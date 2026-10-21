@@ -1,0 +1,173 @@
+/* ===== Wygląd systemu: iOS / Android ===== */
+
+@media (max-width: 1000px) { .stage-side { display: none; } }
+
+/* Na telefonie poza pełnym ekranem widać systemowy pasek stanu — własny chowamy. */
+body.real-status #status { display: none; }
+body.real-status .hdr { padding-top: calc(16px + var(--safe-t)); min-height: calc(62px + var(--safe-t)); }
+body.real-status #home { padding-top: calc(20px + var(--safe-t)); }
+body.real-status .vw-top, body.real-status .mp-top { padding-top: calc(14px + var(--safe-t)); }
+body.real-status #lock { padding-top: calc(50px + var(--safe-t)); }
+body.real-status #banners { top: calc(6px + var(--safe-t)); }
+
+/* ---------- wyszukiwarka na ekranie głównym ---------- */
+.h-search { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 0 auto 14px; height: 32px; padding: 0 16px; border-radius: 16px; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, .85); background: rgba(40, 46, 54, .5); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.os-android .h-search { width: 100%; height: 48px; border-radius: 24px; justify-content: flex-start; padding: 0 18px; margin: 0 0 24px; font-size: 15px; font-weight: 500; background: rgba(48, 52, 58, .85); color: rgba(255, 255, 255, .7); }
+
+/* ---------- powiadomienia ---------- */
+.banner { flex-wrap: wrap; }
+.banner .b-app { display: none; }
+.os-android .banner { border-radius: 24px; background: rgba(40, 43, 48, .97); backdrop-filter: none; padding: 12px 16px 14px; }
+.os-android .banner .b-app { display: flex; width: 100%; align-items: center; gap: 6px; font-size: 11.5px; color: var(--tx2); margin-bottom: 2px; }
+.os-android .banner .b-app span { width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+.os-android .banner .b-app i { font-style: normal; color: var(--tx3); }
+.os-android .banner .b-h span { display: none; }
+.os-android .banner .b-ic { border-radius: 50%; }
+
+/* ---------- ostatnie aplikacje ---------- */
+.recents .rc-list { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: flex; gap: 14px; overflow-x: auto; padding: 0 30px; animation: toin .3s both; }
+.recents.out { animation: fadeout .25s both; }
+.rc-card { flex: none; width: 200px; height: 360px; border-radius: 26px; background: var(--s2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; box-shadow: 0 10px 40px rgba(0, 0, 0, .6); }
+.rc-ic { width: 64px; height: 64px; border-radius: 50%; background: var(--g); display: flex; align-items: center; justify-content: center; }
+.rc-card b { font-size: 15px; }
+
+/* ================= ANDROID ================= */
+.os-android { --font: Roboto, "Google Sans", system-ui, "Segoe UI", sans-serif; --acc: #8ab4f8; --acc2: #aecbfa; --accd: rgba(138, 180, 248, .14); --me: #2a4a7a; --me2: #335a92; }
+.os-android, .os-android button, .os-android input { font-family: var(--font); }
+.os-android #device { border-radius: 44px; }
+.os-android #screen { border-radius: 33px; }
+.os-android #island { width: 14px; height: 14px; top: 14px; border-radius: 50%; }
+.os-android #island::after { display: none; }
+.os-android #status { font-size: 13.5px; font-weight: 500; padding-left: 26px; padding-right: 22px; padding-top: calc(var(--safe-t) + 14px); }
+body.mobile.os-android #status { padding-top: calc(var(--safe-t) + 6px); }
+.os-android #homebar.nav3 { height: calc(46px + var(--safe-b)); padding-bottom: var(--safe-b); display: flex; justify-content: space-around; align-items: center; background: transparent; }
+.os-android #homebar.nav3::before { display: none; }
+.os-android #homebar.nav3 button { width: 64px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, .82); }
+.os-android #homebar.nav3 button:active { background: rgba(255, 255, 255, .1); }
+.os-android .app { padding-bottom: calc(46px + var(--safe-b)); background: var(--scr); }
+.os-android .app .pg { bottom: calc(46px + var(--safe-b)); }
+.os-android .composer { padding-bottom: 12px; }
+.os-android .call { padding-bottom: calc(64px + var(--safe-b)); }
+.os-android .app-ic .ic { border-radius: 50%; width: 58px; height: 58px; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.os-android .app-ic.new .ic::after { border-radius: 50%; }
+.os-android .dock { background: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 8px 6px; }
+.os-android .dock .app-ic .lb { display: none; }
+.os-android #home { padding-bottom: calc(56px + var(--safe-b)); }
+.os-android .widget .w-time { font-weight: 400; font-size: 64px; }
+.os-android .widget .w-wx { background: none; padding: 0; backdrop-filter: none; }
+.os-android .hdr { min-height: calc(92px + var(--safe-t)); padding-bottom: 8px; }
+.os-android .hdr .tt h1 { font-size: 21px; font-weight: 500; }
+.os-android .hdr .bk { color: var(--tx); }
+.os-android .hdr.big { flex-direction: row; padding-left: 20px; }
+.os-android .hdr.big .tt h1 { font-size: 24px; font-weight: 500; letter-spacing: 0; }
+.os-android .list { border-radius: 20px; }
+.os-android .btn { border-radius: 22px; font-weight: 500; }
+.os-android .btn.pri { background: var(--acc); color: #0b1a33; }
+.os-android .sheet { border-radius: 28px 28px 0 0; background: #1e2125; }
+.os-android .modal { border-radius: 28px; text-align: left; background: #2a2d31; }
+.os-android .modal .mb { justify-content: flex-end; }
+.os-android .modal .mb .btn { flex: none; background: none; color: var(--acc); }
+.os-android .seg { border-radius: 20px; }
+.os-android .seg button { border-radius: 18px; }
+.os-android .seg button.on { background: var(--accd); color: var(--acc2); box-shadow: none; }
+.os-android .tgl { width: 52px; height: 32px; border-radius: 16px; background: #3c4043; border: 2px solid #8e918f; }
+.os-android .tgl::after { width: 16px; height: 16px; left: 6px; top: 6px; background: #8e918f; }
+.os-android .tgl.on { background: var(--acc); border-color: var(--acc); }
+.os-android .tgl.on::after { transform: translateX(20px) scale(1.5); background: #0b1a33; }
+.os-android .composer .opt { border-radius: 20px; background: rgba(138, 180, 248, .08); border-color: rgba(138, 180, 248, .3); }
+.os-android .composer .send { background: var(--acc); color: #0b1a33; }
+.os-android .msg.them .bub { border-radius: 20px; }
+.os-android .msg.them.first .bub { border-top-left-radius: 20px; }
+.os-android .msg.me .bub { border-radius: 20px; }
+.os-android .msg.me.first .bub { border-top-right-radius: 20px; }
+.os-android .chat-hdr { background: #16181b; }
+.os-android .crow .cnt { background: var(--acc); color: #0b1a33; }
+.os-android .crow .turn { color: var(--acc2); background: var(--accd); }
+.os-android .toast.ev { background: linear-gradient(135deg, #1e2c44, #1b2230); box-shadow: 0 8px 30px rgba(0, 0, 0, .5), inset 0 0 0 1px rgba(138, 180, 248, .35); }
+.os-android .toast.ev .icw { color: var(--acc); }
+.os-android .toast { border-radius: 8px; }
+.os-android .mp-btn { border-radius: 16px; }
+.os-android .vw-top { background: linear-gradient(#000, transparent); }
+
+/* ================= NOTATKI ================= */
+.notes { --nt: #ffd60a; background: #000; }
+.notes .hdr { --hbg: #000; background: linear-gradient(#000 70%, transparent); }
+.notes .hdr .tt h1, .notes .hdr .bk { color: var(--tx); }
+.notes .hdr .bk { color: var(--nt); }
+.nt-search { display: flex; align-items: center; gap: 6px; height: 36px; margin: 0 16px 6px; padding: 0 10px; border-radius: 11px; background: #1c1c1e; color: #8e8e93; font-size: 15px; }
+.nt-sec { font-size: 20px; font-weight: 700; padding: 16px 20px 8px; }
+.nt-list { margin: 0 16px; border-radius: 12px; background: #1c1c1e; overflow: hidden; }
+.nt-row { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 11px 16px; position: relative; }
+.nt-row + .nt-row::before { content: ""; position: absolute; left: 16px; right: 0; top: 0; height: 1px; background: rgba(255, 255, 255, .08); }
+.nt-row:active { background: #2c2c2e; }
+.nt-row .nt-m { flex: 1; min-width: 0; }
+.nt-row b { display: block; font-size: 16.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nt-row span { display: block; font-size: 14px; color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.nt-row span i { font-style: normal; color: #aeaeb2; margin-right: 8px; }
+.nt-row.has-new b::after { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--nt); margin-left: 8px; vertical-align: middle; }
+.nt-th { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex: none; }
+.nt-count { text-align: center; font-size: 12px; color: #8e8e93; padding: 20px; }
+.note .body { padding-bottom: 60px; }
+.nt-date { text-align: center; font-size: 13px; color: #8e8e93; margin: 0 0 10px; }
+.nt-title { font-size: 28px; font-weight: 700; margin: 0 20px 12px; letter-spacing: -.01em; }
+.nt-body { padding: 0 20px; font-size: 17px; line-height: 1.5; color: #e5e5ea; -webkit-user-select: text; user-select: text; }
+.nt-body p { margin: 0 0 12px; }
+.nt-goal { font-size: 18px; }
+.nt-sub { font-weight: 700; margin-top: 18px !important; color: #fff; }
+.nt-hint { display: flex; flex-direction: column; align-items: flex-start; width: 100%; text-align: left; padding: 6px 0; font-size: 16px; line-height: 1.5; color: #e5e5ea; }
+.nt-hint:not(.on) span { color: #48484a; letter-spacing: -.12em; }
+.nt-hint small { color: var(--nt); font-size: 12.5px; margin-top: 2px; }
+.nt-hint[disabled] { opacity: .5; }
+.nt-foot { margin-top: 26px !important; font-size: 13px; color: #8e8e93; }
+.nt-att { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 6px 0 12px; }
+.nt-a { position: relative; display: flex; flex-direction: column; text-align: left; border-radius: 10px; overflow: hidden; background: #1c1c1e; }
+.nt-a img { width: 100%; aspect-ratio: 1.15; object-fit: cover; }
+.nt-a span { font-size: 11.5px; line-height: 1.3; padding: 6px 7px 8px; color: #d1d1d6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.nt-a.fresh::after, .nt-li.fresh::after { content: "nowe"; position: absolute; top: 6px; left: 6px; font-size: 10px; font-weight: 700; background: var(--nt); color: #1c1c1e; padding: 1px 6px; border-radius: 6px; }
+.nt-li { position: relative; display: block; width: 100%; text-align: left; padding: 6px 0; font-size: 16px; color: #e5e5ea; }
+.nt-li.fresh::after { position: static; margin-left: 8px; }
+.nt-q { display: flex; gap: 14px; align-items: flex-start; width: 100%; text-align: left; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, .06); }
+.nt-cb { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #636366; flex: none; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.nt-q.done .nt-cb { background: var(--nt); border-color: var(--nt); color: #1c1c1e; }
+.nt-q b { display: block; font-size: 17px; }
+.nt-q span { display: block; font-size: 14.5px; color: #8e8e93; line-height: 1.5; margin-top: 3px; }
+.nt-q.done b { color: #8e8e93; text-decoration: line-through; }
+.note .tl, .note .pp-card { margin-left: 0; margin-right: 0; }
+.note .nt-body .pp-card { width: 100%; margin: 0 0 8px; background: #1c1c1e; }
+
+/* Android: Notatki w stylu „Keep” */
+.os-android .notes { --nt: #fdd663; background: #1b1b1f; }
+.os-android .notes .hdr { --hbg: #1b1b1f; background: #1b1b1f; }
+.os-android .nt-search { height: 48px; border-radius: 24px; background: #2b2d31; margin: 4px 16px 10px; padding: 0 18px; }
+.os-android .nt-sec { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: #c4c7c5; padding: 14px 22px 8px; }
+.os-android .nt-list { background: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 14px; }
+.os-android .nt-row { flex-direction: column; align-items: stretch; border: 1px solid #444746; border-radius: 14px; padding: 12px 14px; }
+.os-android .nt-row::before { display: none; }
+.os-android .nt-row b { white-space: normal; font-size: 15px; font-weight: 500; }
+.os-android .nt-row span { white-space: normal; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; font-size: 13.5px; line-height: 1.4; }
+.os-android .nt-row span i { display: none; }
+.os-android .nt-th { width: 100%; height: 90px; order: -1; margin-bottom: 8px; }
+.os-android .nt-date { text-align: left; margin: 0 20px 6px; }
+.os-android .nt-title { font-size: 24px; font-weight: 500; }
+
+/* ================= KALENDARZ, ZEGAR ================= */
+.cal .hdr .tt h1 { color: #ff453a; }
+.os-android .cal .hdr .tt h1 { color: var(--tx); }
+.cal-g { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 0 14px; text-align: center; }
+.cal-g b { font-size: 12px; color: var(--tx3); font-weight: 600; padding: 6px 0; }
+.cal-g button { height: 42px; border-radius: 50%; font-size: 16px; position: relative; }
+.cal-g button.today { background: #ff453a; color: #fff; font-weight: 700; }
+.os-android .cal-g button.today { background: var(--acc); color: #0b1a33; }
+.cal-g button.has::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--tx3); }
+.clk-now { font-size: 64px; font-weight: 200; text-align: center; padding: 10px 0 24px; font-variant-numeric: tabular-nums; }
+
+/* ---------- nowa wiadomość z załącznikami (finał) ---------- */
+.pkg-h { margin: 0 16px 10px; border-radius: 14px; background: var(--s2); padding: 4px 14px; font-size: 13.5px; }
+.pkg-h > div { padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--tx); }
+.pkg-h > div:last-child { border-bottom: 0; }
+.pkg-h small { color: var(--tx3); font-size: 13px; margin-right: 4px; }
+.pkg-t { font-size: 13.5px; color: var(--tx2); line-height: 1.5; }
+.pkg-f { display: flex; gap: 12px; align-items: center; margin-top: 14px; }
+.pkg-f span { font-size: 13px; color: var(--tx2); white-space: nowrap; }
+.curtain.ending { scrollbar-width: none; }
+.curtain.ending::-webkit-scrollbar { display: none; }

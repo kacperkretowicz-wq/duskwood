@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#050608">
+  <meta name="description" content="MGLISKO — gra detektywistyczna rozgrywana w telefonie. Zaginiona dziewczyna, stara huta szkła i zbrodnia sprzed 29 lat.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Mglisko</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/apps.css">
+  <link rel="stylesheet" href="css/web.css">
+  <link rel="stylesheet" href="css/os.css">
+</head>
+<body>
+  <noscript>Mglisko wymaga włączonej obsługi JavaScriptu.</noscript>
+
+  <script src="js/core/util.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/engine.js"></script>
+  <script src="js/core/ui.js"></script>
+
+  <script src="js/art/kit.js"></script>
+  <script src="js/art/avatars.js"></script>
+  <script src="js/art/scenes.js"></script>
+  <script src="js/art/film.js"></script>
+  <script src="js/art/maps.js"></script>
+
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/evidence.js"></script>
+  <script src="js/data/maja.js"></script>
+  <script src="js/data/web.js"></script>
+  <script src="js/data/world.js"></script>
+
+  <script src="js/apps/messages.js"></script>
+  <script src="js/apps/viewer.js"></script>
+  <script src="js/apps/phone.js"></script>
+  <script src="js/apps/browser.js"></script>
+  <script src="js/apps/gallery.js"></script>
+  <script src="js/apps/nimbus.js"></script>
+  <script src="js/apps/maps.js"></script>
+  <script src="js/apps/notes.js"></script>
+  <script src="js/apps/tools.js"></script>
+
+  <script src="js/story/prolog.js"></script>
+  <script src="js/story/ch1.js"></script>
+  <script src="js/story/ch2.js"></script>
+  <script src="js/story/ch3.js"></script>
+  <script src="js/story/ch4.js"></script>
+  <script src="js/story/ch5.js"></script>
+  <script src="js/story/epilog.js"></script>
+
+  <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !location.search.includes('debug')) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

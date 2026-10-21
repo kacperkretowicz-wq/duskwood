@@ -1,0 +1,105 @@
+'use strict';
+/* Postacie, rozmowy, kontakty, pogoda, zakończenia. */
+
+const DATA = window.DATA = {};
+
+DATA.chars = {
+  kuba: { name: 'Kuba Wrona', short: 'Kuba', color: '#f2994a', number: '604 228 961', trust: true, voicemail: '„Siema, tu Kuba. Nie odbieram, bo… no, nie odbieram. Pisz.”' },
+  ola: { name: 'Ola Nowicka', short: 'Ola', color: '#4fc1b1', number: '512 640 377', trust: true, voicemail: '„Dzień dobry, tu Aleksandra Nowicka. Proszę zostawić wiadomość, oddzwonię.”' },
+  bartek: { name: 'Bartek Sowa', short: 'Bartek', color: '#e07a55', number: '669 301 552', trust: true, voicemail: 'Poczta głosowa abonenta nie została skonfigurowana.' },
+  igor: { name: 'Igor Malicki', short: 'Igor', color: '#a395f7', number: '733 905 014', trust: true, voicemail: '„Hej, tu Igor. Jeśli w sprawie naprawy — serwis w rynku, od dziesiątej. Jeśli nie — też raczej nie odbiorę.”' },
+  weronika: { name: 'Weronika Lis', short: 'Weronika', color: '#d2b366', number: '608 117 942', trust: true, voicemail: '„Weronika Lis, proszę zostawić wiadomość po sygnale.”' },
+  gajda: { name: 'Robert Gajda', short: 'Gajda', color: '#7d9fd0', number: '601 450 219', trust: true, voicemail: '„Dzień dobry, Robert Gajda. Proszę zostawić wiadomość.”' },
+  szklarz: { name: 'Nieznany', short: '???', color: '#8ff' },
+  maja: { name: 'Maja Wrona', short: 'Maja', color: '#e88aa2', number: '731 402 118', offline: true },
+  mama: { name: 'Ewa Wrona', short: 'Mama Mai', number: '607 993 140', voicemail: 'Abonent nie odbiera.' },
+  marek: { name: 'Marek Sowa', short: 'Marek' },
+  leszek: { name: 'Leszek Malicki', short: 'Wójt' },
+  dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
+  duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
+  prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
+  unknown: { name: 'Nieznany numer', short: '?' },
+  me: { name: 'Ty', short: 'Ty' }
+};
+
+DATA.chats = {
+  maja: { name: '+48 731 402 118', avatar: 'unknown', sub: 'SMS', readonly: true },
+  kuba: { name: '+48 604 228 961', avatar: 'unknown' },
+  group: { name: 'Szukamy Mai 🕯️', avatar: 'group', group: true, members: ['kuba', 'ola', 'bartek', 'igor'] },
+  ola: { name: 'Ola Nowicka', avatar: 'ola' },
+  bartek: { name: 'Bartek Sowa', avatar: 'bartek' },
+  igor: { name: 'Igor Malicki', avatar: 'igor' },
+  weronika: { name: 'Weronika Lis', avatar: 'weronika' },
+  gajda: { name: 'Robert Gajda', avatar: 'gajda', sub: 'asp. sztab. · Posterunek Policji Mglisko' },
+  szklarz: { name: 'Nieznany', avatar: 'szklarz', glitch: true, sub: 'numer zastrzeżony' },
+  maja2: { name: 'Maja', avatar: 'maja' }
+};
+
+DATA.contacts = [
+  { name: 'Kuba Wrona', who: 'kuba', number: '604 228 961', cond: 'flag:knowKuba' },
+  { name: 'Maja Wrona', who: 'maja', number: '731 402 118', cond: 'flag:knowMaja' },
+  { name: 'Ola Nowicka', who: 'ola', number: '512 640 377', cond: 'unlocked:chat:group' },
+  { name: 'Bartek Sowa', who: 'bartek', number: '669 301 552', cond: 'unlocked:chat:group' },
+  { name: 'Igor Malicki', who: 'igor', number: '733 905 014', cond: 'unlocked:chat:group' },
+  { name: 'Weronika Lis', who: 'weronika', number: '608 117 942', cond: 'unlocked:chat:weronika' },
+  { name: 'Robert Gajda', who: 'gajda', number: '601 450 219', cond: 'unlocked:chat:gajda' },
+  { name: 'Posterunek Policji Mglisko', who: 'duty', number: '74 873 41 20', cond: 'seen:web:posterunek', auto: '„Posterunek Policji w Mglisku. Wszystkie linie są zajęte. W sytuacji zagrożenia życia dzwoń pod numer 112.”' },
+  { name: 'Gazeta Sudecka — redakcja', number: '74 842 20 10', cond: 'seen:web:gazeta_home', auto: '„Redakcja Gazety Sudeckiej. Zapraszamy od poniedziałku do piątku w godzinach 9–16.”' },
+  { name: 'Biblioteka Gminna w Mglisku', number: '74 873 40 55', cond: 'seen:web:biblioteka', auto: '„Biblioteka Gminna w Mglisku jest teraz nieczynna. Zapraszamy od wtorku do soboty w godzinach 10–18.”' },
+  { name: 'Serwis GSM-PC (Igor)', who: 'igor', number: '733 905 014', cond: 'seen:web:kadr:igor.malicki' }
+];
+
+// Pogoda zależna od dnia fabuły.
+DATA.weather = () => {
+  const ch = G.s ? G.s.chapter : 'prolog';
+  const W = {
+    prolog: { now: 'mgła', nowLong: 'Gęsta mgła', temp: 4, feel: 1, hum: 97, alert: 'Gęsta mgła ograniczająca widzialność do 150 m. Obowiązuje do jutra, do godz. 10:00.', moon: 'przybywający sierp', i: 'fog' },
+    ch1: { now: 'mgła', nowLong: 'Gęsta mgła', temp: 3, feel: 0, hum: 98, alert: 'Gęsta mgła ograniczająca widzialność do 150 m.', moon: 'przybywający sierp', i: 'fog' },
+    ch2: { now: 'mżawka', nowLong: 'Mżawka', temp: 3, feel: -1, hum: 95, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    ch3: { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 6, feel: 3, hum: 88, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    ch4: { now: 'pochmurno', nowLong: 'Przelotne przejaśnienia', temp: 8, feel: 5, hum: 81, alert: 'Przymrozek przy gruncie w nocy, do −3°C.', moon: 'przybywający księżyc', i: 'cloud' },
+    ch5: { now: 'mgła', nowLong: 'Mgła i przymrozek', temp: 1, feel: -3, hum: 96, alert: 'Przymrozek przy gruncie, do −3°C. Mgła w dolinach.', moon: 'przybywający księżyc', i: 'fog' },
+    epilog: { now: 'śnieg', nowLong: 'Pierwszy śnieg', temp: -1, feel: -5, hum: 90, alert: null, moon: 'nów', i: 'cloud' }
+  }[ch] || {};
+  const base = W.temp;
+  return Object.assign({
+    hourly: [{ t: base, i: W.i }, { t: base, i: W.i }, { t: base - 1, i: 'fog' }, { t: base - 1, i: 'fog' }, { t: base - 2, i: 'fog' }, { t: base - 2, i: 'cloud' }, { t: base - 1, i: 'cloud' }, { t: base, i: 'cloud' }],
+    days: [
+      { d: 'Dziś', i: W.i, lo: base - 3, hi: base + 3 }, { d: 'Jutro', i: 'cloud', lo: base - 2, hi: base + 5 },
+      { d: 'Pojutrze', i: 'fog', lo: base - 4, hi: base + 2 }, { d: 'Za 3 dni', i: 'cloud', lo: base - 1, hi: base + 6 }, { d: 'Za 4 dni', i: 'sun', lo: base - 3, hi: base + 7 }
+    ]
+  }, W);
+};
+
+DATA.endings = {
+  swit: {
+    title: 'ŚWIT', tag: 'Zakończenie 1 z 3', mood: 'dawn',
+    text: [
+      'Maję wynoszą ze sztolni o 1:52. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
+      'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę na leśnym szlabanie pół godziny później. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
+      'Rano strażacy rozbierają mur w odprężarce. Za nim, pod żółtym strzępem peleryny, czeka dziewięcioletni chłopiec. Czekał dwadzieścia dziewięć lat.',
+      () => (G.flag('leszekTestify') ? 'Marek Sowa i Leszek Malicki składają zeznania tego samego dnia.' : 'Marek Sowa składa zeznania tego samego dnia. Leszek Malicki milczy przez tydzień — potem też zaczyna mówić.') + ' Gazeta Sudecka drukuje tekst, który zaczął pisać Adam Rybicki.',
+      'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale potem {odebrałeś|odebrałaś} wszystko, co było ważne.'
+    ]
+  },
+  odlamki: {
+    title: 'ODŁAMKI', tag: 'Zakończenie 2 z 3', mood: 'calm',
+    text: [
+      'Maję wynoszą ze sztolni nad ranem. Żyje — i tylko to się liczy. Przynajmniej tak powtarzają wszyscy.',
+      () => G.flag('gajdaCaught')
+        ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Ale materiałów jest za mało: po czterdziestu ośmiu godzinach wychodzi na wolność. Dzień później jego skodę znajdują na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.'
+        : 'Robert Gajda nie wraca do domu. Jego skodę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
+      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + 'Ciała Gajdy nie odnaleziono. Śledztwo w sprawie Tomka Lisa zostaje umorzone „wobec śmierci podejrzanego”. Nikt już nie może go o nic zapytać.',
+      'Weronika dostaje szczątki brata i list z prokuratury. Pisze ci jedno zdanie: „Wiem, gdzie on jest. To dużo. To za mało.”'
+    ]
+  },
+  cisza: {
+    title: 'CISZA', tag: 'Zakończenie 3 z 3', mood: 'dark',
+    text: [
+      'Krata sztolni Ewa jest otwarta. W środku: koc, puste butelki po wodzie, gumka do włosów z różowym koralikiem.',
+      'Na ścianie, wydrapane czymś ostrym, przy samej ziemi: TU BYŁAM. M.',
+      'Robert Gajda prowadzi poszukiwania osobiście. Mówi kamerom, że nie spocznie, dopóki jej nie znajdzie.',
+      'Twój telefon milczy. Tylko czasem, późną nocą, wyświetla się połączenie z zastrzeżonego numeru — i nikt się nie odzywa.'
+    ]
+  }
+};

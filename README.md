@@ -1,0 +1,69 @@
+# MGLISKO
+
+Gra detektywistyczna rozgrywana w całości na „telefonie”, w stylu *Duskwood* i *Cold Trace*.
+Ktoś pisze do ciebie w nocy: jego siostra zadzwoniła do ciebie tuż przed zniknięciem. Ty jej nie znasz — ale twój numer kiedyś należał do kogoś, komu ufała.
+
+- **Prolog + 5 rozdziałów + epilog**, około 2–3 godziny gry
+- **3 zakończenia** zależne od decyzji (kto się dowie, komu zaufasz, gdzie zadzwonisz)
+- Gra udaje zwykły telefon: **iOS na iPhonie, Android na Androidzie** (automatycznie, można zmienić w Ustawieniach)
+- Wszystko — fabuła, zdjęcia, dźwięk — powstaje w kodzie gry, bez zewnętrznych plików
+
+## Uruchomienie
+
+Najprościej:
+
+```bash
+node serve.js
+```
+
+Potem otwórz `http://localhost:5173`. Bez Node'a wystarczy dwukrotnie kliknąć `index.html` (zapis działa, tylko tryb offline i instalacja wymagają serwera).
+
+## Na telefonie
+
+1. Uruchom serwer na komputerze (`node serve.js`) albo wrzuć folder na dowolny hosting statyczny (np. GitHub Pages, Netlify).
+2. Otwórz adres w przeglądarce telefonu.
+3. **Android (Chrome):** menu ⋮ → „Dodaj do ekranu głównego” / „Zainstaluj aplikację”. Gra uruchamia się na pełnym ekranie, bez paska przeglądarki — widzisz tylko ekran „telefonu w telefonie”.
+4. **iPhone (Safari):** Udostępnij → „Do ekranu początkowego”.
+
+Po pierwszym uruchomieniu gra działa offline. Postęp zapisuje się automatycznie po każdym kroku; w Ustawieniach → Rozdziały można wrócić do początku dowolnego ukończonego rozdziału, żeby odkryć inne zakończenia.
+
+## Jak się gra
+
+Wszystko dzieje się w aplikacjach telefonu:
+
+| Aplikacja | Do czego służy |
+|---|---|
+| **Wiadomości** | rozmowy z postaciami; wybierasz odpowiedzi, wpisujesz hasła, załączasz rzeczy z Notatek |
+| **Telefon** | rejestr połączeń, kontakty, klawiatura — niektóre numery mają znaczenie |
+| **Internet** | wyszukiwarka i miasteczkowe strony: gazeta, portal Mglisko24, Kadr, urzędy, forum |
+| **Zdjęcia / Galeria** | zdjęcia otrzymane w rozmowach i wywołane w Ciemni |
+| **Nimbus** | kopia zapasowa telefonu zaginionej Mai: galeria, SMS-y, notatki, lokalizacja, poczta, dyktafon |
+| **Notatki** | „Co teraz?” z podpowiedziami, zapisane dowody, ludzie, oś czasu, pytania do rozstrzygnięcia |
+| **Mapy** | plan Mgliska z warstwą leśną i łowiecką |
+| **Ciemnia** | wywoływanie negatywów i rozjaśnianie zdjęć |
+| **BushView** | zdalna fotopułapka (pojawia się później) |
+
+Wskazówki: zdjęcia można przybliżać (dwa palce, kółko myszy, dwuklik) i dotykać szczegółów. Ważne wiadomości w kopii telefonu Mai można dotknąć, żeby zapisać je w Notatkach. Gdy utkniesz — notatka „Co teraz?” ma stopniowane podpowiedzi.
+
+## Struktura
+
+```
+index.html            wejście
+serve.js              serwer statyczny bez zależności
+sw.js, manifest       PWA (offline, instalacja, pełny ekran)
+css/                  base (system), apps (aplikacje), web (strony), os (iOS/Android, Notatki)
+js/core/              util, state (zapis, zegar fabularny), audio (Web Audio), engine (skrypt), ui (powłoka telefonu)
+js/apps/              aplikacje telefonu
+js/art/               generator „zdjęć” SVG: kit, avatars, scenes, film, maps
+js/data/              postacie, dowody, kopia telefonu Mai, internet, świat
+js/story/             prolog, ch1–ch5, epilog (DSL fabuły)
+docs/KONCEPCJA.md     dokument projektowy: świat, postacie, prawda, rozdziały, mechaniki, rozszerzenie „Teren”
+```
+
+## Narzędzia deweloperskie
+
+- `?debug` — szybkie wiadomości i przycisk **DBG** (skoki między rozdziałami)
+- `?debug&speed=fast` — przyspieszone tempo zamiast natychmiastowego
+- `?art` — galeria wszystkich obrazów gry (`?art=c1_` filtruje po nazwie)
+
+Fikcja literacka. Wszystkie postacie i miejsca są zmyślone; powódź tysiąclecia z lipca 1997 roku wydarzyła się naprawdę.

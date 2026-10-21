@@ -1,0 +1,15 @@
+{
+  "name": "Mglisko — gra detektywistyczna",
+  "short_name": "Mglisko",
+  "description": "Zaginiona dziewczyna, stara huta szkła i zbrodnia sprzed 29 lat. Śledztwo w twoim telefonie.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#050608",
+  "theme_color": "#050608",
+  "lang": "pl",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,170 @@
+'use strict';
+/* Stan gry: zapis, zegar fabularny, czaty, dowody, flagi. */
+
+const G = (() => {
+  const KEY = 'mglisko.save.v1';
+  const CP = 'mglisko.cp.v1.';
+  const SKEY = 'mglisko.settings.v1';
+  const START = '2026-10-21T21:03';
+
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+    del(k) { try { localStorage.removeItem(k); } catch (e) { /* brak dostępu */ } },
+    keys() { try { return Object.keys(localStorage); } catch (e) { return []; } }
+  };
+
+  function fresh(player) {
+    return {
+      v: 1,
+      player: player || { name: 'Ty', gender: 'm' },
+      chapter: 'prolog', pc: 0,
+      clock: { t: U.parseLocal(START), at: Date.now() },
+      vars: {}, flags: {}, unlocked: {}, chats: {}, ev: {}, evx: {}, tl: {}, hot: {}, seen: {},
+      solved: {}, used: {}, hints: {}, calls: [], pending: null, objective: null, saved: [],
+      tries: {}, endings: [], done: {}, started: Date.now(), playMs: 0
+    };
+  }
+
+  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, volume: 0.8, os: 'auto' };
+  let settings = Object.assign({}, defaults);
+  try { Object.assign(settings, JSON.parse(store.get(SKEY) || '{}')); } catch (e) { /* uszkodzone ustawienia */ }
+
+  const api = {
+    s: null,
+    settings,
+    viewing: null,
+    saveSettings() { store.set(SKEY, JSON.stringify(settings)); BUS.emit('settings'); },
+
+    newGame(player) { api.s = fresh(player); api.save(true); },
+    hasSave() { return !!store.get(KEY); },
+    load() {
+      const raw = store.get(KEY);
+      if (!raw) return false;
+      try { api.s = Object.assign(fresh(), JSON.parse(raw)); api.s.clock.at = Date.now(); return true; }
+      catch (e) { console.warn('Zapis uszkodzony', e); return false; }
+    },
+    wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; },
+
+    _t: null,
+    save(now) {
+      if (!api.s) return;
+      clearTimeout(api._t);
+      const doSave = () => {
+        const s = api.s; if (!s) return;
+        s.clock.t = api.now(); s.clock.at = Date.now();
+        store.set(KEY, JSON.stringify(s));
+      };
+      if (now) doSave(); else api._t = setTimeout(doSave, 250);
+    },
+    checkpoint(ch) {
+      const c = U.clone(api.s);
+      c.clock.t = api.now();
+      store.set(CP + ch, JSON.stringify(c));
+    },
+    checkpoints() {
+      const out = {};
+      store.keys().filter(k => k.startsWith(CP)).forEach(k => { out[k.slice(CP.length)] = true; });
+      return out;
+    },
+    loadCheckpoint(ch) {
+      const raw = store.get(CP + ch); if (!raw) return false;
+      const keepEndings = api.s ? api.s.endings : [];
+      api.s = Object.assign(fresh(), JSON.parse(raw));
+      api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
+      api.s.clock.at = Date.now(); api.save(true); return true;
+    },
+
+    // Zegar fabularny płynie w czasie rzeczywistym od ostatniego ustawienia.
+    now() { const c = api.s.clock; return c.t + (Date.now() - c.at); },
+    setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now() }; BUS.emit('clock'); },
+
+    chat(id) {
+      const c = api.s.chats;
+      if (!c[id]) c[id] = { msgs: [], unread: 0 };
+      return c[id];
+    },
+    post(chatId, msg) {
+      const c = api.chat(chatId);
+      msg.id = msg.id || U.uid();
+      msg.t = msg.t || api.now();
+      c.msgs.push(msg);
+      if (api.viewing !== chatId && msg.from !== 'me' && msg.from !== 'sys') c.unread++;
+      c.last = msg.t;
+      BUS.emit('msg', { chat: chatId, msg });
+      api.change();
+      return msg;
+    },
+    markRead(chatId) {
+      const c = api.chat(chatId);
+      if (c.unread) { c.unread = 0; BUS.emit('badges'); api.save(); }
+    },
+    unreadTotal() {
+      let n = 0;
+      for (const id in api.s.chats) if (api.isUnlocked('chat:' + id)) n += api.s.chats[id].unread || 0;
+      return n;
+    },
+
+    has(ev) { return !!api.s.ev[ev]; },
+    addEv(ev, quiet) {
+      if (api.s.ev[ev]) return false;
+      api.s.ev[ev] = { t: api.now(), fresh: true };
+      const def = DATA.evidence[ev];
+      if (def && def.tl) api.s.tl[ev] = true;
+      if (def && def.person) api.s.seen['person:' + def.person] = true;
+      if (!quiet) BUS.emit('evidence', ev);
+      BUS.emit('badges');
+      api.change();
+      return true;
+    },
+    ev(id) {
+      const base = DATA.evidence[id];
+      if (!base) return null;
+      return Object.assign({ id }, base, api.s.evx[id] || {});
+    },
+    freshEvidence() { return Object.values(api.s.ev).filter(e => e.fresh).length; },
+
+    unlock(key) { if (!api.s.unlocked[key]) { api.s.unlocked[key] = true; BUS.emit('unlock', key); BUS.emit('badges'); api.change(); } },
+    lock(key) { delete api.s.unlocked[key]; BUS.emit('unlock', key); api.change(); },
+    isUnlocked(key) { return !!api.s.unlocked[key]; },
+
+    flag(k) { return !!api.s.flags[k]; },
+    setFlag(k, v = true) { api.s.flags[k] = v; api.change(); },
+    v(k) { return api.s.vars[k] || 0; },
+    setVar(k, val) { api.s.vars[k] = val; api.change(); },
+    inc(k, n = 1) { api.s.vars[k] = (api.s.vars[k] || 0) + n; api.change(); },
+
+    seen(key) { return !!api.s.seen[key]; },
+    markSeen(key) { if (!api.s.seen[key]) { api.s.seen[key] = true; BUS.emit('badges'); api.change(); } },
+
+    solve(id) { if (!api.s.solved[id]) { api.s.solved[id] = true; BUS.emit('solved', id); api.change(); } },
+
+    // Warunki dla kroków skryptu: funkcja albo krótki zapis tekstowy.
+    test(cond) {
+      if (cond == null) return true;
+      if (Array.isArray(cond)) return cond.every(api.test);
+      if (typeof cond === 'function') return !!cond(api.s, api);
+      let neg = false, c = String(cond);
+      if (c[0] === '!') { neg = true; c = c.slice(1); }
+      const i = c.indexOf(':');
+      const kind = c.slice(0, i), key = c.slice(i + 1);
+      let r;
+      switch (kind) {
+        case 'ev': r = api.has(key); break;
+        case 'flag': r = api.flag(key); break;
+        case 'solved': r = !!api.s.solved[key]; break;
+        case 'unlocked': r = api.isUnlocked(key); break;
+        case 'seen': r = api.seen(key); break;
+        case 'hot': r = !!api.s.hot[key]; break;
+        case 'var': { const m = key.match(/^(\w+)\s*(>=|<=|>|<|==)\s*(-?\d+)$/); const a = api.v(m[1]), b = +m[3]; r = { '>=': a >= b, '<=': a <= b, '>': a > b, '<': a < b, '==': a === b }[m[2]]; break; }
+        default: r = false;
+      }
+      return neg ? !r : r;
+    },
+    change() { BUS.emit('change'); api.save(); }
+  };
+
+  window.addEventListener('pagehide', () => api.save(true));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) api.save(true); });
+  return api;
+})();

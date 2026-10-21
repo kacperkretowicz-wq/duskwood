@@ -1,0 +1,175 @@
+/* ===== Strony internetowe w grze ===== */
+.web { font-size: 15px; line-height: 1.6; color: #1d1f22; }
+.web img { max-width: 100%; display: block; cursor: zoom-in; }
+.web a { color: inherit; }
+.web p { margin: 0 0 14px; }
+.web h1, .web h2, .web h3 { line-height: 1.25; }
+
+/* Gazeta Sudecka */
+.site-gazeta { background: #f7f3ea; font-family: Georgia, "Times New Roman", serif; min-height: 100%; }
+.gz-h { border-bottom: 3px double #2a2420; padding: 10px 16px 0; }
+.gz-top { display: flex; justify-content: space-between; font: 600 10px/1 var(--font); text-transform: uppercase; letter-spacing: .1em; color: #7a6d60; }
+.gz-mast { font-size: 34px; font-weight: 700; text-align: center; letter-spacing: -.01em; margin: 10px 0 6px; font-family: Georgia, serif; color: #1a1512; }
+.gz-nav { display: flex; gap: 14px; justify-content: center; font: 600 12px var(--font); padding: 8px 0; border-top: 1px solid #cbbfae; overflow-x: auto; }
+.gz-nav a { text-decoration: none; color: #7b2b21; white-space: nowrap; }
+.gz-m { padding: 16px 18px 30px; }
+.gz-sec { font: 800 11px var(--font); text-transform: uppercase; letter-spacing: .14em; color: #7b2b21; border-bottom: 1px solid #cbbfae; padding-bottom: 5px; margin: 14px 0 10px; }
+.gz-card { padding: 4px 0 12px; border-bottom: 1px solid #e3dacb; margin-bottom: 10px; }
+.gz-card h3 { margin: 0 0 4px; font-size: 18px; }
+.gz-card h3 a { text-decoration: none; color: #1a1512; }
+.gz-card p { margin: 0 0 4px; color: #4a4038; font-size: 14px; }
+.gz-card small, .gz-small { color: #8a7d70; font-size: 12px; font-family: var(--font); }
+.gz-art h1 { font-size: 27px; margin: 6px 0 12px; color: #1a1512; }
+.gz-kick { font: 800 11px var(--font); text-transform: uppercase; letter-spacing: .14em; color: #7b2b21; }
+.gz-lead { font-size: 17px; font-style: italic; color: #3a312a; }
+.gz-art figure { margin: 0 -18px 16px; }
+.gz-art figcaption { font: 12px var(--font); color: #7a6d60; padding: 6px 18px 0; }
+.gz-art .gz-por { margin: 0 auto 14px; width: 60%; }
+.gz-art p { font-size: 16px; line-height: 1.7; }
+.gz-art p:first-of-type::first-letter { float: left; font-size: 48px; line-height: .9; padding: 4px 6px 0 0; color: #7b2b21; }
+.gz-art .gz-lead::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; }
+.gz-foot { margin-top: 18px; padding: 12px 14px; background: #ede5d5; font: 13.5px/1.6 var(--font); color: #3a312a; border-left: 3px solid #7b2b21; }
+.gz-num { background: #ffe58a; padding: 0 3px; font-weight: 700; text-decoration: none; }
+.gz-rel { margin-top: 14px; font: 13px var(--font); color: #5a4f45; }
+.gz-rel a { color: #7b2b21; }
+
+/* Mglisko24 */
+.site-m24 { background: #f2f3f5; min-height: 100%; font-family: var(--font); }
+.m24-h { background: #c43d2f; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; }
+.m24-logo { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.m24-logo b { background: #fff; color: #c43d2f; padding: 0 5px; border-radius: 4px; margin-left: 2px; }
+.m24-w { font-size: 12px; opacity: .85; }
+.m24-nav { background: #9c2d22; display: flex; gap: 16px; padding: 8px 16px; font-size: 13px; font-weight: 600; }
+.m24-nav a { color: #fff; text-decoration: none; opacity: .9; }
+.m24-m { padding: 14px; }
+.m24-hero { display: block; position: relative; border-radius: 12px; overflow: hidden; text-decoration: none; margin-bottom: 12px; background: #000; }
+.m24-hero img { width: 100%; opacity: .75; }
+.m24-hero div { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 14px; background: linear-gradient(transparent, rgba(0, 0, 0, .85)); color: #fff; }
+.m24-hero h2 { margin: 6px 0 0; font-size: 19px; }
+.m24-tag { display: inline-block; background: #ffd400; color: #111; font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .06em; }
+.m24-row { display: block; background: #fff; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; text-decoration: none; box-shadow: 0 1px 2px rgba(0, 0, 0, .06); }
+.m24-row b { display: block; font-size: 15px; line-height: 1.35; color: #1d1f22; }
+.m24-row small { color: #888; font-size: 12px; }
+.m24-ad { margin-top: 16px; padding: 12px; border: 1px dashed #bbb; border-radius: 10px; text-align: center; font-size: 12.5px; color: #666; }
+.m24-art h1 { font-size: 23px; margin: 8px 0 6px; }
+.m24-d { color: #888; font-size: 12px; display: block; margin-bottom: 12px; }
+.m24-art figure { margin: 0 -14px 14px; }
+.m24-art figcaption { font-size: 12px; color: #777; padding: 6px 14px 0; }
+.m24-com { background: #fff; border-radius: 12px; padding: 12px 14px; margin-top: 10px; font-size: 13.5px; }
+.m24-com > div { padding: 8px 0; border-top: 1px solid #eee; }
+.m24-com i { display: block; font-style: normal; font-weight: 700; font-size: 12px; color: #c43d2f; }
+
+/* Wolnopedia */
+.site-wiki { background: #fff; min-height: 100%; font-family: Georgia, serif; }
+.wk-h { display: flex; align-items: baseline; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #ddd; background: #f8f9fa; }
+.wk-h b { font-size: 20px; }
+.wk-h span { font-size: 12px; color: #777; font-family: var(--font); }
+.wk-m { padding: 14px 18px 30px; }
+.wk-m h1 { font-weight: 400; border-bottom: 1px solid #ccc; padding-bottom: 6px; font-size: 27px; }
+
+/* Kadr */
+.site-kadr { background: #fff; min-height: 100%; font-family: var(--font); color: #111; }
+.kd-h { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #eee; }
+.kd-h b { font-size: 22px; font-weight: 800; letter-spacing: -.03em; background: linear-gradient(90deg, #c2185b, #f57c00); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kd-m { padding: 14px 0 30px; }
+.kd-p { display: flex; gap: 16px; align-items: center; padding: 0 16px; }
+.kd-av { width: 82px; height: 82px; border-radius: 50%; padding: 3px; background: linear-gradient(45deg, #f57c00, #c2185b); cursor: default; }
+.kd-n b { display: block; font-size: 18px; }
+.kd-n small { color: #777; font-size: 13px; }
+.kd-st { display: flex; justify-content: space-around; padding: 14px 10px 8px; font-size: 12px; color: #555; text-align: center; }
+.kd-st b { display: block; font-size: 16px; color: #111; }
+.kd-bio { padding: 0 16px 14px; font-size: 14px; color: #222; }
+.kd-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.kd-g a { aspect-ratio: 1; overflow: hidden; display: block; background: #eee; }
+.kd-g img { width: 100%; height: 100%; object-fit: cover; }
+.kd-t { font-size: 15px; padding: 0 16px; }
+.kd-list { padding: 0 8px; }
+.kd-li { display: flex; gap: 12px; align-items: center; padding: 10px 8px; text-decoration: none; border-bottom: 1px solid #f0f0f0; }
+.kd-li img { width: 46px; height: 46px; border-radius: 50%; cursor: default; }
+.kd-li b { display: block; font-size: 14.5px; color: #111; }
+.kd-li small { color: #888; font-size: 12.5px; }
+.kd-post { padding: 0 0 10px; }
+.kd-ph { display: flex; align-items: center; gap: 10px; padding: 0 16px 10px; }
+.kd-ph img { width: 32px; height: 32px; border-radius: 50%; }
+.kd-pi { width: 100%; display: block; cursor: zoom-in; }
+.kd-pl { padding: 10px 16px 4px; font-size: 13px; color: var(--tx2); }
+.kd-post p { padding: 0 16px; margin: 4px 0; font-size: 14.5px; line-height: 1.45; color: var(--tx); }
+.kd-pc { margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--line); }
+.kd-pc p { font-size: 13.5px; color: var(--tx2); }
+
+/* Urzędy */
+.site-gov { background: #f4f6f9; min-height: 100%; font-family: var(--font); }
+.gv-h { display: flex; gap: 12px; align-items: center; padding: 14px 16px; background: #1d3d6b; color: #fff; }
+.gv-e { width: 40px; height: 40px; border-radius: 50%; background: #c8102e; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.gv-h b { display: block; font-size: 16px; }
+.gv-h small { font-size: 11.5px; opacity: .8; }
+.gv-m { padding: 14px 16px 30px; }
+.gv-m h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: #1d3d6b; border-bottom: 2px solid #1d3d6b; padding-bottom: 5px; margin: 20px 0 10px; }
+.gv-card { display: flex; gap: 14px; background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+.gv-por { width: 96px; height: 120px; object-fit: cover; border-radius: 8px; flex: none; }
+.gv-card b { display: block; font-size: 16px; }
+.gv-card span { display: block; font-size: 12.5px; color: #555; margin-bottom: 6px; }
+.gv-card p { font-size: 13.5px; color: #333; margin: 0; }
+.gv-n { padding: 9px 0; border-bottom: 1px solid #dde3ea; font-size: 14px; }
+.gv-n small { display: block; color: #1d3d6b; font-weight: 700; font-size: 12px; }
+.gv-alert { background: #fff3cd; border-left: 4px solid #c8102e; padding: 10px 12px; border-radius: 4px; font-size: 14px; }
+.site-gov a { color: #1d4f91; }
+
+/* Forum */
+.site-forum { background: #e9ece4; min-height: 100%; font-family: Verdana, Tahoma, sans-serif; font-size: 13.5px; }
+.fr-h { background: #4a6b3a; color: #fff; padding: 12px 14px; }
+.fr-h b { display: block; font-size: 16px; }
+.fr-h small { opacity: .8; font-size: 11px; }
+.fr-m { padding: 12px; }
+.fr-m h2 { font-size: 17px; margin: 4px 0 12px; }
+.fr-p { background: #fff; border: 1px solid #c8cfbf; border-radius: 4px; margin-bottom: 8px; }
+.fr-u { background: #dfe6d6; padding: 6px 10px; display: flex; justify-content: space-between; font-size: 12px; }
+.fr-u b { color: #2d4a20; }
+.fr-u small { color: #6a7560; }
+.fr-p p { padding: 9px 10px; margin: 0; line-height: 1.5; }
+.fr-p.mod { background: #f4f0e0; text-align: center; color: #7a6a40; font-style: italic; }
+
+/* Przewodnik */
+.site-guide { background: #f3efe6; min-height: 100%; font-family: var(--font); }
+.gd-h { position: relative; height: 180px; overflow: hidden; background: #000; }
+.gd-h img { width: 100%; height: 100%; object-fit: cover; opacity: .6; cursor: default; }
+.gd-h div { position: absolute; left: 16px; bottom: 14px; color: #fff; }
+.gd-h small { font-size: 11px; opacity: .85; text-transform: uppercase; letter-spacing: .12em; }
+.gd-h h1 { margin: 4px 0 0; font-size: 26px; }
+.gd-m { padding: 14px 16px 30px; }
+.gd-c { background: #fff; border-radius: 14px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, .08); }
+.gd-c > div { padding: 12px 14px 4px; }
+.gd-c h3 { margin: 0 0 6px; font-size: 17px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.gd-c p { font-size: 14px; color: #3a352d; }
+.gd-t { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; padding: 2px 8px; border-radius: 10px; background: #e6dfcf; color: #5d4a2a; font-weight: 800; }
+.gd-t.ok { background: #d8efd9; color: #2a6b30 !important; }
+.gd-t.bad { background: #f7d9d6; color: #a32a1f !important; }
+.gd-small { font-size: 13px; }
+.gd-small a { color: #2e6b3a; font-weight: 600; }
+
+/* Koło łowieckie (strona z 2008) */
+.site-kolo { background: #2d3a1f; min-height: 100%; font-family: "Comic Sans MS", Verdana, sans-serif; color: #eee8c8; font-size: 13px; }
+.kl-h { text-align: center; padding: 14px 10px; background: linear-gradient(#46602a, #2d3a1f); border-bottom: 3px ridge #8a7a40; }
+.kl-h b { display: block; font-size: 19px; color: #ffe27a; text-shadow: 2px 2px 0 #000; }
+.kl-h small { color: #c8c09a; }
+.kl-t { width: 100%; border-collapse: collapse; }
+.kl-t td { vertical-align: top; padding: 10px; }
+.kl-side { width: 84px; background: #3b4a28; border-right: 2px ridge #8a7a40; font-size: 11.5px; line-height: 1.8; color: #ffe27a; }
+.kl-t h3 { font-size: 13px; color: #ffe27a; background: #46602a; padding: 3px 6px; margin: 0 0 8px; border: 1px solid #8a7a40; }
+.kl-t p { line-height: 1.5; }
+.kl-t small { color: #ffb000; font-weight: 700; }
+.kl-map { border: 2px ridge #8a7a40; margin-bottom: 12px; }
+.kl-f { font-size: 10.5px; color: #a8a080; text-align: center; margin-top: 16px; }
+
+/* Mapa leśna, BushView */
+.site-mapa, .site-bv { background: #eef2ec; min-height: 100%; font-family: var(--font); }
+.ml-h, .bvw-h { padding: 14px 16px; background: #2e6b3a; color: #fff; }
+.bvw-h { background: #3d4a1b; }
+.ml-h b, .bvw-h b { display: block; font-size: 18px; }
+.ml-h small, .bvw-h small { opacity: .8; font-size: 12px; }
+.ml-m, .bvw-m { padding: 14px 16px 30px; }
+.ml-img { border-radius: 12px; margin-bottom: 12px; }
+.ml-b { display: block; width: 100%; padding: 13px; margin: 8px 0; border-radius: 12px; background: #2e6b3a; color: #fff; font-weight: 700; font-size: 14px; }
+.bvw-m .ml-b { background: #4d5a2a; }
+.ml-s { font-size: 12.5px; color: #555; }
+.bvw-m img { border-radius: 12px; margin-bottom: 12px; }
