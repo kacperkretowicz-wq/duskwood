@@ -77,6 +77,12 @@ DATA.web.tt_kronika = {
     ['c_blok_noc', 'assets/kronika/c_blok_noc.jpg', 'Parking · 23:41', 768, 1024],
     ['c_ida_pies', 'assets/kronika/c_ida_pies.jpg', 'Pierwszy śnieg', 768, 1024],
     ['c_lodowisko', 'assets/kronika/c_lodowisko.jpg', 'Lodowisko', 768, 1024],
+    ['c_festyn', 'assets/kronika/c_festyn.jpg', 'TV Dolina · festyn 2011', 1024, 768],
+    ['c_ryz', 'assets/kronika/c_ryz.jpg', 'Serwis Igora', 768, 1024],
+    ['c_gorka', 'assets/kronika/c_gorka.jpg', 'Górka za blokami', 768, 1024],
+    ['c_rysunek', 'assets/kronika/c_rysunek.jpg', 'Świetlica', 768, 1024],
+    ['c_klatka', 'assets/kronika/c_klatka.jpg', 'Klatka schodowa · 0:12', 768, 1024],
+    ['v_festyn', 'assets/video/v_festyn.jpg', 'festyn, 2011', 360, 270],
     ['v_studniowka', 'assets/video/v_studniowka.jpg', 'studniówka, 1999', 360, 270],
     ['v_telewizor', 'assets/video/v_telewizor.jpg', 'on śpi', 360, 640]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
