@@ -100,7 +100,7 @@ Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Mia�
       <a href="#" data-go="m24_maja" class="m24-hero">${`<img src="${Art.url('web_dam')}" alt="">`}<div><span class="m24-tag">PILNE</span><h2>Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie</h2></div></a>
       <a href="#" data-go="m24_huta" class="m24-row"><b>Huta „Jutrzenka”: ruina czy szansa? Wójt: „brak inwestora”</b><small>03.03.2025</small></a>
       <a href="#" data-go="m24_powodz" class="m24-row"><b>20 lat po powodzi tysiąclecia. „Woda zabrała nam pół miasta”</b><small>08.07.2017</small></a>
-      <a href="#" data-go="m24_kruk" class="m24-row"><b>Tragiczny wypadek na moście kolejowym</b><small>14.03.2011</small></a>
+      <a href="#" data-go="m24_kruk" class="m24-row"><b>Tragiczny wypadek na moście kolejowym</b><small>14.09.2011</small></a>
       <div class="m24-ad">Auto-Sowa · mechanika · wulkanizacja · tel. 669 301 552</div></main>`
   });
   page('m24_maja', {
@@ -144,8 +144,8 @@ Jedyną ofiarą śmiertelną w gminie był *9-letni Tomasz L.*, którego ciała 
     url: 'mglisko24.pl/wiadomosci/2011/wypadek-most-kolejowy', title: 'Tragiczny wypadek na moście kolejowym', site: 'm24', fav: 'M', favColor: '#c43d2f',
     kw: ['darek kruk', 'dariusz kruk', 'kruk', 'dariusz k', 'most kolejowy', 'wypadek most', 'kruk mglisko', 'kruk 2011'],
     snippet: '30-letni Dariusz K. spadł z mostu kolejowego nad Mglicą. Znajomi: „ostatnio powtarzał, że musi coś komuś oddać”.',
-    html: () => `${m24Head()}<main class="m24-m m24-art"><h1>Tragiczny wypadek na moście kolejowym</h1><small class="m24-d">14.03.2011</small>
-      ${P(`W nocy z niedzieli na poniedziałek z mostu kolejowego nad Mglicą spadł *30-letni Dariusz K.*, mieszkaniec Mgliska. Mężczyzna zginął na miejscu. Według wstępnych ustaleń był pod wpływem alkoholu.
+    html: () => `${m24Head()}<main class="m24-m m24-art"><h1>Tragiczny wypadek na moście kolejowym</h1><small class="m24-d">14.09.2011</small>
+      ${P(`W środę rano z przęsła remontowanego mostu kolejowego nad Mglicą spadł *30-letni Dariusz K.*, mieszkaniec Mgliska, pracownik firmy wykonującej remont. Mężczyzna zginął na miejscu. Nieoficjalnie mówi się, że mógł być pod wpływem alkoholu.
 
 Sąsiedzi mówią, że od lat zmagał się z problemami. — Dobry chłopak, tylko się pogubił. Od tej powodzi jakby go nie było — mówi jedna z mieszkanek bloku przy Wodnej.
 

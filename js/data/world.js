@@ -124,7 +124,7 @@ DATA.timeline = [
   { t: '1997-07-07T23:30', title: 'Czterech chłopaków w hucie. W drzwiach — Tomek.', text: 'Kadr 21 z kliszy z szafki 17.', cond: 'ev:ev_frame21', key: true },
   { t: '1997-07-08T00:10', title: 'Tomek wpada przez podłogę do zalanego kanału pieca.', text: 'Ciało ukryto w odprężarce, wejście zamurowano.', cond: 'solved:ded_1997', key: true },
   { t: '2007-07-07T08:00', title: 'Reportaż Rybickiego „Dziesięć lat ciszy”.', cond: 'ev:ev_article2007', time: false },
-  { t: '2011-03-14T03:00', title: 'Dariusz Kruk ginie na moście kolejowym.', cond: 'seen:web:m24_kruk', time: false },
+  { t: '2011-09-14T06:50', title: 'Dariusz Kruk ginie przy remoncie mostu kolejowego.', cond: 'seen:web:m24_kruk', time: false },
   { t: '2021-02-11T12:00', title: 'Umiera Adam Rybicki. Jego numer trafia później do ciebie.', cond: 'ev:ev_obit', time: false },
   { t: '2026-10-03T16:02', title: 'Maja znajduje aparat w szafce 17.', cond: any('ev:ev_szafka17', 'ev:ev_darkroom') },
   { t: '2026-10-05T23:48', title: 'Maja wywołuje kliszę.', cond: 'ev:ev_darkroom' },
