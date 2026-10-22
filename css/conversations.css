@@ -36,3 +36,10 @@
 .note-version h4 { margin:0 0 12px; font-size:15px; font-weight:600; color:var(--tx); line-height:1.45; }
 .note-version .paper { margin:0 0 16px; padding:18px; font-size:17px; line-height:1.55; overflow-wrap:anywhere; }
 .note-history>.pad { padding:16px 0 0; }
+.voice-msg { min-width:210px; }
+.voice-row { display:flex; align-items:center; gap:9px; }
+.voice-play { width:34px; height:34px; border-radius:50%; border:0; background:var(--accent,#3478f6); color:#fff; font-size:13px; flex:none; }
+.voice-wave { display:flex; align-items:center; gap:2px; flex:1; height:22px; }
+.voice-wave i { display:block; width:3px; border-radius:2px; background:currentColor; opacity:.55; }
+.voice-from { display:block; margin-top:4px; opacity:.7; }
+.voice-tr { margin:8px 0 0; font-size:15px; opacity:.9; font-style:italic; }

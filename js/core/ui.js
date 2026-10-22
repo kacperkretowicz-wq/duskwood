@@ -432,6 +432,19 @@ const UI = (() => {
     toast(`Zapisano w Notatkach: ${e.title}`, { kind: 'ev', icon: 'note', ms: 3400, onclick: () => openApp('notes', { ev: id }) });
   }
 
+  /* Wiadomość głosowa: `voice:0:38|Kto|transkrypcja`. Bez pliku audio pokazujemy przebieg i zapis. */
+  function textOrVoice(text) {
+    const m = /^voice:(\d+:\d\d)\|([^|]*)\|([\s\S]*)$/.exec(String(text || ''));
+    if (!m) return h('p', { html: U.rich(text) });
+    const bars = Array.from({ length: 28 }, (_, i) => h('i', { style: `height:${4 + ((i * 7 + m[3].length) % 13)}px` }));
+    const tr = h('p', { class: 'voice-tr', hidden: true, html: U.rich(m[3]) });
+    const btn = h('button', { class: 'voice-play', 'aria-label': 'Pokaż transkrypcję wiadomości głosowej', 'aria-expanded': 'false', onclick: () => { tr.hidden = !tr.hidden; btn.setAttribute('aria-expanded', String(!tr.hidden)); wrap.classList.toggle('open', !tr.hidden); } }, '▶');
+    const wrap = h('div', { class: 'voice-msg' },
+      h('div', { class: 'voice-row' }, btn, h('span', { class: 'voice-wave', 'aria-hidden': 'true' }, bars), h('small', {}, m[1])),
+      m[2] ? h('small', { class: 'voice-from' }, 'Nagranie: ' + m[2]) : null, tr);
+    return wrap;
+  }
+
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
     if (who === 'szklarz') who = 'unknown';
@@ -670,7 +683,7 @@ const UI = (() => {
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
-    banner, toast, evidenceToast, avatar, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
+    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
     fx, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };

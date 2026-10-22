@@ -31,9 +31,9 @@
     function render() {
       transcript.innerHTML = '';
       s.transcript.slice(0, visible).forEach(m => transcript.append(h('div', { class: 'side-message' + (m.from === 'me' ? ' mine' : '') },
-        h('small', {}, m.from === 'me' ? 'Ty' : c.short), m.img ? h('button', { class: 'side-photo', onclick: () => UI.viewImage(m.img), 'aria-label': 'Otwórz zdjęcie: ' + Art.get(m.img).title }, h('img', { src: Art.url(m.img), alt: Art.get(m.img).title }), h('span', {}, Art.get(m.img).title)) : h('p', { html: U.rich(m.text) }))));
+        h('small', {}, m.from === 'me' ? 'Ty' : c.short), m.img ? h('button', { class: 'side-photo', onclick: () => UI.viewImage(m.img), 'aria-label': 'Otwórz zdjęcie: ' + Art.get(m.img).title }, h('img', { src: Art.url(m.img), alt: Art.get(m.img).title }), h('span', {}, Art.get(m.img).title)) : UI.textOrVoice(m.text))));
       actions.innerHTML = '';
-      if (busy) { actions.append(h('p', { class: 'side-typing', role: 'status' }, `${c.short} pisze…`)); return; }
+      if (busy) { actions.append(h('p', { class: 'side-typing', role: 'status' }, /^voice:/.test(s.transcript[visible]?.text || '') ? `${c.short} nagrywa wiadomość głosową…` : `${c.short} pisze…`)); return; }
       if (s.done) {
         actions.append(h('p', { class: 'side-complete' }, 'Rozmowa zapisana. Możesz do niej wrócić.'));
         if (d.deduction) {
