@@ -774,7 +774,7 @@ const UI = (() => {
       const fast = G.settings.speed === 'instant';
       const el = h('div', { class: 'nearby-ov' },
         h('div', { class: 'nearby-card' },
-          h('div', { class: 'nb-k' }, OS === 'android' ? 'Przesyłanie w pobliżu' : 'Zrzut w pobliżu'),
+          h('div', { class: 'nb-k' }, 'Przesyłanie w pobliżu'),
           h('div', { class: 'nb-prev' }, o.img ? h('img', { src: Art.url(o.img), alt: '' }) : null),
           h('div', { class: 'nb-t' }, U.tpl(`„${o.device || 'Telefon'}” chce udostępnić ${o.what || 'zdjęcie'}`)),
           o.note ? h('div', { class: 'nb-s' }, U.tpl(o.note)) : null,
