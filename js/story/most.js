@@ -14,14 +14,14 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     title(),
     set('m_case'),
     M('hej. nie śpisz?'),
-    M('siedzę u pani Weroniki. ona robi katalog pudła pana adama, ja robię zdjęcia, bo to akurat umiem'),
+    M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem'),
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
     pic('maja2', 'maja', 'most_teczka', 'ta była na samym dnie. pod wycinkami o powodzi'),
     give('ev_m_teczka'),
     M('„nie publikować bez K.” i nie mamy pojęcia, kto to jest K.'),
     choose('maja2', [
       opt('Rodzina pana Adama wie, że to otwieracie?', [
-        M('tak. jego brat podpisał zgodę na katalog. na katalog, nie na publikację. pani Weronika ma to na kartce i trzyma przy pudle jak paragon')
+        M('tak. jego brat podpisał zgodę na spisanie zawartości. tylko na to, nie na publikację. pani Weronika ma to na kartce i trzyma przy pudle jak paragon')
       ]),
       opt('Jak się czujesz z tym pudłem?', [
         M('dziwnie. jakbym czytała cudzy pamiętnik, ale za pozwoleniem'),
@@ -51,7 +51,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       ], { set: { m_sameEvent: true } }),
       opt('Ktoś tu kłamie. Albo babcia, albo notatka.', [
         W('Proszę spojrzeć na wycinek. „Spadł z przęsła remontowanego mostu… Wykonawca prac, firma Kurek-Bud.”'),
-        W('Pracował przy remoncie. Wypadek w pracy i wypadek na moście to jedno i to samo zdarzenie, tylko opowiedziane innymi słowami.'),
+        W('Pracował przy remoncie. Czyli chodzi o ten sam wypadek. Tylko każdy mówi o nim trochę inaczej.'),
         W('Ja też tak na początku pomyślałam.')
       ], { set: { m_sameEvent: true } })
     ]),
@@ -86,7 +86,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
             c('gs_sek', 'Gazeta Sudecka, dyżur wydania, Kowalczyk, słucham.'),
             choose('call', [opt('Dzień dobry. Czy pracuje u państwa Marta Jasińska?', [])]),
             c('gs_sek', 'Marta? Tak, archiwum, pokój dwanaście. Ona już wyszła, ale jutro od ósmej jest.'),
-            c('gs_sek', 'A {pan|pani} w jakiej sprawie? Bo jak coś przekazać, to zapiszę.'),
+            c('gs_sek', 'A {pan|pani} w jakiej sprawie? Jeśli coś jej przekazać, to zapiszę.'),
             choose('call', [
               opt('Nie trzeba. Chciał{em|am} tylko potwierdzić.', [c('gs_sek', 'Bardzo słusznie. Ludzie teraz piszą do nas, że ktoś się podaje za redakcję. Dobranoc.')]),
               opt('Sprawa kasety pana Rybickiego.', [c('gs_sek', 'Aha, to na pewno Marta. Ona te kasety zna lepiej niż my wszyscy razem wzięci. Dobranoc.')])
@@ -103,7 +103,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     Ma('Konkret: plik w archiwum zaczyna się od 00:00:00 w środku zdania. Pan Adam opisał go „2/2”, bo pierwsza kaseta jest gdzie indziej albo jej nie ma.'),
     Ma('Jeśli w pudle jest oryginał, mogę go przegrać na naszym magnetowidzie i sprawdzić, czy plik jest pełny. Nic nie publikujemy. To tylko archiwum.'),
     choose('marta', [
-      opt('Dobrze. Ale kaseta zostaje u pani Weroniki, przyjedziesz z magnetowidem do niej.', [
+      opt('Dobrze. Ale kaseta zostaje u pani Weroniki. Może pani przyjechać do niej z magnetowidem?', [
         Ma('Zgoda. To nawet lepiej, oryginał nie wychodzi z domu.'),
         Ma('Napiszę do pani Lis w poniedziałek.')
       ], { set: { m_tapeStays: true } }),
@@ -141,7 +141,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     choose('sylwia', [
       opt('Na razie nie przypinaj niczego. Sprawdzę, skąd jest nagranie.', [S('Dobrze. Zostawiam tylko swój komentarz: „Prosimy nie oskarżać nikogo z imienia i nazwiska”.')], { set: { m_sylwiaWaits: true } }),
       opt('Skasuj wszystkie wpisy z tym nagraniem.', [
-        S('Wszystkie się nie da, to pół grupy. A jak skasuję gazetę, to powiedzą, że ukrywam.'),
+        S('Wszystkich nie dam rady, to pół grupy. A jak usunę wpis gazety, to powiedzą, że coś ukrywam.'),
         S('Zostawię link, ale wyłączę komentarze pod nim.')
       ])
     ]),
@@ -167,7 +167,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       ]),
       opt('Kto pana wtedy nagrywał?', [
         H('Rybicki. Adam. Przyszedł do mnie z kamerą, w październiku. Siedzieliśmy w kuchni.'),
-        H('Dwie kasety nagrał. Dwie. Pamiętam, bo zmieniał w połowie i się zaciął.')
+        H('Dwie kasety nagrał. Dwie. Pamiętam, bo w połowie zmieniał kasetę i coś mu się zacięło.')
       ], { set: { m_twoTapes: true } })
     ]),
     H('I jeszcze. Piszą, że Darek był pijany. To nieprawda. Na rusztowaniu? U mnie? Ja bym go zdjął.'),
@@ -201,7 +201,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     N('sorry ze tak z buta. to ja wrzucilem ten material z mostem'),
     N('plik byl w folderze rybickiego w archiwum, opis „HW 2/2”. dostalem go od stazystki, ona szykowala zajawki do cyklu o archiwum'),
     N('wiem ze sie zrobil syf. ale technicznie to jest autentyczne nagranie, nikt nic nie dogrywal'),
-    pic('natan', 'natan', 'most_hw', 'kadr z pierwszej klatki. znak czasu z kamery'),
+    pic('natan', 'natan', 'most_hw', 'pierwsza klatka. czas z kamery'),
     N('kurek-bud przyslal oswiadczenie do redakcji. wklejam'),
     N('„Szanowni Państwo, w związku z publikacją z dnia 22.11.2026 uprzejmie informujemy: 1. Firma z szacunkiem wspomina zmarłego pracownika. 2. Postępowanie z 2012 r. jednoznacznie wykluczyło udział osób trzecich. 3. Na dalsze pytania odpowiemy na piśmie, w ustawowym terminie. Z poważaniem, Janina Kurek, Członek Zarządu”'),
     give('ev_m_kb_statement'),
@@ -240,7 +240,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       opt('Na razie nic nie zanosimy. Najpierw nagranie.', [Ma('Tak. Najpierw nagranie.')])
     ]),
     give('ev_m_praktyki', { silent: true }),
-    Ma('Teraz to, o co chciałam {Pana|Panią} prosić. Nagranie wisi w trzech miejscach: u nas, na Klipo i w „Tygodniu w Sudetach”. Sprawdźmy, czy to jeden plik, czy trzy różne.'),
+    Ma('Mam do {Pana|Pani} prośbę. Nagranie wisi w trzech miejscach: u nas, na Klipo i w „Tygodniu w Sudetach”. Sprawdźmy, czy to jeden plik, czy trzy różne.'),
     goal('Znajdź trzy publikacje nagrania: Gazeta Sudecka, Klipo (@sudety.prawda), „Tydzień w Sudetach”. Porównaj pierwszą klatkę i długość.'),
     waitFor(s => G.has('ev_m_gs') && G.has('ev_m_klipo') && G.has('ev_m_tyg'), { goal: 'Znajdź trzy publikacje nagrania: Gazeta Sudecka, Klipo (@sudety.prawda), „Tydzień w Sudetach”. Porównaj pierwszą klatkę i długość.' }),
     Ma('Ma {Pan|Pani} wszystkie trzy? Co je łączy?'),
@@ -251,7 +251,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       ], { set: { m_oneSource: true } }),
       opt('Wszystkie mówią to samo, więc to chyba prawda.', [
         Ma('To samo, bo to ten sam plik. Proszę spojrzeć na pierwszą klatkę: 17:22:08 wszędzie.'),
-        Ma('Trzy publikacje to nie trzy źródła. Klipo to nawet nasz pasek w rogu.')
+        Ma('Trzy publikacje to nie trzy źródła. Na Klipo nawet widać nasz pasek w rogu.')
       ], { set: { m_oneSource: true } })
     ]),
     give('ev_m_one'),
