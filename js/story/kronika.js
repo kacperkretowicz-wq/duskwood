@@ -46,7 +46,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj'),
       pic('kuba', 'kuba', 'c_gorka', 'maja nagrała jak się wywalam. jak to wrzuci na klipo to się wyprowadzam'),
       choose('kuba', [
-        opt('10/10 za styl lądowania.', [say('kuba', 'kuba', 'dzięki. sędziowie z bałwanem dali mi 6')]),
+        opt('10/10 za styl lądowania.', [say('kuba', 'kuba', 'dzięki. sędziowie razem z bałwanem dali mi 6')]),
         opt('Żyjesz?', [say('kuba', 'kuba', 'żyję. kurtka mniej. śnieg mam nawet w skarpetkach')])
       ]),
       pause(3000),
@@ -103,7 +103,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       say('zuza', 'zuza', 'i powiedziała jeszcze „on wszystkich nagrywał, a jego nikt”'),
       choose('zuza', [
         opt('Ciekawe, ile takich kaset leży po domach.', [say('zuza', 'zuza', 'u nas trzy. komunia, chrzest i wesele cioci. nikt nie ma już magnetowidu')]),
-        opt('Pozdrów babcię.', [say('zuza', 'zuza', 'pozdrowiła. i kazała ci się ciepło ubrać. nie wiem skąd wie że nie')])
+        opt('Pozdrów babcię.', [say('zuza', 'zuza', 'pozdrowiła. i kazała ci się ciepło ubrać. nie wiem skąd wie że się za lekko ubieram')])
       ])
     ]),
     give('ev_c_klip1', { silent: true }),
@@ -265,7 +265,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       O('Upiekliśmy pierniki. Połowa ma kształt dinozaura, choć foremki były w gwiazdki.'),
       O('Jedna dziewczynka zapytała mnie, czy ja też kiedyś byłam niegrzeczna. Prawie się rozpłakałam przy blasze.'),
       choose('ola', [
-        opt('Co jej odpowiedziałaś?', [O('Że tak. I że potem przeprosiłam. Przyjęła to bardzo poważnie i zjadła dinozaura.')], { trust: { ola: 1 } }),
+        opt('Co jej odpowiedziałaś?', [O('Że tak. I że potem przeprosiłam. Potraktowała to bardzo poważnie i zjadła dinozaura.')], { trust: { ola: 1 } }),
         opt('Dzieci zawsze pytają w najgorszym momencie.', [O('One mają do tego radar.')])
       ])
     ]),
@@ -314,10 +314,10 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     ambient('dark'),
     title(),
     O('Nie śpisz? Ja nie mogę.'),
-    O('Leżę i liczę, ile osób z rodziców w świetlicy ogląda Klipo. Wyszło mi, że wszyscy.'),
+    O('Leżę i liczę, ilu rodziców dzieci ze świetlicy ogląda Klipo. Wyszło mi, że wszyscy.'),
     pause(2000),
     callIn('ola'),
-    c('ola', 'Sorry, że dzwonię. Pisać już nie umiem, ręce mi się trzęsą.'),
+    c('ola', 'Sorry, że dzwonię. Już nie daję rady pisać, ręce mi się trzęsą.'),
     c('ola', 'To był sierpień. Festyn na boisku, grał jakiś zespół z Bielawy. Ona powiedziała coś o mojej mamie. Coś obrzydliwego.'),
     c('ola', 'Popchnęłam ją. Upadła twarzą na ławkę. Pamiętam dźwięk. Do dziś pamiętam ten dźwięk.'),
     c('ola', 'Dobra. Już. Dziękuję, że {odebrałeś|odebrałaś}.'),
@@ -342,7 +342,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     iff('flag:c_shotFestyn', [
       pause(2000),
       O('Ktoś wrzucił do grupy zrzut z Błysku. Z twoim imieniem w rogu.'),
-      O('Ludzie piszą, że to ty dostajesz te klipy pierwszy. Sylwia usunęła, ale ja już widziałam.'),
+      O('Ludzie piszą, że to do ciebie najpierw trafiają te klipy. Sylwia usunęła zrzut, ale ja już go widziałam.'),
       O('Wiem, że to nie ty. Ale głupio mi.')
     ]),
     pause(3000),
@@ -351,7 +351,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       pic('igor', 'igor', 'c_festyn', 'zrobiłem kadr. przypomina ci to coś?'),
       choose('igor', [
         opt('Kamera jest wyżej niż ludzie. Ktoś stał na scenie. Operator kablówki.', [
-          I('tak. czyli to nie nagrał ktoś z tłumu telefonem. to oficjalna kaseta TV Dolina'),
+          I('tak. czyli nie nagrał tego nikt z tłumu telefonem. to oficjalna kaseta TV Dolina'),
           I('a pełna wersja jest tylko na oryginale. czyli u pana Zenona w pokoju')
         ], { set: { c_stageLink: true } }),
         opt('Ta dziewczyna z boku. Chyba trzyma telefon.', [
@@ -359,7 +359,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
           pause(3000),
           I('ale zobacz, skąd jest ujęcie. z góry, ze sceny. to kamera kablówki. oryginał jest u pana Zenona')
         ], { set: { c_stageLink: true, c_canDetour: true } }),
-        opt('Zwykły festyn. Taki jak co roku.', [I('no. tylko że ten jest jutro w internecie')], { set: { c_stageLater: true } })
+        opt('Zwykły festyn. Taki jak co roku.', [I('no. tylko że nagranie z tego festynu będzie jutro w internecie')], { set: { c_stageLater: true } })
       ])
     ]),
     pause(5000),
@@ -503,7 +503,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       Z('{Szanowny Panie|Szanowna Pani}, Ida nie przyszła na obiad. Zostawiłem jej talerz w piekarniku. Gdyby {Pan|Pani} ją widział{|a}, proszę powiedzieć, że pies tęskni.'),
       pause(2500),
       W('Siedzę w czytelni i nie umiem nic robić. Zrobiłam sobie trzecią herbatę.'),
-      W('Pani z bibliotek powiatowych pyta, czy przyjmiemy kasety TV Dolina „jakby co”. Powiedziałam, że tak.'),
+      W('Pani z biblioteki powiatowej pyta, czy „jakby co” przyjmiemy kasety TV Dolina. Powiedziałam, że tak.'),
       pause(2500),
       M('pokaż mi coś, co mnie uspokoi. cokolwiek z galerii'),
       camera('maja2', [
