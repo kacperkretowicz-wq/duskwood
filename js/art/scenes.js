@@ -384,7 +384,7 @@
     title: 'CAM-01 · test', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 3, '09.10.2026', '18:02'), stamp: tstamp('CAM-01', 3, '09.10.2026', '18:02:11', 9, 'wax'),
     draw: k => yard(k, { mode: 'day' }) + k.g(k.ell(0, 0, 260, 330, '#d9a888') + k.ell(-180, -200, 70, 160, '#d9a888', 'transform="rotate(-20 -180 -200)"') + k.ell(-60, -300, 60, 170, '#d9a888') + k.ell(70, -300, 58, 160, '#d9a888') + k.ell(190, -230, 54, 150, '#d9a888', 'transform="rotate(18 190 -230)"'), `transform="translate(900,760)" ${k.blur(22)}`)
   });
-  D('c1_0011', {
+  D('c1_0011', { src: 'assets/trap/c1_0011.jpg',
     title: 'CAM-01 · lis', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 11, '10.10.2026', '02:44'), stamp: tstamp('CAM-01', 11, '10.10.2026', '02:44:52', 3, 'wax'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 90, 34, '#8a8a8a') + k.ell(96, -30, 34, 26, '#8a8a8a') + k.path('M110,-46 L104,-80 L124,-50 Z M86,-50 L84,-82 L102,-52 Z', '#8a8a8a') + k.ell(132, -22, 22, 10, '#8a8a8a') + k.pl([[-60, 20], [-64, 60]], '#8a8a8a', 12) + k.pl([[50, 20], [54, 60]], '#8a8a8a', 12) + k.path('M-88,-6 Q-170,-20 -200,30 Q-150,10 -86,14 Z', '#9a9a9a') + k.circle(108, -34, 7, '#fff') + k.circle(126, -32, 6, '#fff') + k.glow(117, -33, 30, '#fff', 0.8), 'transform="translate(560,560)"')
   });
@@ -392,11 +392,11 @@
     title: 'CAM-01 · sarna', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 14, '11.10.2026', '06:58'), stamp: tstamp('CAM-01', 14, '11.10.2026', '06:58:03', 2, 'wax'),
     draw: k => yard(k, { mode: 'dawn' }) + k.g(k.ell(0, 0, 110, 50, '#6b4a30') + k.pl([[-70, 30], [-76, 130]], '#5a3c26', 12) + k.pl([[-40, 30], [-38, 130]], '#5a3c26', 12) + k.pl([[60, 30], [64, 130]], '#5a3c26', 12) + k.pl([[86, 30], [92, 130]], '#5a3c26', 12) + k.path('M90,-20 L130,-110 L160,-100 L120,-10 Z', '#6b4a30') + k.ell(160, -110, 30, 20, '#6b4a30') + k.ell(184, -104, 14, 9, '#3a2a1a') + k.path('M146,-126 L138,-160 L152,-128 Z M160,-126 L166,-160 L170,-126 Z', '#5a3c26') + k.ell(-100, -10, 22, 18, '#e8e0d0'), 'transform="translate(820,470) scale(.8)"') + k.fog(250, 300, { op: 0.4 })
   });
-  D('c1_0021', {
+  D('c1_0021', { src: 'assets/trap/c1_0021.jpg',
     title: 'CAM-01 · 14.10, 22:57', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 21, '14.10.2026', '22:57'), stamp: tstamp('CAM-01', 21, '14.10.2026', '22:57:40', 4, 'wax'), onView: 'ev_cam1_maja',
     draw: k => yard(k) + fig(k, 760, 560, 300, { fill: '#4a4a4a', hair: 'tail', hairFill: '#555', la: [-14, -8], ra: [16, 10], stride: 0.4 }) + k.rect(728, 330, 64, 90, '#3a3a3a', 'rx="12"') + k.glow(768, 286, 60, '#fff', 1) + k.beam(768, 286, -20, 600, 14, '#fff', 0.35, 10)
   });
-  D('c1_0022', {
+  D('c1_0022', { src: 'assets/trap/c1_0022.jpg',
     title: 'CAM-01 · 15.10, 01:20', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 22, '15.10.2026', '01:20'), stamp: tstamp('CAM-01', 22, '15.10.2026', '01:20:17', 2, 'wax'), onView: 'ev_cam1_car',
     draw: k => yard(k) + k.car(420, 600, 1.15, { view: 'front', lights: true, fill: '#262626', glass: '#0a0a0a', plateFill: '#ddd' }) + k.glow(330, 520, 320, '#fff', 0.7) + k.glow(510, 520, 320, '#fff', 0.7)
   });
@@ -411,7 +411,7 @@
     fx: { grain: 0.5 },
     draw: k => `<g opacity=".85">${yard(k)}</g>` + k.car(430, 590, 1.0, { view: 'rear', tail: true, fill: '#5a5a5a', glass: '#2a2a2a', plate: 'DDZ 6K1', plateFill: '#e0e0e0', plateText: '#111' }) + k.ell(470, 543, 14, 12, '#3a3226') + k.glow(330, 522, 90, '#fff', 0.6) + k.glow(530, 522, 90, '#fff', 0.6)
   });
-  D('c1_0031', {
+  D('c1_0031', { src: 'assets/trap/c1_0031.jpg',
     title: 'CAM-01 · 16.10, 11:12', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 31, '16.10.2026', '11:12'), stamp: tstamp('CAM-01', 31, '16.10.2026', '11:12:30', 8, 'half'),
     draw: k => yard(k, { mode: 'day' }) + fig(k, 520, 600, 260, { fill: '#1d2638', cap: true, capFill: '#151c2a', la: [-10, -4], ra: [80, 80] }) + fig(k, 680, 590, 250, { fill: '#1d2638', cap: true, capFill: '#151c2a' }) + k.rect(620, 480, 120, 14, '#c9d0d8', 'opacity=".7"')
   });
@@ -419,9 +419,9 @@
     title: 'CAM-01 · 19.10, 03:30', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 44, '19.10.2026', '03:30'), stamp: tstamp('CAM-01', 44, '19.10.2026', '03:30:02', 0, 'half'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 26, 36, '#8a8a8a') + k.circle(0, -38, 20, '#8a8a8a') + k.circle(-8, -40, 5, '#fff') + k.circle(8, -40, 5, '#fff') + k.path('M-16,-52 L-12,-66 L-4,-56 Z M16,-52 L12,-66 L4,-56 Z', '#8a8a8a'), 'transform="translate(574,140)"')
   });
-  D('c1_0057', {
+  D('c1_0057', { src: 'assets/trap/c1_0057.jpg',
     title: 'CAM-01 · 22.10, 02:13', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 57, '22.10.2026', '02:13'), stamp: tstamp('CAM-01', 57, '22.10.2026', '02:13:26', 3, 'wax'),
-    hotspots: [{ x: 700, y: 410, r: 70, ev: 'ev_jacket', zoom: 1.8 }],
+    hotspots: [{ x: 470, y: 360, r: 90, ev: 'ev_jacket', zoom: 1.8 }],
     draw: k => {
       let s = yard(k);
       s += fig(k, 700, 640, 420, { fill: '#5c5c5c', broad: true, hood: true, hoodFill: '#555', la: [-12, -6], ra: [30, 70], stripes: '#f2f2f2', stride: 0.3 });
@@ -430,11 +430,11 @@
       return s;
     }
   });
-  D('c1_0058', {
+  D('c1_0058', { src: 'assets/trap/c1_0058.jpg',
     title: 'CAM-01 · 22.10, 23:41', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 58, '22.10.2026', '23:41'), stamp: tstamp('CAM-01', 58, '22.10.2026', '23:41:09', 2, 'half'),
     draw: k => yard(k) + fig(k, 880, 600, 250, { fill: '#4e4e4e', beanie: true, beanieFill: '#5a5a5a', la: [-20, -60], ra: [20, 10], stride: 0.5 }) + fig(k, 1010, 610, 270, { fill: '#555', hair: 'short', la: [-10, -5], ra: [40, 90] }) + k.circle(1000, 446, 6, '#fff', 'opacity=".8"') + k.circle(1020, 446, 6, '#fff', 'opacity=".8"') + k.glow(1060, 520, 30, '#fff', 0.8)
   });
-  D('c1_0060', {
+  D('c1_0060', { src: 'assets/trap/c1_0060.jpg',
     title: 'CAM-01 · 23.10, 00:12', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 60, '23.10.2026', '00:12'), stamp: tstamp('CAM-01', 60, '23.10.2026', '00:12:51', 2, 'half'),
     draw: k => yard(k) + k.car(420, 600, 1.15, { view: 'front', lights: true, fill: '#262626', glass: '#0a0a0a', plateFill: '#ddd' }) + k.glow(330, 520, 300, '#fff', 0.7) + k.glow(510, 520, 300, '#fff', 0.7) + fig(k, 640, 590, 260, { fill: '#4a4a4a', broad: true, la: [-8, -4], ra: [60, 90] }) + k.glow(700, 470, 40, '#fff', 1)
   });
@@ -474,7 +474,7 @@
     title: 'CAM-02 · test', w: 1280, h: 720, style: 'ir', exif: trap('CAM-02', 4, '09.10.2026', '18:20'), stamp: tstamp('CAM-02', 4, '09.10.2026', '18:20:45', 7, 'wax'),
     draw: k => hallTrap(k) + fig(k, 640, 640, 330, { fill: '#555', hair: 'tail', hairFill: '#5a5a5a', stride: 0.4 }) + k.rect(600, 380, 80, 110, '#444', 'rx="14"')
   });
-  D('c2_0019', {
+  D('c2_0019', { src: 'assets/trap/c2_0019.jpg',
     title: 'CAM-02 · 13.10, 02:40', w: 1280, h: 720, style: 'ir', exif: trap('CAM-02', 19, '13.10.2026', '02:40'), stamp: tstamp('CAM-02', 19, '13.10.2026', '02:40:33', 3, 'wax'), onView: 'ev_cam2_0019',
     draw: k => hallTrap(k) + fig(k, 760, 650, 400, { fill: '#4a4a4a', broad: true, la: [-10, -6], ra: [-60, -110] }) + k.glow(700, 340, 260, '#fff', 1) + k.glow(700, 340, 90, '#fff', 1) + k.circle(700, 340, 30, '#fff') + k.beam(700, 340, 160, 900, 18, '#fff', 0.3, 20)
   });

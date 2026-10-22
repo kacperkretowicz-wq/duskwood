@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v9';
+const VERSION = 'quiet-is-safer-v10';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -10,6 +10,8 @@ const FILES = [
   './js/data/field-threads.js', './js/core/phone-tools.js', './js/apps/phone-tools.js', './css/phone-tools.css',
   './assets/garage-locker-v1.jpg', './assets/strap-door-v1.jpg', './assets/garage-straps-v1.jpg',
   './assets/factory-day-v1.jpg',
+  './assets/trap/c1_0011.jpg', './assets/trap/c1_0021.jpg', './assets/trap/c1_0022.jpg', './assets/trap/c1_0031.jpg',
+  './assets/trap/c1_0057.jpg', './assets/trap/c1_0058.jpg', './assets/trap/c1_0060.jpg', './assets/trap/c2_0019.jpg',
   './js/core/seasons.js', './js/core/wallpapers.js', './js/apps/seasons.js', './js/apps/wallpapers.js',
   './js/core/pacing.js',
   './js/vendor/capacitor-runtime.js',
