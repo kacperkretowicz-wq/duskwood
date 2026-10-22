@@ -58,7 +58,7 @@ Jeśli ktoś z Państwa pamięta tamtą noc, proszę o kontakt. Każda informacj
       <div class="gz-kick">Wspomnienie</div>
       <h1>Odszedł Adam Rybicki (1961–2021)</h1>
       <figure class="gz-por">${im('web_rybicki', '', 'Adam Rybicki')}<figcaption>Adam Rybicki. Fot. archiwum redakcji</figcaption></figure>
-      ${P(`11 lutego 2021 roku, w wieku 59 lat, zmarł nagle nasz redakcyjny kolega, Adam Rybicki. Przez trzydzieści lat jeździł po Sudetach starym oplem i pisał o sprawach, o których inni woleli zapomnieć.
+      ${P(`11 lutego 2021 roku, w wieku 59 lat, zmarł nagle nasz redakcyjny kolega, Adam Rybicki. Przez trzydzieści lat jeździł po Sudetach starym kombi i pisał o sprawach, o których inni woleli zapomnieć.
 
 Uparty, czasem nieznośny, zawsze przy telefonie. Mówił, że reporter, który nie odbiera, przestaje być reporterem. Do końca miał ten sam numer komórki, który podawał pod każdym tekstem.
 
@@ -105,13 +105,13 @@ Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Mia�
   });
   page('m24_maja', {
     url: 'mglisko24.pl/wiadomosci/poszukiwania-mai-w', title: 'Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie', site: 'm24', fav: 'M', favColor: '#c43d2f',
-    kw: ['maja wrona', 'maja w', 'zaginiona maja', 'zaginięcie mai', 'zaginiona studentka', 'zaginiona mglisko', 'tama', 'tama zalew', 'samochód na tamie', 'auto na tamie', 'zalew mgliski', 'poszukiwania mai', 'panda tama'],
-    snippet: 'Czerwonego fiata pandę zauważył na koronie tamy wędkarz. Na barierce wisiała damska kurtka…',
+    kw: ['maja wrona', 'maja w', 'zaginiona maja', 'zaginięcie mai', 'zaginiona studentka', 'zaginiona mglisko', 'tama', 'tama zalew', 'samochód na tamie', 'auto na tamie', 'zalew mgliski', 'poszukiwania mai', 'iskra tama'],
+    snippet: 'Czerwoną iskrę zauważył na koronie tamy wędkarz. Na barierce wisiała damska kurtka…',
     ev: 'ev_dam_news',
     html: () => `${m24Head()}<main class="m24-m m24-art">
       <span class="m24-tag">PILNE</span><h1>Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie</h1><small class="m24-d">16.10.2026, 9:12 · red.</small>
       <figure>${im('web_dam', '', 'Tama Zalewu Mgliskiego, 15.10')}<figcaption>Korona tamy Zalewu Mgliskiego, czwartek rano. Fot. czytelnik</figcaption></figure>
-      ${P(`W czwartek, 15 października, około *6:40* wędkarz zauważył na koronie tamy Zalewu Mgliskiego czerwonego fiata pandę. Na barierce wisiała damska kurtka. Samochód należy do 22-letniej *Mai W.*, studentki z Mgliska, której nikt nie widział od środy wieczorem.
+      ${P(`W czwartek, 15 października, około *6:40* wędkarz zauważył na koronie tamy Zalewu Mgliskiego czerwoną iskrę. Na barierce wisiała damska kurtka. Samochód należy do 22-letniej *Mai W.*, studentki z Mgliska, której nikt nie widział od środy wieczorem.
 
 Na miejscu pracowała policja i strażacy. Przez dwa dni zalew przeszukiwali płetwonurkowie z Wrocławia. Bez rezultatu.
 

@@ -195,7 +195,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     pause(2000),
 
     /* --- plan --- */
-    g('kuba', 'jedziemy dziś. jak się ściemni'),
+    g('kuba', 'jedziemy dziś wieczorem'),
     g('bartek', 'ja, stary i kuba. nozyce do klodek mam. latarki tez'),
     g('ola', 'Ja zostaję z panią Ewą. Ktoś musi być przy mamie Kuby.'),
     unlock('chat:weronika'),

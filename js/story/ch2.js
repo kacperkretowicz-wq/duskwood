@@ -176,13 +176,13 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     scene('s13', SC.s13),
 
     /* --- wyprawa --- */
-    g('igor', 'dobra. z kubą jedziemy jak się ściemni. bartek, jedziesz czy nie?'),
+    g('igor', 'dobra. z kubą jedziemy dziś o 23. bartek, jedziesz czy nie?'),
     g('bartek', 'nie'),
     interlude('23:20', 'Kuba i Igor jadą pod hutę.', 3200),
     clock('2026-10-22T23:20'),
     ambient('tense'),
     g('kuba', 'jesteśmy pod bramą'),
-    say('group', 'kuba', 'łańcuch. nowy', { img: 'k_gate' }),
+    say('group', 'kuba', 'łańcuch. zamknięte', { img: 'k_gate' }),
     g('igor', 'kłódka nowa. reszta łańcucha ruda, ta się błyszczy'),
     g('kuba', 'jak maja tu wchodziła?'),
     goal('Pomóż Kubie i Igorowi dostać się na teren huty.', [

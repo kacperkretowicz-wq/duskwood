@@ -68,7 +68,7 @@ DATA.persons = {
       { text: '13.10 odwiedził dom Wronów i pytał o projekt Mai w hucie.', cond: 'ev:ev_mom_gajda' },
       { text: 'Syn komendanta Zbigniewa Gajdy, który w 1997 szukał Tomka „w rzece”.', cond: 'ev:ev_questions' },
       { text: 'W 1997 miał 17 lat i był w hucie z Tomkiem i trzema kolegami.', cond: 'ev:ev_interview' },
-      { text: 'Jego skoda DDZ 6K19 była pod hutą noc po zniknięciu Mai i ponownie 23.10.', cond: 'ev:ev_owner' },
+      { text: 'Jego sevra DDZ 6K19 była pod hutą noc po zniknięciu Mai i ponownie 23.10.', cond: 'ev:ev_owner' },
       { text: 'Łowczy koła „Sokół”. Ma jedyny klucz do kraty sztolni Ewa.', cond: 'ev:ev_kolo' },
       { text: 'Na kadrze 23 z 1997: siedemnastolatek z ręką wyciągniętą w stronę aparatu.', cond: 'ev:ev_frame23' }
     ]
@@ -189,7 +189,7 @@ DATA.deductions = {
     answer: 'gajda',
     support: { need: 2, from: ['ev_plate', 'ev_owner', 'ev_kolo', 'ev_gajda_hunt', 'ev_sync_door', 'ev_frame23', 'ev_not_gajda', 'ev_questions', 'ev_cam1_car'], prompt: 'Wybierz *dwa* dowody, które wskazują sprawcę.', fail: 'Połącz samochód spod huty z właścicielem albo klucz do kraty z konkretną osobą.' },
     fail: 'Kto miał samochód pod hutą tamtej nocy? Kto ma klucz do kraty?',
-    done: 'Skoda DDZ 6K19 komendanta Gajdy była pod hutą noc po zniknięciu Mai. Gajda jest łowczym koła, które trzyma klucz do kraty sztolni Ewa — i wymienił kłódkę 16.10. *Maję porwał Robert Gajda.*'
+    done: 'Sevra DDZ 6K19 komendanta Gajdy była pod hutą noc po zniknięciu Mai. Gajda jest łowczym koła, które trzyma klucz do kraty sztolni Ewa — i wymienił kłódkę 16.10. *Maję porwał Robert Gajda.*'
   }
 };
 

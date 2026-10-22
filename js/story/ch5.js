@@ -22,7 +22,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- kamera przy hucie --- */
     iff('flag:cam1Dead', [
-      igorSays('przejechałem koło huty. superb gajdy pod bramą, otwarty bagażnik. widziałem kanistry'),
+      igorSays('przejechałem koło huty. magna gajdy pod bramą, otwarty bagażnik. widziałem kanistry'),
       set('sawJerrycans')
     ], [
       set('panelGajda'),
@@ -185,10 +185,10 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
         c('bartek', 'niebieskie swiatla. to radiowoz. dzierzoniow'),
         c('kuba', 'POLICJA. PRAWDZIWA'),
         c('weronika', 'Przy szlabanie stoi jeszcze jedno auto. Ciemne. Zatrzymali je.'),
-        c('bartek', 'superb. wyciagaja gajde z auta'),
+        c('bartek', 'magna. wyciagaja gajde z auta'),
         set('gajdaCaught')
       ], [
-        c('bartek', 'to superb. to on'),
+        c('bartek', 'to magna. to on'),
         c('kuba', 'gajda idzie tutaj. ma latarkę'),
         c('kuba', '…i sztucer'),
         c('bartek', 'stary wyszedl mu naprzeciw'),

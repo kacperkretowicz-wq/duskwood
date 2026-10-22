@@ -17,7 +17,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.'),
     Ma('Mama nie odbiera ode mnie od soboty. Wczoraj zostawiła mi obiad pod drzwiami. Nie wiem, co to znaczy.'),
     choose('marta', [
-      opt('Zrobiłaś to, co trzeba. To musiało kosztować.', [Ma('Kosztuje. Ale gdybym czekała, to by kosztowało więcej. Komuś innemu.')], { trust: { marta: 1 } }),
+      opt('Zrobiłaś to, co trzeba. To musiało kosztować.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
     ]),
     pause(2500),
@@ -69,7 +69,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     Z('widziałam artykuł że jest jakaś przepisana strona'),
     Z('powiedz mi jedno. czy ktoś wujka zabił'),
     choose('zuza', [
-      opt('Nie. Nie ma dowodu zabójstwa. Wujek spadł z przęsła. Siatki nie było, choć wcześniej zgłoszono jej brak. Potem ktoś przepisał stronę dziennika.', [
+      opt('Nie mamy dowodu, że ktoś go zabił. Wiemy, że spadł z przęsła, brak siatki zgłoszono wcześniej, a potem przepisano stronę dziennika.', [
         Z('ok'),
         Z('dziwne że mi ulżyło i jednocześnie nie'),
         Z('babcia całe życie bała się że to było coś gorszego. albo że to jego wina')
@@ -139,7 +139,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       Z('sąsiadka przyszła do babci po godzinie. „to pani, krysiu, prawda?”'),
       Z('babcia zamknęła się w pokoju. powiedziała, że nie będzie już ze mną rozmawiać o wujku. w ogóle'),
       Z('dlaczego'),
-      Ma('Przeczytałam. Odchodzę z redakcji. Nie dlatego, że to {Pan|Pani} doradził{|a}. Ja też powinnam była krzyczeć głośniej.'),
+      Ma('Przeczytałam. Odchodzę z redakcji. Nie chcę już tam pracować po tym, co opublikowali.'),
       run(s => { s.vars.s2Ending = 'cudzy_podpis'; }),
       ending('cudzy_podpis'),
       credits()
@@ -182,7 +182,8 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     pause(2500),
     iff('flag:m_krystynaOk', [Z('babcia wyszła z pokoju i zrobiła naleśniki. to dużo znaczy u nas'), Z('dzięki')], [Z('babcia powiedziała że już nie chce. ok. to jest ok'), Z('tylko szkoda')]),
     S('Dzień dobry. Pan Henryk był u mnie w salonie. Siedział godzinę i pił herbatę.'),
-    S('Natan nagrał z nim rozmowę, całą. Henryk pyta, czy jak gazeta wyjdzie w poniedziałek, to ja w grupie coś przypnę. On mówi „sprostowanie”, jakby to było z urzędu.'),
+    iff('flag:m_henrykOnRecord', [S('Natan nagrał z nim rozmowę, całą.')], [S('Z Natanem nie chciał rozmawiać. Do mnie przyszedł sam.')]),
+    S('Henryk pyta, czy jak gazeta wyjdzie w poniedziałek, to ja w grupie coś przypnę. On mówi „sprostowanie”, jakby to było z urzędu.'),
     S('Ja mogę przypiąć dziś. Albo poczekać na tekst i wtedy dać link. Co {Pan|Pani} myśli?'),
     choose('sylwia', [
       opt('Dziś. Najpierw sprostowanie dla pana Henryka, żeby ludzie przestali go wyzywać, potem tekst.', [

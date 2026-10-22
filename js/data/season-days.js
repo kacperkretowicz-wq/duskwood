@@ -46,7 +46,7 @@ Object.assign(DATA.evidence, {
   },
   ev_fb_henryk: {
     title: 'Komentarz o pandzie na Szklarskiej', cat: 'testimony', source: 'Sylwia · zrzut skasowanego komentarza',
-    desc: 'Pan Henryk, 74 lata, mieszkaniec Szklarskiej, napisał w grupie, że w środę „koło jedenastej” widział zaparkowaną czerwoną pandę przy przystanku. Nie podał numeru, nie widział kierowcy. Po krytyce skasował wpis. To niezweryfikowana relacja; nie przeczy temu, że rano auto było na tamie.'
+    desc: 'Pan Henryk, 74 lata, mieszkaniec Szklarskiej, napisał w grupie, że w środę „koło jedenastej” widział zaparkowaną czerwoną iskrę przy przystanku. Nie podał numeru, nie widział kierowcy. Po krytyce skasował wpis. To niezweryfikowana relacja; nie przeczy temu, że rano auto było na tamie.'
   },
   ev_gajda_fb: {
     title: 'Post komendanta w grupie', cat: 'msg', source: 'Sylwia · grupa „Mglisko — co się dzieje”',
@@ -57,8 +57,8 @@ Object.assign(DATA.evidence, {
     desc: 'Podpis dodany w 2016: „Robert G., Leszek M., Marek S., Darek K.”. Drugie źródło, że czterech chłopaków znało się w 1997. Nie mówi nic o nocy w hucie.'
   },
   ev_kb_invoice: {
-    title: 'Faktura „Kurek-Bud” · 15.09.2011', cat: 'object', source: 'Bartek · sejf w warsztacie',
-    desc: 'Serwis furgonetki firmy budowlanej dzień po śmierci Darka Kruka na moście. Dokument potwierdza usługę, nie obecność kogokolwiek przy wypadku. *Nie dotyczy zaginięcia Mai.*'
+    title: 'Faktura „Kurek-Bud” · 13.09.2011', cat: 'object', source: 'Bartek · sejf w warsztacie',
+    desc: 'Serwis furgonetki firmy budowlanej dzień przed śmiercią Darka Kruka na moście. Dokument potwierdza usługę, nie obecność kogokolwiek przy wypadku. *Nie dotyczy zaginięcia Mai.*'
   },
   ev_tt_reupload: {
     title: '„Nowe nagranie Mai” = zdjęcie z 21.09', cat: 'digital', source: 'Klipo @zuzakruk_ · Kadr',
@@ -97,7 +97,7 @@ Object.assign(DATA.conversations, {
         sideChoice('Dzień dobry. Co się dzieje w grupie?', ['Wszystko naraz. Jedni piszą, że uciekła, drudzy, że sekta, trzeci, że „wiadomo kto”.', 'Nagram, bo mam klientkę z farbą na głowie i dwadzieścia minut.'], 'voice'),
         sideChoice('Usuwasz posty o Mai?', ['Tylko te, gdzie ktoś wrzuca zdjęcie Oli z podpisem „ona coś wie”. Albo adres Wronów!!', 'Resztę zostawiam, bo zaraz będzie, że cenzura. Nagram, mam klientkę z farbą.'], 'voice')
       ] },
-      voice: { lines: ['voice:0:52||No więc tak… Większość to bzdury, ale jeden komentarz nie daje mi spokoju. Pan Henryk, starszy pan ze Szklarskiej, napisał, że w środę koło jedenastej widział tam zaparkowaną pandę. Czerwoną. Ludzie go od razu zjechali, że przecież auto było na tamie, że on się zawsze myli… No i się obraził i skasował. Ale ja mam screena. Tylko nie chcę, żeby potem było, że puszczam coś dalej bez sprawdzenia, wiesz.'], choices: [
+      voice: { lines: ['voice:0:52||No więc tak… Większość to bzdury, ale jeden komentarz nie daje mi spokoju. Pan Henryk, starszy pan ze Szklarskiej, napisał, że w środę koło jedenastej widział tam zaparkowaną iskrę. Czerwoną. Ludzie go od razu zjechali, że przecież auto było na tamie, że on się zawsze myli… No i się obraził i skasował. Ale ja mam screena. Tylko nie chcę, żeby potem było, że puszczam coś dalej bez sprawdzenia, wiesz.'], choices: [
         sideChoice('Możesz mi wysłać tego screena? Nie opublikuję go.', ['Wysyłam. Tylko nie podawaj dalej nazwiska. Już mu pod komentarzem wystarczająco napisali.', 'voice:0:09||I powiedz Kubie, że jak trzeba coś przypiąć na grupie, to niech pisze do mnie. Od razu przypnę.'], 'tiktok', { reward: ['ev_fb_henryk'], set: { metSylwia: true }, trust: 1 }),
         sideChoice('Auto na tamie nie wyklucza, że wcześniej stało na Szklarskiej.', ['No właśnie to samo mu napisałam!! Tylko po fakcie, jak już skasował 🙈', 'Wysyłam screena. Nazwiska proszę nikomu.'], 'tiktok', { reward: ['ev_fb_henryk'], set: { metSylwia: true } })
       ] },

@@ -124,13 +124,13 @@ const StoryScenes = D => {
       ])
     ],
 
-    /* Sesja 18 — Skoda: dwa częściowe zapisy, jedno zgodne auto, nie kierowca. */
+    /* Sesja 18 — Sevra: dwa częściowe zapisy, jedno zgodne auto, nie kierowca. */
     s18: [
       iff('!flag:camsDeleted', [
       g('igor', 'zanim to gdzieś pójdzie. czy to na pewno jedno auto?'),
       g('igor', 'fotopułapka daje DDZ 6K1, moje zdjęcie końcówkę 19. dwa urządzenia, dwie godziny'),
       choose('group', [
-        opt('Ciemny superb na obu, ta sama noc, numery się nakładają. To zgodne auto. Ale nie wiemy, kto prowadził.', [g('igor', 'tak. auto tak, kierowca nie. dokładnie tak bym to zapisał'), g('ola', 'Dopiszę, że kierowcy nie widać.')], { set: { plateCareful: true } }),
+        opt('Ciemna magna na obu, fragmenty numeru się nakładają. Zdjęcia są z różnych nocy. Kierowcy nie widać.', [g('igor', 'tak. auto tak, kierowca nie. dokładnie tak bym to zapisał'), g('ola', 'Dopiszę, że kierowcy nie widać.')], { set: { plateCareful: true } }),
         opt('Numer się zgadza, więc wiemy, kto tam był.', [g('igor', 'mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
       ])
       ], [
@@ -143,8 +143,8 @@ const StoryScenes = D => {
     s19: [
       pause(2000),
       B('jeszcze cos. tylko tobie'),
-      B('w sejfie starego oprocz zeszytu jest teczka z 2011. faktury za furgonetke kurek-bud. serwis 15.09.2011'),
-      B('dzien po tym jak darek kruk spadl z mostu. stary nigdy o tym nie gadal'),
+      B('w sejfie starego oprocz zeszytu jest teczka z 2011. faktury za furgonetke kurek-bud. serwis 13.09.2011'),
+      B('dzien przed tym jak darek kruk spadl z mostu. stary nigdy o tym nie gadal'),
       give('ev_kb_invoice'),
       choose('bartek', [
         opt('Zrób zdjęcie i odłóż. To inna sprawa, nie mieszajmy jej z Mają.', [B('ok. zrobione. odlozylem tak jak lezalo')], { set: { invoiceAside: true } }),
@@ -203,7 +203,7 @@ const StoryScenes = D => {
         opt('Nie musisz teraz nic z tym robić. Babcia też nie.', [Z('wiem'), Z('ale ona pierwszy raz powiedziala o nim wiecej niz dwa zdania. to juz cos')])
       ]),
       pause(2500),
-      S('Przypięłam w grupie przeprosiny dla pana Henryka. Miał rację z tą pandą na Szklarskiej, a ludzie go zjechali.'),
+      S('Przypięłam w grupie przeprosiny dla pana Henryka. Miał rację z tą iskrą na Szklarskiej, a ludzie go zjechali.'),
       S('Przyszedł do salonu z pierniczkami. Nic nie powiedział, tylko je postawił i wyszedł 🥲'),
       S('A, i pyta, czy ktoś kiedyś zapyta go o most. Nie wiem, o jaki most. Mówi, że „wy wiecie”.'),
       choose('sylwia', [

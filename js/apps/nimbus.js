@@ -158,7 +158,7 @@
       pg.body.append(
         h('div', { class: 'nb-dev' },
           h('div', { class: 'nb-dev-ic', html: U.icon('phone', 26) }),
-          h('div', {}, h('b', {}, 'Telefon Mai'), h('span', {}, 'Galaxy A54 · ' + DATA.chars.maja.number)),
+          h('div', {}, h('b', {}, 'Telefon Mai'), h('span', {}, 'Tellio A54 · ' + DATA.chars.maja.number)),
           h('div', { class: 'nb-dev-st' }, h('span', { class: 'dot ' + (G.flag('majaOnline') ? 'on' : '') }), G.flag('majaOnline') ? 'online' : 'offline')),
         h('div', { class: 'nb-bk' }, U.ico('cloud', 16), `Ostatnia kopia: ${fmtT(bk)}`),
         h('div', { class: 'nb-bar' }, h('i', { style: 'width:63%' })),

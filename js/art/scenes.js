@@ -3,7 +3,7 @@
 
 (() => {
   const D = Art.def;
-  const phone = (date, time, extra = {}) => Object.assign({ date, time, device: 'Galaxy A54 · aparat główny', file: `IMG_${date.split('.').reverse().join('')}_${time.replace(':', '')}${String(Math.floor(Math.random() * 90 + 10))}.jpg` }, extra);
+  const phone = (date, time, extra = {}) => Object.assign({ date, time, device: 'Tellio A54 · aparat główny', file: `IMG_${date.split('.').reverse().join('')}_${time.replace(':', '')}${String(Math.floor(Math.random() * 90 + 10))}.jpg` }, extra);
   const trap = (cam, n, date, time, extra = {}) => Object.assign({ date, time, device: `BushView Trail 4G · ${cam}`, place: cam === 'CAM-01' ? 'Huta „Jutrzenka” — brama i dziedziniec' : 'Huta „Jutrzenka” — hala A, przy odprężarce', file: `${cam.replace('-', '')}_IMG_${String(n).padStart(4, '0')}.JPG` }, extra);
   const tstamp = (cam, n, date, time, temp, moon) => ({ kind: 'trap', cam, date: date.replace(/\./g, '/'), time, temp, moon, id: `IMG_${String(n).padStart(4, '0')}` });
 

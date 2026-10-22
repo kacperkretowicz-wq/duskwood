@@ -206,12 +206,12 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       prompt: 'Pokaż numer albo zdjęcie auta',
       accept: [
         { ev: ['ev_plate'], then: [B('ddz 6k19. sprawdze w zeszycie')] },
-        { ev: ['ev_car_igor', 'ev_plate_cam'], then: [B('tylko koncowka? ciemny superb, tak?'), B('sprawdze w zeszycie')] }
+        { ev: ['ev_car_igor', 'ev_plate_cam'], then: [B('tylko koncowka? ciemna magna, tak?'), B('sprawdze w zeszycie')] }
       ],
       wrong: [['bartek', 'potrzebuje numeru albo zdjecia auta']]
     }),
     typing('bartek', 'bartek', 8000),
-    pic('bartek', 'bartek', 'b_ledger', 'superb gajdy'),
+    pic('bartek', 'bartek', 'b_ledger', 'magna gajdy'),
     give('ev_owner'),
     B('byl u nas 16.10. mycie podwozia i dywanikow. cale w blocie'),
     B('stary go obslugiwal. mowil potem ze gajda byl dziwny. dal 200 zl napiwku za mycie'),
@@ -222,7 +222,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     B('wracam do grupy'),
     sys('group', 'Bartek dołączył do grupy.'),
     members(['kuba', 'ola', 'bartek']),
-    g('bartek', 'auto pod huta to superb gajdy. DDZ 6K19. mam to w zeszycie'),
+    g('bartek', 'auto pod huta to magna gajdy. DDZ 6K19. mam to w zeszycie'),
     typing('group', 'kuba', 5000),
     g('kuba', 'może sprawdzał hutę. jest policjantem'),
     g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?'),

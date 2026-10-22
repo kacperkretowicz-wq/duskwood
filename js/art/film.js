@@ -95,7 +95,7 @@
     return s;
   }
   const negEdit = (res, ev) => ({ neg: true, target: { exp: [2.3, 3.9], con: [0.9, 1.7] }, result: res, ev, darkMsg: 'Pozytyw jest bardzo ciemny — przeterminowana klisza. Rozjaśnij mocno.' });
-  const fexif = n => ({ date: '06.10.2026', time: '21:1' + (n % 10), device: 'Galaxy A54 · zdjęcie negatywu na podświetlarce', file: `NEG_${n}.jpg`, note: 'Klisza 35 mm z 1997 roku, wywołana 5.10' });
+  const fexif = n => ({ date: '06.10.2026', time: '21:1' + (n % 10), device: 'Tellio A54 · zdjęcie negatywu na podświetlarce', file: `NEG_${n}.jpg`, note: 'Klisza 35 mm z 1997 roku, wywołana 5.10' });
   D('p_08', { src: 'assets/film/p_08.jpg', title: 'Negatyw 8', style: 'film', exif: fexif(8), edit: negEdit('p_08d', 'ev_frame08'), draw: k => frame08(k, 0.32) });
   D('p_14', { src: 'assets/film/p_14.jpg', title: 'Negatyw 14', style: 'film', exif: fexif(14), edit: negEdit('p_14d', null), draw: k => frame14(k, 0.32) });
   D('p_21', { src: 'assets/film/p_21.jpg', title: 'Negatyw 21', style: 'film', exif: fexif(21), edit: negEdit('p_21d', 'ev_frame21'), draw: k => frame21(k, 0.32) });
@@ -133,11 +133,11 @@
       for (let i = 0; i < 26; i++) lines += k.line(40, 90 + i * 40, 820, 90 + i * 40, '#7a9ab8', 1.4, 'opacity=".5"');
       const rows = [
         ['03.09', 'DZG 21KM', 'Fabia', 'Nowak', 'olej + filtry'],
-        ['11.09', 'DDZ 6K19', 'Superb gr.', 'R. Gajda', 'klocki + tarcze'],
+        ['11.09', 'DDZ 6K19', 'Magna gr.', 'R. Gajda', 'klocki + tarcze'],
         ['18.09', 'DDZ 4P02', 'Passat B5', 'Wierzba', 'rozrząd'],
         ['25.09', 'DB 7713C', 'Corsa', 'Lis W.', 'opony zim.'],
         ['02.10', 'DDZ 8HT1', 'Octavia', 'Bąk', 'hamulce'],
-        ['16.10', 'DDZ 6K19', 'Superb gr.', 'R. Gajda', 'mycie podw. + dywaniki (błoto!)']
+        ['16.10', 'DDZ 6K19', 'Magna gr.', 'R. Gajda', 'mycie podw. + dywaniki (błoto!)']
       ];
       let txt = '';
       rows.forEach((r, i) => {
@@ -181,7 +181,7 @@
     }
   });
   D('k_zenit', { src: 'assets/kuba/k_zenit.jpg',
-    title: 'Zenit-E', grade: 'warm', exif: ph('28.09.2026', '11:02', { device: 'Galaxy A54', place: 'Mglisko, ul. Szklarska 4' }), onView: 'ev_zenit',
+    title: 'Zenit-E', grade: 'warm', exif: ph('28.09.2026', '11:02', { device: 'Tellio A54', place: 'Mglisko, ul. Szklarska 4' }), onView: 'ev_zenit',
     draw: k => {
       const { W, H } = k;
       let s = k.full('#2a1a10') + k.rect(0, 0, W, H * 0.55, k.lin([[0, '#c9c2b0'], [1, '#8a826e']])) + k.glow(W * 0.85, H * 0.15, 500, '#fff6dc', 0.6);
@@ -278,7 +278,7 @@
 
   /* ================= ZRZUTY EKRANU ================= */
   D('z_article', {
-    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('07.10.2026', '22:46', { device: 'Galaxy A54 · zrzut ekranu' }),
+    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('07.10.2026', '22:46', { device: 'Tellio A54 · zrzut ekranu' }),
     draw: k => {
       let s = k.full('#f7f3ea') + k.rect(0, 0, 900, 120, '#1d1d1d') + k.text(40, 80, '22:46', 30, '#fff') + k.rect(0, 120, 900, 90, '#ece8de') + k.rect(30, 140, 840, 50, '#fff', 'rx="25"') + k.text(60, 174, 'gazetasudecka.pl/archiwum/2007/07/…', 22, '#666');
       s += k.text(450, 290, 'Gazeta Sudecka', 54, '#1a1512', 'text-anchor="middle" font-family="Georgia, serif" font-weight="700"');
@@ -293,7 +293,7 @@
     }
   });
   D('z_kruk', {
-    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('12.10.2026', '21:42', { device: 'Galaxy A54 · zrzut ekranu' }),
+    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('12.10.2026', '21:42', { device: 'Tellio A54 · zrzut ekranu' }),
     draw: k => {
       let s = k.full('#f2f3f5') + k.rect(0, 0, 900, 120, '#1d1d1d') + k.text(40, 80, '21:42', 30, '#fff') + k.rect(0, 120, 900, 110, '#c43d2f') + k.text(40, 196, 'Mglisko24.pl', 44, '#fff', 'font-weight="800"');
       s += k.text(40, 330, 'Tragiczny wypadek', 56, '#1d1f22', 'font-weight="800"') + k.text(40, 400, 'na moście kolejowym', 56, '#1d1f22', 'font-weight="800"') + k.text(40, 450, '14.09.2011', 26, '#888');

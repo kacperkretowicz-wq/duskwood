@@ -65,7 +65,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     W('Dzień dobry. Kuba przesłał mi rozmowę z panią Niną. Proszę mi wybaczyć, że się wtrącam.'),
     W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.'),
     W('Ale „woda, konserwy, olej opałowy” na zimę do pustego zaplecza? To ktoś tam jest. Albo ma być.'),
-    N('byłam tam dziś rano, mam rejon. nie wysiadałam. zrobiłam zdjęcie z auta, bo numer jest przy drzwiach'),
+    N('byłam tam dziś rano swoim autem, mieszkam dwie wsie dalej. nie wysiadałam. zrobiłam zdjęcie przez szybę, bo numer jest przy drzwiach'),
     pic('nina', 'nina', 'mp_wejscie', 'dziś 9:58. kanistry stoją. tamtego dnia ich nie było'),
     give('ev_mp_wejscie'),
     choose('nina', [
@@ -151,10 +151,10 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     ]),
     set('majaFound'),
     set('m_lateRescue'),
-    notify({ app: 'browser', title: 'Mglisko24', text: 'Zaginiona 19-latka odnaleziona w Rzeczce. Zatrzymano byłego komendanta posterunku.', sound: 'notif' }),
+    notify({ app: 'browser', title: 'Mglisko24', text: 'Zaginiona 22-latka odnaleziona w Rzeczce. Zatrzymano byłego komendanta posterunku.', sound: 'notif' }),
     pause(3000),
     W('Dziękuję. Nie umiem tego lepiej napisać.'),
-    W('Pani Nina mówi, że po dzisiejszym poranku nie chce już brać rejonu z Rzeczką. Rozumiem ją.'),
+    W('Pani Nina mówi, że po dzisiejszym poranku nie chce już jeździć przez Rzeczkę. Rozumiem ją.'),
     pause(4000),
     clock('2026-11-20T19:20'),
     unlock('chat:maja2'),
@@ -189,7 +189,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     choose('marta', [
       opt('Czyli ktoś wyciął środek zdania i skleił.', [
         Ma('Tak to wygląda. I słychać to, jak się wie, czego szukać. Na 0:37 w publikacji zmienia się szum pokoju. Najpierw jest lodówka, potem jej nie ma.'),
-        Ma('Nie ma tu żadnego wyostrzania ani cudów. Po prostu dwa kawałki z dwóch momentów mają inne tło.')
+        Ma('Na kasecie lodówkę słychać dalej. W publikacji znika dokładnie przy cięciu.')
       ], { set: { m_cutSeen: true } }),
       opt('Może po prostu skrócili, bo za długie?', [
         Ma('Można skrócić nagranie. Ale tutaj wycięto środek wypowiedzi i doklejono „moja wina”. Przez to brzmi, jakby mówił o sobie.'),
@@ -395,7 +395,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     choose('marta', [
       opt('Marta, nie wiedziałaś, co ona z tym zrobi. Ale teraz musisz to powiedzieć w redakcji.', [
         Ma('wiem'),
-        Ma('jutro rano. do naczelnego. zanim zdążę to sobie wytłumaczyć')
+        Ma('w poniedziałek rano. do naczelnego. zanim zdążę to sobie wytłumaczyć')
       ], { set: { m_martaTells: true }, trust: { marta: 1 } }),
       opt('Dlaczego nie powiedziałaś wcześniej?', [
         Ma('bo myślałam, że to moja prywatna sprawa i nie ma związku ze śledztwem'),

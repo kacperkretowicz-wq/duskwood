@@ -23,7 +23,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     title(),
     K('to jej mail: maja.wrona@nimbus.pl'),
     K('pytania są dwa. o pierwszego psa i o pierwszy aparat'),
-    K('wpisałem bandzior i canon. oba źle 💀'),
+    K('wpisałem bandzior i aparat. oba źle 💀'),
     K('bandzior to ten pies którego mamy TERAZ. nie pytaj jak ja studia zdaję'),
     unlock('app:nimbus'),
     goal('Odzyskaj dostęp do konta Nimbus Mai.', [

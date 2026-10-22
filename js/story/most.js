@@ -60,7 +60,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       ], { set: { m_sameEvent: true } })
     ]),
     pause(1500),
-    M('ok, pani Weronika kazała mi iść do domu, bo „ma {Pan|Pani} jutro pracę”. skąd ona wie'),
+    M('ok, pani Weronika kazała mi iść do domu, bo „masz jutro pracę”. skąd ona wie'),
     M('jeszcze jedno. dzwoniła dziś do mnie jakaś Marta z Gazety Sudeckiej, z archiwum. pyta o kasetę H.W.'),
     M('dałam jej twój numer. sorry. nie mam dzisiaj siły na kolejną obcą osobę'),
     choose('maja2', [
@@ -150,7 +150,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       ])
     ]),
     S('Jeszcze jedno. Pan Henryk do mnie dzwonił. Na stacjonarny do salonu. Prosił o kontakt z {Panem|Panią}. Dałam numer.'),
-    iff('ev:ev_fb_henryk', [S('Pamięta, że to {Pan|Pani} wtedy nie śmiał{|a} się z tej pandy.')]),
+    iff('ev:ev_fb_henryk', [S('Pamięta, że to {Pan|Pani} wtedy nie śmiał{|a} się z tej iskry.')]),
     goal('Obejrzyj nagranie z mostu (szukaj w przeglądarce: „most 2011” albo „brygadzista moja wina”).'),
     waitFor('ev:ev_m_gs', { goal: 'Obejrzyj nagranie z mostu (szukaj w przeglądarce: „most 2011” albo „brygadzista moja wina”).' }),
     pause(2500),
@@ -158,7 +158,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     set('m_metHenryk'),
     H('Halo. Wiśniewski. Henryk.'),
     iff('ev:ev_fb_henryk', [
-      H('{Pan|Pani}. Wtedy z tą pandą. Jako jedyn{y|a} mnie nie wyśmiał{|a}. To dzwonię.')
+      H('{Pan|Pani}. Wtedy z tą iskrą. Jako jedyn{y|a} mnie nie wyśmiał{|a}. To dzwonię.')
     ], [
       H('Sylwia dała numer. Mówi, że {Pan|Pani} pomógł{|a} szukać tej Wronówny. To dzwonię.')
     ]),
@@ -251,7 +251,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     choose('marta', [
       opt('Ten sam znak czasu na pierwszej klatce: 17:22:08. To jedno nagranie.', [
         Ma('Tak. I Klipo to zwykły zapis ekranu. W rogu widać jeszcze nasz pasek GS Wideo.'),
-        Ma('Czyli trzy publikacje, jedno źródło. Ludzie myślą, że „wszyscy to potwierdzają”, a to jest ten sam plik powtórzony trzy razy.')
+        Ma('W komentarzach piszą, że trzy redakcje to potwierdziły. A wszyscy puszczają ten sam fragment.')
       ], { set: { m_oneSource: true } }),
       opt('Wszystkie mówią to samo, więc to chyba prawda.', [
         Ma('To samo, bo to ten sam plik. Proszę spojrzeć na pierwszą klatkę: 17:22:08 wszędzie.'),
@@ -265,7 +265,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     Ma('Od nas wyszło 40 sekund. Liczyłam dwa razy, bo to ja ustawiam eksport w archiwum.'),
     Ma('I nie ma naszego paska. Czyli nie ściągnęli tego od nas.'),
     choose('marta', [
-      opt('Ktoś im wysłał dłuższą wersję. Skąd ją miał?', [Ma('Nie wiem. Ale stażystka miała dostęp tylko do naszego eksportu. 40 sekund.')]),
+      opt('Ktoś im wysłał dłuższą wersję. Skąd ją miał?', [Ma('Nie wiem. Muszę sprawdzić, do czego stażystka miała dostęp poza tymi 40 sekundami.')]),
       opt('Może po prostu dodali dwie sekundy czerni na początku?', [Ma('Sprawdziłam klatka po klatce. Na końcu są dwie sekundy więcej. Słychać wdech, jakby zaczynał następne zdanie.')])
     ]),
     Ma('Ktoś poza redakcją ma dłuższy kawałek tej kasety. I wysłał go do tygodnika jako „materiał nadesłany”.'),

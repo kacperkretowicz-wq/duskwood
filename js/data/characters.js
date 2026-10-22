@@ -90,7 +90,7 @@ DATA.endings = {
     title: 'ŚWIT', tag: 'Zakończenie 1 z 3', mood: 'dawn',
     text: [
       'Tej nocy Maję wynoszą ze sztolni. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
-      'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę przy leśnym szlabanie. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
+      'Radiowóz z Dzierżoniowa zatrzymuje ciemną sevrę przy leśnym szlabanie. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
       'Rano strażacy rozbierają mur w odprężarce. Za nim, pod żółtym strzępem peleryny, czeka dziewięcioletni chłopiec. Czekał dwadzieścia dziewięć lat.',
       () => (G.flag('leszekTestify') ? 'Marek Sowa i Leszek Malicki składają zeznania tego samego dnia.' : 'Marek Sowa składa zeznania tego samego dnia. Leszek Malicki milczy przez tydzień — potem też zaczyna mówić.') + ' Gazeta Sudecka drukuje tekst, który zaczął pisać Adam Rybicki.',
       'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale teraz na ekranie jest wiadomość od Mai.'
@@ -102,7 +102,7 @@ DATA.endings = {
       'Maję wynoszą ze sztolni nad ranem. Żyje — i tylko to się liczy. Przynajmniej tak powtarzają wszyscy.',
       () => G.flag('gajdaCaught')
         ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Zeznanie Mai i odnalezienie jej w sztolni pozostają ważne, nawet jeśli dokumentacja dawnych wydarzeń jest niepełna. On milczy. Część pytań wciąż pozostaje bez odpowiedzi.'
-        : 'Robert Gajda nie wraca do domu. Jego skodę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
+        : 'Robert Gajda nie wraca do domu. Jego sevrę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
       () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + (G.flag('gajdaCaught') ? 'Ratunek się udał. Złożenie pełnego obrazu tego, co wydarzyło się w hucie, zajmie dłużej.' : 'Gajdy nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania trwają, podobnie jak sprawa Tomka.'),
       'Weronika dostaje szczątki brata i list z prokuratury. Pisze ci jedno zdanie: „Wiem, gdzie on jest. To dużo. To za mało.”'
     ]
