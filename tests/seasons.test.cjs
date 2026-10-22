@@ -5,11 +5,12 @@ function game(){
  let time=Date.now();const storage={},events={};
  class Clock extends Date {static now(){return time;}}
  const document={hidden:false,addEventListener(k,f){events[k]=f;}};
- const ctx=vm.createContext({console,Date:Clock,setTimeout:()=>0,clearTimeout(){},document,
+ const vibrations=[];
+ const ctx=vm.createContext({console,Date:Clock,setTimeout:()=>0,clearTimeout(){},document,navigator:{vibrate:p=>vibrations.push(p)},
   window:{addEventListener(){}},Art:{def(){}},localStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v,removeItem:k=>delete storage[k]}});
  for(const p of ['core/util','data/migrations','core/state','data/characters','data/evidence','data/world','data/conversations','data/season-conversations','data/wallpapers','data/seasons','core/conversations','core/wallpapers','core/seasons','core/pacing'])vm.runInContext(fs.readFileSync(path.join(root,'js',p+'.js'),'utf8'),ctx);
- const api=vm.runInContext('({G,DATA,Wallpapers,Seasons,Conversations,SeasonPacing})',ctx);
- api.G.newGame();return {...api,storage,document,events,advance:n=>time+=n};
+ const api=vm.runInContext('({G,U,DATA,Wallpapers,Seasons,Conversations,SeasonPacing})',ctx);
+ api.G.newGame();return {...api,storage,document,events,vibrations,advance:n=>time+=n};
 }
 test('wallpaper import requires authorized backup; new saves never inherit another owner’s clues',()=>{
  const {G,Wallpapers:W}=game();assert.equal(W.importBackup(),false);assert.equal(W.inspectOriginal(),false);
@@ -70,4 +71,14 @@ test('daily pilot opens tutorial immediately, catches up after absence, and neve
  const pending={chat:'group',type:'choose'};G.s.pending=pending;P.configure('free','18:15');assert.equal(P.release('epilog'),0);assert.equal(G.s.pending,pending);
  G.newGame();P.configure('daily');P.configure('free');G.s.chapter='ch4';G.s.pc=50;P.configure('daily');
  assert.equal(P.release('ch4'),0);assert.equal(P.release('ch5'),0,'re-enabling daily during the rescue preparation cannot lock its second half');
+});
+test('dialogue templates use the player’s actual name and selected grammatical form',()=>{
+ const {G,U}=game();G.s.player={name:'Ada',gender:'f'};
+ assert.equal(U.tpl('%name%, {znalazłeś|znalazłaś} coś?'),'Ada, znalazłaś coś?');
+ G.s.player={name:'Jan',gender:'m'};assert.equal(U.tpl('%name%, {znalazłeś|znalazłaś} coś?'),'Jan, znalazłeś coś?');
+ G.save(true);G.load();assert.equal(U.tpl('Cześć, %name%.'),'Cześć, Jan.');
+});
+test('wallpaper haptics use real settings and respect the disabled preference',()=>{
+ const {G,U,vibrations}=game();U.vibrate(18);assert.deepEqual(vibrations,[18]);
+ G.settings.vibrate=false;U.vibrate(18);assert.deepEqual(vibrations,[18]);
 });
