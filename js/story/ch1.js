@@ -52,7 +52,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     ]),
     g('kuba', '%name% {wszedł|weszła} na nimbusa!!'),
     g('ola', 'Okej. Tylko nic nie usuwaj, błagam. Nawet głupich zdjęć.'),
-    g('igor', 'i daty sprawdzaj. ta kopia urywa się 14.10 o 23:58, razem z telefonem'),
+    g('igor', 'i daty sprawdzaj. ostatni zapis w kopii jest z 14.10, 23:58. wtedy telefon stracił kontakt z siecią'),
     g('bartek', 'gdzie byla tej nocy. to jest jedyne pytanie'),
     goal('Sprawdź w kopii telefonu, gdzie była Maja w noc zniknięcia.', [
       'W Nimbusie otwórz *Lokalizacja* i wybierz *14 października*.',
@@ -94,7 +94,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     pause(1500),
     g('igor', 'czekaj. fotopułapki. ustawiałem je mai w hucie. powinny wysyłać zdjęcia na maila'),
     g('kuba', 'serio?? czemu nic nie mówiłeś'),
-    g('igor', 'bo mi dopiero teraz kliknęło. sory. od trzech dni naprawiam telefony na autopilocie'),
+    g('igor', 'bo dopiero teraz sobie przypomniałem. sory. od trzech dni naprawiam telefony na autopilocie'),
     goal('Sprawdź zdjęcia z fotopułapek z nocy 14 października.', [
       'Nimbus → Galeria → album *Fotopułapki*.',
       'Na dole każdego zdjęcia jest pasek z datą i godziną. Szukaj 14.10 wieczorem.'
@@ -104,7 +104,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     show('group', { prompt: 'Pokaż zdjęcie z fotopułapki', accept: [{ ev: ['ev_cam1_maja'] }], wrongFor: { ev_cam2_0019: ['igor', 'To z 13-ego, dzień wcześniej. Ważne, ale najpierw — czy kamera złapała ją 14-ego?'], ev_cam1_car: ['igor', 'To już 15-ego. A 14-ego wieczorem?'] }, wrong: [['kuba', 'pokaż z fotopułapki']] }),
     typing('group', 'kuba', 4200),
     g('kuba', 'to ona'),
-    g('kuba', 'to jej kurtka. z czołówką na głowie jak jakiś górnik'),
+    g('kuba', 'to jej kurtka. a na głowie czołówka, jak u górnika'),
     g('kuba', 'weszła tam sama'),
     g('ola', 'Kuba…'),
     g('ola', '22:57. Minutę przed tym, jak telefon pokazuje hutę.'),

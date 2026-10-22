@@ -27,7 +27,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       opt('Rodzina pana Adama wie, że to otwieracie?', [
         M('tak. jego brat podpisał zgodę na spisanie zawartości. tylko na to, nie na publikację. pani Weronika ma to na kartce i trzyma przy pudle jak paragon')
       ]),
-      opt('Jak się czujesz z tym pudłem?', [
+      opt('Jak ci się przegląda te rzeczy?', [
         M('dziwnie. jakbym czytała cudzy pamiętnik, ale za pozwoleniem'),
         M('dobra, nie rozkręcajmy tego. pani Weronika już wyciąga resztę')
       ])
@@ -108,7 +108,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     rename('marta', 'Marta Jasińska', 'marta'),
     pause(2000),
     Ma('Widzę, że {Pan|Pani} dzwonił{|a}. Dyżur wydania od razu do mnie napisał. Dziękuję.'),
-    Ma('Konkret: plik w archiwum zaczyna się od 00:00:00 w środku zdania. Pan Adam opisał go „2/2”, bo pierwsza kaseta jest gdzie indziej albo jej nie ma.'),
+    Ma('Nasz plik zaczyna się w środku zdania, choć licznik pokazuje 00:00:00. Pan Adam opisał go „2/2”. Pierwsza kaseta musi być gdzie indziej albo zaginęła.'),
     Ma('Jeśli w pudle jest oryginał, mogę go przegrać na naszym magnetowidzie i sprawdzić, czy plik jest pełny. Nic nie publikujemy. To tylko archiwum.'),
     choose('marta', [
       opt('Dobrze. Ale kaseta zostaje u pani Weroniki. Może pani przyjechać do niej z magnetowidem?', [
@@ -253,7 +253,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     waitFor(s => G.has('ev_m_gs') && G.has('ev_m_klipo') && G.has('ev_m_tyg'), { goal: 'Znajdź trzy publikacje nagrania: Gazeta Sudecka, Klipo (@sudety.prawda), „Tydzień w Sudetach”. Porównaj pierwszą klatkę i długość.' }),
     Ma('Ma {Pan|Pani} wszystkie trzy? Co je łączy?'),
     choose('marta', [
-      opt('Ten sam znak czasu na pierwszej klatce: 17:22:08. To jedno nagranie.', [
+      opt('Na pierwszej klatce wszędzie jest ta sama godzina: 17:22:08. To jedno nagranie.', [
         Ma('Tak. I Klipo to zwykły zapis ekranu. W rogu widać jeszcze nasz pasek GS Wideo.'),
         Ma('W komentarzach piszą, że trzy redakcje to potwierdziły. A wszyscy puszczają ten sam fragment.')
       ], { set: { m_oneSource: true } }),

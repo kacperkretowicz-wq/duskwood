@@ -115,7 +115,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     scene('igorMid', [
       choose('igor', [
         opt('Czekaj. Twój ojciec zadzwonił do Gajdy, a dwa dni później Maja zniknęła?', [I('tak'), I('wiem jak to wygląda. dlatego nie umiałem tego napisać')], { set: { igorPressed: true } }),
-        opt('Piszę. Nie wychodzę. Pisz dalej.', [I('ok'), I('dzięki')], { trust: { igor: 1 } }),
+        opt('Jestem tu. Czytam. Pisz dalej.', [I('ok'), I('dzięki')], { trust: { igor: 1 } }),
         opt('Dlaczego mówisz to dopiero teraz?', [I('bo dopiero teraz ktoś mnie złapał'), I('wiem. to żadna odpowiedź')], { trust: { igor: -1 } })
       ])
     ]),
@@ -210,7 +210,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     W('Kuba do mnie dzwonił. Jadę z wami.'),
     W('Nie, nie dam się przekonać. Czekałam dwadzieścia dziewięć lat.'),
     iff('flag:igorBack', [
-      g('igor', 'zostaję przy kompie. mapy i łączność mam, kamerę sprawdzę. jak trzeba dzwońcie')
+      g('igor', 'zostaję przy kompie. mam mapy, kamerę też sprawdzę. będę pod telefonem, dzwońcie jak trzeba')
     ], [
       I('zostaję przy kompie. pisz albo dzwoń jak czegoś potrzebujesz')
     ]),

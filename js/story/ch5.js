@@ -79,7 +79,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
               ], { set: { named112: true } }),
               opt('Nie wiem.', [c('dispatcher', 'Przekazuję zgłoszenie do najbliższej jednostki policji.')], { set: { dispatchLocal: true } })
             ]),
-            iff('flag:reportBoth', [c('dispatcher', 'Straż pożarna jedzie też pod hutę. Proszę nikomu nie zbliżać się do budynku.')]),
+            iff('flag:reportBoth', [c('dispatcher', 'Straż pożarna jedzie też pod hutę. Proszę przekazać wszystkim, żeby nie zbliżali się do budynku.')]),
             c('dispatcher', 'Jeśli musi {Pan|Pani} kończyć, proszę zostać pod telefonem. Oddzwonimy.'),
             callEnd(),
             set('called112')
@@ -98,7 +98,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
             callEnd(),
             set('calledPosterunek'),
             inc('leaks', 1),
-            igorSays('{Zadzwoniłeś|Zadzwoniłaś} na posterunek?? Oni mają radio z Gajdą! Dzwoń na 112, teraz!'),
+            igorSays('{Zadzwoniłeś|Zadzwoniłaś} na posterunek?? Oni są na tym samym radiu co Gajda! Usłyszy wszystko! Dzwoń na 112, teraz!'),
             dial({
               goal: 'Zadzwoń na 112.',
               numbers: {

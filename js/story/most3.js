@@ -17,7 +17,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.'),
     Ma('Mama nie odbiera ode mnie od soboty. Wczoraj zostawiła mi obiad pod drzwiami. Nie wiem, co to znaczy.'),
     choose('marta', [
-      opt('Zrobiłaś to, co trzeba. To musiało kosztować.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
+      opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
     ]),
     pause(2500),
@@ -80,16 +80,16 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     pause(2500),
     clock('2026-12-02T21:40'),
-    Ma('Naczelny zdecydował. Mogę dalej robić archiwum przy tym materiale albo się wyłączyć. Decyzja ma być moja.'),
-    Ma('Jeśli zostanę, każdą rzecz ode mnie sprawdza druga osoba i w tekście będzie zdanie, że autorka archiwum jest córką członkini zarządu Kurek-Bud.'),
+    Ma('Naczelny zdecydował. Mogę dalej sprawdzać materiały z archiwum do tego tekstu albo się z niego wycofać. Decyzja ma być moja.'),
+    Ma('Jeśli zostanę, ktoś drugi sprawdzi wszystko, co przygotuję. W tekście napiszemy też, że moja mama jest w zarządzie Kurek-Bud.'),
     Ma('Jeśli odejdę od tematu, Natan będzie pracował sam. Zajmie mu to więcej czasu. Dotąd przeglądaliśmy kasetę razem.'),
     Ma('Co by {Pan|Pani} zrobił{|a}?'),
     choose('marta', [
-      opt('Zostań. Z jawnym zdaniem w tekście i drugą osobą do sprawdzania. Znasz taśmę najlepiej.', [
+      opt('Zostań. Napiszcie w tekście, kim jest twoja mama, i niech ktoś sprawdza twoje ustalenia. Znasz taśmę najlepiej.', [
         Ma('Dobrze. Wtedy już nie ma odwrotu. W domu też'),
         Ma('Mama dowie się z gazety, że wiem. Wolę, żeby z gazety niż z tabletu')
       ], { set: { m_martaStays: true } }),
-      opt('Wyłącz się. Nie przez to, co zrobiłaś, tylko żeby nikt nie mógł podważyć tekstu przez ciebie.', [
+      opt('Wycofaj się z tego tekstu. Przez twoje pokrewieństwo z Kurek mogą podważać ustalenia.', [
         Ma('Rozumiem. Boli, ale rozumiem.'),
         Ma('Przekażę Natanowi wszystkie znaczniki czasu. 03:12, 03:21, 03:47. Resztę zrobi sam.')
       ], { set: { m_martaOut: true } })
@@ -201,7 +201,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
     iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
     iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
-    W('Oryginał kasety i obie kopie strony 41 są w depozycie redakcji, protokół przekazania podpisaliśmy z panią Martą i rodziną pana Adama. Teczka wróciła do pudła, bez kasety.'),
+    W('Kasetę i obie kopie strony 41 przechowuje teraz redakcja. Razem z panią Martą i rodziną pana Adama podpisaliśmy protokół przekazania. Teczka wróciła do pudła, już bez kasety.'),
     pause(2500),
     scene('f3lena', [
       W('I jeszcze coś, zanim zapomnę. Lena Cicha, ta od busa, pytała mnie, czy w pudle pana Adama są nagrania z 2019 roku.'),

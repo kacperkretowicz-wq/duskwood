@@ -41,7 +41,7 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
    assert.equal(await page.evaluate(()=>Conversations.state('lena_bus').transcript.length),before.lines);
    assert.equal(await page.evaluate(()=>G.v('trust_lena')),before.trust);
    assert.equal(await page.evaluate(()=>G.s.pc),before.pc);
-   await page.getByRole('button',{name:'Co pozwala sprawdzić godzinę?'}).click();
+   await page.getByRole('button',{name:'Masz coś, na czym można sprawdzić godzinę przejazdu?'}).click();
    await page.getByRole('button',{name:'Sprawdzimy godzinę. Zapiszę też, że nie widziałaś twarzy.'}).waitFor();
    await page.getByRole('button',{name:'Sprawdzimy godzinę. Zapiszę też, że nie widziałaś twarzy.'}).click();
    await page.getByRole('button',{name:'Porównaj materiały w Notatkach'}).waitFor();

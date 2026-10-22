@@ -16,12 +16,12 @@ Object.assign(DATA.conversations, {
         sideChoice('To mogło być stare zdjęcie. Sprawdzę plik.', ['wiem', 'wolałbym żeby to było tak proste. zdjęcie, godzina, już wiemy'], 'source')
       ] },
       source: { choices: [
-        sideChoice('Zachowam obie informacje: datę kopii i datę fotografii.', ['i napisz mi co z tego naprawdę wynika', 'nawet jeśli „nic nowego”. to też wolę wiedzieć'], 'boundary'),
+        sideChoice('Zapiszę osobno datę kopii i datę zrobienia zdjęcia.', ['i napisz mi co z tego naprawdę wynika', 'nawet jeśli „nic nowego”. to też wolę wiedzieć'], 'boundary'),
         sideChoice('Nie wysyłajmy tego jako potwierdzenia pobytu na tamie.', ['nie wyślę', 'mama patrzy na każdą taką rzecz jak na wiadomość od niej'], 'boundary')
       ] },
       boundary: { choices: [
         sideChoice('Poczekaj z wnioskami. Dam znać, co jest w oryginale.', ['dobra', 'nie wysyłam tego mamie zanim sprawdzisz. już miałem otwartą jej rozmowę']),
-        sideChoice('Dam znać po porównaniu źródeł.', ['okej. nie będę teraz odświeżał co dziesięć sekund', 'spróbuję przynajmniej'])
+        sideChoice('Porównam daty i dam znać.', ['okej. nie będę teraz odświeżał co dziesięć sekund', 'spróbuję przynajmniej'])
       ] }
     }
   },
@@ -79,11 +79,11 @@ Object.assign(DATA.conversations, {
       ] },
       notebook: { lines: ['Miałam dwanaście lat. Prowadziłam zeszyt, w którym zapisywałam, kto dzwonił i co mówił.', 'Po powodzi przez tydzień była w nim prawie sama lista imion.'], choices: [
         sideChoice('Ma pani jeszcze ten zeszyt?', ['Mam, w domu.', 'Przejrzałam go wielokrotnie. Są telefony do sąsiadów, nazwiska szukających. Nie ma tam nowego tropu.'], 'maja'),
-        sideChoice('Nie musi pani pamiętać więcej, żeby pomóc.', ['Maja powiedziała podobnie.', 'Poprosiła, żebym nie uzupełniała luk tylko dlatego, że nagrywa.'], 'maja')
+        sideChoice('To, co pani pamięta, już nam pomaga.', ['Maja powiedziała podobnie.', 'Poprosiła, żebym nie uzupełniała luk tylko dlatego, że nagrywa.'], 'maja')
       ] },
       maja: { choices: [
         sideChoice('Jak się zachowywała podczas rozmowy?', ['Najpierw wyłączyła dyktafon i zapytała, czy na pewno chcę.', 'Denerwowała się. Nie próbowała udawać zawodowej dziennikarki.'], 'finish'),
-        sideChoice('Co pani chciałaby zachować z tamtego spotkania?', ['Że ktoś usiadł i nie patrzył na zegarek.', 'I że mogłam powiedzieć „nie wiem” bez rozczarowania na drugiej twarzy.'], 'finish')
+        sideChoice('Co pani najbardziej zapamiętała z tamtego spotkania?', ['Że ktoś usiadł i nie patrzył na zegarek.', 'I że kiedy mówiłam „nie wiem”, nie wyglądała na rozczarowaną.'], 'finish')
       ] },
       finish: { choices: [
         sideChoice('Zapiszę, co pani widziała, a co powiedziała pani Mróz.', ['Dziękuję. To uczciwsze wobec Tomka. I wobec pani Mróz.']),
@@ -96,7 +96,7 @@ Object.assign(DATA.conversations, {
     cond: 'ev:ev_igor_conf', preview: 'Igor ma przestać poprawiać rzeczy bez pytania.',
     nodes: {
       start: { lines: ['zrobiłem katalog na materiały', 'najpierw nazwałem go FINAL. potem FINAL2. sam siebie nie mogę słuchać', 'usunąłem te nazwy. pliki zostały'], choices: [
-        sideChoice('Zachowaj też pierwszą strukturę. Opisz, co przeniosłeś.', ['okej. osobny spis zmian', 'wiem jak to brzmi akurat ode mnie'], 'original'),
+        sideChoice('Zapisz też, jak pliki były ułożone wcześniej i co przeniosłeś.', ['okej. osobny spis zmian', 'wiem jak to brzmi akurat ode mnie'], 'original'),
         sideChoice('Ustalmy zasadę: żadnych cichych poprawek.', ['tak', 'nie chcę żebyście musieli wierzyć mi na słowo kolejny raz'], 'original')
       ] },
       original: { lines: ['oryginały osobno. rozjaśnienia osobno', 'nazwa każdego pliku z którego zrobiłem wersję roboczą', 'i zapiszę że brakującą klatkę ukryłem ja. nie „błąd skanera”'], choices: [
@@ -104,8 +104,8 @@ Object.assign(DATA.conversations, {
         sideChoice('Pokaż to też grupie, kiedy skończysz.', ['pokażę', 'kuba ma prawo zobaczyć cały opis. nie tylko fragment który mnie najmniej pogrąża'], 'father')
       ] },
       father: { choices: [
-        sideChoice('Jak wygląda teraz rozmowa z ojcem?', ['pytam. on milczy. ja zaczynam gadać za niego', '„może nie wiedziałeś”, „może to nie tak”. on nawet nie musi się tłumaczyć'], 'finish'),
-        sideChoice('To nie naprawi zaufania od razu.', ['wiem. w serwisie robię test, działa, oddaję. tu nie mam co kliknąć', 'kuba nawet nie odczytał mojej ostatniej. zostawię go na razie'], 'finish')
+        sideChoice('Udaje ci się teraz pogadać z ojcem?', ['pytam. on milczy. ja zaczynam gadać za niego', '„może nie wiedziałeś”, „może to nie tak”. on nawet nie musi się tłumaczyć'], 'finish'),
+        sideChoice('Kuba może jeszcze długo ci nie ufać.', ['wiem. w serwisie robię test, działa, oddaję. tu nie mam co kliknąć', 'kuba nawet nie odczytał mojej ostatniej. zostawię go na razie'], 'finish')
       ] },
       finish: { choices: [
         sideChoice('Zrób spis. Potem oddaj materiały bez stawiania warunków.', ['tak zrobię. nie musisz mnie za to lubić']),
@@ -127,7 +127,7 @@ Object.assign(DATA.conversations, {
       ] },
       home: { lines: ['Jutro znowu będę mijać Jutrzenkę.', 'Już wiem, że spojrzę na tę wiatę. Nie wiem, czy to pomoże w czymkolwiek.'], choices: [
         sideChoice('Jak coś sobie przypomnisz, napisz osobno. Bez zgadywania.', ['Nie będę. Jeśli przypomnę sobie coś konkretnego, zapiszę oddzielnie od tego co już powiedziałam.'], 'finish'),
-        sideChoice('Mamy godzinę i twoją relację. Tyle na razie {zapisałem|zapisałam}.', ['Dobra. W razie pytań do czasu kursu mam dokumenty, nie tylko pamięć.'], 'finish')
+        sideChoice('Mamy godzinę i twoją relację. Tyle na razie {zapisałem|zapisałam}.', ['Dobra. Jak ktoś zapyta o godzinę przejazdu, mam dokumenty. Nie musi wierzyć mi na słowo.'], 'finish')
       ] },
       finish: { choices: [
         sideChoice('Dzięki. Spokojnej trasy.', ['Dzięki. Przerwa się skończyła.', 'Odpiszę dopiero na następnej pętli.']),
@@ -144,7 +144,7 @@ Object.assign(DATA.conversations, {
         sideChoice('Można. O czym chcesz pogadać?', ['gips łapie okruszki. odkurzanie prawej ręki, nowy punkt dnia 💀', 'a wszyscy mi mówią że jestem dzielna. ja chcę tylko otworzyć jogurt bez nożyczek'], 'photo'),
         sideChoice('Nie musisz dzisiaj niczego opowiadać.', ['dzięki', 'ludzie pytają czy już wszystko okej. ile razy można odpisywać że jeszcze nie'], 'photo')
       ] },
-      photo: { lines: ['zrobiłam zdjęcie zlewu. lewej ręki nie słucha żaden palec', 'prowadzący zapytał czy wrócę do projektu. powiedziałam że nie wiem'], choices: [
+      photo: { lines: ['zrobiłam zdjęcie zlewu. palce lewej ręki w ogóle mnie nie słuchają', 'prowadzący zapytał czy wrócę do projektu. powiedziałam że nie wiem'], choices: [
         sideChoice('Możesz robić zdjęcia bez kończenia tamtego projektu.', ['no. nawet mi się to zdjęcie zlewu podoba', 'kran wyszedł krzywo. nazwę to decyzją artystyczną i lecimy dalej'], 'room'),
         sideChoice('„Nie wiem” też jest odpowiedzią.', ['chyba pierwszy raz jej nie poprawiłam od razu na „oczywiście”'], 'room')
       ] },
@@ -172,7 +172,7 @@ Object.assign(DATA.conversations, {
         sideChoice('Nie musisz od razu nadrabiać wszystkiego.', ['wiem. dziekanat też tak powiedział', 'ale mail „przypominam o projekcie” dalej mnie składa. dzięki uczelnio 💀'], 'space')
       ] },
       space: { lines: ['maja wyłączyła udostępnianie lokalizacji', 'pierwsza myśl: jak mogła', 'druga: kurde kuba. jak mogłeś w ogóle tak pomyśleć'], choices: [
-        sideChoice('Nie proś jej, żeby znowu włączyła lokalizację.', ['to próbuję robić', 'umówiliśmy się że napisze kiedy chce. nie co godzinę'], 'repair'),
+        sideChoice('Nie proś jej, żeby znowu włączyła lokalizację.', ['próbuję jej o to nie prosić', 'umówiliśmy się że napisze kiedy chce. nie co godzinę'], 'repair'),
         sideChoice('Powiedziałeś jej o tym?', ['tak. powiedziała „jestem twoją siostrą a nie paczką do śledzenia”', 'strasznie się za nią stęskniłem. nawet jak jest wredna'], 'repair')
       ] },
       repair: { choices: [
@@ -191,7 +191,7 @@ Object.assign(DATA.conversations, {
     preview: 'Poszukiwania Mai trwają. Kuba potrzebuje pomocy, która nie jest kolejną plotką.',
     nodes: {
       start: { lines: ['ktoś wysłał mamie zdjęcie dziewczyny z dworca', 'znowu „na sto procent maja”', 'zdjęcie sprzed dwóch lat. nawet nie ten kraj'], choices: [
-        sideChoice('Zachowaj oryginalną wiadomość i źródło. Bez rozsyłania jako potwierdzenie.', ['tak zrobiliśmy', 'chciałbym jej nie musieć za każdym razem tego zabierać'], 'support'),
+        sideChoice('Zachowaj wiadomość i zapisz, skąd jest zdjęcie. Nie rozsyłaj go jako dowodu, że to Maja.', ['tak zrobiliśmy', 'nie chcę za każdym razem mówić mamie, że to jednak nie maja'], 'support'),
         sideChoice('Jak mama się po tym trzyma?', ['mówi że dobrze. robi obiad na trzy osoby', 'ja też mówię że dobrze. bez sensu rozmowa'], 'support')
       ] },
       support: { lines: ['jestem w kontakcie z ludźmi od poszukiwań spoza mgliska', 'przekazaliśmy im materiały. nie chcę już czekać aż gajda powie co sprawdził'], choices: [
@@ -199,7 +199,7 @@ Object.assign(DATA.conversations, {
         sideChoice('Dobrze, że ktoś spoza miejscowości dostał kopie.', ['teraz chociaż wiem że nie są tylko w jednym telefonie'], 'day')
       ] },
       day: { choices: [
-        sideChoice('Nie będę obiecywać odpowiedzi, których jeszcze nie mamy.', ['dzięki. tego „na pewno się znajdzie jutro” już nie wytrzymuję'], 'finish'),
+        sideChoice('Nie wiem, kiedy ją znajdziemy. Nie będę udawać, że wiem.', ['dzięki. tego „na pewno się znajdzie jutro” już nie wytrzymuję'], 'finish'),
         sideChoice('Nie będę rozsyłać tego zdjęcia. Jestem tu, jeśli chcesz pogadać.', ['okej. jutro mogę się odezwać tak po prostu? bez tego że coś znalazłem'], 'finish')
       ] },
       finish: { choices: [

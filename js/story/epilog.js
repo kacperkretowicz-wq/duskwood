@@ -62,8 +62,8 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         W('Dziękuję. Nie wiem, jak to inaczej powiedzieć.')
       ], [
         W('Oddali mi szczątki Tomka. Pochowaliśmy go obok mamy.'),
-        W('Nie dostałam całej prawdy. Nadal są rzeczy, o których milczą.'),
-        W('Ale wiem, gdzie on jest. To dużo. To za mało.')
+        W('Nadal nie wiem wszystkiego. O niektórych rzeczach wciąż nie chcą mówić.'),
+        W('Ale przynajmniej wiem, gdzie jest. Tyle że nadal mam pytania.')
       ]),
       pause(2500),
       iff('var:trust_bartek>=1', [
@@ -76,7 +76,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ]),
       scene('epBartek', [iff('var:trust_bartek>=1', [
         choose('bartek', [
-          opt('Trzymam za słowo. I za niedziele.', [B('ok. ty tez sie trzymaj')]),
+          opt('Trzymam za słowo. Dobrze, że go odwiedzasz.', [B('ok. ty tez sie trzymaj')]),
           opt('A ty jak dajesz radę z warsztatem?', [B('klienci wracaja. polowa z ciekawosci. jakos to bedzie')])
         ])
       ], [
@@ -101,7 +101,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       pause(2500),
       iff('var:trust_ola>=1', [
         O('Odpisałam jej. Po trzech tygodniach.'),
-        O('„Przepraszam za wczoraj” — ja też.')
+        O('Napisałam: „Ja też przepraszam za tamten wieczór”.')
       ], [
         O('Dziękuję za wszystko. Nawet za to, że {grzebałeś|grzebałaś} w moich wiadomościach.')
       ]),
@@ -123,7 +123,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.'),
       M('Tomek był tylko jedną z jego spraw. Tam są inne.'),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.'),
-      M('Kiedyś ci pokażę, jak je szukać.'),
+      M('Kiedyś ci pokażę, jak je znaleźć.'),
       M('tylko odbierz jak zadzwonię, ok? tym razem'),
       pause(3500),
       iff(E('swit'), [ending('swit')], [ending('odlamki')])

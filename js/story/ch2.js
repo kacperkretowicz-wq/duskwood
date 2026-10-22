@@ -146,7 +146,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('igor', 'czekajcie. nie mamy jeszcze daty tej kliszy'),
     g('ola', 'Igor, serio? Dziecko w żółtej pelerynie w hucie. Tomek zniknął w żółtej pelerynie w noc, kiedy świadek widział go na drodze do huty.'),
     g('kuba', 'jeśli to tomek, to był w hucie. nie nad rzeką'),
-    g('kuba', 'a potem sama zniknęła W HUCIE'),
+    g('kuba', 'i maja potem też zniknęła W HUCIE'),
     set('yellowKnown'),
     pause(2000),
 

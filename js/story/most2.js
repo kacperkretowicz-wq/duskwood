@@ -70,8 +70,8 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     give('ev_mp_wejscie'),
     choose('nina', [
       opt('Czyli wiemy tyle: to miejsce trzeba sprawdzić. Nie wiemy, kto jest w środku.', [
-        N('ok. tak to dla mnie brzmi uczciwie'),
-        W('Zgadzam się. To nie jest dowód, że Maja tam jest. To jest powód, żeby ktoś uprawniony tam pojechał.')
+        N('ok, tyle mogę powiedzieć, więcej nie wiem'),
+        W('Zgadzam się. Nie wiemy, czy Maja tam jest, ale policja powinna to sprawdzić.')
       ], { set: { mp_placeOnly: true } }),
       opt('To tam ją trzyma.', [
         N('nie wiem tego. serio. ja widziałam faceta i trzy paczki'),
@@ -175,7 +175,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     clock('2026-11-24T18:05'),
     title(),
     W('Dobry wieczór. Pani Marta przyjechała z kamerą. Siedzimy w kuchni, kaseta nie wychodzi z mieszkania, tak jak było ustalone.'),
-    Ma('Dzień dobry. Kamera z archiwum, ten sam model, na którym pan Adam zgrywał w 2019. Taśma jest w dobrym stanie, tylko pierwsze 20 sekund ma zaniki.'),
+    Ma('Dzień dobry. Przywiozłam kamerę z archiwum. Ten sam model, którego pan Adam używał do zgrywania w 2019. Taśma jest w dobrym stanie, tylko przez pierwsze 20 sekund nagranie się urywa.'),
     pic('marta', 'marta', 'most_biurko', 'Tak wyglądało moje biurko do wczoraj. Kamera już jest tutaj.'),
     give('ev_m_kubek', { silent: true }),
     Ma('Puszczam od początku. Będę pisać znaczniki czasu.'),
@@ -185,7 +185,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     V('marta', 'marta', '0:24', '(głos Henryka, przez głośnik kamery) …ja tej siatki nie założyłem z powrotem, bo mi zabroniła. Mówi: Heniu, moja wina, jak coś, ja podpiszę. No i… (szum) …i ja nie założyłem. Panie Adamie, ja to mam na sumieniu tak czy siak.', 'Marta (odsłuch kasety)'),
     give('ev_m_raw'),
     Ma('„Moja wina” to nie są jego słowa o sobie. On powtarza, co ktoś mu powiedział.'),
-    Ma('I jeszcze jedno, ważniejsze technicznie. W publikacji „moja wina” jest od razu po „z powrotem”. Na kasecie to „moja wina” pada 9 sekund później.'),
+    Ma('I jeszcze coś ważnego. W opublikowanym fragmencie „moja wina” pada od razu po „z powrotem”. Na kasecie te słowa padają 9 sekund później.'),
     choose('marta', [
       opt('Czyli ktoś wyciął środek zdania i skleił.', [
         Ma('Tak to wygląda. I słychać to, jak się wie, czego szukać. Na 0:37 w publikacji zmienia się szum pokoju. Najpierw jest lodówka, potem jej nie ma.'),
@@ -208,7 +208,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
         Ma('Sprawdzę w przetargu. Jutro.'),
         Ma('Dziś już nie dam rady, przepraszam.')
       ], { set: { m_askedKierownik: true } }),
-      opt('Nie zgadujmy. Poszukajmy pierwszej strony kasety.', [
+      opt('Nie zgadujmy. Poszukajmy pierwszej kasety.', [
         Ma('Tak. Pani Weronika mówi, że w pudle są jeszcze dwie bez opisu.')
       ])
     ])
@@ -366,7 +366,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     ]),
     Z('mogę ją zapytać czy chce z kimś pogadać. ale ona może powiedzieć nie'),
     choose('zuza', [
-      opt('Zapytaj ją, tylko jeśli sama chcesz. A jeśli powie nie, to jest nie.', [Z('ok. zapytam przy obiedzie. ona przy obiedzie jest najspokojniejsza')], { set: { m_askGrandma: true } }),
+      opt('Zapytaj, jeśli chcesz. Jak odmówi, zostawmy to.', [Z('ok. zapytam przy obiedzie. ona przy obiedzie jest najspokojniejsza')], { set: { m_askGrandma: true } }),
       opt('Nie pytaj na razie. Spróbuję potwierdzić ksero inaczej.', [Z('dzięki. serio')], { set: { m_spareGrandma: true } })
     ]),
     iff('flag:m_askGrandma', [
@@ -388,7 +388,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       ], { set: { m_henrykCopyKept: true } }),
       opt('Czy to pani Kurek zabroniła panu założyć siatkę?', [
         H('Pani kierownik. Ja nazwiska przez telefon nie będę mówił.'),
-        H('Na papierze niech będzie. Jak papier powie, to powie.'),
+        H('Na kartce jest nazwisko. Niech tam będzie. Przez telefon nie powiem.'),
         H('Wnuczka zrobi zdjęcie tej kartki.')
       ], { set: { m_henrykCopyKept: true } })
     ]),
@@ -400,7 +400,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     pause(2000),
     Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.'),
     Ma('To ta sama strona 41, ten sam wpis z 13.09, ta sama „zał. nr 3”. Druga kopia, od innej osoby. Zgadza się z kserem z teczki.'),
-    Ma('Czyli tożsamość pani Krystyny nie jest potrzebna, żeby porównać dokument. Tak będzie lepiej dla wszystkich.'),
+    Ma('Czyli możemy sprawdzić ksero bez ujawniania, że dostaliśmy je od pani Krystyny. Tak będzie lepiej dla wszystkich.'),
     give('ev_m_second_source'),
     pause(2500),
     Ma('Natan zapytał mnie dziś, skąd Dudek wiedział o kasecie w archiwum.'),

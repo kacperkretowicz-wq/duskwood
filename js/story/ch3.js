@@ -43,7 +43,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     W('A potem zniknęła. Od tygodnia nie śpię i myślę: czy to przeze mnie? Czy coś jej powiedziałam…'),
     choose('weronika', [
       opt('To nie przez panią.', [W('Dziękuję. Chciałabym w to wierzyć.')], { trust: { weronika: 1 } }),
-      opt('Co jej pani powiedziała?', [W('Opowiedziałam to, co pamiętam. Miałam wtedy dwanaście lat. Nie wszystko potrafię dziś rozdzielić.')])
+      opt('Co jej pani powiedziała?', [W('Opowiedziałam to, co pamiętam. Miałam wtedy dwanaście lat. Dziś nie zawsze wiem, co sama widziałam, a co mi opowiedziano.')])
     ]),
     W('Czego {Pan|Pani} ode mnie potrzebuje?'),
     choose('weronika', [opt('Chcę pani coś pokazać. To może być trudne.', [])]),

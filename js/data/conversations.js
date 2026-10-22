@@ -72,7 +72,7 @@ DATA.conversations = {
       ] },
       memory: { choices: [
         sideChoice('Idź do kuchni. Jak coś przyjdzie, napiszę.', ['wczoraj zjadłem pół bułki', 'dobra. pójdę do kuchni', 'jak coś znajdziesz, pisz. dźwięk mam włączony'], null, { trust: 1 }),
-        sideChoice('Co robiliście, kiedy nie było żadnej sprawy?', ['o ładowarkę się żarliśmy. niby dorosła a podpisuje kabel markerem 💀', 'podpisywała taśmę, ja ją odklejałem. metoda stuprocentowa', 'oddałbym jej teraz wszystkie'])
+        sideChoice('Jak się dogadywaliście, zanim zaginęła?', ['o ładowarkę się żarliśmy. niby dorosła a podpisuje kabel markerem 💀', 'podpisywała taśmę, ja ją odklejałem. metoda stuprocentowa', 'oddałbym jej teraz wszystkie'])
       ] }
     }
   },
@@ -100,7 +100,7 @@ DATA.conversations = {
       ] },
       boundary: { choices: [
         sideChoice('Często pytałeś ją, gdzie była?', ['no', 'gdzie i z kim. myslalem ze tak pokazuje ze mi zalezy', 'wkurzala sie. mowilem ze przeciez tylko pytam', 'miala racje. nie musiala mi sie meldowac'], null, { trust: 1 }),
-        sideChoice('To, że się rozstaliście, nie przekreśla dobrych rzeczy.', ['przynosila mi do roboty kanapki', 'z ogorkiem. nie lubie ogorka. dwa lata go wyjmowalem po cichu', 'nigdy jej nie powiedzialem'])
+        sideChoice('Mieliście też dobre chwile?', ['przynosila mi do roboty kanapki', 'z ogorkiem. nie lubie ogorka. dwa lata go wyjmowalem po cichu', 'nigdy jej nie powiedzialem'])
       ] }
     }
   },
@@ -128,7 +128,7 @@ DATA.conversations = {
       ] },
       repair: { choices: [
         sideChoice('Zachowaj materiały. Nie poprawiaj niczego po cichu.', ['nic nie kasuję. oryginały zostają osobno', 'i powiem kubie sam. nie musisz za mnie'], null, { trust: 1 }),
-        sideChoice('Pomóż z plikami. O reszcie teraz nie pogadamy.', ['uczciwe', 'dobra. siedzę przy kompie, podeślę co trzeba'])
+        sideChoice('Pomóż z plikami. O reszcie teraz nie pogadamy.', ['dobra. rozumiem', 'dobra. siedzę przy kompie, podeślę co trzeba'])
       ] }
     }
   },
@@ -143,12 +143,12 @@ DATA.conversations = {
         sideChoice('Dlaczego zgłaszasz się dopiero teraz?', ['Bo nie wiedziałam, czy coś widziałam.', 'Dopiero na ogłoszeniu zobaczyłam torbę Mai i skojarzyłam. To mógł być ktoś inny.', 'Nie chcę dopowiedzieć wam czegoś, czego nie pamiętam.'], 'time', { trust: -1 })
       ] },
       time: { choices: [
-        sideChoice('Co pozwala sprawdzić godzinę?', ['Zrobiłam odpis z karty kursu. Rejestrator pokazuje 22:11.', 'Tylko on się spóźniał. Rano zgłosiłam to do serwisu, mam porównanie z zegarem dyspozytorni.', 'Wyślę oba wpisy. I zdjęcie przystanku z 21 października, żeby było wiadomo, gdzie to było.'], 'certainty'),
+        sideChoice('Masz coś, na czym można sprawdzić godzinę przejazdu?', ['Zrobiłam odpis z karty kursu. Rejestrator pokazuje 22:11.', 'Tylko on się spóźniał. Rano zgłosiłam to do serwisu, mam porównanie z zegarem dyspozytorni.', 'Wyślę oba wpisy. I zdjęcie przystanku z 21 października, żeby było wiadomo, gdzie to było.'], 'certainty'),
         sideChoice('Czy widziałaś twarz, samochód albo wejście do huty?', ['Nie. Tylko osobę i kierunek. Nie widziałam żadnego auta.', 'Mam kartę przejazdu i zgłoszenie o spóźnionym zegarze. Tam chociaż są liczby.'], 'certainty')
       ] },
       certainty: { choices: [
         sideChoice('Sprawdzimy godzinę. Zapiszę też, że nie widziałaś twarzy.', ['Dzięki. Bo już się bałam, że poleci na grupy „kierowczyni widziała Maję”.', 'Zegar dyspozytorni miał 06:00, rejestrator 05:53. Serwis zapisał: stałe siedem minut, bez resetu od wieczora.', 'A zdjęcie jest z 21 października, 16:10. Nie z tamtej nocy.', 'Jeśli będziesz czegoś potrzebować, napisz. Odpowiem na pętli.'], null, { trust: 1 }),
-        sideChoice('To na pewno Maja. Powiem grupie, że mamy potwierdzenie.', ['Ej, nie. Nie pisz tego jako pewnik.', 'Nie widziałam twarzy. Wyraźnie to mówię.', 'Wysyłam dokumenty, ale zapisz też to zastrzeżenie. Zdjęcie zrobiłam 21 października o 16:10.'], null, { trust: -1 })
+        sideChoice('To na pewno Maja. Powiem grupie, że mamy potwierdzenie.', ['Ej, nie. Nie pisz tego jako pewnik.', 'Nie widziałam twarzy. Wyraźnie to mówię.', 'Wyślę dokumenty, ale dopisz, że nie widziałam twarzy. Zdjęcie zrobiłam 21 października o 16:10.'], null, { trust: -1 })
       ] }
     }
   }

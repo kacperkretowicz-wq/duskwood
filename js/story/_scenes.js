@@ -100,7 +100,7 @@ const StoryScenes = D => {
       W('Proszę mi wybaczyć, że piszę tak nieskładnie.'),
       W('Pamiętam z tamtego wieczoru mało. Kaptur. Mleko, które miał kupić i nie kupił. Mama krzyczała o to mleko, a potem już nigdy o nic nie krzyczała.'),
       choose('weronika', [
-        opt('Maja nagrała z panią rozmowę 11.10. Czy możemy jej odsłuchać?', [W('Tak. Zgodziłam się wtedy na jej pracę i zgadzam się teraz.'), W('Tylko proszę nie wrzucać tego do internetu. Mój głos w telefonach obcych ludzi… nie.')], { set: { weronikaConsent: true }, trust: { weronika: 1 } }),
+        opt('Maja nagrała z panią rozmowę 11.10. Czy możemy jej odsłuchać?', [W('Tak. Zgodziłam się wtedy, żeby Maja mnie nagrała. {Pan|Pani} też może tego posłuchać.'), W('Tylko proszę nie wrzucać tego do internetu. Mój głos w telefonach obcych ludzi… nie.')], { set: { weronikaConsent: true }, trust: { weronika: 1 } }),
         opt('Nie musi pani teraz nic więcej pisać.', [W('Dziękuję.'), W('Nagranie z Mają może {Pan|Pani} odsłuchać. Byle nie w internecie.')], { set: { weronikaConsent: true } })
       ]),
       W('Miałam wtedy dwanaście lat. Czasem już nie wiem, co sama pamiętam, a co znam z opowieści mamy.')
@@ -119,7 +119,7 @@ const StoryScenes = D => {
       S('I jeszcze… Darek K. to Darek Kruk. Wujek tej Zuzy.'),
       S('Zuza mówiła mi kiedyś, że babcia nie chce z nią rozmawiać o Darku. Chyba jeszcze nie widziała tego zdjęcia.'), S('Proszę na razie nic jej nie mówić, dobrze?'),
       choose('sylwia', [
-        opt('Nie powiem. To nie moja historia do opowiadania.', [S('Dziękuję 🙏')]),
+        opt('Nie powiem. Niech Zuza sama zdecyduje, komu o tym mówić.', [S('Dziękuję 🙏')]),
         opt('Jeśli sama zapyta, nie będę kłamać.', [S('Rozumiem. Ja też nie. Ale niech chociaż nie dowie się z komentarzy.')])
       ])
     ],
@@ -128,9 +128,9 @@ const StoryScenes = D => {
     s18: [
       iff('!flag:camsDeleted', [
       g('ola', 'Igor napisał do mnie prywatnie. Na grupę nie chce wracać, ale pyta, czy to na pewno jedno auto.'),
-      g('ola', 'Fotopułapka daje DDZ 6K1, jego zdjęcie końcówkę 19. Dwa urządzenia, dwie różne noce.'),
+      g('ola', 'Na zdjęciu z fotopułapki widać DDZ 6K1, a na zdjęciu Igora końcówkę 19. Zrobiono je różnymi urządzeniami, w dwie różne noce.'),
       choose('group', [
-        opt('Ciemna magna na obu, fragmenty numeru się nakładają. Zdjęcia są z różnych nocy. Kierowcy nie widać.', [g('ola', 'Przekażę mu. Dopiszę, że kierowcy nie widać.'), g('kuba', 'czyli auto mamy, człowieka nie')], { set: { plateCareful: true } }),
+        opt('Na obu zdjęciach jest ciemna magna, a fragmenty tablicy do siebie pasują. To różne noce. Kierowcy nie widać.', [g('ola', 'Przekażę mu. Dopiszę, że kierowcy nie widać.'), g('kuba', 'czyli auto mamy, człowieka nie')], { set: { plateCareful: true } }),
         opt('Numer się zgadza, więc wiemy, kto tam był.', [g('ola', 'Igor odpisał od razu: „mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać”.'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
       ])
       ], [
