@@ -25,7 +25,7 @@ Object.assign(DATA.persons, {
   kronika: {
     name: '@kronika.mglisko', role: 'anonimowe konto na Klipo', cond: 'ev:ev_c_klip1',
     facts: [
-      { text: 'Codziennie o 21:00 wrzuca 30 sekund kroniki „TV Dolina”. Pod spodem: „jutro kolejna osoba”.' },
+      { text: 'Codziennie o 21:00 wrzuca 30-sekundowy fragment kroniki „TV Dolina”. Podpis: „jutro kolejna osoba”.' },
       { text: 'Klipy nie są zgrane z kasety. Ktoś filmuje telewizor telefonem.', cond: 'flag:c_tvFilmed' },
       { text: 'Prowadzi je Ida Gil.', cond: 'flag:c_twist' }
     ]
@@ -34,7 +34,7 @@ Object.assign(DATA.persons, {
 
 Object.assign(DATA.evidence, {
   ev_c_klip1: { title: 'Klip nr 1 · „studniówka, 1999”', cat: 'digital', source: 'klipo.app/@kronika.mglisko', img: 'c_studniowka',
-    desc: '0:30. Polonez w sali gimnastycznej. Kamera przechodzi obok par i zatrzymuje się na drzwiach. Podpis: „jutro kolejna osoba”.' },
+    desc: '0:30. Polonez w sali gimnastycznej. Kamera przesuwa się obok tańczących par i zatrzymuje na drzwiach. Podpis: „jutro kolejna osoba”.' },
   ev_c_boisko: { title: 'Klip nr 2 · „boisko, 2008”', cat: 'digital', source: 'klipo.app/@kronika.mglisko', img: 'c_boisko',
     desc: 'Ówczesny wójt Kalinowski i pan Wrzos z firmy Wrzos-Bud podają sobie ręce przy budowie boiska. Przetarg wygrała firma szwagra wójta.' },
   ev_c_tv: { title: 'Kronika „TV Dolina”', cat: 'testimony', source: 'Weronika · telefon 19.01',
@@ -42,11 +42,11 @@ Object.assign(DATA.evidence, {
   ev_c_okno: { title: 'Zdjęcie mojego okna', cat: 'photo', source: 'Przesyłanie w pobliżu · 20.01, 23:41', img: 'c_blok_noc',
     desc: 'Ktoś zrobił zdjęcie mojego okna z parkingu przed blokiem i przesłał je z telefonu bez nazwy.' },
   ev_c_spacer: { title: 'Spacer z psem pana Zenona', cat: 'photo', source: 'Maja · 20.01', img: 'c_ida_pies',
-    desc: 'Na zdjęciu od Mai, w tle: dziewczyna w beżowej kurtce wyprowadza psa pana Zenona.' },
+    desc: 'W tle zdjęcia od Mai widać dziewczynę w beżowej kurtce, która wyprowadza psa pana Zenona.' },
   ev_c_pokoj: { title: 'Pokój z kasetami', cat: 'photo', source: 'Weronika · od pana Zenona', img: 'c_pokoj_kaset',
-    desc: 'Półki z kasetami, telewizor kineskopowy, magnetowid z zegarem 23:47. W legowisku śpi pies.' },
+    desc: 'Półki z kasetami, telewizor kineskopowy, magnetowid z zegarem pokazującym 23:47. W legowisku śpi pies.' },
   ev_c_wogole: { title: '„wogóle”', cat: 'digital', source: 'Błysk · 21.01',
-    desc: 'Nowy kontakt pisze „wogóle” razem. Tak samo napisała i.k_00 w listopadzie, kiedy przyznała się do wycięcia 40 sekund z mostu.' }
+    desc: 'Nowy kontakt pisze „wogóle” razem. Tak samo napisała i.k_00 w listopadzie, kiedy przyznała się do wycięcia 40 sekund nagrania z mostu.' }
 });
 
 DATA.web.tt_kronika = {
@@ -114,8 +114,8 @@ Object.assign(DATA.endings, {
   przewiniecie: {
     season: 's4', title: 'PRZEWINIĘCIE', tag: 'Sprawa 4 · zakończenie 1 z 3', mood: 'dawn',
     text: [
-      'O 20:59 konto @kronika.mglisko znika. Klip z Olą nie wychodzi.',
-      'Ida mówi dziadkowi w kuchni, przy herbacie. Pan Zenon długo milczy, potem pyta tylko, czy pies był wyprowadzony.',
+      'O 20:59 konto @kronika.mglisko znika. Klip z Olą się nie pojawia.',
+      'Ida mówi dziadkowi o wszystkim w kuchni, przy herbacie. Pan Zenon długo milczy, potem pyta tylko, czy pies był wyprowadzony.',
       'W lutym kasety jadą do archiwum gminy. Na każdej jest nowa naklejka: „do pamięci, nie do Klipo”.',
       () => G.flag('c_olaFirst') ? 'Ola sama opowiada o festynie w grupie. Pod jej wpisem są trzy serduszka i jeden komentarz: „też byłam głupia w liceum”.' : 'Ola nigdy się nie dowiaduje, jak blisko było.'
     ]
@@ -123,7 +123,7 @@ Object.assign(DATA.endings, {
   transmisja: {
     season: 's4', title: 'TRANSMISJA', tag: 'Sprawa 4 · zakończenie 2 z 3', mood: 'dark',
     text: [
-      'O 21:00 klip wychodzi. Festyn, 2011. Ola Nowicka, siedemnaście lat, i dziewczyna z Bielawy z krwią na twarzy.',
+      'O 21:00 klip pojawia się na Klipo. Festyn, 2011. Ola Nowicka, siedemnaście lat, i dziewczyna z Bielawy z krwią na twarzy.',
       'Ola nie przychodzi w poniedziałek do pracy. Pisze tylko: „wiedział{eś|aś}?”.',
       'Ida wyjeżdża z Mgliska pierwszym busem. Ostatnia wiadomość na Błysku znika, zanim zdążysz ją przeczytać do końca.',
       () => G.flag('c_zenonDefended') ? 'Pan Zenon dalej wyprowadza psa. Sam, o szóstej rano. Ktoś zmazał mu z drzwi napis.' : 'Na drzwiach pana Zenona ktoś pisze sprayem „KAMERZYSTA”. Pan Zenon nie zmywa.'
