@@ -80,7 +80,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     K('możesz poszukać w necie? tego tomka lisa i tego artykułu'),
     K('ja… nie ogarniam teraz. siedzę w jej pokoju i wszystko tu pachnie nią'),
     goal('Dowiedz się, kim był *Tomek Lis* i o jakim artykule pisała Maja.', [
-      'Otwórz *Szukajkę* i wpisz „Tomek Lis”.',
+      'Otwórz *przeglądarkę* (Safari lub Internet) i wpisz „Tomek Lis”.',
       'Maja wspomina artykuł z 2007 roku. Szukaj w archiwum *Gazety Sudeckiej*.',
       'Spróbuj: „zaginiony chłopiec Mglisko”.'
     ]),

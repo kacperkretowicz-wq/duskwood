@@ -26,6 +26,14 @@ Potem otwórz `http://localhost:5173`. Bez Node'a wystarczy dwukrotnie kliknąć
 
 ## Na telefonie
 
+### Aplikacje iOS i Android
+
+Repo zawiera projekty `ios/` (Xcode/Swift Package Manager) i `android/` (Gradle), osadzające całą grę lokalnie przez Capacitor. Przygotowanie: **Node.js 22+**, `npm ci`, następnie `npm run mobile:sync`. Otwieranie projektu: `npm run mobile:ios` lub `npm run mobile:android`. iOS wymaga Maca i Xcode 26+, Android — JDK 21 i Android SDK 36. Szczegóły, aktualny zakres weryfikacji i ograniczenia: [APLIKACJE-MOBILNE.md](docs/APLIKACJE-MOBILNE.md).
+
+To telefon wewnątrz gry: aplikacje, wiadomości i internet są częścią fikcji. Gra nie czyta prawdziwych SMS-ów, kontaktów, zdjęć ani położenia urządzenia. Projekty mobilne nie oznaczają publikacji w App Store / Google Play.
+
+### Wersja przeglądarkowa / PWA
+
 1. Uruchom serwer na komputerze (`node serve.js`) albo wrzuć folder na dowolny hosting statyczny (np. GitHub Pages, Netlify).
 2. Otwórz adres w przeglądarce telefonu.
 3. **Android (Chrome):** menu ⋮ → „Dodaj do ekranu głównego” / „Zainstaluj aplikację”. Gra uruchamia się na pełnym ekranie, bez paska przeglądarki — widzisz tylko ekran „telefonu w telefonie”.
@@ -78,7 +86,11 @@ Główna młoda ekipa ma 19–24 lata. Nowe grafiki mają charakter zwykłych zd
 
 Komunikator, głosy postaci, tempo rozmów, grafiki i zgodność starych zapisów opisano w [OPRAWA-I-DIALOGI.md](docs/OPRAWA-I-DIALOGI.md). Walidacja fabuły: `node --test tests/story.test.cjs`. Testy przeglądarkowe po uruchomieniu serwera: `node tests/browser.cjs` (wymagają Playwright i Chromium).
 
+Aktualny interfejs telefonu korzysta z systemowych fontów, jasnego/ciemnego wyglądu, ekranu ikon z dockiem, Wiadomości, Telefonu z dolnymi zakładkami i wyszukiwania w Notatkach. `css/native-ui.css` definiuje wygląd iOS i Androida. W Ustawieniach można wybrać system oraz jasny/ciemny/systemowy motyw. Gra nie pobiera fontów ani zasobów podczas gry.
+
 Pełna walidacja dodatku: `node --test tests/story.test.cjs tests/conversations.test.cjs`, następnie przy działającym serwerze `node tests/browser.cjs` i `node tests/conversations.browser.cjs`. Narzędzia testowe pozostają zewnętrzne; sama gra nie wymaga instalacji zależności.
+
+Testy nowej powłoki: `node tests/native-ui.browser.cjs`. Przejście prologu przez połączenia, SMS-y, dwie strony wyszukiwarki i grupę: `node tests/prolog.browser.cjs`. `npm test` obejmuje też eksport zasobów aplikacji. Workflow `Mobile build` próbuje kompilacji Android debug i iOS Simulator przy zmianach PR; wynik kompilacji trzeba odczytać z konkretnego uruchomienia Actions.
 
 ## Narzędzia deweloperskie
 

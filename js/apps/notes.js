@@ -23,8 +23,9 @@
     const o = G.s.objective;
     const list = [];
     list.push({ id: 'todo', pin: true, title: 'Co teraz?', t: G.now(), prev: o ? plain(o.text) : 'Nic pilnego. Sprawdzaj wiadomości.' });
+    const topics = Conversations.available().length;
     if (G.isUnlocked('chat:group')) list.push({ id: 'conversations', pin: true, title: 'Na osobności', t: G.now() - 30000,
-      prev: `${Conversations.available().length} tematów · prywatne rozmowy i dodatkowe tropy` });
+      prev: `${topics} ${topics === 1 ? 'temat' : topics >= 2 && topics <= 4 ? 'tematy' : 'tematów'} · prywatne rozmowy i dodatkowe tropy` });
     if (deds.length) list.push({ id: 'questions', pin: true, title: 'Pytania', t: G.now() - 60000, prev: openDeds().length ? `${openDeds().length} bez odpowiedzi · ${DATA.deductions[openDeds()[0]].q}` : 'Wszystko rozstrzygnięte.', dot: openDeds().some(id => !G.seen('ded:' + id)) });
     if (ev.length) list.push({ id: 'saved', title: 'Zapisane', t: G.s.ev[ev[0].id].t, prev: `${ev.length} ${ev.length === 1 ? 'element' : ev.length < 5 ? 'elementy' : 'elementów'} · ${ev[0].title}`, dot: G.freshEvidence() > 0, thumb: (ev.find(e => e.img) || {}).img });
     if (ppl.length) list.push({ id: 'people', title: 'Ludzie', t: G.now() - 120000, prev: ppl.map(([, p]) => p.name.split(' ')[0]).join(', ') });
@@ -61,23 +62,27 @@
 
   function rootPage(stack) {
     const pg = UI.page({ title: 'Notatki', big: true, cls: 'notes' });
+    const search = h('input', { type: 'search', class: 'nt-search', placeholder: 'Szukaj', 'aria-label': 'Szukaj w notatkach' });
+    const content = h('div', {});
+    pg.body.append(search, content);
     const render = () => {
-      pg.body.innerHTML = '';
-      const all = notesList();
-      pg.body.appendChild(h('div', { class: 'nt-search' }, U.ico('search', 16), h('span', {}, 'Szukaj')));
+      content.innerHTML = '';
+      const query = U.norm(search.value);
+      const all = notesList().filter(n => !query || U.norm(n.title + ' ' + n.prev).includes(query));
       const sec = (label, items) => {
         if (!items.length) return;
-        pg.body.appendChild(h('div', { class: 'nt-sec' }, label));
+        content.appendChild(h('div', { class: 'nt-sec' }, label));
         const box = h('div', { class: 'nt-list' });
         items.forEach(n => box.appendChild(h('button', { class: 'nt-row' + (n.dot ? ' has-new' : ''), onclick: () => openNote(stack, n.id) },
           h('div', { class: 'nt-m' }, h('b', {}, n.title), h('span', {}, h('i', {}, short(n.t)), n.prev)),
           n.thumb ? h('img', { class: 'nt-th', src: Art.url(n.thumb), alt: '' }) : null)));
-        pg.body.appendChild(box);
+        content.appendChild(box);
       };
       sec('Przypięte', all.filter(n => n.pin));
       sec('Notatki', all.filter(n => !n.pin));
-      pg.body.appendChild(h('div', { class: 'nt-count' }, `${all.length} notatek`));
+      content.appendChild(h('div', { class: 'nt-count' }, all.length ? `${all.length} notatek` : 'Brak wyników'));
     };
+    search.addEventListener('input', render);
     render();
     const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges', 'conversations'].map(e => BUS.on(e, render));
     return { el: pg.el, onShow: render, destroy: () => offs.forEach(f => f()) };
@@ -123,7 +128,7 @@
 
   /* ---------- Zapisane ---------- */
   function savedPage(stack) {
-    const pg = notePage('Zapisane', Date.now());
+    const pg = notePage('Zapisane', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     const render = () => {
@@ -160,7 +165,7 @@
 
   /* ---------- Ludzie ---------- */
   function peoplePage() {
-    const pg = notePage('Ludzie', Date.now());
+    const pg = notePage('Ludzie', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     Object.entries(DATA.persons).filter(([, p]) => G.test(p.cond)).forEach(([id, p]) => {
@@ -187,7 +192,7 @@
 
   /* ---------- Oś czasu ---------- */
   function timelinePage() {
-    const pg = notePage('Oś czasu', Date.now());
+    const pg = notePage('Oś czasu', G.now());
     const items = DATA.timeline.filter(t => G.test(t.cond)).sort((a, b) => U.parseLocal(a.t) - U.parseLocal(b.t));
     const tl = h('div', { class: 'tl' });
     let year = null;
@@ -204,7 +209,7 @@
 
   /* ---------- Pytania ---------- */
   function questionsPage() {
-    const pg = notePage('Pytania', Date.now());
+    const pg = notePage('Pytania', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     const render = () => {

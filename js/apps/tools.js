@@ -298,9 +298,17 @@
           if (r === 1) { S.os = k; G.saveSettings(); G.save(true); location.reload(); }
         }
       }, l)));
+      const appearance = h('div', { class: 'seg', style: 'margin:0' }, [['light', 'Jasny'], ['dark', 'Ciemny'], ['auto', 'Systemowy']].map(([key, text]) => h('button', {
+        class: (S.appearance || 'light') === key ? 'on' : '', 'aria-pressed': String((S.appearance || 'light') === key), onclick: e => {
+          S.appearance = key; G.saveSettings();
+          [...appearance.children].forEach(b => { b.classList.toggle('on', b === e.currentTarget); b.setAttribute('aria-pressed', String(b === e.currentTarget)); });
+        }
+      }, text)));
       pg.body.append(
         h('div', { class: 'sec-t' }, 'Wygląd systemu'),
         h('div', { class: 'pad' }, osSeg),
+        h('div', { class: 'sec-t' }, 'Wygląd'),
+        h('div', { class: 'pad' }, appearance),
         h('div', { class: 'sec-t' }, 'Profil'),
         h('div', { class: 'pad' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Imię'), nameIn, h('label', { class: 'lbl' }, 'Forma zwracania się'), gen),
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),

@@ -65,7 +65,7 @@
 
   /* ---------- lista rozmów ---------- */
   function listPage(stack) {
-    const pg = UI.page({ title: 'Rozmowy', sub: 'MGLISKO / KOMUNIKATOR', big: true });
+    const pg = UI.page({ title: 'Wiadomości', big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
     pg.el.classList.add('conversation-list');
     let filter = 'all';
     const search = h('input', { type: 'search', placeholder: 'Szukaj rozmowy', 'aria-label': 'Szukaj rozmowy', class: 'chat-search' });
@@ -84,10 +84,6 @@
     const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
     pg.body.append(caseCard, sideEntry, search, tabs, list);
-    pg.el.appendChild(h('nav', { class: 'messenger-nav', 'aria-label': 'Nawigacja' },
-      h('button', { class: 'on', 'aria-current': 'page' }, U.ico('chat', 20), 'Rozmowy'),
-      h('button', { onclick: () => UI.openApp('notes') }, U.ico('note', 20), 'Ślady'),
-      h('button', { onclick: () => UI.goHome() }, U.ico('grid', 20), 'Telefon')));
     function render() {
       caseCard.hidden = !G.isUnlocked('chat:maja');
       const sideCount = Conversations.available().length;
@@ -175,7 +171,7 @@
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
       if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, ' ✓') : null));
+      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
       if (m.clue) {
         b.classList.add('clue');
         b.addEventListener('click', () => { if (G.addEv(m.clue)) UI.evidenceToast(m.clue); else UI.toast('Masz to już w dowodach.', { icon: 'folder' }); });
@@ -211,6 +207,7 @@
       requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
     }
     function append(m, animate = true) {
+      if (m.from === 'me') msgs.querySelectorAll('.delivery').forEach(el => el.remove());
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');

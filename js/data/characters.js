@@ -31,7 +31,7 @@ DATA.chats = {
   igor: { name: 'Igor Malicki', avatar: 'igor' },
   weronika: { name: 'Weronika Lis', avatar: 'weronika' },
   gajda: { name: 'Robert Gajda', avatar: 'gajda', sub: 'asp. sztab. · Posterunek Policji Mglisko' },
-  szklarz: { name: 'Nieznany', avatar: 'szklarz', glitch: true, sub: 'numer zastrzeżony' },
+  szklarz: { name: 'Nieznany', avatar: 'szklarz', sub: 'Numer spoza kontaktów' },
   maja2: { name: 'Maja', avatar: 'maja' }
 };
 

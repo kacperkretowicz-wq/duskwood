@@ -1,0 +1,9 @@
+{
+  "appId": "pl.mglisko.game",
+  "appName": "Mglisko",
+  "webDir": "dist",
+  "backgroundColor": "#000000",
+  "ios": { "contentInset": "never", "preferredContentMode": "mobile", "scrollEnabled": false },
+  "android": { "allowMixedContent": false },
+  "server": { "androidScheme": "https" }
+}

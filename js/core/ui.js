@@ -11,10 +11,10 @@ const UI = (() => {
 
   /* ---------- ikony aplikacji ---------- */
   const GLYPH = {
-    messages: '<path d="M7 9.5h18a3 3 0 013 3v9a3 3 0 01-3 3H15l-6 4.5v-4.5H7a3 3 0 01-3-3v-9a3 3 0 013-3z" fill="#fff"/><circle cx="11" cy="17" r="1.6" fill="#c97a12"/><circle cx="16" cy="17" r="1.6" fill="#c97a12"/><circle cx="21" cy="17" r="1.6" fill="#c97a12"/>',
+    messages: '<path d="M27 15c0 6-5 10-11 10-2 0-4-.4-5-1L5 27l2-6c-2-2-3-4-3-6C4 9 9 5 16 5s11 4 11 10z" fill="#fff"/>',
     phone: '<path d="M10.5 6h4l2 5.5-2.6 2a14 14 0 006.6 6.6l2-2.6 5.5 2v4a2.5 2.5 0 01-2.5 2.5A20.5 20.5 0 018 8.5 2.5 2.5 0 0110.5 6z" fill="#fff"/>',
     browser: '<circle cx="16" cy="16" r="10.5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M20.5 11.5l-3 6-6 3 3-6z" fill="#fff"/><circle cx="16" cy="16" r="1.4" fill="#2a6fb0"/>',
-    gallery: '<rect x="5" y="7" width="22" height="18" rx="3.5" fill="#fff"/><path d="M5 22l6.5-7 5 5 3.5-3.5L27 23v-1 1.5a1.5 1.5 0 01-1.5 1.5h-19A1.5 1.5 0 015 23.5z" fill="#7b4fb8"/><circle cx="21.5" cy="12.5" r="2.4" fill="#e9a23b"/>',
+    gallery: ['#ffb444','#ff704b','#ed5f9a','#b87cc4','#7a8fd8','#6cc6dc','#6acb9b','#b7d765'].map((color,i)=>`<ellipse cx="16" cy="9.7" rx="4.6" ry="7.1" fill="${color}" opacity=".82" transform="rotate(${i*45} 16 16)"/>`).join(''),
     nimbus: '<path d="M10 24h13.5a5.5 5.5 0 00.8-10.9A8 8 0 009 14.5 4.8 4.8 0 0010 24z" fill="#fff"/><path d="M16 15v6M13.2 18l2.8-3 2.8 3" stroke="#c4466a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     maps: '<path d="M6 9l6.5-2.5L19.5 9 26 6.5v16.5L19.5 25.5 12.5 23 6 25.5z" fill="#fff" opacity=".9"/><path d="M12.5 6.5V23M19.5 9v16.5" stroke="#1d7c74" stroke-width="1.5"/><path d="M19.5 7.5c-2.2 0-4 1.8-4 4 0 3 4 6.5 4 6.5s4-3.5 4-6.5c0-2.2-1.8-4-4-4z" fill="#e5484d"/><circle cx="19.5" cy="11.5" r="1.4" fill="#fff"/>',
     case: '<path d="M5 10h8l2 2.5h12V25a1.5 1.5 0 01-1.5 1.5h-19A1.5 1.5 0 015 25z" fill="#fff"/><circle cx="17.5" cy="19" r="3.6" fill="none" stroke="#8a5a12" stroke-width="2"/><path d="M20.2 21.7l3 3" stroke="#8a5a12" stroke-width="2.2" stroke-linecap="round"/>',
@@ -22,15 +22,15 @@ const UI = (() => {
     ciemnia: '<circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M16 6l3 8.5M26 16l-8.5 3M16 26l-3-8.5M6 16l8.5-3M23 9l-6 6.3M9 23l6-6.3M23 23l-6.3-6M9 9l6.3 6" stroke="#fff" stroke-width="1.6"/><circle cx="16" cy="16" r="3" fill="#ff5a4a"/>',
     bushview: '<rect x="9" y="5" width="14" height="22" rx="4" fill="#fff"/><circle cx="16" cy="13" r="3.8" fill="#4d5a2a"/><circle cx="16" cy="13" r="1.5" fill="#c6d38a"/><rect x="12" y="20" width="8" height="2" rx="1" fill="#4d5a2a"/><circle cx="12" cy="8" r=".9" fill="#e5484d"/>',
     weather: '<path d="M8 21h15M6 25h20M10 17h14" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><circle cx="20" cy="10" r="4" fill="#ffd27a"/>',
-    notes: '<rect x="7" y="5" width="18" height="22" rx="2.5" fill="#fff"/><rect x="7" y="5" width="18" height="5" rx="2" fill="#f5c400"/><path d="M10.5 14h11M10.5 18h11M10.5 22h7" stroke="#b9b2a0" stroke-width="1.6" stroke-linecap="round"/>',
+    notes: '<path d="M7 13h18M7 18h18M7 23h18" stroke="#b4b4b8" stroke-width="1"/>',
     calendar: '<rect x="6" y="7" width="20" height="19" rx="3" fill="#fff"/><rect x="6" y="7" width="20" height="6" rx="2.5" fill="#e5484d"/><text x="16" y="23.5" font-size="10" font-weight="700" text-anchor="middle" fill="#222" font-family="Inter,Segoe UI,sans-serif">DAY</text>',
     clock: '<circle cx="16" cy="16" r="10.5" fill="#fff"/><path d="M16 9v7l4.5 3" stroke="#111" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="16" cy="16" r="1.4" fill="#e5484d"/>'
   };
   const GRAD = {
-    messages: 'linear-gradient(160deg,#ffbe55,#e08a17)',
+    messages: 'linear-gradient(#64e175,#20c543)',
     phone: 'linear-gradient(160deg,#5be38f,#1f9d55)',
     browser: 'linear-gradient(160deg,#5aa8f0,#1e5a9e)',
-    gallery: 'linear-gradient(160deg,#f6f1ea,#d9cfe6)',
+    gallery: '#fff',
     nimbus: 'linear-gradient(160deg,#f49bb4,#b8355c)',
     maps: 'linear-gradient(160deg,#58d0c0,#17716a)',
     case: 'linear-gradient(160deg,#f2c25c,#a46a10)',
@@ -38,7 +38,7 @@ const UI = (() => {
     ciemnia: 'linear-gradient(160deg,#a8322b,#3d0c0a)',
     bushview: 'linear-gradient(160deg,#94a550,#3d4a1b)',
     weather: 'linear-gradient(160deg,#6b8ba8,#2c3e52)',
-    notes: 'linear-gradient(160deg,#fff7d6,#f1d36a)',
+    notes: 'linear-gradient(#ffcc00 0 29%,#fff 29%)',
     calendar: 'linear-gradient(160deg,#ffffff,#e9e9ee)',
     clock: 'linear-gradient(160deg,#2b2b2e,#0b0b0c)'
   };
@@ -54,7 +54,7 @@ const UI = (() => {
   }
   let OS = 'ios';
   const LABELS = {
-    ios: { gallery: 'Zdjęcia', browser: 'Internet', messages: 'Wiadomości', phone: 'Telefon' },
+    ios: { gallery: 'Zdjęcia', browser: 'Safari', messages: 'Wiadomości', phone: 'Telefon' },
     android: { gallery: 'Galeria', browser: 'Internet', messages: 'Wiadomości', phone: 'Telefon' }
   };
   const appName = a => (LABELS[OS] && LABELS[OS][a.id]) || a.name;
@@ -66,6 +66,9 @@ const UI = (() => {
   function build() {
     OS = detectOS();
     document.body.classList.add('os-' + OS);
+    applyAppearance();
+    BUS.on('settings', applyAppearance);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyAppearance);
     const stage = h('div', { id: 'stage' },
       h('aside', { class: 'stage-side' }, h('div', { class: 'stage-kicker' }, 'INTERAKTYWNY THRILLER'), h('b', {}, 'MGLISKO'),
         h('p', {}, 'Nie znasz tych ludzi.', h('br'), 'Jeszcze.'),
@@ -89,6 +92,16 @@ const UI = (() => {
     renderStatus();
     fit();
     window.addEventListener('resize', fit);
+    const keyboardFit = () => {
+      const viewport = window.visualViewport;
+      const editing = document.activeElement?.matches('input,textarea');
+      const inset = viewport && editing ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop) : 0;
+      document.body.style.setProperty('--keyboard-inset', inset > 100 ? `${inset}px` : '0px');
+      document.body.classList.toggle('keyboard-open', inset > 100);
+    };
+    window.visualViewport?.addEventListener('resize', keyboardFit);
+    document.addEventListener('focusin', keyboardFit);
+    document.addEventListener('focusout', () => setTimeout(keyboardFit, 0));
     document.addEventListener('fullscreenchange', fit);
     setInterval(tick, 1000);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') back(); });
@@ -107,14 +120,16 @@ const UI = (() => {
     });
     BUS.on('msg', onMsg);
     BUS.on('evidence', () => scheduleHome());
+    ['goal', 'clock', 'solved', 'conversations'].forEach(event => BUS.on(event, scheduleHome));
   }
 
   function fit() {
     const mobile = window.innerWidth <= 520 || (window.matchMedia('(pointer: coarse)').matches && window.innerWidth < 900);
     document.body.classList.toggle('mobile', mobile);
     // Na prawdziwym telefonie pokazujemy własny pasek stanu tylko na pełnym ekranie — inaczej widać systemowy.
-    const full = !!document.fullscreenElement || window.matchMedia('(display-mode: fullscreen)').matches;
-    document.body.classList.toggle('real-status', mobile && !full);
+    const full = !!document.fullscreenElement || window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: standalone)').matches || navigator.standalone || window.Capacitor?.isNativePlatform();
+    const hardware = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    document.body.classList.toggle('real-status', mobile && hardware && !full);
     const dev = $('#device');
     if (!mobile) {
       const k = Math.min(1, (window.innerHeight - 32) / dev.offsetHeight, (window.innerWidth - 32) / dev.offsetWidth);
@@ -144,33 +159,57 @@ const UI = (() => {
     if (G.s) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  function applyAppearance() {
+    const pref = G.settings.appearance || 'light';
+    document.body.classList.toggle('dark-ui', pref === 'dark' || pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
 
   /* ---------- ekran główny ---------- */
   let homeQueued = false;
   function scheduleHome() { if (homeQueued) return; homeQueued = true; requestAnimationFrame(() => { homeQueued = false; renderHome(); }); }
   function renderHome() {
     if (!G.s) return;
-    home.style.backgroundImage = `url(${Art.url('wallpaper')})`;
+    home.style.backgroundImage = 'linear-gradient(#06101b55,#0c182b88),url(assets/forest.png)';
     home.innerHTML = '';
-    const ch = Engine.chapters[G.s.chapter];
-    const recent = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id)).sort((a, b) => (G.chat(b).last || 0) - (G.chat(a).last || 0)).slice(0, 3);
+    const dock = ['phone', 'messages', 'browser', 'gallery'];
+    function appIcon(id) {
+      const a = apps[id], n = a.badge ? a.badge() : 0;
+      return h('button', { class: 'app-ic', 'aria-label': appName(a), onclick: e => openApp(id, {}, e.currentTarget) },
+        h('span', { class: 'ic', style: `--g:${GRAD[id]}` }, h('span', { html: glyph(id) }), n ? h('span', { class: 'badge' + (n === 'dot' ? ' dot' : '') }, n === 'dot' ? '' : n) : null), h('span', { class: 'lb' }, appName(a)));
+    }
+    const weather = DATA.weather();
     home.append(
-      h('div', { class: 'hub-heading' }, h('small', {}, 'MGLISKO / TWÓJ TELEFON'), h('h1', {}, 'Po drugiej stronie.'), h('p', {}, cap(U.dayLong(G.now())) + ' · ' + U.time(G.now()))),
-      h('button', { class: 'hub-case', onclick: () => openApp('messages') },
-        h('div', { class: 'hub-case-shade' }, h('span', { class: 'case-tag' }, ch ? (ch.num === 0 ? 'PROLOG' : ch.num === 99 ? 'EPILOG' : 'ROZDZIAŁ ' + ch.num) : 'MGLISKO'),
-          h('h2', {}, ch ? ch.title : 'Nieodebrane'), h('p', {}, 'Maja Wrona, 22 lata. Nie wróciła do domu.'), h('span', { class: 'hub-continue' }, 'Otwórz rozmowy', U.ico('chat', 18)))),
-      h('div', { class: 'hub-section' }, h('b', {}, 'Ostatnie rozmowy'), h('button', { onclick: () => openApp('messages') }, 'Wszystkie')),
-      h('div', { class: 'hub-recent' }, recent.length ? recent.map(id => {
-        const c = G.chat(id), last = c.msgs.at(-1);
-        return h('button', { class: 'row', onclick: () => openApp('messages', { chat: id }) }, avatar(c.avatar || DATA.chats[id].avatar || id),
-          h('div', { class: 'rm' }, h('b', {}, c.name || DATA.chats[id].name), h('span', {}, last ? preview(last) : 'Otwórz rozmowę')),
-          c.unread ? h('span', { class: 'hub-unread' }, c.unread) : null);
-      }) : h('p', { class: 'empty' }, 'Wiadomości pojawią się tutaj.')),
-      h('div', { class: 'hub-section' }, h('b', {}, 'Pod ręką')),
-      h('div', { class: 'hub-tools' }, ['phone', 'notes', 'browser', 'gallery', 'maps', 'nimbus', 'ciemnia', 'bushview', 'weather', 'calendar', 'clock', 'settings'].filter(appUnlocked).map(id =>
-        h('button', { onclick: () => openApp(id) }, h('span', { class: 'hub-tool-icon', html: glyph(id) }), h('span', {}, appName(apps[id])), apps[id].badge && apps[id].badge() ? h('i') : null))),
-      h('p', { class: 'hub-footer' }, 'Słuchawki. Zgaszone światło. I jeszcze jedna wiadomość.')
+      h('div', { class: 'home-widgets' },
+        h('button', { class: 'home-weather', onclick: () => openApp('weather'), 'aria-label': 'Pogoda w Mglisku' },
+          h('b', {}, 'Mglisko'), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', {}, cap(U.dayShort(G.now())))),
+        h('button', { class: 'home-note', onclick: () => openApp('notes', { note: 'todo' }), 'aria-label': 'Co teraz? Otwórz notatkę' },
+          h('small', {}, 'NOTATKI'), h('b', {}, 'Co teraz?'), h('p', {}, G.s.objective ? U.tpl(G.s.objective.text).replace(/[*_]/g, '') : 'Sprawdź wiadomości.'))),
+      h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['calendar', 'maps', 'weather', 'clock', 'notes', 'nimbus', 'ciemnia', 'bushview', 'settings'].filter(appUnlocked).map(appIcon)),
+      h('button', { class: 'home-search', onclick: searchPhone }, U.ico('search', 13), 'Szukaj'),
+      h('div', { class: 'dock', 'aria-label': 'Dock' }, dock.filter(appUnlocked).map(appIcon))
     );
+  }
+
+  function searchPhone() {
+    const input = h('input', { type: 'search', class: 'field', placeholder: 'Aplikacje, osoby, zapisane ślady', 'aria-label': 'Szukaj w telefonie' });
+    const results = h('div', { class: 'list plain spotlight-results' });
+    const body = h('div', { class: 'spotlight' }, input, results);
+    let focusTimer;
+    const sh = sheet({ title: 'Szukaj', body, onClose: () => clearTimeout(focusTimer) });
+    function render() {
+      results.innerHTML = '';
+      const q = U.norm(input.value);
+      const items = Object.values(apps).filter(a => appUnlocked(a.id)).map(a => ({ label: appName(a), sub: 'Aplikacja', run: () => openApp(a.id) }));
+      if (q) {
+        Object.entries(DATA.persons).filter(([, p]) => G.test(p.cond)).forEach(([id, p]) => items.push({ label: p.name, sub: p.role, run: () => openApp('notes', { note: 'people' }) }));
+        Object.keys(G.s.ev).map(G.ev).filter(Boolean).forEach(e => items.push({ label: e.title, sub: e.source || 'Zapisany ślad', run: () => openApp('notes', { ev: e.id }) }));
+      }
+      const visible = items.filter(i => !q || U.norm(i.label + ' ' + i.sub).includes(q));
+      visible.forEach(i => results.append(h('button', { class: 'row', onclick: () => { sh.close(true); i.run(); } }, h('div', { class: 'rm' }, h('b', {}, i.label), h('span', {}, i.sub)), U.ico('back', 15))));
+      if (!visible.length) results.append(h('p', { class: 'empty' }, 'Brak wyników'));
+    }
+    input.addEventListener('input', render); render();
+    focusTimer = setTimeout(() => input.focus(), 150);
   }
 
   /* ---------- aplikacje ---------- */
@@ -390,6 +429,7 @@ const UI = (() => {
 
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
+    if (who === 'szklarz') who = 'unknown';
     const photo = DATA.chars[who]?.photo;
     if (photo) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
     if (who === 'gajda') return h('span', { class: 'av gajda-av ' + cls, role: 'img', 'aria-label': DATA.chars.gajda.name });
@@ -596,10 +636,9 @@ const UI = (() => {
   function fx(name, o = {}) {
     switch (name) {
       case 'glitch':
-        SFX.play.glitch(); U.vibrate([20, 30, 20, 30, 60]);
-        screen.classList.remove('glitch'); void screen.offsetWidth; screen.classList.add('glitch');
-        setTimeout(() => screen.classList.remove('glitch'), 950);
-        return U.sleep(o.wait ? 950 : 0);
+        // Nieznany nadawca nie może zmieniać systemowego interfejsu gracza.
+        U.vibrate([30, 70, 30]);
+        return U.sleep(o.wait ? 650 : 0);
       case 'shake':
         screen.classList.remove('shake'); void screen.offsetWidth; screen.classList.add('shake');
         U.vibrate(200);

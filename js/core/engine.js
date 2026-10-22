@@ -254,8 +254,6 @@ const Engine = (() => {
   }
   function doTrust(who, n) {
     G.inc('trust_' + who, n);
-    const c = DATA.chars[who];
-    if (c && n) UI.toast(`${c.short || c.name} to zapamięta.`, { kind: n > 0 ? 'trust-up' : 'trust-down' });
   }
 
   function clearWaiter() {
