@@ -84,8 +84,8 @@ DATA.endings = {
   swit: {
     title: 'ŚWIT', tag: 'Zakończenie 1 z 3', mood: 'dawn',
     text: [
-      'Maję wynoszą ze sztolni o 1:52. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
-      'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę na leśnym szlabanie pół godziny później. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
+      'Tej nocy Maję wynoszą ze sztolni. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
+      'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę przy leśnym szlabanie. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
       'Rano strażacy rozbierają mur w odprężarce. Za nim, pod żółtym strzępem peleryny, czeka dziewięcioletni chłopiec. Czekał dwadzieścia dziewięć lat.',
       () => (G.flag('leszekTestify') ? 'Marek Sowa i Leszek Malicki składają zeznania tego samego dnia.' : 'Marek Sowa składa zeznania tego samego dnia. Leszek Malicki milczy przez tydzień — potem też zaczyna mówić.') + ' Gazeta Sudecka drukuje tekst, który zaczął pisać Adam Rybicki.',
       'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale potem {odebrałeś|odebrałaś} wszystko, co było ważne.'
@@ -96,9 +96,9 @@ DATA.endings = {
     text: [
       'Maję wynoszą ze sztolni nad ranem. Żyje — i tylko to się liczy. Przynajmniej tak powtarzają wszyscy.',
       () => G.flag('gajdaCaught')
-        ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Ale materiałów jest za mało: po czterdziestu ośmiu godzinach wychodzi na wolność. Dzień później jego skodę znajdują na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.'
+        ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Zeznanie Mai i odnalezienie jej w sztolni pozostają ważne, nawet jeśli dokumentacja dawnych wydarzeń jest niepełna. On milczy. Część pytań wciąż pozostaje bez odpowiedzi.'
         : 'Robert Gajda nie wraca do domu. Jego skodę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
-      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + 'Ciała Gajdy nie odnaleziono. Śledztwo w sprawie Tomka Lisa zostaje umorzone „wobec śmierci podejrzanego”. Nikt już nie może go o nic zapytać.',
+      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + (G.flag('gajdaCaught') ? 'Ratunek się udał. Złożenie pełnego obrazu tego, co wydarzyło się w hucie, zajmie dłużej.' : 'Gajdy nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania trwają, podobnie jak sprawa Tomka.'),
       'Weronika dostaje szczątki brata i list z prokuratury. Pisze ci jedno zdanie: „Wiem, gdzie on jest. To dużo. To za mało.”'
     ]
   },
@@ -107,7 +107,7 @@ DATA.endings = {
     text: [
       'Krata sztolni Ewa jest otwarta. W środku: koc, puste butelki po wodzie, gumka do włosów z różowym koralikiem.',
       'Na ścianie, wydrapane czymś ostrym, przy samej ziemi: TU BYŁAM. M.',
-      'Robert Gajda prowadzi poszukiwania osobiście. Mówi kamerom, że nie spocznie, dopóki jej nie znajdzie.',
+      'Robert Gajda znika. Po przekazaniu materiałów spoza Mgliska trwają poszukiwania jego i Mai. Telewizja przypomina jego dawne zapewnienia, że nie spocznie, dopóki jej nie znajdzie.',
       'Twój telefon milczy. Tylko czasem, późną nocą, wyświetla się połączenie z zastrzeżonego numeru — i nikt się nie odzywa.'
     ]
   }

@@ -8,6 +8,7 @@ const UI = (() => {
   const apps = {};
   const overlays = [];
   let locked = false;
+  let lockWallpaperCleanup = null;
 
   /* ---------- ikony aplikacji ---------- */
   const GLYPH = {
@@ -64,6 +65,7 @@ const UI = (() => {
 
   /* ---------- budowa ---------- */
   function build() {
+    SeasonPacing.init();
     OS = detectOS();
     document.body.classList.add('os-' + OS);
     applyAppearance();
@@ -79,6 +81,7 @@ const UI = (() => {
     island = h('div', { id: 'island' });
     statusEl = h('div', { id: 'status' });
     home = h('div', { id: 'home' });
+    Wallpapers.bind(home, () => UI.openWallpapers());
     appsLayer = h('div', { id: 'apps' });
     bannersEl = h('div', { id: 'banners' });
     toastsEl = h('div', { id: 'toasts' });
@@ -120,7 +123,8 @@ const UI = (() => {
     });
     BUS.on('msg', onMsg);
     BUS.on('evidence', () => scheduleHome());
-    ['goal', 'clock', 'solved', 'conversations'].forEach(event => BUS.on(event, scheduleHome));
+    ['goal', 'clock', 'solved', 'conversations', 'wallpaper'].forEach(event => BUS.on(event, scheduleHome));
+    BUS.on('wallpaper', () => { if (lockEl) lockEl.style.cssText = Wallpapers.style(Wallpapers.selected()); });
   }
 
   function fit() {
@@ -156,7 +160,7 @@ const UI = (() => {
     const st = $('.st-t', statusEl); if (st && st.textContent !== t) renderStatus();
     const wt = $('.w-time', home); if (wt && wt.textContent !== t) { wt.textContent = t; $('.w-date', home).textContent = cap(U.dayLong(G.now())); }
     if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; }
-    if (G.s) G.s.playMs = (G.s.playMs || 0) + 1000;
+    if (G.s && !document.hidden && !G.s.clock.paused) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
   function applyAppearance() {
@@ -169,7 +173,7 @@ const UI = (() => {
   function scheduleHome() { if (homeQueued) return; homeQueued = true; requestAnimationFrame(() => { homeQueued = false; renderHome(); }); }
   function renderHome() {
     if (!G.s) return;
-    home.style.backgroundImage = 'linear-gradient(#06101b55,#0c182b88),url(assets/forest.png)';
+    home.style.cssText = Wallpapers.style(Wallpapers.selected());
     home.innerHTML = '';
     const dock = ['phone', 'messages', 'browser', 'gallery'];
     function appIcon(id) {
@@ -322,6 +326,7 @@ const UI = (() => {
 
   function sheet({ title = '', body, onClose, cls = '' }) {
     const wrap = h('div', { class: 'ovl' });
+    if (locked) wrap.style.zIndex = '72';
     const scrim = h('div', { class: 'scrim', onclick: () => o.close() });
     const sh = h('div', { class: 'sheet ' + cls },
       h('div', { class: 'grab' }),
@@ -445,15 +450,16 @@ const UI = (() => {
   function lock() {
     if (lockEl) return;
     locked = true;
-    lockEl = h('div', { id: 'lock', style: `background-image:url(${Art.url('wallpaper')})` },
+    lockEl = h('div', { id: 'lock', style: Wallpapers.style(Wallpapers.selected()) },
       h('div', { class: 'lk-ic', html: U.icon('lock', 20) }),
       h('div', { class: 'lk-d' }, cap(U.dayLong(G.now()))),
       h('div', { class: 'lk-t' }, U.time(G.now())),
       h('div', { class: 'lk-n' }),
       h('div', { class: 'lk-u', onclick: unlockScreen }, 'Dotknij, aby odblokować'));
+    lockWallpaperCleanup = Wallpapers.bind(lockEl, () => UI.openWallpapers());
     let sy = null;
     lockEl.addEventListener('pointerdown', e => { sy = e.clientY; });
-    lockEl.addEventListener('pointerup', e => { if (sy != null && sy - e.clientY > 60) unlockScreen(); sy = null; });
+    lockEl.addEventListener('pointerup', e => { if (sy != null && sy - e.clientY > 60 && !overlays.length) unlockScreen(); sy = null; });
     screen.appendChild(lockEl);
     homebar.classList.add('hide');
   }
@@ -467,6 +473,7 @@ const UI = (() => {
     if (!lockEl) return;
     SFX.unlockAudio(); SFX.play.unlock();
     const el = lockEl; lockEl = null; locked = false;
+    lockWallpaperCleanup?.(); lockWallpaperCleanup = null;
     el.classList.add('gone');
     setTimeout(() => el.remove(), 550);
     homebar.classList.remove('hide');

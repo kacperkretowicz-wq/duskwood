@@ -140,6 +140,7 @@
     { id: 'mail', name: 'Poczta', icon: 'mail', count: () => M().mail.filter(vis).length },
     { id: 'audio', name: 'Dyktafon', icon: 'mic', count: () => M().audio.filter(vis).length },
     { id: 'web', name: 'Internet', icon: 'globe', count: () => M().web.filter(vis).length },
+    { id: 'wallpapers', name: 'Tapety', icon: 'image', count: () => 2, cond: () => G.isUnlocked('maja:base') },
     { id: 'find', name: 'Znajdź urządzenie', icon: 'target', count: () => 0, cond: () => G.isUnlocked('maja:find') }
   ];
 
@@ -173,6 +174,7 @@
   }
 
   function openSection(stack, id, params = {}) {
+    if (id === 'wallpapers') { UI.openWallpaperBackup(); return; }
     const fn = { photos: albumsPage, sms: threadsPage, calls: callsPage, notes: notesPage, loc: daysPage, mail: mailPage, audio: audioPage, web: webPage, find: findPage }[id];
     if (fn) stack.push(fn(stack, params));
   }

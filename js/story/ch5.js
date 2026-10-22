@@ -41,7 +41,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
     g('weronika', 'Jedźcie do Mai. Ja… ja wracam do huty.'),
     choose('group', [
       opt('Nie! Pani Weroniko, proszę zostać z nimi. Zadzwonię po pomoc.', [g('weronika', 'Dobrze. Ale niech {Pan|Pani} dzwoni. Teraz.')], { trust: { weronika: 1 } }),
-      opt('Niech pani jedzie z Olą pod hutę. Ale nie wychodźcie z auta.', [g('ola', 'Jadę po nią. Staniemy przy drodze, z daleka.')], { set: { weronikaToHuta: true } }),
+      opt('Ola, obserwuj drogę pod hutą z daleka. Pani Weroniko, proszę zostać z Kubą.', [g('ola', 'Dobrze. Stanę przy drodze. Nie będę podchodzić do budynku.')], { set: { weronikaToHuta: true } }),
       opt('Najpierw Maja. Huta poczeka.', [g('weronika', '…'), g('weronika', 'Ma {Pan|Pani} rację. Żywi są ważniejsi.')], { trust: { weronika: -1 } })
     ]),
 
@@ -114,7 +114,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- pakiet dowodów --- */
     g('ola', '%name%, wyślij wszystko prokuraturze. Teraz. Zanim on zdąży cokolwiek zniszczyć.'),
-    g('ola', 'I do Gazety Sudeckiej. Niech pan Rybicki skończy swój tekst.'),
+    g('ola', 'I do Gazety Sudeckiej. Niech redakcja dokończy tekst, który zaczął Rybicki.'),
     goal('Wyślij zebrane materiały do prokuratury i gazety.', ['Wybierz najmocniejsze rzeczy z Notatek: to, co łączy Gajdę z hutą w 1997 i z porwaniem Mai.']),
     task(async () => { const n = await UI.packageSheet(); G.setVar('pkg', n); }),
     notify({ app: 'nimbus', title: 'Poczta', text: 'Wiadomość wysłana: biuro.podawcze@dzierzoniow.po.gov.pl, redakcja@gazetasudecka.pl', sound: 'notif' }),

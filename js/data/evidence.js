@@ -38,7 +38,7 @@ DATA.evidence = {
   },
   ev_loc_1410: {
     title: 'Lokalizacja Mai: 14.10', cat: 'digital', source: 'Nimbus · historia lokalizacji', img: 'map_snip1410',
-    desc: 'Dom → stacja „Mglica” (17:05–17:40) → dom → *22:58 Huta Szkła „Jutrzenka”*. Ostatni sygnał telefonu: *23:58, w hucie*, dokładność 12 m. *Telefon nigdy nie był na tamie* — tama leży 3 km dalej.',
+    desc: 'Dom → stacja „Mglica” (17:05–17:40) → dom → *22:58 Huta Szkła „Jutrzenka”*. Ostatni zapis telefonu: *23:58, w hucie*, dokładność 12 m. W zachowanej historii nie ma pozycji na tamie, która leży 3 km dalej. Po utracie sygnału nie da się odtworzyć dalszej trasy z tych danych. Lokalizacja telefonu nie jest pewną lokalizacją właścicielki.',
     open: { app: 'nimbus', params: { section: 'loc', day: '2026-10-14' }, label: 'Otwórz historię lokalizacji' }
   },
   ev_ola_fight: { title: 'Kłótnia Mai i Oli (13.10)', cat: 'msg', source: 'Nimbus · SMS', desc: 'Dzień przed zniknięciem Ola nazwała poszukiwania Mai „obsesją”. Maja: „Jego siostra czeka od 29 lat”. Ola twierdziła w grupie, że ostatni raz pisały *12.10* i „wszystko było normalnie”. *To nieprawda.*' },

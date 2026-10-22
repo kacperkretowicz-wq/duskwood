@@ -7,6 +7,6 @@
   const App = cap.registerPlugin('App');
   const StatusBar = cap.registerPlugin('StatusBar');
   StatusBar.hide().catch(e => console.warn('Native status bar:', e.message));
-  App.addListener('appStateChange', ({ isActive }) => { if (!isActive) G.save(true); });
+  App.addListener('appStateChange', ({ isActive }) => { if (!isActive) { G.pauseClock(); G.save(true); } else G.resumeClock(); });
   App.addListener('backButton', () => { if (G.s) UI.back(); });
 })();

@@ -3,6 +3,8 @@
 > Gra detektywistyczna rozgrywana w całości na „telefonie” gracza. Inspiracje: *Duskwood*, *Cold Trace*.
 > Gatunek: interaktywny thriller / found-phone mystery. Język: polski. Czas gry: ok. 2–3 godziny (prolog + 5 rozdziałów + epilog, 3 zakończenia).
 
+> Aktualizacja 1.2: pełny, nadrzędny dokument spójności i rozbudowy: [BIBLIA-SEZONOW.md](BIBLIA-SEZONOW.md). Sezon miesięczny jest celem produkcji; aktualny kalendarz to pięciodniowy pilot. Obecny interfejs używa systemowej typografii i kolorów opisanych niżej.
+
 ---
 
 ## 1. Pitch
@@ -44,7 +46,7 @@ Ty jesteś jedyną osobą spoza miasteczka. Jedyną, której nikt tu nie zna —
 | **Igor Malicki** (23) | informatyk, serwis GSM w rynku; syn wójta | żarty, „technicznie rzecz biorąc”, „xD” | **jest Szklarzem**; zeskanował negatywy, rozpoznał ojca i mu powiedział — tym uruchomił lawinę |
 | **Weronika Lis** (41) | bibliotekarka, siostra zaginionego Tomka | ciepła, formalna, długie wiadomości | 29 lat czeka na prawdę |
 | **Robert Gajda** (46) | komendant posterunku, „przyjaciel rodziny” | uprzejmy, urzędowy, coraz bardziej naciskający | **sprawca** — w 1997 ukrył ciało Tomka, w 2026 uwięził Maję |
-| **Szklarz** | anonim z zastrzeżonego numeru | bez polskich znaków, małe litery, kropki ze spacjami | patrz: Igor |
+| **Szklarz** | anonim z nieznanego numeru | bez polskich znaków, małe litery, kropki ze spacjami | patrz: Igor |
 
 Postacie drugiego planu: Ewa Wrona (mama), Leszek Malicki (wójt), Marek Sowa (ojciec Bartka), Dariusz Kruk (†2011), Adam Rybicki (†2021, dziennikarz), Halina Mróz (świadek z 1997).
 
@@ -97,8 +99,8 @@ Po ukończeniu: wybór rozdziału, by sprawdzić inne ścieżki.
 
 ## 9. Ton i oprawa
 
-- UI: ciemny „system” telefonu, akcent bursztynowy (światło lampy w mgle), Nimbus w odcieniu różu Mai, Szklarz — glitch, monospace.
-- Zdjęcia: generowane wektorowo (SVG) z filtrami: ziarno, winieta, gradacja, podczerwień, flesz, przeterminowana klisza, przecieki światła. Twarze ukryte w cieniu, za aparatem, w odblasku — to też element klimatu.
+- UI: systemowe kroje iOS/Android, jasny i ciemny wygląd, semantyczne kolory, zwykły komunikator. Nieznany nadawca nie zmienia fontu ani systemu telefonu. Nimbus zachowuje własny różowy akcent.
+- Zdjęcia postaci i główna oprawa: lokalne rastry, stałe twarze i wiek. Ich generowane pochodzenie nie jest ukrywane w dokumentacji. Część materiałów zagadek nadal jest SVG; docelowa wymiana musi zachować treść, kadry i punkty dowodowe.
 - Dźwięk: syntezowany na żywo (Web Audio) — powiadomienia, dzwonek, glitch, ambient (wiatr, niski dron), szum nagrań.
 
 ## 10. Rozszerzenie: MGLISKO: TEREN (osobny temat, na później)

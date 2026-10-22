@@ -23,6 +23,7 @@
     const o = G.s.objective;
     const list = [];
     list.push({ id: 'todo', pin: true, title: 'Co teraz?', t: G.now(), prev: o ? plain(o.text) : 'Nic pilnego. Sprawdzaj wiadomości.' });
+    list.push({ id: 'season', pin: true, title: 'Szkło pamięta', t: G.now() - 1000, prev: 'Sezon 1 · etapy historii i podsumowanie sesji' });
     const topics = Conversations.available().length;
     if (G.isUnlocked('chat:group')) list.push({ id: 'conversations', pin: true, title: 'Na osobności', t: G.now() - 30000,
       prev: `${topics} ${topics === 1 ? 'temat' : topics >= 2 && topics <= 4 ? 'tematy' : 'tematów'} · prywatne rozmowy i dodatkowe tropy` });
@@ -51,6 +52,7 @@
   });
 
   function openNote(stack, id) {
+    if (id === 'season') { UI.openSeason(); return; }
     if (id === 'conversations') { UI.openConversations(); return; }
     if (id === 'todo') stack.push(todoPage());
     else if (id === 'saved') stack.push(savedPage(stack));

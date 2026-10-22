@@ -7,7 +7,7 @@ function game(){
  const ctx=vm.createContext({console,Date, setTimeout:()=>0,clearTimeout:()=>{},
   window:{addEventListener(){}},document:{addEventListener(){}},Art:{def(){}},
   localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)}});
- for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/conversations.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+ for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/conversations.js','js/data/season-conversations.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
  return vm.runInContext('({G, DATA, Conversations})',ctx);
 }
 function unlock(G){
@@ -28,7 +28,11 @@ test('every dialogue path terminates, saves once, and leaves main story intact',
   return d.nodes[node].choices.flatMap((c,i)=>c.next?routes(d,c.next,[...route,[node,i]]):[[...route,[node,i]]]);
  }
  for(const [id,d]of Object.entries(DATA.conversations))for(const route of routes(d)){
-  unlock(G);G.s.pc=89;G.s.chapter='ch3';G.s.pending={chat:'group',type:'choose'};
+  unlock(G);
+  for(const ev of ['ev_not_gajda','ev_bartek_conf','ev_interview'])G.addEv(ev,true);
+  G.setFlag('wallpapersImported');G.solve('ded_bus');G.s.finished=true;G.setFlag('majaFound');G.s.vars.endingId='swit';
+  if(id==='kuba_missing'){G.s.vars.endingId='cisza';G.s.flags.majaFound=false;}
+  G.s.pc=89;G.s.chapter='ch3';G.s.pending={chat:'group',type:'choose'};
   C.open(id);let trust=0;
   for(const [node,i]of route){
    const expected=d.nodes[node].choices[i];trust+=expected.trust||0;
@@ -52,7 +56,7 @@ test('Lena unlocks corroboration, gallery, and person facts without awarding a p
  assert.equal(G.s.saved.filter(x=>x.art==='bus_stop').length,1);
  G.solve('ded_bus');assert.ok(G.has('ev_bus_verified'));G.solve('ded_bus');
  assert.equal(Object.keys(G.s.ev).filter(id=>id==='ev_bus_verified').length,1);
- assert.equal(C.available('lena').length,0);
+ assert.deepEqual(Array.from(C.available('lena'),x=>x[0]),['lena_route']);
 });
 test('old version 2 saves and checkpoints accept the additive conversation state',()=>{
  const {G,Conversations:C}=game();unlock(G);delete G.s.conversations;

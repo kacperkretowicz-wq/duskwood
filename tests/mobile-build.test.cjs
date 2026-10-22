@@ -27,4 +27,7 @@ test('native projects agree on identity, use local game files, and restrict phon
  assert.ok(read('android/app/src/main/AndroidManifest.xml').includes('android:screenOrientation="portrait"'));
  assert.match(read('ios/App/App/Info.plist'),/UISupportedInterfaceOrientations<\/key>\s*<array>\s*<string>UIInterfaceOrientationPortrait<\/string>\s*<\/array>/);
  assert.equal(config.ios.contentInset,'never');
+ assert.match(read('android/app/src/main/AndroidManifest.xml'),/SCHEDULE_EXACT_ALARM" tools:node="remove"/);
+ assert.ok(read('android/capacitor.settings.gradle').includes('local-notifications'));
+ assert.ok(read('ios/App/CapApp-SPM/Package.swift').includes('CapacitorLocalNotifications'));
 });

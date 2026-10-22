@@ -309,6 +309,9 @@
         h('div', { class: 'pad' }, osSeg),
         h('div', { class: 'sec-t' }, 'Wygląd'),
         h('div', { class: 'pad' }, appearance),
+        h('div', { class: 'list plain' },
+          h('button', { class: 'row', onclick: () => UI.openWallpapers() }, h('div', { class: 'rm' }, h('b', {}, 'Tapeta'), h('span', {}, Wallpapers.selected().name)), U.ico('back', 16)),
+          h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, 'Szkło pamięta · twój postęp')), U.ico('back', 16))),
         h('div', { class: 'sec-t' }, 'Profil'),
         h('div', { class: 'pad' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Imię'), nameIn, h('label', { class: 'lbl' }, 'Forma zwracania się'), gen),
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),
@@ -323,7 +326,7 @@
         h('div', { class: 'sec-t' }, 'Gra'),
         h('div', { class: 'list plain' },
           h('button', { class: 'row', onclick: async () => { const r = await UI.modal({ title: 'Nowa gra?', text: 'Cały postęp i punkty kontrolne zostaną usunięte.', buttons: [{ label: 'Anuluj', value: 0 }, { label: 'Usuń i zacznij', value: 1, pri: true }] }); if (r === 1) { G.wipe(); location.reload(); } } }, h('div', { class: 'rm' }, h('b', { class: 'bad' }, 'Zacznij od nowa'))),
-          h('div', { class: 'row' }, h('div', { class: 'rm' }, h('b', {}, 'MGLISKO'), h('span', {}, 'Wersja 1.0 · fikcja literacka · zapis automatyczny')))));
+          h('div', { class: 'row' }, h('div', { class: 'rm' }, h('b', {}, 'MGLISKO'), h('span', {}, 'Wersja 1.2 · fikcja literacka · zapis automatyczny')))));
       stack.push({ el: pg.el });
       return { back: () => stack.pop(), destroy: () => stack.destroy() };
     }

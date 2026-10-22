@@ -22,9 +22,9 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ambient('dark'),
       K('trzy tygodnie'),
       K('szukamy codziennie. ja, bartek, pani weronika. nawet ola po pracy'),
-      K('gajda prowadzi poszukiwania osobiście. w telewizji mówi, że nie spocznie'),
-      K('mama mu wierzy. ja już nie umiem na niego patrzeć'),
-      notify({ app: 'browser', title: 'Mglisko24', text: 'Komendant Gajda: „Nie spoczniemy, dopóki jej nie znajdziemy”', sound: 'notif', open: { page: 'm24_home' } }),
+      K('gajda zniknął. w telewizji pokazują w kółko jego stare wypowiedzi o poszukiwaniach'),
+      K('mama słyszy w nich ciągle kogoś, kogo znała. ja już nie mogę tego słuchać'),
+      notify({ app: 'browser', title: 'Mglisko24 · archiwum', text: 'Tak Gajda mówił o poszukiwaniach. Dziś sam jest poszukiwany.', sound: 'notif', open: { page: 'm24_home' } }),
       pause(3000),
       W('Mur w hucie spłonął razem z odprężarką. Strażacy przyjechali za późno.'),
       W('Dalej palę znicze nad rzeką. Teraz dwa.'),
@@ -60,7 +60,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         W('Dziękuję. Nie wiem, jak to inaczej powiedzieć.')
       ], [
         W('Oddali mi szczątki Tomka. Pochowaliśmy go obok mamy.'),
-        W('Nie dostałam prawdy z ust tego, który zdecydował. On wybrał wodę. Jak wtedy.'),
+        W('Nie dostałam całej prawdy. Nadal są rzeczy, o których milczą.'),
         W('Ale wiem, gdzie on jest. To dużo. To za mało.')
       ]),
       pause(2500),

@@ -169,7 +169,7 @@ DATA.deductions = {
   },
   ded_szklarz: {
     q: 'Kim jest Szklarz?', kind: 'person',
-    intro: 'Ktoś zna fotopułapki Mai, zna jej skany i pisze do ciebie z zastrzeżonego numeru. Kto?',
+    intro: 'Ktoś zna fotopułapki Mai, zna jej skany i pisze do ciebie z nieznanego numeru. Kto?',
     options: [
       { id: 'kuba', label: 'Kuba', av: 'kuba' }, { id: 'ola', label: 'Ola', av: 'ola' }, { id: 'bartek', label: 'Bartek', av: 'bartek' },
       { id: 'igor', label: 'Igor', av: 'igor' }, { id: 'weronika', label: 'Weronika', av: 'weronika' }, { id: 'gajda', label: 'Gajda', av: 'gajda' }

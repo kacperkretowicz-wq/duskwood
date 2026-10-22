@@ -1,0 +1,53 @@
+'use strict';
+const Seasons = (() => {
+  const current = () => DATA.seasons.find(s => s.id === (G.s?.seasonId || 's1') && s.released) || DATA.seasons[0];
+  function progress() {
+    const season = current(), rank = season.chapters.indexOf(G.s.chapter);
+    let reached = false;
+    return season.episodes.map((ep, i) => {
+      const chapterRank = season.chapters.indexOf(ep.chapter);
+      const done = !!G.s.finished || rank > chapterRank || !!G.s.done[ep.chapter] || G.test(ep.done);
+      // Istniejące zapisy mogą pochodzić z dowolnego rozdziału. Późniejszy znany etap
+      // nie odsłania tytułów wcześniejszych, nieprzeżytych zakończeń.
+      const available = done || (!reached && rank >= chapterRank);
+      if (!done && available) reached = true;
+      return { ...ep, number: i + 1, done, available };
+    });
+  }
+  function ensure() {
+    G.s.seasonId ||= 's1'; G.s.seasons ||= {};
+    const season = current();
+    return G.s.seasons[season.id] ||= { revision: season.revision, sessions: [], firstPlayed: G.s.started || Date.now() };
+  }
+  function saveSession() {
+    if (!G.s) return false;
+    const s = ensure();
+    const snapshot = {
+      at: Date.now(), chapter: G.s.chapter, pc: G.s.pc,
+      goal: G.s.objective?.text || 'Sprawdź wiadomości i Notatki.',
+      evidence: Object.keys(G.s.ev), completed: progress().filter(ep => ep.done).map(ep => ep.id)
+    };
+    const last = s.sessions.at(-1);
+    // Wielokrotne dotknięcie bez nowego postępu aktualizuje jeden zapis.
+    if (last && last.chapter === snapshot.chapter && last.pc === snapshot.pc && JSON.stringify(last.evidence) === JSON.stringify(snapshot.evidence) && JSON.stringify(last.completed) === JSON.stringify(snapshot.completed)) s.sessions[s.sessions.length - 1] = snapshot;
+    else s.sessions.push(snapshot);
+    G.save(true); BUS.emit('season'); return snapshot;
+  }
+  function recap() {
+    const entry = G.s?.seasons?.[current().id], last = entry?.sessions.at(-1);
+    if (!last) return null;
+    const previous = entry.sessions.at(-2);
+    return { ...last, found: last.evidence.filter(id => !previous?.evidence.includes(id)).map(id => G.ev(id)).filter(Boolean) };
+  }
+  function archive() {
+    if (!G.s?.finished || !G.s.vars.endingId) return false;
+    G.s.seasonArchive ||= {};
+    const id = current().id, old = G.s.seasonArchive[id] || { endings: [] };
+    G.s.seasonArchive[id] = { revision: current().revision, finishedAt: Date.now(), endings: [...new Set([...old.endings, G.s.vars.endingId])],
+      outcome: { ending: G.s.vars.endingId, majaFound: G.flag('majaFound'), gajdaCaught: G.flag('gajdaCaught'),
+        reportBoth: G.flag('reportBoth'), igorForgiven: G.flag('igorForgiven'), leszekTestify: G.flag('leszekTestify'),
+        trust: Object.fromEntries(['kuba', 'ola', 'bartek', 'igor', 'weronika'].map(id => [id, G.v('trust_' + id)])) } };
+    G.save(true); return true;
+  }
+  return { current, progress, saveSession, recap, archive };
+})();

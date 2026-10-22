@@ -3,7 +3,9 @@
 Gra detektywistyczna rozgrywana w całości na „telefonie”, w stylu *Duskwood* i *Cold Trace*.
 Ktoś pisze do ciebie w nocy: jego siostra zadzwoniła do ciebie tuż przed zniknięciem. Ty jej nie znasz — ale twój numer kiedyś należał do kogoś, komu ufała.
 
-- **Prolog + 5 rozdziałów + epilog**, około 2–3 godziny gry
+- **Prolog + 5 rozdziałów + epilog**, baza historii pisana na 2–3 godziny, rozbudowywana rozmowami i dodatkowymi śledztwami
+- **15 rozmów opcjonalnych**, trop tapety, śledztwo ostatniego kursu, podsumowania sesji i zapis konsekwencji do kontynuacji
+- Swobodne tempo albo **pięciodniowy pilot kalendarzowy**; natywne powiadomienia po zgodzie gracza. Pełny miesięczny sezon jest celem produkcji, nie aktualną długością tej wersji
 - **3 zakończenia** zależne od decyzji (kto się dowie, komu zaufasz, gdzie zadzwonisz)
 - Gra udaje zwykły telefon: **iOS na iPhonie, Android na Androidzie** (automatycznie, można zmienić w Ustawieniach)
 - Fabuła i dźwięk powstają w kodzie, fotograficzne portrety i oprawa są dostarczane lokalnie w `assets/`; gra nie potrzebuje zewnętrznych API
@@ -58,6 +60,10 @@ Wszystko dzieje się w aplikacjach telefonu:
 | **BushView** | zdalna fotopułapka (pojawia się później) |
 
 Wskazówki: zdjęcia można przybliżać (dwa palce, kółko myszy, dwuklik) i dotykać szczegółów. Ważne wiadomości w kopii telefonu Mai można dotknąć, żeby zapisać je w Notatkach. Gdy utkniesz — notatka „Co teraz?” ma stopniowane podpowiedzi.
+
+Przytrzymanie pustego tła otwiera wybór tapety. Warianty z kopii Mai najpierw trzeba zachować z Nimbus → Tapety. W Ustawienia → Sezony i sesje znajdziesz tempo i porę kolejnych rozdziałów; zapis podsumowania nie przerywa rozmowy. Ratunek nie ma bramki czasowej w środku akcji. Po zakończeniu można wrócić do świata przez przycisk „Po zakończeniu”.
+
+Pełna chronologia, postacie, scenariusz rozbudowy na 30 dni i konstrukcja dalszych sezonów: [BIBLIA-SEZONOW.md](docs/BIBLIA-SEZONOW.md). Format zapisu, terminy, powiadomienia i ograniczenia aktualizacji: [SEZONY-I-AKTUALIZACJE.md](docs/SEZONY-I-AKTUALIZACJE.md).
 
 ## Struktura
 

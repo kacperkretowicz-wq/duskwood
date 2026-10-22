@@ -464,6 +464,7 @@ const Engine = (() => {
       }
       case 'credits': {
         s.finished = true; G.save(true);
+        Seasons.archive();
         await UI.credits(); guard(my);
         return 'STOP';
       }
@@ -486,6 +487,7 @@ const Engine = (() => {
       while (G.s && my === gen) {
         const ch = chapters[G.s.chapter];
         if (!ch) break;
+        if (G.s.pc === 0 && SeasonPacing.hold(ch.id)) break;
         const st = ch.steps[G.s.pc];
         if (!st) break;
         let next;

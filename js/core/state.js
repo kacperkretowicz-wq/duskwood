@@ -17,6 +17,7 @@ const G = (() => {
   function fresh(player) {
     return {
       v: 2,
+      seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
       clock: { t: U.parseLocal(START), at: Date.now() },
@@ -44,15 +45,15 @@ const G = (() => {
     viewing: null,
     saveSettings() { store.set(SKEY, JSON.stringify(settings)); BUS.emit('settings'); },
 
-    newGame(player) { api.s = fresh(player); api.save(true); },
+    newGame(player) { api.s = fresh(player); api.save(true); BUS.emit('game-reset'); },
     hasSave() { return !!store.get(KEY); },
     load() {
       const raw = store.get(KEY);
       if (!raw) return false;
-      try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); return true; }
+      try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; return true; }
       catch (e) { console.warn('Zapis uszkodzony', e); return false; }
     },
-    wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; },
+    wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; BUS.emit('game-reset'); },
 
     _t: null,
     save(now) {
@@ -78,14 +79,20 @@ const G = (() => {
     loadCheckpoint(ch) {
       const raw = store.get(CP + ch); if (!raw) return false;
       const keepEndings = api.s ? api.s.endings : [];
+      const keepArchive = api.s ? U.clone(api.s.seasonArchive || {}) : {};
+      const keepPacing = api.s?.pacing ? U.clone(api.s.pacing) : null;
       api.s = Object.assign(fresh(), migrate(JSON.parse(raw)));
       api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
-      api.s.clock.at = Date.now(); api.save(true); return true;
+      api.s.seasonArchive = Object.assign({}, api.s.seasonArchive, keepArchive);
+      if (keepPacing) { delete keepPacing.waiting; api.s.pacing = keepPacing; }
+      api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; api.save(true); return true;
     },
 
     // Zegar fabularny płynie w czasie rzeczywistym od ostatniego ustawienia.
-    now() { const c = api.s.clock; return c.t + (Date.now() - c.at); },
-    setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now() }; BUS.emit('clock'); },
+    now() { const c = api.s.clock; return c.t + (c.paused ? 0 : Date.now() - c.at); },
+    pauseClock() { if (api.s && !api.s.clock.paused) api.s.clock = { t: api.now(), at: Date.now(), paused: true }; },
+    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && api.s.pacing.waiting?.at > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
+    setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now(), paused: !!document.hidden }; BUS.emit('clock'); },
 
     chat(id) {
       const c = api.s.chats;
@@ -179,7 +186,8 @@ const G = (() => {
     change() { BUS.emit('change'); api.save(); }
   };
 
-  window.addEventListener('pagehide', () => api.save(true));
-  document.addEventListener('visibilitychange', () => { if (document.hidden) api.save(true); });
+  window.addEventListener('pagehide', () => { api.pauseClock(); api.save(true); });
+  window.addEventListener('pageshow', () => { if (!document.hidden) api.resumeClock(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { api.pauseClock(); api.save(true); } else api.resumeClock(); });
   return api;
 })();

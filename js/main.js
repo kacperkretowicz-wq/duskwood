@@ -25,6 +25,7 @@
         h('div', { class: 'ts-s' }, 'Ostatnie połączenie było do ciebie.'),
         h('div', { class: 'ts-b' },
           has && !G.s.finished ? h('button', { class: 'btn pri wide', onclick: () => go(() => resume()) }, 'Kontynuuj') : null,
+          has && G.s.finished ? h('button', { class: 'btn wide', onclick: () => go(() => { close(); UI.renderHome(); UI.openSeason(); }) }, 'Po zakończeniu') : null,
           h('button', { class: 'btn wide' + (has && !G.s.finished ? ' ghost' : ' pri'), onclick: () => go(() => has ? confirmNew() : setup()) }, 'Nowa gra'),
           has && Object.keys(G.checkpoints()).length > 1 ? h('button', { class: 'btn ghost wide', onclick: () => go(() => chapters()) }, 'Rozdziały') : null),
         h('div', { class: 'ts-n' }, '🎧 Najlepiej ze słuchawkami, po zmroku.'),
@@ -93,6 +94,7 @@
     if (G.s.call) UI.callScreen();
     BUS.emit('badges');
     Engine.restart();
+    BUS.emit('game:ready');
     if (DEBUG) debugPanel();
   }
 

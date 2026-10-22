@@ -82,7 +82,7 @@ Adamie, odbierz tam, gdzie jesteś.`)}
 Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Odnalazła ją grupa przyjaciół i rodzina — w porozumieniu z kimś, kogo w Mglisku nikt nie znał.
 
 Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.`
-        : `Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym miesiąc wcześniej stało auto Mai W. Mężczyzny nie odnaleziono.
+        : `${G.flag('gajdaCaught') ? 'Robert G. został zatrzymany przy leśnym szlabanie. Nie wszystkie materiały z dawnej sprawy udało się zabezpieczyć; część okoliczności pozostaje do wyjaśnienia.' : 'Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym wcześniej stało auto Mai W. Mężczyzny nie odnaleziono. Poszukiwania trwają.'}
 
 Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Dwaj mężczyźni, którzy w 1997 roku mieli po 16 i 17 lat, złożyli wyjaśnienia w sprawie śmierci Tomasza Lisa.
 
