@@ -389,7 +389,7 @@
             const numbers = inputs.map((el, n) => U.clamp(Math.floor(Number(el.value) || 0), 0, n ? 59 : 23));
             inputs.forEach((el, n) => { el.value = numbers[n]; });
             t.duration = numbers[0] * 3600000 + numbers[1] * 60000 + numbers[2] * 1000;
-            t.remaining = t.duration; t.finished = false; save(); status.textContent = t.duration ? 'Gotowy' : 'Ustaw czas'; update();
+            t.remaining = t.duration; t.finished = false; save(); status.textContent = t.duration ? 'Gotowy' : 'Ustaw czas'; const pri = controls.querySelector('.btn.pri'); if (pri) pri.textContent = 'Start'; update();
           });
           return input;
         });

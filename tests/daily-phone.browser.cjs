@@ -93,7 +93,7 @@ const contrast=(fg,bg)=>{
   }
   if(os==='ios'&&width===390){
    await page.evaluate(()=>UI.openApp('clock',{tab:'timer'}));
-   await page.getByRole('spinbutton',{name:'Sekundy',exact:true}).fill('1');await page.getByRole('button',{name:'Start',exact:true}).click();
+   await page.getByRole('spinbutton',{name:'Sekundy',exact:true}).fill('1');await page.keyboard.press('Tab');await page.getByRole('button',{name:'Start',exact:true}).click();assert.equal(await page.evaluate(()=>G.s.phoneTools.timer.running),true,'Start begins the timer');
    // Keep expiry deterministic even when Chromium reload takes >1 second under load.
    await page.evaluate(()=>{G.s.phoneTools.timer.deadline=Date.now()+10000;G.save(true);});
    await page.reload();
