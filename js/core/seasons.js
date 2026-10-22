@@ -64,19 +64,23 @@ const Seasons = (() => {
     const ending = G.s.vars.endingId || G.s.seasonArchive?.[cur]?.outcome?.ending;
     return ending === 'swit' || ending === 'odlamki' || (ending === 'cisza' && nextCase().chapters.includes('mp'));
   }
+  // Prologi „po Ciszy” (mp, kp) startują tylko z gałęzi Ciszy w S1.
+  function nextPrologue() {
+    const next = nextCase(); if (!next) return null;
+    const cisza = (current().id === 's1' ? G.s.vars.endingId : G.s.vars.s1Ending) === 'cisza';
+    return cisza ? next.chapters.find(c => c === 'mp' || c === 'kp') || null : null;
+  }
   function startNext() {
     if (!canStartNext()) return false;
     archive();
     const next = nextCase();
     const fromS1 = current().id === 's1';
-    // Prologi „po Ciszy” (mp, kp) startują tylko z gałęzi Ciszy w S1.
-    const cisza = (fromS1 ? G.s.vars.endingId : G.s.vars.s1Ending) === 'cisza';
-    const prologue = next.chapters.find(c => c === 'mp' || c === 'kp');
-    const first = cisza && prologue ? prologue : next.chapters.find(c => c !== 'mp' && c !== 'kp');
+    const prologue = nextPrologue();
+    const first = prologue || next.chapters.find(c => c !== 'mp' && c !== 'kp');
     Object.assign(G.s, { seasonId: next.id, chapter: first, pc: 0, finished: false, pending: null, objective: null, call: null });
     if (fromS1) G.s.vars.s1Ending = G.s.vars.endingId;
     G.checkpoint(first); G.save(true); BUS.emit('season');
     return true;
   }
-  return { current, progress, saveSession, recap, archive, nextCase, canStartNext, startNext };
+  return { current, progress, saveSession, recap, archive, nextCase, canStartNext, startNext, nextPrologue };
 })();
