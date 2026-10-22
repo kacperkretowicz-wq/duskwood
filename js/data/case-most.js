@@ -4,6 +4,8 @@
    nie w tekstach widocznych przed odpowiednią sesją. */
 
 Object.assign(DATA.chars, {
+  blyskm: { name: 'i.k_00', short: 'i.k_00', color: '#8a7f99', role: 'Błysk · konto bez zdjęcia' },
+  blyskm2: { name: 'nowy kontakt', short: '???', color: '#555', role: 'Błysk · konto bez zdjęcia' },
   marta: {
     name: 'Marta Jasińska', short: 'Marta', age: 24, trust: true, color: '#c9a76b',
     role: 'Archiwum i montaż audio · Gazeta Sudecka',
@@ -50,6 +52,8 @@ Object.assign(DATA.chars, {
   gs_sek: { name: 'Gazeta Sudecka · sekretariat', short: 'Sekretariat', number: '74 832 10 40' }
 });
 Object.assign(DATA.chats, {
+  blyskm: { name: 'i.k_00', avatar: 'blyskm', sub: 'Błysk · znika po przeczytaniu', readonly: true, ephemeral: true },
+  blyskm2: { name: 'nowy kontakt', avatar: 'blyskm2', sub: 'Błysk · znika po przeczytaniu', readonly: true, ephemeral: true },
   marta: { name: '+48 694 117 302', avatar: 'unknown' },
   natan: { name: 'Natan Brzeziński', avatar: 'natan', sub: 'GS Wideo' },
   nina: { name: 'Nina Duda', avatar: 'nina', sub: 'od Kuby' },
@@ -226,6 +230,12 @@ Object.assign(DATA.evidence, {
   P('most_szuflada', 'szuflada_henryka.jpg', 'Szuflada z rachunkami', 1280, 960, { date: '28.11.2026', time: '19:12', device: 'telefon wnuczki', file: 'IMG_1912.jpg' });
   P('most_oip_s41', 'oip_s41.jpg', 'Akta OIP · str. 41', 1280, 960, { date: '30.11.2026', time: '10:12', device: 'Kiro Note 12', place: 'Wrocław', file: 'IMG_20261130_101233.jpg' });
   P('most_oip_protokol', 'oip_protokol.jpg', 'Akta OIP · protokół', 1280, 960, { date: '30.11.2026', time: '10:15', device: 'Kiro Note 12', place: 'Wrocław', file: 'IMG_20261130_101540.jpg' });
+  P('m_kadr_siatka', 'm_kadr_siatka.jpg', 'Kronika kablówki · wrzesień 2011', 1024, 768);
+  P('m_okno_redakcji', 'm_okno_redakcji.jpg', 'Okno redakcji · 23:44', 768, 1024);
+  P('m_mem_radio', 'm_mem_radio.jpg', 'Dział dźwięku po 22', 768, 1024);
+  Art.def('v_licznik', { src: 'assets/video/v_licznik.jpg', title: 'Archiwum · noc', w: 360, h: 640, draw: () => '' });
+  Art.def('s1_mem_kot', { src: 'assets/s1x/s1_mem_kot.jpg', title: 'Kot w praniu', w: 768, h: 1024, draw: () => '' });
+  Art.def('s1_lumpeks', { src: 'assets/s1x/s1_lumpeks.jpg', title: 'Lumpeks na Kolejowej', w: 768, h: 1024, draw: () => '' });
   Art.def('life_zuza_most', { src: 'assets/people/zuza_most.jpg', title: 'Pod mostem', w: 1200, h: 900, draw: () => '' });
   P('most_hw', 'hw_kadr.jpg', 'H.W. 2/2 · kadr', 1280, 720, { date: '10.2011', time: '17:22:08', device: 'mini-DV · zgrane w 2019', file: 'HW_2z2.mov' });
   const life = { nina: 'W trasie', marta: 'Archiwum, piąta po południu', natan: 'Pod redakcją', janina: 'Sesja rady gminy', henryk: 'Ławka pod blokiem' };

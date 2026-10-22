@@ -3,12 +3,13 @@
    Plan: docs/SPRAWA-2-PLAN.md §5–6. Żaden finał nie nagradza naruszania prywatności jako skrótu do prawdy. */
 
 Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona 41', when: 'Poniedziałek, 30 listopada · 8:20', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd, scene } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const H = t => say('call', 'henryk', t);
+  const c = (who, t) => say('call', who, t);
 
   return [
     clock('2026-11-30T08:20'),
@@ -19,6 +20,21 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     choose('marta', [
       opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
+    ]),
+    scene('xLicznik', [
+      pause(2500),
+      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.'),
+      say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
+      Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
+      choose('marta', [
+        opt('Stare kamery same się wyłączają na końcu taśmy.', [Ma('Wiem. Tylko że to nie był koniec taśmy. Licznik stanął na 03:51, dokładnie tam, gdzie urywa się fragment z publikacji.')]),
+        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { trust: { marta: 1 } })
+      ]),
+      pause(4000),
+      callIn('natan'),
+      c('natan', 'cześć, nie chce mi się pisać, ręce mi marzną. siedzę w aucie pod inspekcją'),
+      c('natan', 'mam akta. zaraz ci wyślę zdjęcia, tylko daj mi się ogrzać'),
+      callEnd()
     ]),
     pause(2500),
     Nt('hej. naczelny wystąpił do inspekcji pracy we wrocławiu o akta wypadku z 2011. jako redakcja, oficjalnie, z powołaniem na dostęp do informacji'),
@@ -104,7 +120,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 });
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene, camera } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -116,6 +132,15 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     clock('2026-12-04T16:05'),
     title(),
     Nt('ok. naczelny chce wypuścić tekst w poniedziałek. „strona 41” roboczo'),
+    scene('xGaleria', [
+      pause(2000),
+      Z('hej. babcia pyta czy masz jakieś zdjęcie mostu. mówi że nie była tam od 2011'),
+      camera('zuza', [
+        opt('Z galerii: klatka z kroniki, 2011', [Z('babcia od razu poznała barierkę'), Z('powiedziała tylko „no tak” i poszła nastawić wodę')], { img: 'm_kadr_siatka', gallery: true, set: { m_granSaw2011: true } }),
+        opt('Z galerii: zdjęcie czytelnika z 2011', [Z('mówi że wtedy stała tam jeszcze stara latarnia. teraz jest nowa i za jasna')], { img: 'most_2011', gallery: true }),
+        opt('Z galerii: pies naczelnego na radiu', [Z('xD babcia się śmieje. pierwszy raz od tygodnia'), Z('mówi że to nie jest most ale niech będzie')], { img: 'm_mem_radio', gallery: true, set: { m_granLaughed: true } })
+      ])
+    ]),
     Nt('i jest problem. tygodnik zapowiada na jutro „kim jest tajemnicza K.”. ktoś im dał cytat z notesu, ten co ja wtedy usunąłem'),
     Nt('naczelny pyta czy nie wyprzedzić ich dziś. z notesem. „k. przyniosła ksero, dziękuje za mleko”. mówi że to najmocniejszy dowód że ksero jest z 2011'),
     choose('natan', [

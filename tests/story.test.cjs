@@ -61,7 +61,7 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
   const fixed=['epBartek','epIgor','epOla','f3ewa','f3lena','f3lib','f3noc','f3reset','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
   // sceny straszaków mają prefiks „sc” i zawierają co najmniej jeden krok scare
   // sceny sprawy 3 (prefiks „k”) są w nowych rozdziałach, poza migracją v4
-  assert.deepEqual(Array.from(ids).filter(x=>!/^(sc|k)[A-Z]/.test(x)).sort(),fixed);
+  assert.deepEqual(Array.from(ids).filter(x=>!/^(sc|k|x)[A-Z]/.test(x)).sort(),fixed);
 });
 test('generated v3 migration table is up to date with the story sources',()=>{
   const {execFileSync}=require('node:child_process');

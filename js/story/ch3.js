@@ -16,7 +16,32 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
   return [
     clock('2026-10-23T17:30'),
     title(),
+    scene('xPiatek', [
+      K('zanim zaczniemy. mój kot od rana siedzi w praniu i nie da go wyjąć'),
+      pic('kuba', 'kuba', 's1_mem_kot', 'mama mówi że to moja wina bo go rozpieściłem'),
+      choose('kuba', [
+        opt('Zostaw go. Wygrał.', [K('no wygrał. ręczniki są teraz jego')]),
+        opt('Kot ma rację. Ręczniki są ciepłe.', [K('xD babcia mówi dokładnie to samo')])
+      ]),
+      pause(2500),
+      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.'),
+      pause(5000),
+      pic('group', 'ola', 's1_lumpeks', 'Wisiało między kurtkami. Przypomina wam to coś?'),
+      choose('group', [
+        opt('Peleryna jak z kliszy. Żółta, z kapturem.', [
+          g('ola', 'Też od razu o tym pomyślałam. Zapytałam sprzedawczynię. Przyszło w tym tygodniu w worku z Niemiec.'),
+          g('ola', 'Czyli to nie ta. Ale przez chwilę serce mi stanęło.'),
+          g('kuba', 'na kliszy dziecko ma taką samą. tylko bez paska')
+        ], { set: { x_pelerynaLink: true } }),
+        opt('Kurtka z fotopułapki?', [
+          g('kuba', 'nie no, tamta była ciemna i z napisem'),
+          g('ola', 'To zwykła dziecięca peleryna. Ale teraz jak patrzę, to przypomina mi kliszę.')
+        ], { set: { x_pelerynaDetour: true } }),
+        opt('Zwykła peleryna. Szukaj tej kurtki.', [g('ola', 'Znalazłam. 25 zł i jeszcze ciepła.')], { set: { x_pelerynaLater: true } })
+      ])
+    ]),
     scene('s15', SC.s15),
+    scene('xPeleryna', [iff('flag:x_pelerynaLater', [g('ola', 'Czekajcie. Ta peleryna z lumpeksu. Dopiero teraz mi się skojarzyła.')])]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
     g('ola', 'Kuba, zjedz coś. Serio.'),

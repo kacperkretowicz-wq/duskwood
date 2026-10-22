@@ -163,13 +163,14 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
 });
 
 Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka', when: 'Wtorek, 24 listopada · 18:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, typing, scene } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, typing, scene, vanish } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const S = (t, o) => say('sylwia', 'sylwia', t, o);
   const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const IK = t => say('blyskm', 'blyskm', t, { vanish: true });
 
   return [
     clock('2026-11-24T18:05'),
@@ -199,6 +200,22 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     give('ev_m_cut'),
     pic('marta', 'marta', 'most_2011', 'Z archiwum. Zdjęcie czytelnika z września 2011, bez daty dziennej. Siatki tu nie widać, ale nie widać też całego przęsła.'),
     give('ev_m_most2011'),
+    scene('xSiatka', [
+      pause(2000),
+      pic('natan', 'natan', 'm_kadr_siatka', 'grzebałem w kronice naszej kablówki. klatka z września 2011. przypomina ci to coś?'),
+      choose('natan', [
+        opt('Siatka, o której mówi pan Henryk. Zdjęta i niezałożona z powrotem.', [
+          Nt('no. w opisie kroniki jest „remont mostu, wrzesień”. nikt nie zwrócił uwagi na barierkę'),
+          Nt('daję marcie do akt. teraz mamy to nie tylko z taśmy')
+        ], { set: { m_meshFast: true } }),
+        opt('Wygląda jak płot przy którejś budowie Kurek-Bud.', [
+          Nt('sprawdziłem ich budowy na mapie. mają zielone panele, nie siatkę'),
+          pause(3000),
+          Nt('a w opisie kroniki stoi „remont mostu, wrzesień”. czyli to most. dobra, i tak się przydało')
+        ], { set: { m_meshDetour: true } }),
+        opt('Zwykła barierka. Nic nie widzę.', [Nt('ok. odkładam na bok, może się przyda')], { set: { m_meshLater: true } })
+      ])
+    ]),
     W('Pan Henryk mówi „mi zabroniła”. Kto mu zabronił?'),
     Ma('Na tej części taśmy nie pada nazwisko. Może jest na pierwszej, której nie mamy.'),
     scene('m2kto', [
@@ -291,13 +308,44 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.'),
     Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.'),
     give('ev_m_terminy', { silent: true }),
+    scene('xIda', [
+      pause(6000),
+      clock('2026-11-24T23:41'),
+      unlock('chat:blyskm'),
+      notify({ app: 'messages', title: 'Błysk', text: 'i.k_00 wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blyskm' } }),
+      IK('nie pytaj skąd mam twój numer'),
+      IK('te 40 sekund z mostu wycięłam ja'),
+      IK('ktoś mnie poprosił. wogóle nie wiedziałam po co'),
+      IK('nie mów nikomu w redakcji. jeszcze nie. proszę'),
+      choose('blyskm', [
+        opt('Zrób zrzut ekranu', [
+          IK('zrobił{eś|aś} zrzut'),
+          IK('super. czyli jednak jesteś jak oni'),
+          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
+        ], { shot: true, set: { m_shotIda: true } }),
+        opt('Kto cię poprosił?', [
+          IK('znajomy. przez telefon nie powiem'),
+          IK('sama to komuś powiem. daj mi kilka dni'),
+          vanish('blyskm')
+        ], { set: { m_idaTrust: true } })
+      ]),
+      pause(3000),
+      choose('natan', [
+        opt('Natan, ktoś mi napisał na Błysku, że to stażystka wycięła te 40 sekund.', [
+          Nt('ida? daj spokój. ona od tygodnia robi tylko napisy do relacji z rady miasta'),
+          Nt('masz to gdzieś? zrzut, cokolwiek?'),
+          iff('flag:m_shotIda', [Nt('zrzut jest rozmazany i bez nazwy konta. sorry, to mi nic nie mówi')], [Nt('no właśnie. to zniknęło i tyle. nie będę jej oskarżał przez anonima')])
+        ], { set: { m_toldNatan: true } }),
+        opt('Nikomu nic nie piszę. Niech Ida sama powie.', [], { set: { m_keptIda: true } })
+      ])
+    ]),
     set('m_act2'),
     end('m3')
   ];
 });
 
 Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', when: 'Piątek, 27 listopada · 23:18', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene, scare } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene, scare, vanish } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -309,6 +357,33 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     title(),
     V('marta', 'marta', '0:38', 'Przepraszam, że głosówka, nie chce mi się pisać. Przesłuchałam te zaniki. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.', 'Marta'),
     give('ev_m_kuchnia', { silent: true }),
+    scene('xPiatekNoc', [
+      pause(3000),
+      Z('dobra muszę się komuś pochwalić. kupiłam babci frytkownicę beztłuszczową na black friday'),
+      Z('babcia powiedziała że frytki to się robi na smalcu i schowała ją do szafy'),
+      choose('zuza', [
+        opt('Za tydzień będzie w niej robić wszystko.', [Z('już dzisiaj zrobiła w niej grzanki. mówi że „tylko sprawdza”')]),
+        opt('Babcia ma rację.', [Z('nie wspieraj jej proszę 😭')])
+      ]),
+      pause(2500),
+      pic('natan', 'natan', 'm_mem_radio', 'pies naczelnego. tak wygląda nasz dział dźwięku po 22'),
+      pause(6000),
+      clock('2026-11-27T23:44'),
+      unlock('chat:blyskm2'),
+      notify({ app: 'messages', title: 'Błysk', text: 'Nowy kontakt wysyła ci zdjęcie. Zniknie po obejrzeniu.', sound: 'notif', open: { chat: 'blyskm2' } }),
+      say('blyskm2', 'blyskm2', 'długo dziś siedzą w gazecie', { img: 'm_okno_redakcji', vanish: true }),
+      pause(4500),
+      vanish('blyskm2', 'Zdjęcie zniknęło po obejrzeniu.'),
+      pause(2000),
+      choose('natan', [
+        opt('Natan, jesteś jeszcze w redakcji?', [
+          Nt('tak, eksportuję relację z rady. czemu?'),
+          Nt('ktoś ci przysłał zdjęcie okna? pierwsze piętro z lampką to ja'),
+          Nt('dobra. zamykam i idę. przez park nie pójdę')
+        ], { set: { m_warnedNatan: true } }),
+        opt('Nic nie piszę. Może to tylko głupi żart.', [])
+      ])
+    ]),
     scene('scNoc', [
       pause(9000),
       clock('2026-11-27T23:52'),
@@ -327,6 +402,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),
     Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund'),
+    scene('xIdaPo', [
+      iff('flag:m_toldNatan', [Nt('i sorry za tamto. miał{eś|aś} rację z tym błyskiem, a ja cię zbyłem')]),
+      iff('flag:m_shotIda', [Nt('powiedziała że ktoś jej zrobił zrzut i się przestraszyła. dlatego tak długo nie chciała gadać')]),
+      iff('flag:m_idaTrust', [Nt('powiedziała że napisała do ciebie pierwsza i że jej nie wydał{eś|aś}. dlatego przyszła do mnie')])
+    ]),
     Nt('sama mi pokazała wiadomości. płakała przy tym'),
     Nt('20.11 napisał do niej znajomy z siłowni. paweł dudek. „masz dostęp do archiwum? jest tam takie stare nagranie z mostu, pokażesz kawałek?”'),
     Nt('wysłała mu całe 6 minut z okolicy 03:00. on odesłał „a da się samo to z siatką i moja wina?”'),
