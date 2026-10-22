@@ -293,6 +293,16 @@ Object.assign(DATA.evidence, {
 /* Sezon 2: osobne wydanie, ten sam zapis. Identyfikatory odcinków są kontraktem zapisu. */
 DATA.seasons.push({
   id: 's2', revision: 1, title: 'Most', kicker: 'SPRAWA 2', released: true,
+  credits: {
+    kicker: 'Koniec sprawy 2', title: 'MOST',
+    lines: [
+      'Kaseta „H.W. 2/2” leży w depozycie redakcji. Część pierwsza nigdy się nie znalazła.',
+      'Wszystkie osoby, firmy i redakcje w tej sprawie są fikcyjne. Inspekcja pracy działa tu tak, jak działałaby naprawdę: na wniosek, na piśmie, w czytelni.',
+      'Dziękujemy, że {słuchałeś|słuchałaś} całych zdań.'
+    ],
+    teaser: { title: 'SPRAWA 3: KOPIA ZAPASOWA', text: 'W pudle Rybickiego jest jeszcze dwadzieścia lat nagrań. Ktoś właśnie wrzucił pierwsze. Hasło znał tylko pan Adam. I ktoś, kto patrzył, jak odzyskujesz cudze konto.' },
+    note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 2 · Rozdział 5.'
+  },
   description: 'Czterdzieści sekund z kasety z 2011 roku. Jedno zdanie, które wszyscy już usłyszeli.',
   chapters: ['mp', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5'],
   episodes: [

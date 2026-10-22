@@ -663,6 +663,15 @@ const UI = (() => {
   }
   function credits() {
     SFX.ambient('dawn');
+    const season = typeof Seasons !== 'undefined' ? Seasons.current() : null;
+    if (season && season.credits) return curtain('ending credits-' + season.id, [
+      h('div', { class: 'cu-k' }, season.credits.kicker),
+      h('div', { class: 'cu-t' }, season.credits.title),
+      h('div', { class: 'cu-line' }),
+      ...season.credits.lines.map(t => h('div', { class: 'cu-p', style: 'text-align:center', html: U.rich(t) })),
+      h('div', { class: 'cu-p cu-teaser', style: 'text-align:center' }, h('b', {}, season.credits.teaser.title), h('br'), season.credits.teaser.text),
+      h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, season.credits.note)
+    ], { button: 'Menu główne', tap: false }).then(() => { location.reload(); });
     return curtain('ending', [
       h('div', { class: 'cu-k' }, 'Dziękujemy za grę'),
       h('div', { class: 'cu-t' }, 'MGLISKO'),

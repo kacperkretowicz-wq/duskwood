@@ -7,7 +7,7 @@ const shots=process.env.TEST_SCREENSHOT_DIR;if(shots)fs.mkdirSync(shots,{recursi
 async function play(page,stopFlag,target){
  return page.evaluate(async ([stopFlag,target])=>{
   const done=async()=>{};
-  window.__ending=window.__ending||UI.endingScreen;Object.assign(UI,{endingScreen:done,credits:done,chapterTitle:done,chapterEnd:done,interlude:done,fx:done,endCall:done,incomingCall:async()=>'accept',outgoingCall:done,callScreen(){}});
+  window.__ending=window.__ending||UI.endingScreen;window.__credits=window.__credits||UI.credits;Object.assign(UI,{endingScreen:done,credits:done,chapterTitle:done,chapterEnd:done,interlude:done,fx:done,endCall:done,incomingCall:async()=>'accept',outgoingCall:done,callScreen(){}});
   const satisfy=c=>{for(const k of [].concat(c)){if(typeof k!=='string')continue;const [t,...r]=k.split(':');const id=r.join(':');
    if(t==='ev')G.addEv(id,true);else if(t==='solved')G.solve(id);else if(t==='flag'&&!/Next$/.test(id))G.setFlag(id);else if(t==='seen')G.markSeen(id);else if(t==='unlocked')G.unlock(id);}};
   Engine.restart();const chapters=[];const t0=Date.now();let last='',same=0;
@@ -68,6 +68,9 @@ async function shot(page,name,fn,arg){
     await shot(page,'final-'+target,id=>{UI.goHome();window.__ending(id);},want);
     await page.evaluate(()=>document.querySelectorAll('.curtain,.cu,[class*=curtain]').forEach(n=>n.remove()));
     if(target==='pelny'){
+     await shot(page,'koniec-sprawy-2',()=>{window.__credits();});
+     assert.match(await page.locator('.curtain').last().innerText(),/KOPIA ZAPASOWA/);
+     await page.evaluate(()=>document.querySelectorAll('.curtain').forEach(n=>n.remove()));
      await shot(page,'m4-natan-oip',()=>{UI.goHome();UI.openApp('messages',{chat:'natan'});});
      await shot(page,'m5-zuza-final',()=>{UI.goHome();UI.openApp('messages',{chat:'zuza'});});
      await shot(page,'m5-gs-strona41',()=>{UI.goHome();UI.openApp('browser',{page:'gs_strona41'});});

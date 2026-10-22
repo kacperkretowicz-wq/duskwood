@@ -123,7 +123,7 @@
       }
       const n = openDeds().length;
       if (n) box.appendChild(h('p', { class: 'nt-sub' }, `Pytania bez odpowiedzi: ${n} (notatka „Pytania”).`));
-      box.appendChild(h('p', { class: 'nt-foot' }, `${ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : 'Rozdział ' + ch.num} · ${ch.title || ''} · ${Object.keys(G.s.ev).length} zapisanych`));
+      box.appendChild(h('p', { class: 'nt-foot' }, `${ch.kicker ? ch.kicker : ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : 'Rozdział ' + ch.num} · ${ch.title || ''} · ${Object.keys(G.s.ev).length} zapisanych`));
     };
     render();
     const off = BUS.on('goal', render);

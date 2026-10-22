@@ -99,6 +99,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     W('Dobry wieczór. Pani Marta była u mnie po kamerę. Długo stała w przedpokoju.'),
     W('Poprosiła, żeby kaseta dalej leżała u mnie. Jak dawniej u pana Adama: dopóki nie będzie wiadomo, komu ją oddać.'),
     give('ev_m_chain'),
+    W('Jeszcze jedno, drobiazg. Kuba Wrona pytał mnie dziś w bibliotece, czy pan Adam też trzymał wszystko „w chmurze”, jak Maja. Powiedziałam, że nie wiem. On tylko kiwnął głową.'),
     set('m_act4'),
     end('m5')
   ];

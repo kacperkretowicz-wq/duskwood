@@ -487,7 +487,7 @@
           if (!ok) return;
           const r = await UI.modal({ title: `Zagrać od: ${ch.title}?`, text: 'Obecny postęp zostanie zastąpiony stanem z początku tego rozdziału. Odblokowane zakończenia zostaną zachowane.', buttons: [{ label: 'Anuluj', value: 0 }, { label: 'Wczytaj', value: 1, pri: true }] });
           if (r === 1) { G.loadCheckpoint(id); location.reload(); }
-        } }, h('span', { class: 'ri', html: U.icon(ok ? 'refresh' : 'lock', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`), h('span', {}, ch.title))));
+        } }, h('span', { class: 'ri', html: U.icon(ok ? 'refresh' : 'lock', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)), h('span', {}, ch.title))));
       });
       const endings = h('div', { class: 'list plain' }, Object.entries(DATA.endings).map(([id, e]) => h('div', { class: 'row' + (G.s.endings.includes(id) ? '' : ' dis') }, h('div', { class: 'rm' }, h('b', {}, G.s.endings.includes(id) ? e.title : '???'), h('span', {}, G.s.endings.includes(id) ? e.tag : 'Zakończenie nieodkryte')))));
       const osSeg = h('div', { class: 'seg', style: 'margin:0' }, [['auto', 'Automatycznie'], ['ios', 'iOS'], ['android', 'Android']].map(([k, l]) => h('button', {
@@ -510,7 +510,7 @@
         h('div', { class: 'pad' }, appearance),
         h('div', { class: 'list plain' },
           h('button', { class: 'row', onclick: () => UI.openWallpapers() }, h('div', { class: 'rm' }, h('b', {}, 'Tapeta'), h('span', {}, Wallpapers.selected().name)), U.ico('back', 16)),
-          h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, 'Szkło pamięta · twój postęp')), U.ico('back', 16))),
+          h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, Seasons.current().title + ' · twój postęp')), U.ico('back', 16))),
         h('div', { class: 'sec-t' }, 'Profil'),
         h('div', { class: 'pad' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Imię'), nameIn, h('label', { class: 'lbl' }, 'Forma zwracania się'), gen),
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),
