@@ -1,6 +1,6 @@
 /* Shared local character photographs. Layout and system colors: native-ui.css. */
-.photo-av { background-image:url('../assets/people.png'); background-size:300% auto; background-position:var(--photo-x) var(--photo-y); background-repeat:no-repeat; }
-.gajda-av { background:url('../assets/gajda.png') center/cover; }
+.photo-av { background-image:url('../assets/people.jpg'); background-size:300% auto; background-position:var(--photo-x) var(--photo-y); background-repeat:no-repeat; }
+.gajda-av { background:url('../assets/gajda.jpg') center/cover; }
 .profile-link { text-align:left; border-radius:6px; }
 .contact-profile { padding:14px 26px 26px; text-align:center; }
 .contact-profile .av { margin:auto; width:120px; height:120px; }
@@ -18,3 +18,41 @@
 .profile-life { display:flex; gap:8px; justify-content:center; margin:20px 0 4px; }
 .life-th { flex:1; max-width:140px; aspect-ratio:4/3; border:0; padding:0; border-radius:12px; overflow:hidden; background:#222; }
 .life-th img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Wideo w czacie, znikające wiadomości, zrzut ekranu */
+.bub .mvid { display: block; width: 100%; max-width: 260px; border-radius: 14px; background: #000; aspect-ratio: 9/16; object-fit: cover; }
+.bub.vanish { position: relative; outline: 1px dashed rgba(127,127,127,.45); }
+.bub .vanish-tag { display: block; font-size: 11px; opacity: .6; margin-top: 3px; }
+.opt.shot { border-style: dashed; }
+
+
+/* Przesyłanie w pobliżu */
+.nearby-ov { position: absolute; inset: 0; z-index: 90; display: flex; align-items: flex-start; justify-content: center; padding-top: 70px; background: rgba(0,0,0,.25); animation: nbIn .25s ease; }
+.nearby-ov.out { opacity: 0; transition: opacity .3s; }
+.nearby-card { width: min(330px, 88%); background: var(--s1, #f4f4f6); color: var(--tx, #111); backdrop-filter: blur(20px); border-radius: 22px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.35); text-align: center; }
+.nb-k { font-size: 12px; opacity: .6; text-transform: uppercase; letter-spacing: .04em; }
+.nb-prev { margin: 10px auto; width: 120px; height: 120px; border-radius: 14px; overflow: hidden; background: #222; }
+.nb-prev img { width: 100%; height: 100%; object-fit: cover; filter: blur(7px) brightness(.8); transform: scale(1.1); }
+.nb-t { font-weight: 600; font-size: 15px; }
+.nb-s { font-size: 12px; opacity: .65; margin-top: 4px; }
+.nb-btns { display: flex; gap: 10px; margin-top: 14px; } .nb-btns .btn { flex: 1; }
+@keyframes nbIn { from { transform: translateY(-20px); opacity: 0; } }
+
+/* Aparat w grze */
+.cam-ov { position: absolute; inset: 0; z-index: 95; background: #000; color: #fff; display: flex; flex-direction: column; }
+.cam-ov.flash::after { content: ''; position: absolute; inset: 0; background: #fff; animation: camFlash .26s ease-out forwards; }
+@keyframes camFlash { from { opacity: 1; } to { opacity: 0; } }
+.cam-top { display: flex; align-items: center; gap: 10px; padding: 50px 14px 8px; }
+.cam-x { background: none; border: 0; color: #fff; font-size: 20px; }
+.cam-tabs { display: flex; gap: 6px; margin: 0 auto; }
+.cam-tab { background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 14px; padding: 6px 12px; font-size: 13px; }
+.cam-tab.on { background: #ffd60a; color: #000; }
+.cam-view { flex: 1; margin: 6px 10px; border-radius: 10px; overflow: hidden; background: #111; position: relative; }
+.cam-view img { width: 100%; height: 100%; object-fit: cover; }
+.cam-view::after { content: ''; position: absolute; inset: 0; background: linear-gradient(#fff3,#fff3) 33.3% 0/1px 100% no-repeat, linear-gradient(#fff3,#fff3) 66.6% 0/1px 100% no-repeat, linear-gradient(#fff3,#fff3) 0 33.3%/100% 1px no-repeat, linear-gradient(#fff3,#fff3) 0 66.6%/100% 1px no-repeat; pointer-events: none; }
+.cam-chips { display: flex; gap: 8px; overflow-x: auto; padding: 8px 10px; }
+.cam-chip { flex: 0 0 auto; width: 104px; background: rgba(255,255,255,.08); border: 2px solid transparent; border-radius: 10px; color: #fff; padding: 4px; font-size: 11px; text-align: left; }
+.cam-chip.on { border-color: #ffd60a; }
+.cam-chip img { width: 100%; height: 56px; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 3px; }
+.cam-bottom { display: flex; justify-content: center; padding: 10px 0 34px; }
+.cam-shutter { width: 70px; height: 70px; border-radius: 50%; border: 5px solid #fff; background: #fff; box-shadow: inset 0 0 0 3px #000; }

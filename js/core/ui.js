@@ -411,8 +411,10 @@ const UI = (() => {
     });
   }
   function preview(msg) {
+    if (msg.vanish) return '👁 Wiadomość znikająca';
     if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');
+    if (msg.vid) return '🎬 Wideo';
     if (msg.img) return '📷 Zdjęcie';
     if (msg.ev) return '📎 Załącznik';
     if (msg.place) return '📍 Lokalizacja';
@@ -761,11 +763,62 @@ const UI = (() => {
     return U.sleep(0);
   }
 
+  /* Przesyłanie w pobliżu: obce urządzenie chce wysłać zdjęcie. Podgląd rozmyty do decyzji. */
+  function nearby(o = {}) {
+    return new Promise(res => {
+      closeOverlays();
+      const fast = G.settings.speed === 'instant';
+      const el = h('div', { class: 'nearby-ov' },
+        h('div', { class: 'nearby-card' },
+          h('div', { class: 'nb-k' }, OS === 'android' ? 'Przesyłanie w pobliżu' : 'Zrzut w pobliżu'),
+          h('div', { class: 'nb-prev' }, o.img ? h('img', { src: Art.url(o.img), alt: '' }) : null),
+          h('div', { class: 'nb-t' }, U.tpl(`„${o.device || 'Telefon'}” chce udostępnić ${o.what || 'zdjęcie'}`)),
+          o.note ? h('div', { class: 'nb-s' }, U.tpl(o.note)) : null,
+          h('div', { class: 'nb-btns' },
+            h('button', { class: 'btn', onclick: () => end('decline') }, 'Odrzuć'),
+            h('button', { class: 'btn pri', onclick: () => end('accept') }, 'Akceptuj'))));
+      screen.appendChild(el);
+      SFX.play.notif ? SFX.play.notif() : null; U.vibrate(30);
+      let over = false;
+      const timer = setTimeout(() => end('decline'), o.ms || 20000);
+      function end(r) {
+        if (over) return; over = true; clearTimeout(timer);
+        el.classList.add('out'); setTimeout(() => el.remove(), 300);
+        if (r === 'accept' && o.img && !fast) setTimeout(() => UI.viewImage(o.img, { from: o.device || 'W pobliżu' }), 320);
+        res(r);
+      }
+    });
+  }
+  /* Aparat w grze: gracz kadruje scenę (kilka ujęć) albo wybiera z galerii i wysyła zdjęcie do czatu. */
+  function camera(options) {
+    return new Promise(res => {
+      closeOverlays();
+      const shots = options.filter(o => !o.gallery), gal = options.filter(o => o.gallery);
+      let tab = shots.length ? 'cam' : 'gal', cur = (shots[0] || gal[0]);
+      const view = h('div', { class: 'cam-view' }), chips = h('div', { class: 'cam-chips' });
+      const el = h('div', { class: 'cam-ov' },
+        h('div', { class: 'cam-top' }, h('button', { class: 'cam-x', 'aria-label': 'Zamknij', onclick: () => { el.remove(); res(null); } }, '✕'),
+          h('div', { class: 'cam-tabs' }, shots.length ? h('button', { class: 'cam-tab', 'data-t': 'cam', onclick: () => { tab = 'cam'; cur = shots[0]; draw(); } }, 'Aparat') : null,
+            gal.length ? h('button', { class: 'cam-tab', 'data-t': 'gal', onclick: () => { tab = 'gal'; cur = gal[0]; draw(); } }, 'Galeria') : null)),
+        view, chips,
+        h('div', { class: 'cam-bottom' }, h('button', { class: 'cam-shutter', 'aria-label': 'Zrób zdjęcie i wyślij', onclick: () => { SFX.play.tap(); el.classList.add('flash'); setTimeout(() => { el.remove(); res(cur.i); }, fast() ? 0 : 260); } })));
+      const fast = () => G.settings.speed === 'instant';
+      function draw() {
+        view.innerHTML = ''; chips.innerHTML = '';
+        if (cur.img) view.appendChild(h('img', { src: Art.url(cur.img), alt: '' }));
+        (tab === 'cam' ? shots : gal).forEach(o => chips.appendChild(h('button', { class: 'cam-chip' + (o === cur ? ' on' : ''), onclick: () => { cur = o; draw(); } },
+          o.img ? h('img', { src: Art.url(o.img), alt: '' }) : null, h('span', {}, U.tpl(o.text)))));
+        el.querySelectorAll('.cam-tab').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
+      }
+      draw(); screen.appendChild(el);
+    });
+  }
+
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
     banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
-    fx, scare, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
+    fx, scare, nearby, camera, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };
 })();

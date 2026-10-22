@@ -77,7 +77,10 @@ const Engine = (() => {
     tl: id => ({ t: 'tl', id }),
     scene: (id, steps) => ({ t: 'scene', id, steps }),
     // Straszak: odpala się raz na zapis (s.scares), nigdy przy przewijaniu ani po wczytaniu.
-    scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o })
+    scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o }),
+    nearby: (id, o = {}) => ({ t: 'nearby', id, ...o }),
+    vanish: (chat, text) => ({ t: 'vanish', chat, text }),
+    camera: (chat, options, o = {}) => ({ t: 'choose', chat, options, camera: true, ...o })
   };
 
   /* ---------- Kompilacja ---------- */
@@ -289,7 +292,7 @@ const Engine = (() => {
 
       case 'say': {
         const msg = {};
-        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
+        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         await talk(st.chat, st.who, st.text, { msg, gap: st.gap, typing: st.typing });
         return;
       }
@@ -306,11 +309,12 @@ const Engine = (() => {
         const vis = st.options.map((o, i) => Object.assign({ i }, o))
           .filter(o => !(st.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
         if (!vis.length) return st.end;
-        const pick = await interact({ type: 'choose', chat: st.chat, options: vis.map(o => ({ i: o.i, text: o.text })) });
+        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
         guard(my);
         const o = st.options[pick];
         if (st.menu && !o.exit) s.used[key] = [...used, pick];
-        if (!o.silent) { G.post(st.chat, { from: 'me', text: o.say || o.text }); SFX.play.sent(); }
+        if (o.shot) G.post(st.chat, { from: 'sys', text: U.tpl(o.sys || '{Zrobiłeś|Zrobiłaś} zrzut ekranu. Druga strona dostała powiadomienie.') });
+        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : o.text }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
         apply(o);
         return o.lab || st.end;
       }
@@ -430,6 +434,23 @@ const Engine = (() => {
         const r = await UI.scare(st.kind, st); guard(my);
         if (r === 'accept' && st.onAccept) G.setFlag(st.onAccept);
         return;
+      }
+      case 'nearby': {
+        // Przesyłanie w pobliżu: obce urządzenie proponuje zdjęcie. Decyzja raz na zapis.
+        s.nearby = s.nearby || {};
+        if (!s.nearby[st.id]) {
+          s.nearby[st.id] = ff ? 'accept' : await UI.nearby(st); guard(my);
+          G.save();
+        }
+        if (s.nearby[st.id] === 'accept') { if (st.flag) G.setFlag(st.flag); if (st.ev) G.addEv(st.ev, true); }
+        else if (st.declineFlag) G.setFlag(st.declineFlag);
+        return;
+      }
+      case 'vanish': {
+        // Znikające wiadomości: po przeczytaniu zostaje tylko informacja, że były.
+        const c = s.chats[st.chat];
+        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
+        G.change(); return;
       }
       case 'run': { const r = st.fn(s, G); return typeof r === 'string' ? r : undefined; }
       case 'task': { stopFF(); const r = await st.fn(s, G); guard(my); return typeof r === 'string' ? r : undefined; }

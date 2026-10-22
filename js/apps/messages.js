@@ -166,10 +166,12 @@
       const ch = DATA.chars[m.from] || {};
       const b = h('div', { class: 'bub' + (m.img && !m.text ? ' media' : '') });
       UI.bindMessageActions(b, id, m);
-      if (m.img) {
+      if (m.img && !m.vid) {
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
         b.appendChild(im);
       }
+      if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
+      if (m.vanish) { b.classList.add('vanish'); b.appendChild(h('span', { class: 'vanish-tag' }, '👁 zniknie po przeczytaniu')); }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
       if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
@@ -247,8 +249,13 @@
       if (p.type === 'choose') {
         comp.classList.add('choices');
         comp.appendChild(h('div', { class: 'reply-label' }, 'TWOJA ODPOWIEDŹ'));
+        if (p.camera) {
+          comp.appendChild(h('button', { class: 'opt cam-open', onclick: async () => { SFX.play.tap(); const i = await UI.camera(p.options); if (i != null) { comp.innerHTML = ''; Engine.answer(i); } } },
+            h('span', {}, '📷 Otwórz aparat'), U.ico('send', 15)));
+          scrollEnd(true); return;
+        }
         p.options.forEach((o, n) => comp.appendChild(h('button', {
-          class: 'opt', style: `animation-delay:${n * 60}ms`,
+          class: 'opt' + (o.shot ? ' shot' : ''), style: `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
         }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
         scrollEnd(true);
