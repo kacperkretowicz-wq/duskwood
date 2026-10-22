@@ -3,7 +3,9 @@
    Plan: docs/SPRAWA-2-PLAN.md §5–6. Żaden finał nie nagradza naruszania prywatności jako skrótu do prawdy. */
 
 Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona 41', when: 'Poniedziałek, 30 listopada · 8:20', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd, scene } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd, scene, notify, vanish } = D;
+  const IK = t => say('blyskm', 'blyskm', t, { vanish: true });
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -36,6 +38,14 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       c('natan', 'mam akta. zaraz ci wyślę zdjęcia, tylko daj mi się ogrzać'),
       callEnd()
     ]),
+    scene('xInspekcja', [
+      pause(2000),
+      pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu'),
+      choose('natan', [
+        opt('Ogrzej się. Akta nie uciekną.', [Nt('akta nie. ale czytelnię zamykają o 15, a pani w okienku patrzy na mnie jak na ucznia bez legitymacji')]),
+        opt('Ile zdjęć zrobiłeś?', [Nt('63. połowa krzywo. ale wszystko da się przeczytać')])
+      ])
+    ]),
     pause(2500),
     Nt('hej. naczelny wystąpił do inspekcji pracy we wrocławiu o akta wypadku z 2011. jako redakcja, oficjalnie, z powołaniem na dostęp do informacji'),
     Nt('i sorry że tak szybko ale już mamy. pojechałem rano, dali mi czytelnię na godzinę'),
@@ -54,6 +64,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     set('m_rewriteSeen'),
     give('ev_m_rewrite'),
+    scene('xSiatka', [iff('flag:m_netSeen', [Ma('Na tym zdjęciu z notesu, z mlekiem na desce, też nie było siatki. Teraz wiemy, że brak siatki zgłoszono przed wypadkiem.')])]),
     Nt('i jeszcze protokół powypadkowy. wykaz załączników'),
     pic('natan', 'natan', 'most_oip_protokol', 'punkt 3'),
     give('ev_m_oip_protokol'),
@@ -77,8 +88,32 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     callEnd(),
     give('ev_m_henryk_oip'),
+    scene('xIdaBlysk', [iff('flag:m_idaTrust', [
+      pause(5000),
+      clock('2026-11-30T23:12'),
+      notify({ app: 'messages', title: 'Błysk', text: 'i.k_00 wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blyskm' } }),
+      IK('widziałam, że natan był w inspekcji'),
+      IK('jutro mam rozmowę z naczelnym. o tych 40 sekundach. boję się bardziej niż przed maturą'),
+      IK('jak mnie wyrzucą, pojadę na ferie do dziadka i będę z nim oglądać jego stare kasety. on ma ich cały pokój'),
+      choose('blyskm', [
+        opt('Zrób zrzut ekranu', [
+          IK('serio? teraz?'),
+          IK('ok. to już nic nie piszę'),
+          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
+        ], { shot: true, set: { m_shotIda2: true } }),
+        opt('Dobrze, że sama do niego idziesz.', [
+          IK('nie czuję się dobrze. ale trochę lżej'),
+          IK('dzięki, że wtedy nie zrobił{eś|aś} zrzutu'),
+          vanish('blyskm')
+        ], { set: { m_idaKind: true } })
+      ])
+    ])]),
     pause(2500),
     clock('2026-12-01T19:10'),
+    scene('xZuzaGlos', [
+      V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza'),
+      pause(2000)
+    ]),
     Z('hej'),
     Z('widziałam artykuł że jest jakaś przepisana strona'),
     Z('powiedz mi jedno. czy ktoś wujka zabił'),
@@ -120,7 +155,8 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 });
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene, camera } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene, camera, nearby } = D;
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -142,6 +178,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       ])
     ]),
     Nt('i jest problem. tygodnik zapowiada na jutro „kim jest tajemnicza K.”. ktoś im dał cytat z notesu, ten co ja wtedy usunąłem'),
+    scene('xMleko', [iff('flag:m_milkLink', [Nt('pamiętasz to zdjęcie z mlekiem na desce? jak ktoś zestawi je z tym cytatem, w mglisku w godzinę będą wiedzieć, kim jest K.')])]),
     Nt('naczelny pyta czy nie wyprzedzić ich dziś. z notesem. „k. przyniosła ksero, dziękuje za mleko”. mówi że to najmocniejszy dowód że ksero jest z 2011'),
     choose('natan', [
       opt('Nie. Ten cytat wskazuje panią Krystynę każdemu, kto ją zna. Ksero mamy potwierdzone kopią Henryka i aktami z inspekcji.', [
@@ -204,7 +241,42 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     }),
     pause(2500),
     iff('flag:m_krystynaOk', [Z('babcia wyszła z pokoju i zrobiła naleśniki. to dużo znaczy u nas'), Z('dzięki')], [Z('babcia powiedziała że już nie chce. ok. to jest ok'), Z('tylko szkoda')]),
+    scene('xZnicz', [
+      pause(3000),
+      clock('2026-12-05T16:20'),
+      nearby('m_znicz', { device: 'Telefon', img: 'm_znicz_most', note: 'Nieznane urządzenie w pobliżu', flag: 'm_zniczOk', declineFlag: 'm_zniczNo' }),
+      iff('flag:m_zniczOk', [
+        Z('to ja. widzę cię z drugiej strony mostu')
+      ], [
+        Z('to byłam ja, z drugiej strony mostu. sorry, że przez przesyłanie'),
+        pic('zuza', 'zuza', 'm_znicz_most', '')
+      ]),
+      iff('flag:m_krystynaOk', [
+        Z('babcia zapaliła znicz. pierwszy raz od 2011. nie chciała, żeby ktoś podchodził, więc nie machałam')
+      ], [
+        Z('zapaliłam znicz. babcia nie chciała iść, ale dała mi zapałki. to już coś')
+      ]),
+      Z('te goździki ktoś przywiązał wcześniej. babcia mówi, że nie ona. przypomina ci to coś?'),
+      choose('zuza', [
+        opt('Pan Henryk mówił, że sam by Darka zdjął z rusztowania. Może to on.', [
+          Z('babcia też tak myśli. mówi, że co roku we wrześniu ktoś tu przywiązuje goździki, a ona myślała, że to firma'),
+          Z('pójdzie mu podziękować. kiedyś. może')
+        ], { set: { m_henrykFlowers: true } }),
+        opt('Może Kurek-Bud? „Z szacunkiem wspomina zmarłego pracownika”.', [
+          Z('babcia się zaśmiała. pierwszy raz od dawna'),
+          Z('mówi, że firma dałaby wieniec z szarfą, a nie goździki na sznurku')
+        ]),
+        opt('Nie wiem. Niech to zostanie czyjąś tajemnicą.', [Z('babcia powiedziała to samo. słowo w słowo')])
+      ])
+    ]),
     S('Dzień dobry. Pan Henryk był u mnie w salonie. Siedział godzinę i pił herbatę.'),
+    scene('xSalon', [
+      pic('sylwia', 'sylwia', 'm_salon_herbata', 'Zostawił czapkę. Trzeci raz w tym miesiącu. Odniosę mu jutro, i tak mam po drodze.'),
+      choose('sylwia', [
+        opt('Może zostawia ją specjalnie, żeby mieć po co wrócić.', [S('Może. Pani Basia robiła tak samo z parasolką. Byli siebie warci.')]),
+        opt('Jak on się trzyma?', [S('Lepiej niż tydzień temu. Dziś nawet żartował z moimi klientkami.')])
+      ])
+    ]),
     iff('flag:m_henrykOnRecord', [S('Natan nagrał z nim rozmowę, całą.')], [S('Z Natanem nie chciał rozmawiać. Do mnie przyszedł sam.')]),
     S('Henryk pyta, czy jak gazeta wyjdzie w poniedziałek, to ja w grupie coś przypnę. On mówi „sprostowanie”, jakby to było z urzędu.'),
     S('Ja mogę przypiąć dziś. Albo poczekać na tekst i wtedy dać link. Co {Pan|Pani} myśli?'),
@@ -223,6 +295,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Strona 41. Jak przepisano dziennik robót z mostu nad Mglicą', sound: 'notif', open: { page: 'gs_strona41' } }),
     set('m_published'),
     Nt('wyszło. 7:00'),
+    V('natan', 'natan', '0:12', 'nie spałem od czwartej. mama zadzwoniła, że kupiła trzy egzemplarze. jeden dla cioci w Kanadzie. ciocia ma internet', 'Natan'),
     Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
     iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
     iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),

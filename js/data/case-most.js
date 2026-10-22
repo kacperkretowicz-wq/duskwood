@@ -233,6 +233,11 @@ Object.assign(DATA.evidence, {
   P('m_kadr_siatka', 'm_kadr_siatka.jpg', 'Kronika kablówki · wrzesień 2011', 1024, 768);
   P('m_okno_redakcji', 'm_okno_redakcji.jpg', 'Okno redakcji · 23:44', 768, 1024);
   P('m_mem_radio', 'm_mem_radio.jpg', 'Dział dźwięku po 22', 768, 1024);
+  P('m_kot_wycinki', 'm_kot_wycinki.jpg', 'Pani Ziuta na wycinkach', 768, 1024);
+  P('m_brygada', 'm_brygada.jpg', 'Most w remoncie · 2011', 1024, 768);
+  P('m_inspekcja', 'm_inspekcja.jpg', 'Wrocław · parking przed inspekcją', 768, 1024);
+  P('m_znicz_most', 'm_znicz_most.jpg', 'Most nad Mglicą · 16:20', 768, 1024);
+  P('m_salon_herbata', 'm_salon_herbata.jpg', 'Salon Sylwii', 1024, 768);
   Art.def('v_licznik', { src: 'assets/video/v_licznik.jpg', title: 'Archiwum · noc', w: 360, h: 640, draw: () => '' });
   Art.def('s1_mem_kot', { src: 'assets/s1x/s1_mem_kot.jpg', title: 'Kot w praniu', w: 768, h: 1024, draw: () => '' });
   Art.def('s1_lumpeks', { src: 'assets/s1x/s1_lumpeks.jpg', title: 'Lumpeks na Kolejowej', w: 768, h: 1024, draw: () => '' });

@@ -8,6 +8,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const c = (who, t) => say('call', who, t);
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
 
   return [
     clock('2026-11-20T19:24'),
@@ -20,6 +21,14 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     ], [M('hej. nie śpisz?')]),
     M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem'),
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
+    scene('xKot', [
+      pic('maja2', 'maja', 'm_kot_wycinki', 'poznaj Panią Ziutę. kotka pani Weroniki. uznała, że wycinki o powodzi to jej łóżko'),
+      choose('maja2', [
+        opt('Pani Ziuta ma większy porządek w papierach niż gmina.', [M('xD przekażę. kotka i tak ma to gdzieś')]),
+        opt('Nie budźcie jej. Pilnuje dowodów.', [M('pilnuje. jak sięgnęłam po wycinek, dostałam łapą. bez pazurów, ale jednak')])
+      ]),
+      M('dobra, wyciągnęłam spod niej resztę. tylko trochę pachną kotem')
+    ]),
     pic('maja2', 'maja', 'most_teczka', 'ta była na samym dnie. pod wycinkami o powodzi'),
     give('ev_m_teczka'),
     M('„nie publikować bez K.” i nie mamy pojęcia, kto to jest K.'),
@@ -49,6 +58,26 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     give('ev_m_postcard'),
     pic('weronika', 'weronika', 'most_clip', 'Na koniec wycinek z 2012 roku.'),
     give('ev_m_clip2012'),
+    scene('xBrygada', [
+      pause(1500),
+      M('jeszcze to. leżało luzem w notesie, między kartkami z września'),
+      pic('maja2', 'maja', 'm_brygada', 'zdjęcie z 2011. most w remoncie. przypomina ci to coś?'),
+      choose('maja2', [
+        opt('Butelka mleka na desce. Jak „dziękuję za mleko” z pocztówki.', [
+          M('o kurczę. faktycznie'),
+          M('ktoś nosił im mleko na budowę? wszystkim czy tylko jednemu?'),
+          M('zapisuję. ale na razie nikomu o tym nie mówmy')
+        ], { set: { m_milkLink: true } }),
+        opt('Pod przęsłem nie ma żadnej siatki.', [
+          M('serio. same deski, a pod spodem od razu woda'),
+          M('pani Weronika mówi, że to da się sprawdzić w papierach. czy siatka w ogóle miała tam być')
+        ], { set: { m_netSeen: true } }),
+        opt('Ci ludzie są za daleko. Nikogo tu nie poznam.', [
+          M('ja też nie. i chyba dobrze. nie chcę nikogo zgadywać po kurtce'),
+          M('odkładam do teczki, tak jak leżało')
+        ])
+      ])
+    ]),
     pause(1200),
     W('Jedno mi nie pasuje. W notatkach Mai z października było „Darek Kruk, zginął w 2011, most kolejowy”.'),
     W('A ta dziewczyna od filmików, Zuza, mówiła Mai, że babcia powtarza tylko „wypadek w pracy, 2011”. Czy to są dwie różne wersje?'),
@@ -70,6 +99,14 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     choose('maja2', [
       opt('Spoko. Ogarnę.', [M('dzięki. idę spać jak normalny człowiek. o 20:40 🫠')]),
       opt('Następnym razem zapytaj, zanim dasz komuś mój numer.', [M('masz rację. przepraszam. ja tylko… dobra. następnym razem zapytam')], { trust: { maja: -1 } })
+    ]),
+    scene('xWieczor', [
+      pause(3000),
+      V('kuba', 'kuba', '0:14', 'Maja zasnęła na kanapie w kurtce. Mama mówi, żeby jej nie budzić, ale mam jej zdjąć buty. Czemu zawsze ja?', 'Kuba'),
+      choose('kuba', [
+        opt('Zdejmij. Będzie ci wdzięczna.', [say('kuba', 'kuba', 'zdjąłem. powiedziała przez sen „nie publikować”. serio')]),
+        opt('Zrób jej zdjęcie na pamiątkę.', [say('kuba', 'kuba', 'zrobiłem. ale nie wyślę, bo mnie zabije'), say('kuba', 'kuba', 'dam jej na urodziny')])
+      ])
     ]),
     pause(4000),
     clock('2026-11-20T21:07'),
