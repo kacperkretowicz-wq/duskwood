@@ -5,7 +5,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
  try{
-  const W={przewiniecie:['c_idaStops','c_olaFirst','c_zenonDefended','c_linkTV','c_clockSeen','c_idaSeen','c_roomLink','c_blyskTalk'],transmisja:['c_gaveUp','c_hunt','c_linkGym','c_wojtSeen','c_shotBlysk','c_wrongZenon'],kopia2:['c_tookCopy','c_linkLater','c_clockLater','c_idaLater','c_roomLater']};
+  const W={przewiniecie:['c_idaStops','c_olaFirst','c_zenonDefended','c_linkTV','c_clockSeen','c_idaSeen','c_roomLink','c_blyskTalk','c_stageLink','c_pleaded','c_klatkaOk'],transmisja:['c_gaveUp','c_hunt','c_linkGym','c_wojtSeen','c_shotBlysk','c_wrongZenon','c_shotFestyn','c_canDetour'],kopia2:['c_tookCopy','c_linkLater','c_clockLater','c_idaLater','c_roomLater','c_stageLater']};
   for(const [s3,target] of [['wlasnym_glosem','przewiniecie'],['kopia','transmisja'],['zasiegi','kopia2']]){
   const ctx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
@@ -37,9 +37,9 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
    }return{timeout:last};},[W[target],[...new Set(Object.values(W).flat())]]);
   console.log(s3,target,JSON.stringify(res));
   assert.ok(res.end,JSON.stringify(res));
-  assert.deepEqual(res.chapters,['c0','c1','c2','c3','c4']);
+  assert.deepEqual(res.chapters,['c0','c1','c2','cf','c3','c4']);
   assert.equal(res.ending,target);assert.equal(res.archived,target);
-  const sc=['s4_cisza','s4_drzwi','s4_noc','s4_okno',...(target==='transmisja'?['s4_transmisja']:[])].sort();
+  const sc=['s4_cisza','s4_drzwi','s4_festyn','s4_noc','s4_okno',...(target==='transmisja'?['s4_transmisja']:[])].sort();
   assert.deepEqual(res.scares.filter(s=>/^s4_/.test(s)).sort(),sc);
   assert.deepEqual(res.missing,[]);
   assert.equal(res.v,4);

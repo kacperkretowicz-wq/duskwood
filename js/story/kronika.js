@@ -41,6 +41,22 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu')]),
       opt('Czyli całe ferie na sankach?', [M('sanki, herbata, seriale. jak w podstawówce'), M('mama już kupiła trzy paczki pierniczków „na wszelki wypadek”')])
     ]),
+    scene('xFerie', [
+      pause(2500),
+      say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj'),
+      pic('kuba', 'kuba', 'c_gorka', 'maja nagrała jak się wywalam. jak to wrzuci na klipo to się wyprowadzam'),
+      choose('kuba', [
+        opt('10/10 za styl lądowania.', [say('kuba', 'kuba', 'dzięki. sędziowie z bałwanem dali mi 6')]),
+        opt('Żyjesz?', [say('kuba', 'kuba', 'żyję. kurtka mniej. śnieg mam nawet w skarpetkach')])
+      ]),
+      pause(3000),
+      O('Hej! Pierwszy dzień ferii w świetlicy. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.'),
+      pic('ola', 'ola', 'c_rysunek', 'Ale dostałam to. Podobno ja w zielonym swetrze 💚'),
+      choose('ola', [
+        opt('Wyglądasz na szczęśliwą. I wysoką.', [O('Bo dla nich jestem wysoka 😄 Jutro robimy pierniki.')], { trust: { ola: 1 } }),
+        opt('A gdzie kostka?', [O('Podobno zjadł ją pies Kacpra. W co nikt nie wierzy, bo Kacper nie ma psa.')])
+      ])
+    ]),
     pause(4000),
     V('maja2', 'maja', '0:09', 'Dobra, idę zrobić herbatę. Jak będziesz coś oglądać, daj znać, to obejrzymy razem.', 'Maja'),
     pause(6000),
@@ -80,6 +96,16 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     pause(2500),
     S('Dobry wieczór. Pod tym klipem w mojej grupie jest już czterdzieści komentarzy.'),
     S('Ludzie pytają, kto będzie „jutro”. Proszę, jeśli {Pan|Pani} coś wie, niech {Pan|Pani} da znać. Nie chcę, żeby zrobiła się z tego afera.'),
+    scene('xZuza', [
+      unlock('chat:zuza'),
+      say('zuza', 'zuza', 'hej. widział{eś|aś} tę studniówkę?'),
+      say('zuza', 'zuza', 'babcia mówi że ten sam pan z kablówki kręcił mój chrzest. ma tę kasetę do dziś'),
+      say('zuza', 'zuza', 'i powiedziała jeszcze „on wszystkich nagrywał, a jego nikt”'),
+      choose('zuza', [
+        opt('Ciekawe, ile takich kaset leży po domach.', [say('zuza', 'zuza', 'u nas trzy. komunia, chrzest i wesele cioci. nikt nie ma już magnetowidu')]),
+        opt('Pozdrów babcię.', [say('zuza', 'zuza', 'pozdrowiła. i kazała ci się ciepło ubrać. nie wiem skąd wie że nie')])
+      ])
+    ]),
     give('ev_c_klip1', { silent: true }),
     pause(7000),
     clock('2027-01-18T23:52'),
@@ -98,7 +124,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
 /* ---------- c1 · Boisko ---------- */
 Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko', when: 'Wtorek, 19 stycznia · 16:40', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock } = D;
-  const { M, O, I, W, c } = KronikaCast(D);
+  const { M, O, I, W, c, V } = KronikaCast(D);
   return [
     clock('2027-01-19T16:40'),
     ambient('calm'),
@@ -110,6 +136,9 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
       opt('Dobrze, że chociaż zdjęcia są.', [I('no. ludzie płaczą po straconych zdjęciach, nie po telefonie')])
     ]),
     pause(3000),
+    pic('igor', 'igor', 'c_ryz', 'oczywiście przyniosła go w ryżu. ryż nic nie daje. ale ludzie w to wierzą jak w horoskop'),
+    choose('igor', [opt('Ja też kiedyś wierzył{em|am}.', [I('wszyscy wierzyli. potem przychodzili do mnie z ryżem w porcie ładowania')]), opt('Daj jej ten ryż na drogę.', [I('dałem. powiedziała, że zrobi z niego kaszę. nie wiem, czy żartowała')])]),
+    pause(2500),
     I('a tak serio. widziałem tę studniówkę. dziś o 21 ma być następny klip'),
     I('obejrzałem pierwszy klatka po klatce. chcesz wiedzieć, co znalazłem?'),
     choose('igor', [opt('Pewnie.', []), opt('Mów.', [])]),
@@ -149,7 +178,8 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     give('ev_c_boisko'),
     pause(3000),
     O('Pod klipem z boiskiem ktoś napisał „jutro: O.N.”.'),
-    O('O.N. To mogę być ja. Aleksandra Nowicka.'),
+    O('O.N. To mogę być ja. Aleksandra Nowicka.'),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola'),
+
     O('Wiem, co może być na tej kasecie. Festyn, 2011. Nie chcę o tym pisać.'),
     choose('ola', [
       opt('Nie musisz. Jestem tu.', [O('Dziękuję. Muszę to przemyśleć.')], { trust: { ola: 1 } }),
@@ -201,7 +231,11 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
         ] }
       }
     }),
-    set('c_zenonCalled'),
+    set('c_zenonCalled'),    pause(2500),
+    unlock('chat:zenon'),
+    Z('{Szanowny Panie|Szanowna Pani}, przepraszam, że się rozłączyłem. Pies nie lubi, jak rozmawiam przez telefon.'),
+    Z('Gdyby {Pan|Pani} czegoś potrzebował{|a}, jestem w domu po 9. Z poważaniem, Z. Gil'),
+
     pause(3000),
     M('i jak?'),
     choose('maja2', [
@@ -227,6 +261,14 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       ])
     ]),
     give('ev_c_spacer'),
+    scene('xSwietlica', [
+      O('Upiekliśmy pierniki. Połowa ma kształt dinozaura, choć foremki były w gwiazdki.'),
+      O('Jedna dziewczynka zapytała mnie, czy ja też kiedyś byłam niegrzeczna. Prawie się rozpłakałam przy blasze.'),
+      choose('ola', [
+        opt('Co jej odpowiedziałaś?', [O('Że tak. I że potem przeprosiłam. Przyjęła to bardzo poważnie i zjadła dinozaura.')], { trust: { ola: 1 } }),
+        opt('Dzieci zawsze pytają w najgorszym momencie.', [O('One mają do tego radar.')])
+      ])
+    ]),
     pause(4000),
     clock('2027-01-20T21:00'),
     set('c_day3'),
@@ -259,12 +301,93 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     ]),
     pause(2500),
     scene('scOkno', [scare('s4_okno', 'glitch')]),
+    end('cf')
+  ];
+});
+
+/* ---------- cf · Festyn (noc z 20 na 21.01) ---------- */
+Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when: 'Środa, 20 stycznia · 23:58', mood: 'dark' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, nearby, vanish, typing } = D;
+  const { M, O, I, B, c, V } = KronikaCast(D);
+  return [
+    clock('2027-01-20T23:58'),
+    ambient('dark'),
+    title(),
+    O('Nie śpisz? Ja nie mogę.'),
+    O('Leżę i liczę, ile osób z rodziców w świetlicy ogląda Klipo. Wyszło mi, że wszyscy.'),
+    pause(2000),
+    callIn('ola'),
+    c('ola', 'Sorry, że dzwonię. Pisać już nie umiem, ręce mi się trzęsą.'),
+    c('ola', 'To był sierpień. Festyn na boisku, grał jakiś zespół z Bielawy. Ona powiedziała coś o mojej mamie. Coś obrzydliwego.'),
+    c('ola', 'Popchnęłam ją. Upadła twarzą na ławkę. Pamiętam dźwięk. Do dziś pamiętam ten dźwięk.'),
+    c('ola', 'Dobra. Już. Dziękuję, że {odebrałeś|odebrałaś}.'),
+    callEnd(),
+    pause(4000),
+    clock('2027-01-21T00:09'),
+    unlock('chat:blysk2'),
+    notify({ app: 'messages', title: 'Błysk', text: 'nowy kontakt wysyła ci wideo. Zniknie po obejrzeniu.', sound: 'notif', open: { chat: 'blysk2' } }),
+    say('blysk2', 'blysk2', '', { vid: 'assets/video/v_festyn.mp4', img: 'v_festyn', vanish: true }),
+    B('zapowiedź. pełna wersja jutro o 21'),
+    choose('blysk2', [
+      opt('Zrób zrzut ekranu', [
+        B('znowu zrzut'),
+        B('pokaż go komu chcesz. nikt ci nie uwierzy, że to nie ty masz te kasety'),
+        vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
+      ], { shot: true, set: { c_shotFestyn: true } }),
+      opt('Ona miała 17 lat.', [
+        B('a ja w listopadzie byłam tylko stażystką. i jakoś nikt się nade mną nie litował'),
+        vanish('blysk2')
+      ], { set: { c_pleaded: true } })
+    ]),
+    iff('flag:c_shotFestyn', [
+      pause(2000),
+      O('Ktoś wrzucił do grupy zrzut z Błysku. Z twoim imieniem w rogu.'),
+      O('Ludzie piszą, że to ty dostajesz te klipy pierwszy. Sylwia usunęła, ale ja już widziałam.'),
+      O('Wiem, że to nie ty. Ale głupio mi.')
+    ]),
+    pause(3000),
+    scene('xKadrFestyn', [
+      I('nie śpię, składam laptopa klientce. obejrzałem tę zapowiedź, zanim zniknęła u kogoś w grupie'),
+      pic('igor', 'igor', 'c_festyn', 'zrobiłem kadr. przypomina ci to coś?'),
+      choose('igor', [
+        opt('Kamera jest wyżej niż ludzie. Ktoś stał na scenie. Operator kablówki.', [
+          I('tak. czyli to nie nagrał ktoś z tłumu telefonem. to oficjalna kaseta TV Dolina'),
+          I('a pełna wersja jest tylko na oryginale. czyli u pana Zenona w pokoju')
+        ], { set: { c_stageLink: true } }),
+        opt('Ta dziewczyna z boku. Chyba trzyma telefon.', [
+          I('przybliżyłem. to puszka po napoju, nie telefon'),
+          pause(3000),
+          I('ale zobacz, skąd jest ujęcie. z góry, ze sceny. to kamera kablówki. oryginał jest u pana Zenona')
+        ], { set: { c_stageLink: true, c_canDetour: true } }),
+        opt('Zwykły festyn. Taki jak co roku.', [I('no. tylko że ten jest jutro w internecie')], { set: { c_stageLater: true } })
+      ])
+    ]),
+    pause(5000),
+    clock('2027-01-21T00:12'),
+    M('jesteś w domu? światło na twojej klatce mruga od dziesięciu minut'),
+    pause(3000),
+    scene('xKlatka', [
+      nearby('c_klatka', { device: 'Telefon', img: 'c_klatka', note: 'Nieznane urządzenie w pobliżu', flag: 'c_klatkaOk', declineFlag: 'c_klatkaNo' }),
+      iff('flag:c_klatkaOk', [
+        B('mokre ślady. ktoś tu przed chwilą był'),
+        B('spokojnie. to tylko ja i pies'),
+        vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.'),
+        M('ktoś stał pod twoimi drzwiami?? zaraz zejdę z Kubą')
+      ], [M('ktoś wyszedł z twojej klatki. z psem. poszedł w stronę bloku pana Zenona')])
+    ]),
+    pause(3000),
+    typing('blysk2', 'blysk2', 4000),
+    pause(2500),
+    scene('scFestyn', [scare('s4_festyn', 'face', { img: 'c_festyn', caption: 'TV Dolina · 14.08.2011 · 21:12' })]),
+    pause(2000),
+    M('dobra. zamknij drzwi na dwa zamki. ja nie śpię'),
+    set('c_festynSeen'),
     end('c3')
   ];
 });
 
 /* ---------- c3 · Wogóle ---------- */
-Engine.chapter('c3', { num: 3, kicker: 'Sprawa 4 · Rozdział 3', title: 'Wogóle', when: 'Czwartek, 21 stycznia · 9:30', mood: 'tense' }, D => {
+Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogóle', when: 'Czwartek, 21 stycznia · 9:30', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, vanish } = D;
   const { M, O, W, S, I, Id, B, c } = KronikaCast(D);
   return [
@@ -299,6 +422,14 @@ Engine.chapter('c3', { num: 3, kicker: 'Sprawa 4 · Rozdział 3', title: 'Wogól
         ], { set: { c_roomLink: true } }),
         opt('Porządek ma. Wszystko podpisane.', [W('Zawsze był pedantem. Kasety ułożone według lat.')], { set: { c_roomLater: true } })
       ])
+    ]),
+    scene('xCzwartek', [
+      pause(2000),
+      I('ludzie przynoszą mi dziś magnetowidy. trzy sztuki od rana. chcą sprawdzić, czy na ich kasetach nie ma czegoś złego'),
+      I('jedna pani przyniosła kasetę „wesele 1997” i zapytała, czy da się wyciąć szwagra'),
+      choose('igor', [opt('Da się?', [I('da się. ale powiedziałem, że szwagier jest w każdej klatce, bo tak było')]), opt('Mglisko w pigułce.', [I('no. każdy ma swoje 30 sekund, jak piszą')])]),
+      say('zuza', 'zuza', 'babcia nie wierzy że to pan zenon. mówi że on by nikomu nie zrobił wstydu'),
+      say('zuza', 'zuza', 'na moim chrzcie podobno wyłączył kamerę jak wujek się przewrócił. „tego nie trzeba”')
     ]),
     pause(4000),
     callIn('zenon'),
@@ -347,7 +478,7 @@ Engine.chapter('c3', { num: 3, kicker: 'Sprawa 4 · Rozdział 3', title: 'Wogól
 });
 
 /* ---------- c4 · 20:58 ---------- */
-Engine.chapter('c4', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
+Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust } = D;
   const { M, O, Id, c } = KronikaCast(D);
   return [

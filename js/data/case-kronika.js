@@ -92,7 +92,7 @@ DATA.web.tt_kronika = {
 DATA.seasons.push({
   id: 's4', revision: 1, title: 'Kronika', kicker: 'SPRAWA 4', released: true,
   description: 'Ferie w Mglisku. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
-  chapters: ['c0', 'c1', 'c2', 'c3', 'c4'],
+  chapters: ['c0', 'c1', 'c2', 'cf', 'c3', 'c4'],
   credits: {
     kicker: 'Koniec sprawy 4', title: 'KRONIKA',
     lines: [
@@ -101,7 +101,7 @@ DATA.seasons.push({
       'Dziękujemy, że {pytałeś|pytałaś}, kto trzyma kamerę.'
     ],
     teaser: { title: 'MGLISKO', text: 'Lodowisko otwierają w lutym. Bałwan z pachołkiem jeszcze stoi.' },
-    note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 4 · Rozdział 4.'
+    note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 4 · Rozdział 5.'
   },
   episodes: [
     ['s4.01', 'Studniówka', 'c0', 'ev:ev_c_klip1'],
@@ -110,6 +110,7 @@ DATA.seasons.push({
     ['s4.04', 'O.N.', 'c2', 'flag:c_day3'],
     ['s4.05', 'Okno', 'c2', 'ev:ev_c_okno'],
     ['s4.06', 'Pies', 'c2', 'ev:ev_c_spacer'],
+    ['s4.06b', 'Festyn', 'cf', 'flag:c_festynSeen'],
     ['s4.07', 'Pokój z kasetami', 'c3', 'ev:ev_c_pokoj'],
     ['s4.08', 'Wogóle', 'c3', 'ev:ev_c_wogole'],
     ['s4.09', '20:58', 'c4', s => !!G.s.vars.s4Ending]
