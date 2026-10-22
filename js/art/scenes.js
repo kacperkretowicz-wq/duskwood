@@ -141,7 +141,7 @@
     return s;
   }
   D('m_hall', { title: 'Hala A', exif: phone('03.10.2026', '15:40', { place: 'Huta „Jutrzenka”, hala A' }), draw: k => hall(k, { light: 'day', puddle: true }) });
-  D('m_cam_install', {
+  D('m_cam_install', { src: 'assets/maja/m_cam_install.jpg',
     title: 'Fotopułapka na filarze', exif: phone('09.10.2026', '17:30', { place: 'Huta „Jutrzenka”, hala A' }),
     draw: k => {
       let s = hall(k, { light: 'dusk', cols: 2 });
@@ -302,9 +302,9 @@
   });
 
   /* ================= OKNO — AUTO POD DOMEM ================= */
-  D('m_window', {
+  D('m_window', { src: 'assets/maja/m_window.jpg',
     title: 'Z okna', w: 900, h: 1200, exif: phone('13.10.2026', '23:10', { place: 'Mglisko, ul. Szklarska 4, piętro', note: 'Tryb nocny' }), style: 'night',
-    hotspots: [{ x: 470, y: 900, r: 140, ev: 'ev_car_window' }],
+    hotspots: [{ x: 540, y: 870, r: 150, ev: 'ev_car_window' }],
     draw: k => {
       const { W, H } = k;
       let s = k.sky([[0, '#06090d'], [1, '#1a1f26']]);
@@ -323,7 +323,7 @@
   });
 
   /* ================= NAD ZALEWEM / PIES ================= */
-  D('m_ola_lake', {
+  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg',
     title: 'Z Olą nad zalewem', exif: phone('21.09.2026', '18:42', { place: 'Zalew Mgliski, tama' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;
@@ -339,7 +339,7 @@
       return s;
     }
   });
-  D('m_bandzior', {
+  D('m_bandzior', { src: 'assets/maja/m_bandzior.jpg',
     title: 'Bandzior', exif: phone('24.09.2026', '20:15', { place: 'Mglisko, ul. Szklarska 4' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;
