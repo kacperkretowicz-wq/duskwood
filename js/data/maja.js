@@ -4,7 +4,7 @@
 DATA.maja = {
   security: [
     { q: 'Jak miał na imię twój pierwszy pies?', a: ['kluska'] },
-    { q: 'Jaki był twój pierwszy aparat fotograficzny?', a: ['zenit', 'zenit e', 'zenit-e', 'zenite', 'zenit 12', 'aparat zenit'] }
+    { q: 'Jaki był twój pierwszy aparat fotograficzny?', a: ['kometa', 'kometa e', 'kometa-e', 'kometae', 'kometa 12', 'aparat kometa'] }
   ],
 
   albums: [
@@ -200,7 +200,7 @@ DATA.maja = {
   notes: [
     {
       id: 'szklo', title: 'Szkło pamięta — założenia', t: '2026-09-20T23:10', ev: 'ev_project',
-      body: 'Projekt dyplomowy, pracownia fotografii, prof. Wilk.\n\n*Ślady widać dopiero pod światło.* Odcisk palca, rysa, miejsce po naklejce. Chcę fotografować rzeczy, które ktoś próbował doczyścić, a potem ludzi, którzy tu pracowali. Bez udawania, że budynek przemówi za nich.\n\nHuta „Jutrzenka”, zamknięta w 1996. Nikt tam nie chodzi oprócz dzieciaków i lisów.\n\nPlan:\n1. Hala A i B — dokumentacja, światło przez okna (październik = najlepsze niskie słońce)\n2. Szatnie i biura — przedmioty, które zostały po ludziach\n3. *Odprężarka* — tunel, w którym studzono szkło. Podobno 40 m!\n4. Portrety ludzi, którzy tu pracowali (zapytać mamę, kto żyje)\n5. Analog: Zenit + klisza cz-b. Telefon tylko do notatek.\n\nTytuł roboczy: *SZKŁO PAMIĘTA.*'
+      body: 'Projekt dyplomowy, pracownia fotografii, prof. Wilk.\n\n*Ślady widać dopiero pod światło.* Odcisk palca, rysa, miejsce po naklejce. Chcę fotografować rzeczy, które ktoś próbował doczyścić, a potem ludzi, którzy tu pracowali. Bez udawania, że budynek przemówi za nich.\n\nHuta „Jutrzenka”, zamknięta w 1996. Nikt tam nie chodzi oprócz dzieciaków i lisów.\n\nPlan:\n1. Hala A i B — dokumentacja, światło przez okna (październik = najlepsze niskie słońce)\n2. Szatnie i biura — przedmioty, które zostały po ludziach\n3. *Odprężarka* — tunel, w którym studzono szkło. Podobno 40 m!\n4. Portrety ludzi, którzy tu pracowali (zapytać mamę, kto żyje)\n5. Analog: Kometa + klisza cz-b. Telefon tylko do notatek.\n\nTytuł roboczy: *SZKŁO PAMIĘTA.*'
     },
     {
       id: 'ciemnia', title: 'Dziennik ciemni', t: '2026-10-05T23:48', ev: 'ev_darkroom',

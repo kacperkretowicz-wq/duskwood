@@ -23,7 +23,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     title(),
     K('to jej mail: maja.wrona@nimbus.pl'),
     K('pytania są dwa. o pierwszego psa i o pierwszy aparat'),
-    K('wpisałem bandzior i aparat. oba źle 💀'),
+    K('wpisałem bandzior i lustrzanka. oba źle 💀'),
     K('bandzior to ten pies którego mamy TERAZ. nie pytaj jak ja studia zdaję'),
     unlock('app:nimbus'),
     goal('Odzyskaj dostęp do konta Nimbus Mai.', [
@@ -40,7 +40,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     K('udało się??'),
     choose('kuba', [
       opt('Jestem w środku.', []),
-      opt('Kluska i Zenit. Mam dostęp.', [K('KLUSKA. no jasne'), K('jamniczka. umarła, jak miałem 12 lat. maja płakała tydzień')], { trust: { kuba: 1 } })
+      opt('Kluska i Kometa. Mam dostęp.', [K('KLUSKA. no jasne'), K('jamniczka. umarła, jak miałem 12 lat. maja płakała tydzień')], { trust: { kuba: 1 } })
     ]),
     g('kuba', '%name% {wszedł|weszła} na nimbusa!!'),
     g('ola', 'Okej. Tylko nic nie usuwaj, błagam. Nawet głupich zdjęć.'),

@@ -180,15 +180,15 @@
       return s;
     }
   });
-  D('k_zenit', { src: 'assets/kuba/k_zenit.jpg',
-    title: 'Zenit-E', grade: 'warm', exif: ph('28.09.2026', '11:02', { device: 'Tellio A54', place: 'Mglisko, ul. Szklarska 4' }), onView: 'ev_zenit',
+  D('k_kometa', { src: 'assets/kuba/k_kometa.jpg',
+    title: 'Kometa-E', grade: 'warm', exif: ph('28.09.2026', '11:02', { device: 'Tellio A54', place: 'Mglisko, ul. Szklarska 4' }), onView: 'ev_kometa',
     draw: k => {
       const { W, H } = k;
       let s = k.full('#2a1a10') + k.rect(0, 0, W, H * 0.55, k.lin([[0, '#c9c2b0'], [1, '#8a826e']])) + k.glow(W * 0.85, H * 0.15, 500, '#fff6dc', 0.6);
       s += k.rect(0, H * 0.55, W, H * 0.45, k.lin([[0, '#7a4e2a'], [1, '#4a2e18']]));
       for (let i = 0; i < 12; i++) s += k.line(0, H * 0.58 + i * 34, W, H * 0.6 + i * 34, '#3a2210', 2, 'opacity=".35"');
       s += k.ell(600, 690, 330, 40, '#000', 'opacity=".4" ' + k.blur(10));
-      s += k.zenit(600, 560, 1.9);
+      s += k.kometa(600, 560, 1.9);
       return s;
     }
   });

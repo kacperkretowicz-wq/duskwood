@@ -31,7 +31,7 @@ DATA.evidence = {
 
   /* ---------- rozdział 1 ---------- */
   ev_kluska: { title: 'Kluska — pierwszy pies Mai', cat: 'photo', source: 'Kadr: @maja.wrona', img: 'k_kluska', desc: 'Jamniczka Kluska (2006–2019). Pierwsza psia miłość Mai — „zanim pojawił się Bandzior”.' },
-  ev_zenit: { title: 'Zenit-E — pierwszy aparat Mai', cat: 'object', source: 'Kadr: @maja.wrona', img: 'k_zenit', desc: 'Prezent od dziadka na 12. urodziny. „Mój pierwszy aparat. Waży tonę, kocham go.”' },
+  ev_kometa: { title: 'Kometa-E — pierwszy aparat Mai', cat: 'object', source: 'Kadr: @maja.wrona', img: 'k_kometa', desc: 'Prezent od dziadka na 12. urodziny. „Mój pierwszy aparat. Waży tonę, kocham go.”' },
   ev_dam_news: {
     title: 'Samochód Mai na tamie', cat: 'msg', source: 'Mglisko24.pl', img: 'web_dam',
     desc: 'Czerwoną iskrę Mai znalazł wędkarz *15.10 o 6:40* na koronie tamy Zalewu Mgliskiego. Na barierce wisiała jej kurtka. Komendant Gajda: „wszystko wskazuje na tragiczny wypadek lub targnięcie się na życie”. Nurkowie nic nie znaleźli.'

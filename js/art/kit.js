@@ -350,11 +350,11 @@ const Art = (() => {
           (o.dust ? k.rect(-110, -60, 220, 120, '#6b5a40', `rx="10" opacity="${o.dust}"`) : ''),
           `transform="translate(${f(x)},${f(y)}) scale(${s}) rotate(${o.rot || 0})"`);
       },
-      zenit(x, y, s) {
+      kometa(x, y, s) {
         return k.g(
           k.rect(-140, -55, 280, 110, '#151515', 'rx="12"') + k.rect(-140, -55, 280, 34, '#b9bcbf', 'rx="10"') + k.path('M-40,-55 L-22,-100 L22,-100 L40,-55 Z', '#b9bcbf') +
           k.rect(-30, -96, 60, 18, '#2a2a2a') + k.circle(0, 20, 64, '#0d0d0d') + k.circle(0, 20, 50, '#1e2328') + k.circle(0, 20, 30, '#2f4554') + k.circle(-12, 6, 10, '#fff', 'opacity=".25"') +
-          k.circle(95, -62, 14, '#888') + k.circle(-100, -62, 16, '#888') + k.text(-12, -64, 'ZENIT-E', 13, '#222', 'text-anchor="middle" font-weight="800" letter-spacing="2"'),
+          k.circle(95, -62, 14, '#888') + k.circle(-100, -62, 16, '#888') + k.text(-12, -64, 'KOMETA-E', 13, '#222', 'text-anchor="middle" font-weight="800" letter-spacing="2"'),
           `transform="translate(${f(x)},${f(y)}) scale(${s})"`);
       },
       paper(x, y, w, h, rot, inner, o = {}) {

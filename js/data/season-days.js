@@ -77,7 +77,7 @@ Object.assign(DATA.conversations, {
         sideChoice('Odsłuchałaś je sama?', ['W aucie pod apteką. Dwa razy.', 'Potem musiałam wejść i wydawać ludziom syropy na kaszel. Przesyłam.'], 'voice')
       ] },
       voice: { lines: [
-        'voice:0:38|Maja|Ola. Ola, Ola. Nie krzycz, jestem w hucie. W szatni są takie stare metalowe szafki i w siedemnastce leży aparat. Taka żółta jednorazówka, wygląda na lata dziewięćdziesiąte. I słuchaj, film jest skończony. Ktoś ją tu zostawił ze zdjęciami w środku…',
+        'voice:0:38|Maja|Ola. Ola, Ola. Nie krzycz, jestem w hucie. W szatni są takie stare metalowe szafki i w siedemnastce leży aparat. Taka niebieska jednorazówka, wygląda na lata dziewięćdziesiąte. I słuchaj, film jest skończony. Ktoś ją tu zostawił ze zdjęciami w środku…',
         'voice:0:12|Maja|Dobra, wiem, że jesteś w pracy. Ale ja bym tego nie wytrzymała. Muszę zobaczyć, co tam jest. W poniedziałek wywołuję, trzymaj kciuki.'
       ], choices: [
         sideChoice('Brzmi, jakby była szczęśliwa.', ['Była. Dawno jej takiej nie słyszałam.', 'Cały czas gadała o tym dyplomie. Miała mi pokazać zdjęcia.'], 'after'),
