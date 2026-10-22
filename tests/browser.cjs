@@ -89,7 +89,7 @@ assert.ok(await page.locator('.photo-av, .av img[src*="assets/people/"]').count(
  await op.goto(base+'/');await op.evaluate(async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}));});
  await offline.setOffline(true);await op.reload();await op.getByRole('button',{name:'Nowa gra',exact:true}).waitFor();
  const assets=await op.evaluate(async()=>{
-  const urls=['css/messenger.css','assets/people.png','assets/forest.png','assets/maja-river.png','assets/gajda.png','js/data/migrations.js'];
+  const urls=['css/messenger.css','assets/people.jpg','assets/forest.jpg','assets/maja-river.jpg','assets/gajda.jpg','js/data/migrations.js'];
   return Promise.all(urls.map(async u=>(await fetch(u)).ok));
  });assert.ok(assets.every(Boolean));
  console.log('PASS offline reload with new styles, photos, migration');passed++;

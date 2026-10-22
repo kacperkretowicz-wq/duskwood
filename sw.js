@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v25';
+const VERSION = 'quiet-is-safer-v26';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -15,7 +15,7 @@ const FILES = [
   './assets/film/p_21.jpg', './assets/film/p_21d.jpg', './assets/film/p_22.jpg', './assets/film/p_22d.jpg',
   './assets/film/p_23.jpg', './assets/film/p_23d.jpg', './assets/film/p_23fog.jpg', './assets/kuba/k_gate.jpg',
   './assets/kuba/k_headlamp.jpg', './assets/kuba/k_kluska.jpg', './assets/kuba/k_locker.jpg', './assets/kuba/k_mount.jpg',
-  './assets/kuba/k_poster.jpg', './assets/kuba/k_skate.jpg', './assets/kuba/k_wall.jpg', './assets/kuba/k_zenit.jpg',
+  './assets/kuba/k_poster.jpg', './assets/kuba/k_skate.jpg', './assets/kuba/k_wall.jpg', './assets/kuba/k_kometa.jpg',
   './assets/maja/m_bandzior.jpg', './assets/maja/m_bricks.jpg', './assets/maja/m_cam_install.jpg', './assets/maja/m_darkroom.jpg',
   './assets/maja/m_fence.jpg', './assets/maja/m_hall.jpg', './assets/maja/m_kodak.jpg', './assets/maja/m_lehr.jpg',
   './assets/maja/m_library.jpg', './assets/maja/m_lockers.jpg', './assets/maja/m_mirror.jpg', './assets/maja/m_ola_lake.jpg',
@@ -29,13 +29,13 @@ const FILES = [
   './js/core/pacing.js',
   './js/vendor/capacitor-runtime.js',
   './assets/lena-v2.jpg', './assets/bus-stop-v2.jpg',
-  './assets/people.png', './assets/forest.png', './assets/maja-river.png', './assets/gajda.png', './js/data/migrations.js',
+  './assets/people.jpg', './assets/forest.jpg', './assets/maja-river.jpg', './assets/gajda.jpg', './js/data/migrations.js',
   './js/core/util.js', './js/core/state.js', './js/core/audio.js', './js/core/engine.js', './js/core/ui.js',
   './js/art/kit.js', './js/art/avatars.js', './js/art/scenes.js', './js/art/film.js', './js/art/maps.js',
   './js/data/characters.js', './js/data/evidence.js', './js/data/maja.js', './js/data/web.js', './js/data/world.js',
   './js/apps/messages.js', './js/apps/viewer.js', './js/apps/phone.js', './js/apps/browser.js', './js/apps/gallery.js',
   './js/apps/nimbus.js', './js/apps/maps.js', './js/apps/notes.js', './js/apps/tools.js',
-  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './js/story/kopia2.js', './assets/kopia/k_biurko.jpg', './assets/kopia/k_petla.jpg', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg',
+  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './js/story/kopia2.js', './assets/kopia/k_biurko.jpg', './assets/kopia/k_petla.jpg', './assets/kopia/k_mem_krzeslo.jpg', './assets/kopia/k_kadr_kabel.jpg', './assets/kopia/k_igor_kable.jpg', './assets/kopia/k_peron.jpg', './assets/kopia/k_zeszyt.jpg', './assets/kopia/k_zeszyt_zoom.jpg', './assets/video/v_korytarz.jpg', './assets/video/v_petla.jpg', './assets/video/v_korytarz.mp4', './assets/video/v_petla.mp4', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg',
   './assets/people/marta.jpg', './assets/people/marta_life1.jpg', './assets/people/natan.jpg', './assets/people/natan_life1.jpg', './assets/people/janina.jpg', './assets/people/janina_life1.jpg', './assets/people/henryk.jpg', './assets/people/henryk_life1.jpg',
   './assets/most/teczka_kruk.jpg', './assets/most/dziennik_s41.jpg', './assets/most/pocztowka.jpg', './assets/most/wycinek_2012.jpg', './assets/most/most_2011.jpg', './assets/most/hw_kadr.jpg',
   './js/main.js'

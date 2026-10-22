@@ -21,6 +21,15 @@ Object.assign(DATA.chats, {
   cicho: { name: '@cicho.bylo', avatar: 'cicho', sub: 'Klipo · wiadomość prywatna', readonly: true }
 });
 DATA.chats.lena ||= { name: 'Lena Cicha', avatar: 'lena' };
+/* Błysk: fikcyjna apka ze znikającymi wiadomościami. Zrzut ekranu widzi nadawca. */
+Object.assign(DATA.chars, {
+  blysk: { name: 'mgla_24', short: 'mgla_24', color: '#7a8a99', role: 'Błysk · konto bez zdjęcia' },
+  blysk2: { name: 'nowy kontakt', short: '???', color: '#555', role: 'Błysk · konto bez zdjęcia' }
+});
+Object.assign(DATA.chats, {
+  blysk: { name: 'mgla_24', avatar: 'blysk', sub: 'Błysk · znika po przeczytaniu', readonly: true, ephemeral: true },
+  blysk2: { name: 'nowy kontakt', avatar: 'blysk2', sub: 'Błysk · znika po przeczytaniu', readonly: true, ephemeral: true }
+});
 
 Object.assign(DATA.persons, {
   ewa: {
@@ -108,6 +117,10 @@ Object.assign(DATA.evidence, {
     title: 'Zdjęcie z pętli', cat: 'photo', source: '@cicho.bylo · 23.12, 21:50', img: 'k_petla',
     desc: 'Przednia szyba w nocy, pusta wiata na pętli, zielona strzałka kierunkowskazu na desce, rozkład jazdy za klipsem i kanapka w folii.'
   },
+  ev_k_peron: {
+    title: 'Zdjęcie z peronu', cat: 'photo', source: 'Przesyłanie w pobliżu · 23.12, 8:46', img: 'k_peron',
+    desc: 'Ktoś na stacji w Mglisku zrobił mi zdjęcie od tyłu, zza słupa, i przesłał je z telefonu bez nazwy. Weronika nikogo z telefonem nie widziała.'
+  },
   ev_k_lena: {
     title: '@cicho.bylo to Lena Cicha', cat: 'testimony', source: 'Maja i Lena · 23.12',
     desc: 'Nazwa konta, kierunkowskaz w głosówce, kabina busa na zdjęciu i pytanie o nagrania z 2019 prowadzą do Leny. W 2009 miała siedem lat. To jej głos jest w pierwszym klipie.'
@@ -122,6 +135,16 @@ Object.assign(DATA.evidence, {
     exif: { date: '21.12.2026', time: '17:04', device: 'Telefon Kuby', file: 'IMG_20261221_1704.jpg' } });
   Art.def('k_petla', { src: 'assets/kopia/k_petla.jpg', title: 'Pętla · 21:49', w: 1024, h: 768, draw: () => '',
     exif: { date: '23.12.2026', time: '21:49', device: 'nieznane (przesłane w Klipo)', file: 'klipo_dm_20261223.jpg' } });
+  for (const [id, src, title, w, h] of [
+    ['k_mem_krzeslo', 'assets/kopia/k_mem_krzeslo.jpg', 'Krzesło na przystanku', 768, 1024],
+    ['k_kadr_kabel', 'assets/kopia/k_kadr_kabel.jpg', 'Kadr z klipu nr 6 · 0:03', 1024, 768],
+    ['k_igor_kable', 'assets/kopia/k_igor_kable.jpg', 'Serwis Igora', 1024, 768],
+    ['k_peron', 'assets/kopia/k_peron.jpg', 'Peron w Mglisku · 8:46', 768, 1024],
+    ['k_zeszyt', 'assets/kopia/k_zeszyt.jpg', 'Zeszyt zapisów', 768, 1024],
+    ['k_zeszyt_zoom', 'assets/kopia/k_zeszyt_zoom.jpg', 'Zeszyt zapisów · 2 grudnia', 550, 270],
+    ['v_korytarz', 'assets/video/v_korytarz.jpg', 'Czytelnia · 21:40', 360, 640],
+    ['v_petla', 'assets/video/v_petla.jpg', 'Pętla', 360, 640]
+  ]) Art.def(id, { src, title, w, h, draw: () => '' });
   DATA.chars.ewa.photo = 'assets/people/ewa.jpg';
 })();
 

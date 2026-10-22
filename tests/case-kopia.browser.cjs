@@ -5,7 +5,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
  try{
-  const W={wlasnym_glosem:['k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff'],zasiegi:['k_outedKuba'],kopia:['k_lenaPublic','k_ewaWait','k_quiet']};
+  const W={wlasnym_glosem:['k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff','k_photoZoom','k_blyskTrust','k_cableLink'],zasiegi:['k_outedKuba','k_photoZoom','k_shotBlysk','k_cableIgor'],kopia:['k_lenaPublic','k_ewaWait','k_quiet','k_photoZoom','k_cableLater']};
   for(const [s1,target] of [['swit','wlasnym_glosem'],['swit','zasiegi'],['swit','kopia'],['cisza','wlasnym_glosem']]){
   const ctx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});

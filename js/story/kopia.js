@@ -102,7 +102,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     K('to jest moja droga do pracy. stał tam pan pawlak i szorował to rozpuszczalnikiem'),
     K('napisałbym do niego. ale co mam napisać'),
     choose('kuba', [
-      opt('Prawda o stodole to jedno. Spray na bramie to drugie.', [K('no'), K('on to szoruje a ludzie dalej wrzucają link')], { set: { k_kubaTruthTalk: true } }),
+      opt('Cokolwiek się stało ze stodołą, nikt nie powinien im mazać po bramie.', [K('no'), K('on to szoruje a ludzie dalej wrzucają link')], { set: { k_kubaTruthTalk: true } }),
       opt('Trzymaj się z daleka od komentarzy, dobrze?', [K('spoko. i tak mam nockę dzisiaj')])
     ]),
     pause(2000),
@@ -122,6 +122,15 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
   return [
     clock('2026-12-19T21:30'),
     title(),
+    scene('kMem', [
+      pic('maja2', 'maja', 'k_mem_krzeslo', 'ktoś postawił krzesło na przystanku przy szkole. bo autobus o 7:10 przyjeżdża „mniej więcej”'),
+      M('gmina już napisała na kwartale, że „krzesło nie jest elementem infrastruktury” 😭'),
+      choose('maja2', [
+        opt('Najlepsza inwestycja w gminie od lat.', [M('zgłaszam do budżetu obywatelskiego. „krzesło 2”')]),
+        opt('Kto je tam postawił?', [M('podobno pan Zenon. czeka tam co rano na gazetę, a ławkę ktoś ukradł w 2019')])
+      ])
+    ]),
+    pause(2500),
     I('hej. maja mi przesłała klip'),
     I('po samym klipie nie powiem, czym to nagrano. klipo i tak kompresuje dźwięk'),
     I('ale powiadomienie w tle to dźwięk z systemu telefonu. nie z dyktafonu'),

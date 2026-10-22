@@ -34,7 +34,7 @@
   UI.openWallpaperBackup = function () {
     if (!G.isUnlocked('nimbus:auth') || !G.isUnlocked('maja:base')) return;
     const body = h('div', { class: 'pad wallpaper-backup' },
-      h('img', { src: 'assets/maja-river.png', alt: 'Zachowana fotografia Mai nad wodą' }),
+      h('img', { src: 'assets/maja-river.jpg', alt: 'Zachowana fotografia Mai nad wodą' }),
       h('h3', {}, 'Dwa kadrowania. Jeden plik.'),
       h('p', {}, 'W ustawieniach ekranu są zachowane dwa warianty fotografii znad wody. Kopia telefonu zakończyła się 14 października o 23:58.'),
       h('p', {}, 'Możesz zachować te warianty w swoim wyborze tapet i sprawdzić plik źródłowy.'),

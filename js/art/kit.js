@@ -502,7 +502,7 @@ const Art = (() => {
     const meta = get(id);
     if (meta?.src) return meta.src;
     if (meta?.photo) { const u = photoUrl(String(id), meta); if (u) return u; loadPhoto(meta.photo); }
-    if (id === 'k_maja') return 'assets/maja-river.png';
+    if (id === 'k_maja') return 'assets/maja-river.jpg';
     if (!cache[id]) cache[id] = URL.createObjectURL(new Blob([build(id)], { type: 'image/svg+xml' }));
     return cache[id];
   }

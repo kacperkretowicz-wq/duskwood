@@ -118,7 +118,7 @@ DATA.endings = {
   }
 };
 
-/* Portrety i codzienne zdjęcia postaci (assets/people). Gdy plik się nie wczyta, UI.avatar wraca do people.png. */
+/* Portrety i codzienne zdjęcia postaci (assets/people). Gdy plik się nie wczyta, UI.avatar wraca do people.jpg. */
 (() => {
   const people = {
     kuba: ['Zasnął nad kodem', 'Pociąg do Mgliska'],

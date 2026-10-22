@@ -37,7 +37,7 @@ Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Ha
     K('i ja stoję z bułkami i nic nie mówię. jak wszyscy'),
     choose('kuba', [
       opt('Ty nie jesteś jak wszyscy. Szukałeś jej, kiedy inni milczeli.', [K('szukałem w grupie'), K('a w sklepie milczałem')], { trust: { kuba: 1 } }),
-      opt('Ludzie tak gadają, bo boją się, że to też o nich.', [K('no to niech się boją'), K('sorry. 8% baterii, jestem zły na wszystko')], { set: { kp_kubaAngry: true } })
+      opt('Może tak gadają, bo boją się przyznać, co się tu stało.', [K('no to niech się boją'), K('sorry. 8% baterii, jestem zły na wszystko')], { set: { kp_kubaAngry: true } })
     ]),
     pause(4000),
     unlock('chat:maja2'),
@@ -55,7 +55,10 @@ Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Ha
 });
 
 Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy', when: 'Poniedziałek, 21 grudnia · 8:10', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, vanish, callIn, callEnd } = D;
+  const I = (t, o) => say('igor', 'igor', t, o);
+  const Bl = (t) => say('blysk', 'blysk', t, { vanish: true });
+  const c = (who, t) => say('call', who, t);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -98,8 +101,28 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
       opt('Wyłącz ją na minutę z prądu. A potem sprawdź papier.', [pause(4000), K('zadziałało. nie wiem co, ale zadziałało')])
     ]),
     pause(3500),
-    clock('2026-12-21T23:48'),
+    clock('2026-12-21T21:40'),
     ambient('dark'),
+    /* Nagranie z pustej czytelni. Lampa na czujnik zapala się sama. Wyjaśnienia nie ma (zaczep na sprawę 4). */
+    scene('kLampa', [
+      W('Wróciłam do czytelni po szalik. Kuba już poszedł, wszystko pozamykane.'),
+      W('Lampa na końcu korytarza zapaliła się sama. Nagrałam, bo nie wierzyłam.'),
+      say('weronika', 'weronika', '', { vid: 'assets/video/v_korytarz.mp4', img: 'v_korytarz' }),
+      W('To jest czujnik ruchu. Tam nikogo nie ma. Prawda?'),
+      choose('weronika', [
+        opt('Czujniki łapią czasem ciepło z kaloryfera. Ale niech pani już idzie do domu.', [W('Idę. Zostawiam zapalone światło przy wejściu.')]),
+        opt('Proszę zamknąć czytelnię i zadzwonić do mnie z domu.', [
+          W('Dobrze.'),
+          pause(5000),
+          callIn('weronika'),
+          c('weronika', 'Jestem w domu. Drzwi zamknięte na dwa zamki.'),
+          c('weronika', 'Głupio mi, że się przestraszyłam lampy. Dziękuję, że {Pan|Pani} poczekał{|a}.'),
+          callEnd()
+        ], { set: { k_veraCall: true }, trust: { weronika: 1 } })
+      ])
+    ]),
+    pause(3000),
+    clock('2026-12-21T23:48'),
     notify({ app: 'browser', title: 'Klipo', text: '@archiwum.rybickiego dodał nowy klip', sound: 'notif', open: { page: 'tt_archiwum' } }),
     set('k_clip6'),
     pause(5000),
@@ -110,6 +133,29 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     set('k_clip7gone'),
     pause(4000),
     /* Głosówka z konta, które zostawia komentarze z minutami. Oddech i równe tykanie w tle. */
+    clock('2026-12-22T01:30'),
+    unlock('chat:blysk'),
+    notify({ app: 'messages', title: 'Błysk', text: 'mgla_24 wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blysk' } }),
+    /* Znikające wiadomości: sekret, którego nie da się potem udowodnić. Zrzut ekranu widzi druga strona. */
+    scene('kBlysk', [
+      Bl('nie pytaj kim jestem'),
+      Bl('stodołę pawlaków podpalił stary pawlak. sam. dla odszkodowania'),
+      Bl('widziałam go z kanistrem. miałam 7 lat'),
+      Bl('tego nie ma w żadnym klipie. i nie będzie, jak ktoś nie dopilnuje'),
+      choose('blysk', [
+        opt('Zrób zrzut ekranu', [
+          Bl('zrobił{eś|aś} zrzut'),
+          Bl('myślałam że jesteś inn{y|a}'),
+          vanish('blysk', 'Wiadomości zniknęły. mgla_24 cię zablokował(a).')
+        ], { shot: true, set: { k_shotBlysk: true } }),
+        opt('Dlaczego mówisz to mnie?', [
+          Bl('bo ty pytasz zanim wrzucisz'),
+          Bl('nikomu tego nie pokazuj. i tak nie masz jak'),
+          vanish('blysk')
+        ], { set: { k_blyskTrust: true } })
+      ])
+    ]),
+    pause(4000),
     clock('2026-12-22T02:14'),
     unlock('chat:cicho'),
     scene('scOddech', [
@@ -129,6 +175,23 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
       opt('Ja go nie {widziałem|widziałam}. Co w nim było?', [K('nieważne. jakaś stara sprawa z ocenami'), K('nie chcę tego powtarzać')], { set: { k_kubaSlip: true } })
     ]),
     pause(3000),
+    scene('kOlaNie', [
+      choose('ola', [
+        opt('Ktoś mi napisał w nocy, że stodołę podpalił sam stary Pawlak.', [
+          O('Kto?'),
+          iff('flag:k_shotBlysk', [
+            O('Widzę zrzut. Anonimowe konto na Błysku, zero zdjęć.'),
+            O('Bartek mówi, że taki zrzut robi się w minutę w apce do memów. I ma rację.')
+          ], [
+            O('Masz to gdzieś?'),
+            O('Czyli nie masz nic. Wiesz, ile osób pisze mi teraz „ktoś mi powiedział”?')
+          ]),
+          O('Proszę, nie powtarzaj tego dalej. Pawlakowie i tak mają dość.')
+        ], { set: { k_toldOla: true } }),
+        opt('Nic. Jak tam w pracy?', [O('Kolejka po paczki do Wigilii. Dwie godziny słuchałam o pierogach.'), O('Czyli normalnie. Dobrze, że ktoś pyta o normalne rzeczy.')])
+      ])
+    ]),
+    pause(2500),
     goal('Porównaj opisy klipów na koncie @archiwum.rybickiego: godziny wrzutek i sposób pisania.', ['Otwórz Klipo w przeglądarce. Zapisz, o której pojawiały się klipy i jak są podpisane.']),
     waitFor(s => G.flag('k_clip6') && G.has('ev_k_klip1'), {}),
     M('Siedzę nad tymi opisami od rana. Zrobiłam tabelkę.'),
@@ -146,6 +209,27 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
       ], { set: { k_styleFirst: true } })
     ]),
     give('ev_k_godziny'),
+    /* Zagadka obrazkowa: od odpowiedzi zależy, jak szybko Maja połączy fakty w rozdziale 3. */
+    scene('kKabel', [
+      pic('maja2', 'maja', 'k_kadr_kabel', 'kadr z ostatniego klipu, 0:03, zanim zaczyna się dźwięk'),
+      M('przypomina ci to coś?'),
+      choose('maja2', [
+        opt('Kabel z taśmą. Taki sam leżał na biurku w czytelni, na zdjęciu od Kuby.', [
+          M('czekaj'),
+          pause(2500),
+          M('o kurczę. ja tak oklejam swoje kable. taśmą malarską, żeby mi ich nie podbierali'),
+          M('nic nie mówię. jeszcze nic nie mówię')
+        ], { set: { k_cableLink: true } }),
+        opt('Igor ma w serwisie mnóstwo kabli z taśmą. Każdy podpisany.', [
+          M('zapytam go'),
+          pause(4000),
+          pic('igor', 'igor', 'k_igor_kable', 'maja pyta o kable. proszę. pół mgliska zostawia u mnie ładowarki'),
+          I('u mnie taśma jest kolorowa i z numerem. ta z klipu jest malarska, bez niczego'),
+          M('czyli nie od igora. ok, przynajmniej to wiemy')
+        ], { set: { k_cableIgor: true } }),
+        opt('Zwykły biały kabel. Każdy taki ma.', [M('no może. zapiszę i tyle')], { set: { k_cableLater: true } })
+      ])
+    ]),
     M('Pół Mgliska pisze małymi literami. Mój brat też, nawet do mamy*'),
     M('*zwłaszcza do mamy'),
     pause(3000),
@@ -154,6 +238,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     Z('zrobilam duet z tym klipem o stodole. „mglisko unsolved part 2”. 200 tys w nocy'),
     Z('ale teraz pisza ze ja jestem z nimi w zmowie. ze to ja wrzucam'),
     Z('i ktos wrzucil w komentarzu moj adres. babcia nie wie'),
+    say('zuza', 'zuza', 'voice:0:11||(szeptem) babcia śpi, nie mogę głośno. to jest nasz dom. nasz dom jest w komentarzach'),
     choose('zuza', [
       opt('Usuń duet i zgłoś komentarz z adresem. Pomogę ci napisać zgłoszenie, krok po kroku.', [
         Z('ok. usuwam'),
@@ -180,7 +265,8 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
 });
 
 Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto patrzył', when: 'Środa, 23 grudnia · 2:40', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, set, iff, end, title, clock, ambient, typing, scene, scare, show } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, set, iff, end, title, clock, ambient, typing, scene, scare, show, interlude, nearby, camera, label, go, dial, callEnd, unlock } = D;
+  const c = (who, t) => say('call', who, t);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -189,6 +275,16 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     clock('2026-12-23T02:31'),
     ambient('dark'),
     title(),
+    scene('kNocka', [
+      M('nie śpisz? ja też nie'),
+      M('mama już lepi uszka. o drugiej w nocy. mówi, że jak nie teraz, to kiedy'),
+      M('a Kuba ma ostatnią nockę przed świętami. obiecał, że jutro odśpi i przyjdzie lepić'),
+      choose('maja2', [
+        opt('Ile tych uszek?', [M('dwieście. liczyłam. w tym roku ja robię te krzywe')]),
+        opt('Śpij, Maja. Jutro ważny dzień.', [M('wiem. dobranoc')])
+      ])
+    ]),
+    pause(8000),
     typing('kuba', 'kuba', 4000),
     pause(6000),
     /* Kuba dzwoni w nocy i nic nie mówi. Słychać wózek widłowy i jego oddech. */
@@ -201,10 +297,37 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     pause(6000),
     clock('2026-12-23T08:05'),
     ambient('calm'),
-    W('Zeszyt zapisów, środa 2 grudnia. Przepisuję dokładnie:'),
-    W('„15:10–15:40 Iwona Z., drukowanie CV. 16:00–16:20 p. Zenon, prasa. 15:30–18:00 K. Wrona, dyżur, katalog fiszek z pudła A.R.”'),
+    W('Dzień dobry. Wolałabym pokazać {Panu|Pani} ten zeszyt na miejscu. Przez telefon nie umiem.'),
+    W('Pociąg o 7:12 jest w Mglisku za kwadrans dziewiąta. Odbiorę ze stacji.'),
+    interlude('Pociąg do Mgliska', 'Środa, 23 grudnia · 8:44'),
+    clock('2026-12-23T08:46'),
+    /* Ktoś na peronie robi zdjęcie gracza od tyłu i proponuje je przez przesyłanie w pobliżu. */
+    scene('kPeron', [
+      nearby('k_peron', { device: 'Telefon', img: 'k_peron', note: 'Nieznane urządzenie w pobliżu', flag: 'k_peronOk', declineFlag: 'k_peronNo', ev: 'ev_k_peron' }),
+      iff('flag:k_peronOk', [
+        choose('weronika', [
+          opt('Ktoś na peronie przesłał mi zdjęcie. Mnie, od tyłu. Przed chwilą.', [
+            W('Stoję przy wyjściu. Na peronie byli dwaj panowie i dziewczyna z psem.'),
+            W('Nikogo nie widziałam z telefonem przy oczach. Proszę do mnie podejść, szybko.')
+          ], { set: { k_peronTold: true } }),
+          opt('Już idę.', [W('Widzę {Pana|Panią}. Proszę iść do wyjścia.')])
+        ])
+      ], [W('Widzę {Pana|Panią}. Proszę iść do wyjścia, tam jest cieplej.')])
+    ]),
+    pause(3000),
+    clock('2026-12-23T09:10'),
+    W('Zeszyt leży na ladzie. Proszę spojrzeć na drugi grudnia.'),
     W('Kuba ma u nas dyżury jako wolontariusz. Tego dnia pokazałam mu fiszki pana Adama. Pan Adam pisał na nich ołówkiem, drobno: imiona, ulice, pierwsze redakcje.'),
-    W('Obiecałam wczoraj sprawdzić zeszyt. Tyle mam zapisane.'),
+    M('jesteś w czytelni? zrób mi zdjęcie tego zeszytu. chcę zobaczyć sama'),
+    /* Aparat w grze: gracz kadruje. Ostre zbliżenie od razu, reszta wymaga poprawki. */
+    scene('kAparat', [
+      label('kAparat.kadr'),
+      camera('maja2', [
+        opt('Cała strona', [M('nic nie odczytam, za daleko. zrób bliżej'), go('kAparat.kadr')], { img: 'k_zeszyt', set: { k_photoWide: true } }),
+        opt('Zbliżenie na 2 grudnia', [M('mam. 2 grudnia, 15:30–18:00, K. Wrona'), M('i 3 grudnia też')], { img: 'k_zeszyt_zoom', set: { k_photoZoom: true } }),
+        opt('Z galerii: biurko w czytelni', [M('to biurko już widziałam. zeszyt mi wyślij'), go('kAparat.kadr')], { img: 'k_biurko', gallery: true })
+      ])
+    ]),
     give('ev_k_zeszyt'),
     goal('Zestaw historię logowań z zeszytem zapisów i tym, co wiesz o nockach. Komu pokażesz wynik?', ['Logowania: biblioteka 2.12 o 17:40, potem internet mobilny w nocy (03:09, 23:45). Zeszyt: kto był w czytelni o 17:40?']),
     choose('weronika', [
@@ -220,20 +343,42 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     W('Proszę, żeby {Pan|Pani} to zrobił{|a} ostrożnie. To dobry chłopak.'),
     pause(3000),
     M('Pani Weronika do mnie dzwoniła. Nic nie powiedziała, tylko zapytała, czy Kuba śpi w domu.'),
-    M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.'),
-    show('maja2', {
-      prompt: 'Pokaż Mai, co łączy konto z jedną osobą',
-      accept: [{ ev: ['ev_k_logi', 'ev_k_zeszyt'] }],
-      wrong: [['maja', 'To mi nic nie mówi. Pokaż mi, skąd i kiedy ktoś wchodził na jego konto.'], ['maja', 'A kto wtedy był w czytelni?']]
-    }),
-    M('17:40. Biblioteka. Dyżur do osiemnastej.'),
+    scene('kSzybciej', [
+      iff('flag:k_cableLink', [
+        M('Nie musisz mi nic pokazywać.'),
+        M('Kabel z taśmą to mój. Zeszyt, dyżur do osiemnastej, logowanie o 17:40. Ja to już wiem od wczoraj, tylko nie chciałam wiedzieć.')
+      ], [
+        M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.'),
+        show('maja2', {
+          prompt: 'Pokaż Mai, co łączy konto z jedną osobą',
+          accept: [{ ev: ['ev_k_logi', 'ev_k_zeszyt'] }],
+          wrong: [['maja', 'To mi nic nie mówi. Pokaż mi, skąd i kiedy ktoś wchodził na jego konto.'], ['maja', 'A kto wtedy był w czytelni?']]
+        }),
+        M('17:40. Biblioteka. Dyżur do osiemnastej.')
+      ])
+    ]),
     pause(2500),
     M('nie'),
     pause(3000),
     M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.'),
-    M('Napisz do niego Ty. Ja nie umiem. Ja na niego nakrzyczę i on się zamknie na tydzień.'),
+    scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.')])]),
+    M('Zadzwoń do niego. Ja nie umiem. Ja na niego nakrzyczę i on się zamknie na tydzień.'),
     set('k_majaKnows'),
     pause(2500),
+    scene('kTelefon', [
+      dial({
+        goal: 'Zadzwoń do Kuby (604 228 961).',
+        goalHints: [],
+        numbers: {
+          '604 228 961': { who: 'kuba', then: [
+            c('kuba', 'halo'),
+            c('kuba', 'wiem po co dzwonisz. maja do mnie pisała'),
+            c('kuba', 'nie umiem tego powiedzieć na głos. napiszę ci. daj mi minutę'),
+            callEnd()
+          ] }
+        }
+      })
+    ]),
     goal('Porozmawiaj z Kubą.'),
     choose('kuba', [
       opt('Kuba. Logowanie z biblioteki 2 grudnia o 17:40, kiedy miałeś dyżur. I o 3:09, kiedy rozładowywałeś tira.', [], { set: { k_confrontFacts: true } }),
@@ -247,6 +392,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     K('w październiku. imię psa, pierwsza szkoła. siedziałem obok i patrzyłem'),
     K('pan adam miał „pierwsza redakcja”. jest w nekrologu. „ulica dzieciństwa” była na fiszce. pani weronika mi ją sama pokazała'),
     K('weszło za drugim razem'),
+    iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej'), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
     K('zdjęcie okna też ja. szedłem z dyżuru'),
     K('chciałem żebyście przestali szukać w pudle. pani weronika się przestraszyła. usunąłem po sześciu minutach'),
     pause(2500),
@@ -256,7 +402,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     K('ciągle tylko że cicho jest bezpieczniej'),
     iff(s => (s.vars.s1Ending || s.vars.endingId) === 'cisza', [K('o mai też było cicho. trzy tygodnie. pani od pieczywa dalej mówi że sama poszła')]),
     choose('kuba', [
-      opt('Brama Pawlaków. Adres Zuzy. Nauczycielka. To nie jest prawda o nich, Kuba. To jest krzywda.', [K('wiem'), K('o zuzie nie wiedziałem. serio')], { set: { k_toldHarm: true } }),
+      opt('Kuba, po tych klipach ktoś pomazał Pawlakom bramę i podał adres Zuzy. Jest jeszcze ta nauczycielka. Widzisz, jak ich to krzywdzi?', [K('wiem'), K('o zuzie nie wiedziałem. serio')], { set: { k_toldHarm: true } }),
       opt('Rozumiem, czemu to zrobiłeś. Ale musisz to zatrzymać.', [K('wiem'), K('próbowałem w niedzielę. nie umiem')], { set: { k_askedStop: true } })
     ]),
     pause(2500),
@@ -281,7 +427,8 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
 });
 
 Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym głosem', when: 'Środa, 23 grudnia · 21:50', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, title, clock, ambient, scene, scare, ask, run, ending, credits } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, title, clock, ambient, scene, scare, ask, run, ending, credits, vanish, notify, trust } = D;
+  const O = (t, o) => say('ola', 'ola', t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -294,6 +441,15 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     clock('2026-12-23T21:50'),
     ambient('dark'),
     title(),
+    scene('kWigilia', [
+      O('Hej. Jak się trzymasz po dzisiejszym dniu?'),
+      O('Ja właśnie wróciłam z pracy. Na jutro mam do zrobienia jeszcze sałatkę i choinkę, a lampki znowu nie działają. Co roku to samo.'),
+      choose('ola', [
+        opt('Przedłużacz. Zawsze winny jest przedłużacz.', [O('Sprawdziłam. Był przedłużacz.'), O('Jesteś lepsz{y|a} niż serwis Igora 😄')]),
+        opt('Nie najlepiej. Ale dzięki, że pytasz.', [O('Nie musisz mówić. Jutro będzie spokojniej. Mam nadzieję.')])
+      ])
+    ]),
+    pause(9000),
     /* Zdjęcie, które przychodzi samo: przednia szyba, pętla, zielona strzałka. */
     scene('scPetla', [
       scare('s3_petla', 'photo', { img: 'k_petla', ms: 2200 }),
@@ -302,7 +458,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     ]),
     pause(2000),
     C('napisał mi, że ci powiedział'),
-    C('nie szukaj mnie po nim. on nie wie'),
+    C('nie wypytuj go o mnie. on nie wie, kim jestem'),
     pause(3000),
     W('Przepraszam, że się wtrącam. Ktoś mnie niedawno pytał o nagrania pana Adama z 2019. Pisałam {Panu|Pani} o tym, pamięta {Pan|Pani}?'),
     goal('Kto jest @cicho.bylo? Zestaw głosówkę, zdjęcie i nazwę konta.', ['Głosówka z 2:14: równe tykanie jak kierunkowskaz. Zdjęcie: przednia szyba, pętla, kanapka w folii.', 'Klip nr 1: dziewczyna miała 7 lat w 2009. Kto pytał Weronikę o nagrania z 2019?']),
@@ -315,7 +471,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       ]
     }),
     M('Lena. Ta od busa. To ona pytała panią Weronikę o 2019.'),
-    M('W 2009 miała siedem lat. Wiek też pasuje. Ale to dalej tylko moje „pasuje”.'),
+    M('W 2009 miała siedem lat. Wiek też pasuje. Ale nadal tylko zgaduję.'),
     pause(3000),
     unlock('chat:lena'),
     goal('Napisz do Leny.'),
@@ -326,24 +482,34 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     pause(4000),
     L('Uff.'),
     L('Jestem na pętli, mam sześć minut. Potem ostatni kurs.'),
+    say('lena', 'lena', '', { vid: 'assets/video/v_petla.mp4', img: 'v_petla' }),
+    L('Tak tu jest co noc. Ten dźwięk kierunkowskazu słyszę we śnie.'),
+    scene('kLenaBlysk', [
+      iff('flag:k_shotBlysk', [
+        L('I tak, na Błysku to też byłam ja. Zrobił{eś|aś} wtedy zrzut. Dlatego przestałam pisać.'),
+        trust('lena', -1)
+      ], [
+        iff('flag:k_blyskTrust', [L('Na Błysku to też byłam ja. Dzięki, że nie zrobił{eś|aś} zrzutu.')])
+      ])
+    ]),
     L('To mój głos w pierwszym klipie. 2019. Miałam siedemnaście lat i pan Adam obiecał, że to nie do druku.'),
     L('W 2009 tata woził drewno dla starego Pawlaka. Byłam z nim tej nocy w szoferce. Widziałam, kto stał przy stodole z kanistrem.'),
     L('Tata powiedział: nic nie widziałaś. I tak było przez dziesięć lat. Cicho było.'),
     give('ev_k_lena'),
     pause(2500),
-    L('Jak zobaczyłam, że ktoś ma jego nagrania, wiedziałam, że prędzej czy później wyjdzie moje. Wolałam, żeby wyszło moimi słowami, a nie z komentarzy.'),
+    L('Jak zobaczyłam, że ktoś ma jego nagrania, wiedziałam, że prędzej czy później wrzuci też moje. Wolałam, żeby ludzie usłyszeli, co powiedziałam, zamiast poznawać tę historię z komentarzy.'),
     L('Najpierw poprosiłam o listę plików z 2019 i wskazałam swoją rozmowę. Myślałam, że jak sama wskażę, to będę miała wpływ na to, co wyjdzie.'),
     L('A potem prosiłam o inne. Pan Adam podpisywał pliki, po nazwach wiedziałam, o kim są. Warsztat. Rada gminy. Nauczycielka.'),
     L('Bo jak ja muszę, to oni też. Tak sobie mówiłam na pętli.'),
     choose('lena', [
-      opt('Twoja historia jest twoja. Opowiedz ją Weronice, do archiwum, z zakazem publikacji. Bez Klipo.', [
+      opt('Możesz opowiedzieć o tym Weronice i zastrzec, żeby nagranie zostało tylko w archiwum. Bez wrzucania na Klipo.', [
         L('Do archiwum.'),
         pause(3000),
         L('Dobrze. Po świętach. Tata może przyjść ze mną, jak będzie chciał. Raczej nie będzie.')
       ], { set: { k_lenaTalks: true }, trust: { lena: 1 } }),
       opt('Nagraj to sama i wrzuć. Swoim głosem, pod nazwiskiem.', [
         L('Pod nazwiskiem.'),
-        L('Nie wiem, czy umiem. Ostatnim razem jak mówiłam pod nazwiskiem, miałam siedemnaście lat'),
+        L('Nie wiem, czy umiem. Ostatnio opowiadałam o tym pod własnym nazwiskiem, kiedy miałam siedemnaście lat'),
         L('Zastanowię się.')
       ], { set: { k_lenaPublic: true } })
     ]),
@@ -362,7 +528,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     S('Dzień dobry. Przepraszam, że w Wigilię.'),
     S('Ktoś napisał w grupie, że „wie, kto prowadzi archiwum”, i że powie o dwunastej. Ludzie czekają. Czy {Pan|Pani} wie, kto to?'),
     choose('sylwia', [
-      opt('Wiem. Nie napiszę nazwiska w grupie. Proszę zablokować ten wpis.', [S('Zablokuję. Ludzie będą źli. Wolę złych niż drugą bramę.')], { set: { k_quiet: true } }),
+      opt('Wiem. Nie napiszę nazwiska w grupie. Proszę zablokować ten wpis.', [S('Zablokuję. Ludzie będą źli. Wolę to, niż żeby komuś znowu pomazali bramę.')], { set: { k_quiet: true } }),
       opt('To Kuba Wrona. Proszę to przypiąć, żeby ludzie przestali podejrzewać innych.', [S('Jest {Pan|Pani} pew{ien|na}?'), pause(2000), S('Przypinam. Mam nadzieję, że to dobra decyzja.')], { set: { k_outedKuba: true } })
     ]),
     pause(3000),
@@ -374,9 +540,20 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       K('sylwia napisała mi, że wie. i że nie poda nazwiska na grupie'),
       K('dziękuję'),
       choose('kuba', [
-        opt('Wyłącz konto sam. I napisz do Pawlaków i do Zuzy. Imiennie, nie do wszystkich.', [K('ok'), pause(5000), K('konto usunięte. napisałem do pana pawlaka. i do zuzy'), K('pan pawlak odpisał „dobrze”. tylko tyle')], { set: { k_kubaOff: true } }),
+        opt('Sam usuń konto. I napisz osobno do Pawlaków i do Zuzy.', [K('ok'), pause(5000), K('konto usunięte. napisałem do pana pawlaka. i do zuzy'), K('pan pawlak odpisał „dobrze”. tylko tyle')], { set: { k_kubaOff: true } }),
         opt('To twoja decyzja, co dalej. Ja nie będę jej za ciebie podejmować.', [K('to nie wiem'), K('jeszcze nie wiem')])
       ])
+    ]),
+    pause(3000),
+    /* Zaczep na sprawę 4: ktoś trzeci obserwował od początku. */
+    scene('kZaczep', [
+      clock('2026-12-24T19:40'),
+      unlock('chat:blysk2'),
+      notify({ app: 'messages', title: 'Błysk', text: 'nowy kontakt wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blysk2' } }),
+      say('blysk2', 'blysk2', 'wesołych świąt', { vanish: true }),
+      say('blysk2', 'blysk2', 'na peronie {stałeś|stałaś} przy starej wiacie. ładna kurtka', { vanish: true }),
+      say('blysk2', 'blysk2', 'kuba skopiował 1412 plików. ja mam więcej', { vanish: true }),
+      vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ]),
     pause(3000),
     run(s => {
