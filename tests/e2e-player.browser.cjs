@@ -5,14 +5,15 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE));}
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.TEST_SCREENSHOT_DIR,report=process.env.PLAYTEST_REPORT;
 if(shots)fs.mkdirSync(shots,{recursive:true});
-const WANT=['m_protectK','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays','k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff','k_zuzaHelped','k_police','k_requestLog'];
-const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_martaOut','k_outedKuba','k_lenaPublic','k_ewaWait','k_zuzaAlone'];
+const WANT=['m_protectK','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays','k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff','k_zuzaHelped','k_police','k_requestLog','c_idaStops','c_olaFirst','c_zenonDefended'];
+const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_martaOut','k_outedKuba','k_lenaPublic','k_ewaWait','k_zuzaAlone','c_tookCopy','c_gaveUp'];
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
  const out={};
  try{
-  for(const os of ['ios','android']){
+  for(const os of (process.env.E2E_OS||'ios,android').split(',')){
    const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[];
+   page.on('crash',()=>console.error(os,'RENDERER CRASH',JSON.stringify(process.memoryUsage())));
    page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    let bytes=0;page.on('response',async r=>{if(r.url().startsWith(base)){if(r.status()>=400)errors.push(r.status()+' '+r.url());const l=+r.headers()['content-length']||0;bytes+=l;}});
    await page.addInitScript(os=>{if(!localStorage.getItem('mglisko.settings.v1'))localStorage.setItem('mglisko.settings.v1',JSON.stringify({os,appearance:'light',sfx:true,ambient:false,speed:'instant',softScares:false,autoHints:false}));},os);
@@ -55,7 +56,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
      if(shots)await page.screenshot({path:path.join(shots,`${os}-scare-${st.ch}-${scares.length}.png`)});}
     if(st.credits){
      credits++;if(shots)await page.screenshot({path:path.join(shots,`${os}-credits-${st.season}.png`)});
-     if(st.season==='s3')break;
+     if(st.season==='s4')break;
      await Promise.all([page.waitForNavigation(),page.evaluate(()=>document.querySelector('.curtain button').click())]);
      await page.waitForFunction(()=>typeof G!=='undefined'&&G.s&&typeof Seasons!=='undefined');
      const ok=await page.evaluate(()=>{document.querySelector('.title-scr')?.remove();UI.packageSheet=async()=>6;const ok=Seasons.startNext();UI.renderHome();Engine.restart();return ok;});
@@ -68,14 +69,14 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
       const sat=c=>{for(const k of [].concat(c)){if(typeof k!=='string')continue;const [t,...r]=k.split(':');const id=r.join(':');
        if(t==='ev')G.addEv(id,true);else if(t==='solved')G.solve(id);else if(t==='flag')G.setFlag(id);else if(t==='seen')G.markSeen(id);else if(t==='unlocked')G.unlock(id);}};
       if(typeof step.cond==='function'){G.setFlag('sawCalls');if(G.s.chapter==='ch1'&&!G.has('ev_ola_sorry'))G.addEv('ev_ola_fight',true);
-       for(const w of ['gs_most','tt_most','tyg_most','tt_archiwum'])if(DATA.web[w]&&G.test(DATA.web[w].avail||[])){UI.openApp('browser',{page:w});}
+       for(const w of ['gs_most','tt_most','tyg_most','tt_archiwum','tt_kronika'])if(DATA.web[w]&&G.test(DATA.web[w].avail||[])){UI.openApp('browser',{page:w});}
        for(const c of Object.keys(G.s.chats||{})){G.viewing=c;G.change();if(G.test(step.cond))break;}}else sat(step.cond);G.change();});
     }
     if(same>2500)throw new Error('utknięcie '+key+' '+JSON.stringify(st));
     await page.waitForTimeout(25);
    }
    if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t;
-   const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,scaresSaved:Object.keys(G.s.scares)}));
+   const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,scaresSaved:Object.keys(G.s.scares)}));
    // offline: po pierwszym wczytaniu service worker musi wystarczyć do startu bez sieci
    await page.reload();await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
    await ctx.setOffline(true);let offline=true;try{await page.reload();await page.waitForFunction(()=>typeof G!=='undefined'&&typeof Engine!=='undefined',{timeout:8000});}catch{offline=false;}
@@ -83,7 +84,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
    out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),
     chapters:Object.fromEntries(Object.entries(chapters).map(([k,v])=>[k,{season:v.season,sec:Math.round(v.ms/1000),msgs:v.msgs}]))};
    console.log(os,JSON.stringify(out[os]));
-   assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');
+   assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');assert.equal(fin.s4,'przewiniecie');
    assert.ok(offline,'start offline z cache');
    assert.deepEqual(out[os].errors,[]);assert.deepEqual(layout,[]);
    await ctx.close();console.log('PASS e2e-player',os);
