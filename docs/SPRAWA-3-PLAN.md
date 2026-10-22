@@ -99,3 +99,15 @@ Twarze: Kuba, Maja, Weronika, Igor, Zuza, Natan, Sylwia mają refy w /workspace/
 3. Codex czyta dialogi pod kątem „pisane, nie wystukane” przed każdym pushem aktu.
 4. Bez instrukcji włamania: w grze pokazujemy, że pytania bezpieczeństwa są słabe, ale nie podajemy kroków na prawdziwe usługi. Zamiast tego Weronika na końcu poprawia ustawienia kont biblioteki (jedna scena, bez wykładu).
 5. Bez realnych marek, także na zdjęciach (logo na telefonie, busie, kubku).
+
+## 9. Stan produkcji (22.10.2026)
+
+W grze: `kp` „Hasło” (tylko po Ciszy z S1), `k0` „Pierwszy klip”, `k1` „Chmura”, `k2` „Opisy”, `k3` „Kto patrzył”, `k4` „Cudzym głosem” z trzema zakończeniami (`wlasnym_glosem`, `zasiegi`, `kopia`). Pięć aktów planu zmieściło się w pięciu rozdziałach (k4 łączy akt V i finał). Pliki: js/story/kopia.js, js/story/kopia2.js, js/data/case-kopia.js.
+
+Doprecyzowania względem planu (po redakcji Codex):
+- 2.12.2026 to środa. Kuba pobrał cały folder „Nagrania” (1412 plików) w czytelni o 17:52; później logował się z internetu mobilnego.
+- Droga Leny do nagrań: Kuba napisał pod starym filmem, że ma nagrania; @cicho.bylo poprosiło o listę plików z 2019, potem wskazywało pliki po nazwach („2016_warsztat_S”).
+- Zdjęcie okna czytelni zrobił Kuba (przyznaje się w k3).
+- Pawlakowie są właścicielami stodoły; tłum zrozumiał klip jako „sami podpalili dla odszkodowania”. Lena widziała człowieka z kanistrem, będąc z ojcem w szoferce.
+
+Straszaki S3: k0 `scDom` (telefon z domu Rybickich), k1 `scOkno` (zdjęcie okna), k1 `scGlos` (zakłócenie + głosówka), k2 `scOddech` (oddech i kierunkowskaz), k3 `scKuba` (nocny telefon od Kuby), k4 `scPetla` (zdjęcie z kabiny busa), k4 `scKopia` (tylko zakończenie „kopia”).

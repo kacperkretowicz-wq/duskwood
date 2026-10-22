@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v24';
+const VERSION = 'quiet-is-safer-v25';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -35,7 +35,7 @@ const FILES = [
   './js/data/characters.js', './js/data/evidence.js', './js/data/maja.js', './js/data/web.js', './js/data/world.js',
   './js/apps/messages.js', './js/apps/viewer.js', './js/apps/phone.js', './js/apps/browser.js', './js/apps/gallery.js',
   './js/apps/nimbus.js', './js/apps/maps.js', './js/apps/notes.js', './js/apps/tools.js',
-  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg',
+  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './js/story/kopia2.js', './assets/kopia/k_biurko.jpg', './assets/kopia/k_petla.jpg', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg',
   './assets/people/marta.jpg', './assets/people/marta_life1.jpg', './assets/people/natan.jpg', './assets/people/natan_life1.jpg', './assets/people/janina.jpg', './assets/people/janina_life1.jpg', './assets/people/henryk.jpg', './assets/people/henryk_life1.jpg',
   './assets/most/teczka_kruk.jpg', './assets/most/dziennik_s41.jpg', './assets/most/pocztowka.jpg', './assets/most/wycinek_2012.jpg', './assets/most/most_2011.jpg', './assets/most/hw_kadr.jpg',
   './js/main.js'
