@@ -42,11 +42,12 @@ const Seasons = (() => {
     return { ...last, found: last.evidence.filter(id => !previous?.evidence.includes(id)).map(id => G.ev(id)).filter(Boolean) };
   }
   function archive() {
-    if (!G.s?.finished || !G.s.vars.endingId) return false;
+    const id = current().id, endingId = G.s?.vars[id + 'Ending'] || G.s?.vars.endingId;
+    if (!G.s?.finished || !endingId) return false;
     G.s.seasonArchive ||= {};
-    const id = current().id, old = G.s.seasonArchive[id] || { endings: [] };
-    G.s.seasonArchive[id] = { revision: current().revision, finishedAt: Date.now(), endings: [...new Set([...old.endings, G.s.vars.endingId])],
-      outcome: { ending: G.s.vars.endingId, majaFound: G.flag('majaFound'), gajdaCaught: G.flag('gajdaCaught'),
+    const old = G.s.seasonArchive[id] || { endings: [] };
+    G.s.seasonArchive[id] = { revision: current().revision, finishedAt: Date.now(), endings: [...new Set([...old.endings, endingId])],
+      outcome: { ending: endingId, majaFound: G.flag('majaFound'), gajdaCaught: G.flag('gajdaCaught'),
         reportBoth: G.flag('reportBoth'), igorForgiven: G.flag('igorForgiven'), leszekTestify: G.flag('leszekTestify'),
         trust: Object.fromEntries(['kuba', 'ola', 'bartek', 'igor', 'weronika'].map(id => [id, G.v('trust_' + id)])) } };
     G.save(true); return true;

@@ -658,7 +658,7 @@ const UI = (() => {
       ...e.text.map(p => h('div', { class: 'cu-p', html: U.rich(typeof p === 'function' ? p() : p) })),
       h('div', { class: 'cu-stats' },
         h('div', {}, h('b', {}, Object.keys(G.s.ev).length + '/' + Object.keys(DATA.evidence).length), 'odkryte'),
-        h('div', {}, h('b', {}, G.s.endings.length + '/3'), 'zakończeń'))
+        h('div', {}, h('b', {}, G.s.endings.filter(x => (DATA.endings[x]?.season || 's1') === (e.season || 's1')).length + '/3'), 'zakończeń'))
     ], { button: 'Dalej', tap: false });
   }
   function credits() {

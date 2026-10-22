@@ -405,7 +405,6 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     Ma('ona jest w kuchni. słyszę jak zmywa'),
     Ma('nie wiem, jak mam teraz tam wejść'),
     set('m_act3'),
-    D.goal('Ciąg dalszy sprawy „Most” (Akt IV „Strona 41”) pojawi się w kolejnej aktualizacji. Twoje decyzje i Notatki zostają w zapisie.'),
-    waitFor('flag:m_act3Next')
+    end('m4')
   ];
 });
