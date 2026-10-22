@@ -1,0 +1,220 @@
+'use strict';
+/* SPRAWA 2 „MOST” — Akt IV „Strona 41” (sesje 19–24) i Akt V „Pełny kadr” (sesje 25–30) z trzema finałami.
+   Plan: docs/SPRAWA-2-PLAN.md §5–6. Żaden finał nie nagradza naruszania prywatności jako skrótu do prawdy. */
+
+Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona 41', when: 'Poniedziałek, 30 listopada · 8:20', mood: 'calm' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd } = D;
+  const Ma = (t, o) => say('marta', 'marta', t, o);
+  const Nt = (t, o) => say('natan', 'natan', t, o);
+  const Z = (t, o) => say('zuza', 'zuza', t, o);
+  const W = (t, o) => say('weronika', 'weronika', t, o);
+  const H = t => say('call', 'henryk', t);
+
+  return [
+    clock('2026-11-30T08:20'),
+    title(),
+    Ma('Dzień dobry. Byłam u naczelnego o 7:45. Powiedziałam wszystko: że to moja mama, że opowiadałam o kasecie przy kolacji, że tablet jest wspólny.'),
+    Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.'),
+    Ma('Mama nie odbiera ode mnie od soboty. Wczoraj zostawiła mi obiad pod drzwiami. Nie wiem, co to znaczy.'),
+    choose('marta', [
+      opt('Zrobiłaś to, co trzeba. To musiało kosztować.', [Ma('Kosztuje. Ale gdybym czekała, to by kosztowało więcej. Komuś innemu.')], { trust: { marta: 1 } }),
+      opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
+    ]),
+    pause(2500),
+    Nt('hej. naczelny wystąpił do inspekcji pracy we wrocławiu o akta wypadku z 2011. jako redakcja, oficjalnie, z powołaniem na dostęp do informacji'),
+    Nt('i sorry że tak szybko ale już mamy. pojechałem rano, dali mi czytelnię na godzinę'),
+    pic('natan', 'natan', 'most_oip_s41', 'kopia str 41 która firma dała inspekcji 19.09.2011'),
+    give('ev_m_oip_s41'),
+    Nt('i patrz. tu jest „bez uwag”. zero o siatce. a pismo inne niż na ksero'),
+    choose('natan', [
+      opt('Czyli ksero z teczki jest podróbką?', [
+        Nt('no tak bym pomyślał w pierwszej chwili'),
+        Ma('Nie wynika to z tego. Mamy dwie kopie tej samej strony od dwóch osób i obie mówią „siatka — brak, zgłoszone”.'),
+        Ma('A ta z akt ma inne pismo, choć podpis udaje H.W. I pieczątkę „za zgodność” przystawiła kierowniczka kontraktu, nie inspektor.'),
+        Nt('ok. czyli przepisana po wypadku. nie podrobione ksero, tylko przepisany oryginał')
+      ]),
+      opt('Ta strona jest przepisana. Pismo inne niż na ksero, a „za zgodność” potwierdziła sama kierowniczka kontraktu.', [
+        Nt('tak. j. kurek, 19.09.2011. pięć dni po wypadku'),
+        Ma('Pismo różni się od tego na obu kopiach. Samo porównanie nie wystarczy, żeby ustalić, kto pisał. Ale wiemy, kto potwierdził zgodność.')
+      ], { set: { m_rewriteSeen: true } })
+    ]),
+    set('m_rewriteSeen'),
+    give('ev_m_rewrite'),
+    Nt('i jeszcze protokół powypadkowy. wykaz załączników'),
+    pic('natan', 'natan', 'most_oip_protokol', 'punkt 3'),
+    give('ev_m_oip_protokol'),
+    Nt('„3. protokół zgłoszenia — brak w aktach”. to jest ten załącznik nr 3. był na liście, ale w aktach go nie ma'),
+    Nt('i zobacz kto był w zespole powypadkowym. h. wiśniewski, przedstawiciel pracowników'),
+    pause(2000),
+    callIn('henryk'),
+    H('Wiśniewski. Sylwia mówi, że w gazecie mają te papiery z Wrocławia.'),
+    H('Ja podpisałem ten protokół. Bo kazali. Ale napisałem przy trzecim „brak”. Sam. Żeby było.'),
+    H('Pan Darek tego dnia był trzeźwy. Ja to powiedziałem inspektorowi. Inspektor zapisał. Potem już nikt nie pytał.'),
+    choose('call', [
+      opt('Czy powie pan to samo pod nazwiskiem, w redakcji? Nikt nie utnie. Będzie całe.', [
+        H('Całe?'),
+        H('…'),
+        H('To powiem. Ale niech ten młody przyjdzie do mnie. Nie ja do niego. I niech ma kamerę porządną.')
+      ], { set: { m_henrykOnRecord: true }, trust: { henryk: 1 } }),
+      opt('Nie musi pan już nic mówić. Dokumenty wystarczą.', [
+        H('No… dobrze. Jak dokumenty wystarczą.'),
+        H('To ja nic nie mówię. Raz już mówiłem.')
+      ], { set: { m_henrykQuiet: true } })
+    ]),
+    callEnd(),
+    give('ev_m_henryk_oip'),
+    pause(2500),
+    clock('2026-12-01T19:10'),
+    Z('hej'),
+    Z('widziałam artykuł że jest jakaś przepisana strona'),
+    Z('powiedz mi jedno. czy ktoś wujka zabił'),
+    choose('zuza', [
+      opt('Nie. Nie ma dowodu zabójstwa. Wujek spadł z przęsła. Siatki nie było, choć wcześniej zgłoszono jej brak. Potem ktoś przepisał stronę dziennika.', [
+        Z('ok'),
+        Z('dziwne że mi ulżyło i jednocześnie nie'),
+        Z('babcia całe życie bała się że to było coś gorszego. albo że to jego wina')
+      ], { set: { m_toldZuzaTruth: true } }),
+      opt('Tego nie wiemy.', [
+        Z('jak nie wiecie to ja sobie dopowiem najgorsze. serio'),
+        Z('to wiecie czy nie'),
+        D.choose('zuza', [opt('Wiemy tyle: nie ma dowodu zabójstwa. To był wypadek przy zdjętej siatce, a potem ktoś przepisał dokumenty.', [Z('ok. dzięki że wprost')], { set: { m_toldZuzaTruth: true } })])
+      ])
+    ]),
+    pause(2500),
+    clock('2026-12-02T21:40'),
+    Ma('Naczelny zdecydował. Mogę dalej robić archiwum przy tym materiale albo się wyłączyć. Decyzja ma być moja.'),
+    Ma('Jeśli zostanę, każdą rzecz ode mnie sprawdza druga osoba i w tekście będzie zdanie, że autorka archiwum jest córką członkini zarządu Kurek-Bud.'),
+    Ma('Jeśli odejdę od tematu, Natan będzie pracował sam. Zajmie mu to więcej czasu. Dotąd przeglądaliśmy kasetę razem.'),
+    Ma('Co by {Pan|Pani} zrobił{|a}?'),
+    choose('marta', [
+      opt('Zostań. Z jawnym zdaniem w tekście i drugą osobą do sprawdzania. Znasz taśmę najlepiej.', [
+        Ma('Dobrze. Wtedy już nie ma odwrotu. W domu też'),
+        Ma('Mama dowie się z gazety, że wiem. Wolę, żeby z gazety niż z tabletu')
+      ], { set: { m_martaStays: true } }),
+      opt('Wyłącz się. Nie przez to, co zrobiłaś, tylko żeby nikt nie mógł podważyć tekstu przez ciebie.', [
+        Ma('Rozumiem. Boli, ale rozumiem.'),
+        Ma('Przekażę Natanowi wszystkie znaczniki czasu. 03:12, 03:21, 03:47. Resztę zrobi sam.')
+      ], { set: { m_martaOut: true } })
+    ]),
+    W('Dobry wieczór. Pani Marta była u mnie po kamerę. Długo stała w przedpokoju.'),
+    W('Poprosiła, żeby kaseta dalej leżała u mnie. Jak dawniej u pana Adama: dopóki nie będzie wiadomo, komu ją oddać.'),
+    give('ev_m_chain'),
+    set('m_act4'),
+    end('m5')
+  ];
+});
+
+Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run } = D;
+  const Ma = (t, o) => say('marta', 'marta', t, o);
+  const Nt = (t, o) => say('natan', 'natan', t, o);
+  const Z = (t, o) => say('zuza', 'zuza', t, o);
+  const S = (t, o) => say('sylwia', 'sylwia', t, o);
+  const W = (t, o) => say('weronika', 'weronika', t, o);
+  const c = (who, t) => say('call', who, t);
+
+  return [
+    clock('2026-12-04T16:05'),
+    title(),
+    Nt('ok. naczelny chce wypuścić tekst w poniedziałek. „strona 41” roboczo'),
+    Nt('i jest problem. tygodnik zapowiada na jutro „kim jest tajemnicza K.”. ktoś im dał cytat z notesu, ten co ja wtedy usunąłem'),
+    Nt('naczelny pyta czy nie wyprzedzić ich dziś. z notesem. „k. przyniosła ksero, dziękuje za mleko”. mówi że to najmocniejszy dowód że ksero jest z 2011'),
+    choose('natan', [
+      opt('Nie. Ten cytat wskazuje panią Krystynę każdemu, kto ją zna. Ksero mamy potwierdzone kopią Henryka i aktami z inspekcji.', [
+        Nt('wiem. sorry. chciałem tylko żeby ktoś to powiedział na głos zanim on mnie przekona'),
+        Nt('ok. bez notesu')
+      ], { set: { m_protectK: true } }),
+      opt('Wyprzedźcie ich. Jak tygodnik i tak to da, lepiej, żeby było rzetelnie u was.', [
+        Nt('…'),
+        Nt('ok. dam znać naczelnemu')
+      ], { set: { m_leakK: true } })
+    ]),
+    iff('flag:m_leakK', [
+      pause(3000),
+      notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Strona 41. Jak przepisano dziennik robót z mostu nad Mglicą', sound: 'notif' }),
+      set('m_published'),
+      pause(2500),
+      Z('wy wpisaliście tam mleko'),
+      Z('sąsiadka przyszła do babci po godzinie. „to pani, krysiu, prawda?”'),
+      Z('babcia zamknęła się w pokoju. powiedziała, że nie będzie już ze mną rozmawiać o wujku. w ogóle'),
+      Z('dlaczego'),
+      Ma('Przeczytałam. Odchodzę z redakcji. Nie dlatego, że to {Pan|Pani} doradził{|a}. Ja też powinnam była krzyczeć głośniej.'),
+      run(s => { s.vars.s2Ending = 'cudzy_podpis'; }),
+      ending('cudzy_podpis'),
+      credits()
+    ]),
+    pause(2000),
+    Z('hej'),
+    Z('babcia mówi że chce pogadać. z tobą. nie z gazetą'),
+    Z('tylko przez stacjonarny. chce ustalić, co może być w tekście, a co nie'),
+    Z('ona się po prostu boi'),
+    Z('numer 74 873 52 06. dzwoń po piątej, po dzienniku'),
+    give('ev_m_krystyna_tel', { silent: true }),
+    dial({
+      goal: 'Zadzwoń do pani Krystyny Kruk na stacjonarny (numer od Zuzy, 74 873 52 06).',
+      goalHints: [],
+      numbers: {
+        '74 873 52 06': {
+          who: 'krystyna', then: [
+            c('krystyna', 'Kruk, słucham.'),
+            choose('call', [opt('Dobry wieczór. Dzwonię od Zuzy. W sprawie strony 41 i tekstu w gazecie.', [])]),
+            c('krystyna', 'Wiem. Zuzia mówiła. Proszę mi tylko jasno odpowiedzieć.'),
+            c('krystyna', 'Czy w tej gazecie będzie, że to ja?'),
+            choose('call', [
+              opt('Nie. Ani nazwiska, ani mleka, ani niczego, po czym sąsiadki by panią poznały. Ksero potwierdzamy kopią pana Henryka i aktami z Wrocławia.', [
+                c('krystyna', 'To dobrze.'),
+                c('krystyna', 'Panu Adamowi też tak mówiłam. On dotrzymał. Piętnaście lat.'),
+                c('krystyna', 'To niech piszą. Że Darek był trzeźwy, tak jak mówi pan Henryk. Że nie było siatki. Że potem przepisano stronę dziennika. Tego chcę.'),
+                c('krystyna', 'O mnie nic. O Darku — tak.')
+              ], { set: { m_krystynaOk: true } }),
+              opt('To zależy od redakcji. Ale byłoby mocniej, gdyby pani powiedziała, że to pani dała ksero.', [
+                c('krystyna', 'Mocniej.'),
+                c('krystyna', 'Ja piętnaście lat mówię „wypadek w pracy”, bo obiecałam sobie, że nikt mnie nie będzie pokazywał palcami.'),
+                c('krystyna', 'Nie. Proszę już nie dzwonić. Do widzenia.')
+              ], { set: { m_krystynaNo: true } })
+            ]),
+            callEnd()
+          ]
+        }
+      }
+    }),
+    pause(2500),
+    iff('flag:m_krystynaOk', [Z('babcia wyszła z pokoju i zrobiła naleśniki. to dużo znaczy u nas'), Z('dzięki')], [Z('babcia powiedziała że już nie chce. ok. to jest ok'), Z('tylko szkoda')]),
+    S('Dzień dobry. Pan Henryk był u mnie w salonie. Siedział godzinę i pił herbatę.'),
+    S('Natan nagrał z nim rozmowę, całą. Henryk pyta, czy jak gazeta wyjdzie w poniedziałek, to ja w grupie coś przypnę. On mówi „sprostowanie”, jakby to było z urzędu.'),
+    S('Ja mogę przypiąć dziś. Albo poczekać na tekst i wtedy dać link. Co {Pan|Pani} myśli?'),
+    choose('sylwia', [
+      opt('Dziś. Najpierw sprostowanie dla pana Henryka, żeby ludzie przestali go wyzywać, potem tekst.', [
+        S('Dobrze. Napiszę od siebie, krótko. „Nagranie z mostu było ucięte. Słowa «moja wina» pan Henryk przytaczał jako cudzą wypowiedź. Przepraszam, że udostępniałam tu ten fragment bez sprawdzenia.”'),
+        S('I wyłączę komentarze pod tym jednym. Niech raz będzie spokój.')
+      ], { set: { m_correctionFirst: true } }),
+      opt('Poczekaj na tekst. Lepiej z linkiem do całości.', [
+        S('Rozumiem. Tylko że do poniedziałku jeszcze trzy dni komentarzy.'),
+        S('No nic. Poczekam.')
+      ], { set: { m_correctionLater: true } })
+    ]),
+    pause(3000),
+    clock('2026-12-07T07:00'),
+    notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Strona 41. Jak przepisano dziennik robót z mostu nad Mglicą', sound: 'notif', open: { page: 'gs_strona41' } }),
+    set('m_published'),
+    Nt('wyszło. 7:00'),
+    Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
+    iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
+    iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
+    W('Oryginał kasety i obie kopie strony 41 są w depozycie redakcji, protokół przekazania podpisaliśmy z panią Martą i rodziną pana Adama. Teczka wróciła do pudła, bez kasety.'),
+    pause(2500),
+    run(s => {
+      const full = G.flag('m_krystynaOk') && G.flag('m_henrykOnRecord') && G.flag('m_correctionFirst');
+      s.vars.s2Ending = full ? 'pelny_kadr' : 'margines';
+    }),
+    iff(s => s.vars.s2Ending === 'pelny_kadr', [
+      Z('nagrałam coś. babcia obejrzała zanim wrzuciłam. powiedziała „może być”'),
+      pic('zuza', 'zuza', 'life_zuza_most', 'pod mostem. bez muzyki'),
+      Z('zobacz jak chcesz. tam nie ma nic o babci. jest tylko wujek'),
+      ending('pelny_kadr')
+    ], [
+      ending('margines')
+    ]),
+    credits()
+  ];
+});

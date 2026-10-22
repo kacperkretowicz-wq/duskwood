@@ -39,7 +39,7 @@ Object.assign(DATA.chars, {
     role: 'Emeryt, dawniej brygadzista', number: '74 832 55 19',
     voicemail: '„Wiśniewski. Mnie nie ma. Proszę mówić po sygnale. Głośno.”'
   },
-  krystyna: { name: 'Krystyna Kruk', short: 'Pani Krystyna', age: 71 },
+  krystyna: { name: 'Krystyna Kruk', short: 'Pani Krystyna', age: 71, number: '74 873 52 06' },
   nina: {
     name: 'Nina Duda', short: 'Nina', age: 23, trust: true, color: '#7fb77e',
     role: 'Kurierka · rejon Głuszyca / Rzeczka', bio: 'Zawsze robi zdjęcie karty trasy. Bo potem dzwonią, że nie było doręczenia.',
@@ -190,6 +190,17 @@ Object.assign(DATA.evidence, {
     desc: 'Kopia od Henryka zgadza się z kserem z teczki. Do porównania obu kopii *nie trzeba ujawniać, kim jest K.*' },
   ev_m_zwrot: { title: 'Wiadomość z domowego tabletu', cat: 'digital', source: 'Marta',
     desc: '20.11, 22:10, do Dudka: „Marta mówi, że w redakcji szukają zał. nr 3 do mostu. Jest kaseta H.W., zgrana. Zajmij się tym.” Marta jest córką Janiny Kurek. Przeciek poszedł przez kuchnię, nie przez hakowanie.' },
+  ev_m_oip_s41: { title: 'Str. 41 z akt inspekcji pracy', cat: 'photo', source: 'OIP Wrocław, akta 0412/WP/2011 · Natan', img: 'most_oip_s41',
+    desc: '12.09: „Prace wg harmonogramu.” 13.09: *„Piaskowanie przęsła II. Bez uwag.”* O siatce ani słowa. Inne, równe pismo, podpis udaje H.W. Pieczątka „za zgodność z oryginałem”: *kier. kontraktu J. Kurek, 19.09.2011*.' },
+  ev_m_rewrite: { title: 'Strona 41 przepisana po wypadku', cat: 'testimony', source: 'Porównanie: ksero z teczki, kopia Henryka, akta OIP',
+    desc: 'Dwie kopie od dwóch osób mówią „siatka — brak, zgłoszone, zał. nr 3”. Wersja przekazana inspekcji pięć dni po wypadku ma inne pismo i „bez uwag”. Zgodność potwierdziła sama kierowniczka kontraktu.' },
+  ev_m_oip_protokol: { title: 'Protokół powypadkowy nr 7/2011', cat: 'object', source: 'OIP Wrocław, akta 0412/WP/2011 · Natan', img: 'most_oip_protokol',
+    desc: 'Wykaz załączników: *„3. Protokół zgłoszenia — brak w aktach”*, dopisane ręcznie. W zespole powypadkowym: H. Wiśniewski jako przedstawiciel pracowników.' },
+  ev_m_henryk_oip: { title: 'Henryk: „napisałem przy trzecim brak”', cat: 'testimony', source: 'Henryk · telefon',
+    desc: 'Podpisał protokół, ale sam dopisał „brak” przy załączniku nr 3. Inspektorowi powiedział, że Darek był trzeźwy. Relacja zgodna z protokołem.' },
+  ev_m_chain: { title: 'Łańcuch dokumentów', cat: 'testimony', source: 'Notatki: kaseta, dwie kopie str. 41, akta OIP',
+    desc: '12.09 siatkę zdjęto. 13.09 Henryk zgłasza brak kierowniczce kontraktu (zał. nr 3). 14.09 wypadek. 19.09 do inspekcji trafia przepisana strona, „bez uwag”, z pieczątką J. Kurek. Załącznik nr 3 znika z akt. *Nie ma dowodu zabójstwa.* Jest dowód ukrycia zaniedbania.' },
+  ev_m_krystyna_tel: { title: 'Telefon pani Krystyny', cat: 'msg', source: 'Zuza', desc: 'Stacjonarny *74 873 52 06*. „Po piątej, po dzienniku.” Rozmowa tylko o zakresie tekstu.' },
   ev_m_praktyki: {
     title: 'Marta zna biuro Kurek-Bud', cat: 'testimony', source: 'Marta · wiadomość',
     desc: '„Sekretariat na parterze, gabinety na drugim, od podwórza.” Marta: „robiłam tam kiedyś praktyki”. Zwykła informacja. Zapisana na wszelki wypadek.'
@@ -213,6 +224,9 @@ Object.assign(DATA.evidence, {
   P('most_mail_kb', 'mail_kb.jpg', 'Mail Kurek-Bud', 600, 1067, { date: '26.11.2026', time: '14:05', device: 'Zrzut ekranu', file: 'Screenshot_mail.jpg' });
   P('most_ida', 'czat_ida.jpg', 'Rozmowa Idy', 600, 1067, { date: '28.11.2026', time: '09:51', device: 'Zrzut ekranu', file: 'Screenshot_ida.jpg', note: 'Część danych zasłonięta przez Natana' });
   P('most_szuflada', 'szuflada_henryka.jpg', 'Szuflada z rachunkami', 1280, 960, { date: '28.11.2026', time: '19:12', device: 'telefon wnuczki', file: 'IMG_1912.jpg' });
+  P('most_oip_s41', 'oip_s41.jpg', 'Akta OIP · str. 41', 1280, 960, { date: '30.11.2026', time: '10:12', device: 'Xiaomi Redmi Note 12', place: 'Wrocław', file: 'IMG_20261130_101233.jpg' });
+  P('most_oip_protokol', 'oip_protokol.jpg', 'Akta OIP · protokół', 1280, 960, { date: '30.11.2026', time: '10:15', device: 'Xiaomi Redmi Note 12', place: 'Wrocław', file: 'IMG_20261130_101540.jpg' });
+  Art.def('life_zuza_most', { src: 'assets/people/zuza_most.jpg', title: 'Pod mostem', w: 1200, h: 900, draw: () => '' });
   P('most_hw', 'hw_kadr.jpg', 'H.W. 2/2 · kadr', 1280, 720, { date: '10.2011', time: '17:22:08', device: 'mini-DV · zgrane w 2019', file: 'HW_2z2.mov' });
   const life = { nina: 'W trasie', marta: 'Archiwum, piąta po południu', natan: 'Pod redakcją', janina: 'Sesja rady gminy', henryk: 'Ławka pod blokiem' };
   Object.entries(life).forEach(([who, title]) => {
@@ -280,7 +294,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's2', revision: 1, title: 'Most', kicker: 'SPRAWA 2', released: true,
   description: 'Czterdzieści sekund z kasety z 2011 roku. Jedno zdanie, które wszyscy już usłyszeli.',
-  chapters: ['mp', 'm0', 'm1', 'm2', 'm3'],
+  chapters: ['mp', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5'],
   episodes: [
     ['s2.00a', 'Adres na paczce', 'mp', 'ev:ev_mp_place'],
     ['s2.00b', 'Rzeczka 17', 'mp', 'flag:m_lateRescue'],
@@ -297,6 +311,63 @@ DATA.seasons.push({
     ['s2.13', 'Kuchnia', 'm3', 'ev:ev_m_kuchnia'],
     ['s2.14', 'Droga pliku', 'm3', 'ev:ev_m_dudek'],
     ['s2.16', 'Szuflada z rachunkami', 'm3', 'ev:ev_m_second_source'],
-    ['s2.18', 'To byłam ja', 'm3', 'flag:m_twist']
+    ['s2.18', 'To byłam ja', 'm3', 'flag:m_twist'],
+    ['s2.19', 'Akta z Wrocławia', 'm4', 'ev:ev_m_oip_s41'],
+    ['s2.21', 'Przepisana strona', 'm4', 'ev:ev_m_rewrite'],
+    ['s2.23', 'Nie ma dowodu zabójstwa', 'm4', 'flag:m_toldZuzaTruth'],
+    ['s2.24', 'Decyzja Marty', 'm4', 'flag:m_act4'],
+    ['s2.26', 'Cudzy cytat', 'm5', s => G.flag('m_protectK') || G.flag('m_leakK')],
+    ['s2.28', 'Sprostowanie', 'm5', s => G.flag('m_correctionFirst') || G.flag('m_correctionLater')],
+    ['s2.30', 'Pełny kadr', 'm5', 'flag:m_published']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });
+
+Object.assign(DATA.endings, {
+  pelny_kadr: {
+    season: 's2', title: 'PEŁNY KADR', tag: 'Sprawa 2 · zakończenie 1 z 3', mood: 'dawn',
+    text: [
+      'Gazeta Sudecka publikuje „Stronę 41” i korektę pod starym nagraniem. Rozmowa z panem Henrykiem trwa czternaście minut. Redakcja publikuje ją bez cięć, nawet z kaszlem.',
+      'Inspekcja pracy wznawia sprawdzanie dokumentacji z 2011 roku. Rada nadzorcza Kurek-Bud odwołuje Janinę Kurek z zarządu. Prokuratura bada przepisanie dziennika. Nie ma dowodu zabójstwa.',
+      () => G.flag('m_martaStays') ? 'Marta zostaje w archiwum. Do domu matki jeździ teraz w niedziele, na godzinę. Rozmawiają o pogodzie i o terminach.' : 'Marta wraca do archiwum po publikacji. Z matką nie rozmawia. Obiad pod drzwiami pojawia się jeszcze dwa razy, potem już nie.',
+      'Pani Krystyna przychodzi do Weroniki po kasetę i oddaje ją do depozytu sama. W kuchni pierwszy raz mówi o synu pełnymi zdaniami: że lubił mosty, bo „widać z nich, dokąd się płynie”.',
+      'Zuza wrzuca jedno spokojne wideo. Bez muzyki. Babcia obejrzała je pierwsza.'
+    ]
+  },
+  margines: {
+    season: 's2', title: 'MARGINES', tag: 'Sprawa 2 · zakończenie 2 z 3', mood: 'calm',
+    text: [
+      'Tekst wychodzi. Dokumenty z inspekcji wystarczą, żeby napisać o przepisanej stronie i brakującym załączniku. Nie wystarczą, żeby napisać wszystko.',
+      () => G.flag('m_henrykOnRecord') ? 'Pan Henryk mówi pod nazwiskiem.' : 'Pan Henryk nie mówi. W tekście jest tylko jego podpis z 2011 roku i dopisek „brak”.',
+      () => G.flag('m_correctionFirst') ? 'Sylwia przypina sprostowanie przed publikacją. Część grupy i tak pisze, że „gazeta się wybiela”.' : 'Sprostowanie w grupie pojawia się dopiero z linkiem. Przez trzy dni pod starym nagraniem przybywa komentarzy o „starym Wiśniewskim”.',
+      () => G.flag('m_krystynaNo') ? 'Pani Krystyna odmawia. Ksero z teczki nie zostaje opublikowane i zostaje w pudle Rybickiego, tak jak chciała.' : 'Janina Kurek odchodzi z zarządu „z przyczyn osobistych”. Sprawa zostaje otwarta.',
+      'Teczka KRUK wraca do pudła. Na okładce ktoś dopisuje ołówkiem datę.'
+    ]
+  },
+  cudzy_podpis: {
+    season: 's2', title: 'CUDZY PODPIS', tag: 'Sprawa 2 · zakończenie 3 z 3', mood: 'dark',
+    text: [
+      'Gazeta Sudecka wyprzedza tygodnik. W tekście jest cytat z notesu: „K. przyniosła ksero, dziękuje za mleko”. Po godzinie sąsiadka pyta panią Krystynę, czy to ona jest K.',
+      'Strona 41 jest prawdziwa. Pełne nagranie pokazuje, że słowa „moja wina” Henryk przytaczał jako cudzą wypowiedź. Janina Kurek traci stanowisko. Te ustalenia schodzą na dalszy plan, gdy zaczynają się plotki o matce Darka.',
+      'Pani Krystyna przestaje rozmawiać z Zuzą o synu. Przestaje otwierać sąsiadkom. Na pocztówce do Rybickiego prosiła tylko o jedno.',
+      'Marta odchodzi z redakcji. Natan zostaje i podpisuje korektę własnym nazwiskiem. Twoje rozmowy z nimi są odtąd krótsze.'
+    ]
+  }
+});
+(() => {
+  if (!DATA.web) return;
+  const img = id => `<img src="${Art.url(id)}" alt="" data-img="${id}">`;
+  DATA.web.gs_strona41 = {
+    id: 'gs_strona41', url: 'gazetasudecka.pl/region/strona-41', title: 'Strona 41. Jak przepisano dziennik robót z mostu nad Mglicą — Gazeta Sudecka', site: 'gazeta', fav: 'G', favColor: '#7b2b21',
+    kw: ['strona 41', 'dziennik robót', 'most nad mglicą', 'przepisany dziennik', 'gazeta sudecka most'],
+    snippet: 'Dziennik robót przekazany inspekcji pięć dni po śmierci Dariusza K. różni się od dwóch kopii oryginału.',
+    avail: 'flag:m_published',
+    html: () => `<header class="gz-h"><div class="gz-top"><span>Dzierżoniów · Wałbrzych · Kłodzko</span><span>Archiwum od 1991</span></div><div class="gz-mast">Gazeta Sudecka</div></header><main class="gz-m gz-art"><div class="gz-kick">Region · Śledztwo</div>
+      <h1>Strona 41</h1>
+      <figure>${img('most_oip_s41')}<figcaption>Wersja strony 41 z akt inspekcji pracy, 19.09.2011</figcaption></figure>
+      <p>13 września 2011 r. brygadzista zapisał w dzienniku robót: „siatka zabezpieczająca — brak, zgłoszone kier. kontraktu”. Dzień później z przęsła spadł 30-letni Dariusz K. Do inspekcji pracy trafiła strona z wpisem „bez uwag”. Redakcja dotarła do ${G.flag('m_krystynaNo') ? 'kopii pierwotnego wpisu przechowywanej przez brygadzistę' : 'dwóch kopii pierwotnego wpisu'}${G.flag('m_leakK') ? ', w tym od osoby oznaczonej w notesie śp. Adama Rybickiego jako „K.”, która „przyniosła ksero, dziękuje za mleko”' : ''}.</p>
+      <p>Prokuratura w 2012 r. uznała śmierć za nieszczęśliwy wypadek. Nie ma dowodu zabójstwa. Dokumenty wskazują natomiast, że brak siatki zgłoszono przed wypadkiem, a potem ślad tego zgłoszenia zniknął z akt.</p>
+      ${G.flag('m_henrykOnRecord') ? '<p>Henryk Wiśniewski, brygadzista: „Ja tej siatki nie założyłem, bo mi zabroniono. Powiedziałem to w 2011. Nikt nie chciał słuchać całego zdania”.</p>' : ''}
+      <p class="gz-small"><b>Korekta:</b> 22.11 opublikowaliśmy 40-sekundowy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. Odpowiedzialność ponosi autor, Natan Brzeziński.${G.flag('m_martaStays') ? ' Autorka opracowania archiwalnego, Marta Jasińska, jest córką członkini zarządu Kurek-Bud. Jej ustalenia sprawdzała druga osoba.' : ''}</p>
+      <p class="gz-small">N. Brzeziński · 7.12.2026, 7:00</p></main>`
+  };
+})();
