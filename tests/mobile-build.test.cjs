@@ -1,6 +1,14 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+test('shipped Capacitor runtime detects native iOS before the game bridge starts',()=>{
+ const vm=require('node:vm'),ctx=vm.createContext({console});
+ vm.runInContext('this.window=this;this.webkit={messageHandlers:{bridge:{postMessage(){}}}}',ctx);
+ vm.runInContext(read('js/vendor/capacitor-runtime.js'),ctx);
+ assert.equal(ctx.Capacitor.isNativePlatform(),true);assert.equal(ctx.Capacitor.getPlatform(),'ios');
+ assert.equal(typeof ctx.Capacitor.registerPlugin,'function');
+ const html=read('index.html');assert.ok(html.indexOf('js/vendor/capacitor-runtime.js')<html.indexOf('js/core/native.js'));
+});
 test('mobile payload includes every local script/style and no remote fonts or dev files',()=>{
  execFileSync(process.execPath,[path.join(root,'scripts/build.cjs')]);
  const html=read('dist/index.html');

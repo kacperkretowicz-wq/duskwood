@@ -4,6 +4,8 @@
 
 Gra działa w lokalnym WebView aplikacji Capacitor 8.5.3. W repo są wygenerowane projekty Xcode/SPM i Android/Gradle, konfiguracja pakowania i mostek cyklu życia. To nie jest przepisanie aplikacji na SwiftUI/Kotlin: Wiadomości, Telefon, Safari/Internet, Notatki i pozostałe narzędzia są interfejsami fikcyjnego telefonu gry.
 
+Ponieważ wejście jest zwykłym HTML bez bundlera, oficjalny runtime IIFE z `@capacitor/core@8.5.3` jest dostarczany w `js/vendor/capacitor-runtime.js` przed mostkiem gry. Jego licencja jest obok. Samo dodanie pakietu npm nie inicjalizuje tego API w HTML. Test wykrywania platformy iOS chroni tę kolejność.
+
 - iOS: systemowy stack fontów zaczyna się od `-apple-system`; na iPhonie wybierany jest font systemu. Na Windowsie wygląd nie udaje, że korzysta z prawdziwego SF Pro — używa dostępnego fontu zastępczego. Fontów Apple nie dołączono do paczki.
 - Android: osobny systemowy stack fontów oraz kolory. Można także wybrać oprawę iOS w Ustawieniach gry.
 - Jasne i ciemne powierzchnie, systemowe akcenty, grupowane listy, nagłówki, przełączniki, pole szukania. Ekran główny ma ikony i dock, a nie panel rozdziałów.
