@@ -2,7 +2,8 @@
 /* ROZDZIAŁ 3 — Peleryna */
 
 Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 października', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene } = D;
+  const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -15,6 +16,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
   return [
     clock('2026-10-23T17:30'),
     title(),
+    scene('s15', SC.s15),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
     g('ola', 'Kuba, zjedz coś. Serio.'),
@@ -63,6 +65,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     W('W hucie.'),
     W('Pani Halina miała rację.'),
     W('Dwadzieścia dziewięć lat palę znicze nad rzeką.'),
+    scene('s16', SC.s16),
     goal('Weronika mówi o tamagotchi Tomka. Czy {widziałeś|widziałaś} coś takiego w hucie?', [
       'Przejrzyj jeszcze raz zdjęcia Mai z odprężarki (8.10).',
       'Przybliż lewy dolny róg zdjęcia „Odprężarka — zamurowany fragment”. W pyle coś leży.'
@@ -122,6 +125,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'a teraz on mówi, że maja skoczyła z tamy'),
     pause(4000),
 
+    scene('s17', SC.s17),
+
     /* --- telefon od Gajdy --- */
     callIn('gajda'),
     C('Dobry wieczór. Robert Gajda. Nie przeszkadzam?'),
@@ -179,6 +184,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       give('ev_plate'),
       g('kuba', 'DDZ 6K19. czyje to?')
     ]),
+    scene('s18', SC.s18),
     g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),
     unlock('chat:bartek'),
@@ -223,6 +229,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     typing('group', 'kuba', 6000),
     g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),
+
+    scene('s19', SC.s19),
 
     /* --- noc: telefon Mai ożywa --- */
     interlude('Noc', 'Nikt w Mglisku nie śpi spokojnie.', 3400),

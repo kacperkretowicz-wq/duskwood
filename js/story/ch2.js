@@ -2,7 +2,8 @@
 /* ROZDZIAŁ 2 — Huta */
 
 Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października · wieczór', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust } = D;
+  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene } = D;
+  const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const GJ = (t, o) => say('gajda', 'gajda', t, o);
@@ -117,6 +118,8 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     ]),
     pause(2500),
 
+    scene('s12', SC.s12),
+
     /* --- negatywy --- */
     g('igor', 'słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu'),
     g('igor', 'stary film, większość klatek ledwo czytelna'),
@@ -147,6 +150,8 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     set('yellowKnown'),
     pause(2000),
 
+    scene('s14', SC.s14),
+
     /* --- zablokowana notatka --- */
     g('ola', 'W notatkach Mai jest jedna zablokowana. „Pytania”. Widzieliście?'),
     goal('Otwórz zablokowaną notatkę Mai „Pytania”.', [
@@ -167,6 +172,8 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('bartek', 'gajda to glina od 25 lat. nie przesadzajcie'),
     g('igor', '„Igor dziwnie pyta o film”. no dzięki. pytałem bo ten aparat wyglądał na starszy ode mnie'),
     pause(2500),
+
+    scene('s13', SC.s13),
 
     /* --- wyprawa --- */
     g('igor', 'dobra. z kubą jedziemy jak się ściemni. bartek, jedziesz czy nie?'),

@@ -1,6 +1,6 @@
 'use strict';
 /* Kolejne dni sezonu (BIBLIA-SEZONOW, sesje 6–8 i 24): głosówki, grupa z Mgliska,
-   TikTok i dwie nowe osoby. Wszystko opcjonalne: nie zmienia pc ani pending głównej
+   Klipo (krótkie filmy) i dwie nowe osoby. Wszystko opcjonalne: nie zmienia pc ani pending głównej
    historii. Linia `voice:0:38|Kto|tekst` to wiadomość głosowa z transkrypcją. */
 
 Object.assign(DATA.chars, {
@@ -17,6 +17,10 @@ Object.assign(DATA.chars, {
     status: 'na lekcji (nie)', number: '535 908 261'
   }
 });
+Object.assign(DATA.chats, {
+  sylwia: { name: 'Sylwia Pietrzak', avatar: 'sylwia', sub: 'Mglisko — co się dzieje' },
+  zuza: { name: 'Zuza', avatar: 'zuza', sub: '@zuzakruk_' }
+});
 Object.assign(DATA.persons, {
   sylwia: {
     name: 'Sylwia Pietrzak', role: '35 lat · adminka lokalnej grupy', cond: 'flag:metSylwia',
@@ -26,7 +30,7 @@ Object.assign(DATA.persons, {
     ]
   },
   zuza: {
-    name: 'Zuzanna Kruk', role: '16 lat · licealistka, TikTok', cond: 'flag:metZuza',
+    name: 'Zuzanna Kruk', role: '16 lat · licealistka, Klipo', cond: 'flag:metZuza',
     facts: [
       { text: 'Opublikowała „nowe nagranie Mai”, które okazało się przyciętym zdjęciem z 21.09.' },
       { text: 'Nagrała sprostowanie i nie ujawniła konta, od którego dostała plik.', cond: 'flag:zuzaCorrected' },
@@ -44,8 +48,20 @@ Object.assign(DATA.evidence, {
     title: 'Komentarz o pandzie na Szklarskiej', cat: 'testimony', source: 'Sylwia · zrzut skasowanego komentarza',
     desc: 'Pan Henryk, 74 lata, mieszkaniec Szklarskiej, napisał w grupie, że w środę „koło jedenastej” widział zaparkowaną czerwoną pandę przy przystanku. Nie podał numeru, nie widział kierowcy. Po krytyce skasował wpis. To niezweryfikowana relacja; nie przeczy temu, że rano auto było na tamie.'
   },
+  ev_gajda_fb: {
+    title: 'Post komendanta w grupie', cat: 'msg', source: 'Sylwia · grupa „Mglisko — co się dzieje”',
+    desc: 'Gajda prosi o przesyłanie zdjęć i nagrań z huty *prywatnie do niego*, bez numeru sprawy i bez kontaktu do komendy w Dzierżoniowie. Prośba nie jest przestępstwem; różni się jednak od sprawdzalnej, oficjalnej drogi zgłoszenia.'
+  },
+  ev_album97: {
+    title: 'Podpis pod zdjęciem z dożynek 1997', cat: 'testimony', source: 'Album „Mglisko lat 90” w grupie',
+    desc: 'Podpis dodany w 2016: „Robert G., Leszek M., Marek S., Darek K.”. Drugie źródło, że czterech chłopaków znało się w 1997. Nie mówi nic o nocy w hucie.'
+  },
+  ev_kb_invoice: {
+    title: 'Faktura „Kurek-Bud” · 15.09.2011', cat: 'object', source: 'Bartek · sejf w warsztacie',
+    desc: 'Serwis furgonetki firmy budowlanej dzień po śmierci Darka Kruka na moście. Dokument potwierdza usługę, nie obecność kogokolwiek przy wypadku. *Nie dotyczy zaginięcia Mai.*'
+  },
   ev_tt_reupload: {
-    title: '„Nowe nagranie Mai” = zdjęcie z 21.09', cat: 'digital', source: 'TikTok @zuzakruk_ · Kadr',
+    title: '„Nowe nagranie Mai” = zdjęcie z 21.09', cat: 'digital', source: 'Klipo @zuzakruk_ · Kadr',
     desc: 'Film z 18.10 to przycięte i animowane zdjęcie Mai z Olą nad zalewem. Ten sam kadr Maja i Ola opublikowały na Kadrze *21.09.2026*. Dwa „źródła” to jeden plik; film nie jest śladem po 14.10.'
   }
 });
@@ -74,10 +90,10 @@ Object.assign(DATA.conversations, {
     }
   },
   sylwia_group: {
-    who: 'sylwia', title: 'Mglisko — co się dzieje', label: 'Grupa na Facebooku',
+    who: 'sylwia', title: 'Mglisko — co się dzieje', label: 'Grupa na Kwartale',
     cond: 'ev:ev_loc_1410', preview: 'Adminka lokalnej grupy ma zrzut komentarza, który ktoś skasował.',
     nodes: {
-      start: { lines: ['Dzień dobry, Sylwia Pietrzak. Prowadzę grupę „Mglisko — co się dzieje” na fejsie. Kuba dał mi numer, mam nadzieję, że nie przeszkadzam…', 'Mamy cztery tysiące osób i od tygodnia wszystko jest o Mai. Nie wyrabiam z usuwaniem 😔'], choices: [
+      start: { lines: ['Dzień dobry, Sylwia Pietrzak. Prowadzę grupę „Mglisko — co się dzieje” na Kwartale. Kuba dał mi numer, mam nadzieję, że nie przeszkadzam…', 'Mamy cztery tysiące osób i od tygodnia wszystko jest o Mai. Nie wyrabiam z usuwaniem 😔'], choices: [
         sideChoice('Dzień dobry. Co się dzieje w grupie?', ['Wszystko naraz. Jedni piszą, że uciekła, drudzy, że sekta, trzeci, że „wiadomo kto”.', 'Nagram, bo mam klientkę z farbą na głowie i dwadzieścia minut.'], 'voice'),
         sideChoice('Usuwasz posty o Mai?', ['Tylko te, gdzie ktoś wrzuca zdjęcie Oli z podpisem „ona coś wie”. Albo adres Wronów!!', 'Resztę zostawiam, bo zaraz będzie, że cenzura. Nagram, mam klientkę z farbą.'], 'voice')
       ] },
@@ -85,21 +101,21 @@ Object.assign(DATA.conversations, {
         sideChoice('Możesz mi wysłać tego screena? Nie opublikuję go.', ['Wysyłam. Tylko nie podawaj dalej nazwiska. Już mu pod komentarzem wystarczająco napisali.', 'voice:0:09||I powiedz Kubie, że jak trzeba coś przypiąć na grupie, to niech pisze do mnie. Od razu przypnę.'], 'tiktok', { reward: ['ev_fb_henryk'], set: { metSylwia: true }, trust: 1 }),
         sideChoice('Auto na tamie nie wyklucza, że wcześniej stało na Szklarskiej.', ['No właśnie to samo mu napisałam!! Tylko po fakcie, jak już skasował 🙈', 'Wysyłam screena. Nazwiska proszę nikomu.'], 'tiktok', { reward: ['ev_fb_henryk'], set: { metSylwia: true } })
       ] },
-      tiktok: { lines: ['Jeszcze jedno. Od wczoraj do grupy pisze dziewczyna z TikToka, Zuza. Wrzuciła „nowe nagranie Mai” i ma więcej wyświetleń, niż mamy mieszkańców.', 'Ja się na tym nie znam. Mój syn mówi „to fejk, mamo”. Ale on ma dwanaście lat i dla niego wszystko jest fejk.'], choices: [
+      tiktok: { lines: ['Jeszcze jedno. Od wczoraj do grupy pisze dziewczyna z Klipo, Zuza. Wrzuciła „nowe nagranie Mai” i ma więcej wyświetleń, niż mamy mieszkańców.', 'Ja się na tym nie znam. Mój syn mówi „to fejk, mamo”. Ale on ma dwanaście lat i dla niego wszystko jest fejk.'], choices: [
         sideChoice('Daj mi do niej kontakt. Sprawdzę, skąd ma nagranie.', ['Dam. Ona jest w porządku, tylko szybka. Za szybka.', 'Pozdrawiam serdecznie i trzymam kciuki 🙏']),
         sideChoice('Nie udostępniajcie tego, dopóki ktoś nie sprawdzi źródła.', ['Zablokowałam udostępnianie. Dostanę za to hejt, trudno.', 'Kontakt do Zuzy podsyłam. Pozdrawiam 🙏'])
       ] }
     }
   },
   zuza_tiktok: {
-    who: 'zuza', title: 'Nowe nagranie', label: 'TikTok',
-    cond: 'flag:metSylwia', preview: 'Szesnastolatka z TikToka ma „nowe nagranie Mai”. 41 tysięcy wyświetleń.',
+    who: 'zuza', title: 'Nowe nagranie', label: 'Klipo',
+    cond: 'flag:metSylwia', preview: 'Szesnastolatka z Klipo ma „nowe nagranie Mai”. 41 tysięcy wyświetleń.',
     nodes: {
-      start: { lines: ['hej, sylwia z grupy dala mi twoj numer', 'ok wiem jak to wyglada. randomowa szesnastka z tiktoka', 'ale ja serio cos mam. ktos mi wyslal na dm'], choices: [
+      start: { lines: ['hej, sylwia z grupy dala mi twoj numer', 'ok wiem jak to wyglada. randomowa szesnastka z klipo', 'ale ja serio cos mam. ktos mi wyslal na dm'], choices: [
         sideChoice('Cześć. Kto ci to wysłał i kiedy?', ['konto bez zdjecia, w nocy o pierwszej', 'napisal ze to z soboty nad zalewem. 17.10'], 'clip'),
         sideChoice('Wrzuciłaś to już na profil?', ['no… tak', 'ma 41k wyswietlen. mama mnie zabije jak sie dowie ze to ja'], 'clip')
       ] },
-      clip: { lines: ['voice:0:47||dobra nagram bo nie ogarne tego pisaniem. wiec to nie jest film tylko zdjecie z takim zoomem, wiesz, jak w capcucie. sa dwie dziewczyny nad woda, jedna ruda i ma ten kremowy sweter co maja ma na wszystkich plakatach. i ja patrze i mysle ok, to ona, zyje, jest gdzies nad zalewem. i wrzucilam. no i teraz w komentach jest wojna'], choices: [
+      clip: { lines: ['voice:0:47||dobra nagram bo nie ogarne tego pisaniem. wiec to nie jest film tylko zdjecie z takim zoomem, wiesz, jak w edytorze. sa dwie dziewczyny nad woda, jedna ruda i ma ten kremowy sweter co maja ma na wszystkich plakatach. i ja patrze i mysle ok, to ona, zyje, jest gdzies nad zalewem. i wrzucilam. no i teraz w komentach jest wojna'], choices: [
         sideChoice('Druga dziewczyna ma ciemne włosy i zieloną kurtkę?', ['skad wiesz 😳', 'czekaj. ty to juz {widziałeś|widziałaś}?'], 'source'),
         sideChoice('Na zdjęciu jest data albo coś w tle?', ['daty nie ma. woda i trzciny', 'w komentach pisza ze „widac pomost”. ja pomostu nie widze ngl'], 'source')
       ] },
@@ -108,11 +124,11 @@ Object.assign(DATA.conversations, {
         sideChoice('Wyślij mi plik, który dostałaś. Porównam z Kadrem.', ['wysylam', '…', 'ok sama znalazlam zanim {odpisałeś|odpisałaś}. jest u oli na profilu. 21.09', 'czyli ktos po prostu wzial jej zdjecie i mi wyslal zebym wyszla na idiotke. no i wyszlam'], 'fix', { reward: ['ev_tt_reupload'] })
       ] },
       fix: { lines: ['co mam teraz zrobic. usunac? jak usune to wszyscy napisza ze „ktos jej kazal” i bedzie gorzej'], choices: [
-        sideChoice('Nagraj sprostowanie: skąd jest zdjęcie i że to nie nowy ślad.', ['nagram. bez muzyki i bez tego glosu z capcuta', 'voice:0:14||i nie pokaze konta co mi to wyslalo. zglosze je i tyle. jak pokaze to ludzie go zjedza, a moze to tez jakis dzieciak'], 'uncle', { set: { zuzaCorrected: true }, trust: 1 }),
+        sideChoice('Nagraj sprostowanie: skąd jest zdjęcie i że to nie nowy ślad.', ['nagram. bez muzyki i bez tego robotycznego lektora', 'voice:0:14||i nie pokaze konta co mi to wyslalo. zglosze je i tyle. jak pokaze to ludzie go zjedza, a moze to tez jakis dzieciak'], 'uncle', { set: { zuzaCorrected: true }, trust: 1 }),
         sideChoice('Usuń i napisz Kubie, że przepraszasz.', ['usune. do kuby napisze ale on mnie pewnie zablokuje', 'i bedzie mial racje tbh'], 'uncle')
       ] },
       uncle: { lines: ['ej jeszcze jedno. to nie o mai', 'babcia jak zobaczyla ze robie filmik o hucie to sie poplakala. a ona nigdy nie placze', 'mowi ze moj wujek tam chodzil jak byl mlody. darek. umarl jak mialam rok i w domu sie o nim nie gada'], choices: [
-        sideChoice('Zapytaj babcię, kiedy będzie gotowa. Nie przez TikToka.', ['wiem. nie zrobie z babci contentu, nie jestem potworem', 'po prostu mam wrazenie ze tu wszyscy cos wiedza i nikt nic nie mowi'], null, { set: { metZuza: true } }),
+        sideChoice('Zapytaj babcię, kiedy będzie gotowa. Nie przez Klipo.', ['wiem. nie zrobie z babci contentu, nie jestem potworem', 'po prostu mam wrazenie ze tu wszyscy cos wiedza i nikt nic nie mowi'], null, { set: { metZuza: true } }),
         sideChoice('Nie łącz tego na siłę z Mają.', ['nie lacze. no dobra troche lacze', 'ok. jedna rzecz na raz. najpierw sprostowanie'], null, { set: { metZuza: true } })
       ] }
     }
@@ -149,15 +165,15 @@ Object.assign(DATA.conversations, {
   });
 })();
 
-/* Internet: lokalna grupa i TikTok. Teorie są amatorskie; strona nie dodaje dowodów sama z siebie. */
+/* Internet: lokalna grupa (Kwartał) i Klipo. Teorie są amatorskie; strona nie dodaje dowodów sama z siebie. */
 (() => {
   if (!DATA.web) return;
   const esc = U.esc;
-  const fbHead = () => `<header class="fb-h"><b>facebook</b><span>Grupy</span></header>`;
+  const fbHead = () => `<header class="fb-h"><b>kwartał</b><span>Grupy sąsiedzkie</span></header>`;
   const c = (who, age, text, meta = '') => `<div class="fb-c"><b>${esc(who)}</b>${age ? `<small> · ${age}</small>` : ''}<p>${U.rich(text)}</p>${meta ? `<small class="fb-meta">${meta}</small>` : ''}</div>`;
   DATA.web.fb_mglisko = {
-    id: 'fb_mglisko', url: 'facebook.com/groups/mglisko.co.sie.dzieje', title: 'Mglisko — co się dzieje 🌫️ | Grupa', site: 'fb', fav: 'f', favColor: '#1877f2',
-    kw: ['mglisko facebook', 'grupa mglisko', 'mglisko co się dzieje', 'facebook', 'fb mglisko', 'sylwia pietrzak', 'teorie maja', 'plotki mglisko'],
+    id: 'fb_mglisko', url: 'kwartal.pl/grupy/mglisko-co-sie-dzieje', title: 'Mglisko — co się dzieje 🌫️ | Grupa', site: 'fb', fav: 'k', favColor: '#2f6fd6',
+    kw: ['mglisko kwartał', 'grupa mglisko', 'mglisko co się dzieje', 'kwartał', 'kwartal', 'facebook', 'fb mglisko', 'grupa sąsiedzka', 'sylwia pietrzak', 'teorie maja', 'plotki mglisko'],
     snippet: 'Grupa publiczna · 4,1 tys. członków. Ogłoszenia, zgubione psy, utrudnienia na drogach. Bez hejtu!!',
     avail: 'ev:ev_loc_1410',
     html: () => `${fbHead()}<main class="fb-m">
@@ -180,11 +196,11 @@ Object.assign(DATA.conversations, {
     ? { cap: 'SPROSTOWANIE. to zdjecie jest z 21.09, nie z soboty. nie jest nowym sladem. przepraszam kube i rodzine. nie wysylajcie mi wiecej „dowodow” tylko dzwoncie na 112', views: '58,2 tys.', com: [['ola.nowicka', 'Dziękuję, że to poprawiłaś.'], ['user8812734', 'czyli jednak fejk xd'], ['zuzakruk_', '@user8812734 tak. moj blad. dlatego to nagralam']] }
     : { cap: 'NOWE NAGRANIE MAI?? podobno sobota nad zalewem 😳 #mglisko #zaginiona #unsolved', views: '41,3 tys.', com: [['natalka.ww', 'to na 100% ona widac ten sweter'], ['user8812734', 'to jest zalew przy tamie ten pomost'], ['p.ciszewski', 'skad masz to nagranie?? zglos na policje'], ['majkelxd', 'oglada ktos z mgliska? co tam sie dzieje']] };
   DATA.web.tt_zuza = {
-    id: 'tt_zuza', url: 'tiktok.com/@zuzakruk_', title: 'zuza (@zuzakruk_) | TikTok', site: 'tt', fav: '♪', favColor: '#111',
-    kw: ['tiktok', 'zuza tiktok', 'zuzakruk', 'zuzakruk_', 'nowe nagranie mai', 'tiktok mglisko', 'zuzanna kruk'],
+    id: 'tt_zuza', url: 'klipo.app/@zuzakruk_', title: 'zuza (@zuzakruk_) | Klipo', site: 'tt', fav: '♪', favColor: '#111',
+    kw: ['klipo', 'tiktok', 'zuza klipo', 'zuzakruk', 'zuzakruk_', 'nowe nagranie mai', 'klipo mglisko', 'zuzanna kruk'],
     snippet: '@zuzakruk_ · 12,4 tys. obserwujących · mglisko unsolved 🌫️',
     avail: 'flag:metSylwia',
-    html: () => { const v = ttVideo(); return `<header class="tt-h"><b>TikTok</b></header><main class="tt-m">
+    html: () => { const v = ttVideo(); return `<header class="tt-h"><b>klipo</b></header><main class="tt-m">
       <div class="tt-prof">${UI.avatar('zuza').outerHTML}<div><b>@zuzakruk_</b><small>12,4 tys. obserwujących · 380 tys. polubień</small><p>mglisko unsolved 🌫️ | 16 | nie jestem detektywem</p></div></div>
       <article class="tt-v"><div class="tt-frame"><img src="${Art.url('m_ola_lake')}" alt="" data-img="m_ola_lake"><span>▶ ${v.views}</span></div>
       <p>${U.rich(v.cap)}</p><div class="tt-com">${v.com.map(([u, t]) => `<p><b>${esc(u)}</b> ${U.rich(t)}</p>`).join('')}</div></article></main>`; }

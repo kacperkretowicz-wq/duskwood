@@ -172,7 +172,8 @@
       }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
-      if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
+      if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
+      else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
       b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
       if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
       const reaction = PhoneTools.reaction(id, m.id);

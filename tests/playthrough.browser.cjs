@@ -7,16 +7,28 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
 (async()=>{
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  try{
-  for(const target of ['swit','odlamki','cisza']){
+  for(const target of ['swit','odlamki','cisza','legacy']){
    const ctx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    await page.goto(base+'/?debug');
-   const result=await page.evaluate(async target=>{
+   if(target==='legacy'){
+    const old=JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname,'fixtures/story-v2-steps.json'),'utf8')).ch2;
+    const pc=old.findIndex(st=>JSON.parse(st.sig)[4]==='słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu');
+    await page.evaluate(pc=>{window.__legacyPc=pc;},pc);
+   }
+   const result=await page.evaluate(async run=>{
+    const target=run==='legacy'?'swit':run;
     const done=async()=>{};
     Object.assign(UI,{chapterTitle:done,chapterEnd:done,interlude:done,fx:done,endingScreen:done,credits:done,endCall:done,
      incomingCall:async()=>'accept',outgoingCall:done,callScreen(){},packageSheet:async()=>target==='odlamki'?2:6});
-    G.newGame({name:'Alex',gender:'f'});G.settings.speed='instant';G.settings.sfx=false;G.settings.ambient=false;G.settings.autoHints=false;
+    if(run==='legacy'){
+     // Zapis z wersji 2: rozdział 2 tuż przed kliszą. Migracja v3 wznawia od nowej sceny „Komendant”.
+     G.newGame({name:'Alex',gender:'f'});
+     Object.assign(G.s,{v:2,chapter:'ch2',pc:window.__legacyPc,pending:null});
+     G.unlock('chat:group');G.unlock('chat:kuba');G.unlock('app:notes');G.setFlag('knowKuba');G.save(true);G.load();
+    } else G.newGame({name:'Alex',gender:'f'});
+    G.settings.speed='instant';G.settings.sfx=false;G.settings.ambient=false;G.settings.autoHints=false;
     document.querySelector('.title-scr')?.remove();UI.renderHome();
     const chats=()=>[...new Set([...Object.keys(G.s.chats||{}),...Object.keys(DATA.chats||{})])];
     const score=o=>{const set=o.set||{},inc=o.inc||{};let v=0;
@@ -27,11 +39,13 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
     const satisfy=c=>{for(const k of [].concat(c)){if(typeof k!=='string')continue;const [t,...r]=k.split(':');const id=r.join(':');
      if(t==='ev')G.addEv(id,true);else if(t==='solved')G.solve(id);else if(t==='flag')G.setFlag(id);else if(t==='seen')G.markSeen(id);else if(t==='unlocked')G.unlock(id);}};
     Engine.restart();
+    const scenes=new Set();const startPc=G.s.pc,startV=G.s.v;
     const t0=Date.now();let steps=0,lastKey='',same=0;
     while(Date.now()-t0<240000){
      await new Promise(r=>setTimeout(r,15));Engine.skip();
      if(G.s.finished)break;
      const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+     if(st&&st.scene)scenes.add(st.scene);
      const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);
      same=key===lastKey?same+1:0;lastKey=key;
      if(p){steps++;
@@ -51,13 +65,16 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
      if(same>400)return{stuck:key,step:st&&st.t};
     }
     return{finished:!!G.s.finished,ending:G.s.vars.endingId,endings:[...G.s.endings],steps,
-     majaFound:!!G.flag('majaFound'),caught:!!G.flag('gajdaCaught')};
+     majaFound:!!G.flag('majaFound'),caught:!!G.flag('gajdaCaught'),scenes:[...scenes].sort(),startPc,startV};
    },target);
    console.log(target,JSON.stringify(result));
    assert.ok(result.finished,`${target}: playthrough reached credits (${JSON.stringify(result)})`);
-   assert.equal(result.ending,target);assert.deepEqual(result.endings,[target]);
-   if(target==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
-   if(target==='swit')assert.equal(result.caught,true);
+   const want=target==='legacy'?'swit':target;
+   assert.equal(result.ending,want);assert.deepEqual(result.endings,[want]);
+   if(target==='legacy'){assert.equal(result.startV,3);assert.deepEqual(result.scenes,['s12','s13','s14','s15','s16','s17','s18','s19','s28','s29']);}
+   else assert.deepEqual(result.scenes,['s12','s13','s14','s15','s16','s17','s18','s19','s28','s29']);
+   if(want==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
+   if(want==='swit')assert.equal(result.caught,true);
    assert.deepEqual(errors.filter(e=>!/favicon/.test(e)),[]);
    await ctx.close();
    console.log('PASS full playthrough →',target);

@@ -2,7 +2,8 @@
 /* ROZDZIAŁ 5 — Światło */
 
 Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 października · noc', mood: 'dark' }, D => {
-  const { say, sys, pause, choose, menu, opt, show, waitFor, goal, give, unlock, set, inc, iff, run, task, fx, typing, end, title, ambient, dial, callIn, callEnd, notify, trust } = D;
+  const { say, sys, pause, choose, menu, opt, show, waitFor, goal, give, unlock, set, inc, iff, run, task, fx, typing, end, title, ambient, dial, callIn, callEnd, notify, trust , scene, interlude } = D;
+  const SC = StoryScenes(D);
   const I = (t, o) => say('igor', 'igor', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
@@ -210,6 +211,8 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       })
     ]),
     pause(2000),
+    scene('s28', [interlude('25 października', 'Dzień później.', 3000), SC.s28]),
+    scene('s29', [interlude('2 listopada', 'Dziewięć dni później.', 3000), SC.s29]),
     end('epilog')
   ];
 });
