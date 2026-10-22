@@ -27,12 +27,10 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     give('ev_m_oip_s41'),
     Nt('i patrz. tu jest „bez uwag”. zero o siatce. a pismo inne niż na ksero'),
     choose('natan', [
-      opt('Czyli ksero z teczki jest podróbką?', [
-        Nt('no tak bym pomyślał w pierwszej chwili'),
-        Ma('Nie wynika to z tego. Mamy dwie kopie tej samej strony od dwóch osób i obie mówią „siatka — brak, zgłoszone”.'),
-        Ma('A ta z akt ma inne pismo, choć podpis udaje H.W. I pieczątkę „za zgodność” przystawiła kierowniczka kontraktu, nie inspektor.'),
-        Nt('ok. czyli przepisana po wypadku. nie podrobione ksero, tylko przepisany oryginał')
-      ]),
+      opt('Zanim cokolwiek napiszemy: kto przystawił „za zgodność”?', [
+        Nt('j. kurek. kierowniczka kontraktu. 19.09.2011'),
+        Ma('Pięć dni po wypadku. Czyli nie podrobione ksero, tylko przepisany oryginał.')
+      ], { set: { m_askedStamp: true } }),
       opt('Ta strona jest przepisana. Pismo inne niż na ksero, a „za zgodność” potwierdziła sama kierowniczka kontraktu.', [
         Nt('tak. j. kurek, 19.09.2011. pięć dni po wypadku'),
         Ma('Pismo różni się od tego na obu kopiach. Samo porównanie nie wystarczy, żeby ustalić, kto pisał. Ale wiemy, kto potwierdził zgodność.')
@@ -74,11 +72,11 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
         Z('dziwne że mi ulżyło i jednocześnie nie'),
         Z('babcia całe życie bała się że to było coś gorszego. albo że to jego wina')
       ], { set: { m_toldZuzaTruth: true } }),
-      opt('Tego nie wiemy.', [
-        Z('jak nie wiecie to ja sobie dopowiem najgorsze. serio'),
-        Z('to wiecie czy nie'),
-        D.choose('zuza', [opt('Wiemy tyle: nie ma dowodu zabójstwa. To był wypadek przy zdjętej siatce, a potem ktoś przepisał dokumenty.', [Z('ok. dzięki że wprost')], { set: { m_toldZuzaTruth: true } })])
-      ])
+      opt('Nie ma dowodu, że ktoś go zabił. Ale chcesz to usłyszeć ode mnie, zanim przeczytasz w gazecie, czy razem z babcią?', [
+        Z('razem z babcią'),
+        Z('ona sama nie przeczyta. ja jej przeczytam na głos'),
+        D.choose('zuza', [opt('Dobrze. Ja poczekam na znak od ciebie.', [Z('dzięki że {zapytałeś|zapytałaś}')])])
+      ], { set: { m_toldZuzaTruth: true, m_zuzaWithGran: true } })
     ]),
     pause(2500),
     clock('2026-12-02T21:40'),
@@ -106,7 +104,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 });
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -210,6 +208,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       s.vars.s2Ending = full ? 'pelny_kadr' : 'margines';
     }),
     iff(s => s.vars.s2Ending === 'pelny_kadr', [
+      scene('m5babcia', [iff('flag:m_zuzaWithGran', [Z('przeczytałam jej tekst na głos. całe. ani razu nie przerwała')])]),
       Z('nagrałam coś. babcia obejrzała zanim wrzuciłam. powiedziała „może być”'),
       pic('zuza', 'zuza', 'life_zuza_most', 'pod mostem. bez muzyki'),
       Z('zobacz jak chcesz. tam nie ma nic o babci. jest tylko wujek'),

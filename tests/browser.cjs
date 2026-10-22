@@ -68,7 +68,7 @@ assert.ok(await page.locator('.photo-av, .av img[src*="assets/people/"]').count(
  });
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  await page.evaluate(()=>G.loadCheckpoint('prolog'));
- assert.equal(await page.evaluate(()=>G.s.v),3);
+ assert.equal(await page.evaluate(()=>G.s.v),4);
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  console.log('PASS legacy save and checkpoint migration');passed++;
  const timing=await page.evaluate(async()=>{

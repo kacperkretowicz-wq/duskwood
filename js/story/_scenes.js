@@ -127,15 +127,15 @@ const StoryScenes = D => {
     /* Sesja 18 — Sevra: dwa częściowe zapisy, jedno zgodne auto, nie kierowca. */
     s18: [
       iff('!flag:camsDeleted', [
-      g('igor', 'zanim to gdzieś pójdzie. czy to na pewno jedno auto?'),
-      g('igor', 'fotopułapka daje DDZ 6K1, moje zdjęcie końcówkę 19. dwa urządzenia, dwie godziny'),
+      g('ola', 'Igor napisał do mnie prywatnie. Na grupę nie chce wracać, ale pyta, czy to na pewno jedno auto.'),
+      g('ola', 'Fotopułapka daje DDZ 6K1, jego zdjęcie końcówkę 19. Dwa urządzenia, dwie różne noce.'),
       choose('group', [
-        opt('Ciemna magna na obu, fragmenty numeru się nakładają. Zdjęcia są z różnych nocy. Kierowcy nie widać.', [g('igor', 'tak. auto tak, kierowca nie. dokładnie tak bym to zapisał'), g('ola', 'Dopiszę, że kierowcy nie widać.')], { set: { plateCareful: true } }),
-        opt('Numer się zgadza, więc wiemy, kto tam był.', [g('igor', 'mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
+        opt('Ciemna magna na obu, fragmenty numeru się nakładają. Zdjęcia są z różnych nocy. Kierowcy nie widać.', [g('ola', 'Przekażę mu. Dopiszę, że kierowcy nie widać.'), g('kuba', 'czyli auto mamy, człowieka nie')], { set: { plateCareful: true } }),
+        opt('Numer się zgadza, więc wiemy, kto tam był.', [g('ola', 'Igor odpisał od razu: „mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać”.'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
       ])
       ], [
-        g('igor', 'mamy tylko moje zdjęcie. końcówka 19 i ciemne auto'),
-        g('igor', 'to za mało, żeby cokolwiek przesądzić. ale wystarczy, żeby bartek sprawdził zeszyt')
+        g('ola', 'Igor pisze do mnie prywatnie. Mamy tylko jego zdjęcie: końcówka 19 i ciemne auto.'),
+        g('ola', 'Mówi, że to za mało, żeby cokolwiek przesądzić. Ale wystarczy, żeby Bartek sprawdził zeszyt.')
       ])
     ],
 

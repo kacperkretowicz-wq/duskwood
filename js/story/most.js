@@ -253,10 +253,10 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
         Ma('Tak. I Klipo to zwykły zapis ekranu. W rogu widać jeszcze nasz pasek GS Wideo.'),
         Ma('W komentarzach piszą, że trzy redakcje to potwierdziły. A wszyscy puszczają ten sam fragment.')
       ], { set: { m_oneSource: true } }),
-      opt('Wszystkie mówią to samo, więc to chyba prawda.', [
-        Ma('To samo, bo to ten sam plik. Proszę spojrzeć na pierwszą klatkę: 17:22:08 wszędzie.'),
-        Ma('Trzy publikacje to nie trzy źródła. Na Klipo nawet widać nasz pasek w rogu.')
-      ], { set: { m_oneSource: true } })
+      opt('Pokaż to ludziom, nie mnie. Trzy pierwsze klatki obok siebie, do grupy Sylwii.', [
+        Ma('17:22:08 wszędzie, tak. Zrobię zrzut trzech klatek obok siebie.'),
+        Ma('Sylwia to przypnie szybciej niż my napiszemy sprostowanie.')
+      ], { set: { m_oneSource: true, m_showSylwia: true } })
     ]),
     give('ev_m_one'),
     pause(1800),

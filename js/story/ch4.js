@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 4 — Sztolnia */
 
 Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 października', mood: 'tense' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, place, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, deduce, trust } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, place, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, deduce, trust, scene } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const I = (t, o) => say('igor', 'igor', t, o);
@@ -111,6 +111,14 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     I('powiedziałem mai że klatka prześwietlona. chciałem najpierw pogadać z ojcem. sam'),
     I('12-go go zapytałem. po prostu pokazałem skan. wyszedł do kuchni i zadzwonił do gajdy'),
     I('dwa dni później mai już nie było'),
+    /* Reakcja gracza w środku wyznania, zanim Igor dokończy. */
+    scene('igorMid', [
+      choose('igor', [
+        opt('Czekaj. Twój ojciec zadzwonił do Gajdy, a dwa dni później Maja zniknęła?', [I('tak'), I('wiem jak to wygląda. dlatego nie umiałem tego napisać')], { set: { igorPressed: true } }),
+        opt('Piszę. Nie wychodzę. Pisz dalej.', [I('ok'), I('dzięki')], { trust: { igor: 1 } }),
+        opt('Dlaczego mówisz to dopiero teraz?', [I('bo dopiero teraz ktoś mnie złapał'), I('wiem. to żadna odpowiedź')], { trust: { igor: -1 } })
+      ])
+    ]),
     typing('igor', 'igor', 5000),
     I('ciągle sobie odtwarzam jak wchodzę do tej kuchni. mogłem nic nie mówić'),
     I('bałem się powiedzieć wam wprost. pisałem z drugiej karty jako szklarz. wiem. brzmi jeszcze gorzej kiedy to piszę'),

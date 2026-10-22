@@ -163,7 +163,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
 });
 
 Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka', when: 'Wtorek, 24 listopada · 18:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, typing, scene } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
@@ -191,17 +191,28 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
         Ma('Tak to wygląda. I słychać to, jak się wie, czego szukać. Na 0:37 w publikacji zmienia się szum pokoju. Najpierw jest lodówka, potem jej nie ma.'),
         Ma('Na kasecie lodówkę słychać dalej. W publikacji znika dokładnie przy cięciu.')
       ], { set: { m_cutSeen: true } }),
-      opt('Może po prostu skrócili, bo za długie?', [
-        Ma('Można skrócić nagranie. Ale tutaj wycięto środek wypowiedzi i doklejono „moja wina”. Przez to brzmi, jakby mówił o sobie.'),
-        Ma('Proszę posłuchać publikacji na 0:37. Do tego miejsca w tle buczy lodówka. Po cięciu nagle jej nie ma.')
-      ], { set: { m_cutSeen: true } })
+      opt('Do takiego cięcia trzeba mieć całą taśmę. Kto miał cyfrową kopię?', [
+        Ma('Dobre pytanie. Kaseta leżała w pudle, ale zgrywaliśmy ją w redakcji.'),
+        Ma('Sprawdzę, komu poszedł plik. Na 0:37 zresztą słychać cięcie: lodówka w tle nagle znika.')
+      ], { set: { m_cutSeen: true, m_askedAccess: true } })
     ]),
     give('ev_m_cut'),
     pic('marta', 'marta', 'most_2011', 'Z archiwum. Zdjęcie czytelnika z września 2011, bez daty dziennej. Siatki tu nie widać, ale nie widać też całego przęsła.'),
     give('ev_m_most2011'),
     W('Pan Henryk mówi „mi zabroniła”. Kto mu zabronił?'),
     Ma('Na tej części taśmy nie pada nazwisko. Może jest na pierwszej, której nie mamy.'),
-    Ma('Nie zgaduję. Kobieta, która mogła zabronić brygadziście. To zawęża, ale nie wskazuje.'),
+    scene('m2kto', [
+  choose('marta', [
+      opt('Kobieta, która mogła zabronić brygadziście. Kto kierował kontraktem w 2011?', [
+        typing('marta', 'marta', 4000),
+        Ma('Sprawdzę w przetargu. Jutro.'),
+        Ma('Dziś już nie dam rady, przepraszam.')
+      ], { set: { m_askedKierownik: true } }),
+      opt('Nie zgadujmy. Poszukajmy pierwszej strony kasety.', [
+        Ma('Tak. Pani Weronika mówi, że w pudle są jeszcze dwie bez opisu.')
+      ])
+    ])
+    ]),
     pause(2000),
     Ma('Pani Weronika zrobiła herbatę, więc piszę na spokojnie. U nas mówiło się, że most to przekleństwo. Że co remont, to coś.'),
     Ma('W Mglisku, znaczy. Tak mówią w Mglisku.'),
@@ -241,16 +252,17 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
         B('no'),
         B('napisz to temu z gazety. ja do sylwii nie pisze, ona i tak wszystko kasuje')
       ], { set: { m_bartekCleared: true }, trust: { bartek: 1 } }),
-      opt('A te hamulce mogły mieć coś wspólnego z wypadkiem?', [
-        B('darek spadl z przesla. nie wjechal autem'),
-        B('nie dopisuj do tego czego nie ma'),
-        B('robota byla zrobiona i odebrana')
-      ], { set: { m_bartekCleared: true } })
+      opt('Dzięki. Natan może napisać, że warsztat wyjaśnił. Chcesz, żeby padło twoje imię?', [
+        B('nie. niech napisze „warsztat”'),
+        B('ja tu dalej mam klientow. i tak polowa juz wie')
+      ], { set: { m_bartekCleared: true, m_bartekAnon: true }, trust: { bartek: 1 } })
     ]),
     give('ev_m_sowa_clear'),
     Nt('ok, dostałem od bartka zdjęcie zeszytu. naczelny mówi że w korekcie dopiszemy jedno zdanie że faktura nie ma związku'),
     Nt('i „p. dudek”. to nazwisko gdzies juz widzialem. sprawdze'),
+    scene('m2anon', [iff('flag:m_bartekAnon', [Nt('w korekcie bedzie „warsztat”, bez imienia. bartek prosil')])]),
     S('Napisałam w grupie: „Faktura dotyczy wymiany klocków. Proszę nie wskazywać osób, które nic z tym nie mają wspólnego”. Przypięłam.'),
+    scene('m2zrzut', [iff('flag:m_showSylwia', [S('Przypięłam też zrzut od pani Marty, trzy pierwsze klatki obok siebie. Pierwszy raz ktoś pod spodem napisał „aha”.')])]),
     S('Pan Henryk zadzwonił do mnie na salon i podziękował. Nie wiem nawet za co. Chyba za to, że ktoś coś przypiął.'),
     pause(3000),
     clock('2026-11-26T20:40'),
@@ -285,7 +297,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
 });
 
 Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', when: 'Piątek, 27 listopada · 23:18', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -390,6 +402,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     pause(2000),
     Ma('moja mama to Janina Kurek'),
     Ma('mam nazwisko po tacie. nie mówiłam, bo to nie miało znaczenia. tak myślałam'),
+    scene('m3kier', [iff('flag:m_askedKierownik', [Ma('pytał{|a} {Pan|Pani} wtedy, kto kierował kontraktem. ja już wiedziałam. przepraszam')])]),
     give('ev_m_zwrot'),
     set('m_twist'),
     choose('marta', [

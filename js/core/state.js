@@ -16,18 +16,18 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 3,
+      v: 4,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
       clock: { t: U.parseLocal(START), at: Date.now() },
       vars: {}, flags: {}, unlocked: {}, chats: {}, ev: {}, evx: {}, tl: {}, hot: {}, seen: {},
       solved: {}, used: {}, hints: {}, calls: [], pending: null, objective: null, saved: [],
-      tries: {}, endings: [], done: {}, started: Date.now(), playMs: 0
+      tries: {}, scares: {}, endings: [], done: {}, started: Date.now(), playMs: 0
     };
   }
 
-  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, volume: 0.8, os: 'auto', appearance: 'light' };
+  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, volume: 0.8, os: 'auto', appearance: 'light' };
   function migrate(saved) {
     if ((saved.v || 1) < 2) {
       const map = STORY_MIGRATIONS[saved.chapter];
@@ -41,7 +41,15 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 3;
+      saved.v = 4; // tabela V3 jest generowana wprost do bieżących kroków
+    }
+    if (saved.v < 4) {
+      // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
+      const map = typeof STORY_MIGRATIONS_V4 !== 'undefined' && STORY_MIGRATIONS_V4[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 4;
     }
     return saved;
   }

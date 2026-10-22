@@ -2,7 +2,7 @@
 /* EPILOG — Listopad */
 
 Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopada', mood: 'dawn' }, D => {
-  const { say, pause, choose, opt, iff, run, goal, unlock, notify, title, clock, ambient, ending, credits, callIn, callEnd, set, fx } = D;
+  const { say, pause, choose, opt, iff, run, goal, unlock, notify, title, clock, ambient, ending, credits, callIn, callEnd, set, fx, scene } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const O = (t, o) => say('ola', 'ola', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -72,6 +72,17 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         B('stary siedzi. ja prowadze warsztat'),
         B('nie pisz do mnie przez jakis czas. to nie przez ciebie. po prostu')
       ]),
+      scene('epBartek', [iff('var:trust_bartek>=1', [
+        choose('bartek', [
+          opt('Trzymam za słowo. I za niedziele.', [B('ok. ty tez sie trzymaj')]),
+          opt('A ty jak dajesz radę z warsztatem?', [B('klienci wracaja. polowa z ciekawosci. jakos to bedzie')])
+        ])
+      ], [
+        choose('bartek', [
+          opt('Jasne. Jak będziesz chciał, jestem.', [B('wiem')]),
+          opt('Przepraszam, że tak wyszło.', [B('nie przepraszaj. to nie ty go wsadziles')])
+        ])
+      ])]),
       pause(2500),
       iff('flag:igorForgiven', [
         I('ojciec zeznaje. wraca po kilku godzinach i nic nie mówi. ale już nie dzwoni do gajdy'),
@@ -81,6 +92,10 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         I('jadę do wrocławia. tu każdy pyta o ojca, a ja dalej nie mam odpowiedzi na połowę rzeczy'),
         I('dzięki że nie {odpuściłeś|odpuściłaś}. ja wiem że sam strasznie dużo spieprzyłem')
       ]),
+      scene('epIgor', [choose('igor', [
+        opt('Napisz, jak dojedziesz.', [I('napiszę. to akurat umiem')]),
+        opt('Dobrze, że w końcu mówisz wprost.', [I('za późno. ale tak')])
+      ])]),
       pause(2500),
       iff('var:trust_ola>=1', [
         O('Odpisałam jej. Po trzech tygodniach.'),
@@ -88,6 +103,10 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ], [
         O('Dziękuję za wszystko. Nawet za to, że {grzebałeś|grzebałaś} w moich wiadomościach.')
       ]),
+      scene('epOla', [choose('ola', [
+        opt('Dobrze, że jej odpisałaś.', [O('Jeszcze nie wiem, czy dobrze. Ale odpisałam.')]),
+        opt('Daj znać, jak się będziesz czuła.', [O('Dam. Tym razem naprawdę.')])
+      ])]),
       pause(4000),
       unlock('chat:maja2'),
       M('hej, maja. kuba mówi że mam zacząć od imienia a nie od „to ja” 🙂'),

@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 2 — Huta */
 
 Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października · wieczór', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene } = D;
+  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene, label, go } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -195,6 +195,12 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('kuba', 'jest dziura w siatce. jesteśmy w środku'),
     sync('maja:cam58', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0058.JPG' }),
     g('igor', 'no i właśnie mamy zdjęcie z jej fotopułapki. przynajmniej działa 🙃'),
+    /* Plan sprawdzony w s13: nie pytamy drugi raz o szatnię. */
+    scene('s13go', [iff('flag:planChecked', [
+      g('kuba', 'mam plan na pulpicie. hala B, pierwsze piętro, tak jak ustaliliśmy'),
+      g('kuba', 'schody… są. idziemy'),
+      go('s13at.szatnia')
+    ])]),
     g('kuba', 'gdzie jest ta szafka 17?'),
     goal('Gdzie jest szatnia? Sprawdź plan ewakuacji w galerii Mai.', ['W galerii Mai jest zdjęcie planu ewakuacji hal A i B. Przybliż je.']),
     menu('group', [
@@ -202,6 +208,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
       opt('Hala A, za piecem.', [g('kuba', 'tu jest tylko piec. i zimno jak w psiarni. nie ma szafek')]),
       opt('W piwnicy, poziom −1.', [g('igor', 'Schody w dół są zalane do kolan. Szatni bym tam nie szukał.')])
     ]),
+    scene('s13at', [label('s13at.szatnia')]),
     pause(3000),
     g('kuba', 'są szafki. 17 otwarta, kłódka wyłamana'),
     say('group', 'kuba', 'w środku coś wydrapane', { img: 'k_locker' }),

@@ -37,7 +37,7 @@ test('v3 migration: every v2 step maps to the identical step; resume lands on a 
   const {chapters,v3}=stories();
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v2-steps.json'),'utf8'));
   const sig=s=>JSON.stringify([s.t,s.name,s.to,s.self,s.text,s.chat,s.who,s.ev,s.k,s.iso]);
-  assert.deepEqual([...Object.keys(v3)].sort(),['ch2','ch3','ch5']);
+  assert.deepEqual([...Object.keys(v3)].sort(),['ch2','ch3','ch4','ch5','epilog']);
   for(const [ch,steps] of Object.entries(old)){
     const m=v3[ch]||{exact:steps.map((_,i)=>i).concat(steps.length),resume:steps.map((_,i)=>i).concat(steps.length)};
     assert.equal(m.exact.length,steps.length+1);
@@ -58,10 +58,30 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
   const {chapters}=stories();
   const ids=new Set();
   for(const ch of Object.values(chapters))for(const s of ch.steps)if(s.scene){ids.add(s.scene);if(s.t==='label')assert.ok(s.name.startsWith(s.scene+'.'),s.name);}
-  assert.deepEqual(Array.from(ids).sort(),['s12','s13','s14','s15','s16','s17','s18','s19','s28','s29']);
+  assert.deepEqual(Array.from(ids).sort(),['epBartek','epIgor','epOla','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29']);
 });
 test('generated v3 migration table is up to date with the story sources',()=>{
   const {execFileSync}=require('node:child_process');
   const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v3.cjs'),path.join(__dirname,'fixtures/story-v2-steps.json')],{encoding:'utf8'});
   assert.ok(fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8').endsWith(gen),'run tools/gen-migration-v3.cjs');
+});
+
+test('v4 migration table is up to date and maps every v3 step monotonically',()=>{
+  const {execFileSync}=require('node:child_process');
+  const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v4.cjs'),path.join(__dirname,'fixtures/story-v3-steps.json')],{encoding:'utf8'});
+  const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');
+  assert.ok(src.includes(gen),'run tools/gen-migration-v4.cjs');
+  const v4=JSON.parse(gen.split('V4 = ')[1].replace(/;\s*$/,''));
+  const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v3-steps.json'),'utf8'));
+  const {chapters,sig}=require(path.join(root,'tools/dump-steps.cjs'));
+  for(const [ch,m] of Object.entries(v4)){
+    assert.equal(m.exact.length,old[ch].length+1,ch);
+    m.exact.forEach((x,i)=>{assert.ok(x>=0&&x<=chapters[ch].steps.length);if(i)assert.ok(x>=m.exact[i-1],ch+':'+i);assert.ok(m.resume[i]<=x);});
+    // identyfikatory wyborów spoza nowych scen się nie przesuwają (klucze s.used / s.tries)
+    const oldSelves=old[ch].map(o=>JSON.parse(o)).filter(a=>a[3]&&!a[10]).map(a=>a[3]);
+    const newSelves=chapters[ch].steps.filter(st=>st.self&&!(st.scene&&!old[ch].some(o=>JSON.parse(o)[10]===st.scene))).map(st=>st.self);
+    assert.equal(JSON.stringify(newSelves.filter(x=>!x.includes('.'))),JSON.stringify(oldSelves.filter(x=>!x.includes('.'))),ch);
+    // każdy wybór, który przetrwał bez zmian, trafia dokładnie na siebie
+    old[ch].forEach((o,i)=>{const t=JSON.parse(o)[0];if(t==='choose'&&chapters[ch].steps.map(sig).includes(o))assert.equal(sig(chapters[ch].steps[m.exact[i]]),o,ch+':'+i);});
+  }
 });
