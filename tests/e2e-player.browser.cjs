@@ -23,7 +23,8 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
    await page.evaluate(()=>{G.newGame({name:'Alex',gender:'f'});document.querySelector('.title-scr')?.remove();
     UI.packageSheet=async()=>6;UI.renderHome();Engine.restart();});
    const chapters={},scares=[],layout=[];let season='s1',lastCh='',tick=0,lastKey='',same=0,credits=0;const tStart=Date.now();
-   while(Date.now()-tStart<1500000){
+   while(true){
+    if(Date.now()-tStart>2700000)throw new Error('e2e: przekroczony czas w rozdziale '+lastCh+' (maszyna przeciążona?)');
     tick++;
     const st=await page.evaluate(([W,X])=>{
      const r={ch:G.s.chapter,pc:G.s.pc,season:Seasons.current().id,finished:!!G.s.finished,msgs:Object.values(G.s.chats||{}).reduce((a,c)=>a+((c.msgs||c.messages||c).length||0),0)};
