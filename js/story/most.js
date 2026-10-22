@@ -13,7 +13,11 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     clock('2026-11-20T19:24'),
     title(),
     set('m_case'),
-    M('hej. nie śpisz?'),
+    iff('flag:m_lateRescue', [
+      M('hej. to ja'),
+      M('nie odpisałam ci wcześniej. nie umiałam. lekarka mówi, że to normalne, że nie umiem'),
+      M('dziękuję. za rzeczkę. kuba mi pokazał, co {pisales|pisalas} z niną. więcej nie dam rady o tym teraz')
+    ], [M('hej. nie śpisz?')]),
     M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem'),
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
     pic('maja2', 'maja', 'most_teczka', 'ta była na samym dnie. pod wycinkami o powodzi'),
@@ -267,7 +271,6 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     Ma('Ktoś poza redakcją ma dłuższy kawałek tej kasety. I wysłał go do tygodnika jako „materiał nadesłany”.'),
     Ma('Jutro przegram oryginał. Wtedy usłyszymy, co jest po tych dwóch sekundach.'),
     set('m_act1'),
-    goal('Ciąg dalszy sprawy „Most” pojawi się w kolejnej aktualizacji. Twoje decyzje i Notatki zostają w zapisie.'),
-    waitFor('flag:m_act1Next')
+    end('m2')
   ];
 });

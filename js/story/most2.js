@@ -1,0 +1,411 @@
+'use strict';
+/* SPRAWA 2 „MOST” — prolog po Ciszy „Adres na paczce” (BIBLIA-SEZONOW.md, Łączenie z S1)
+   oraz rozdziały 2 „Siatka” (Akt II) i 3 „K.” (Akt III, do zwrotu z sesji 18).
+   Plan: docs/SPRAWA-2-PLAN.md. Każdy wniosek ma źródło widoczne przed wyborem. */
+
+Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Adres na paczce', when: 'Niedziela, 15 listopada · 10:40', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, dial, callEnd, notify, ambient } = D;
+  const K = (t, o) => say('kuba', 'kuba', t, o);
+  const N = (t, o) => say('nina', 'nina', t, o);
+  const W = (t, o) => say('weronika', 'weronika', t, o);
+  const c = (who, t) => say('call', who, t);
+
+  return [
+    clock('2026-11-15T10:38'),
+    ambient('dark'),
+    title(),
+    set('m_case'),
+    K('ej'),
+    K('napisała do mnie jakaś dziewczyna. nina. jeździ kurierem po głuszycy i rzeczce'),
+    K('mówi że jak w piątek pokazali w tv że gajda jest poszukiwany to jej się coś przypomniało'),
+    K('nie wiem czy to coś jest. trzy tygodnie i każdy coś widział'),
+    K('dałem jej twój numer. ty umiesz pytać tak żeby nie wymyślali'),
+    choose('kuba', [
+      opt('Dobrze zrobiłeś. Co dokładnie ci napisała?', [K('że odebrał od niej paczkę facet podobny do niego. tylko tyle. i że maji nie widziała. sama to napisała zanim zapytałem')]),
+      opt('A jak to kolejna osoba, która chce się pokazać?', [K('no to sprawdzisz i powiesz. ja już nie umiem odróżnić'), K('serio nie umiem')])
+    ]),
+    pause(3000),
+    unlock('chat:nina'),
+    N('cześć, tu nina, kuba dał mi numer'),
+    N('od razu mówię żeby nie było: ja maji nie widziałam. nie chcę żeby ktoś potem mówił że ją widziałam'),
+    N('ale 6 listopada wiozłam paczki do rzeczki i odbierał facet w czapce. nie gadał. tylko „dawaj tu”'),
+    N('i w piątek w wiadomościach puścili to jego stare nagranie i on tak samo mówi „dawaj tu”. aż mi się zimno zrobiło'),
+    choose('nina', [
+      opt('Dziękuję, że piszesz. Pamiętasz, jak wyglądał, poza czapką?', [
+        N('ciemna kurtka, zarost kilka dni. wysoki. twarzy dobrze nie widziałam bo stał bokiem i było szaro'),
+        N('więc nie powiem na 100% że to on. powiem że mi się skojarzył')
+      ], { set: { mp_ninaCareful: true } }),
+      opt('Na pewno to był Gajda?', [
+        N('no nie na pewno. dlatego piszę do ciebie a nie na grupę'),
+        N('skojarzył mi się. głos i to jak stał. tyle')
+      ])
+    ]),
+    give('ev_mp_nina'),
+    N('mam w apce zapis tego doręczenia. szefowa pozwoliła mi wysłać, ale zasłoniłam numer telefonu klienta'),
+    pic('nina', 'nina', 'mp_doreczenie', 'to jest z apki kurierskiej'),
+    give('ev_mp_doreczenie'),
+    N('i zdjęcie karty trasy z tego dnia. ja zawsze robię zdjęcie bo potem dzwonią że nie było doręczenia'),
+    pic('nina', 'nina', 'mp_karta', 'zakreśliłam w piątek długopisem, sorry'),
+    give('ev_mp_karta'),
+    goal('Porównaj adres na etykiecie z miejscem, gdzie Nina naprawdę doręczyła paczki (Notatki: zapis doręczenia i karta trasy).'),
+    D.label('mp_adres'),
+    choose('nina', [
+      opt('Etykieta mówi Rynek 2 w Głuszycy. Tam trzeba sprawdzić.', [
+        N('nie, czekaj. rynek 2 to biuro rachunkowe. tam o 9:12 zostawiłam list polecony, zupełnie inny'),
+        N('na etykiecie jest adres korespondencyjny firmy. jak na fakturze. ale w uwagach jest „dostarczyć na zaplecze, rzeczka 17” i tam pojechałam'),
+        N('popatrz jeszcze raz na kartę, o 10:25'),
+        D.go('mp_adres')
+      ]),
+      opt('Etykieta to adres do korespondencji. Paczki pojechały do Rzeczki 17, na zaplecze.', [
+        N('tak. skan jest z rzeczki 17, 10:25. i na karcie też mam rzeczka 17, zaplecze'),
+        N('na etykiecie stoi rynek. kto by szukał po etykiecie, pojechałby do biura rachunkowego')
+      ], { set: { mp_addrRight: true } })
+    ]),
+    pause(1500),
+    W('Dzień dobry. Kuba przesłał mi rozmowę z panią Niną. Proszę mi wybaczyć, że się wtrącam.'),
+    W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.'),
+    W('Ale „woda, konserwy, olej opałowy” na zimę do pustego zaplecza? To ktoś tam jest. Albo ma być.'),
+    N('byłam tam dziś rano, mam rejon. nie wysiadałam. zrobiłam zdjęcie z auta, bo numer jest przy drzwiach'),
+    pic('nina', 'nina', 'mp_wejscie', 'dziś 9:58. kanistry stoją. tamtego dnia ich nie było'),
+    give('ev_mp_wejscie'),
+    choose('nina', [
+      opt('Czyli wiemy tyle: to miejsce trzeba sprawdzić. Nie wiemy, kto jest w środku.', [
+        N('ok. tak to dla mnie brzmi uczciwie'),
+        W('Zgadzam się. To nie jest dowód, że Maja tam jest. To jest powód, żeby ktoś uprawniony tam pojechał.')
+      ], { set: { mp_placeOnly: true } }),
+      opt('To tam ją trzyma.', [
+        N('nie wiem tego. serio. ja widziałam faceta i trzy paczki'),
+        W('Rozumiem, co {Pan|Pani} czuje. Ale wiemy tylko, dokąd trafiły paczki. Nie wiemy, czy Maja tam jest. Proszę to tak przekazać.')
+      ], { set: { mp_placeOnly: true } })
+    ]),
+    give('ev_mp_place'),
+    pause(1500),
+    K('dobra'),
+    K('bartek ma auto. jedziemy tam'),
+    K('teraz'),
+    choose('kuba', [
+      opt('Nie. Jeśli on tam jest, a wy podjedziecie, znowu ją przeniesie. Przekazuję to policji spoza Mgliska.', [
+        K('…'),
+        K('ok. ale zadzwoń teraz. nie za godzinę'),
+        K('teraz')
+      ], { set: { mp_stoppedFamily: true }, trust: { kuba: 1 } }),
+      opt('Jedźcie, tylko nie wchodźcie.', [
+        K('jedziemy'),
+        pause(2500),
+        K('bartek zawrócił pod przejazdem. mówi że jak gajda zobaczy jego auto to koniec'),
+        K('ma rację. kurwa. ma rację'),
+        K('zadzwoń do kogoś. proszę')
+      ], { set: { mp_familyNearly: true } })
+    ]),
+    W('W październiku dostałam wizytówkę od komisarza z Wrocławia, który przejął poszukiwania. Komisarz Ostrowski, 71 340 22 17.'),
+    give('ev_mp_ostrowski', { silent: true }),
+    dial({
+      goal: 'Zadzwoń do komisarza Ostrowskiego (Komenda Wojewódzka we Wrocławiu). Numer jest w wiadomości od Weroniki.',
+      goalHints: [],
+      numbers: {
+        '71 340 22 17': {
+          who: 'ostrowski', then: [
+            c('ostrowski', 'Ostrowski.'),
+            choose('call', [opt('Dzień dobry. Dzwonię w sprawie poszukiwań Mai Wrony. Mam relację kurierki i adres do sprawdzenia.', [])]),
+            c('ostrowski', 'Słucham. Po kolei. Kto, co widział i kiedy.'),
+            choose('call', [
+              opt('Kurierka, Nina Duda. 6 listopada w Rzeczce 17 odebrał od niej paczki mężczyzna, który skojarzył się jej z Gajdą. Mai nie widziała. Mam zapis doręczenia, kartę trasy i dzisiejsze zdjęcie wejścia.', [], { set: { mp_reportClean: true } }),
+              opt('Gajda trzyma Maję w Rzeczce 17. Kurierka go widziała.', [])
+            ]),
+            iff('!flag:mp_reportClean', [
+              c('ostrowski', 'Widziała Gajdę czy kogoś podobnego? I widziała dziewczynę?'),
+              choose('call', [opt('Kogoś podobnego. Dziewczyny nie widziała. Mam zapis doręczenia i kartę trasy.', [], { set: { mp_reportClean: true } })])
+            ]),
+            c('ostrowski', 'Dobrze. Adres z etykiety jest inny niż miejsce odbioru?'),
+            choose('call', [opt('Tak. Na etykiecie Rynek 2 w Głuszycy, biuro rachunkowe. Doręczenie było w Rzeczce 17, na zapleczu.', [])]),
+            c('ostrowski', 'Proszę mi to wszystko przesłać tak, jak {pan|pani} dostał{|a}. Bez przycinania, bez komentarzy na zdjęciach.'),
+            c('ostrowski', 'I jeszcze jedno. Nikt z rodziny ani znajomych nie jedzie w tamtą stronę. Nikt. Jasne?'),
+            choose('call', [opt('Jasne. Już im to powiedział{em|am}.', [])]),
+            c('ostrowski', 'Pani Duda niech będzie pod telefonem. Odezwę się.'),
+            callEnd()
+          ]
+        }
+      }
+    }),
+    set('mp_reported'),
+    give('ev_mp_report'),
+    N('zadzwonił do mnie jakiś ostrowski. pytał o wszystko jeszcze raz. czy na pewno 10:25 i czy facet podpisał się „R.”'),
+    N('powiedziałam że tak. i że nie widziałam maji. trzy razy to powtórzyłam'),
+    pause(6000),
+    clock('2026-11-15T16:52'),
+    K('dzwonił ktoś do ciebie?'),
+    K('mama siedzi przy telefonie i nie odbiera od nikogo bo czeka'),
+    pause(8000),
+    clock('2026-11-15T19:31'),
+    K('ZNALEŹLI JĄ'),
+    K('żyje'),
+    K('żyje żyje żyje'),
+    pause(2500),
+    K('dzwonili do mamy. w rzeczce, w tym zapleczu, w zamkniętym pokoju z tyłu. był tam piecyk i woda'),
+    K('gajdę zatrzymali na miejscu. nie uciekał. siedział w kuchni z kamerą'),
+    K('podobno chciał żeby nagrała coś że sama uciekła. nie nagrała'),
+    K('jedziemy z mamą do szpitala w wałbrzychu. ona jest bardzo chuda. ale mówi'),
+    choose('kuba', [
+      opt('Jedźcie. Nic więcej teraz nie trzeba.', [K('dzięki'), K('nina płakała w telefonie jak jej powiedziałem')]),
+      opt('Powiedz jej, że czekam. Bez pośpiechu.', [K('powiem. ona może nie odpisać szybko. lekarka mówi żeby jej nie zasypywać wiadomościami'), K('ok?')])
+    ]),
+    set('majaFound'),
+    set('m_lateRescue'),
+    notify({ app: 'browser', title: 'Mglisko24', text: 'Zaginiona 19-latka odnaleziona w Rzeczce. Zatrzymano byłego komendanta posterunku.', sound: 'notif' }),
+    pause(3000),
+    W('Dziękuję. Nie umiem tego lepiej napisać.'),
+    W('Pani Nina mówi, że po dzisiejszym poranku nie chce już brać rejonu z Rzeczką. Rozumiem ją.'),
+    pause(4000),
+    clock('2026-11-20T19:20'),
+    unlock('chat:maja2'),
+    end('m0')
+  ];
+});
+
+Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka', when: 'Wtorek, 24 listopada · 18:05', mood: 'calm' }, D => {
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify } = D;
+  const Ma = (t, o) => say('marta', 'marta', t, o);
+  const W = (t, o) => say('weronika', 'weronika', t, o);
+  const Nt = (t, o) => say('natan', 'natan', t, o);
+  const B = (t, o) => say('bartek', 'bartek', t, o);
+  const S = (t, o) => say('sylwia', 'sylwia', t, o);
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+
+  return [
+    clock('2026-11-24T18:05'),
+    title(),
+    W('Dobry wieczór. Pani Marta przyjechała z kamerą. Siedzimy w kuchni, kaseta nie wychodzi z mieszkania, tak jak było ustalone.'),
+    Ma('Dzień dobry. Kamera z archiwum, ten sam model, na którym pan Adam zgrywał w 2019. Taśma jest w dobrym stanie, tylko pierwsze 20 sekund ma zaniki.'),
+    pic('marta', 'marta', 'most_biurko', 'Tak wyglądało moje biurko do wczoraj. Kamera już jest tutaj.'),
+    give('ev_m_kubek', { silent: true }),
+    Ma('Puszczam od początku. Będę pisać znaczniki czasu.'),
+    pause(2500),
+    Ma('03:12–03:51. To jest fragment z publikacji. Słowo w słowo do „nie założyłem z powrotem”.'),
+    Ma('A potem on mówi dalej. Nagrałam telefonem dźwięk z głośnika kamery, bo nie chcę jeszcze zgrywać kasety. Jakość jest słaba.'),
+    V('marta', 'marta', '0:24', '(głos Henryka, przez głośnik kamery) …ja tej siatki nie założyłem z powrotem, bo mi zabroniła. Mówi: Heniu, moja wina, jak coś, ja podpiszę. No i… (szum) …i ja nie założyłem. Panie Adamie, ja to mam na sumieniu tak czy siak.', 'Marta (odsłuch kasety)'),
+    give('ev_m_raw'),
+    Ma('„Moja wina” to nie są jego słowa o sobie. On powtarza, co ktoś mu powiedział.'),
+    Ma('I jeszcze jedno, ważniejsze technicznie. W publikacji „moja wina” jest od razu po „z powrotem”. Na kasecie to „moja wina” pada 9 sekund później.'),
+    choose('marta', [
+      opt('Czyli ktoś wyciął środek zdania i skleił.', [
+        Ma('Tak to wygląda. I słychać to, jak się wie, czego szukać. Na 0:37 w publikacji zmienia się szum pokoju. Najpierw jest lodówka, potem jej nie ma.'),
+        Ma('Nie ma tu żadnego wyostrzania ani cudów. Po prostu dwa kawałki z dwóch momentów mają inne tło.')
+      ], { set: { m_cutSeen: true } }),
+      opt('Może po prostu skrócili, bo za długie?', [
+        Ma('Można skrócić nagranie. Ale tutaj wycięto środek wypowiedzi i doklejono „moja wina”. Przez to brzmi, jakby mówił o sobie.'),
+        Ma('Proszę posłuchać publikacji na 0:37. Do tego miejsca w tle buczy lodówka. Po cięciu nagle jej nie ma.')
+      ], { set: { m_cutSeen: true } })
+    ]),
+    give('ev_m_cut'),
+    pic('marta', 'marta', 'most_2011', 'Z archiwum. Zdjęcie czytelnika z września 2011, bez daty dziennej. Siatki tu nie widać, ale nie widać też całego przęsła.'),
+    give('ev_m_most2011'),
+    W('Pan Henryk mówi „mi zabroniła”. Kto mu zabronił?'),
+    Ma('Na tej części taśmy nie pada nazwisko. Może jest na pierwszej, której nie mamy.'),
+    Ma('Nie zgaduję. Kobieta, która mogła zabronić brygadziście. To zawęża, ale nie wskazuje.'),
+    pause(2000),
+    Ma('Pani Weronika zrobiła herbatę, więc piszę na spokojnie. U nas mówiło się, że most to przekleństwo. Że co remont, to coś.'),
+    Ma('W Mglisku, znaczy. Tak mówią w Mglisku.'),
+    give('ev_m_przeklenstwo', { silent: true }),
+    pause(2500),
+    clock('2026-11-25T09:14'),
+    Nt('hej. sorry że od rana'),
+    Nt('po wczorajszym od marty siedzimy z naczelnym. bedzie korekta, ale najpierw chce wszystko na papierze'),
+    Nt('i jest problem z drugiej strony. w komentarzach pod klipo ktoś wrzucił fakture z 2011. warsztat sowów serwisował furgonetkę kurek-bud dzień przed wypadkiem'),
+    pic('natan', 'natan', 'most_faktura', 'to krąży od nocy'),
+    give('ev_m_faktura'),
+    Nt('i ludzie piszą że „sowa był na moście” i że hamulce i w ogóle. ja nie wiem nawet co z tym zrobic'),
+    S('Dzień dobry. U mnie w grupie to samo. Ktoś napisał, że to „Sowa młody”. Bartek. Usuwam, a oni wrzucają od nowa.'),
+    choose('natan', [
+      opt('Faktura potwierdza wymianę klocków w furgonetce. Nie potwierdza, że ktoś z warsztatu był na moście.', [
+        Nt('no tak. ale ludzie czytają co chcą'),
+        Nt('dobra. zapytam bartka o fakture, nie o wypadek')
+      ], { set: { m_invoiceRead: true } }),
+      opt('Zapytam Bartka. Może coś wie.', [
+        Nt('ok. tylko tak żeby nie brzmialo jak przesłuchanie, bo on i tak ma już dość')
+      ])
+    ]),
+    unlock('chat:bartek'),
+    goal('Zapytaj Bartka o fakturę z warsztatu (czat z Bartkiem).'),
+    choose('bartek', [
+      opt('Bartek, krąży faktura waszego warsztatu z 13.09.2011. Wiesz coś o niej?', [], { set: { m_askedBartekFair: true } }),
+      opt('Byłeś przy tej furgonetce Kurek-Bud w 2011?', [])
+    ]),
+    iff('flag:m_askedBartekFair', [B('widzialem. ktos mi wyslal o 2 w nocy')], [B('stary'), B('w 2011 mialem 9 lat'), B('ale dobra, widzialem ta fakture')]),
+    B('wystawil ojciec. jego podpis. klocki przod, normalna robota'),
+    B('sprawdzilem w zeszycie z 2011. jest wpis. furgon przyjety 12.09, wydany 13.09 o 17.30'),
+    B('odebral jakis dudek. podpisal sie'),
+    B('ojciec przy moscie nie byl. warsztat nie robi mostow. robi hamulce'),
+    pic('bartek', 'bartek', 'most_faktura', 'tu jest „odebral: p. dudek”'),
+    choose('bartek', [
+      opt('Dzięki. To pokazuje usługę i kto odebrał auto. Nie pokazuje, że ktoś z warsztatu był przy wypadku.', [
+        B('no'),
+        B('napisz to temu z gazety. ja do sylwii nie pisze, ona i tak wszystko kasuje')
+      ], { set: { m_bartekCleared: true }, trust: { bartek: 1 } }),
+      opt('A te hamulce mogły mieć coś wspólnego z wypadkiem?', [
+        B('darek spadl z przesla. nie wjechal autem'),
+        B('nie dopisuj do tego czego nie ma'),
+        B('robota byla zrobiona i odebrana')
+      ], { set: { m_bartekCleared: true } })
+    ]),
+    give('ev_m_sowa_clear'),
+    Nt('ok, dostałem od bartka zdjęcie zeszytu. naczelny mówi że w korekcie dopiszemy jedno zdanie że faktura nie ma związku'),
+    Nt('i „p. dudek”. to nazwisko gdzies juz widzialem. sprawdze'),
+    S('Napisałam w grupie: „Faktura dotyczy wymiany klocków. Proszę nie wskazywać osób, które nic z tym nie mają wspólnego”. Przypięłam.'),
+    S('Pan Henryk zadzwonił do mnie na salon i podziękował. Nie wiem nawet za co. Chyba za to, że ktoś coś przypiął.'),
+    pause(3000),
+    clock('2026-11-26T20:40'),
+    Nt('wrzuciliśmy wczoraj na stronę tekst „pytania o most”. bez nagrania. ze jest „brakujący dokument” do którego dotarła redakcja'),
+    Nt('naczelny nie chciał pisać jaki, bo nie mamy oryginału'),
+    Nt('i dzis kurek-bud odpisał na pytania. przekleję cały mail bo nie chce nic skracać, juz raz skrociłem'),
+    pic('natan', 'natan', 'most_mail_kb', 'mail z 26.11, 14:02'),
+    give('ev_m_janina_mail'),
+    Nt('brzmi jak każdy mail od firmy. nie?'),
+    choose('natan', [
+      opt('W tekście było tylko „brakujący dokument”. Skąd ona wie, że chodzi o załącznik nr 3?', [
+        Nt('…'),
+        Nt('czekaj'),
+        Nt('nie. tego nigdzie nie bylo. ani u nas, ani w tygodniku. sprawdziłem teraz trzy razy'),
+        Nt('„załącznik nr 3” jest tylko na tym ksero z teczki. a ksero widziało kilka osób'),
+        Ma('Ja to widziałam. U pani Weroniki. I pan Natan na zdjęciu ode mnie. I osoby z tej rozmowy.'),
+        Ma('Albo pani Kurek pamięta to z 2011, z własnych akt. To też jest możliwe.')
+      ], { set: { m_zal3Noticed: true } }),
+      opt('Tak. Uprzejmie i o niczym.', [
+        Nt('no. jak zwykle'),
+        Ma('Przeczytałam ten mail dwa razy. Ona pisze „załącznik nr 3”. A w tekście było „brakujący dokument”.'),
+        Ma('Nie wiem, co to znaczy. Ale zapisuję.')
+      ], { set: { m_zal3Noticed: true } })
+    ]),
+    pause(2000),
+    Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.'),
+    Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.'),
+    give('ev_m_terminy', { silent: true }),
+    set('m_act2'),
+    end('m3')
+  ];
+});
+
+Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', when: 'Piątek, 27 listopada · 23:18', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify } = D;
+  const Ma = (t, o) => say('marta', 'marta', t, o);
+  const Nt = (t, o) => say('natan', 'natan', t, o);
+  const Z = (t, o) => say('zuza', 'zuza', t, o);
+  const H = t => say('call', 'henryk', t);
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+
+  return [
+    clock('2026-11-27T23:18'),
+    title(),
+    V('marta', 'marta', '0:38', 'Przepraszam, że głosówka, nie chce mi się pisać. Przesłuchałam te zaniki. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.', 'Marta'),
+    give('ev_m_kuchnia', { silent: true }),
+    pause(3000),
+    clock('2026-11-28T10:02'),
+    Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),
+    Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund'),
+    Nt('sama mi pokazała wiadomości. płakała przy tym'),
+    Nt('20.11 napisał do niej znajomy z siłowni. paweł dudek. „masz dostęp do archiwum? jest tam takie stare nagranie z mostu, pokażesz kawałek?”'),
+    Nt('wysłała mu całe 6 minut z okolicy 03:00. on odesłał „a da się samo to z siatką i moja wina?”'),
+    Nt('i ona to zrobiła. dwa kawałki, sklejone. myślała że to „dla jaj”. potem ja to wziąłem z jej folderu i opublikowałem bez sprawdzenia. za to ja odpowiadam'),
+    pic('natan', 'natan', 'most_ida', 'zrzut, ida się zgodziła żeby ci pokazać. nazwisko dudka zostawiłem, resztę zasłoniłem'),
+    give('ev_m_ida'),
+    choose('natan', [
+      opt('Dudek. Ten sam, który odebrał furgonetkę z warsztatu w 2011.', [
+        Nt('no właśnie. dlatego mi się kojarzył'),
+        Nt('dziś jest kierownikiem budowy w kurek-bud. jest na ich stronie w zakładce zespół'),
+        Nt('i tygodnik ma 0:42 bo dudek wysłał im swoją wersję. dłuższą o dwie sekundy. bo ida najpierw źle ucięła i poprawiała')
+      ], { set: { m_dudekLinked: true } }),
+      opt('Ida to zrobiła sama?', [
+        Nt('ucięła sama. ale na prośbę. i nie wiedziała po co'),
+        Nt('a ten dudek to kierownik budowy w kurek-bud. ten sam co odebrał furgon w 2011, z faktury'),
+        Nt('dlatego tygodnik ma 0:42. dudek wysłał im wersję, którą ida poprawiała')
+      ], { set: { m_dudekLinked: true } })
+    ]),
+    give('ev_m_dudek'),
+    Nt('jedno nie gra. skad dudek w ogóle wiedział, że w archiwum jest kaseta h.w.? to nie było nigdzie opisane'),
+    pause(2500),
+    clock('2026-11-28T17:30'),
+    Z('hej'),
+    Z('{czytales|czytalas} to w gazecie że jest jakiś „brakujący dokument”'),
+    Z('babcia to przeczytała w gazecie u sąsiadki i od dwóch dni nie wychodzi z pokoju'),
+    Z('dzisiaj powiedziała do mnie „ja nic nie dałam, ja tylko pokazałam panu adamowi”'),
+    Z('i potem już nic. tylko to swoje „wypadek w pracy, 2011”'),
+    choose('zuza', [
+      opt('Myślisz, że babcia to K.?', [
+        Z('nie wiem. ale chyba tak. mleko. ona mówi że pan adam woził jej mleko jak wujek zginął'),
+        Z('nie chcę jej zmuszać. nie zrobię z babci filmiku. serio nie')
+      ]),
+      opt('Nie musisz nic robić. Jak się czujesz?', [
+        Z('dziwnie. jak w październiku tylko odwrotnie. wtedy chciałam żeby wszyscy wiedzieli, teraz chcę żeby nikt nie wiedział'),
+        Z('chyba babcia to K. mleko. pan adam woził jej mleko po pogrzebie')
+      ], { trust: { zuza: 1 } })
+    ]),
+    Z('mogę ją zapytać czy chce z kimś pogadać. ale ona może powiedzieć nie'),
+    choose('zuza', [
+      opt('Zapytaj ją, tylko jeśli sama chcesz. A jeśli powie nie, to jest nie.', [Z('ok. zapytam przy obiedzie. ona przy obiedzie jest najspokojniejsza')], { set: { m_askGrandma: true } }),
+      opt('Nie pytaj na razie. Spróbuję potwierdzić ksero inaczej.', [Z('dzięki. serio')], { set: { m_spareGrandma: true } })
+    ]),
+    iff('flag:m_askGrandma', [
+      pause(5000),
+      Z('zapytałam'),
+      Z('powiedziała „nie”. potem powiedziała „przepraszam, zuziu, nie”'),
+      Z('i że pan henryk też ma. że on dał jej jedno, a jedno zostawił sobie'),
+      set('m_grandmaNo')
+    ]),
+    pause(2000),
+    callIn('henryk'),
+    H('Wiśniewski. Dzwonię, bo Sylwia mówi, że {pan|pani} szuka tej kartki.'),
+    H('Mam. W szufladzie. Z rachunkami. Od prądu.'),
+    H('Piętnaście lat przekładam. Żona, świeć Panie nad jej duszą, chciała wyrzucić. Nie dałem.'),
+    choose('call', [
+      opt('Może mi pan zrobić zdjęcie? I nie dawać jej nikomu, dopóki nie będzie wiadomo, co dalej.', [
+        H('Zdjęcie wnuczka zrobi. Ja nie umiem tak, żeby było prosto.'),
+        H('A kartka zostaje u mnie. Raz mi już wszystko zabrali i ucięli.')
+      ], { set: { m_henrykCopyKept: true } }),
+      opt('Czy to pani Kurek zabroniła panu założyć siatkę?', [
+        H('Pani kierownik. Ja nazwiska przez telefon nie będę mówił.'),
+        H('Na papierze niech będzie. Jak papier powie, to powie.'),
+        H('Wnuczka zrobi zdjęcie tej kartki.')
+      ], { set: { m_henrykCopyKept: true } })
+    ]),
+    callEnd(),
+    pause(3000),
+    unlock('chat:henryk_sms'),
+    pic('henryk_sms', 'henryk', 'most_szuflada', 'ZDJECIE. OD WNUCZKI. H.W.'),
+    give('ev_m_s41_h'),
+    pause(2000),
+    Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.'),
+    Ma('To ta sama strona 41, ten sam wpis z 13.09, ta sama „zał. nr 3”. Druga kopia, od innej osoby. Zgadza się z kserem z teczki.'),
+    Ma('Czyli tożsamość pani Krystyny nie jest potrzebna, żeby porównać dokument. Tak będzie lepiej dla wszystkich.'),
+    give('ev_m_second_source'),
+    pause(2500),
+    Ma('Natan zapytał mnie dziś, skąd Dudek wiedział o kasecie w archiwum.'),
+    Ma('Sprawdzam, kto w ogóle pytał o „H.W.” i „załącznik nr 3”. Mam dostęp do historii zamówień archiwum. To moja praca, nie hakowanie.'),
+    pause(5000),
+    clock('2026-11-28T22:47'),
+    Ma('W archiwum nikt.'),
+    Ma('ale'),
+    Ma('mamy w domu wspólny tablet. stary. mama go używa do maili'),
+    Ma('20.11 o 22:10 jest wiadomość do dudka. „Marta mówi, że w redakcji szukają zał. nr 3 do mostu. Jest kaseta H.W., zgrana. Zajmij się tym.”'),
+    Ma('to byłam ja. znaczy nie ja. ja jej powiedziałam'),
+    Ma('przy kolacji. opowiadałam o pracy. o kasecie. o tym ksero. normalnie. jak się mamie opowiada'),
+    pause(2000),
+    Ma('moja mama to Janina Kurek'),
+    Ma('mam nazwisko po tacie. nie mówiłam, bo to nie miało znaczenia. tak myślałam'),
+    give('ev_m_zwrot'),
+    set('m_twist'),
+    choose('marta', [
+      opt('Marta, nie wiedziałaś, co ona z tym zrobi. Ale teraz musisz to powiedzieć w redakcji.', [
+        Ma('wiem'),
+        Ma('jutro rano. do naczelnego. zanim zdążę to sobie wytłumaczyć')
+      ], { set: { m_martaTells: true }, trust: { marta: 1 } }),
+      opt('Dlaczego nie powiedziałaś wcześniej?', [
+        Ma('bo myślałam, że to moja prywatna sprawa i nie ma związku ze śledztwem'),
+        Ma('pomyliłam się. jutro mówię naczelnemu')
+      ], { set: { m_martaTells: true } })
+    ]),
+    Ma('ona jest w kuchni. słyszę jak zmywa'),
+    Ma('nie wiem, jak mam teraz tam wejść'),
+    set('m_act3'),
+    D.goal('Ciąg dalszy sprawy „Most” (Akt IV „Strona 41”) pojawi się w kolejnej aktualizacji. Twoje decyzje i Notatki zostają w zapisie.'),
+    waitFor('flag:m_act3Next')
+  ];
+});

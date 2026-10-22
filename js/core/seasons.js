@@ -4,7 +4,9 @@ const Seasons = (() => {
   function progress() {
     const season = current(), rank = season.chapters.indexOf(G.s.chapter);
     let reached = false;
-    return season.episodes.map((ep, i) => {
+    // Prolog „Adres na paczce” istnieje tylko w gałęzi po Ciszy.
+    const cisza = (G.s.vars.s1Ending || G.s.vars.endingId) === 'cisza';
+    return season.episodes.filter(ep => ep.chapter !== 'mp' || cisza).map((ep, i) => {
       const chapterRank = season.chapters.indexOf(ep.chapter);
       const done = !!G.s.finished || rank > chapterRank || !!G.s.done[ep.chapter] || G.test(ep.done);
       // Istniejące zapisy mogą pochodzić z dowolnego rozdziału. Późniejszy znany etap
@@ -57,15 +59,16 @@ const Seasons = (() => {
   function canStartNext() {
     if (!G.s?.finished || !nextCase()) return false;
     const ending = G.s.vars.endingId || G.s.seasonArchive?.[current().id]?.outcome?.ending;
-    return ending === 'swit' || ending === 'odlamki';
+    return ending === 'swit' || ending === 'odlamki' || (ending === 'cisza' && nextCase().chapters.includes('mp'));
   }
   function startNext() {
     if (!canStartNext()) return false;
     archive();
     const next = nextCase();
-    Object.assign(G.s, { seasonId: next.id, chapter: next.chapters[0], pc: 0, finished: false, pending: null, objective: null, call: null });
+    const first = G.s.vars.endingId === 'cisza' ? 'mp' : next.chapters.find(c => c !== 'mp');
+    Object.assign(G.s, { seasonId: next.id, chapter: first, pc: 0, finished: false, pending: null, objective: null, call: null });
     G.s.vars.s1Ending = G.s.vars.endingId;
-    G.checkpoint(next.chapters[0]); G.save(true); BUS.emit('season');
+    G.checkpoint(first); G.save(true); BUS.emit('season');
     return true;
   }
   return { current, progress, saveSession, recap, archive, nextCase, canStartNext, startNext };

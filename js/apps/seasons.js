@@ -41,8 +41,8 @@
       const next = Seasons.nextCase();
       if (next && G.s.finished) body.append(h('section', { class: 'season-recap' }, h('h3', {}, `${next.kicker || 'Kolejna sprawa'}: ${next.title}`), h('p', {}, next.description),
         Seasons.canStartNext()
-          ? h('button', { class: 'btn pri wide', onclick: () => { if (Seasons.startNext()) { sh.close(true); UI.renderHome(); Engine.restart(); } } }, 'Otwórz teczkę')
-          : h('p', { class: 'season-pacing' }, 'Po zakończeniu „Cisza” ta sprawa zacznie się od prologu „Adres na paczce”. Ten prolog jest jeszcze w przygotowaniu.')));
+          ? h('button', { class: 'btn pri wide', onclick: () => { if (Seasons.startNext()) { sh.close(true); UI.renderHome(); Engine.restart(); } } }, G.s.vars.endingId === 'cisza' ? 'Szukaj dalej' : 'Otwórz teczkę')
+          : h('p', { class: 'season-pacing' }, 'Kolejna sprawa otworzy się po zakończeniu sezonu.')));
       body.append(list, h('p', { class: 'season-pacing' }, 'Zakończenie i relacje zapisują się do kontynuacji.'),
         h('button', { class: 'btn wide', onclick: () => { sh.close(true); UI.openApp('notes', { note: 'todo' }); } }, 'Wróć do śledztwa'));
     };

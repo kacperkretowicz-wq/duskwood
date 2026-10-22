@@ -16,6 +16,20 @@ Object.assign(DATA.chars, {
     bio: 'Kręci, montuje, wrzuca. Czasem w tej kolejności.',
     status: 'na planie', number: '511 284 690'
   },
+  nina: {
+    name: 'Nina Duda', role: '23 lata · kurierka', cond: 'ev:ev_mp_nina',
+    facts: [
+      { text: 'Nie widziała Mai. Powtarza to sama, zanim ktoś zapyta.' },
+      { text: '6.11 w Rzeczce 17 paczki odebrał mężczyzna, który skojarzył się jej z Gajdą. Skojarzenie, nie rozpoznanie.' }
+    ]
+  },
+  dudek: {
+    name: 'Paweł Dudek', role: 'kierownik budowy w Kurek-Bud', cond: 'ev:ev_m_dudek',
+    facts: [
+      { text: 'W 2011 odebrał z warsztatu Sowów furgonetkę Kurek-Bud (faktura 117/09/2011).' },
+      { text: 'Poprosił stażystkę Idę o fragment kasety i o „samo to z siatką i moja wina”.' }
+    ]
+  },
   janina: {
     name: 'Janina Kurek', short: 'J. Kurek', age: 48, color: '#9aa3b5',
     role: 'Współwłaścicielka Kurek-Bud sp. z o.o.'
@@ -26,11 +40,20 @@ Object.assign(DATA.chars, {
     voicemail: '„Wiśniewski. Mnie nie ma. Proszę mówić po sygnale. Głośno.”'
   },
   krystyna: { name: 'Krystyna Kruk', short: 'Pani Krystyna', age: 71 },
+  nina: {
+    name: 'Nina Duda', short: 'Nina', age: 23, trust: true, color: '#7fb77e',
+    role: 'Kurierka · rejon Głuszyca / Rzeczka', bio: 'Zawsze robi zdjęcie karty trasy. Bo potem dzwonią, że nie było doręczenia.',
+    status: 'w trasie', number: '533 410 286'
+  },
+  ostrowski: { name: 'kom. Paweł Ostrowski', short: 'Ostrowski', role: 'Wydział Kryminalny KWP we Wrocławiu', number: '71 340 22 17' },
+  dudek: { name: 'Paweł Dudek', short: 'Dudek', role: 'Kierownik budowy · Kurek-Bud' },
   gs_sek: { name: 'Gazeta Sudecka · sekretariat', short: 'Sekretariat', number: '74 832 10 40' }
 });
 Object.assign(DATA.chats, {
   marta: { name: '+48 694 117 302', avatar: 'unknown' },
-  natan: { name: 'Natan Brzeziński', avatar: 'natan', sub: 'GS Wideo' }
+  natan: { name: 'Natan Brzeziński', avatar: 'natan', sub: 'GS Wideo' },
+  nina: { name: 'Nina Duda', avatar: 'nina', sub: 'od Kuby' },
+  henryk_sms: { name: 'H. Wiśniewski', avatar: 'henryk', sub: 'SMS', readonly: true }
 });
 
 Object.assign(DATA.persons, {
@@ -39,7 +62,10 @@ Object.assign(DATA.persons, {
     facts: [
       { text: 'Zgłosiła się z prywatnego numeru. Sekretariat redakcji potwierdził, że pracuje w archiwum (pokój 12).' },
       { text: 'Rybicki zdigitalizował kasetę „H.W. 2/2” w 2019 r. Plik jest w archiwum redakcji. Części 1/2 nie ma ani tam, ani w pudle.' },
-      { text: 'Zna rozkład biura Kurek-Bud: „robiłam tam kiedyś praktyki”.', cond: 'ev:ev_m_praktyki' }
+      { text: 'Zna rozkład biura Kurek-Bud: „robiłam tam kiedyś praktyki”.', cond: 'ev:ev_m_praktyki' },
+      { text: '„U nas mówiło się, że most to przekleństwo… W Mglisku, znaczy.”', cond: 'ev:ev_m_przeklenstwo' },
+      { text: '„Mama ma zawsze rację co do terminów.”', cond: 'ev:ev_m_terminy' },
+      { text: 'Jest córką Janiny Kurek. Opowiadała matce o kasecie i załączniku nr 3. Nie wiedziała, co matka z tym zrobi.', cond: 'flag:m_twist' }
     ]
   },
   henryk: {
@@ -50,11 +76,27 @@ Object.assign(DATA.persons, {
       { text: 'Mówi, że Darek był trzeźwy. Relacja, nie ustalenie: nikt jej jeszcze nie sprawdził.', cond: 'flag:m_henrykSober' }
     ]
   },
+  nina: {
+    name: 'Nina Duda', role: '23 lata · kurierka', cond: 'ev:ev_mp_nina',
+    facts: [
+      { text: 'Nie widziała Mai. Powtarza to sama, zanim ktoś zapyta.' },
+      { text: '6.11 w Rzeczce 17 paczki odebrał mężczyzna, który skojarzył się jej z Gajdą. Skojarzenie, nie rozpoznanie.' }
+    ]
+  },
+  dudek: {
+    name: 'Paweł Dudek', role: 'kierownik budowy w Kurek-Bud', cond: 'ev:ev_m_dudek',
+    facts: [
+      { text: 'W 2011 odebrał z warsztatu Sowów furgonetkę Kurek-Bud (faktura 117/09/2011).' },
+      { text: 'Poprosił stażystkę Idę o fragment kasety i o „samo to z siatką i moja wina”.' }
+    ]
+  },
   janina: {
     name: 'Janina Kurek', role: '48 lat · współwłaścicielka Kurek-Bud', cond: 'ev:ev_m_kb_statement',
     facts: [
       { text: 'W 2011 r. kierowała kontraktem remontu mostu.' },
-      { text: 'Oświadczenie firmy po publikacji: uprzejme, punkt po punkcie, bez odpowiedzi na pytania redakcji.' }
+      { text: 'Oświadczenie firmy po publikacji: uprzejme, punkt po punkcie, bez odpowiedzi na pytania redakcji.' },
+      { text: 'W mailu z 26.11 pisze o „załączniku nr 3”, choć w publikacji był tylko „brakujący dokument”.', cond: 'ev:ev_m_janina_mail' },
+      { text: 'Z domowego tabletu poszła 20.11 wiadomość do Dudka o kasecie i zał. nr 3.', cond: 'flag:m_twist' }
     ]
   }
 });
@@ -74,7 +116,7 @@ Object.assign(DATA.evidence, {
   },
   ev_m_s41: {
     title: 'Ksero dziennika robót, str. 41', cat: 'photo', source: 'Teczka KRUK', img: 'most_s41',
-    desc: 'Wpis z *13.09.2011*: „Siatka zabezpieczająca — brak, zgłoszone kier. kontraktu.” Podpis H.W. Kserokopia bez pieczątki; oryginał nieznany. To jeszcze nie dowód, kto i co zgłosił.'
+    desc: 'Wpis z *13.09.2011*: „Siatka zabezpieczająca — brak, zgłoszone kier. kontraktu. Protokół — zał. nr 3.” Podpis H.W. Kserokopia bez pieczątki; oryginał nieznany. To jeszcze nie dowód, kto i co zgłosił.'
   },
   ev_m_postcard: {
     title: 'Pocztówka bez nadawcy', cat: 'msg', source: 'Teczka KRUK', img: 'most_postcard',
@@ -108,6 +150,46 @@ Object.assign(DATA.evidence, {
     title: 'Trzy publikacje = jeden plik', cat: 'digital', source: 'Porównanie: GS Wideo, Klipo, Tydzień w Sudetach',
     desc: 'Ta sama pierwsza klatka i znak czasu *17:22:08*. Klipo to zapis ekranu z GS Wideo. *Tygodnik ma 0:42*, czyli dwie sekundy więcej niż „oryginał” redakcji, i nie ma paska GS. Musiał dostać plik skądinąd.'
   },
+  ev_mp_nina: { title: 'Relacja Niny Dudy', cat: 'testimony', source: 'Nina · wiadomość',
+    desc: '6.11, Rzeczka: paczki odebrał mężczyzna w czapce. Powiedział: „dawaj tu”. Skojarzył się jej z Gajdą po piątkowym nagraniu w TV. *Mai nie widziała.* Nowy trop, nie dowód obecności Mai.' },
+  ev_mp_doreczenie: { title: 'Zapis doręczenia (zrzut z aplikacji kuriera)', cat: 'digital', source: 'Nina · za zgodą szefowej', img: 'mp_doreczenie',
+    desc: 'Etykieta: *PPHU Jodła, Rynek 2, Głuszyca* (adres korespondencyjny). Uwaga nadawcy: „dostarczyć na zaplecze, Rzeczka 17”. Skan: *Rzeczka 17, 06.11, 10:25*, odebrał „R.”. Woda, konserwy, olej opałowy.' },
+  ev_mp_karta: { title: 'Karta trasy z 6.11', cat: 'photo', source: 'Nina · zdjęcie', img: 'mp_karta',
+    desc: '09:12 Rynek 2 (biuro rachunkowe, list polecony). *10:25 Rzeczka 17 — zaplecze, 3 paczki, odbiór osobisty.* Dopisek długopisem z piątku: „ten sam co w TV?”.' },
+  ev_mp_wejscie: { title: 'Wejście, Rzeczka 17 (15.11, 9:58)', cat: 'place', source: 'Nina · zdjęcie z auta', img: 'mp_wejscie',
+    desc: 'Budynek gospodarczy dawnego ośrodka kolonijnego huty. Numer 17 przy drzwiach. Kanistry z wodą i drewno pod ścianą. Zdjęcie pokazuje miejsce, nie to, kto jest w środku.' },
+  ev_mp_place: { title: 'Wniosek: miejsce do sprawdzenia', cat: 'testimony', source: 'Porównanie: etykieta, skan, karta trasy, zdjęcie',
+    desc: 'Etykieta prowadzi do biura w Głuszycy. Paczki trafiły do *Rzeczki 17, na zaplecze*. Zapis w aplikacji, karta trasy i aktualne zdjęcie wskazują miejsce do sprawdzenia przez policję. Nie wiadomo, kto tam jest.' },
+  ev_mp_ostrowski: { title: 'Kontakt: kom. Ostrowski', cat: 'msg', source: 'Weronika · wizytówka z października', desc: 'Komisarz z Wrocławia, który przejął poszukiwania. Tel. *71 340 22 17*.' },
+  ev_mp_report: { title: 'Przekazane do KWP Wrocław', cat: 'msg', source: 'Rozmowa z kom. Ostrowskim',
+    desc: 'Relacja Niny, zapis doręczenia, karta trasy i zdjęcie wejścia przekazane bez przycinania. Rodzina i znajomi nie jadą na miejsce.' },
+  ev_m_kubek: { title: 'Biurko Marty w archiwum', cat: 'photo', source: 'Marta · zdjęcie', img: 'most_biurko',
+    desc: 'Kamera mini-DV, laptop, pudła archiwalne, słuchawki. Kubek z wyblakłym niebieskim „KB”.' },
+  ev_m_raw: { title: 'Kaseta H.W. 2/2: pełna wypowiedź (03:12–04:00)', cat: 'testimony', source: 'Odsłuch u Weroniki · nagranie Marty z głośnika',
+    desc: '„…ja tej siatki nie założyłem z powrotem, *bo mi zabroniła. Mówi: Heniu, moja wina, jak coś, ja podpiszę.*” „Moja wina” to cudze słowa, które Henryk powtarza. Nazwisko nie pada.' },
+  ev_m_cut: { title: 'Miejsce cięcia: 0:37', cat: 'digital', source: 'Marta · porównanie z kasetą',
+    desc: 'W publikacji „moja wina” pada od razu po „z powrotem”, na kasecie 9 s później. Na 0:37 znika buczenie lodówki w tle: dwa kawałki z dwóch momentów. Zwykłe porównanie tła, bez „wyostrzania”.' },
+  ev_m_przeklenstwo: { title: '„U nas mówiło się…”', cat: 'testimony', source: 'Marta · wiadomość',
+    desc: '„U nas mówiło się, że most to przekleństwo.” Zaraz poprawka: „W Mglisku, znaczy.” Drobiazg.' },
+  ev_m_faktura: { title: 'Faktura warsztatu Sowów, 13.09.2011', cat: 'object', source: 'Komentarz pod Klipo · Natan', img: 'most_faktura',
+    desc: 'Wymiana klocków w furgonetce Kurek-Bud (DDZ 4417K). Przyjęta 12.09, wydana 13.09 o 17:30. Wystawił M. Sowa, *odebrał P. Dudek*. Faktura potwierdza usługę, nie czyjąkolwiek obecność przy wypadku.' },
+  ev_m_sowa_clear: { title: 'Trop Sowów obalony', cat: 'testimony', source: 'Bartek · zeszyt napraw z 2011',
+    desc: 'Wpis w zeszycie zgadza się z fakturą. Bartek miał wtedy 9 lat. Warsztat naprawił hamulce i wydał auto. Własność pojazdu ani obecność w firmie nie oznacza działania przy moście.' },
+  ev_m_janina_mail: { title: 'Mail Kurek-Bud z 26.11', cat: 'msg', source: 'Natan · mail do GS Wideo', img: 'most_mail_kb',
+    desc: 'Janina Kurek: „sugestie dotyczące rzekomo brakującego *załącznika nr 3* do dziennika robót są bezpodstawne”. W publikacji redakcji był tylko „brakujący dokument”. Skąd numer?' },
+  ev_m_terminy: { title: '„Mama ma zawsze rację co do terminów”', cat: 'testimony', source: 'Marta · wiadomość', desc: 'Zwykła rozmowa o wyjeździe na urodziny ciotki.' },
+  ev_m_kuchnia: { title: 'Głosówka Marty z kuchni', cat: 'testimony', source: 'Marta · głosówka 0:38',
+    desc: 'Na pierwszych 20 s kasety nie ma nazwiska. W tle kobiecy głos: „Martuś, z kim tak późno?”. Barwę można porównać z nagraniem z rady gminy. Nieformalnie, to nie dowód.' },
+  ev_m_ida: { title: 'Rozmowa stażystki Idy z Pawłem D.', cat: 'digital', source: 'Natan · za zgodą Idy', img: 'most_ida',
+    desc: '20.11, 22:31 Dudek pyta o „stare nagranie z mostu”. Ida wysyła 6 min, potem na prośbę „samo to z siatką i moja wina” robi dwie wersje: *0:42* (źle ucięta) i *0:40*.' },
+  ev_m_dudek: { title: 'Droga pliku: Dudek', cat: 'testimony', source: 'Natan · Ida · faktura z 2011',
+    desc: 'Cięcie zamówił Paweł Dudek, dziś kierownik budowy w Kurek-Bud. Tygodnik dostał od niego wersję 0:42. Bez hakowania: stażystka sama pokazała wiadomości. Otwarte: skąd Dudek wiedział o kasecie?' },
+  ev_m_s41_h: { title: 'Druga kopia str. 41 (szuflada Henryka)', cat: 'photo', source: 'H. Wiśniewski · SMS, zdjęcie wnuczki', img: 'most_szuflada',
+    desc: 'Ten sam wpis z 13.09.2011: „siatka — brak, zgłoszone kier. kontraktu. Protokół — zał. nr 3.” Kopia zostaje u Henryka, w szufladzie z rachunkami.' },
+  ev_m_second_source: { title: 'Ksero zgodne z kopią Henryka', cat: 'testimony', source: 'Porównanie: teczka KRUK i kopia Henryka',
+    desc: 'Kopia od Henryka zgadza się z kserem z teczki. Do porównania obu kopii *nie trzeba ujawniać, kim jest K.*' },
+  ev_m_zwrot: { title: 'Wiadomość z domowego tabletu', cat: 'digital', source: 'Marta',
+    desc: '20.11, 22:10, do Dudka: „Marta mówi, że w redakcji szukają zał. nr 3 do mostu. Jest kaseta H.W., zgrana. Zajmij się tym.” Marta jest córką Janiny Kurek. Przeciek poszedł przez kuchnię, nie przez hakowanie.' },
   ev_m_praktyki: {
     title: 'Marta zna biuro Kurek-Bud', cat: 'testimony', source: 'Marta · wiadomość',
     desc: '„Sekretariat na parterze, gabinety na drugim, od podwórza.” Marta: „robiłam tam kiedyś praktyki”. Zwykła informacja. Zapisana na wszelki wypadek.'
@@ -123,8 +205,16 @@ Object.assign(DATA.evidence, {
   P('most_postcard', 'pocztowka.jpg', 'Pocztówka bez nadawcy', 1280, 960, { date: '20.11.2026', time: '19:37', device: 'iPhone 13 · aparat główny', file: 'IMG_4475.HEIC' });
   P('most_clip', 'wycinek_2012.jpg', 'Wycinek z 2012', 1280, 960, { date: '20.11.2026', time: '19:38', device: 'iPhone 13 · aparat główny', file: 'IMG_4476.HEIC' });
   P('most_2011', 'most_2011.jpg', 'Most nad Mglicą · IX 2011', 1280, 960, { date: '09.2011', time: '—', device: 'Canon PowerShot A480', file: 'IMG_0912.JPG', note: 'Data dzienna nieustawiona w aparacie' });
+  P('mp_doreczenie', 'doreczenie.jpg', 'Zapis doręczenia', 600, 1067, { date: '15.11.2026', time: '10:41', device: 'Zrzut ekranu', file: 'Screenshot_20261115_104127.jpg' });
+  P('mp_karta', 'karta_trasy.jpg', 'Karta trasy 6.11', 1280, 960, { date: '06.11.2026', time: '08:47', device: 'Samsung Galaxy A14', place: 'Głuszyca', file: '20261106_084702.jpg' });
+  P('mp_wejscie', 'wejscie_17.jpg', 'Rzeczka 17, zaplecze', 1280, 960, { date: '15.11.2026', time: '09:58', device: 'Samsung Galaxy A14', place: 'Rzeczka', file: '20261115_095811.jpg' });
+  P('most_biurko', 'biurko_marty.jpg', 'Archiwum, pokój 12', 1280, 960, { date: '23.11.2026', time: '17:04', device: 'Xiaomi Redmi Note 12', file: 'IMG_20261123_170412.jpg' });
+  P('most_faktura', 'faktura_sowa.jpg', 'Faktura 117/09/2011', 1280, 960, { date: '25.11.2026', time: '02:11', device: 'zdjęcie z komentarza', file: 'faktura.jpg' });
+  P('most_mail_kb', 'mail_kb.jpg', 'Mail Kurek-Bud', 600, 1067, { date: '26.11.2026', time: '14:05', device: 'Zrzut ekranu', file: 'Screenshot_mail.jpg' });
+  P('most_ida', 'czat_ida.jpg', 'Rozmowa Idy', 600, 1067, { date: '28.11.2026', time: '09:51', device: 'Zrzut ekranu', file: 'Screenshot_ida.jpg', note: 'Część danych zasłonięta przez Natana' });
+  P('most_szuflada', 'szuflada_henryka.jpg', 'Szuflada z rachunkami', 1280, 960, { date: '28.11.2026', time: '19:12', device: 'telefon wnuczki', file: 'IMG_1912.jpg' });
   P('most_hw', 'hw_kadr.jpg', 'H.W. 2/2 · kadr', 1280, 720, { date: '10.2011', time: '17:22:08', device: 'mini-DV · zgrane w 2019', file: 'HW_2z2.mov' });
-  const life = { marta: 'Archiwum, piąta po południu', natan: 'Pod redakcją', janina: 'Sesja rady gminy', henryk: 'Ławka pod blokiem' };
+  const life = { nina: 'W trasie', marta: 'Archiwum, piąta po południu', natan: 'Pod redakcją', janina: 'Sesja rady gminy', henryk: 'Ławka pod blokiem' };
   Object.entries(life).forEach(([who, title]) => {
     const c = DATA.chars[who];
     c.photo = 'assets/people/' + who + '.jpg';
@@ -190,13 +280,23 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's2', revision: 1, title: 'Most', kicker: 'SPRAWA 2', released: true,
   description: 'Czterdzieści sekund z kasety z 2011 roku. Jedno zdanie, które wszyscy już usłyszeli.',
-  chapters: ['m0', 'm1'],
+  chapters: ['mp', 'm0', 'm1', 'm2', 'm3'],
   episodes: [
+    ['s2.00a', 'Adres na paczce', 'mp', 'ev:ev_mp_place'],
+    ['s2.00b', 'Rzeczka 17', 'mp', 'flag:m_lateRescue'],
     ['s2.01', 'Teczka KRUK', 'm0', 'ev:ev_m_teczka'],
     ['s2.02', 'Most czy praca', 'm0', 'flag:m_sameEvent'],
     ['s2.03', 'Numer redakcji', 'm0', 'flag:m_martaVerified'],
     ['s2.04', 'Czterdzieści sekund', 'm1', 'ev:ev_m_gs'],
     ['s2.05', 'Trzy publikacje', 'm1', 'ev:ev_m_one'],
-    ['s2.06', 'Dwie sekundy więcej', 'm1', 'flag:m_act1']
+    ['s2.06', 'Dwie sekundy więcej', 'm1', 'flag:m_act1'],
+    ['s2.07', 'Surowa kaseta', 'm2', 'ev:ev_m_raw'],
+    ['s2.08', 'Miejsce cięcia', 'm2', 'ev:ev_m_cut'],
+    ['s2.09', 'Faktura Sowów', 'm2', 'ev:ev_m_sowa_clear'],
+    ['s2.10', 'Załącznik nr 3', 'm2', 'flag:m_zal3Noticed'],
+    ['s2.13', 'Kuchnia', 'm3', 'ev:ev_m_kuchnia'],
+    ['s2.14', 'Droga pliku', 'm3', 'ev:ev_m_dudek'],
+    ['s2.16', 'Szuflada z rachunkami', 'm3', 'ev:ev_m_second_source'],
+    ['s2.18', 'To byłam ja', 'm3', 'flag:m_twist']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });
