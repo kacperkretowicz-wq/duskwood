@@ -68,8 +68,13 @@ DATA.weather = () => {
     ch3: { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 6, feel: 3, hum: 88, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
     ch4: { now: 'pochmurno', nowLong: 'Przelotne przejaśnienia', temp: 8, feel: 5, hum: 81, alert: 'Przymrozek przy gruncie w nocy, do −3°C.', moon: 'przybywający księżyc', i: 'cloud' },
     ch5: { now: 'mgła', nowLong: 'Mgła i przymrozek', temp: 1, feel: -3, hum: 96, alert: 'Przymrozek przy gruncie, do −3°C. Mgła w dolinach.', moon: 'przybywający księżyc', i: 'fog' },
-    epilog: { now: 'śnieg', nowLong: 'Pierwszy śnieg', temp: -1, feel: -5, hum: 90, alert: null, moon: 'nów', i: 'cloud' }
-  }[ch] || {};
+    epilog: { now: 'śnieg', nowLong: 'Pierwszy śnieg', temp: -1, feel: -5, hum: 90, alert: null, moon: 'nów', i: 'cloud' },
+    mp: { now: 'pochmurno', nowLong: 'Zachmurzenie całkowite', temp: 2, feel: -2, hum: 91, alert: null, moon: 'przybywający sierp', i: 'cloud' },
+    m0: { now: 'mżawka', nowLong: 'Mżawka', temp: 3, feel: 0, hum: 94, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    m1: { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 4, feel: 1, hum: 89, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    m2: { now: 'deszcz', nowLong: 'Słaby deszcz', temp: 5, feel: 2, hum: 93, alert: 'Wzrost stanu wody na Mglicy, bez przekroczenia stanu ostrzegawczego.', moon: 'przybywający księżyc', i: 'cloud' },
+    m3: { now: 'śnieg z deszczem', nowLong: 'Śnieg z deszczem', temp: 1, feel: -3, hum: 95, alert: null, moon: 'pełnia', i: 'cloud' }
+  }[ch] || { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 3, feel: 0, hum: 90, alert: null, moon: '—', i: 'cloud' };
   const base = W.temp;
   return Object.assign({
     hourly: [{ t: base, i: W.i }, { t: base, i: W.i }, { t: base - 1, i: 'fog' }, { t: base - 1, i: 'fog' }, { t: base - 2, i: 'fog' }, { t: base - 2, i: 'cloud' }, { t: base - 1, i: 'cloud' }, { t: base, i: 'cloud' }],

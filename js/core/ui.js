@@ -427,10 +427,25 @@ const UI = (() => {
     while (toastsEl.children.length > 3) toastsEl.firstChild.remove();
     setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 300); }, o.ms || 2800);
   }
+  /* Kilka dowodów naraz: jeden dymek, który zbiera tytuły, zamiast stosu takich samych. */
+  let evToast = null;
   function evidenceToast(id) {
     const e = G.ev(id); if (!e) return;
+    if (evToast && evToast.el.isConnected && !evToast.el.classList.contains('out')) {
+      evToast.ids.push(id);
+      const n = evToast.ids.length;
+      evToast.el.querySelector('span').textContent = `Zapisano w Notatkach: ${e.title} i ${n - 1 === 1 ? 'jeszcze 1' : 'jeszcze ' + (n - 1)}`;
+      clearTimeout(evToast.t); evToast.t = setTimeout(evToast.close, 3400);
+      return;
+    }
     SFX.play.discover(); U.vibrate([30, 30, 50]);
-    toast(`Zapisano w Notatkach: ${e.title}`, { kind: 'ev', icon: 'note', ms: 3400, onclick: () => openApp('notes', { ev: id }) });
+    const ids = [id];
+    const el = h('div', { class: 'toast ev' }, U.ico('note', 17), h('span', {}, `Zapisano w Notatkach: ${e.title}`));
+    el.addEventListener('click', () => openApp('notes', ids.length > 1 ? {} : { ev: id }));
+    toastsEl.appendChild(el);
+    while (toastsEl.children.length > 3) toastsEl.firstChild.remove();
+    const close = () => { el.classList.add('out'); setTimeout(() => el.remove(), 300); };
+    evToast = { el, ids, close, t: setTimeout(close, 3400) };
   }
 
   /* Wiadomość głosowa: `voice:0:38|Kto|transkrypcja`. Bez pliku audio pokazujemy przebieg i zapis. */
