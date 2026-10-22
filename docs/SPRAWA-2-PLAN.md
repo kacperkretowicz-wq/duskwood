@@ -38,7 +38,7 @@ Zwrot przestawia pytanie sezonu. Na początku brzmi „czy Henryk zawinił?”, 
 
 | Gdzie | Zapowiedź | Odczytanie po zwrocie |
 |---|---|---|
-| S1, grupa FB (już w grze) | Komentarze z dawnej relacji pana Henryka zostały skasowane, „on się zawsze myli” | Miasto od lat lekceważy Henryka. Cięcie nagrania na tym gra |
+| S1, grupa na Kwartale (już w grze) | Komentarze z dawnej relacji pana Henryka zostały skasowane, „on się zawsze myli” | Miasto od lat lekceważy Henryka. Cięcie nagrania na tym gra |
 | S1, Zuza (już w grze) | Babcia mówi „zawsze tymi samymi słowami”: „wypadek w pracy, 2011” | Krystyna powtarza wyuczoną formułę, bo obiecała milczeć. Nie kłamie |
 | S1, Zuza (już w grze) | „mam wrażenie, że tu wszyscy coś wiedzą i nikt nic nie mówi” | Temat sezonu: milczenie ochronne i milczenie interesowne |
 | S2, sesja 2 | Marta zna rozkład pięter biura „Kurek-Bud” lepiej niż archiwum redakcji. Tłumaczy: „robiłam tam kiedyś praktyki” | Prawda, tylko niepełna |
@@ -59,7 +59,7 @@ Głosy zgodnie z [GLOSY-POSTACI.md](GLOSY-POSTACI.md); nowe osoby dopiszemy tam 
 | Marta Jasińska | 24 | Archiwum i montaż audio. Kontakt startowy | Pełne zdania i znaczniki czasu („03:12–03:51”). Pod presją pisze krótko i bez kropek. Nie żartuje o pracy |
 | Natan Brzeziński | 25 | Operator obrazu, autor publikacji | Pisze szybko, z literówkami, dużo „sorry”. Broni się technicznymi argumentami, potem bierze korektę na siebie |
 | Janina Kurek | 48 | Usunęła załącznik w 2011 i zleciła cięcie w 2026 | Maile w formie „Szanowni Państwo”, uprzejmy chłód, wypunktowania. Nigdy nie grozi wprost |
-| Henryk Wiśniewski | 74 | Brygadzista z 2011. Pan Henryk z grupy FB | Pisze capslockiem po wciśnięciu złego klawisza, kropki co dwa słowa. Dzwoni zamiast pisać |
+| Henryk Wiśniewski | 74 | Brygadzista z 2011. Pan Henryk z grupy na Kwartale | Pisze capslockiem po wciśnięciu złego klawisza, kropki co dwa słowa. Dzwoni zamiast pisać |
 | Krystyna Kruk | 71 | Matka Darka, źródło z 2011 | Nie pisze, wyłącznie rozmowa przez Zuzę albo telefon stacjonarny. Pojawia się tylko za swoją zgodą |
 | Zuza Kruk | 16 | Wnuczka. Nie jest detektywem i nie robi z babci contentu | Jak w S1. Rośnie: sprawdza źródło, zanim coś wrzuci |
 | Sylwia Pietrzak | 35 | Adminka grupy, przez którą rozchodzi się nagranie | Jak w S1. Musi zdecydować, czy przypiąć sprostowanie Henryka |
@@ -69,7 +69,7 @@ Fałszywy trop z biblii (Bartek) zostaje: warsztat Sowów serwisował furgonetk�
 
 ## 5. Przebieg (30 sesji, zgodnie z aktami biblii)
 
-**Akt I, sesje 1–6: „Trzy publikacje”.** Gracz ustala, czy kontakt Marty jest autentyczny (rozmowa przez numer redakcji, nie przez prywatny komunikator), na jakich prawach pracuje z archiwum Rybickiego i jaki jest katalog teczki. Rozbraja pozorną sprzeczność „most czy praca”. Porównanie trzech publikacji pokazuje, że portal, TikTok i lokalny tygodnik to jedno źródło: ten sam 40-sekundowy plik z tym samym znakiem czasu (echo tropu Zuzy z S1). *Hak:* tygodnik ma dwie sekundy więcej niż „oryginał”.
+**Akt I, sesje 1–6: „Trzy publikacje”.** Gracz ustala, czy kontakt Marty jest autentyczny (rozmowa przez numer redakcji, nie przez prywatny komunikator), na jakich prawach pracuje z archiwum Rybickiego i jaki jest katalog teczki. Rozbraja pozorną sprzeczność „most czy praca”. Porównanie trzech publikacji pokazuje, że portal, Klipo i lokalny tygodnik to jedno źródło: ten sam 40-sekundowy plik z tym samym znakiem czasu (echo tropu Zuzy z S1). *Hak:* tygodnik ma dwie sekundy więcej niż „oryginał”.
 
 **Akt II, sesje 7–12: „Siatka”.** Surowa kaseta „H.W. 2/2”, kolejność wypowiedzi i szum tła, który zdradza miejsce cięcia (zmiana pogłosu, nie cudowne wyostrzenie). Plan mostu z fotografiami Mai z S1. Fałszywy trop Bartka i jego obalenie. Mail Janiny z „załącznikiem nr 3” (zapowiedź). *Domknięcie:* własność pojazdu albo obecność w firmie nie oznacza działania.
 

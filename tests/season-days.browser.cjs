@@ -1,4 +1,4 @@
-// Głosówki, grupa FB, TikTok i nowe osoby. Uruchom po node serve.js.
+// Głosówki, grupa Kwartał, Klipo i nowe osoby. Uruchom po node serve.js.
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE||'/workspace/.onboarding-tools/node_modules/playwright'));}
