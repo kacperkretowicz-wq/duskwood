@@ -479,8 +479,8 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
 
 /* ---------- c4 · 20:58 ---------- */
 Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust } = D;
-  const { M, O, Id, c } = KronikaCast(D);
+  const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust, camera } = D;
+  const { M, O, Id, c, Z, W } = KronikaCast(D);
   return [
     clock('2027-01-22T18:20'),
     ambient('calm'),
@@ -498,6 +498,20 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         opt('Poczekaj jeszcze. Może uda się zatrzymać klip.', [O('Dobrze. Ale tylko do 21.')])
       ])
     ], [O('Jest 18:30. Za dwie i pół godziny wszyscy zobaczą, co zrobiłam.')]),
+    scene('xCzekanie', [
+      pause(3000),
+      Z('{Szanowny Panie|Szanowna Pani}, Ida nie przyszła na obiad. Zostawiłem jej talerz w piekarniku. Gdyby {Pan|Pani} ją widział{|a}, proszę powiedzieć, że pies tęskni.'),
+      pause(2500),
+      W('Siedzę w czytelni i nie umiem nic robić. Zrobiłam sobie trzecią herbatę.'),
+      W('Pani z bibliotek powiatowych pyta, czy przyjmiemy kasety TV Dolina „jakby co”. Powiedziałam, że tak.'),
+      pause(2500),
+      M('pokaż mi coś, co mnie uspokoi. cokolwiek z galerii'),
+      camera('maja2', [
+        opt('Z galerii: Kuba na górce', [M('xD to mi pomogło bardziej niż melisa'), M('wysyłam mu. niech cierpi')], { img: 'c_gorka', gallery: true }),
+        opt('Z galerii: rysunek ze świetlicy Oli', [M('ok teraz płaczę'), M('ona nie może stracić tej pracy')], { img: 'c_rysunek', gallery: true, set: { c_sawDrawing: true } }),
+        opt('Z galerii: Ida z psem', [M('to mnie nie uspokaja'), M('ale dobrze, że ją pamiętamy taką. z psem, nie z kamerą')], { img: 'c_ida_pies', gallery: true })
+      ])
+    ]),
     pause(5000),
     clock('2027-01-22T20:58'),
     ambient('dark'),
