@@ -7,7 +7,7 @@ function game(){
  const ctx=vm.createContext({console,Date, setTimeout:()=>0,clearTimeout:()=>{},
   window:{addEventListener(){}},document:{addEventListener(){}},Art:{def(){}},
   localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)}});
- for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+ for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/data/field-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
  return vm.runInContext('({G, DATA, Conversations})',ctx);
 }
 function unlock(G){
@@ -34,6 +34,7 @@ test('every dialogue path terminates, saves once, and leaves main story intact',
   if(id==='kuba_missing'){G.s.vars.endingId='cisza';G.s.flags.majaFound=false;}
   G.s.pc=89;G.s.chapter='ch3';G.s.pending={chat:'group',type:'choose'};
   G.unlock('chat:gajda');G.solve('ded_note_versions');
+  G.addEv('ev_car_igor',true);G.addEv('ev_strap_field',true);G.setFlag('askedStrap');G.solve('ded_strap');
   if(['ola_container','kuba_room'].includes(id))G.s.flags.majaFound=false;
   if(id==='gajda_versions')G.s.finished=false;
   if(id==='maja_words')G.s.flags.noteCopyShared=route[0][1]===0;
@@ -128,4 +129,30 @@ test('versioned note has consistent dates and is not a shortcut into the finale'
  const notesSource=fs.readFileSync(path.join(root,'js/apps/notes.js'),'utf8');
  const key=notesSource.match(/const KEY = \[([^;]+)\];/)[1];
  assert.equal(/ev_note/.test(key),false,'extra clues do not inflate key evidence score');
+});
+
+test('physical clue attachments appear once, need viewing, and archive before Marek’s confession',()=>{
+ const {G,Conversations:C}=game();unlock(G);G.s.chapter='ch3';G.addEv('ev_car_igor',true);
+ assert.equal(C.open('kuba_strap'),null);G.addEv('ev_bartek_conf',true);
+ const s=C.open('kuba_strap');assert.equal(s.transcript.filter(m=>m.img==='strap_door').length,1);
+ assert.equal(G.has('ev_strap_field'),false,'receiving a thumbnail does not inspect it');
+ C.open('kuba_strap');G.save(true);G.load();C.open('kuba_strap');
+ assert.equal(G.s.saved.filter(x=>x.art==='strap_door').length,1);
+ C.answer('kuba_strap','start',0);C.answer('kuba_strap','finish',0);
+ assert.equal(C.open('bartek_strap'),null);G.addEv('ev_strap_field',true);C.open('bartek_strap');
+ assert.equal(G.has('ev_strap_loan'),false,'future ledger is not awarded on first node');
+ for(const n of ['start','ledger','father'])C.answer('bartek_strap',n,0);
+ assert.ok(G.has('ev_strap_loan'));assert.ok(G.isUnlocked('ded:ded_strap'));
+ G.setFlag('marekTestify');assert.ok(C.open('bartek_strap'),'history survives');
+ assert.equal(C.open('bartek_locker'),null,'no plans to first confront a father who has already confessed');
+ assert.equal(C.available('bartek').some(([id])=>id==='bartek_strap'),false);
+});
+
+test('person facts do not turn an appointment or workshop jacket into a confirmed identification',()=>{
+ const {G,DATA}=game();unlock(G);G.addEv('ev_jacket',true);
+ let facts=DATA.persons.bartek.facts.filter(f=>G.test(f.cond));
+ assert.equal(facts.some(f=>/spotkał|Przyznał/.test(f.text)),false);
+ assert.equal(DATA.timeline.filter(t=>G.test(t.cond)).some(t=>t.title==='Bartek nocą w hucie.'),false);
+ G.addEv('ev_bartek_conf',true);facts=DATA.persons.bartek.facts.filter(f=>G.test(f.cond));
+ assert.ok(facts.some(f=>/spotkał/.test(f.text)));assert.ok(facts.some(f=>/Przyznał/.test(f.text)));
 });

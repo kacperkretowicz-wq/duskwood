@@ -65,7 +65,7 @@ const NativeNotifications = (() => {
       // schedule() od 8.3 może samo pytać o zgodę. Tu zawsze sprawdzamy ją wcześniej.
       if ((await plugin.checkPermissions()).display !== 'granted') return;
       if (cap.getPlatform() === 'android') await plugin.createChannel({ id: 'story', name: 'Rozmowy w Mglisku', description: 'Dostępność następnej części historii', importance: 3 });
-      await plugin.schedule({ notifications: [{ id, title: 'Mglisko · Wiadomości', body: 'Kolejna część rozmów jest dostępna. Wróć, kiedy masz chwilę.',
+      await plugin.schedule({ notifications: [{ id, title: 'Quiet Is Safer · Wiadomości', body: 'Kolejna część rozmów jest dostępna. Wróć, kiedy masz chwilę.',
         channelId: 'story', schedule: { at: new Date(waiting.at) }, isExactNotification: false, extra: { season: 's1', chapter: waiting.chapter } }] });
     }).catch(e => { console.warn('Powiadomienia:', e.message); });
     return chain;

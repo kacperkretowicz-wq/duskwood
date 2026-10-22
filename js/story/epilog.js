@@ -47,7 +47,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       K('hej'),
       K('minęły trzy tygodnie, a ja dalej nie wiem, co ci napisać'),
       K('maja wyszła ze szpitala. ręka w gipsie, odmrożone palce u stóp. robi zdjęcia lewą ręką'),
-      K('mówi że prowadzący z asp by powiedział że wreszcie wyszła ze strefy komfortu xdd'),
+      K('powiedziała że prowadzący pewnie zapyta czy lewa ręka to świadomy zabieg 💀'),
       choose('kuba', [
         opt('A ty jak się trzymasz?', [K('trochę lepiej. wczoraj przespałem noc bez sprawdzania telefonu. pierwszy raz'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
@@ -74,12 +74,12 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ]),
       pause(2500),
       iff('flag:igorForgiven', [
-        I('Ojciec zeznaje. Codziennie, od rana do wieczora. Mówi, że pierwszy raz od lat czuje się lekko.'),
-        I('Ja jeszcze nie. Ale pracuję nad tym.'),
+        I('ojciec zeznaje. wraca po kilku godzinach i nic nie mówi. ale już nie dzwoni do gajdy'),
+        I('kuba jeszcze nie odpisuje na moje prywatne. nie poganiam go'),
         I('drugą kartę oddałem policji. technicznie rzecz biorąc w końcu mam jeden numer')
       ], [
-        I('Wyjeżdżam do Wrocławia. Tu wszyscy patrzą na mnie jak na syna wójta. Bo jestem.'),
-        I('Dziękuję, że {skończyłeś|skończyłaś} to, czego ja nie umiałem.')
+        I('jadę do wrocławia. tu każdy pyta o ojca, a ja dalej nie mam odpowiedzi na połowę rzeczy'),
+        I('dzięki że nie {odpuściłeś|odpuściłaś}. ja wiem że sam strasznie dużo spieprzyłem')
       ]),
       pause(2500),
       iff('var:trust_ola>=1', [
@@ -90,10 +90,10 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ]),
       pause(4000),
       unlock('chat:maja2'),
-      M('hej. maja tutaj 🙂 ta prawdziwa, dla odmiany'),
-      M('nowy numer. stary telefon zabrali jako dowód. mam nadzieję że nikt tam nie czyta moich list zakupów XD'),
-      M('kuba mi opowiedział. znaczy próbuje, bo co chwilę mu się urywa. nie wiem jak ci podziękować'),
-      M('i sory za te telefony po nocy. miał być pan adam, a wyszło... no. ty'),
+      M('hej, maja. kuba mówi że mam zacząć od imienia a nie od „to ja” 🙂'),
+      M('nowy numer. stary telefon jest dowodem, a ja myślę czy muszą czytać moją listę „ser, ser, płyn do naczyń”'),
+      M('kuba próbuje mi opowiedzieć co robiliście. co chwilę zaczyna od innego miejsca. dzięki że z nim {byłeś|byłaś}'),
+      M('myślałam że dzwonię do rybickiego. nawet nie sprawdziłam czy dalej ma ten numer'),
       choose('maja2', [
         opt('Cieszę się, że zadzwoniłaś pod zły numer.', [M('ja też. pierwszy raz w życiu cieszę się że pomyliłam numer 🫶')]),
         opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.')]),

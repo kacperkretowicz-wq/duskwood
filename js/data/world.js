@@ -37,8 +37,8 @@ DATA.persons = {
     name: 'Bartek Sowa', role: 'były chłopak Mai · mechanik w Auto-Sowa', cond: 'unlocked:chat:group',
     facts: [
       { text: 'Rozstał się z Mają w kwietniu. Nadal mu na niej zależy.' },
-      { text: '14.10 spotkał się z Mają na stacji. Pytała o jego ojca.', cond: 'ev:ev_bartek_sms' },
-      { text: 'W nocy z 21 na 22.10 był sam w hucie — złapała go fotopułapka.', cond: 'ev:ev_jacket' },
+      { text: '14.10 spotkał się z Mają na stacji. Pytała o jego ojca.', cond: 'ev:ev_bartek_conf' },
+      { text: 'Przyznał, że w nocy z 21 na 22.10 poszedł sam do huty. Rozpoznał siebie na zdjęciu.', cond: 'ev:ev_bartek_conf' },
       { text: 'Jego ojciec, Marek Sowa, był jednym z czterech chłopaków w hucie w 1997.', cond: 'ev:ev_interview' },
       { text: 'Rozpoznał tablicę DDZ 6K19 — auto Gajdy, serwisowane w ich warsztacie.', cond: 'ev:ev_owner' }
     ]
@@ -138,7 +138,7 @@ DATA.timeline = [
   { t: '2026-10-13T21:12', title: 'Maja pisze SMS do „Pana Adama” — trafia do ciebie.', cond: 'ev:ev_sms_maja' },
   { t: '2026-10-13T21:40', title: 'Kłótnia Mai i Oli.', cond: 'ev:ev_ola_fight' },
   { t: '2026-10-13T23:10', title: 'Ciemne auto pod domem Wronów.', cond: 'ev:ev_car_window' },
-  { t: '2026-10-14T17:05', title: 'Maja spotyka się z Bartkiem na stacji.', cond: 'ev:ev_bartek_sms' },
+  { t: '2026-10-14T17:05', title: 'Maja spotyka się z Bartkiem na stacji.', cond: 'ev:ev_bartek_conf' },
   { t: '2026-10-14T22:57', title: 'Fotopułapka 1: Maja wchodzi na teren huty.', cond: 'ev:ev_cam1_maja', key: true },
   { t: '2026-10-14T23:31', title: 'SMS do Oli: „Przepraszam za wczoraj”.', cond: 'ev:ev_ola_sorry' },
   { t: '2026-10-14T23:44', title: 'Maja wybija otwór w murze odprężarki.', cond: 'ev:ev_sync_wall', key: true },
@@ -148,7 +148,7 @@ DATA.timeline = [
   { t: '2026-10-15T01:20', title: 'Ciemne auto przy bramie huty.', cond: 'ev:ev_cam1_car' },
   { t: '2026-10-15T06:40', title: 'Auto Mai „znalezione” na tamie.', cond: 'ev:ev_dam_news' },
   { t: '2026-10-21T21:03', title: 'Kuba pisze do ciebie.', cond: 'flag:knowKuba' },
-  { t: '2026-10-22T02:13', title: 'Bartek nocą w hucie.', cond: 'ev:ev_jacket' },
+  { t: '2026-10-22T02:13', title: 'Bartek nocą w hucie.', cond: 'ev:ev_bartek_conf' },
   { t: '2026-10-23T00:12', title: 'DDZ 6K19 znów pod hutą, gdy są tam Kuba i Igor.', cond: 'ev:ev_car_igor' },
   { t: '2026-10-24T03:05', title: 'Telefon Mai włączony w lesie. SMS do mamy.', cond: 'ev:ev_sms_kluska', key: true }
 ];

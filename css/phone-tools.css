@@ -1,0 +1,26 @@
+.side-photo { display:block; text-align:left; width:100%; margin-top:10px; border-radius:12px; overflow:hidden; }
+.side-photo img { display:block; width:100%; height:auto; }
+.side-photo span { display:block; padding:10px 2px 2px; color:var(--tx); font-size:15px; line-height:1.4; }
+.message-menu { padding:0 18px 20px; }
+.message-menu blockquote { margin:4px 0 18px; border-left:3px solid var(--acc); padding:4px 14px; font-size:17px; line-height:1.45; overflow-wrap:anywhere; }
+.message-menu .reaction-picker { display:flex; justify-content:space-between; background:var(--s1); border-radius:20px; padding:8px 4px; margin:12px 0 20px; }
+.reaction-picker button { width:44px; min-height:48px; font-size:25px; border-radius:14px; }
+.reaction-picker button[aria-pressed=true] { background:var(--accd); box-shadow:inset 0 0 0 2px var(--acc); }
+.message-menu>.btn { margin:8px 0; }
+.message-reaction { position:absolute; right:5px; bottom:-16px; border:2px solid var(--scr); background:var(--s2); padding:2px 7px; border-radius:15px; font-size:16px; min-height:28px; }
+.msg:has(.message-reaction) { margin-bottom:25px; }
+.bub { position:relative; }
+.message-bookmark { display:inline-block; font-size:13px; color:var(--tx2); margin:5px 4px 0; }
+.msg.me .message-bookmark { color:inherit; }
+.message-search { display:flex; flex-direction:column; gap:10px; padding:0 18px 20px; }
+.message-search .field { margin:0; width:100%; }
+.message-search-result { text-align:left; border-bottom:1px solid var(--line); padding:16px 0; min-height:60px; }
+.message-search-result b { display:block; font-size:15px; color:var(--tx); }
+.message-search-result p { margin:7px 0; font-size:17px; line-height:1.45; overflow-wrap:anywhere; }
+.message-search-result small { color:var(--tx2); font-size:14px; }
+.message-search-empty { color:var(--tx2); font-size:16px; line-height:1.5; }
+.crow .pinned-chat { color:var(--acc); font-size:14px; padding-right:5px; }
+.quote-origin { font-size:14px; color:var(--tx2); margin:0 0 8px; }
+.ts-t { font-size:clamp(31px,8.6vw,41px); line-height:1.08; max-width:9ch; margin:12px auto; letter-spacing:.025em; text-shadow:none; padding-left:0; }
+.ts-k { letter-spacing:.08em; font-size:13px; padding-left:0; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-delay:0ms!important; transition-delay:0ms!important; } }

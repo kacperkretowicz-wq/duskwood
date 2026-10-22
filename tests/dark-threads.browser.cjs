@@ -65,7 +65,7 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
    assert.equal(await page.locator('.side-choice').count(),0,'archive cannot reopen the disclosure');
    await page.keyboard.press('Escape');await page.locator('.side-dialogue').waitFor({state:'detached'});await page.evaluate(()=>{G.s.finished=true;G.setFlag('majaFound');UI.openConversation('maja_words');});
    assert.equal(await page.locator('.side-choice').count(),1,'only matching response is visible');
-   await page.locator('.side-choice').click();await page.getByRole('button',{name:'Nie musisz wypełniać tej luki.',exact:true}).waitFor();
+   await page.locator('.side-choice').click();await page.getByRole('button',{name:'Nie będę ci dopowiadać, co „musiało” się stać.',exact:true}).waitFor();
    assert.match(await page.locator('.side-transcript').innerText(),/sms do mamy pisałam ja/);
    assert.ok(await page.evaluate(()=>[...document.querySelectorAll('.side-choice')].every(e=>e.scrollWidth<=e.clientWidth+1)));
    assert.deepEqual(errors,[]);console.log(`PASS ${os} ${width}px: history, wrong conclusion/sources, disclosure, resume, reactions, archive`);await ctx.close();

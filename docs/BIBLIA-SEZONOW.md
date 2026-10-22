@@ -1,10 +1,12 @@
-# MGLISKO — historia, ludzie i sezony
+# QUIET IS SAFER — historia, ludzie i sezony
 
-Wersja redakcyjna 1.3, 22.10.2026. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
+Wersja redakcyjna 1.4, 22.10.2026. Mglisko pozostaje nazwą miejscowości. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
 
 ## Co jest grą, a co celem produkcji
 
-W grze: prolog, pięć rozdziałów, epilog, trzy zakończenia, dwadzieścia rozmów opcjonalnych, śledztwo Leny, śledztwo tapety, historia zmienionej notatki „Do Oli”, trzydzieści etapów postępu, zapis sesji i konsekwencji finału. Jest wybór swobodnego tempa oraz pięciodniowego pilota z terminami rozdziałów i lokalnymi powiadomieniami w aplikacji mobilnej. Istniejące sceny nie zostały zastąpione trzydziestoma pełnymi odcinkami.
+W grze: prolog, pięć rozdziałów, epilog, trzy zakończenia, dwadzieścia trzy rozmowy opcjonalne, śledztwo Leny, śledztwo tapety, historia zmienionej notatki „Do Oli”, trop pasa przy wejściu do huty, trzydzieści etapów postępu, zapis sesji i konsekwencji finału. Jest wybór swobodnego tempa oraz pięciodniowego pilota z terminami rozdziałów i lokalnymi powiadomieniami w aplikacji mobilnej. Istniejące sceny nie zostały zastąpione trzydziestoma pełnymi odcinkami.
+
+Wersja 1.4 dopracowuje głosy ludzi i codzienne używanie telefonu; [ROZWOJ-1-4.md](ROZWOJ-1-4.md) zawiera ustalenia nowego tropu. Wydanie pasów 12.10 nie identyfikuje egzemplarza pod hutą ani nie ustala sposobu porwania. Rozmowy Bartka o dopiero planowanym wypytaniu ojca przestają przyjmować odpowiedzi po głównym wyznaniu Marka. [GLOSY-POSTACI.md](GLOSY-POSTACI.md) reguluje język kolejnych odcinków.
 
 Wdrożony mroczny wątek notatki i autorskie ustalenie sprawcy edycji: [MROK-I-SLADY.md](MROK-I-SLADY.md). Gajda zmienia tekst na telefonie Mai; zostają wcześniejsze wersje. Gracz ustala zmianę, lecz sama historia wersji nie identyfikuje autora. Po ratunku Maja potwierdza przymus przy SMS-ie i uczciwie nie potwierdza sceny edycji, której nie pamięta.
 

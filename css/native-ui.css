@@ -136,3 +136,106 @@ body.os-android .delivery::before { content:' · '; }
 .paper { background:var(--s1); color:var(--tx); font:17px/1.55 var(--font); border:0; border-radius:12px; box-shadow:none; padding:20px; }
 .paper b { color:var(--tx); }
 .note-history .nb-hint { color:var(--tx2); padding:12px 0; text-align:left; line-height:1.5; }
+
+/* Secondary text is still reading text: no faint microtype for a crucial clue. */
+body { --tx2:#505057; --tx3:#606067; }
+body.dark-ui { --tx2:#c4c4c8; --tx3:#b4b4b9; }
+body.os-android #homebar.nav3 button { color:var(--tx); }
+body.os-android:has(#home:not(.behind)) #homebar.nav3 button,body.os-android:has(#lock) #homebar.nav3 button,
+body.os-android:has(.call) #homebar.nav3 button,body.os-android:has(.viewer) #homebar.nav3 button,
+body.os-android:has(.title-scr) #homebar.nav3 button,body.os-android:has(.app-weather) #homebar.nav3 button { color:#fff; }
+body:has(.app-weather) #homebar::before { background:#fff; }
+.hdr .tt small,.row .rm span,.side-person div>span,.side-intro,.side-complete,.side-typing,
+.side-lead small,.side-label,.side-message small,.side-choice small,.side-attachments button,
+.nb-hint,.nb-sub,.nb-dev span,.nb-dev-st,.nb-bk,.nb-bar-l,.nb-tile small,.nb-alb small,
+.nb-note-s,.loc-t small,.loc-b span,.mail-h span,.mail-h small,.exif .rm span,
+.transcript p .lt,.bv-st,.cm-intro,.tn-l,.tn-st,.ev-detail small,.pp-card .rm small,
+.pp-trust,.tl-d small,.tl-b span,body .wallpaper-card>small,body .season-meta,body .season-pacing,
+body .season-kicker,body .season-episodes small,body .episode-num,.case-card small,.case-card div>span,
+.profile-bio small,.banner .b-app,.banner .b-t,.nt-date,.nt-count,.nt-hint small { font-size:14px; line-height:1.45; }
+.side-intro,.side-complete,.side-person div>span,.side-lead div>span,.side-attachments button,
+.res-s,.nt-row span,.ded span,.ded-solve p,.ded-opts .ded-o,.cm-intro,.mail-b,
+.transcript p,.ev-detail p,.pp-facts li,body .season-recap p,body .season-recap li { font-size:16px; line-height:1.5; }
+.side-message small,.side-person div>span,.nt-row span,.nt-date,.nt-hint:not(.on) span,
+.case-card small,.crow .ct span,.res-n,.nb-hint,.nb-bar-l,.nb-tile small,.exif .rm span,
+.tl-d small,.transcript p .lt,.ev-detail small { color:var(--tx2); opacity:1; }
+.side-attachments button,.side-choice { min-height:48px; }
+.side-message { padding:12px 15px; }.side-message small { display:block; margin-bottom:4px; }
+.sysmsg,.sep,.reply-label { font-size:14px; line-height:1.45; }
+.composer .idle { color:var(--tx2); }.composer .opt { font-size:17px; }
+.phone-tabs button { font-size:12px; }.chat-filters button,.seg button { font-size:14px; }
+.toast { font-size:15px; line-height:1.4; }.case-card div>span { font-size:15px; }
+.lbl,.sec-t,.row .rx,.su-o small,.setup .su-f,.ts-n,.ts-w,.curtain .cu-s { font-size:14px; line-height:1.5; }
+.banner .b-h { font-size:16px; }.banner .b-h span { font-size:14px; }.pill { font-size:13px; }
+.bub .tm { font-size:12px; opacity:1; }body.os-ios .delivery { font-size:12px; }
+body.os-ios .chat-hdr .tt h1 { font-size:14px; }
+body.os-ios .chat-hdr .tt small.typ { font-size:12px; }
+.app-ic .lb { font-size:12px; }.home-search { font-size:14px; min-height:34px; }
+.home-weather small { font-size:13px; opacity:1; }.home-note small { font-size:12px; }
+.home-weather>span:last-of-type { font-size:14px; }.home-note p { font-size:14px; }
+.cm-ed,.cm-ed .hdr { background:var(--scr); }
+.wx { --tx:#fff; --tx2:#e4edf5; --tx3:#d8e3ee; --s1:#ffffff17; --bar:transparent; --acc:#fff; --acc2:#fff; --line:#ffffff38; color:#fff; background:linear-gradient(#38536c,#192b3c); }
+.wx .hdr { border:0; }.wx-top span,.wx-h small { font-size:15px; }
+.wx-alert { color:#fff; background:#ffffff17; font-size:15px; }.wx-hours { background:#ffffff17; }
+.wx .row .rm b { color:#fff; }.wx .row .rx { color:var(--tx2); }
+.wx .body>p { color:var(--tx2)!important; font-size:14px!important; line-height:1.5; }
+/* Fictional web pages keep their own light paper even when the phone is dark. */
+.web { --tx:#1d1f22; --tx2:#505057; --tx3:#606067; }
+.gz-top,.gz-card small,.gz-small,.gz-art figcaption { color:#62564a; font-size:14px; }
+.gz-nav,.gz-sec,.gz-kick,.gz-rel { font-size:14px; letter-spacing:0; }
+.m24-row small,.m24-d,.m24-art figcaption,.kd-n small,.kd-li small,.wk-h span { color:#55585f; font-size:14px; }
+.m24-com,.kd-post p,.kd-pc p { font-size:16px; }.m24-w,.m24-tag,.m24-com i,.kd-st,.kd-pl,.gv-h small { font-size:14px; }
+
+/* Calendar: a normal personal calendar, with local editable appointments. */
+.cal .hdr .tt h1 { color:var(--tx); }
+.cal-month-nav { display:flex; align-items:center; gap:8px; padding:4px 14px 8px; }
+.cal-month-nav h2 { flex:1; text-align:center; font-size:21px; font-weight:600; margin:0; letter-spacing:-.02em; }
+.cal-month-nav button { width:44px; height:44px; flex:none; color:var(--acc); display:grid; place-items:center; }
+.cal-next { transform:rotate(180deg); }
+.cal-g { gap:2px; padding:0 13px; }
+.cal-g b { font-size:14px; font-weight:500; color:var(--tx2); text-transform:uppercase; }
+.cal-g button { min-height:44px; height:44px; border-radius:50%; font-size:17px; }
+.cal-g button.selected:not(.today) { background:var(--tx); color:var(--scr); }
+.cal-g button.today { background:transparent; color:#c62c26; font-weight:700; }
+.cal-g button.today.selected { background:#d72d26; color:#fff; }
+.cal-g button.has::after { background:currentColor; width:4px; height:4px; bottom:3px; margin-left:-2px; }
+.cal-toolbar { display:flex; align-items:center; justify-content:space-between; padding:4px 20px 10px; border-bottom:1px solid var(--line); }
+.cal-toolbar button { color:var(--acc); min-height:44px; font-size:17px; }.cal-toolbar span { font-size:14px; color:var(--tx2); }
+.cal-agenda { padding:8px 18px 20px; }.cal-agenda h3 { font-size:19px; margin:12px 0; font-weight:600; }
+.cal-events { margin:0; border-radius:0; background:none; }.cal-events .row { gap:13px; padding:15px 0; min-height:66px; }
+.cal-event-time { min-width:62px; max-width:66px; font-size:14px; color:var(--tx2); line-height:1.4; }
+.cal-events .rm { border-left:3px solid var(--acc); padding-left:12px; }.cal-events .rm b { line-height:1.4; overflow-wrap:anywhere; }.cal-events .rm span { font-size:14px; line-height:1.4; margin-top:4px; }
+.cal-add { display:flex; align-items:center; gap:8px; color:var(--acc); min-height:48px; margin-top:8px; font-size:17px; }
+.phone-form,.phone-event-detail { padding:8px 20px 28px; }.phone-form>label,.clock-label>label { display:block; font-size:15px; color:var(--tx2); margin:16px 0 7px; }
+.phone-form .field { display:block; width:100%; margin:0; min-width:0; max-width:100%; }
+.phone-form textarea.field { resize:vertical; min-height:100px; line-height:1.5; }
+select.field { font:17px var(--font); color:var(--tx); padding:12px; }
+.phone-form .btn,.phone-event-detail .btn { margin-top:14px; }
+.phone-help { color:var(--tx2); font-size:15px; line-height:1.5; margin:10px 0; }
+.phone-form-error { color:var(--bad); font-size:15px; line-height:1.4; margin:10px 0; }
+.phone-delete { color:#c52f2a; }.dark-ui .phone-delete { color:#ff6961; }
+.phone-event-detail h2 { font-size:25px; line-height:1.25; font-weight:600; margin:15px 0; overflow-wrap:anywhere; }
+.phone-event-detail p { line-height:1.5; }.cal-event-note { white-space:pre-wrap; overflow-wrap:anywhere; user-select:text; }
+.phone-event-detail .btn { text-align:left; white-space:normal; line-height:1.4; padding:12px 14px; }
+.phone-check { display:flex!important; gap:12px; align-items:center; min-height:44px; color:var(--tx)!important; }
+.phone-check input { width:23px; height:23px; accent-color:var(--acc); }
+/* Clock: timers and stopwatches use real elapsed time; alarms use story time. */
+.clock-app .body { padding-bottom:14px; }.clock-app .hdr { border-bottom:0; }
+.clock-display { font-size:64px; font-weight:300; font-variant-numeric:tabular-nums; text-align:center; letter-spacing:-.04em; line-height:1.15; margin:30px 12px 6px; }
+.stopwatch-display { font-size:56px; }.clock-state { font-size:15px; color:var(--tx2); text-align:center; min-height:23px; margin:8px 20px 24px; }
+.timer-duration { display:flex; gap:12px; margin:10px 22px 18px; }.timer-duration label { flex:1; min-width:0; text-align:center; }
+.timer-duration input { display:block; width:100%; min-height:58px; border:1px solid var(--line); border-radius:10px; background:var(--s1); color:var(--tx); font-size:28px; text-align:center; font-variant-numeric:tabular-nums; padding:8px 4px; -moz-appearance:textfield; }
+.timer-duration input::-webkit-inner-spin-button { -webkit-appearance:none; }.timer-duration label>span { display:block; font-size:14px; color:var(--tx2); margin-top:7px; }
+.timer-duration input:disabled { color:var(--tx2); opacity:1; }.timer-presets { display:flex; gap:8px; margin:0 22px 16px; }
+.timer-presets button { flex:1; min-height:40px; border-radius:9px; background:var(--s1); color:var(--acc); font-size:15px; }.timer-presets button:disabled { color:var(--tx2); }
+.clock-label { margin:0 22px; }.clock-label .field { width:100%; }.clock-label>label { margin-top:8px; }
+.clock-controls { display:flex; gap:14px; margin:24px 22px; }.clock-controls .btn { flex:1; background:var(--s1); }.clock-controls .btn.pri { background:var(--acc); }
+.clock-help { margin:20px 24px; }.clock-tabs { flex:none; display:flex; gap:8px; padding:10px 12px calc(30px + var(--safe-b)); border-top:1px solid var(--line); background:var(--bar); }
+.clock-tabs button { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; font-size:13px; min-height:48px; color:var(--tx2); padding-top:3px; }
+.clock-tabs [aria-selected="true"] { color:var(--acc); }.os-android .clock-tabs { padding-bottom:9px; }
+.stopwatch-laps { margin:0 22px; background:transparent; border-radius:0; }.stopwatch-laps .row { padding:13px 0; gap:8px; justify-content:space-between; font-size:16px; font-variant-numeric:tabular-nums; }.stopwatch-laps b { font-weight:400; }
+.alarm-list { margin:0 22px; border-radius:0; background:transparent; }.alarm-list .row { padding:14px 0; justify-content:space-between; gap:18px; }
+.alarm-edit { flex:1; text-align:left; min-height:70px; display:flex; flex-direction:column; gap:3px; }.alarm-edit b { font-size:46px; font-weight:300; font-variant-numeric:tabular-nums; line-height:1.1; }.alarm-edit span { font-size:17px; }.alarm-edit small { font-size:14px; color:var(--tx2); }
+.alarm-list .tgl { flex:none; width:51px; height:31px; }.alarm-list .tgl::after { width:27px; height:27px; top:2px; left:2px; }.alarm-list .tgl.on::after { transform:translateX(20px); }
+.clock-add { display:flex; gap:8px; color:var(--acc); margin:20px auto; }
+@media(max-width:360px) { .clock-display { font-size:58px; margin-top:18px; }.stopwatch-display { font-size:49px; }.clock-state { margin-bottom:17px; }.clock-controls { margin-top:18px; margin-bottom:18px; }.cal-month-nav h2 { font-size:20px; }.home-weather small { font-size:12px; }.case-card div>span { font-size:15px; } }

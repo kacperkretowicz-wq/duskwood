@@ -1,7 +1,7 @@
 'use strict';
 /* Identyfikatory odcinków są kontraktem zapisu. Nie zależą od indeksów kroków DSL. */
 DATA.seasons = [{
-  id: 's1', revision: 2, title: 'Szkło pamięta', released: true,
+  id: 's1', revision: 3, title: 'Szkło pamięta', released: true,
   description: 'Jedno nieodebrane połączenie i sprawa, o której Mglisko milczało przez 29 lat.',
   chapters: ['prolog', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'epilog'],
   episodes: [

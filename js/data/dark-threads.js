@@ -61,8 +61,8 @@
           sideChoice('Nie dostałaś tego tekstu tamtej nocy?', ['Nie. Tylko przeprosiny o 23:31.', 'Gdybym dostała ten, spytałabym, co to za brelok. Tak sobie mówię. Nie wiem, czy naprawdę bym spytała.'], 'door')
         ] },
         door: { lines: ['Wczoraj zostawiłam buty przy drzwiach. Kurtkę na krześle.', 'Jakby miała napisać „zejdź” i jakbym mogła naprawić wszystko tym, że tym razem zejdę od razu.'], choices: [
-          sideChoice('Możesz ją kochać i nie być gotowa przy drzwiach całą dobę.', ['Wiem.', 'Przesunęłam buty do szafki, kiedy to czytałam. Czuję się okropnie głupio, że ci o tym piszę.'], 'finish'),
-          sideChoice('Chcesz, żebym {został|została} przy tej rozmowie przez chwilę?', ['Tak. Bez następnego pliku przez minutę.', 'Tylko nie pisz mi, że na pewno jutro będziemy się z tego śmiać.'], 'finish')
+          sideChoice('Nie musisz siedzieć w kurtce. Jak coś się zmieni, napiszę.', ['Wiem.', 'Schowałam buty. Teraz siedzę i patrzę na pustą wycieraczkę, super zajęcie.'], 'finish'),
+          sideChoice('Chcesz pogadać? Mogę na chwilę odłożyć pliki.', ['Tak. Bez następnego pliku przez minutę.', 'Tylko nie pisz mi, że na pewno jutro będziemy się z tego śmiać.'], 'finish')
         ] },
         finish: { choices: [
           sideChoice('Zachowamy jej własne słowa. I szukamy dalej.', ['Dobrze.', 'A pojemnik niech sobie zatrzyma. Powiem jej to, jak wróci.']),
@@ -81,7 +81,7 @@
         ] },
         room: { lines: ['jej długa ładowarka jest teraz u mnie', 'jak odłączam telefon to odkładam kabel przy jej drzwiach', 'nie wchodzę. nie wiem czemu. normalnie bym wszedł i zabrał jeszcze słuchawki'], choices: [
           sideChoice('Nie musisz dzisiaj wchodzić.', ['okej', 'a jak się znajdzie to nie wysyłaj jej tego screena. dobra?'], 'copy', { set: { respectedKubaRoom: true } }),
-          sideChoice('To ty decydujesz, kiedy będziesz gotowy.', ['chciałbym żeby to było zwykłe „nie ruszaj moich rzeczy” przez ścianę', 'nigdy mnie to tak nie denerwowało jak teraz że tego nie ma'], 'copy', { set: { respectedKubaRoom: true } })
+          sideChoice('Ładowarkę oddasz później. Nie musisz tam teraz wchodzić.', ['normalnie by mnie opieprzyła przez ścianę że dotykam jej kabla', 'wcześniej mnie to wkurzało. teraz sam bym zapukał żeby się pokłócić'], 'copy', { set: { respectedKubaRoom: true } })
         ] },
         copy: { lines: s => s.flags.noteCopyShared
           ? ['mama dzwoniła do gajdy. mówił że ma od ciebie obie wersje', 'on teraz wie że stary tekst też został. nie mamy przycisku cofnij?']
@@ -117,13 +117,13 @@
           sideChoice('Długo tak robiła?', ['Nie umiem powiedzieć kiedy przestała.', 'Pamiętam tylko, jak kiedyś sama zgasiłam. I przez całą noc nie mogłam zasnąć.'], 'people'),
           sideChoice('Nie musi pani teraz o tym opowiadać.', ['Chcę. Bo znowu słyszę te same zdania.', '„Proszę dać służbom pracować”. „Może sam wróci”.'], 'people')
         ] },
-        people: { lines: ['W bibliotece ktoś zapytał, czy nie powinnam już oddać albumu Tomka do archiwum.', 'To nie był zły człowiek. Chciał odzyskać zwykłą rozmowę przy ladzie.', 'Czasem całe miasto chce już zwykłej rozmowy. A jedna rodzina nie może.'], choices: [
-          sideChoice('To pani album. Nie termin do zamknięcia sprawy.', ['Tak.', 'Dzisiaj zabiorę go do domu. Nie chcę, żeby znów ktoś go oglądał przez ramię.'], 'finish'),
+        people: { lines: ['W bibliotece ktoś zapytał, czy nie powinnam już oddać albumu Tomka do archiwum.', 'To nie był zły człowiek. Chciał odzyskać zwykłą rozmowę przy ladzie.', 'Odłożyłam album. Ten pan zaczął pytać o nowości wydawnicze. Ja nie potrafiłam odpowiedzieć.'], choices: [
+          sideChoice('Nie musi pani oddawać albumu.', ['Tak.', 'Dzisiaj zabiorę go do domu. Nie chcę, żeby znów ktoś go oglądał przez ramię.'], 'finish'),
           sideChoice('Chce pani, żebym {przekazał|przekazała} coś Kubie?', ['Że nie musi odpowiadać wszystkim, którzy pytają „co nowego”.', 'Że może zjeść obiad, nawet jeśli nie ma nic nowego.'], 'finish')
         ] },
         finish: { choices: [
           sideChoice('Dziękuję, że opowiedziała mi pani o nim.', ['Był też nieznośny, proszę pamiętać.', 'Zawsze naciskał wszystkie guziki w windzie. Chciałabym jeszcze raz się za to zezłościć.']),
-          sideChoice('Zapiszę to dla siebie. Bez rozsyłania albumu.', ['Dziękuję.', 'Nie wszystko, co po kimś zostaje, jest dowodem.'])
+          sideChoice('Zapiszę to dla siebie. Bez rozsyłania albumu.', ['Dziękuję.', 'Album zostawię sobie. Nie chcę, żeby następne zdjęcie Tomka trafiło do gazety.'])
         ] }
       }
     },
@@ -137,16 +137,16 @@
           'ten pojemnik. serio planowałam go oddać. aż mnie to rozśmieszyło, i potem już nie',
           s.flags.noteCopyShared ? 'wiem też że dostał te zapisy. nie musisz mi mówić że to miało pomóc' : 'dzięki że ten pierwszy tekst nie zniknął pod drugim'
         ], choices: [
-          sideChoice('To była moja decyzja. Nie będę prosić, żebyś mnie teraz uspokajała.', ['dobrze', 'nie mam teraz na to miejsca'], 'voice', { cond: 'flag:noteCopyShared' }),
+          sideChoice('{Wysłałem|Wysłałam} je. {Myślałem|Myślałam}, że pomagam. Rozumiem, że możesz być na mnie zła.', ['dobrze', 'nie mam teraz na to miejsca'], 'voice', { cond: 'flag:noteCopyShared' }),
           sideChoice('Co chcesz z nimi zrobić teraz?', ['pierwszą zostawić. drugą też, jako materiał do sprawy', 'ale nie chcę żeby mi się otwierała jako moja najnowsza notatka'], 'voice', { cond: '!flag:noteCopyShared' })
         ] },
         voice: { lines: ['sms do mamy pisałam ja. te słowa o klusce też', 'on kazał mi napisać że nic mi nie jest. telefon miałam przez chwilę', 'notatki nie pamiętam. nie dopiszę wam do niej sceny tylko dlatego że teraz pasuje'], choices: [
-          sideChoice('Nie musisz wypełniać tej luki.', ['dzięki', 'czasem ktoś mówi „czyli wtedy…” i ja prawie przytakuję żeby mieć spokój'], 'finish'),
-          sideChoice('Zostawimy przy niej tylko to, co wiadomo.', ['tak. i nie podpisujcie tej drugiej „pożegnanie mai”', 'ja się z nikim nie żegnałam'], 'finish')
+          sideChoice('Nie będę ci dopowiadać, co „musiało” się stać.', ['dzięki', 'czasem ktoś mówi „czyli wtedy…” i ja prawie przytakuję żeby mieć spokój'], 'finish'),
+          sideChoice('Dopiszę, że nie pamiętasz edycji notatki.', ['tak. i nie podpisujcie tej drugiej „pożegnanie mai”', 'ja się z nikim nie żegnałam'], 'finish')
         ] },
         finish: { choices: [
           sideChoice('Jak chciałabyś ją nazwać?', ['zmieniony tekst. po prostu', 'a moją notatkę nazwę „pojemnik”. ola od razu będzie wiedziała']),
-          sideChoice('Wrócimy do tego, kiedy sama zechcesz.', ['dobra', 'teraz mam jej wreszcie oddać ten nieszczęsny pojemnik'])
+          sideChoice('Okej. Zostawmy to na dziś.', ['dobra', 'teraz mam jej wreszcie oddać ten nieszczęsny pojemnik'])
         ] }
       }
     }

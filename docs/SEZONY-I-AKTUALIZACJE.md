@@ -1,6 +1,8 @@
-# Sezony, zapis i powiadomienia — wydanie 1.3
+# Sezony, zapis i powiadomienia — wydanie 1.4
 
 ## Obecny zakres
+
+Rewizja sezonu `s1`: 3. Angielski tytuł gry to Quiet Is Safer; identyfikatory aplikacji i klucze stanu pozostają zgodne. `s.phoneTools` przechowuje przypięcia, reakcje, cytaty, kalendarz i zegar. Pola inicjalizują się osobno, więc otwarcie Zegara nie kasuje reakcji ani odwrotnie. Załączniki opcjonalnych rozmów są elementami transkrypcji. Wydanie 1.4 nie przesuwa numerycznych kroków głównej fabuły. Szczegóły: [ROZWOJ-1-4.md](ROZWOJ-1-4.md).
 
 Rewizja zawartości sezonu `s1`: 2. Wydanie 1.3 dodaje historię wersji notatki „Do Oli”, pięć rozmów i konsekwencje udostępnienia plików. Numery kroków głównej historii i format zapisu v2 pozostają zgodne. Zaczęte rozmowy zachowują transkrypcję po utracie dostępności; możliwość odpowiedzi zależy od aktualnego etapu. [Ustalenia fabularne i źródła](MROK-I-SLADY.md).
 

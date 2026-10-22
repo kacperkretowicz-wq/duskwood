@@ -18,13 +18,13 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
       'Otwórz zdjęcie i przybliż je — dwoma palcami, kółkiem myszy albo dwuklikiem.',
       'Na plecach kurtki jest napis. Przybliż mocno i dotknij go.'
     ]),
-    waitFor('ev:ev_jacket', { hints: [{ after: 90, chat: 'kuba', who: 'kuba', text: 'ma coś na plecach. jak przybliżam na moim to same ziemniaki xdd' }] }),
+    waitFor('ev:ev_jacket', { hints: [{ after: 90, chat: 'kuba', who: 'kuba', text: 'na plecach ma napis. u mnie po przybliżeniu są cztery piksele i rozpacz' }] }),
     K('i co, widać coś?'),
     show('kuba', { prompt: 'Pokaż, co widać na kurtce', accept: [{ ev: ['ev_jacket'] }], wrong: [['kuba', 'chodzi mi o gościa z 2:13. co ma na plecach?']] }),
     typing('kuba', 'kuba', 3000),
     K('„O-SOWA”'),
     K('auto-sowa. to kurtka z warsztatu bartka'),
-    K('co on tam robił w nocy?? wczoraj pisał „nie idźcie tam”'),
+    K('nam pisał „nie idźcie tam” a sam pojechał? no nie'),
     choose('kuba', [
       opt('Napiszę do niego na priv. Najpierw zapytam.', [
         K('ok. ale napisz mi potem'),
@@ -92,11 +92,11 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
 
     /* --- komendant Gajda --- */
     unlock('chat:gajda'),
-    GJ('Dobry wieczór. Mówi aspirant sztabowy Robert Gajda, komendant posterunku w Mglisku.'),
+    GJ('Dobry wieczór. Aspirant sztabowy Robert Gajda, komendant posterunku w Mglisku.'),
     iff('flag:kubaToldGajda',
       [GJ('Kuba był u mnie dziś rano z mamą. Opowiedział mi o lokalizacji telefonu Mai. Rozumiem, że to {Pan|Pani} ją {znalazł|znalazła}.')],
       [GJ('Pani Ewa Wrona przekazała mi {Pana|Pani} numer. Rozumiem, że pomaga {Pan|Pani} rodzinie i ma dostęp do kopii telefonu Mai.')]),
-    GJ('Doceniam to. Ale proszę pamiętać, że to sprawa policyjna.'),
+    GJ('Dziękuję za pomoc rodzinie. Proszę jednak uzgadniać dalsze działania z policją.'),
     GJ('Co jeszcze {Pan|Pani} {znalazł|znalazła}?'),
     choose('gajda', [
       opt('Maja tamtej nocy była w hucie, nie na tamie.', [
@@ -118,18 +118,18 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     pause(2500),
 
     /* --- negatywy --- */
-    g('igor', 'Słuchajcie. Maja dała mi w zeszłym tygodniu negatywy do zeskanowania. Z tej kliszy z huty.'),
-    g('igor', 'Klisza była przeterminowana. Większość klatek wyszła słabo.'),
+    g('igor', 'słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu'),
+    g('igor', 'stary film, większość klatek ledwo czytelna'),
     g('ola', 'A te skany gdzie są?'),
-    g('igor', 'Oddałem jej na pendrivie. Ale ona sfotografowała negatywy też telefonem, powinny być w galerii.'),
-    g('igor', '%name%, wyślę ci link do Ciemni. To apka do wywoływania — odwraca negatywy.'),
+    g('igor', 'oddałem na pendrivie. ale wcześniej robiła negatywom zdjęcia telefonem. szukaj w galerii'),
+    g('igor', '%name%, podeślę Ciemnię. odwraca negatyw i można wyciągnąć trochę więcej z cieni'),
     unlock('app:ciemnia'),
     goal('Wywołaj negatywy Mai w Ciemni. Co jest na kliszy z szafki 17?', [
       'Otwórz *Ciemnię* i wybierz negatyw.',
       'Najpierw odwróć negatyw na pozytyw. Potem mocno rozjaśnij — klisza jest przeterminowana.',
       'Kadr 21: ekspozycja około +1,5 EV, kontrast odrobinę w górę.'
     ]),
-    waitFor('ev:ev_frame21', { hints: [{ after: 100, chat: 'group', who: 'igor', text: 'W Ciemni: najpierw przełącz na „Pozytyw”, potem ekspozycja w górę. Mocno.' }] }),
+    waitFor('ev:ev_frame21', { hints: [{ after: 100, chat: 'group', who: 'igor', text: 'w Ciemni najpierw „Pozytyw”. potem ekspozycja w górę, nie sam kontrast' }] }),
     g('kuba', 'wywołało się coś?'),
     show('group', { prompt: 'Pokaż wywołany kadr', accept: [{ ev: ['ev_frame21'] }], wrongFor: { ev_frame08: ['ola', 'Chłopcy przy piwie… Są inne klatki?'], ev_frame22: ['igor', 'Prawie nic nie widać. Coś wyraźniejszego?'] }, wrong: [['kuba', 'coś z kliszy']] }),
     typing('group', 'ola', 3500),
@@ -140,9 +140,9 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('ola', 'W żółtej pelerynie.'),
     g('kuba', 'żółta peleryna. jak w artykule. tomek lis'),
     typing('group', 'igor', 5000),
-    g('igor', 'Nie wiemy, z kiedy jest ta klisza.'),
+    g('igor', 'czekajcie. nie mamy jeszcze daty tej kliszy'),
     g('ola', 'Igor, serio? Dziecko w żółtej pelerynie w hucie. Tomek zniknął w żółtej pelerynie w noc, kiedy świadek widział go na drodze do huty.'),
-    g('kuba', 'maja znalazła zdjęcie zaginionego chłopca z nocy, kiedy zaginął. w hucie'),
+    g('kuba', 'jeśli to tomek, to był w hucie. nie nad rzeką'),
     g('kuba', 'a potem sama zniknęła W HUCIE'),
     set('yellowKnown'),
     pause(2000),
@@ -165,18 +165,18 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('ola', 'Maja powiedziała mi przez telefon: nie do Gajdy. Nie pytaj dlaczego.'),
     g('kuba', 'nie. nie wierzę. gajda przynosił mi lego na komunię'),
     g('bartek', 'gajda to glina od 25 lat. nie przesadzajcie'),
-    g('igor', '„Igor dziwnie pyta o film” — no super. Pytałem, skąd ma tak stary film, bo wyglądał na starszy ode mnie. Serio, ludzie.'),
+    g('igor', '„Igor dziwnie pyta o film”. no dzięki. pytałem bo ten aparat wyglądał na starszy ode mnie'),
     pause(2500),
 
     /* --- wyprawa --- */
-    g('igor', 'Dobra. Jedziemy z Kubą, jak się ściemni na dobre. Bartek?'),
+    g('igor', 'dobra. z kubą jedziemy jak się ściemni. bartek, jedziesz czy nie?'),
     g('bartek', 'nie'),
     interlude('23:20', 'Kuba i Igor jadą pod hutę.', 3200),
     clock('2026-10-22T23:20'),
     ambient('tense'),
     g('kuba', 'jesteśmy pod bramą'),
     say('group', 'kuba', 'łańcuch. nowy', { img: 'k_gate' }),
-    g('igor', 'Kłódka świeża. Nawet nie zardzewiała. Ktoś ją niedawno założył.'),
+    g('igor', 'kłódka nowa. reszta łańcucha ruda, ta się błyszczy'),
     g('kuba', 'jak maja tu wchodziła?'),
     goal('Pomóż Kubie i Igorowi dostać się na teren huty.', [
       'W galerii Mai jest zdjęcie ogrodzenia przy trafostacji. Przyjrzyj mu się.',
@@ -187,7 +187,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     pause(3500),
     g('kuba', 'jest dziura w siatce. jesteśmy w środku'),
     sync('maja:cam58', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0058.JPG' }),
-    g('igor', 'Właśnie złapała nas fotopułapka Mai. Pozdrawiamy.'),
+    g('igor', 'no i właśnie mamy zdjęcie z jej fotopułapki. przynajmniej działa 🙃'),
     g('kuba', 'gdzie jest ta szafka 17?'),
     goal('Gdzie jest szatnia? Sprawdź plan ewakuacji w galerii Mai.', ['W galerii Mai jest zdjęcie planu ewakuacji hal A i B. Przybliż je.']),
     menu('group', [
@@ -205,7 +205,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('kuba', 'teraz ta ściana. gdzie jest odprężarka?'),
     menu('group', [
       opt('Hala A, poziom −1, za piecem.', [g('kuba', 'za piecem są schody w dół. idziemy')], { exit: true }),
-      opt('Hala B, przy magazynie.', [g('igor', 'Tu są tylko regały i gołębie.')]),
+      opt('Hala B, przy magazynie.', [g('igor', 'same regały. gołębie chyba też nie wiedzą gdzie szatnia')]),
       opt('Pod dziedzińcem.', [g('kuba', 'pod dziedzińcem jest beton')])
     ]),
     pause(3000),
@@ -215,7 +215,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('igor', 'Zaprawa jest świeża. Kruszy się pod palcem. Ktoś tu niedawno murował.'),
     g('kuba', 'co jest za tą ścianą???'),
     choose('group', [
-      opt('Nie ruszajcie ściany. To może być miejsce przestępstwa.', [g('igor', 'Zgadzam się.'), g('kuba', 'ok. ok.')], { trust: { igor: 1 }, set: { noBreak: true } }),
+      opt('Nie ruszajcie ściany. To może być miejsce przestępstwa.', [g('igor', 'tak. nie ruszamy'), g('kuba', 'ok. ok.')], { trust: { igor: 1 }, set: { noBreak: true } }),
       opt('Zajrzyjcie przez szczelinę.', [g('kuba', 'nic nie widać. czarno. czuć wilgocią')]),
       opt('Rozbijcie ją.', [g('kuba', 'czym? ręką?'), g('igor', 'Kuba, stop. Nie mamy czym. I chyba nie powinniśmy.')], { trust: { kuba: 1, igor: -1 } })
     ]),
@@ -227,7 +227,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('kuba', 'to czołówka mai'),
     g('kuba', 'ma naklejkę z kluską. sama ją kleiła'),
     g('kuba', 'ona tu była. ona tu była i ktoś'),
-    g('ola', 'Kuba, oddychaj.'),
+    g('ola', 'Kuba. Jestem tu. Napisz, czy stoisz z Igorem.'),
     say('group', 'igor', 'Na filarze był uchwyt drugiej fotopułapki. Ktoś ją zerwał.', { img: 'k_mount' }),
     give('ev_mount'),
     pause(3000),
@@ -258,19 +258,19 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
       ]),
       opt('Zobaczcie, kto to jest. Ostrożnie.', [
         g('kuba', 'widzę latarkę. duży facet. kurtka'),
-        g('igor', 'Kuba, wracaj. Nie jesteśmy bohaterami.'),
+        g('igor', 'kuba wracaj. nie podchodź do niego'),
         g('kuba', 'ok ok. idziemy')
       ], { trust: { kuba: 1 } })
     ]),
     pause(2500),
-    say('group', 'igor', 'Zrobiłem zdjęcie auta zza trafostacji. Z daleka. Widać tylko końcówkę tablicy.', { img: 'i_car' }),
+    say('group', 'igor', 'mam zdjęcie auta zza trafostacji. tylko końcówka tablicy, bliżej nie podejdę', { img: 'i_car' }),
     give('ev_car_igor'),
     iff('flag:leakCams', [
       pause(3500),
       sync('maja:cam61', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0061.JPG' }),
       set('cam1Dead'),
-      g('igor', 'Kamera przy bramie właśnie przestała odpowiadać. Ostatnie zdjęcie to czyjaś ręka.'),
-      g('igor', 'Była schowana w bluszczu. Skąd wiedział, gdzie szukać?')
+      g('igor', 'kamera przy bramie nie odpowiada. na ostatnim zdjęciu ręka przy obiektywie'),
+      g('igor', 'była w bluszczu. trzeba wiedzieć gdzie patrzeć żeby ją znaleźć')
     ]),
     g('kuba', 'jesteśmy w aucie. jedziemy'),
     clock('2026-10-23T00:50'),

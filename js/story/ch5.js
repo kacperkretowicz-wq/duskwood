@@ -21,11 +21,11 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- kamera przy hucie --- */
     iff('flag:cam1Dead', [
-      igorSays('Przejechałem koło huty. Pod bramą stoi superb Gajdy. Bagażnik otwarty, w środku kanistry.'),
+      igorSays('przejechałem koło huty. superb gajdy pod bramą, otwarty bagażnik. widziałem kanistry'),
       set('sawJerrycans')
     ], [
       set('panelGajda'),
-      igorSays('%name%, zajrzyj przez kamerę przy bramie. Coś mi tu nie gra — w hucie pali się światło.'),
+      igorSays('%name%, sprawdź kamerę przy bramie. w hucie pali się światło'),
       goal('Zajrzyj przez kamerę przy hucie. Co się tam dzieje?', [
         'Zainstaluj aplikację *BushView* — wyszukaj „bushview” w przeglądarce i pobierz ją ze strony.',
         'Zaloguj się danymi od Szklarza: login *maja.cam*, hasło *Jutrzenka1996*.',
@@ -42,7 +42,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
     choose('group', [
       opt('Nie! Pani Weroniko, proszę zostać z nimi. Zadzwonię po pomoc.', [g('weronika', 'Dobrze. Ale niech {Pan|Pani} dzwoni. Teraz.')], { trust: { weronika: 1 } }),
       opt('Ola, obserwuj drogę pod hutą z daleka. Pani Weroniko, proszę zostać z Kubą.', [g('ola', 'Dobrze. Stanę przy drodze. Nie będę podchodzić do budynku.')], { set: { weronikaToHuta: true } }),
-      opt('Najpierw Maja. Huta poczeka.', [g('weronika', '…'), g('weronika', 'Ma {Pan|Pani} rację. Żywi są ważniejsi.')], { trust: { weronika: -1 } })
+      opt('Najpierw Maja. Huta poczeka.', [g('weronika', '…'), g('weronika', 'Dobrze. Zostaję przy Kubie. Proszę tylko nie zapomnieć o hucie.')], { trust: { weronika: -1 } })
     ]),
 
     /* --- telefon po pomoc --- */
@@ -173,7 +173,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       c('maja', 'Myślałam, że to pan Adam.'),
       choose('call', [
         opt('Przepraszam. Nie {odebrałem|odebrałam}.', [c('maja', 'Ale teraz {odebrałeś|odebrałaś}.')]),
-        opt('Pan Adam nie żyje. Ale jego numer cię znalazł.', [c('maja', 'To… dziwnie piękne.'), c('maja', 'Albo mam gorączkę.')])
+        opt('Numer należał kiedyś do niego. Kuba znalazł mnie po twoim połączeniu.', [c('maja', 'Kuba… dobrze. Dobrze, że sprawdził.'), c('maja', 'Nie mogę się teraz skupić.')])
       ]),
       c('maja', 'Tomek… on jest w hucie. Za murem. Widziałam pelerynę.'),
       c('maja', 'To był Gajda. Przyjechał za mną. Spadłam ze schodów, a potem było ciemno.'),
@@ -201,7 +201,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       ]),
       c('maja', 'Nie rozłączaj się. Proszę. Jeszcze chwilę.'),
       pause(4000),
-      c('maja', 'Dobrze. Już dobrze.'),
+      c('maja', 'Jesteś jeszcze? Słyszę cię.'),
       callEnd(),
       set('majaFound'),
       run(s => {

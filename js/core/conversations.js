@@ -4,6 +4,13 @@ const Conversations = (() => {
   const all = () => Object.entries(DATA.conversations).filter(([id, d]) => G.test(d.cond) || state(id));
   const state = id => G.s.conversations && G.s.conversations[id];
   const lines = value => (typeof value === 'function' ? value(G.s) : value) || [];
+  function enter(d, s, node) {
+    lines(node.lines).forEach(text => s.transcript.push({ from: d.who, text, t: G.now() }));
+    (node.attachments || []).forEach(img => {
+      s.transcript.push({ from: d.who, img, t: G.now() });
+      if (!G.s.saved.some(item => item.art === img)) G.s.saved.push({ art: img, t: G.now() });
+    });
+  }
   function available(who) { return all().filter(([id, d]) => G.test(d.cond) && (!who || d.who === who) && !state(id)?.done); }
   function open(id) {
     const d = DATA.conversations[id];
@@ -11,7 +18,7 @@ const Conversations = (() => {
     G.s.conversations ||= {};
     if (!state(id)) {
       G.s.conversations[id] = { node: 'start', transcript: [], choices: [], done: false, started: G.now() };
-      lines(d.nodes.start.lines).forEach(text => state(id).transcript.push({ from: d.who, text, t: G.now() }));
+      enter(d, state(id), d.nodes.start);
       if (d.who === 'lena') G.s.flags.metLena = true;
       G.change();
     }
@@ -38,7 +45,7 @@ const Conversations = (() => {
       if (d.deduction) G.unlock('ded:' + d.deduction);
       const photo = d.reward?.map(ev => DATA.evidence[ev]).find(e => e.img);
       if (photo && !G.s.saved.some(item => item.art === photo.img)) G.s.saved.push({ art: photo.img, t: G.now() });
-    } else lines(d.nodes[s.node].lines).forEach(text => s.transcript.push({ from: d.who, text, t: G.now() }));
+    } else enter(d, s, d.nodes[s.node]);
     // Trwały zapis przed animacją. Zamknięcie aplikacji nie gubi wybranego węzła.
     G.save(true);
     BUS.emit('conversations', id); BUS.emit('evidence'); BUS.emit('badges'); G.change();

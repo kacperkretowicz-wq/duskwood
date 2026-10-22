@@ -67,12 +67,12 @@ DATA.conversations = {
     nodes: {
       start: { lines: ['zrobiłem dwie herbaty', 'odruchowo. jej kubek dalej stoi przy czajniku', 'głupie, nie?'], choices: [
         sideChoice('Nie. Chcesz mi o niej opowiedzieć?', ['ona zostawia łyżeczkę w kubku. zawsze', 'jak przenosiła herbatę do pokoju, było ją słychać przez cały korytarz', 'teraz ciągle nasłuchuję'], 'memory', { trust: 1 }),
-        sideChoice('Nie musisz teraz wszystkiego ogarniać.', ['dzięki', 'wszyscy mówią „trzymaj się”. a ja nawet nie wiem czego'], 'memory', { trust: 1 }),
+        sideChoice('Nie ma nic głupiego w tej herbacie.', ['dzięki', 'wszyscy pytają co mogą zrobić. jak mówię żeby znaleźli maję to robi się cisza'], 'memory', { trust: 1 }),
         sideChoice('Potrzebujemy kolejnych tropów.', ['wiem. tylko na chwilę odłożyłem telefon', 'zaraz wracam do szukania'], 'memory')
       ] },
       memory: { choices: [
-        sideChoice('Zjedz coś i usiądź z mamą. Ja zostaję przy telefonie.', ['wczoraj zjadłem pół bułki', 'dobra. pójdę do kuchni', 'jak coś znajdziesz, pisz. dźwięk mam włączony'], null, { trust: 1 }),
-        sideChoice('Co robiliście, kiedy nie było żadnej sprawy?', ['kłóciliśmy się o ładowarkę xdd', 'maja naklejała na swoją taśmę. ja ją odklejałem', 'oddałbym jej teraz wszystkie'])
+        sideChoice('Idź do kuchni. Jak coś przyjdzie, napiszę.', ['wczoraj zjadłem pół bułki', 'dobra. pójdę do kuchni', 'jak coś znajdziesz, pisz. dźwięk mam włączony'], null, { trust: 1 }),
+        sideChoice('Co robiliście, kiedy nie było żadnej sprawy?', ['o ładowarkę się żarliśmy. niby dorosła a podpisuje kabel markerem 💀', 'podpisywała taśmę, ja ją odklejałem. metoda stuprocentowa', 'oddałbym jej teraz wszystkie'])
       ] }
     }
   },
@@ -81,11 +81,11 @@ DATA.conversations = {
     cond: 'unlocked:chat:group', preview: 'Ola próbuje utrzymać codzienność w ryzach.',
     nodes: {
       start: { lines: ['Właśnie zamknęłam. Przez całą zmianę sprawdzałam telefon pod ladą.', 'Klientka pytała o coś na sen. Przez chwilę nie pamiętałam, gdzie to stoi.'], choices: [
-        sideChoice('Nie musisz udawać, że normalnie funkcjonujesz.', ['W domu też udaję.', 'Moja mama pyta, czy jadłam. Mówię, że tak, i ona wie, że kłamię. Obie mamy wtedy na chwilę spokój.'], 'voice', { trust: 1 }),
-        sideChoice('Jak Maja pomagała ci po ciężkim dniu?', ['Wysyłała mi zdjęcia psów spotkanych w autobusie.', 'Nigdy swoich problemów na początek. Zawsze najpierw jakiś pies.'], 'voice', { trust: 1 })
+        sideChoice('Ktoś jest z tobą w domu?', ['Mama. Zostawiła mi obiad.', 'Zapytała, czy jadłam. Powiedziałam, że tak, choć talerz stoi pełny. Nie miała siły dalej pytać.'], 'voice', { trust: 1 }),
+        sideChoice('Jak Maja pomagała ci po ciężkim dniu?', ['Wysyłała mi zdjęcia psów spotkanych w autobusie.', 'Najpierw pies, potem „a tak w ogóle to zalałam sąsiada”. Taka kolejność.'], 'voice', { trust: 1 })
       ] },
       voice: { choices: [
-        sideChoice('Możemy też przez chwilę porozmawiać o czymś zwykłym.', ['Okej. Zabiłam jej bazylię.', 'Zostawiła mi na parapecie i mówiła „tylko nie przelej”. Więc podlewałam za mało.', 'Jak wróci, będzie nieznośna. Chcę, żeby była nieznośna.'], null, { trust: 1 }),
+        sideChoice('Dobra, pogadajmy o czymś innym. Choćby przez minutę.', ['Okej. Zabiłam jej bazylię 🫠', 'Zostawiła mi na parapecie i mówiła „tylko nie przelej”. Więc podlewałam za mało.', 'Pierwsze co zrobi, to sprawdzi ten parapet. Mogę już wyrzucić doniczkę czy to drugi zarzut?'], null, { trust: 1 }),
         sideChoice('Dzięki, że mi o niej mówisz.', ['Nie chcę, żeby była dla ciebie tylko zdjęciem na ogłoszeniu.', 'Jest strasznie uparta. Zostawia otwarte szafki. I zawsze pamięta o cudzych urodzinach.'])
       ] }
     }
@@ -95,12 +95,12 @@ DATA.conversations = {
     cond: 'ev:ev_bartek_sms', preview: 'Bartek został po godzinach przy rozebranym silniku.',
     nodes: {
       start: { lines: ['siedze w warsztacie', 'trzeci raz czyszcze ten sam element. klient sie ucieszy'], choices: [
-        sideChoice('Łatwiej robić coś rękami?', ['jak trzymasz klucz to przynajmniej wiesz co dalej', 'z ludzmi tak nie jest'], 'boundary', { trust: 1 }),
+        sideChoice('Chociaż silnik da się ogarnąć?', ['jak trzymasz klucz to przynajmniej wiesz co dalej', 'tu od godziny nie wiem nawet do kogo zadzwonic'], 'boundary', { trust: 1 }),
         sideChoice('Myślisz o waszym ostatnim spotkaniu?', ['caly czas', 'i nie. nie umiem znalezc w kazdym jej slowie ukrytej wiadomosci'], 'boundary')
       ] },
       boundary: { choices: [
-        sideChoice('Nie każda rozmowa musi być przesłuchaniem.', ['no', 'maja tez tak mowila. jak pytalem gdzie byla i z kim', 'dopiero teraz widze jak to brzmialo', 'nie byla mi winna meldunkow'], null, { trust: 1 }),
-        sideChoice('To, że się rozstaliście, nie przekreśla dobrych rzeczy.', ['przynosila mi do roboty kanapki', 'za kazdym razem z ogorkiem ktorego nie lubie', 'nigdy jej nie powiedzialem'])
+        sideChoice('Często pytałeś ją, gdzie była?', ['no', 'gdzie i z kim. myslalem ze tak pokazuje ze mi zalezy', 'wkurzala sie. mowilem ze przeciez tylko pytam', 'miala racje. nie musiala mi sie meldowac'], null, { trust: 1 }),
+        sideChoice('To, że się rozstaliście, nie przekreśla dobrych rzeczy.', ['przynosila mi do roboty kanapki', 'z ogorkiem. nie lubie ogorka. dwa lata go wyjmowalem po cichu', 'nigdy jej nie powiedzialem'])
       ] }
     }
   },
@@ -113,8 +113,8 @@ DATA.conversations = {
         sideChoice('Może pani opowiedzieć tyle, ile pani chce.', ['Dziękuję. Nie zawsze chcę mówić o tamtej nocy.', 'Czasem chcę po prostu powiedzieć, że miał śmieszny śmiech.'], 'remember', { trust: 1 })
       ] },
       remember: { choices: [
-        sideChoice('Pomaga mi pamiętać, że szukamy człowieka.', ['Maja też tak powiedziała.', 'W bibliotece pytała najpierw, jak mówiłam na brata. Dopiero później o daty.'], null, { trust: 1 }),
-        sideChoice('Dziękuję. Zapamiętam go też w ten sposób.', ['To dużo.', 'Jutro otworzę bibliotekę jak zawsze. Dobrze mieć drzwi, które można rano otworzyć.'])
+        sideChoice('{Chciałbym|Chciałabym} wiedzieć o nim więcej niż to, co jest w artykule.', ['Maja też tak powiedziała.', 'W bibliotece pytała najpierw, jak mówiłam na brata. Dopiero później o daty.'], null, { trust: 1 }),
+        sideChoice('Dziękuję. Zapamiętam go też w ten sposób.', ['Cieszę się, że {Pan|Pani} pyta.', 'Muszę już kończyć. Jutro otwieram bibliotekę, a jeszcze nie przygotowałam zwrotów.'])
       ] }
     }
   },
@@ -123,12 +123,12 @@ DATA.conversations = {
     cond: 'ev:ev_igor_conf', preview: 'Igor napisał i usunął tę wiadomość kilka razy.',
     nodes: {
       start: { lines: ['napisałem „przepraszam” i brzmi jakbym ci zalał laptop', 'nie wiem jak napisać to lepiej'], choices: [
-        sideChoice('Nie potrzebuję lepszego zdania. Potrzebuję prawdy.', ['okej', 'bałem się ojca bardziej niż tego co robię wam', 'to nie jest usprawiedliwienie. wiem'], 'repair', { trust: 1 }),
-        sideChoice('To, co zrobiłeś, miało konsekwencje dla żywej osoby.', ['wiem', 'najgorsze że wtedy też wiedziałem. tylko odsuwałem to od siebie'], 'repair')
+        sideChoice('Zacznij od tego, czego jeszcze nam nie powiedziałeś.', ['okej', 'nie chciałem żeby ojciec zobaczył że piszę. siedziałem z telefonem w kiblu jak dzieciak', 'a potem pisałem wam że wszystko ogarniam. nie ogarniałem nic'], 'repair', { trust: 1 }),
+        sideChoice('Nie rozumiem, jak mogłeś dalej pisać do Kuby po tym telefonie ojca.', ['wiem', 'najgorsze że wtedy też wiedziałem. tylko odsuwałem to od siebie'], 'repair')
       ] },
       repair: { choices: [
         sideChoice('Zachowaj materiały. Nie poprawiaj niczego po cichu.', ['nic nie kasuję. oryginały zostają osobno', 'i powiem kubie sam. nie musisz za mnie'], null, { trust: 1 }),
-        sideChoice('Możesz pomóc. Zaufanie zajmie więcej czasu.', ['uczciwe', 'pierwszy raz dzisiaj nie mam do tego żadnego „technicznie”'])
+        sideChoice('Pomóż z plikami. O reszcie teraz nie pogadamy.', ['uczciwe', 'dobra. siedzę przy kompie, podeślę co trzeba'])
       ] }
     }
   },
@@ -138,17 +138,17 @@ DATA.conversations = {
     preview: 'Odpowiedź na ogłoszenie. Kierowczyni kojarzy osobę przy Jutrzence.',
     reward: ['ev_lena_statement', 'ev_bus_log', 'ev_bus_clock', 'ev_bus_place'], deduction: 'ded_bus',
     nodes: {
-      start: { lines: ['Cześć. Tu Lena, jeżdżę wieczornym przez Szklarską. Zostawiłam kontakt pod ogłoszeniem o Mai.', 'Nie wiem, czy to wam pomoże. W tamtą środę ktoś stał przy Jutrzence.'], choices: [
-        sideChoice('Opowiedz od początku, bez zgadywania, kto to był.', ['Osoba z dużą torbą. Stała z boku wiaty, a potem poszła pod górę.', 'Nie czekała na autobus. Nawet nie spojrzała, kiedy przejeżdżałam.', 'Twarzy nie widziałam. Za daleko.'], 'time', { trust: 1 }),
+      start: { lines: ['Cześć. Tu Lena, jeżdżę wieczornym przez Szklarską. Zostawiłam kontakt pod ogłoszeniem o Mai.', 'Piszę z pętli, mam chwilę. W tamtą środę ktoś stał przy Jutrzence.'], choices: [
+        sideChoice('Co dokładnie widziałaś?', ['Osoba z dużą torbą. Stała z boku wiaty, a potem poszła pod górę.', 'Nie czekała na autobus. Nawet nie spojrzała, kiedy przejeżdżałam.', 'Twarzy nie widziałam. Za daleko.'], 'time', { trust: 1 }),
         sideChoice('Dlaczego zgłaszasz się dopiero teraz?', ['Bo nie wiedziałam, czy coś widziałam.', 'Dopiero na ogłoszeniu zobaczyłam torbę Mai i skojarzyłam. To mógł być ktoś inny.', 'Nie chcę dopowiedzieć wam czegoś, czego nie pamiętam.'], 'time', { trust: -1 })
       ] },
       time: { choices: [
         sideChoice('Co pozwala sprawdzić godzinę?', ['Zrobiłam odpis z karty kursu. Rejestrator pokazuje 22:11.', 'Tylko on się spóźniał. Rano zgłosiłam to do serwisu, mam porównanie z zegarem dyspozytorni.', 'Wyślę oba wpisy. I zdjęcie przystanku z 21 października, żeby było wiadomo, gdzie to było.'], 'certainty'),
-        sideChoice('Czy widziałaś twarz, samochód albo wejście do huty?', ['Nie. Tylko osobę i kierunek. Nie widziałam żadnego auta.', 'Mam za to kartę przejazdu i zgłoszenie o spóźnionym zegarze. To będzie konkretniejsze niż moja pamięć.'], 'certainty')
+        sideChoice('Czy widziałaś twarz, samochód albo wejście do huty?', ['Nie. Tylko osobę i kierunek. Nie widziałam żadnego auta.', 'Mam kartę przejazdu i zgłoszenie o spóźnionym zegarze. Tam chociaż są liczby.'], 'certainty')
       ] },
       certainty: { choices: [
-        sideChoice('Zapiszę to jako trop. Bez potwierdzonej tożsamości.', ['Dzięki. Właśnie o to mi chodziło.', 'Zegar dyspozytorni miał 06:00, rejestrator 05:53. Serwis zapisał: stałe siedem minut, bez resetu od wieczora.', 'A zdjęcie jest z 21 października, 16:10. Nie z tamtej nocy.', 'Jeśli będziesz czegoś potrzebować, napisz. Odpowiem na pętli.'], null, { trust: 1 }),
-        sideChoice('To na pewno Maja. Powiem grupie, że mamy potwierdzenie.', ['Nie. Proszę, nie pisz tak.', 'Nie widziałam twarzy. Wyraźnie to mówię.', 'Wysyłam dokumenty, ale zapisz też to zastrzeżenie. Zdjęcie zrobiłam 21 października o 16:10.'], null, { trust: -1 })
+        sideChoice('Sprawdzimy godzinę. Zapiszę też, że nie widziałaś twarzy.', ['Dzięki. Bo już się bałam, że poleci na grupy „kierowczyni widziała Maję”.', 'Zegar dyspozytorni miał 06:00, rejestrator 05:53. Serwis zapisał: stałe siedem minut, bez resetu od wieczora.', 'A zdjęcie jest z 21 października, 16:10. Nie z tamtej nocy.', 'Jeśli będziesz czegoś potrzebować, napisz. Odpowiem na pętli.'], null, { trust: 1 }),
+        sideChoice('To na pewno Maja. Powiem grupie, że mamy potwierdzenie.', ['Ej, nie. Nie pisz tego jako pewnik.', 'Nie widziałam twarzy. Wyraźnie to mówię.', 'Wysyłam dokumenty, ale zapisz też to zastrzeżenie. Zdjęcie zrobiłam 21 października o 16:10.'], null, { trust: -1 })
       ] }
     }
   }

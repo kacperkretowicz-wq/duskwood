@@ -1,10 +1,10 @@
-# MGLISKO
+# QUIET IS SAFER
 
 Gra detektywistyczna rozgrywana w całości na „telefonie”, w stylu *Duskwood* i *Cold Trace*.
 Ktoś pisze do ciebie w nocy: jego siostra zadzwoniła do ciebie tuż przed zniknięciem. Ty jej nie znasz — ale twój numer kiedyś należał do kogoś, komu ufała.
 
 - **Prolog + 5 rozdziałów + epilog**, baza historii pisana na 2–3 godziny, rozbudowywana rozmowami i dodatkowymi śledztwami
-- **20 rozmów opcjonalnych**, trop tapety, śledztwo ostatniego kursu, historia zmienionej notatki, podsumowania sesji i zapis konsekwencji do kontynuacji
+- **23 rozmowy opcjonalne**, trop tapety, śledztwo ostatniego kursu, historia zmienionej notatki, nowy trop sprzętu z warsztatu, podsumowania sesji i zapis konsekwencji do kontynuacji
 - Swobodne tempo albo **pięciodniowy pilot kalendarzowy**; natywne powiadomienia po zgodzie gracza. Pełny miesięczny sezon jest celem produkcji, nie aktualną długością tej wersji
 - **3 zakończenia** zależne od decyzji (kto się dowie, komu zaufasz, gdzie zadzwonisz)
 - Gra udaje zwykły telefon: **iOS na iPhonie, Android na Androidzie** (automatycznie, można zmienić w Ustawieniach)
@@ -105,6 +105,10 @@ Nocna kopia w rozdziale 3 przynosi notatkę, której treść zastąpiono żądan
 W tense/dark tło ma ciche, nieregularne brzmienia metalu zamiast wysokich melodyjnych dzwonków. Odkrycia nie grają zwycięskiej fanfary; dźwięk zatrzymuje się w tle. Głośność i ambient można wyłączyć. [Zakres i chronologia](docs/MROK-I-SLADY.md). Test interakcji, źródeł, wznowienia, konsekwencji i offline: `node tests/dark-threads.browser.cjs`.
 
 ## Narzędzia deweloperskie
+
+Wydanie 1.4: [ROZWOJ-1-4.md](docs/ROZWOJ-1-4.md). Około 200 zmian głosów postaci, cztery nowe grafiki, trzy rozmowy i śledztwo pasa przy wejściu do huty. Dochodzą reakcje i cytaty, przypinanie i wyszukiwanie rozmów, pełny prywatny Kalendarz, Minutnik/Stoper/Alarmy. Czytelniejsza typografia i kolory opisów w obu motywach. Nazwa angielska dotyczy gry; miejscowość Mglisko i polski język pozostają. Zapis zachowuje zgodne identyfikatory aplikacji i stanu.
+
+Nowe scenariusze: `node tests/daily-phone.browser.cjs` oraz `node tests/field-phone.browser.cjs`. Prompty i pochodzenie zdjęć: [ASSETY-1-4.md](docs/ASSETY-1-4.md). Zasady dalszych dialogów: [GLOSY-POSTACI.md](docs/GLOSY-POSTACI.md).
 
 - `?debug` — szybkie wiadomości i przycisk **DBG** (skoki między rozdziałami)
 - `?debug&speed=fast` — przyspieszone tempo zamiast natychmiastowego

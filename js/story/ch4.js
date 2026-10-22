@@ -24,8 +24,8 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     g('ola', 'Las na stoku Sowiej Kopy. 800 metrów to kawał lasu.'),
     g('bartek', 'w tym kolku sa trzy stare sztolnie. anna, ewa i waltraud'),
     g('kuba', 'myślisz, że ona jest w sztolni??'),
-    g('bartek', 'jak ktos chce kogos schowac, to tam. zero zasiegu. skala'),
-    g('bartek', 'telefon zlapal siec tylko przy wejsciu. dlatego tylko na chwile'),
+    g('bartek', 'tam nawet telefon nie dziala. w srodku zero zasiegu'),
+    g('bartek', 'mogl zlapac siec przy wejsciu. by tlumaczylo czemu tylko na chwile'),
     goal('Która sztolnia? Dowiedz się o trzech sztolniach i o tym, kto ma do nich klucze.', [
       'Wyszukaj w przeglądarce „sztolnie Sowia Kopa”.',
       'Anna to trasa turystyczna, Waltraud jest zalana. Kto ma klucze do Ewy? Poszukaj strony koła łowieckiego.',
@@ -78,7 +78,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     show('group', { prompt: 'Pokaż kadr 23', accept: [{ ev: ['ev_frame23'] }], wrong: [['kuba', 'co masz?']] }),
     typing('group', 'kuba', 4500),
     g('kuba', 'ten chłopak ma czapkę policyjną'),
-    g('ola', 'Syn komendanta w czapce ojca. Robert Gajda.'),
+    g('ola', 'Czapka pasuje do Roberta. Jego ojciec był komendantem.'),
     g('ola', 'A w kanale pieca, za nim… to żółte.'),
     g('bartek', 'skad to masz'),
     choose('group', [
@@ -120,15 +120,15 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     I('nie był to żaden plan. po prostu z każdą wiadomością trudniej było przestać kłamać'),
     give('ev_igor_conf'),
     choose('igor', [
-      opt('Rozumiem. Ale teraz musisz nam pomóc. Naprawdę.', [I('tak. tylko powiedz co robić')], { trust: { igor: 2 }, set: { igorForgiven: true } }),
-      opt('Przez ciebie Maja od dziesięciu dni siedzi w ciemnej dziurze.', [I('Wiem.'), I('Myślisz, że nie wiem?')], { trust: { igor: -2 } }),
-      opt('Przekonaj ojca, żeby zeznawał.', [I('Spróbuję. On się boi Gajdy bardziej niż więzienia.'), I('Ale spróbuję.')], { trust: { igor: 1 }, set: { leszekTestify: true, igorForgiven: true } })
+      opt('Dobra. Pomóż nam ją znaleźć. Bez kolejnych kłamstw.', [I('tak. tylko powiedz co robić')], { trust: { igor: 2 }, set: { igorForgiven: true } }),
+      opt('Wiedziałeś, że twój ojciec dzwonił do Gajdy. I dalej nas straszyłeś?', [I('wiem'), I('nie umiem ci tego wytłumaczyć tak żeby brzmiało lepiej')], { trust: { igor: -2 } }),
+      opt('Przekonaj ojca, żeby zeznawał.', [I('spróbuję. boi się gajdy bardziej niż więzienia'), I('pójdę do niego jeszcze raz')], { trust: { igor: 1 }, set: { leszekTestify: true, igorForgiven: true } })
     ]),
     iff('!flag:leszekTestify', [
-      I('Pogadam z ojcem. Może teraz, kiedy wie, że Maja żyje…'),
+      I('pogadam z ojcem. pokażę mu ten sms. niech mi sam powie że mamy nic nie robić'),
       iff('var:trust_igor>=1', [set('leszekTestify')])
     ]),
-    I('Dodaj mnie z powrotem do grupy. Albo nie. Zrozumiem.'),
+    I('możesz mnie dodać z powrotem? jak nie, piszę tylko do ciebie'),
     choose('igor', [
       opt('Wracasz do grupy.', [
         sys('group', 'Igor dołączył do grupy.'),
@@ -137,7 +137,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
         g('kuba', 'co nam powie?'),
         g('igor', 'że zawaliłem. bardzo. kuba, najpierw ją stamtąd wyciągnijmy')
       ], { set: { igorBack: true } }),
-      opt('Na razie zostań poza grupą.', [I('Ok. Będę pisać tylko do ciebie.')])
+      opt('Na razie zostań poza grupą.', [I('okej. zostaję tutaj, telefon mam przy sobie')])
     ]),
     pause(3500),
 
@@ -156,7 +156,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     B('i jeszcze jedno. robert ma klucz do kraty w ewie. kolo trzyma tam sol dla zwierzyny. 16 pazdziernika wymienil klodke'),
     B('stary chce jechac z nami. mowi ze 29 lat czekal, az ktos go zlapie'),
     choose('bartek', [
-      opt('Dziękuję, Bartek. To wymagało odwagi. Jego i twojej.', [B('nie dziekuj. jedzmy po nia')], { trust: { bartek: 2 } }),
+      opt('Dzięki, że mi to napisałeś. Niech ojciec opowie to też policji.', [B('nie dziekuj. jedzmy po nia')], { trust: { bartek: 2 } }),
       opt('Twój ojciec pójdzie siedzieć.', [B('wiem. on tez wie')]),
       opt('Niech jedzie. Zna teren i zna Gajdę.', [B('tak')], { trust: { bartek: 1 } })
     ]),
@@ -202,9 +202,9 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     W('Kuba do mnie dzwonił. Jadę z wami.'),
     W('Nie, nie dam się przekonać. Czekałam dwadzieścia dziewięć lat.'),
     iff('flag:igorBack', [
-      g('igor', 'Ja zostaję przy komputerze. Mapy, łączność, kamera przy hucie. Jak trzeba — dzwońcie.')
+      g('igor', 'zostaję przy kompie. mapy i łączność mam, kamerę sprawdzę. jak trzeba dzwońcie')
     ], [
-      I('Zostaję przy komputerze. Jak będziesz czegoś potrzebować — pisz do mnie.')
+      I('zostaję przy kompie. pisz albo dzwoń jak czegoś potrzebujesz')
     ]),
     g('kuba', '%name%, będziesz z nami na telefonie? bez ciebie się pogubimy'),
     choose('group', [

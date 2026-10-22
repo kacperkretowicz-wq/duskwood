@@ -40,7 +40,7 @@ Object.assign(DATA.chars.kuba, { age: 19, role: 'Studia · Wrocław / Mglisko', 
 Object.assign(DATA.chars.ola, { age: 22, role: 'Technik farmacji · Mglisko', bio: 'Praca, zaoczne, praca. Oddzwonię po zmianie 🫶', status: 'telefon na cichym', cadence: { key: 60, think: 1900 } });
 Object.assign(DATA.chars.bartek, { age: 24, role: 'Auto-Sowa · Mglisko', bio: 'auta robie na miejscu. wycen przez telefon nie robie', status: 'w warsztacie', cadence: { key: 79, think: 2600 } });
 Object.assign(DATA.chars.igor, { age: 23, role: 'Serwis GSM-PC · Rynek 7', bio: 'wyłącz i włącz. jak nie działa, kawa i dopiero wtedy dzwoń xD', status: 'zaraz wracam', cadence: { key: 44, think: 1500 } });
-Object.assign(DATA.chars.maja, { age: 22, role: 'Fotografia · ASP Wrocław', bio: 'zbieram światło, stare aparaty i bilety, których nie wyrzucam. 📷', status: 'jeszcze jedno zdjęcie i wracam', cadence: { key: 55, think: 1800 } });
+Object.assign(DATA.chars.maja, { age: 22, role: 'Fotografia · ASP Wrocław', bio: 'ASP Wrocław. Zenit po dziadku, telefon z wiecznie pełną pamięcią 📷', status: 'jeszcze jedno zdjęcie i wracam', cadence: { key: 55, think: 1800 } });
 Object.assign(DATA.chars.weronika, { age: 41, role: 'Biblioteka Gminna · Mglisko', bio: 'Książki, góry, ogród. Wiadomości czytam zwykle wieczorem.', status: 'Do zobaczenia w bibliotece', cadence: { key: 90, think: 3000 } });
 Object.assign(DATA.chars.gajda, { age: 46, role: 'Posterunek Policji · Mglisko', bio: 'Kontakt służbowy. W nagłych sytuacjach proszę dzwonić pod 112.', cadence: { key: 85, think: 2800 } });
 
@@ -88,7 +88,7 @@ DATA.endings = {
       'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę przy leśnym szlabanie. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
       'Rano strażacy rozbierają mur w odprężarce. Za nim, pod żółtym strzępem peleryny, czeka dziewięcioletni chłopiec. Czekał dwadzieścia dziewięć lat.',
       () => (G.flag('leszekTestify') ? 'Marek Sowa i Leszek Malicki składają zeznania tego samego dnia.' : 'Marek Sowa składa zeznania tego samego dnia. Leszek Malicki milczy przez tydzień — potem też zaczyna mówić.') + ' Gazeta Sudecka drukuje tekst, który zaczął pisać Adam Rybicki.',
-      'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale potem {odebrałeś|odebrałaś} wszystko, co było ważne.'
+      'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale teraz na ekranie jest wiadomość od Mai.'
     ]
   },
   odlamki: {

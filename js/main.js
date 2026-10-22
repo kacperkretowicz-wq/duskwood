@@ -22,7 +22,7 @@
       h('div', { class: 'ts-fog' }), h('div', { class: 'ts-fog f2' }),
       h('div', { class: 'ts-c' },
         h('div', { class: 'ts-k' }, 'Gra detektywistyczna'),
-        h('h1', { class: 'ts-t' }, 'MGLISKO'),
+        h('h1', { class: 'ts-t' }, 'QUIET IS SAFER'),
         h('div', { class: 'ts-s' }, 'Ostatnie połączenie było do ciebie.'),
         h('div', { class: 'ts-b' },
           has && !G.s.finished ? h('button', { class: 'btn pri wide', onclick: () => go(() => resume()) }, 'Kontynuuj') : null,

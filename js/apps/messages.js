@@ -91,7 +91,7 @@
       sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';
       const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
         .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
-        .sort((a, b) => ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
+        .sort((a, b) => Number(PhoneTools.pinned(b)) - Number(PhoneTools.pinned(a)) || ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
       list.innerHTML = '';
       if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : 'Jeszcze cisza. Ktoś zaraz się odezwie.') })); return; }
       ids.forEach(id => {
@@ -108,11 +108,11 @@
         list.appendChild(h('button', { class: 'crow' + (c.unread ? ' unread' : '') + (DATA.chats[id].glitch ? ' glitchy' : ''), onclick: () => stack.push(chatPage(stack, id)) },
           UI.avatar(chatAv(id)),
           h('div', { class: 'cm' },
-            h('div', { class: 'ct' }, h('b', {}, chatName(id)), h('span', {}, last ? stamp(last.t) : '')),
+            h('div', { class: 'ct' }, h('b', {}, PhoneTools.pinned(id) ? h('span', { class: 'pinned-chat', 'aria-label': 'Przypięta rozmowa' }, '●') : null, chatName(id)), h('span', {}, last ? stamp(last.t) : '')),
             h('div', { class: 'cp' }, h('span', { class: 'pv' }, prev), p ? h('span', { class: 'turn' }, 'Odpowiedz') : null, c.unread ? h('span', { class: 'cnt' }, c.unread) : null))));
       });
     }
-    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock', 'evidence', 'conversations'].map(e => BUS.on(e, render));
+    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock', 'evidence', 'conversations', 'phone-tools'].map(e => BUS.on(e, render));
     render();
     return { el: pg.el, destroy: () => offs.forEach(f => f()), onShow: () => { G.viewing = null; render(); } };
   }
@@ -127,7 +127,7 @@
       h('button', { class: 'bk', 'aria-label': 'Wstecz', onclick: () => { SFX.play.tap(); stack.pop(); }, html: U.icon(UI.os === 'android' ? 'arrowL' : 'back', 24) }),
       h('button', { class: 'profile-link', 'aria-label': 'Otwórz profil rozmówcy', onclick: () => profile(id) }, UI.avatar(chatAv(id), 'sm')),
       h('button', { class: 'tt profile-link', 'aria-label': 'Informacje o rozmowie', onclick: () => profile(id) }, h('h1', {}, chatName(id)), sub),
-      h('div', { class: 'rt' }, ffBtn));
+      h('div', { class: 'rt' }, UI.iconBtn('dots', () => UI.chatTools(id), 'Opcje rozmowy'), ffBtn));
     const msgs = h('div', { class: 'msgs' });
     const body = h('div', { class: 'body chat-body' }, msgs);
     const comp = h('div', { class: 'composer' });
@@ -164,6 +164,7 @@
       const newRun = !prev || prev.from !== m.from || m.t - prev.t > 5 * 60000 || sepNeeded(prev, m) || prev.from === 'sys';
       const ch = DATA.chars[m.from] || {};
       const b = h('div', { class: 'bub' + (m.img && !m.text ? ' media' : '') });
+      UI.bindMessageActions(b, id, m);
       if (m.img) {
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
         b.appendChild(im);
@@ -172,6 +173,9 @@
       if (m.place) b.appendChild(placeCard(m.place));
       if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
       b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
+      if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
+      const reaction = PhoneTools.reaction(id, m.id);
+      if (reaction) b.append(h('button', { class: 'message-reaction', 'aria-label': 'Twoja reakcja ' + reaction, onclick: e => { e.stopPropagation(); UI.messageActions(id, m); } }, reaction));
       if (m.clue) {
         b.classList.add('clue');
         b.addEventListener('click', () => { if (G.addEv(m.clue)) UI.evidenceToast(m.clue); else UI.toast('Masz to już w dowodach.', { icon: 'folder' }); });
@@ -271,6 +275,7 @@
       }),
       BUS.on('typing', ({ chat }) => { if (chat === id) showTyping(); }),
       BUS.on('pending', () => renderComposer()),
+      BUS.on('phone-tools', () => { const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
       BUS.on('chats', () => { $('h1', hdr).textContent = chatName(id); setSub(); })
     ];
     renderAll();
