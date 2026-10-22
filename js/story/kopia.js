@@ -22,31 +22,31 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     K('ktoś mi to wysłał na klipo. konto ma trzy godziny'),
     V('kuba', 'kuba', '0:40', '„…wszyscy mówili, że od pioruna. A ja widziałam, kto stał przy stodole Pawlaków. Miałam siedem lat, ale widziałam.” — „Nikomu tego nie mówiłaś?” — „Panu mówię.”', 'przekazane z Klipo'),
     K('to jest pan adam. ten drugi głos to on'),
-    K('nie wiem kim jest ta dziewczyna. ale całe mglisko już wie o kogo chodzi'),
+    K('nie wiem kim jest ta dziewczyna. w komentarzach już lecą nazwiska'),
     notify({ app: 'browser', title: 'Klipo', text: '@archiwum.rybickiego · „stodoła, 2009” · 61 tys. wyświetleń', sound: 'notif', open: { page: 'tt_archiwum' } }),
     goal('Obejrzyj konto @archiwum.rybickiego na Klipo.', ['W przeglądarce wpisz „archiwum rybickiego” albo dotknij powiadomienia.']),
     waitFor('ev:ev_k_klip1', { hints: [{ after: 90, chat: 'kuba', who: 'kuba', text: 'wpisz w przeglądarce archiwum rybickiego. tylko nie komentuj nic' }] }),
     choose('kuba', [
       opt('Skąd ktoś ma jego nagrania?', [K('no właśnie nie wiem. pudło jest u pani weroniki'), K('pytałem maję. pisze że zaraz sprawdzi')], { set: { k_askedSource: true } }),
-      opt('Kto ci to wysłał?', [K('nikt. znaczy jakieś konto bez zdjęcia, „pokaż kubie”'), K('pewnie ktoś z grupy. wszyscy wiedzą, że znałem pana adama przez maję')], { set: { k_askedSender: true } })
+      opt('Kto ci to wysłał?', [K('jakieś konto bez zdjęcia. wysłało sam link'), K('pewnie ktoś z grupy. wszyscy wiedzą, że znałem pana adama przez maję')], { set: { k_askedSender: true } })
     ]),
     pause(3000),
     M('jestem u pani Weroniki. przeliczyłyśmy pudło dwa razy'),
     M('nic nie zginęło. wszystkie kasety są, wszystkie zeszyty'),
-    M('i to nie brzmi jak kaseta. posłuchaj 0:31'),
+    M('i posłuchaj 0:12. on mówi „dziesięć lat minęło”. czyli rozmowa jest z 2019, nie z 2009. wtedy już nie nosił magnetofonu'),
     goal('Posłuchaj klipu jeszcze raz. Skąd jest to nagranie?', ['W Notatkach otwórz „Klip nr 1”. Co słychać w 0:31?']),
     choose('maja2', [
-      opt('W 0:31 jest dźwięk powiadomienia. To nagranie z telefonu, nie z kasety.', [
-        M('tak. kasety nie piszczą jak telefon 🙂'),
+      opt('W 0:31 słychać powiadomienie. Może nagrywał telefonem?', [
+        M('też to słyszę. sam dźwięk niczego nie przesądza, ale pasuje'),
         M('pani Weronika mówi, że pan Adam od lat nagrywał rozmowy telefonem. „żeby nie zapisywać, tylko słuchać”')
       ], { set: { k_phoneSource: true } }),
       opt('Może ktoś zgrał kasetę i dokleił coś na początku?', [
-        M('sprawdziłam. kaseta z 2009 jest o czymś innym. o powodzi'),
-        M('a w 0:31 piszczy powiadomienie. to telefon. pani Weronika mówi, że on od lat nagrywał rozmowy telefonem')
+        M('sprawdziłyśmy. z 2019 nie ma w pudle ani jednej kasety. ostatnia jest z 2012'),
+        M('a w 0:31 piszczy powiadomienie. pani Weronika mówi, że od lat nagrywał rozmowy telefonem')
       ], { set: { k_phoneSource: true, k_triedTape: true } })
     ]),
     give('ev_k_zrodlo'),
-    M('czyli to nie z pudła. to z jego telefonu. albo z tego, gdzie telefon robił kopię'),
+    M('czyli szukamy nagrań z telefonu. może pani Ewa wie, gdzie je trzymał'),
     pause(2500),
     W('Dobry wieczór. Przepraszam, że tak późno.'),
     W('Dzwoniła do mnie pani Ewa, żona pana Adama. Ktoś jej wysłał ten klip. Płakała. Nie mogłam jej zrozumieć.'),
@@ -72,8 +72,8 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     ambient('calm'),
     unlock('chat:ewa'),
     E('dzien dobry. tu ewa rybicka. pani weronika dala mi numer'),
-    iff('flag:k_pickedDom', [E('przepraszam za noc. to ja dzwonilam z domowego. {pan odebral|pani odebrala} a ja nie umialam nic powiedziec')], [E('przepraszam za noc. to ja dzwonilam z domowego. nie wiem po co. ten numer mial zapisany jako swoj')]),
-    E('adam mial ten sam numer 30 lat. zapomnialam ze teraz ma go ktos inny'),
+    iff('flag:k_pickedDom', [E('przepraszam za noc. to ja dzwonilam z domowego. {pan odebral|pani odebrala} a ja nie umialam nic powiedziec')], [E('przepraszam za noc. to ja dzwonilam z domowego. {pan nie odebral|pani nie odebrala}. i dobrze')]),
+    E('pani weronika dala mi numer jeszcze wieczorem. w nocy zobaczylam drugi klip i nie wytrzymalam'),
     E('kto to robi'),
     choose('ewa', [
       opt('Jeszcze nie wiem. Ale to nie są kasety z pudła. To nagrania z jego telefonu.', [
@@ -89,7 +89,8 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     pause(3000),
     S('Dzień dobry. Przepraszam, że piszę do {Pana|Pani} w sobotę rano.'),
     S('Nad ranem był trzeci klip. Znowu stodoła. Dziewczyna mówi „ja tam stałam”.'),
-    S('Ktoś w nocy napisał sprayem na bramie Pawlaków „PODPALACZE”. Ich syn wypisał się z grupy. Usuwam komentarze z nazwiskiem co pięć minut.'),
+    S('Ktoś w nocy napisał sprayem na bramie Pawlaków „PODPALACZE”. Ludzie zrozumieli z klipu, że sami podpalili, dla odszkodowania. W klipie tego nie ma.'),
+    S('Ich syn wypisał się z grupy. Usuwam komentarze z nazwiskami co pięć minut.'),
     set('k_clip3'),
     give('ev_k_klip3'),
     choose('sylwia', [
@@ -99,9 +100,9 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     pause(2500),
     K('{widziałeś|widziałaś} bramę?'),
     K('to jest moja droga do pracy. stał tam pan pawlak i szorował to rozpuszczalnikiem'),
-    K('ja już nie wiem czy to dobrze że ktoś to mówi. czy źle'),
+    K('napisałbym do niego. ale co mam napisać'),
     choose('kuba', [
-      opt('Prawda o stodole to jedno. Spray na bramie to drugie.', [K('no'), K('tylko że bez klipa nikt by nic nie powiedział. przez 17 lat')], { set: { k_kubaTruthTalk: true } }),
+      opt('Prawda o stodole to jedno. Spray na bramie to drugie.', [K('no'), K('on to szoruje a ludzie dalej wrzucają link')], { set: { k_kubaTruthTalk: true } }),
       opt('Trzymaj się z daleka od komentarzy, dobrze?', [K('spoko. i tak mam nockę dzisiaj')])
     ]),
     pause(2000),
@@ -110,7 +111,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
 });
 
 Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura', when: 'Sobota, 19 grudnia · 21:30', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, title, clock, notify, ambient, typing, scene, scare, run } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -122,15 +123,16 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     clock('2026-12-19T21:30'),
     title(),
     I('hej. maja mi przesłała klip'),
-    I('to jest telefon na sto procent. kompresja jak z dyktafonu w telefonie, 32 kb/s, mono'),
+    I('po samym klipie nie powiem, czym to nagrano. klipo i tak kompresuje dźwięk'),
+    I('ale powiadomienie w tle to dźwięk z systemu telefonu. nie z dyktafonu'),
     I('i zanim ktoś zapyta: nie. ja tego nie robię'),
     I('wiem, jak to brzmi po szklarzu'),
     choose('igor', [
       opt('Nie {pytałem|pytałam}. Ale dzięki, że mówisz wprost.', [I('bartek zapytał. na grupie. dwa razy')], { trust: { igor: 1 } }),
       opt('Gdzie byłeś wczoraj wieczorem?', [I('w serwisie do 22. mam kasę fiskalną i dwóch klientów. możesz sprawdzić'), I('rozumiem, że pytasz')], { set: { k_askedIgorAlibi: true } })
     ]),
-    I('jedno ci powiem technicznie. telefony z tamtych lat same robiły kopię do chmury. nimbus, co noc, jak był na ładowarce'),
-    I('jeśli ktoś wszedł na jego konto, to ma wszystko z piętnastu lat. nie tylko nagrania'),
+    I('jeśli nagrywał telefonem, mógł mieć kopię w nimbusie. telefony robią to same, w nocy, na ładowarce. jak ktoś tego nie wyłączył'),
+    I('wtedy ktoś, kto wszedł na konto, mógł to stamtąd pobrać. trzeba sprawdzić, co tam w ogóle było'),
     pause(3000),
     W('Pani Ewa zgodziła się, żebym w jej imieniu zapytała Nimbus o konto męża. Jest formularz dla rodzin osób zmarłych.'),
     W('Potrzebny akt zgonu i moje upoważnienie. Odpowiedź do 14 dni roboczych.'),
@@ -155,14 +157,14 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     goal('Sprawdź nowy klip na koncie @archiwum.rybickiego.', ['Otwórz Klipo w przeglądarce. Zwróć uwagę na opis i godzinę.']),
     waitFor(s => G.has('ev_k_klip1') && G.flag('k_clip5'), {}),
     give('ev_k_opis'),
-    K('sorry jak coś pisałem w nocy. zasnąłem z telefonem w kieszeni na nocce'),
+    K('dopiero wstałem. co mnie ominęło?'),
     choose('kuba', [
-      opt('Pisałeś coś o 03:11? Akurat wtedy wpadł nowy klip.', [K('nie wiem. może kieszeń'), K('o 3 to ja ładuję palety. serio')], { set: { k_askedTyping: true } }),
+      opt('W nocy pokazywało, że piszesz. Chciałeś coś wysłać?', [K('zacząłem pytać o klip. potem mnie zawołali do palet'), K('o 3 to my rozładowujemy tira')], { set: { k_askedTyping: true } }),
       opt('Spoko. Wyśpij się.', [K('postaram się 💀')])
     ]),
     pause(3000),
     M('{widziałeś|widziałaś} opis? „4% baterii a i tak wrzucam”'),
-    M('ktoś to robi w nocy, z telefonu, na resztce baterii. jak człowiek, nie jak hakerska ekipa'),
+    M('serio, „a i tak wrzucam”. jakby wrzucał zdjęcie kolacji'),
     pause(5000),
     clock('2026-12-20T21:58'),
     ambient('dark'),
@@ -174,7 +176,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
       give('ev_k_okno')
     ]),
     W('Czy {Pan|Pani} to widzi?'),
-    W('To jest moje okno. Teraz. Siedzę przy pudle.'),
+    W('To okno czytelni. Siedzę dokładnie tak jak na zdjęciu. Nawet kubek stoi w tym samym miejscu.'),
     W('Zgasiłam światło. Nie widzę nikogo na ulicy.'),
     choose('weronika', [
       opt('Proszę zamknąć drzwi na klucz i zadzwonić na 112. Zostaję z panią na czacie.', [W('Dzwonię.'), pause(6000), W('Przyjadą. Mówią, żebym nie wychodziła.')], { set: { k_police: true }, trust: { weronika: 1 } }),
@@ -188,22 +190,22 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     /* Głos zmarłego w wiadomości prywatnej. Konto zna mój profil. */
     scene('scGlos', [
       scare('s3_glos', 'glitch'),
-      say('archiwum', 'archiwum', 'voice:0:12|głos z nagrania|„…a jak ktoś to kiedyś usłyszy, to znaczy, że nie dopilnowałem.”'),
+      say('archiwum', 'archiwum', 'voice:0:12|głos z nagrania|„…tego nie cytujemy. To tylko dla mnie, żebym pamiętał.”'),
       give('ev_k_dm')
     ]),
     pause(4000),
-    A('nie szukaj'),
+    A('w pudle tego nie znajdziesz'),
     pause(3000),
     K('pani weronika ok? widziałem to z oknem'),
     K('ktoś wrzucił screena na grupę mglisko zanim zniknęło'),
     choose('kuba', [
-      opt('Zdjęcie wisiało sześć minut. Kto zrobił screena?', [K('nie pamiętam. ktoś. tam było sto komentarzy'), K('ważne że jest cała')], { set: { k_noticedWindow: true } }),
-      opt('Jest cała. Policja przyjechała.', [K('dobrze. dobrze')])
+      opt('Podeślesz tego screena z grupy?', [K('jasne. poszukam posta'), pause(4000), K('nie ma. sylwia usunęła. sorry')], { set: { k_noticedWindow: true } }),
+      opt('Odpisała mi. Jest cała.', [K('dobrze. dobrze')])
     ]),
     pause(2500),
     iff('flag:k_requestLog', [W('Formularz do Nimbusa wysłany. Numer zgłoszenia N-4471-2026. Czekamy.')]),
-    goal('Ciąg dalszy sprawy 3 — rozdział 2 „Opisy” — w przygotowaniu.'),
+    pause(1500),
     set('k_ch1Done'),
-    waitFor('flag:k_ch2Released')
+    end('k2')
   ];
 });
