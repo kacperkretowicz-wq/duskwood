@@ -173,3 +173,19 @@
 .bvw-m .ml-b { background: #4d5a2a; }
 .ml-s { font-size: 12.5px; color: #555; }
 .bvw-m img { border-radius: 12px; margin-bottom: 12px; }
+/* Facebook / TikTok w grze */
+.fb-h { background:#1877f2; color:#fff; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; font:700 20px/1 system-ui; }
+.fb-h span { font:500 13px system-ui; opacity:.85; }
+.fb-m { background:#f0f2f5; color:#050505; padding:8px; font:15px/1.38 system-ui; }
+.fb-g { background:#fff; padding:14px; border-radius:8px; margin-bottom:8px; } .fb-g h2 { margin:0 0 4px; font-size:19px; } .fb-g small { color:#65676b; }
+.fb-p { background:#fff; padding:12px 14px; border-radius:8px; margin-bottom:8px; } .fb-p > p { margin:8px 0; }
+.fb-a small { display:block; color:#65676b; font-size:12px; } .fb-adm { background:#e7f3ff; color:#1877f2; font-size:11px; padding:1px 6px; border-radius:4px; }
+.fb-meta { color:#65676b; font-size:12px; }
+.fb-c { background:#f0f2f5; border-radius:14px; padding:7px 11px; margin:8px 0 0 10px; } .fb-c p { margin:2px 0; } .fb-del { color:#65676b; }
+.tt-h { background:#000; color:#fff; padding:10px 14px; font:800 18px system-ui; }
+.tt-m { background:#121212; color:#eee; padding:12px; font:14px/1.4 system-ui; min-height:100%; }
+.tt-prof { display:flex; gap:12px; align-items:center; margin-bottom:14px; } .tt-prof small { display:block; color:#aaa; } .tt-prof p { margin:4px 0 0; }
+.tt-frame { position:relative; aspect-ratio:9/12; overflow:hidden; border-radius:10px; background:#000; }
+.tt-frame img { width:100%; height:100%; object-fit:cover; filter:saturate(1.1) contrast(1.05); transform:scale(1.35); }
+.tt-frame span { position:absolute; left:8px; bottom:8px; font-weight:700; text-shadow:0 1px 3px #000; }
+.tt-com p { margin:6px 0; color:#ddd; } .tt-com b { color:#aaa; }

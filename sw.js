@@ -1,16 +1,16 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v14';
+const VERSION = 'quiet-is-safer-v15';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
   './css/conversations.css', './js/data/conversations.js', './js/core/conversations.js', './js/apps/conversations.js',
   './css/native-ui.css', './js/core/native.js',
   './css/seasons.css', './js/data/season-conversations.js', './js/data/seasons.js', './js/data/wallpapers.js',
-  './js/data/dark-threads.js',
+  './js/data/dark-threads.js', './js/data/season-days.js',
   './js/data/field-threads.js', './js/core/phone-tools.js', './js/apps/phone-tools.js', './css/phone-tools.css',
   './assets/garage-locker-v1.jpg', './assets/strap-door-v1.jpg', './assets/garage-straps-v1.jpg',
   './assets/factory-day-v1.jpg',
-  './assets/people/bartek.jpg', './assets/people/bartek_life1.jpg', './assets/people/bartek_life2.jpg', './assets/people/igor.jpg', './assets/people/igor_life1.jpg', './assets/people/igor_life2.jpg', './assets/people/kuba.jpg', './assets/people/kuba_life1.jpg', './assets/people/kuba_life2.jpg', './assets/people/maja.jpg', './assets/people/maja_life1.jpg', './assets/people/ola.jpg', './assets/people/ola_life1.jpg', './assets/people/ola_life2.jpg', './assets/people/weronika.jpg', './assets/people/weronika_life1.jpg', './assets/people/weronika_life2.jpg',
+  './assets/people/sylwia.jpg', './assets/people/sylwia_life1.jpg', './assets/people/zuza.jpg', './assets/people/zuza_life1.jpg', './assets/people/bartek.jpg', './assets/people/bartek_life1.jpg', './assets/people/bartek_life2.jpg', './assets/people/igor.jpg', './assets/people/igor_life1.jpg', './assets/people/igor_life2.jpg', './assets/people/kuba.jpg', './assets/people/kuba_life1.jpg', './assets/people/kuba_life2.jpg', './assets/people/maja.jpg', './assets/people/maja_life1.jpg', './assets/people/ola.jpg', './assets/people/ola_life1.jpg', './assets/people/ola_life2.jpg', './assets/people/weronika.jpg', './assets/people/weronika_life1.jpg', './assets/people/weronika_life2.jpg',
   './assets/film/p_08.jpg', './assets/film/p_08d.jpg', './assets/film/p_14.jpg', './assets/film/p_14d.jpg',
   './assets/film/p_21.jpg', './assets/film/p_21d.jpg', './assets/film/p_22.jpg', './assets/film/p_22d.jpg',
   './assets/film/p_23.jpg', './assets/film/p_23d.jpg', './assets/film/p_23fog.jpg', './assets/kuba/k_gate.jpg',

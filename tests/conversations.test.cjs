@@ -7,7 +7,7 @@ function game(){
  const ctx=vm.createContext({console,Date, setTimeout:()=>0,clearTimeout:()=>{},
   window:{addEventListener(){}},document:{addEventListener(){}},Art:{def(){}},
   localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)}});
- for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/data/field-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+ for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/data/season-days.js','js/data/field-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
  return vm.runInContext('({G, DATA, Conversations})',ctx);
 }
 function unlock(G){
@@ -29,7 +29,8 @@ test('every dialogue path terminates, saves once, and leaves main story intact',
  }
  for(const [id,d]of Object.entries(DATA.conversations))for(const route of routes(d)){
   unlock(G);
-  for(const ev of ['ev_not_gajda','ev_bartek_conf','ev_interview','ev_note_original','ev_note_revised','ev_tomek'])G.addEv(ev,true);
+  for(const ev of ['ev_not_gajda','ev_bartek_conf','ev_interview','ev_note_original','ev_note_revised','ev_tomek','ev_dk97','ev_loc_1410','ev_marek'])G.addEv(ev,true);
+  G.setFlag('metSylwia');G.setFlag('metZuza');
   G.setFlag('wallpapersImported');G.solve('ded_bus');G.s.finished=true;G.setFlag('majaFound');G.s.vars.endingId='swit';
   if(id==='kuba_missing'){G.s.vars.endingId='cisza';G.s.flags.majaFound=false;}
   G.s.pc=89;G.s.chapter='ch3';G.s.pending={chat:'group',type:'choose'};
