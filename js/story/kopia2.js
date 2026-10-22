@@ -284,6 +284,15 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
         opt('Śpij, Maja. Jutro ważny dzień.', [M('wiem. dobranoc')])
       ])
     ]),
+    scene('kKlatka', [
+      pause(5000),
+      M('ktoś chodzi po klatce. o tej porze'),
+      M('a nie. pies pana Zenona. ma zapalenie pęcherza i wychodzi co dwie godziny'),
+      M('teraz chodzi z nim wnuczka, przyjechała na święta. pan Zenon by nie dał rady po nocach'),
+      pause(4000),
+      M('Kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”'),
+      say('maja2', 'maja', 'voice:0:07|Maja|(szeptem) Mama już śpi. Na stole zostało dwieście uszek. Dobra, idę spać.')
+    ]),
     pause(8000),
     typing('kuba', 'kuba', 4000),
     pause(6000),
@@ -427,7 +436,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
 });
 
 Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym głosem', when: 'Środa, 23 grudnia · 21:50', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, title, clock, ambient, scene, scare, ask, run, ending, credits, vanish, notify, trust } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, title, clock, ambient, scene, scare, ask, run, ending, credits, vanish, notify, trust, typing } = D;
   const O = (t, o) => say('ola', 'ola', t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
@@ -448,6 +457,15 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
         opt('Przedłużacz. Zawsze winny jest przedłużacz.', [O('Sprawdziłam. Był przedłużacz.'), O('Jesteś lepsz{y|a} niż serwis Igora 😄')]),
         opt('Nie najlepiej. Ale dzięki, że pytasz.', [O('Nie musisz mówić. Jutro będzie spokojniej. Mam nadzieję.')])
       ])
+    ]),
+    scene('kLampki', [
+      pause(4000),
+      O('Lampki działają. Ale mrugają same, nawet na stałym trybie.'),
+      O('Tata mówi, że to napięcie. Nikt w tym domu nie umie powiedzieć „nie wiem”.'),
+      pause(5000),
+      typing('cicho', 'cicho', 5000),
+      pause(3000),
+      typing('cicho', 'cicho', 3500)
     ]),
     pause(9000),
     /* Zdjęcie, które przychodzi samo: przednia szyba, pętla, zielona strzałka. */
