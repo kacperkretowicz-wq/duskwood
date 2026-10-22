@@ -94,7 +94,10 @@ const contrast=(fg,bg)=>{
   if(os==='ios'&&width===390){
    await page.evaluate(()=>UI.openApp('clock',{tab:'timer'}));
    await page.getByRole('spinbutton',{name:'Sekundy',exact:true}).fill('1');await page.getByRole('button',{name:'Start',exact:true}).click();
-   await page.reload();await page.waitForTimeout(1600);
+   // Keep expiry deterministic even when Chromium reload takes >1 second under load.
+   await page.evaluate(()=>{G.s.phoneTools.timer.deadline=Date.now()+10000;G.save(true);});
+   await page.reload();
+   await page.evaluate(()=>{G.s.phoneTools.timer.deadline=Date.now()-1;G.save(true);});await page.waitForTimeout(600);
    assert.equal(await page.locator('.banner').count(),0,'elapsed timer waits for user to enter the saved game');
    assert.equal(await page.evaluate(()=>G.s.phoneTools.timer.running),true);
    await page.evaluate(()=>{document.querySelector('.title-scr').remove();UI.renderHome();});
