@@ -625,7 +625,7 @@ const UI = (() => {
       h('div', { class: 'cu-k' }, 'Dziękujemy za grę'),
       h('div', { class: 'cu-t' }, 'MGLISKO'),
       h('div', { class: 'cu-line' }),
-      h('div', { class: 'cu-p', style: 'text-align:center' }, 'Scenariusz, oprogramowanie, grafika i dźwięk powstały w całości w tej grze — bez zewnętrznych plików.'),
+      h('div', { class: 'cu-p', style: 'text-align:center' }, 'Scenariusz i postacie są fikcyjne. Grafiki są dostarczane z grą, a efekty dźwiękowe powstają lokalnie. Gra nie czyta danych z prawdziwego telefonu.'),
       h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, 'Wszystkie postacie i miejsca są fikcyjne. Powódź tysiąclecia z lipca 1997 roku wydarzyła się naprawdę.'),
       h('div', { class: 'cu-p', style: 'text-align:center' }, h('b', {}, 'MGLISKO: TEREN'), h('br'), 'Notatki Rybickiego prowadzą w prawdziwe miejsca. Wkrótce.'),
       h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, 'Inne zakończenia odblokujesz w Ustawieniach → Rozdziały.')

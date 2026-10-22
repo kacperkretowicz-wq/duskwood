@@ -40,7 +40,9 @@ Testy nowej powłoki obejmują 360 i 390 px dla obu systemów, jasny i ciemny wy
 
 Windows nie ma tutaj JDK/Android SDK ani Xcode. Lokalna próba Gradle zatrzymała się na braku JAVA_HOME/Java. Nie uznajemy synchronizacji lub emulacji szerokości za kompilację ani za test fizycznego iPhone'a/Androida. Nie przechodzono od początku wszystkich zakończeń.
 
-Workflow `.github/workflows/mobile.yml` uruchamia kompilację Android debug na Ubuntu i iOS Simulator na macOS/Xcode 26.3. Samo istnienie workflow nie oznacza sukcesu kompilacji: obowiązuje wynik konkretnego uruchomienia w Actions. Workflow nie publikuje do sklepów i nie używa certyfikatów.
+Workflow `.github/workflows/mobile.yml` uruchamia kompilację Android debug na Ubuntu i iOS Simulator na macOS/Xcode 26.3. Następnie instaluje grę na dostępnym symulatorze iPhone'a, uruchamia ją i zapisuje zrzut startu. Artefakty to testowy APK oraz zrzut symulatora. Samo istnienie workflow nie oznacza sukcesu: obowiązuje wynik konkretnego uruchomienia w Actions. Workflow nie publikuje do sklepów i nie używa certyfikatów.
+
+Pierwsze kompilacje Android debug i iOS Simulator przeszły dla commitu `ec680c3`: [Actions 39773575523](https://github.com/kacperkretowicz-wq/duskwood/actions/runs/39773575523). To dowód kompilacji obu projektów. Kolejny przebieg obejmuje także uruchomienie na symulatorze; jego wynik jest raportowany osobno. Nadal nie jest to test fizycznego urządzenia, podpisana wersja iPhone ani pełny test rozgrywki natywnej.
 
 ## Źródła techniczne
 
