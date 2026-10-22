@@ -102,7 +102,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
           vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
         ], { shot: true, set: { m_shotIda2: true } }),
         opt('Dobrze, że sama do niego idziesz.', [
-          IK('nie czuję się dobrze. ale trochę lżej'),
+          IK('nie czuję się dobrze. ale jest mi trochę lżej'),
           IK('dzięki, że wtedy nie zrobił{eś|aś} zrzutu'),
           vanish('blyskm')
         ], { set: { m_idaKind: true } })
@@ -248,7 +248,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       iff('flag:m_zniczOk', [
         Z('to ja. widzę cię z drugiej strony mostu')
       ], [
-        Z('to byłam ja, z drugiej strony mostu. sorry, że przez przesyłanie'),
+        Z('to byłam ja, z drugiej strony mostu. sorry, że wysłałam przez przesyłanie'),
         pic('zuza', 'zuza', 'm_znicz_most', '')
       ]),
       iff('flag:m_krystynaOk', [

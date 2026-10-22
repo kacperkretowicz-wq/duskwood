@@ -42,7 +42,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
         ], { set: { k_chargerSeen: true } }),
         opt('Ktoś to już kiedyś przeliczał. Te karteczki z kreskami?', [
           M('to my. dwa razy. kreski są moje'),
-          M('ale dzięki, że wzięł{eś|aś} mnie za archiwistkę')
+          M('ale dzięki, że uznał{eś|aś} mnie za archiwistkę')
         ]),
         opt('Wygląda jak stół u mojej babci przed wigilią. Wszystko w rzędach.', [
           M('xD pani Weronika się śmieje. mówi, że u niej przed wigilią jest dużo większy bałagan')

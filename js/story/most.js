@@ -27,7 +27,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         opt('Pani Ziuta ma większy porządek w papierach niż gmina.', [M('xD przekażę. kotka i tak ma to gdzieś')]),
         opt('Nie budźcie jej. Pilnuje dowodów.', [M('pilnuje. jak sięgnęłam po wycinek, dostałam łapą. bez pazurów, ale jednak')])
       ]),
-      M('dobra, wyciągnęłam spod niej resztę. tylko trochę pachną kotem')
+      M('dobra, wyciągnęłam spod niej resztę wycinków. trochę pachną kotem')
     ]),
     pic('maja2', 'maja', 'most_teczka', 'ta była na samym dnie. pod wycinkami o powodzi'),
     give('ev_m_teczka'),
@@ -73,7 +73,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
           M('pani Weronika mówi, że to da się sprawdzić w papierach. czy siatka w ogóle miała tam być')
         ], { set: { m_netSeen: true } }),
         opt('Ci ludzie są za daleko. Nikogo tu nie poznam.', [
-          M('ja też nie. i chyba dobrze. nie chcę nikogo zgadywać po kurtce'),
+          M('ja też nie. i chyba dobrze. nie chcę zgadywać, kto to, po samej kurtce'),
           M('odkładam do teczki, tak jak leżało')
         ])
       ])
@@ -164,7 +164,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
 });
 
 Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy publikacje', when: 'Poniedziałek, 23 listopada', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, menu, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, show } = D;
+  const { say, pic, pause, choose, menu, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, show, scene } = D;
   const S = (t, o) => say('sylwia', 'sylwia', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
@@ -247,6 +247,22 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     N('plik byl w folderze rybickiego w archiwum, opis „HW 2/2”. dostalem go od stazystki, ona szykowala zajawki do cyklu o archiwum'),
     N('wiem ze sie zrobil syf. ale technicznie to jest autentyczne nagranie, nikt nic nie dogrywal'),
     pic('natan', 'natan', 'most_hw', 'pierwsza klatka. czas z kamery'),
+    scene('xKadrHW', [
+      N('patrzę na tę klatkę od wczoraj. przypomina ci to coś?'),
+      choose('natan', [
+        opt('To jego kuchnia. Rybicki nagrywał go w domu, przy stole.', [
+          N('czyli to nie był wywiad dla gazety. tylko rozmowa w kuchni'),
+          N('on nawet nie wiedział, że kiedyś ktoś to puści w sieci')
+        ], { set: { m_kitchenLink: true } }),
+        opt('Ma złożone ręce i patrzy w stół. Nie wygląda, jakby się przyznawał.', [
+          N('raczej jakby czekał na następne pytanie'),
+          N('kurde. ja widziałem w tym tylko „moja wina”')
+        ], { set: { m_handsSeen: true } }),
+        opt('Firanka i lampa jak u mojej babci.', [
+          N('u mojej też. może dlatego tak się to klika. każdy zna taką kuchnię')
+        ])
+      ])
+    ]),
     N('kurek-bud przyslal oswiadczenie do redakcji. wklejam'),
     N('„Szanowni Państwo, w związku z publikacją z dnia 22.11.2026 uprzejmie informujemy: 1. Firma z szacunkiem wspomina zmarłego pracownika. 2. Postępowanie z 2012 r. jednoznacznie wykluczyło udział osób trzecich. 3. Na dalsze pytania odpowiemy na piśmie, w ustawowym terminie. Z poważaniem, Janina Kurek, Członek Zarządu”'),
     give('ev_m_kb_statement'),
