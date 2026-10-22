@@ -143,7 +143,12 @@ Object.assign(DATA.evidence, {
     ['k_zeszyt', 'assets/kopia/k_zeszyt.jpg', 'Zeszyt zapisów', 768, 1024],
     ['k_zeszyt_zoom', 'assets/kopia/k_zeszyt_zoom.jpg', 'Zeszyt zapisów · 2 grudnia', 550, 270],
     ['v_korytarz', 'assets/video/v_korytarz.jpg', 'Czytelnia · 21:40', 360, 640],
-    ['v_petla', 'assets/video/v_petla.jpg', 'Pętla', 360, 640]
+    ['v_petla', 'assets/video/v_petla.jpg', 'Pętla', 360, 640],
+    ['k_pudlo', 'assets/kopia/k_pudlo.jpg', 'Pudło pana Adama · przeliczone', 1024, 768],
+    ['k_ladowarka', 'assets/kopia/k_ladowarka.jpg', 'Parapet Igora · 2:04', 768, 1024],
+    ['k_czytelnia_kubek', 'assets/kopia/k_czytelnia_kubek.jpg', 'Czytelnia · 21:41', 1024, 768],
+    ['k_lampki', 'assets/kopia/k_lampki.jpg', 'Okno Oli', 768, 1024],
+    ['k_wigilia', 'assets/kopia/k_wigilia.jpg', 'Wigilia u Wronów', 1024, 768]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
   DATA.chars.ewa.photo = 'assets/people/ewa.jpg';
 })();

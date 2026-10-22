@@ -33,6 +33,22 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     pause(3000),
     M('jestem u pani Weroniki. przeliczyłyśmy pudło dwa razy'),
     M('nic nie zginęło. wszystkie kasety są, wszystkie zeszyty'),
+    scene('xPudlo', [
+      pic('maja2', 'maja', 'k_pudlo', 'rozłożyłyśmy wszystko na stole. przypomina ci to coś?'),
+      choose('maja2', [
+        opt('Ładowarka do telefonu. A telefonu w pudle nie ma.', [
+          M('no właśnie. pani Weronika mówi, że telefon został u pani Ewy'),
+          M('czyli to, czego szukamy, może w ogóle nie być w pudle')
+        ], { set: { k_chargerSeen: true } }),
+        opt('Ktoś to już kiedyś przeliczał. Te karteczki z kreskami?', [
+          M('to my. dwa razy. kreski są moje'),
+          M('ale dzięki, że wzięł{eś|aś} mnie za archiwistkę')
+        ]),
+        opt('Wygląda jak stół u mojej babci przed wigilią. Wszystko w rzędach.', [
+          M('xD pani Weronika się śmieje. mówi, że u niej przed wigilią jest dużo większy bałagan')
+        ])
+      ])
+    ]),
     M('i posłuchaj 0:12. on mówi „dziesięć lat minęło”. czyli rozmowa jest z 2019, nie z 2009. wtedy już nie nosił magnetofonu'),
     goal('Posłuchaj klipu jeszcze raz. Skąd jest to nagranie?', ['W Notatkach otwórz „Klip nr 1”. Co słychać w 0:31?']),
     choose('maja2', [
@@ -46,6 +62,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
       ], { set: { k_phoneSource: true, k_triedTape: true } })
     ]),
     give('ev_k_zrodlo'),
+    scene('xLadowarkaTrop', [iff('flag:k_chargerSeen', [M('i ta ładowarka z pudła. pasuje do telefonu, który leży u pani Ewy')])]),
     M('czyli szukamy nagrań z telefonu. może pani Ewa wie, gdzie je trzymał'),
     pause(2500),
     W('Dobry wieczór. Przepraszam, że tak późno.'),
@@ -54,6 +71,18 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     choose('weronika', [
       opt('Czy mogę do niej napisać? Tylko jeśli się zgodzi.', [W('Zapytam ją rano. Dziś niech już śpi.')], { set: { k_askEwa: true } }),
       opt('Niech pani do niej jutro zadzwoni. Ja poczekam.', [W('Dobrze. Pani Ewa nie lubi obcych numerów.')])
+    ]),
+    scene('xNoc', [
+      pause(3000),
+      clock('2026-12-18T23:40'),
+      V('maja2', 'maja', '0:16', 'Jestem w domu. Kuba jeszcze nie śpi, siedzi w słuchawkach i udaje, że nie słyszy, jak go wołam na herbatę. Ja już padam. Dobranoc.', 'Maja'),
+      choose('maja2', [
+        opt('Dobranoc. Nie czytaj już komentarzy.', [M('za późno. ale już przestaję')]),
+        opt('Wyśpij się.', [M('postaram się 🫠')])
+      ]),
+      pause(3000),
+      W('Jeszcze jedno. Pani Ewa napisała mi, że nie śpi. Siedzi w kuchni przy szufladzie z telefonem męża, chociaż jest rozładowany.'),
+      W('Mówi, że tak jej spokojniej. Ja chyba też dziś nie zasnę.')
     ]),
     pause(4000),
     clock('2026-12-19T00:58'),
@@ -111,7 +140,8 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
 });
 
 Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura', when: 'Sobota, 19 grudnia · 21:30', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run, callIn, callEnd } = D;
+  const c = (who, t) => say('call', who, t);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -142,6 +172,23 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     ]),
     I('jeśli nagrywał telefonem, mógł mieć kopię w nimbusie. telefony robią to same, w nocy, na ładowarce. jak ktoś tego nie wyłączył'),
     I('wtedy ktoś, kto wszedł na konto, mógł to stamtąd pobrać. trzeba sprawdzić, co tam w ogóle było'),
+    scene('xLadowarka', [
+      pause(1500),
+      pic('igor', 'igor', 'k_ladowarka', 'tak to wygląda. mój stary telefon, dziś o drugiej w nocy. sam z siebie. przypomina ci to coś?'),
+      choose('igor', [
+        opt('Pani Ewa mówiła, że telefon pana Adama leży rozładowany w szufladzie.', [
+          I('rozładowany nic nie wyśle. ale kopia mogła pójść dużo wcześniej, jeszcze za jego życia'),
+          I('liczy się konto. nie sam telefon')
+        ], { set: { k_drawerLink: true } }),
+        opt('U mnie w nocy też coś się świeci. Myślał{em|am}, że to powiadomienia.', [
+          I('pewnie to samo. kopia idzie zwykle między pierwszą a piątą, jak telefon leży na ładowarce'),
+          I('czyli godzina wrzucenia klipu jeszcze nic nie mówi. o tej porze telefony żyją same')
+        ], { set: { k_nightSync: true } }),
+        opt('Wygląda jak ufo nad blokiem.', [
+          I('xD to tylko chmurka kopii zapasowej. ludzie mi przynoszą telefony, bo „coś się świeci w nocy”')
+        ])
+      ])
+    ]),
     pause(3000),
     W('Pani Ewa zgodziła się, żebym w jej imieniu zapytała Nimbus o konto męża. Jest formularz dla rodzin osób zmarłych.'),
     W('Potrzebny akt zgonu i moje upoważnienie. Odpowiedź do 14 dni roboczych.'),
@@ -149,6 +196,20 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     choose('weronika', [
       opt('Proszę wysłać od razu. I poprosić o historię logowań, nie o treść.', [W('Dobrze. „Historia aktywności konta”. Tak to się nazywa w formularzu.')], { set: { k_requestLog: true } }),
       opt('Proszę też poprosić o zablokowanie konta. Nawet jeśli stracimy ślad.', [W('Wpiszę oba. Niech zdecydują, co szybciej.')], { set: { k_requestLog: true, k_requestLock: true } })
+    ]),
+    scene('xEwaTel', [
+      pause(3000),
+      callIn('ewa'),
+      c('ewa', 'Przepraszam. Nie umiem tak szybko pisać, to dzwonię.'),
+      c('ewa', 'Pani Weronika mówiła o tej chmurze. Ja nic o tym nie wiem. Ale ten jego telefon w szufladzie…'),
+      c('ewa', 'Po Wszystkich Świętych raz go podłączyłam. Chciałam zobaczyć jego zdjęcia. Hasła nie znałam, więc odłożyłam.'),
+      c('ewa', 'A w nocy ekran się zaświecił. Sam. Myślałam, że mi się przywidziało.'),
+      choose('call', [
+        opt('Czy ktoś jeszcze wtedy był u pani w domu?', [c('ewa', 'Brat Adama na chwilę. I chłopak od Wronów przyniósł zakupy, bo Maja prosiła. Nikt więcej.')], { set: { k_ewaVisitors: true } }),
+        opt('To mogło być zwykłe powiadomienie.', [c('ewa', 'Może. On zawsze mówił, że telefon ma swoje życie.')])
+      ]),
+      c('ewa', 'Dobranoc. Albo dzień dobry. Już nie wiem, która godzina.'),
+      callEnd()
     ]),
     pause(4000),
     clock('2026-12-20T03:11'),
@@ -175,6 +236,16 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     M('{widziałeś|widziałaś} opis? „4% baterii a i tak wrzucam”'),
     M('serio, „a i tak wrzucam”. jakby wrzucał zdjęcie kolacji'),
     pause(5000),
+    scene('xKubek', [
+      clock('2026-12-20T21:41'),
+      W('Jestem jeszcze w czytelni. Segreguję zgłoszenia na kiermasz książek, bo w domu i tak nie zasnę.'),
+      pic('weronika', 'weronika', 'k_czytelnia_kubek', 'Mój wieczór. Herbata wystygła już dwa razy.'),
+      choose('weronika', [
+        opt('Niech pani nie siedzi za długo. Jest ciemno i pusto.', [W('Jeszcze kwadrans. Lubię tę ciszę.')], { trust: { weronika: 1 } }),
+        opt('Kubek z odpryskiem to klasyka bibliotek.', [W('Ma dwadzieścia lat. Pan Adam przywiózł mi go z jakiegoś festynu. Nie wyrzucę.')])
+      ]),
+      pause(6000)
+    ]),
     clock('2026-12-20T21:58'),
     ambient('dark'),
     /* Zdjęcie, którego sekundę temu nie było: konto wrzuca okno czytelni, w środku Weronika. */

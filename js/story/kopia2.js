@@ -462,6 +462,15 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       pause(4000),
       O('Lampki działają. Ale mrugają same, nawet na stałym trybie.'),
       O('Tata mówi, że to napięcie. Nikt w tym domu nie umie powiedzieć „nie wiem”.'),
+      pic('ola', 'ola', 'k_lampki', 'Ale ładnie wyszło. Z okna widać pętlę. Przypomina ci to coś?'),
+      choose('ola', [
+        opt('Bus na pętli. Ktoś tam stoi co noc o tej samej porze.', [
+          O('Ostatni kurs. Zawsze stoi sześć minut. Kierowczyni czasem je kanapkę i patrzy w telefon.'),
+          O('Czemu pytasz?')
+        ], { set: { k_lampkiBus: true } }),
+        opt('Kartkę świąteczną. Śnieg, latarnia, choinka.', [O('Prawda? Wyślę to cioci zamiast kartki. Zaoszczędzę na znaczku.')]),
+        opt('Twoje lampki mrugają w rytm kierunkowskazu tego busa.', [O('Przestań 😄 Teraz nie będę mogła przestać na to patrzeć.')], { set: { k_lampkiBus: true } })
+      ]),
       pause(5000),
       typing('cicho', 'cicho', 5000),
       pause(3000),
@@ -478,6 +487,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     C('napisał mi, że ci powiedział'),
     C('nie wypytuj go o mnie. on nie wie, kim jestem'),
     pause(3000),
+    scene('xPetlaTrop', [iff('flag:k_lampkiBus', [M('Ola wysłała mi zdjęcie z okna. Bus na pętli, sześć minut postoju. Jak na tym zdjęciu przez przednią szybę.')])]),
     W('Przepraszam, że się wtrącam. Ktoś mnie niedawno pytał o nagrania pana Adama z 2019. Pisałam {Panu|Pani} o tym, pamięta {Pan|Pani}?'),
     goal('Kto jest @cicho.bylo? Zestaw głosówkę, zdjęcie i nazwę konta.', ['Głosówka z 2:14: równe tykanie jak kierunkowskaz. Zdjęcie: przednia szyba, pętla, kanapka w folii.', 'Klip nr 1: dziewczyna miała 7 lat w 2009. Kto pytał Weronikę o nagrania z 2019?']),
     ask('maja2', {
@@ -532,9 +542,23 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       ], { set: { k_lenaPublic: true } })
     ]),
     L('Muszę jechać. Nie piszę w trakcie.'),
+    scene('xLenaKurs', [
+      pause(6000),
+      clock('2026-12-23T23:44'),
+      say('lena', 'lena', 'voice:0:21|Lena|Skończyłam. Ostatni pasażer wysiadł pod kościołem i powiedział „wesołych świąt”, chociaż to dopiero jutro. Dawno nikt mi tego nie powiedział. Dobranoc.')
+    ]),
     pause(5000),
     clock('2026-12-24T09:15'),
     ambient('calm'),
+    scene('xWigilia', [
+      pic('maja2', 'maja', 'k_wigilia', 'mama lepi od szóstej. ja jestem od zaginania brzegów, bo „masz cierpliwość”. nie mam'),
+      choose('maja2', [
+        opt('Ile jest tych pierogów?', [M('policzyłam. 64. mama mówi, że za mało')]),
+        opt('Zostaw mi jednego.', [M('z kapustą czy ruskiego? dobra, z kapustą. ruskie są moje')])
+      ]),
+      M('Kuba od rana nie wychodzi z pokoju. mama myśli, że pakuje prezenty'),
+      pause(3000)
+    ]),
     E('dzien dobry. pani weronika powiedziala mi wszystko. o kubie tez'),
     E('mowi ze moge poprosic nimbus zeby zamknal jego konto na zawsze. wszystko zniknie. tez to co dobre. jego glos'),
     E('mam w telefonie dwie wiadomosci glosowe od niego. reszta jest tam'),
