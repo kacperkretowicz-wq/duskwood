@@ -68,3 +68,13 @@ W 5. rozdziale gracz jest pewny, że archiwum ma Zenon. Wszystko na niego wskazu
 - Nieprzeczytana wiadomość na Błysku na ekranie blokady, kiedy gracz wraca do gry.
 - Dylemat społeczny: kogo ostrzec, skoro można ostrzec tylko jedną osobę.
 - Aparat: gracz robi zdjęcie ekranu z klipem, żeby mieć dowód. Bohater Błysku to zauważa.
+
+## 9. Stan produkcji (22.10.2026, noc)
+Zrobione: `js/data/case-kronika.js`, `js/story/kronika.js`, test `tests/case-kronika.browser.cjs` (trzy zakończenia).
+Siedem nocy z punktu 5 jest skondensowane w pięć rozdziałów:
+- **c0 „Studniówka”** (18.01): wariant startu po zakończeniu `kopia`, lodowisko i bałwan, wideo ze studniówki, zagadka z kadrem (TV Dolina / sala gimnastyczna / „wesele”), Ola i mama na nagraniu, straszak `s4_drzwi`.
+- **c1 „Boisko”** (19.01): pralka w serwisie Igora, odbicie lampki, telefon od Weroniki (Zenon), zagadka z boiskiem (zegar 23:47), „jutro: O.N.”, straszak `s4_noc` o 23:47.
+- **c2 „O.N.”** (20.01): wyznanie Oli i dylemat (niech sama powie / szukać źródła), telefon do Zenona, zdjęcie Idy z psem (zagadka), przesyłanie w pobliżu ze zdjęciem okna gracza, Błysk i zrzut ekranu, straszak `s4_okno`.
+- **c3 „Wogóle”** (21.01): adres Zenona w grupie Sylwii, pokój z kasetami (zagadka z zegarem), telefon od Zenona, znikające wideo „on śpi”, „wogóle”, zwrot, telefon od Idy (`s4_cisza`).
+- **c4 „20:58”** (22.01): pierogi, wpis Oli, telefon do Idy na dwie minuty przed 21:00 i trzy zakończenia (`przewiniecie`, `transmisja`, `kopia2`).
+Do zrobienia: zapowiedź R1 na zdjęciu (zrobione jako `xSnieg`), fiszka z literówką w S2 (zrobione). Kolejne rozdziały (festyn jako osobna noc) są opcjonalne.
