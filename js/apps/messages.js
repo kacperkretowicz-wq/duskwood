@@ -9,6 +9,27 @@
   const charName = w => (DATA.chars[w] && (DATA.chars[w].short || DATA.chars[w].name)) || w;
   const pendingFor = id => { const p = Engine.pending(); return p && p.chat === id ? p : null; };
 
+
+  function profile(id) {
+    const cd = DATA.chats[id] || {};
+    if (cd.group) {
+      const members = G.chat(id).members || cd.members || [];
+      UI.sheet({ title: chatName(id), body: h('div', { class: 'profile-members' },
+        h('p', {}, 'Rozmowa prywatna · ' + (members.length + 1) + ' osób'),
+        members.map(who => h('button', { class: 'row', onclick: () => profile(who) }, UI.avatar(who), h('div', { class: 'rm' }, h('b', {}, DATA.chars[who].name), h('span', {}, DATA.chars[who].role || ''))))) });
+      return;
+    }
+    const known = chatAv(id) !== 'unknown' && !cd.glitch;
+    const c = known ? DATA.chars[id === 'maja2' ? 'maja' : id] || {} : {};
+    UI.sheet({ title: 'Profil', body: h('div', { class: 'contact-profile' },
+      UI.avatar(known ? id === 'maja2' ? 'maja' : id : chatAv(id), 'xl'),
+      h('h2', {}, c.name || chatName(id)),
+      h('p', { class: 'profile-role' }, c.role || cd.sub || 'Numer spoza kontaktów'),
+      c.status ? h('p', { class: 'profile-status' }, c.status) : null,
+      c.bio ? h('div', { class: 'profile-bio' }, h('small', {}, 'O MNIE'), h('p', {}, c.bio)) : null,
+      c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null) });
+  }
+
   function stamp(t) {
     const now = G.now();
     if (U.sameDay(t, now)) return U.time(t);
@@ -43,14 +64,35 @@
 
   /* ---------- lista rozmów ---------- */
   function listPage(stack) {
-    const pg = UI.page({ title: 'Wiadomości', big: true });
+    const pg = UI.page({ title: 'Rozmowy', sub: 'MGLISKO / KOMUNIKATOR', big: true });
+    pg.el.classList.add('conversation-list');
+    let filter = 'all';
+    const search = h('input', { type: 'search', placeholder: 'Szukaj rozmowy', 'aria-label': 'Szukaj rozmowy', class: 'chat-search' });
+    const tabs = h('div', { class: 'chat-filters', role: 'group', 'aria-label': 'Filtr rozmów' });
+    [['all', 'Wszystkie'], ['unread', 'Nieprzeczytane']].forEach(([key, label]) => {
+      const button = h('button', { class: key === filter ? 'on' : '', 'aria-pressed': String(key === filter), onclick: () => {
+        filter = key;
+        [...tabs.children].forEach(b => { b.classList.toggle('on', b === button); b.setAttribute('aria-pressed', String(b === button)); });
+        render();
+      } }, label);
+      tabs.appendChild(button);
+    });
+    const caseCard = h('button', { class: 'case-card', onclick: () => stack.push(chatPage(stack, 'maja')) },
+      UI.avatar('maja'), h('div', {}, h('small', {}, 'ZAGINIONA / 14 PAŹDZIERNIKA'), h('b', {}, 'Maja Wrona'), h('span', {}, 'Ostatnie połączenie było do ciebie.')), U.ico('back', 16));
     const list = h('div', { class: 'chatlist' });
-    pg.body.appendChild(list);
+    search.addEventListener('input', render);
+    pg.body.append(caseCard, search, tabs, list);
+    pg.el.appendChild(h('nav', { class: 'messenger-nav', 'aria-label': 'Nawigacja' },
+      h('button', { class: 'on', 'aria-current': 'page' }, U.ico('chat', 20), 'Rozmowy'),
+      h('button', { onclick: () => UI.openApp('notes') }, U.ico('note', 20), 'Ślady'),
+      h('button', { onclick: () => UI.goHome() }, U.ico('grid', 20), 'Telefon')));
     function render() {
+      caseCard.hidden = !G.isUnlocked('chat:maja');
       const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
+        .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
         .sort((a, b) => ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
       list.innerHTML = '';
-      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + 'Brak wiadomości' })); return; }
+      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : 'Jeszcze cisza. Ktoś zaraz się odezwie.') })); return; }
       ids.forEach(id => {
         const c = G.chat(id);
         const last = c.msgs[c.msgs.length - 1];
@@ -66,7 +108,7 @@
           UI.avatar(chatAv(id)),
           h('div', { class: 'cm' },
             h('div', { class: 'ct' }, h('b', {}, chatName(id)), h('span', {}, last ? stamp(last.t) : '')),
-            h('div', { class: 'cp' }, h('span', { class: 'pv' }, prev), p ? h('span', { class: 'turn' }, 'Twoja kolej') : null, c.unread ? h('span', { class: 'cnt' }, c.unread) : null))));
+            h('div', { class: 'cp' }, h('span', { class: 'pv' }, prev), p ? h('span', { class: 'turn' }, 'Odpowiedz') : null, c.unread ? h('span', { class: 'cnt' }, c.unread) : null))));
       });
     }
     const offs = ['msg', 'typing', 'pending', 'chats', 'unlock'].map(e => BUS.on(e, render));
@@ -82,8 +124,8 @@
     const ffBtn = h('button', { class: 'ff', title: 'Przewiń', 'aria-label': 'Przewiń', onclick: () => { Engine.skip(); }, html: U.icon('ff', 18) });
     const hdr = h('div', { class: 'hdr chat-hdr' },
       h('button', { class: 'bk', 'aria-label': 'Wstecz', onclick: () => { SFX.play.tap(); stack.pop(); }, html: U.icon(UI.os === 'android' ? 'arrowL' : 'back', 24) }),
-      UI.avatar(chatAv(id), 'sm'),
-      h('div', { class: 'tt' }, h('h1', {}, chatName(id)), sub),
+      h('button', { class: 'profile-link', 'aria-label': 'Otwórz profil rozmówcy', onclick: () => profile(id) }, UI.avatar(chatAv(id), 'sm')),
+      h('button', { class: 'tt profile-link', 'aria-label': 'Informacje o rozmowie', onclick: () => profile(id) }, h('h1', {}, chatName(id)), sub),
       h('div', { class: 'rt' }, ffBtn));
     const msgs = h('div', { class: 'msgs' });
     const body = h('div', { class: 'body chat-body' }, msgs);
@@ -99,7 +141,10 @@
       if (t) { sub.textContent = cd.group ? `${charName(t)} pisze…` : 'pisze…'; sub.className = 'typ'; return; }
       sub.className = '';
       if (cd.group) sub.textContent = (G.s.chats[id] && G.s.chats[id].members ? G.s.chats[id].members : cd.members).map(charName).join(', ') + ', Ty';
-      else sub.textContent = cd.sub || (DATA.chars[id] && DATA.chars[id].number) || '';
+      else {
+        const recent = [...G.chat(id).msgs].reverse().find(m => m.from !== 'me' && m.from !== 'sys');
+        sub.textContent = cd.sub || (recent ? 'Ostatnia wiadomość · ' + stamp(recent.t) : 'Kontakt w komunikatorze');
+      }
     }
 
     function sepNeeded(prev, m) {
@@ -125,7 +170,7 @@
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
       if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, U.time(m.t)));
+      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, ' ✓') : null));
       if (m.clue) {
         b.classList.add('clue');
         b.addEventListener('click', () => { if (G.addEv(m.clue)) UI.evidenceToast(m.clue); else UI.toast('Masz to już w dowodach.', { icon: 'folder' }); });
@@ -188,15 +233,16 @@
       comp.className = 'composer';
       const p = pendingFor(id);
       if (!p) {
-        comp.appendChild(h('div', { class: 'idle' }, h('span', {}, cd.readonly ? 'Nie możesz odpowiedzieć na tę wiadomość' : 'Wiadomość'), h('span', { class: 'send dis', html: U.icon('send', 18) })));
+        comp.appendChild(h('div', { class: 'idle' }, h('span', {}, cd.readonly ? 'Nie możesz odpowiedzieć na tę wiadomość' : Engine.typing(id) ? 'Poczekaj na wiadomość…' : 'Czekasz na odpowiedź'), h('span', { class: 'send dis', html: U.icon('send', 18) })));
         return;
       }
       if (p.type === 'choose') {
         comp.classList.add('choices');
+        comp.appendChild(h('div', { class: 'reply-label' }, 'TWOJA ODPOWIEDŹ'));
         p.options.forEach((o, n) => comp.appendChild(h('button', {
           class: 'opt', style: `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
-        }, h('span', { html: U.rich(o.text) }))));
+        }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
         scrollEnd(true);
       } else if (p.type === 'ask') {
         const inp = h('input', { class: 'field', placeholder: p.placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', type: p.mask ? 'password' : 'text', enterkeyhint: 'send' });

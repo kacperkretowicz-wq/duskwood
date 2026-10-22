@@ -271,7 +271,7 @@ _W grze Mglisko rzeka Mglica i samo miasteczko są fikcyjne._`))
       kw: [p.name, handle, handle.replace(/[._]/g, ' '), p.name + ' kadr', p.name + ' instagram'],
       snippet: p.bio.replace(/\n/g, ' · '),
       html: () => `${kadrHead()}<main class="kd-m"><div class="kd-p">
-        <img class="kd-av" src="${Art.avatar(p.av)}" alt=""><div class="kd-n"><b>${esc(p.name)}</b><small>@${handle}</small></div></div>
+        ${UI.avatar(p.av, 'kd-av').outerHTML}<div class="kd-n"><b>${esc(p.name)}</b><small>@${handle}</small></div></div>
         <div class="kd-st"><div><b>${p.posts}</b>posty</div><div><b>${p.followers}</b>obserwujący</div><div><b>${p.following}</b>obserwowani</div></div>
         <div class="kd-bio">${U.rich(p.bio)}</div>
         <div class="kd-g">${p.feed.map((f, i) => `<a href="#" data-post="${handle}:${i}"><img src="${Art.url(f.art)}" alt=""></a>`).join('')}</div></main>`
@@ -281,14 +281,14 @@ _W grze Mglisko rzeka Mglica i samo miasteczko są fikcyjne._`))
     url: 'kadr.pl', title: 'Kadr — zdjęcia i ludzie', site: 'kadr', fav: 'K', favColor: '#c2185b',
     kw: ['kadr', 'kadr.pl', 'instagram'],
     snippet: 'Dziel się kadrami. Znajdź znajomych z okolicy.',
-    html: () => `${kadrHead()}<main class="kd-m"><h2 class="kd-t">Popularne w okolicy: Mglisko</h2><div class="kd-list">${Object.entries(DATA.kadr).map(([h, p]) => `<a href="#" data-go="kadr:${h}" class="kd-li"><img src="${Art.avatar(p.av)}" alt=""><div><b>${esc(p.name)}</b><small>@${h}</small></div></a>`).join('')}</div></main>`
+    html: () => `${kadrHead()}<main class="kd-m"><h2 class="kd-t">Popularne w okolicy: Mglisko</h2><div class="kd-list">${Object.entries(DATA.kadr).map(([h, p]) => `<a href="#" data-go="kadr:${h}" class="kd-li">${UI.avatar(p.av).outerHTML}<div><b>${esc(p.name)}</b><small>@${h}</small></div></a>`).join('')}</div></main>`
   });
   DATA.kadrPost = key => {
     const [handle, i] = key.split(':');
     const p = DATA.kadr[handle], f = p.feed[+i];
     const { h } = U;
     const body = h('div', { class: 'kd-post' },
-      h('div', { class: 'kd-ph' }, h('img', { src: Art.avatar(p.av), alt: '' }), h('b', {}, handle)),
+      h('div', { class: 'kd-ph' }, UI.avatar(p.av), h('b', {}, handle)),
       h('img', { class: 'kd-pi', src: Art.url(f.art), alt: '', onclick: () => UI.viewImage(f.art) }),
       h('div', { class: 'kd-pl' }, `♥ ${f.likes} polubień · ${f.date}`),
       h('p', { html: `<b>${handle}</b> ${U.rich(f.text)}` }),

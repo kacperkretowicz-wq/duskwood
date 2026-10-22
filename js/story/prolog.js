@@ -24,28 +24,29 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     title(),
     fx('lock'),
     pause(2400),
-    K('Cześć. Przepraszam, że piszę o tej porze.', { gap: 0 }),
-    K('Kim jesteś?'),
+    K('hej, sory że tak późno', { gap: 0 }),
+    K('to numer, na który dzwoniła maja wrona?'),
     waitFor('flag:unlockedPhone', { goal: 'Odblokuj telefon.' }),
     openChat('kuba', { goal: 'Ktoś do ciebie napisał. Sprawdź, kto.', hints: [] }),
     pause(700),
     choose('kuba', [
-      opt('A ty kim jesteś? Skąd masz mój numer?', [K('sorry. masz rację'), K('jestem Kuba. Kuba Wrona')]),
-      opt('Chyba pomyłka.', [K('nie sądzę'), K('sorry, nie przedstawiłem się. Kuba Wrona')]),
-      opt('Nie odpisuję nieznajomym.', [K('wiem, jak to wygląda'), K('daj mi minutę. proszę. jestem Kuba Wrona')], { trust: { kuba: -1 } })
+      opt('A ty kim jesteś? Skąd masz mój numer?', [K('tak, sory. od początku'), K('kuba jestem. jej brat')]),
+      opt('Chyba pomyłka.', [K('nie sądzę'), K('kuba wrona. sory, piszę jak jakiś bot')]),
+      opt('Nie odpisuję nieznajomym.', [K('wiem. sam bym pewnie nie odpisał'), K('daj mi minutę, serio. kuba wrona jestem')], { trust: { kuba: -1 } })
     ]),
     rename('kuba', 'Kuba Wrona', 'kuba'),
     set('knowKuba'),
-    K('moja siostra Maja zadzwoniła do ciebie 14 października o 23:47'),
+    K('moja siostra dzwoniła pod ten numer 14 października. 23:47'),
     pause(900),
-    K('to było jej ostatnie połączenie. od tamtej nocy nikt jej nie widział'),
+    K('to ostatnie połączenie w bilingu'),
+    K('od tygodnia nie wróciła do domu'),
     typing('kuba', 'kuba', 3200),
-    K('mama ma ją na swoim abonamencie, widzi biling w aplikacji. ostatni numer, pod który dzwoniła, to twój'),
-    K('kim jesteś? skąd znasz moją siostrę?'),
+    K('mama ma nas na jednym abonamencie. wzięła biling od operatora. na końcu jest twój numer'),
+    K('więc pytam. skąd znasz maję?'),
     choose('kuba', [
-      opt('Nie znam żadnej Mai. Naprawdę.', [K('to czemu do ciebie dzwoniła?? o północy')]),
+      opt('Hej. Nie znam Mai. Na pewno ten numer?', [K('to czemu do ciebie dzwoniła?? o północy')]),
       opt('Nikt do mnie nie dzwonił. Na pewno?', [K('sprawdź. proszę. 14.10, 23:47')]),
-      opt('Mam na imię %name%. Nie wiem, kim jest twoja siostra.', [K('%name%… ok. przepraszam, że tak na ciebie wjechałem')], { trust: { kuba: 1 } })
+      opt('%name% jestem. Serio nie wiem, o kim mówisz.', [K('%name%… ok. przepraszam, że tak na ciebie wjechałem')], { trust: { kuba: 1 } })
     ]),
     K('możesz sprawdzić telefon? czy masz od niej cokolwiek? połączenia, smsy'),
     K('jej numer to +48 731 402 118'),
@@ -117,9 +118,9 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     K('czyli dzwoniła do… sorry. nie chciałem tak'),
     K('chciała zadzwonić do kogoś, komu ufała. a trafiła na ciebie'),
     pause(1500),
-    K('przepraszam, że cię w to wciągam. nie wiem już, do kogo pisać'),
+    K('przepraszam, że cię w to wciągam. nie wiem już, do kogo z tym iść'),
     K('policja mówi, że ona skoczyła z tamy. jej auto stało na tamie. kurtka na barierce'),
-    K('ale maja by nie skoczyła. nigdy. ona się bała wody, na basen nawet nie chodziła'),
+    K('ale maja by nie skoczyła. nigdy. ona nie wchodziła do jeziora nawet po kolana. nigdy'),
     pic('kuba', 'kuba', 'k_maja', 'to ona. sierpień, nad mglicą. zawsze zasłania twarz aparatem'),
     pause(1200),
     K('mieszkasz w mglisku?'),
@@ -143,11 +144,14 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     sys('group', 'Kuba utworzył grupę „Szukamy Mai 🕯️”'),
     sys('group', 'Kuba dodał: Ola, Bartek, Igor, %name%'),
     g('kuba', 'dodałem %name%. to ta osoba, do której maja dzwoniła ostatnia'),
-    g('ola', 'Kuba, rozmawialiśmy o tym. Nie dodaje się obcych do takiej grupy.'),
+    g('ola', 'Kuba, serio? Nawet nas nie zapytałeś.'),
     g('bartek', 'kto to w ogole jest'),
-    g('igor', 'Cześć, %name%. Ja jestem Igor, ten miły. Bartek to ten niemiły. Ola to ta, która wszystkich pilnuje.'),
+    g('igor', 'hej %name%. igor, serwis przy rynku. jak ktoś cię tu zjedzie to nie bierz osobiście'),
     g('ola', 'Igor.'),
-    g('igor', 'No co. Ktoś musi rozładować atmosferę.'),
+    g('igor', 'dobra już nic nie mówię 🙃'),
+    g('kuba', 'igor zjadł kiedyś zalaną klawiaturę bo mówił że ryż w środku się nie zmarnuje'),
+    g('igor', 'XDDD kuba to była jedna kanapka nad laptopem'),
+    g('ola', 'Dobra, wróćmy do Mai.'),
     openChat('group', { goal: 'Zajrzyj do nowej grupy „Szukamy Mai”.' }),
     g('bartek', 'skąd maja cię znała'),
     choose('group', [
@@ -162,11 +166,11 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
         g('kuba', 'maja myślała, że pisze do jakiegoś dziennikarza. on nie żyje, a jego numer {dostał|dostała} potem %name%')
       ]),
       opt('A ty skąd ją znasz, Bartek?', [
-        g('bartek', 'chodziliśmy ze sobą. do kwietnia. {zadowolony|zadowolona}?'),
+        g('bartek', 'bylismy razem. do kwietnia. cos jeszcze?'),
         g('kuba', 'bartek…')
       ], { trust: { bartek: -1 } })
     ]),
-    g('ola', 'Dobrze. Skoro już tu jesteś: to, co tu piszemy, zostaje tutaj. Nie piszesz do nikogo z Mgliska. Nie dzwonisz na policję bez nas. Jasne?'),
+    g('ola', 'Dobra. Tylko nie puszczaj dalej screenów, ok? Są tu nasze numery. I rzeczy o Mai, których mama jeszcze nie wie.'),
     choose('group', [
       opt('Jasne.', [], { trust: { ola: 1 } }),
       opt('Czemu nie na policję?', [
@@ -174,14 +178,14 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
         g('kuba', 'gajda jest ok. to prawie wujek. pomagał mamie, jak tata się wyprowadził'),
         set('kubaGajda')
       ]),
-      opt('Nie będę obiecywać w ciemno.', [g('ola', 'To przynajmniej nie rób nic za naszymi plecami.')], { trust: { ola: -1 } })
+      opt('Zależy, co tu znajdziemy. Nie obiecam w ciemno.', [g('ola', 'Ok. Ale daj nam znać, zanim coś zrobisz.')], { trust: { ola: -1 } })
     ]),
-    g('igor', 'Dobra, konkrety. Telefon Mai jest wyłączony od 14.10, 23:58. Tyle wiemy od operatora przez mamę Kuby.'),
-    g('ola', 'Maja robiła kopię zapasową wszystkiego. Zdjęcia, notatki, wiadomości. Na Nimbusie.'),
+    g('igor', 'dobra. telefon mai: ostatni kontakt z siecią 14.10 o 23:58. potem cisza'),
+    g('ola', 'Miała wszystko w Nimbusie. Zdjęcia, smsy, notatki. Całe życie, nawet listy zakupów.'),
     g('kuba', 'próbowałem się zalogować na jej laptopie. hasła nie ma. jak klikam „nie pamiętasz hasła”, to pyta o pytania bezpieczeństwa'),
     g('kuba', 'dwa razy źle odpowiedziałem i się wystraszyłem, że zablokuje konto'),
     g('igor', 'Spokojnie. Technicznie rzecz biorąc, Nimbus blokuje dopiero po dziesięciu próbach. Ale lepiej nie strzelać na ślepo.', { clue: 'ev_igor_phrase' }),
-    g('ola', 'Mam jutro ranną zmianę. Proponuję, żeby %name% {spróbował|spróbowała}. Ktoś z zewnątrz patrzy na świeżo.'),
+    g('ola', 'Jutro mam na szóstą. Ale jeszcze chwilę posiedzę. %name%, zerkniesz? My już się w to gapimy któryś wieczór.'),
     g('kuba', 'zaraz podeślę ci jej maila'),
     pause(2500),
     fx('glitch', { wait: true }),

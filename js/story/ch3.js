@@ -221,7 +221,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'może sprawdzał hutę. jest policjantem'),
     g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?'),
     typing('group', 'kuba', 6000),
-    g('kuba', 'nie wiem już nic'),
+    g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),
 
     /* --- noc: telefon Mai ożywa --- */
@@ -236,20 +236,22 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     K('MAMA DOSTAŁA SMS OD MAI'),
     K('TERAZ'),
     K('„Mamo, nic mi nie jest. Potrzebuję czasu. Nie szukajcie mnie. Pozdrów Kluskę.”'),
-    K('ona żyje??? ŻYJE'),
+    K('ona żyje'),
+    K('ej'),
+    K('ona żyje???'),
     pause(1500),
     unlock('maja:find'),
     set('majaOnline', false),
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest offline.', sound: 'notif' }),
     choose('kuba', [
-      opt('Kuba, poczekaj. Kluska nie żyje od 2019.', [K('wiem'), K('wiem, kurde, wiem')], { trust: { kuba: 1 } }),
+      opt('Kuba, poczekaj. Kluska nie żyje od 2019.', [K('wiem'), K('wiem. właśnie dlatego mi ręce latają')], { trust: { kuba: 1 } }),
       opt('Żyje! To najważniejsze.', [K('tak tylko'), K('czekaj')]),
       opt('To nie brzmi jak ona.', [K('nie brzmi')])
     ]),
     K('kluska nie żyje od 7 lat'),
     K('i maja nigdy nie pisze „mamo”. zawsze „mamuś”. zawsze'),
     K('to nie ona to pisała. albo ktoś jej kazał'),
-    K('ona nam daje znać'),
+    K('może dała nam znać specjalnie. ja muszę tak myśleć, rozumiesz?'),
     goal('Telefon Mai był przez chwilę online. Sprawdź, co się zsynchronizowało.', [
       'Nimbus → Galeria → Aparat. Są nowe zdjęcia z 14.10, z nocy zniknięcia.',
       'Nimbus → Wiadomości → „Mamuś 💛”. Dotknij nowego SMS-a, żeby zapisać go w Notatkach.'
@@ -272,7 +274,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('ola', 'Ona żyje. Ktoś ją trzyma. I włączył jej telefon, żeby napisać do mamy.'),
     g('bartek', 'albo kazal jej odblokowac. telefon na odcisk palca'),
     g('kuba', 'czyli była przy telefonie. o 3:05. gdzieś'),
-    g('ola', 'Nimbus pokazuje, gdzie był telefon?'),
+    g('ola', 'Igor mówił, że Nimbus zapisuje lokalizację. Mamy ją?'),
     pause(2500),
     fx('glitch'),
     sz('teraz wiesz, ze zyje'),

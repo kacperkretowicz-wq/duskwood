@@ -18,7 +18,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
       'Otwórz zdjęcie i przybliż je — dwoma palcami, kółkiem myszy albo dwuklikiem.',
       'Na plecach kurtki jest napis. Przybliż mocno i dotknij go.'
     ]),
-    waitFor('ev:ev_jacket', { hints: [{ after: 90, chat: 'kuba', who: 'kuba', text: 'ma jakiś napis na plecach. nie mogę przeczytać, ty masz lepszy ekran xd' }] }),
+    waitFor('ev:ev_jacket', { hints: [{ after: 90, chat: 'kuba', who: 'kuba', text: 'ma coś na plecach. jak przybliżam na moim to same ziemniaki xdd' }] }),
     K('i co, widać coś?'),
     show('kuba', { prompt: 'Pokaż, co widać na kurtce', accept: [{ ev: ['ev_jacket'] }], wrong: [['kuba', 'chodzi mi o gościa z 2:13. co ma na plecach?']] }),
     typing('kuba', 'kuba', 3000),
@@ -26,7 +26,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     K('auto-sowa. to kurtka z warsztatu bartka'),
     K('co on tam robił w nocy?? wczoraj pisał „nie idźcie tam”'),
     choose('kuba', [
-      opt('Napiszę do niego. Spokojnie, bez oskarżeń.', [
+      opt('Napiszę do niego na priv. Najpierw zapytam.', [
         K('ok. ale napisz mi potem'),
         unlock('chat:bartek'),
         openChat('bartek', { goal: 'Napisz do Bartka.' }),
@@ -39,7 +39,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
         B('tak. bylem'),
         B('nie mow kubie. on i tak mnie nie trawi'),
         choose('bartek', [
-          opt('Powiedz mi, po co. Nie oceniam.', [], { trust: { bartek: 1 } }),
+          opt('Dobra. Tylko powiedz, po co tam byłeś.', [], { trust: { bartek: 1 } }),
           opt('Kuba już wie. Lepiej sam mu to wytłumacz.', [B('super')]),
           opt('Skłamałeś, że nie gadałeś z Mają od miesięcy.', [B('wiesz o stacji?'), B('no tak. przeczytales jej smsy')], { cond: 'ev:ev_bartek_sms' })
         ]),
@@ -73,12 +73,12 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
         g('kuba', 'i nie mogłeś tego napisać wczoraj??'),
         g('bartek', 'nie. bo to moj ojciec'),
         trust('bartek', -1),
-        g('igor', 'Spokojnie. Bartek, dzięki, że mówisz. Świeża zaprawa to ważna rzecz.')
+        g('igor', 'ej, dajcie mu skończyć. bartek, ta zaprawa. jesteś pewien, że świeża?')
       ]),
       opt('Nie mówmy mu na razie, że wiemy.', [
         K('nie umiem tak'),
         K('sorry'),
-        g('kuba', 'bartek. co robiłeś o 2 w nocy w hucie'),
+        g('kuba', 'bartek. co robiles w hucie o drugiej w nocy'),
         g('bartek', 'skad wiesz'),
         g('kuba', 'fotopułapka. twoja kurtka'),
         g('bartek', 'maja w srode pytala mnie o mojego starego. czy byl w hucie w 97'),

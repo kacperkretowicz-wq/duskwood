@@ -47,9 +47,9 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       K('hej'),
       K('minęły trzy tygodnie, a ja dalej nie wiem, co ci napisać'),
       K('maja wyszła ze szpitala. ręka w gipsie, odmrożone palce u stóp. robi zdjęcia lewą ręką'),
-      K('mówi, że to najlepsze ćwiczenie z kompozycji'),
+      K('mówi że prowadzący z asp by powiedział że wreszcie wyszła ze strefy komfortu xdd'),
       choose('kuba', [
-        opt('Jak się trzymasz, Kuba?', [K('lepiej. śpię. czasem'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
+        opt('A ty jak się trzymasz?', [K('trochę lepiej. wczoraj przespałem noc bez sprawdzania telefonu. pierwszy raz'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
       notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
@@ -67,7 +67,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       iff('var:trust_bartek>=1', [
         B('stary siedzi w areszcie. odwiedzam go w kazda niedziele'),
         B('pierwszy raz od lat gadamy jak ludzie'),
-        B('jakbys kiedys {mial|miala} stluczke, to wiesz gdzie jest warsztat')
+        B('jak ci kiedys auto nie odpali to pisz. tylko nie o trzeciej w nocy')
       ], [
         B('stary siedzi. ja prowadze warsztat'),
         B('nie pisz do mnie przez jakis czas. to nie przez ciebie. po prostu')
@@ -76,7 +76,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       iff('flag:igorForgiven', [
         I('Ojciec zeznaje. Codziennie, od rana do wieczora. Mówi, że pierwszy raz od lat czuje się lekko.'),
         I('Ja jeszcze nie. Ale pracuję nad tym.'),
-        I('Szklarz przeszedł na emeryturę. Technicznie rzecz biorąc.')
+        I('drugą kartę oddałem policji. technicznie rzecz biorąc w końcu mam jeden numer')
       ], [
         I('Wyjeżdżam do Wrocławia. Tu wszyscy patrzą na mnie jak na syna wójta. Bo jestem.'),
         I('Dziękuję, że {skończyłeś|skończyłaś} to, czego ja nie umiałem.')
@@ -90,12 +90,12 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ]),
       pause(4000),
       unlock('chat:maja2'),
-      M('Cześć. Tu Maja. Ta prawdziwa.'),
-      M('Mam nowy numer, stary telefon jest w prokuraturze jako dowód. Dziwne uczucie.'),
-      M('Kuba mówi, że mam ci podziękować. Więc: dziękuję. Za wszystko, czego nie widziałam.'),
-      M('I przepraszam, że cię wtedy budziłam o północy. Myślałam, że dzwonię do kogoś innego.'),
+      M('hej. maja tutaj 🙂 ta prawdziwa, dla odmiany'),
+      M('nowy numer. stary telefon zabrali jako dowód. mam nadzieję że nikt tam nie czyta moich list zakupów XD'),
+      M('kuba mi opowiedział. znaczy próbuje, bo co chwilę mu się urywa. nie wiem jak ci podziękować'),
+      M('i sory za te telefony po nocy. miał być pan adam, a wyszło... no. ty'),
       choose('maja2', [
-        opt('Cieszę się, że zadzwoniłaś pod zły numer.', [M('Ja też. Chyba najlepsza pomyłka w moim życiu.')]),
+        opt('Cieszę się, że zadzwoniłaś pod zły numer.', [M('ja też. pierwszy raz w życiu cieszę się że pomyliłam numer 🫶')]),
         opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.')]),
         opt('Pan Adam byłby z ciebie dumny.', [M('Jego brat powiedział to samo. Prawie się rozpłakałam przy obcym facecie.')])
       ]),
@@ -103,7 +103,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('Tomek był tylko jedną z jego spraw. Tam są inne.'),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.'),
       M('Kiedyś ci pokażę, jak je szukać.'),
-      M('Odbierz, jak zadzwonię. Tym razem.'),
+      M('tylko odbierz jak zadzwonię, ok? tym razem'),
       pause(3500),
       iff(E('swit'), [ending('swit')], [ending('odlamki')])
     ]),

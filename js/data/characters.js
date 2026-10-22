@@ -35,6 +35,15 @@ DATA.chats = {
   maja2: { name: 'Maja', avatar: 'maja' }
 };
 
+// Publiczne opisy profili. Sekrety fabularne nigdy nie trafiają do tych kart.
+Object.assign(DATA.chars.kuba, { age: 19, role: 'Studia · Wrocław / Mglisko', bio: 'informatyka, pierwszy rok. kawa z automatu i ostatni autobus do domu.', status: 'jak coś ważnego to pisz', cadence: { key: 48, think: 1100 } });
+Object.assign(DATA.chars.ola, { age: 22, role: 'Technik farmacji · Mglisko', bio: 'Praca, zaoczne, praca. Oddzwonię po zmianie 🫶', status: 'telefon na cichym', cadence: { key: 60, think: 1900 } });
+Object.assign(DATA.chars.bartek, { age: 24, role: 'Auto-Sowa · Mglisko', bio: 'auta robie na miejscu. wycen przez telefon nie robie', status: 'w warsztacie', cadence: { key: 79, think: 2600 } });
+Object.assign(DATA.chars.igor, { age: 23, role: 'Serwis GSM-PC · Rynek 8', bio: 'wyłącz i włącz. jak nie działa, kawa i dopiero wtedy dzwoń xD', status: 'zaraz wracam', cadence: { key: 44, think: 1500 } });
+Object.assign(DATA.chars.maja, { age: 22, role: 'Fotografia · ASP Wrocław', bio: 'zbieram światło, stare aparaty i bilety, których nie wyrzucam. 📷', status: 'jeszcze jedno zdjęcie i wracam', cadence: { key: 55, think: 1800 } });
+Object.assign(DATA.chars.weronika, { age: 41, role: 'Biblioteka Gminna · Mglisko', bio: 'Książki, góry, ogród. Wiadomości czytam zwykle wieczorem.', status: 'Do zobaczenia w bibliotece', cadence: { key: 90, think: 3000 } });
+Object.assign(DATA.chars.gajda, { age: 46, role: 'Posterunek Policji · Mglisko', bio: 'Kontakt służbowy. W nagłych sytuacjach proszę dzwonić pod 112.', cadence: { key: 85, think: 2800 } });
+
 DATA.contacts = [
   { name: 'Kuba Wrona', who: 'kuba', number: '604 228 961', cond: 'flag:knowKuba' },
   { name: 'Maja Wrona', who: 'maja', number: '731 402 118', cond: 'flag:knowMaja' },

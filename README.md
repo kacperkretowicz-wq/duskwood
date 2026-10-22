@@ -6,9 +6,15 @@ Ktoś pisze do ciebie w nocy: jego siostra zadzwoniła do ciebie tuż przed znik
 - **Prolog + 5 rozdziałów + epilog**, około 2–3 godziny gry
 - **3 zakończenia** zależne od decyzji (kto się dowie, komu zaufasz, gdzie zadzwonisz)
 - Gra udaje zwykły telefon: **iOS na iPhonie, Android na Androidzie** (automatycznie, można zmienić w Ustawieniach)
-- Wszystko — fabuła, zdjęcia, dźwięk — powstaje w kodzie gry, bez zewnętrznych plików
+- Fabuła i dźwięk powstają w kodzie, fotograficzne portrety i oprawa są dostarczane lokalnie w `assets/`; gra nie potrzebuje zewnętrznych API
 
 ## Uruchomienie
+
+### Windows — bez instalowania Node.js
+
+Na GitHubie wybierz **Code → Download ZIP**, wypakuj pobrany folder, a następnie otwórz `index.html` w Microsoft Edge albo Google Chrome. Nie otwieraj pliku bezpośrednio z archiwum ZIP. Gra i lokalne grafiki działają bez serwera; instalacja PWA wymaga uruchomienia przez HTTP.
+
+### Serwer lokalny
 
 Najprościej:
 
@@ -59,6 +65,10 @@ js/data/              postacie, dowody, kopia telefonu Mai, internet, świat
 js/story/             prolog, ch1–ch5, epilog (DSL fabuły)
 docs/KONCEPCJA.md     dokument projektowy: świat, postacie, prawda, rozdziały, mechaniki, rozszerzenie „Teren”
 ```
+
+## Oprawa i testy
+
+Komunikator, głosy postaci, tempo rozmów, grafiki i zgodność starych zapisów opisano w [OPRAWA-I-DIALOGI.md](docs/OPRAWA-I-DIALOGI.md). Walidacja fabuły: `node --test tests/story.test.cjs`. Testy przeglądarkowe po uruchomieniu serwera: `node tests/browser.cjs` (wymagają Playwright i Chromium).
 
 ## Narzędzia deweloperskie
 

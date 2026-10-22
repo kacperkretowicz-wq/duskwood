@@ -15,6 +15,19 @@ const Engine = (() => {
   let resolver = null;
   let waiter = null;
   const typingMap = {};
+  let lastTalk = null;
+
+  // Tempo konkretnej osoby: najpierw czyta, potem pisze; kolejne dymki idą seriami.
+  function cadence(chat, who, text, extra) {
+    const profile = (DATA.chars[who] && DATA.chars[who].cadence) || {};
+    const previous = G.chat(chat).msgs.at(-1);
+    const sameBurst = previous && previous.from === who && lastTalk && lastTalk.chat === chat && lastTalk.who === who && Date.now() - lastTalk.at < 18000;
+    const reading = previous && previous.from !== who ? Math.min((previous.text || '').length * 24, 3200) : 0;
+    const jitter = .85 + Math.random() * .3;
+    const gap = extra.gap ?? ((sameBurst ? 450 : (profile.think || 1500) + reading) * jitter);
+    const duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 14000));
+    return { gap, duration, hesitate: !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
+  }
 
   /* ---------- DSL ---------- */
   const D = {
@@ -214,14 +227,22 @@ const Engine = (() => {
       SFX.play.sent();
       return;
     }
-    const len = (text || '').length;
-    await sleep(extra.gap != null ? extra.gap : 420); guard(my);
-    const typ = extra.typing != null ? extra.typing : (extra.msg && extra.msg.img ? 1600 : U.clamp(480 + len * 30, 700, 4300));
+    const timing = cadence(chat, who, text, extra);
+    await sleep(timing.gap); guard(my);
     setTyping(chat, who, true);
-    try { await sleep(typ); } finally { if (my === gen) setTyping(chat, who, false); }
+    try {
+      if (timing.hesitate) {
+        await sleep(timing.duration * .35); guard(my);
+        setTyping(chat, who, false);
+        await sleep(1100); guard(my);
+        setTyping(chat, who, true);
+        await sleep(timing.duration * .65);
+      } else await sleep(timing.duration);
+    } finally { if (my === gen) setTyping(chat, who, false); }
     guard(my);
     if (extra.cancelIf && extra.cancelIf()) return;
     const msg = G.post(chat, Object.assign({ from: who, text }, extra.msg || {}));
+    lastTalk = { chat, who, at: Date.now() };
     if (msg.img) G.s.saved.push({ art: msg.img, t: msg.t, from: who, chat });
   }
 
@@ -491,6 +512,7 @@ const Engine = (() => {
 
   function restart() {
     gen++;
+    lastTalk = null;
     running = false;
     resolver = null;
     clearWaiter();

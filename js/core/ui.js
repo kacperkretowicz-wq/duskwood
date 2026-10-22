@@ -67,7 +67,10 @@ const UI = (() => {
     OS = detectOS();
     document.body.classList.add('os-' + OS);
     const stage = h('div', { id: 'stage' },
-      h('div', { class: 'stage-side' }, h('b', {}, 'MGLISKO'), 'Gra w telefonie. Najlepiej ze słuchawkami, po zmroku.'),
+      h('aside', { class: 'stage-side' }, h('div', { class: 'stage-kicker' }, 'INTERAKTYWNY THRILLER'), h('b', {}, 'MGLISKO'),
+        h('p', {}, 'Nie znasz tych ludzi.', h('br'), 'Jeszcze.'),
+        h('small', {}, 'Jedna nieodebrana rozmowa. Całe miasto, które ma coś do ukrycia.'),
+        h('div', { class: 'stage-save' }, h('i'), 'Twoje wybory zostają.')),
       h('div', { id: 'device' }, screen = h('div', { id: 'screen' })));
     document.body.appendChild(stage);
     island = h('div', { id: 'island' });
@@ -114,7 +117,7 @@ const UI = (() => {
     document.body.classList.toggle('real-status', mobile && !full);
     const dev = $('#device');
     if (!mobile) {
-      const k = Math.min(1, (window.innerHeight - 32) / 866, (window.innerWidth - 32) / 412);
+      const k = Math.min(1, (window.innerHeight - 32) / dev.offsetHeight, (window.innerWidth - 32) / dev.offsetWidth);
       dev.style.transform = `scale(${k})`;
     } else dev.style.transform = '';
   }
@@ -148,31 +151,26 @@ const UI = (() => {
   function renderHome() {
     if (!G.s) return;
     home.style.backgroundImage = `url(${Art.url('wallpaper')})`;
-    const DOCK = ['phone', 'messages', 'browser', 'gallery'];
-    const GRID = ['calendar', 'clock', 'weather', 'notes', 'maps', 'nimbus', 'ciemnia', 'bushview', 'settings'];
-    const icon = id => {
-      const a = apps[id];
-      const b = a.badge ? a.badge() : 0;
-      const isNew = a.unlock && !G.seen('app:' + id);
-      const el = h('button', { class: 'app-ic' + (isNew ? ' new' : ''), onclick: e => openApp(id, null, e.currentTarget) },
-        h('span', { class: 'ic', style: `--g:${GRAD[id]}`, html: glyph(id) },
-          b ? h('span', { class: 'badge' + (b === 'dot' ? ' dot' : '') }, b === 'dot' ? '' : (b > 99 ? '99+' : b)) : null),
-        h('span', { class: 'lb' }, appName(a)));
-      return el;
-    };
-    const wx = DATA.weather ? DATA.weather() : { now: 'mgła', temp: 4 };
-    const search = h('button', { class: 'h-search', onclick: () => openApp('browser') }, U.ico('search', 16), h('span', {}, OS === 'android' ? 'Szukaj w sieci' : 'Szukaj'));
     home.innerHTML = '';
-    [
-      h('div', { class: 'widget' },
-        h('div', { class: 'w-time' }, U.time(G.now())),
-        h('div', { class: 'w-date' }, cap(U.dayLong(G.now()))),
-        h('div', { class: 'w-wx' }, U.ico('fog', 15), `Mglisko · ${wx.now} · ${wx.temp}°C`)),
-      OS === 'android' ? search : null,
-      h('div', { class: 'grid' }, GRID.filter(appUnlocked).map(icon)),
-      OS === 'ios' ? search : null,
-      h('div', { class: 'dock' }, DOCK.filter(appUnlocked).map(icon))
-    ].filter(Boolean).forEach(n => home.appendChild(n));
+    const ch = Engine.chapters[G.s.chapter];
+    const recent = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id)).sort((a, b) => (G.chat(b).last || 0) - (G.chat(a).last || 0)).slice(0, 3);
+    home.append(
+      h('div', { class: 'hub-heading' }, h('small', {}, 'MGLISKO / TWÓJ TELEFON'), h('h1', {}, 'Po drugiej stronie.'), h('p', {}, cap(U.dayLong(G.now())) + ' · ' + U.time(G.now()))),
+      h('button', { class: 'hub-case', onclick: () => openApp('messages') },
+        h('div', { class: 'hub-case-shade' }, h('span', { class: 'case-tag' }, ch ? (ch.num === 0 ? 'PROLOG' : ch.num === 99 ? 'EPILOG' : 'ROZDZIAŁ ' + ch.num) : 'MGLISKO'),
+          h('h2', {}, ch ? ch.title : 'Nieodebrane'), h('p', {}, 'Maja Wrona, 22 lata. Nie wróciła do domu.'), h('span', { class: 'hub-continue' }, 'Otwórz rozmowy', U.ico('chat', 18)))),
+      h('div', { class: 'hub-section' }, h('b', {}, 'Ostatnie rozmowy'), h('button', { onclick: () => openApp('messages') }, 'Wszystkie')),
+      h('div', { class: 'hub-recent' }, recent.length ? recent.map(id => {
+        const c = G.chat(id), last = c.msgs.at(-1);
+        return h('button', { class: 'row', onclick: () => openApp('messages', { chat: id }) }, avatar(c.avatar || DATA.chats[id].avatar || id),
+          h('div', { class: 'rm' }, h('b', {}, c.name || DATA.chats[id].name), h('span', {}, last ? preview(last) : 'Otwórz rozmowę')),
+          c.unread ? h('span', { class: 'hub-unread' }, c.unread) : null);
+      }) : h('p', { class: 'empty' }, 'Wiadomości pojawią się tutaj.')),
+      h('div', { class: 'hub-section' }, h('b', {}, 'Pod ręką')),
+      h('div', { class: 'hub-tools' }, ['phone', 'notes', 'browser', 'gallery', 'maps', 'nimbus', 'ciemnia', 'bushview', 'weather', 'calendar', 'clock', 'settings'].filter(appUnlocked).map(id =>
+        h('button', { onclick: () => openApp(id) }, h('span', { class: 'hub-tool-icon', html: glyph(id) }), h('span', {}, appName(apps[id])), apps[id].badge && apps[id].badge() ? h('i') : null))),
+      h('p', { class: 'hub-footer' }, 'Słuchawki. Zgaszone światło. I jeszcze jedna wiadomość.')
+    );
   }
 
   /* ---------- aplikacje ---------- */
@@ -364,7 +362,7 @@ const UI = (() => {
     const name = (G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name;
     const title = cd.group ? `${who.short || who.name} · ${name}` : name;
     banner({
-      app: 'messages', open: { chat }, who: cd.group ? msg.from : (cd.avatar || msg.from), title,
+      app: 'messages', open: { chat }, who: cd.group ? msg.from : (G.chat(chat).avatar || cd.avatar || msg.from), title,
       text: preview(msg), sound: cd.group ? 'group' : 'msg', glitch: !!cd.glitch && Math.random() < 0.6
     });
   }
@@ -392,6 +390,12 @@ const UI = (() => {
 
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
+    if (who === 'gajda') return h('span', { class: 'av gajda-av ' + cls, role: 'img', 'aria-label': DATA.chars.gajda.name });
+    const photos = { kuba: [0, 0], ola: [1, 0], bartek: [2, 0], igor: [0, 1], maja: [1, 1], maja2: [1, 1], weronika: [2, 1] };
+    if (photos[who]) {
+      const [x, y] = photos[who];
+      return h('span', { class: 'av photo-av ' + cls, role: 'img', 'aria-label': (DATA.chars[who] || DATA.chars.maja).name, style: `--photo-x:${x * 50}%;--photo-y:${y * 75}%` });
+    }
     return h('span', { class: 'av ' + cls }, h('img', { src: Art.avatar(who), alt: '' }));
   }
 

@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 1,
+      v: 2,
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
       clock: { t: U.parseLocal(START), at: Date.now() },
@@ -27,6 +27,14 @@ const G = (() => {
   }
 
   const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, volume: 0.8, os: 'auto' };
+  function migrate(saved) {
+    if ((saved.v || 1) < 2) {
+      const map = STORY_MIGRATIONS[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map[saved.pc] != null) saved.pc = map[saved.pc];
+      saved.v = 2;
+    }
+    return saved;
+  }
   let settings = Object.assign({}, defaults);
   try { Object.assign(settings, JSON.parse(store.get(SKEY) || '{}')); } catch (e) { /* uszkodzone ustawienia */ }
 
@@ -41,7 +49,7 @@ const G = (() => {
     load() {
       const raw = store.get(KEY);
       if (!raw) return false;
-      try { api.s = Object.assign(fresh(), JSON.parse(raw)); api.s.clock.at = Date.now(); return true; }
+      try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); return true; }
       catch (e) { console.warn('Zapis uszkodzony', e); return false; }
     },
     wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; },
@@ -70,7 +78,7 @@ const G = (() => {
     loadCheckpoint(ch) {
       const raw = store.get(CP + ch); if (!raw) return false;
       const keepEndings = api.s ? api.s.endings : [];
-      api.s = Object.assign(fresh(), JSON.parse(raw));
+      api.s = Object.assign(fresh(), migrate(JSON.parse(raw)));
       api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
       api.s.clock.at = Date.now(); api.save(true); return true;
     },
