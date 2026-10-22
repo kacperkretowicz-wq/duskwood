@@ -8,7 +8,7 @@ function game(){
   window:{addEventListener(){}},document:{addEventListener(){}},Art:{def(){}},
   localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)}});
  for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/data/season-days.js','js/data/field-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
- return vm.runInContext('({G, DATA, Conversations})',ctx);
+ return vm.runInContext('({G, DATA, Conversations, M:STORY_MIGRATIONS_V3})',ctx);
 }
 function unlock(G){
  G.newGame({name:'Alex',gender:'f'}); G.unlock('chat:group');G.unlock('chat:weronika');
@@ -66,8 +66,8 @@ test('Lena unlocks corroboration, gallery, and person facts without awarding a p
 });
 test('old version 2 saves and checkpoints accept the additive conversation state',()=>{
  const {G,Conversations:C}=game();unlock(G);delete G.s.conversations;
- G.checkpoint('ch1');assert.ok(G.loadCheckpoint('ch1'));
- assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,2);
+ G.s.v=2;G.checkpoint('ch1');assert.ok(G.loadCheckpoint('ch1'));
+ assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,3);
 });
 test('character ages, evidence references, and dialogue destinations are valid',()=>{
  const {DATA}=game();
@@ -156,4 +156,16 @@ test('person facts do not turn an appointment or workshop jacket into a confirme
  assert.equal(DATA.timeline.filter(t=>G.test(t.cond)).some(t=>t.title==='Bartek nocą w hucie.'),false);
  G.addEv('ev_bartek_conf',true);facts=DATA.persons.bartek.facts.filter(f=>G.test(f.cond));
  assert.ok(facts.some(f=>/spotkał/.test(f.text)));assert.ok(facts.some(f=>/Przyznał/.test(f.text)));
+});
+
+test('v2 save inside chapter 2 resumes at the new Komendant scene; a pending choice stays on its step',()=>{
+ const {G,M}=game();
+ const old=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/story-v2-steps.json'),'utf8')).ch2;
+ const i=old.findIndex(st=>JSON.parse(st.sig)[4]==='słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu');
+ assert.ok(i>0);assert.ok(M.ch2.resume[i]<M.ch2.exact[i]);
+ for(const [pending,want] of [[null,M.ch2.resume[i]],[{chat:'group',type:'choose',options:[]},M.ch2.exact[i]]]){
+  G.newGame({name:'Alex',gender:'f'});G.s.v=2;G.s.chapter='ch2';G.s.pc=i;G.s.pending=pending;G.s.flags.keep=true;G.save(true);
+  assert.equal(G.load(),true);assert.equal(G.s.v,3);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want);
+  G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'second load does not migrate again');
+ }
 });

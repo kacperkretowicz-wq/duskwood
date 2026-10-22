@@ -74,14 +74,15 @@ const Engine = (() => {
     rename: (chat, name, avatar) => ({ t: 'rename', chat, name, avatar }),
     ambient: mood => ({ t: 'ambient', mood }),
     deduce: id => ({ t: 'unlock', keys: ['ded:' + id] }),
-    tl: id => ({ t: 'tl', id })
+    tl: id => ({ t: 'tl', id }),
+    scene: (id, steps) => ({ t: 'scene', id, steps })
   };
 
   /* ---------- Kompilacja ---------- */
   function compile(raw, chId) {
     const out = [];
-    let n = 0;
-    const L = p => `${p}${n++}`;
+    let n = 0, prefix = '';
+    const L = p => `${prefix}${p}${n++}`;
     const hasSteps = a => Array.isArray(a) ? a.flat(Infinity).filter(Boolean).length > 0 : !!a;
     function branches(list, end) {
       return (list || []).map(b => {
@@ -154,6 +155,16 @@ const Engine = (() => {
             out.push({ t: 'go', to: end });
             for (const b of bs) { out.push({ t: 'label', name: b.lab }); emit([b.then]); out.push({ t: 'go', to: end }); }
             out.push({ t: 'label', name: end });
+            break;
+          }
+          case 'scene': {
+            // Sceny dopisane po wydaniu mają własną przestrzeń etykiet: stare identyfikatory
+            // wyborów (zapis `used`, `tries`) nie przesuwają się, zmienia się tylko indeks kroku.
+            const pn = n, pp = prefix, start = out.length;
+            prefix = st.id + '.'; n = 0;
+            emit([st.steps]);
+            for (let i = start; i < out.length; i++) out[i] = Object.assign({}, out[i], { scene: out[i].scene || st.id });
+            n = pn; prefix = pp;
             break;
           }
           default: out.push(st);

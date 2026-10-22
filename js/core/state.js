@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 2,
+      v: 3,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -33,6 +33,15 @@ const G = (() => {
       const map = STORY_MIGRATIONS[saved.chapter];
       if (map && Number.isInteger(saved.pc) && map[saved.pc] != null) saved.pc = map[saved.pc];
       saved.v = 2;
+    }
+    if (saved.v < 3) {
+      // v3: dopisane sceny. Zapis w trakcie wyboru wraca dokładnie do tego wyboru;
+      // zapis między krokami wznawia od początku nowej sceny stojącej tuż przed nim.
+      const map = typeof STORY_MIGRATIONS_V3 !== 'undefined' && STORY_MIGRATIONS_V3[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 3;
     }
     return saved;
   }
