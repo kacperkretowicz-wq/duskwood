@@ -54,7 +54,7 @@ try {
  await page.locator('.contact-profile').waitFor({state:'detached'});
  console.log('PASS search, unread filter, contact profile, close with Escape');passed++;
  await page.evaluate(()=>UI.openApp('browser',{page:'kadr:maja.wrona'}));
- assert.ok(await page.locator('.photo-av').count()>0);
+assert.ok(await page.locator('.photo-av, .av img[src*="assets/people/"]').count()>0);
  await page.evaluate(()=>UI.goHome());
  for(const app of ['phone','browser','gallery','maps','settings']) {
   await page.evaluate(id=>UI.openApp(id),app);

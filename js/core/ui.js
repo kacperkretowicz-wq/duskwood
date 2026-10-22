@@ -436,7 +436,13 @@ const UI = (() => {
   function avatar(who, cls = '') {
     if (who === 'szklarz') who = 'unknown';
     const photo = DATA.chars[who]?.photo;
-    if (photo) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
+    if (photo && !/^assets\/people\//.test(photo)) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
+    if (photo) {
+      const sp = h('span', { class: 'av ' + cls });
+      const img = h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' });
+      img.onerror = () => { const c = DATA.chars[who]; const keep = c.photo; c.photo = null; sp.replaceWith(UI.avatar(who, cls.trim())); c.photo = keep; };
+      sp.appendChild(img); return sp;
+    }
     if (who === 'gajda') return h('span', { class: 'av gajda-av ' + cls, role: 'img', 'aria-label': DATA.chars.gajda.name });
     const photos = { kuba: [0, 0], ola: [1, 0], bartek: [2, 0], igor: [0, 1], maja: [1, 1], maja2: [1, 1], weronika: [2, 1] };
     if (photos[who]) {

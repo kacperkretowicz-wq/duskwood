@@ -26,6 +26,7 @@
       h('h2', {}, c.name || chatName(id)),
       h('p', { class: 'profile-role' }, c.role || cd.sub || 'Numer spoza kontaktów'),
       c.status ? h('p', { class: 'profile-status' }, c.status) : null,
+      c.life && c.life.length ? h('div', { class: 'profile-life' }, c.life.map(art => h('button', { class: 'life-th', 'aria-label': 'Zdjęcie', onclick: () => UI.viewImage(art, { list: c.life }) }, h('img', { src: Art.url(art), alt: '', loading: 'lazy' })))) : null,
       c.bio ? h('div', { class: 'profile-bio' }, h('small', {}, 'O MNIE'), h('p', {}, c.bio)) : null,
       c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null,
       known && Conversations.all().some(([, d]) => d.who === id) ? h('button', { class: 'btn wide side-profile-link', onclick: () => UI.openConversations(id) }, 'Porozmawiaj na osobności') : null) });

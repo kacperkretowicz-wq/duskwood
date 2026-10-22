@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v13';
+const VERSION = 'quiet-is-safer-v14';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -10,6 +10,7 @@ const FILES = [
   './js/data/field-threads.js', './js/core/phone-tools.js', './js/apps/phone-tools.js', './css/phone-tools.css',
   './assets/garage-locker-v1.jpg', './assets/strap-door-v1.jpg', './assets/garage-straps-v1.jpg',
   './assets/factory-day-v1.jpg',
+  './assets/people/bartek.jpg', './assets/people/bartek_life1.jpg', './assets/people/bartek_life2.jpg', './assets/people/igor.jpg', './assets/people/igor_life1.jpg', './assets/people/igor_life2.jpg', './assets/people/kuba.jpg', './assets/people/kuba_life1.jpg', './assets/people/kuba_life2.jpg', './assets/people/maja.jpg', './assets/people/maja_life1.jpg', './assets/people/ola.jpg', './assets/people/ola_life1.jpg', './assets/people/ola_life2.jpg', './assets/people/weronika.jpg', './assets/people/weronika_life1.jpg', './assets/people/weronika_life2.jpg',
   './assets/film/p_08.jpg', './assets/film/p_08d.jpg', './assets/film/p_14.jpg', './assets/film/p_14d.jpg',
   './assets/film/p_21.jpg', './assets/film/p_21d.jpg', './assets/film/p_22.jpg', './assets/film/p_22d.jpg',
   './assets/film/p_23.jpg', './assets/film/p_23d.jpg', './assets/film/p_23fog.jpg', './assets/kuba/k_gate.jpg',

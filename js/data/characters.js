@@ -112,3 +112,26 @@ DATA.endings = {
     ]
   }
 };
+
+/* Portrety i codzienne zdjęcia postaci (assets/people). Gdy plik się nie wczyta, UI.avatar wraca do people.png. */
+(() => {
+  const people = {
+    kuba: ['Zasnął nad kodem', 'Pociąg do Mgliska'],
+    ola: ['Sesja zaoczna', 'Zapiekanka na dniach miasta'],
+    bartek: ['Pod Astrą', 'Świt nad zalewem'],
+    igor: ['Serwis w rynku', 'Balkon, wieczór'],
+    weronika: ['Działka', 'Spotkanie w bibliotece'],
+    maja: ['Stara fabryka', 'Dni miasta z Olą']
+  };
+  const files = { maja: ['maja_life1', 'ola_life2'] };
+  Object.entries(people).forEach(([who, titles]) => {
+    const c = DATA.chars[who]; if (!c) return;
+    c.photo = 'assets/people/' + who + '.jpg';
+    c.life = titles.map((title, i) => {
+      const id = 'life_' + who + '_' + (i + 1);
+      const f = (files[who] || [])[i] || who + '_life' + (i + 1);
+      if (typeof Art !== 'undefined') Art.def(id, { src: 'assets/people/' + f + '.jpg', title, w: 1200, h: 900, draw: k => k.svg || '' });
+      return id;
+    });
+  });
+})();
