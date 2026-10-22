@@ -78,3 +78,8 @@ Siedem nocy z punktu 5 jest skondensowane w pięć rozdziałów:
 - **c3 „Wogóle”** (21.01): adres Zenona w grupie Sylwii, pokój z kasetami (zagadka z zegarem), telefon od Zenona, znikające wideo „on śpi”, „wogóle”, zwrot, telefon od Idy (`s4_cisza`).
 - **c4 „20:58”** (22.01): pierogi, wpis Oli, telefon do Idy na dwie minuty przed 21:00 i trzy zakończenia (`przewiniecie`, `transmisja`, `kopia2`).
 Do zrobienia: zapowiedź R1 na zdjęciu (zrobione jako `xSnieg`), fiszka z literówką w S2 (zrobione). Kolejne rozdziały (festyn jako osobna noc) są opcjonalne.
+
+### Aktualizacja (23.10, 1:40)
+- Dodana noc **cf „Festyn”** (20/21.01) między c2 i c3: telefon od Oli, znikające wideo z festynu na Błysku (zrzut ekranu trafia do grupy z imieniem gracza), zagadka z kadrem (kamera na scenie), przesyłanie w pobliżu z klatki schodowej, straszak `s4_festyn`.
+- Gęstsze rozdziały: górka Kuby, rysunek ze świetlicy Oli, ryż w serwisie Igora, babcia Zuzy i chrzest nagrany przez Zenona, grzeczne SMS-y Zenona (kontrast dla „wogóle”), czekanie przed 20:58 ze zdjęciem z galerii.
+- Gęstość w playteście: c0 38, c1 27, c2 29, cf 16 wiadomości na czacie (plus telefony), c3 26. Poziom S2/S3, nadal poniżej S1.
