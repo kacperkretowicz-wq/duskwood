@@ -59,16 +59,20 @@ const Seasons = (() => {
   }
   function canStartNext() {
     if (!G.s?.finished || !nextCase()) return false;
-    const ending = G.s.vars.endingId || G.s.seasonArchive?.[current().id]?.outcome?.ending;
+    const cur = current().id;
+    if (cur !== 's1') return !!(G.s.vars[cur + 'Ending'] || G.s.seasonArchive?.[cur]?.outcome?.ending);
+    const ending = G.s.vars.endingId || G.s.seasonArchive?.[cur]?.outcome?.ending;
     return ending === 'swit' || ending === 'odlamki' || (ending === 'cisza' && nextCase().chapters.includes('mp'));
   }
   function startNext() {
     if (!canStartNext()) return false;
     archive();
     const next = nextCase();
-    const first = G.s.vars.endingId === 'cisza' ? 'mp' : next.chapters.find(c => c !== 'mp');
+    const fromS1 = current().id === 's1';
+    // Prologi „po Ciszy” (mp, kp) startują tylko z gałęzi Ciszy w S1.
+    const first = fromS1 && G.s.vars.endingId === 'cisza' && next.chapters.includes('mp') ? 'mp' : next.chapters.find(c => c !== 'mp' && c !== 'kp');
     Object.assign(G.s, { seasonId: next.id, chapter: first, pc: 0, finished: false, pending: null, objective: null, call: null });
-    G.s.vars.s1Ending = G.s.vars.endingId;
+    if (fromS1) G.s.vars.s1Ending = G.s.vars.endingId;
     G.checkpoint(first); G.save(true); BUS.emit('season');
     return true;
   }
