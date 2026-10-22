@@ -58,7 +58,9 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
   const {chapters}=stories();
   const ids=new Set();
   for(const ch of Object.values(chapters))for(const s of ch.steps)if(s.scene){ids.add(s.scene);if(s.t==='label')assert.ok(s.name.startsWith(s.scene+'.'),s.name);}
-  assert.deepEqual(Array.from(ids).sort(),['epBartek','epIgor','epOla','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29']);
+  const fixed=['epBartek','epIgor','epOla','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
+  // sceny straszaków mają prefiks „sc” i zawierają co najmniej jeden krok scare
+  assert.deepEqual(Array.from(ids).filter(x=>!/^sc[A-Z]/.test(x)).sort(),fixed);
 });
 test('generated v3 migration table is up to date with the story sources',()=>{
   const {execFileSync}=require('node:child_process');
@@ -84,4 +86,14 @@ test('v4 migration table is up to date and maps every v3 step monotonically',()=
     // każdy wybór, który przetrwał bez zmian, trafia dokładnie na siebie
     old[ch].forEach((o,i)=>{const t=JSON.parse(o)[0];if(t==='choose'&&chapters[ch].steps.map(sig).includes(o))assert.equal(sig(chapters[ch].steps[m.exact[i]]),o,ch+':'+i);});
   }
+});
+
+test('every scare has a unique id, sits in its own scene and is rare (≤3 per chapter)',()=>{
+  const {chapters}=stories();const seen=new Set();
+  for(const [ch,c] of Object.entries(chapters)){
+    const sc=c.steps.filter(st=>st.t==='scare');
+    assert.ok(sc.length<=3,ch+': za dużo straszaków');
+    for(const st of sc){assert.ok(!seen.has(st.id),st.id);seen.add(st.id);assert.ok(st.scene&&/^sc[A-Z]/.test(st.scene),st.id+' w scenie sc*');assert.ok(['call','photo','face','glitch','breath'].includes(st.kind));}
+  }
+  assert.ok(seen.size>=4);
 });

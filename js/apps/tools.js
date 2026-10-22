@@ -516,7 +516,7 @@
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),
         h('div', { class: 'pad' }, sp),
         h('div', { class: 'sec-t' }, 'Dźwięk i wibracje'),
-        h('div', { class: 'list plain' }, toggle('Efekty dźwiękowe', 'sfx'), toggle('Dźwięk otoczenia', 'ambient', 'Wiatr, szkło, niski szum'), toggle('Wibracje', 'vibrate'), toggle('Podpowiedzi od postaci', 'autoHints', 'Gdy utkniesz, ktoś może coś zasugerować')),
+        h('div', { class: 'list plain' }, toggle('Efekty dźwiękowe', 'sfx'), toggle('Dźwięk otoczenia', 'ambient', 'Wiatr, szkło, niski szum'), toggle('Wibracje', 'vibrate'), toggle('Łagodniejsze straszenie', 'softScares', 'Bez głośnych dźwięków, błysków i nagłych zbliżeń'), toggle('Podpowiedzi od postaci', 'autoHints', 'Gdy utkniesz, ktoś może coś zasugerować')),
         h('div', { class: 'pad', style: 'margin-top:12px' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Głośność'), vol),
         h('div', { class: 'sec-t' }, 'Rozdziały'), chList,
         h('div', { class: 'sec-t' }, 'Zakończenia'), endings,

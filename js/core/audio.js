@@ -86,6 +86,20 @@ const SFX = (() => {
     vibe() { U.vibrate([60, 40, 60]); if (!on()) return; tone({ f: 150, d: 0.09, g: 0.04, type: 'square' }); tone({ f: 150, t: 0.13, d: 0.09, g: 0.04, type: 'square' }); },
     hangup() { if (!on()) return; tone({ f: 480, d: 0.25, g: 0.06 }); tone({ f: 380, t: 0.28, d: 0.3, g: 0.06 }); },
     beep() { if (!on()) return; tone({ f: 425, d: 0.4, g: 0.05 }); },
+    // Straszaki: zawsze przez ten sam master (głośność z ustawień i urządzenia), w trybie łagodnym ciszej i bez uderzenia.
+    sting(soft) {
+      if (!on()) return;
+      if (soft) { tone({ f: 110, d: 1.2, g: 0.035, a: 0.25 }); return; }
+      burst({ d: 0.35, g: 0.32, f: 900, q: 0.7 });
+      tone({ f: 58, d: 1.6, g: 0.3, a: 0.004, type: 'sawtooth', f2: 41 });
+      tone({ f: 466, d: 1.1, g: 0.07, a: 0.01, type: 'triangle' }); tone({ f: 494, d: 1.1, g: 0.07, a: 0.01, type: 'triangle' });
+    },
+    breath(soft) {
+      if (!on()) return;
+      const g = soft ? 0.05 : 0.12;
+      burst({ d: 1.1, g, f: 700, q: 0.6, type: 'lowpass' }); burst({ t: 1.5, d: 1.3, g: g * 0.8, f: 520, q: 0.6, type: 'lowpass' });
+    },
+    staticHit(soft) { if (!on()) return; burst({ d: soft ? 0.18 : 0.45, g: soft ? 0.05 : 0.22, f: 3200, q: 0.4 }); },
   };
 
   function ringStart(kind = 'in') {

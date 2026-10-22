@@ -2,7 +2,7 @@
 /* EPILOG — Listopad */
 
 Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopada', mood: 'dawn' }, D => {
-  const { say, pause, choose, opt, iff, run, goal, unlock, notify, title, clock, ambient, ending, credits, callIn, callEnd, set, fx, scene } = D;
+  const { say, pause, choose, opt, iff, run, goal, unlock, notify, title, clock, ambient, ending, credits, callIn, callEnd, set, fx, scene, scare } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const O = (t, o) => say('ola', 'ola', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -35,6 +35,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       pause(4000),
       callIn('unknown'),
       say('call', 'unknown', '…'),
+      scene('scCisza', [scare('s1_cisza_breath', 'breath')]),
       pause(4000),
       say('call', 'unknown', '(szum)'),
       pause(4000),

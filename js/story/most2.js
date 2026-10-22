@@ -297,7 +297,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
 });
 
 Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', when: 'Piątek, 27 listopada · 23:18', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene, scare } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -309,8 +309,17 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     title(),
     V('marta', 'marta', '0:38', 'Przepraszam, że głosówka, nie chce mi się pisać. Przesłuchałam te zaniki. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.', 'Marta'),
     give('ev_m_kuchnia', { silent: true }),
+    scene('scNoc', [
+      pause(9000),
+      clock('2026-11-27T23:52'),
+      scare('s2_nightcall', 'call', { name: 'Nieznany numer', ms: 7000 })
+    ]),
     pause(3000),
     clock('2026-11-28T10:02'),
+    scene('scNocRano', [
+      Nt('dzwonił do ciebie ktoś w nocy? do mnie o 23:50, nieznany numer. odebrałem i cisza'),
+      Nt('ida mówi że dudek przeglądał jej telefon na siłowni. miała tam numery do wszystkich od mostu. twój też, bo ci go przekazywałem')
+    ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),
     Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund'),
     Nt('sama mi pokazała wiadomości. płakała przy tym'),

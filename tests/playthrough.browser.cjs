@@ -74,7 +74,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
    const sceneBase=['igorMid','s12','s13','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
    const scenesWant=(want==='cisza'?sceneBase:['epBartek','epIgor','epOla',...sceneBase]).sort();
    if(target==='legacy')assert.equal(result.startV,4);
-   assert.deepEqual(result.scenes,scenesWant);
+   assert.deepEqual(result.scenes.filter(x=>!/^sc[A-Z]/.test(x)),scenesWant);
    if(want==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
    if(want==='swit')assert.equal(result.caught,true);
    assert.deepEqual(errors.filter(e=>!/favicon/.test(e)),[]);

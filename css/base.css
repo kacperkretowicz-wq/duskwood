@@ -387,3 +387,25 @@ body.mobile .hdr { padding-top: calc(36px + var(--safe-t)); min-height: calc(82p
 .su-o.on { border-color: var(--acc); background: var(--accd); }
 .setup .su-f { font-size: 12px; color: var(--tx3); margin-top: 14px; }
 .dbg-b { position: fixed; right: 10px; top: 10px; z-index: 999; background: #c23; color: #fff; font: 700 11px var(--mono); padding: 6px 9px; border-radius: 8px; opacity: .7; }
+
+/* ---------- straszaki (rzadkie, jednorazowe; tryb łagodny: .soft) ---------- */
+.scare-ov { position: absolute; inset: 0; z-index: 98; background: #000; display: flex; align-items: center; justify-content: center; pointer-events: auto; animation: scareIn .08s both; }
+.scare-ov.soft { animation: scareIn .9s both; }
+.scare-ov img { width: 100%; height: 100%; object-fit: cover; }
+.scare-ov.zoom img { animation: scareZoom 1.4s cubic-bezier(.2,.9,.3,1) both; }
+.scare-ov.soft.zoom img { animation: none; filter: brightness(.75); }
+.scare-ov .scare-cap { position: absolute; left: 0; right: 0; bottom: 10%; text-align: center; color: #ddd; font: 600 13px/1.3 ui-monospace, monospace; letter-spacing: .08em; text-shadow: 0 1px 2px #000; }
+.scare-ov.out { animation: fadeout .5s both; }
+.scare-glitch { animation: scareGlitch .55s steps(2) both; }
+.scare-glitch.soft { animation: none; filter: contrast(1.15) brightness(.85); transition: filter .6s; }
+@keyframes scareIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes scareZoom { from { transform: scale(1.0) } to { transform: scale(1.18) } }
+@keyframes scareGlitch {
+  0% { transform: translate(0); filter: none }
+  20% { transform: translate(-6px, 2px) skewX(4deg); filter: hue-rotate(80deg) contrast(2) }
+  40% { transform: translate(5px, -3px); filter: invert(1) }
+  60% { transform: translate(-3px, 0) skewX(-6deg); filter: saturate(4) }
+  80% { transform: translate(2px, 2px); filter: grayscale(1) contrast(3) }
+  100% { transform: translate(0); filter: none }
+}
+@media (prefers-reduced-motion: reduce) { .scare-ov, .scare-ov.zoom img, .scare-glitch { animation: none !important; } }

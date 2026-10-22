@@ -75,7 +75,9 @@ const Engine = (() => {
     ambient: mood => ({ t: 'ambient', mood }),
     deduce: id => ({ t: 'unlock', keys: ['ded:' + id] }),
     tl: id => ({ t: 'tl', id }),
-    scene: (id, steps) => ({ t: 'scene', id, steps })
+    scene: (id, steps) => ({ t: 'scene', id, steps }),
+    // Straszak: odpala się raz na zapis (s.scares), nigdy przy przewijaniu ani po wczytaniu.
+    scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o })
   };
 
   /* ---------- Kompilacja ---------- */
@@ -419,6 +421,16 @@ const Engine = (() => {
       case 'rename': G.chat(st.chat).name = st.name; if (st.avatar) G.chat(st.chat).avatar = st.avatar; BUS.emit('chats'); G.change(); return;
       case 'toast': UI.toast(st.text, st); return;
       case 'fx': await UI.fx(st.name, st); guard(my); return;
+      case 'scare': {
+        s.scares = s.scares || {};
+        if (s.scares[st.id]) return;
+        s.scares[st.id] = G.now ? G.now() : Date.now();
+        G.save();
+        if (ff) return;
+        const r = await UI.scare(st.kind, st); guard(my);
+        if (r === 'accept' && st.onAccept) G.setFlag(st.onAccept);
+        return;
+      }
       case 'run': { const r = st.fn(s, G); return typeof r === 'string' ? r : undefined; }
       case 'task': { stopFF(); const r = await st.fn(s, G); guard(my); return typeof r === 'string' ? r : undefined; }
 

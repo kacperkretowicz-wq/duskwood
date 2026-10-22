@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 2 — Huta */
 
 Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października · wieczór', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene, label, go } = D;
+  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene, label, go, scare } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -194,6 +194,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     pause(3500),
     g('kuba', 'jest dziura w siatce. jesteśmy w środku'),
     sync('maja:cam58', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0058.JPG' }),
+    scene('scCam58', [scare('s1_cam58', 'face', { img: 'c1_0058', caption: 'CAM-01 · 22.10.2026 · 23:41' })]),
     g('igor', 'no i właśnie mamy zdjęcie z jej fotopułapki. przynajmniej działa 🙃'),
     /* Plan sprawdzony w s13: nie pytamy drugi raz o szatnię. */
     scene('s13go', [iff('flag:planChecked', [

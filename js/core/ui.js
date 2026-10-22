@@ -705,11 +705,67 @@ const UI = (() => {
     }
   }
 
+  /* ---------- straszaki ----------
+     Rzadkie i jednorazowe (engine pilnuje s.scares). Tryb łagodny (Ustawienia): bez głośnego dźwięku,
+     błysku i nagłego zbliżenia. Dźwięk idzie przez wspólny master, więc słucha głośności gry i urządzenia. */
+  function scare(kind, o = {}) {
+    const soft = !!(G.settings.softScares || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches));
+    const fast = G.settings.speed === 'instant';
+    const wait = ms => U.sleep(fast ? Math.min(ms, 120) : ms);
+    closeOverlays();
+    if (kind === 'glitch') {
+      screen.classList.add('scare-glitch'); if (soft) screen.classList.add('soft');
+      SFX.play.staticHit(soft); if (!soft) U.vibrate([20, 40, 20, 40, 60]);
+      return wait(soft ? 700 : 560).then(() => { screen.classList.remove('scare-glitch', 'soft'); });
+    }
+    if (kind === 'breath') { SFX.play.breath(soft); if (!soft) U.vibrate(40); return wait(2600); }
+    if (kind === 'photo' || kind === 'face') {
+      const el = h('div', { class: 'scare-ov' + (soft ? ' soft' : '') + (kind === 'face' ? ' zoom' : '') },
+        h('img', { src: o.src || Art.url(o.img), alt: '' }),
+        o.caption ? h('div', { class: 'scare-cap' }, o.caption) : null);
+      screen.appendChild(el);
+      if (kind === 'face') { SFX.play.sting(soft); if (!soft) U.vibrate(260); } else SFX.play.staticHit(true);
+      return wait(o.ms || (kind === 'face' ? 1300 : 1700)).then(() => { el.classList.add('out'); return wait(500); }).then(() => el.remove());
+    }
+    if (kind === 'call') {
+      // Połączenie, które dzwoni samo i samo się urywa. Odebranie = cisza i oddech, nic więcej.
+      return new Promise(res => {
+        const el = h('div', { class: 'call scare-call' },
+          h('div', { class: 'c-av' }, o.who ? avatar(o.who, 'xl') : h('div', { class: 'av xl', style: 'background:#333' })),
+          h('h2', {}, o.name || 'Nieznany numer'),
+          h('div', { class: 'c-s' }, o.number || 'Połączenie przychodzące'),
+          h('div', { style: 'flex:1' }),
+          h('div', { class: 'c-btns' },
+            h('button', { class: 'c-btn dec', 'aria-label': 'Odrzuć', html: U.icon('hang', 32), onclick: () => end('decline') }),
+            h('button', { class: 'c-btn acc', 'aria-label': 'Odbierz', html: U.icon('phone', 30), onclick: () => pick() })));
+        screen.appendChild(el);
+        if (soft) SFX.play.vibe(); else SFX.ringStart('in');
+        let over = false;
+        const timer = setTimeout(() => end('missed'), fast ? 150 : (o.ms || 6500));
+        function pick() {
+          if (over) return; SFX.ringStop(); clearTimeout(timer);
+          el.querySelector('.c-btns').remove();
+          el.querySelector('.c-s').textContent = '00:00';
+          SFX.play.breath(soft);
+          let sec = 0; const t = setInterval(() => { sec++; const n = el.querySelector('.c-s'); if (n) n.textContent = '00:0' + sec; }, 1000);
+          wait(o.listen || 3600).then(() => { clearInterval(t); end('accept'); });
+        }
+        function end(r) {
+          if (over) return; over = true; clearTimeout(timer); SFX.ringStop(); SFX.play.hangup();
+          el.classList.add('out'); setTimeout(() => el.remove(), 450);
+          if (o.log !== false && G.s.calls) { G.s.calls.unshift({ who: o.who || null, number: o.number || '', label: o.name || 'Nieznany numer', dir: r === 'accept' ? 'in' : r === 'decline' ? 'declined' : 'missed', t: G.now(), dur: r === 'accept' ? 4 : 0, seen: false }); BUS.emit('badges'); G.save(); }
+          res(r);
+        }
+      });
+    }
+    return U.sleep(0);
+  }
+
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
     banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
-    fx, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
+    fx, scare, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };
 })();

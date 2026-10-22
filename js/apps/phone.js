@@ -17,8 +17,10 @@
       if (entry.who === 'maja' && !G.flag('knowMaja')) return '+48 ' + fmtNum(DATA.chars.maja.number);
       return DATA.chars[entry.who].name;
     }
-    const c = DATA.contacts.find(x => digits(x.number) === digits(entry.number));
-    return c ? c.name : '+48 ' + fmtNum(entry.number);
+    const c = entry.number && DATA.contacts.find(x => digits(x.number) === digits(entry.number));
+    if (c) return c.name;
+    if (!entry.number) return entry.label || 'Nieznany numer';
+    return '+48 ' + fmtNum(entry.number);
   }
 
   UI.def('phone', {
