@@ -15,6 +15,7 @@
 
   function title() {
     const has = G.hasSave() && G.load();
+    if (has && G.s.finished && !G.s.seasonArchive?.[Seasons.current().id]) Seasons.archive();
     const scr = UI.screen;
     const el = h('div', { class: 'title-scr' },
       h('div', { class: 'ts-bg', style: `background-image:url(${Art.url('title_bg')})` }),

@@ -82,8 +82,9 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
   if(shots&&width===390)await page.screenshot({path:path.join(shots,os+'-sezon.png')});
   assert.ok(await page.evaluate(()=>document.querySelector('.season-body').scrollWidth<=document.querySelector('.season-body').clientWidth+1));
   // Finished saves have an accessible post-season route, with the correct cast.
-  await page.evaluate(()=>{G.s.finished=true;G.s.vars.endingId='swit';G.setFlag('majaFound');Seasons.archive();G.save(true);});
+  await page.evaluate(()=>{G.s.finished=true;G.s.vars.endingId='swit';G.setFlag('majaFound');delete G.s.seasonArchive;G.save(true);});
   await page.reload();await page.getByRole('button',{name:'Po zakończeniu',exact:true}).click();
+  assert.equal(await page.evaluate(()=>G.s.seasonArchive.s1.outcome.ending),'swit','completed legacy saves acquire the continuation archive');
   await page.getByRole('button',{name:'Wróć do śledztwa'}).click();
   await page.evaluate(()=>UI.openConversation('maja_aftercare'));await page.locator('.side-person').filter({hasText:'Maja'}).waitFor();
   assert.equal(await page.evaluate(()=>Conversations.open('kuba_missing')),null);
