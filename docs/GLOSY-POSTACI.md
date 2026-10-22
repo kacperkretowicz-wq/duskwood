@@ -14,6 +14,11 @@ Zasady redakcyjne dla aktualnych dialogów i kolejnych odcinków. Obejmują teks
 | Lena, 24 | Czytelne zdania, ale zwykła wiadomość z pętli, nie protokół zeznania. Podaje liczby, prostuje przypisaną jej pewność. Napisze `Uff` i zażartuje o kanapkach od taty. | Sześć minut przerwy, powtarzalna trasa, rodzinne wiadomości. | Odpisywanie podczas jazdy; wypowiedzi jak rzeczniczka śledztwa; rozpoznanie twarzy, której nie widziała. |
 | Weronika, 41 | Wielkie litery, interpunkcja, zwroty `Pan/Pani`. Pamięta konkret: kaptur, mleko, zwroty w bibliotece. Emocja może przerwać poprawne zdanie. | Album, kolacja, praca w bibliotece i stare rodzinne rytuały. | Każda odpowiedź jako sentencja; udawanie pewnej pamięci po 29 latach; slang młodszej grupy. |
 | Gajda, 46 | Służbowy początek, uprzejma forma, polecenia podane jako pomoc rodzinie. Nacisk wynika z tego, co ktoś mu ujawnił. | Dostępność pod numerem, jeden komplet materiałów, uzgadnianie działań. | Groźba jak z plakatu horroru; wiedza o niewysłanych plikach; emotikony ocieplające antagonistę. |
+| Nina, 23 (sprawa 2) | Małe litery, przecinki zamiast kropek, `w sensie`, `sorry`. Sama zastrzega, czego nie widziała. | Rejon, karta trasy, szefowa, kawa z automatu. | Pewność rozpoznania; bohaterski ton; emoji przy temacie zaginięcia. |
+| Marta, 24 (sprawa 2) | Pełne zdania, znaczniki czasu `03:12–03:51`. Pod presją małe litery i bez kropek. Nie żartuje o pracy. | Archiwum, eksport, kamera, mama i terminy. | Hakerski żargon; wyostrzanie nagrań; spowiedź w akapitach. |
+| Natan, 25 (sprawa 2) | Szybko, literówki, `sorry`, brak polskich znaków w połowie słów. Broni się technicznie, potem bierze winę. | Montaż, naczelny, stażystka, dedlajn. | Cynizm; zrzucanie winy na Idę. |
+| Henryk, 74 (sprawa 2) | Dzwoni. Kropki co dwa słowa, SMS capslockiem. | Szuflada z rachunkami, żona, ławka. | Gwara z kabaretu; płaczliwość. |
+| Janina Kurek, 48 (sprawa 2) | „Szanowni Państwo”, wypunktowania, uprzejmy chłód. Nigdy nie grozi wprost. | Dokumentacja, organy, terminy. | Groźby; złoczyńca z filmu. |
 
 ## Emotikony i śmiech
 
