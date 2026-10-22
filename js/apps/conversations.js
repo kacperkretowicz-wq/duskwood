@@ -10,7 +10,7 @@
     items.forEach(([id, d]) => {
       const s = Conversations.state(id), c = DATA.chars[d.who];
       const row = h('button', { class: 'side-lead', onclick: () => { sheet.close(true); UI.openConversation(id); } },
-        UI.avatar(d.who), h('div', {}, h('small', {}, `${c.short} · ${s?.done ? 'Zapis rozmowy' : s ? 'Wróć do rozmowy' : d.label}`),
+        UI.avatar(d.who), h('div', {}, h('small', {}, `${c.short} · ${s?.done || !G.test(d.cond) ? 'Zapis rozmowy' : s ? 'Wróć do rozmowy' : d.label}`),
           h('b', {}, d.title), h('span', {}, d.preview)), U.ico('back', 15));
       body.append(row);
     });
@@ -39,19 +39,26 @@
         if (d.deduction) {
           const solved = !!G.s.solved[d.deduction];
           actions.append(h('button', { class: 'btn pri wide', onclick: () => { sh.close(true); UI.openApp('notes', { ded: d.deduction, note: 'questions' }); } }, solved ? 'Zobacz zapisany wniosek' : 'Porównaj materiały w Notatkach'));
+        }
+        const attachments = [...new Set([...(d.reward || []), ...s.choices.flatMap(({ node, index }) => d.nodes[node].choices[index].reward || [])])];
+        if (attachments.length) {
           const ev = h('div', { class: 'side-attachments' });
-          d.reward.forEach(id => ev.append(h('button', { onclick: () => { const e = G.ev(id); if (e.img) UI.viewImage(e.img, { title: e.title }); else UI.evSheet(id); } }, U.ico('clip', 14), G.ev(id).title)));
+          attachments.filter(id => G.has(id)).forEach(id => ev.append(h('button', { onclick: () => { const e = G.ev(id); if (e.img) UI.viewImage(e.img, { title: e.title }); else UI.evSheet(id); } }, U.ico('clip', 14), G.ev(id).title)));
           actions.append(ev);
         }
         return;
       }
+      if (!G.test(d.cond)) {
+        actions.append(h('p', { class: 'side-complete' }, 'Zapis archiwalny. Nie możesz już odpowiedzieć w tej rozmowie.'));
+        return;
+      }
       actions.append(h('small', { class: 'side-label' }, 'TWOJA ODPOWIEDŹ'));
-      d.nodes[s.node].choices.forEach((choice, index) => actions.append(h('button', { class: 'side-choice', onclick: () => {
+      d.nodes[s.node].choices.forEach((choice, index) => { if (!G.test(choice.cond)) return; actions.append(h('button', { class: 'side-choice', onclick: () => {
         if (busy || closed) return;
         const before = s.transcript.length;
         if (!Conversations.answer(id, s.node, index)) return;
         SFX.play.tap(); busy = true; visible = before + 1; render(); reveal();
-      } }, U.tpl(choice.text), U.ico('send', 15))));
+      } }, h('span', {}, U.tpl(choice.text), choice.detail ? h('small', {}, choice.detail) : null), U.ico('send', 15))); });
     }
     function reveal() {
       const duration = G.settings.speed === 'instant' ? 25 : G.settings.speed === 'fast' ? 350 : Math.min(1800, 450 + (s.transcript[visible]?.text.length || 0) * 12);

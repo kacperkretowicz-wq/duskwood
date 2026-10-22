@@ -4,8 +4,10 @@
 const SFX = (() => {
   let ctx = null, master = null, sfxBus = null, ambBus = null, nbuf = null;
   let amb = null, ringTimer = null;
+  let active = !document.hidden;
 
   function ac() {
+    if (!active) return null;
     if (!ctx) {
       const C = window.AudioContext || window.webkitAudioContext;
       if (!C) return null;
@@ -58,7 +60,7 @@ const SFX = (() => {
     group() { if (!on()) return; tone({ f: 784, d: 0.12, g: 0.08 }); tone({ f: 1175, t: 0.07, d: 0.25, g: 0.06 }); },
     sent() { if (!on()) return; tone({ f: 520, f2: 880, d: 0.1, g: 0.05, type: 'triangle' }); },
     notif() { if (!on()) return; [659, 988, 1319].forEach((f, i) => tone({ f, t: i * 0.11, d: 0.55 - i * 0.08, g: 0.07 })); },
-    discover() { if (!on()) return; [784, 988, 1175, 1568].forEach((f, i) => tone({ f, t: i * 0.065, d: 0.6, g: 0.055, type: 'triangle' })); },
+    discover() { if (!on()) return; tone({ f: 523, d: 0.32, g: 0.035, type: 'triangle' }); tone({ f: 784, t: 0.06, d: 0.42, g: 0.018 }); },
     unlock() { if (!on()) return; tone({ f: 523, d: 0.18, g: 0.07 }); tone({ f: 784, t: 0.1, d: 0.35, g: 0.07 }); },
     error() { if (!on()) return; tone({ f: 196, d: 0.16, g: 0.07, type: 'square' }); tone({ f: 147, t: 0.11, d: 0.22, g: 0.06, type: 'square' }); },
     tap() { if (!on()) return; tone({ f: 2200, d: 0.025, g: 0.018 }); },
@@ -115,7 +117,7 @@ const SFX = (() => {
       tense: { lp: 520, lfo: 0.11, ng: 0.06, drone: [49, 49.6, 73.4], dg: 0.024, chime: 18 },
       dark: { lp: 260, lfo: 0.035, ng: 0.06, drone: [41.2, 41.5, 61.7], dg: 0.03, chime: 34 },
       dawn: { lp: 700, lfo: 0.04, ng: 0.03, drone: [65.4, 98, 130.8], dg: 0.012, chime: 12 }
-    }[mood] || {};
+    }[mood] || { lp: 380, lfo: 0.05, ng: 0.05, drone: [55, 55.3], dg: 0.018, chime: 26 };
     const nodes = [];
     const src = c.createBufferSource(); src.buffer = noiseBuf(); src.loop = true;
     const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = cfg.lp; lp.Q.value = 0.7;
@@ -136,12 +138,21 @@ const SFX = (() => {
     });
     const chime = () => {
       if (!amb) return;
-      const base = [1760, 2093, 2349, 2637, 3136][Math.floor(Math.random() * 5)];
-      tone({ f: base, d: 4, g: 0.012, a: 0.01, dest: ambBus });
-      tone({ f: base * 1.5, t: 0.02, d: 3, g: 0.006, a: 0.01, dest: ambBus });
+      if (active && G.settings.ambient) {
+        if (mood === 'dark' || mood === 'tense') {
+          // Nierówne, ciche naprężenie metalu w tle, bez sugerowania kroków
+          // czy nowego zdarzenia fabularnego. Brak melodyjnego „odliczania”.
+          const base = 145 + Math.random() * 65;
+          tone({ f: base, f2: base * 0.93, d: 2.4, g: 0.007, a: 0.6, dest: ambBus });
+          tone({ f: base * 2.71, d: 1.7, g: 0.003, a: 0.35, dest: ambBus });
+        } else {
+          const base = [1760, 2093, 2349, 2637, 3136][Math.floor(Math.random() * 5)];
+          tone({ f: base, d: 4, g: 0.008, a: 0.01, dest: ambBus });
+        }
+      }
       amb.timer = setTimeout(chime, (cfg.chime + Math.random() * cfg.chime) * 1000);
     };
-    amb = { mood, nodes, timer: setTimeout(chime, 8000) };
+    amb = { mood, nodes, timer: setTimeout(chime, (cfg.chime + Math.random() * cfg.chime) * 1000) };
     ambBus.gain.setValueAtTime(0, c.currentTime);
     ambBus.gain.linearRampToValueAtTime(1, c.currentTime + 4);
   }
@@ -186,6 +197,11 @@ const SFX = (() => {
 
   function setVolume(v) { if (master) master.gain.value = v; }
   function unlockAudio() { ac(); }
+  function setActive(value) {
+    active = !!value;
+    if (ctx) (active ? ctx.resume() : ctx.suspend()).catch(() => {});
+  }
+  document.addEventListener('visibilitychange', () => setActive(!document.hidden));
 
-  return { play, ringStart, ringStop, ambient, tuner, setVolume, unlockAudio };
+  return { play, ringStart, ringStop, ambient, tuner, setVolume, unlockAudio, setActive };
 })();

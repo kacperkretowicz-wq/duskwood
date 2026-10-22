@@ -1,10 +1,12 @@
 # MGLISKO — historia, ludzie i sezony
 
-Wersja redakcyjna 1.2, 22.10.2026. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
+Wersja redakcyjna 1.3, 22.10.2026. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
 
 ## Co jest grą, a co celem produkcji
 
-W grze: prolog, pięć rozdziałów, epilog, trzy zakończenia, piętnaście rozmów opcjonalnych, śledztwo Leny, śledztwo tapety, trzydzieści etapów postępu, zapis sesji i konsekwencji finału. Jest wybór swobodnego tempa oraz pięciodniowego pilota z terminami rozdziałów i lokalnymi powiadomieniami w aplikacji mobilnej. Istniejące sceny nie zostały zastąpione trzydziestoma pełnymi odcinkami.
+W grze: prolog, pięć rozdziałów, epilog, trzy zakończenia, dwadzieścia rozmów opcjonalnych, śledztwo Leny, śledztwo tapety, historia zmienionej notatki „Do Oli”, trzydzieści etapów postępu, zapis sesji i konsekwencji finału. Jest wybór swobodnego tempa oraz pięciodniowego pilota z terminami rozdziałów i lokalnymi powiadomieniami w aplikacji mobilnej. Istniejące sceny nie zostały zastąpione trzydziestoma pełnymi odcinkami.
+
+Wdrożony mroczny wątek notatki i autorskie ustalenie sprawcy edycji: [MROK-I-SLADY.md](MROK-I-SLADY.md). Gajda zmienia tekst na telefonie Mai; zostają wcześniejsze wersje. Gracz ustala zmianę, lecz sama historia wersji nie identyfikuje autora. Po ratunku Maja potwierdza przymus przy SMS-ie i uczciwie nie potwierdza sceny edycji, której nie pamięta.
 
 Cel pełnego sezonu: około 30 dni kalendarzowych przy sesjach 15–30 minut. To 450–900 minut aktywnej gry. Obecna baza była pisana na 2–3 godziny; dodatkowe rozmowy nie są dowodem osiągnięcia tego celu. Poniższe rozpiski są scenariuszem rozbudowy i kryteriami produkcji, nie obietnicą już dostarczonej objętości. Liczba 30 w interfejsie oznacza etapy, nie trzydzieści równych dni.
 

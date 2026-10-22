@@ -4,7 +4,7 @@ Gra detektywistyczna rozgrywana w całości na „telefonie”, w stylu *Duskwoo
 Ktoś pisze do ciebie w nocy: jego siostra zadzwoniła do ciebie tuż przed zniknięciem. Ty jej nie znasz — ale twój numer kiedyś należał do kogoś, komu ufała.
 
 - **Prolog + 5 rozdziałów + epilog**, baza historii pisana na 2–3 godziny, rozbudowywana rozmowami i dodatkowymi śledztwami
-- **15 rozmów opcjonalnych**, trop tapety, śledztwo ostatniego kursu, podsumowania sesji i zapis konsekwencji do kontynuacji
+- **20 rozmów opcjonalnych**, trop tapety, śledztwo ostatniego kursu, historia zmienionej notatki, podsumowania sesji i zapis konsekwencji do kontynuacji
 - Swobodne tempo albo **pięciodniowy pilot kalendarzowy**; natywne powiadomienia po zgodzie gracza. Pełny miesięczny sezon jest celem produkcji, nie aktualną długością tej wersji
 - **3 zakończenia** zależne od decyzji (kto się dowie, komu zaufasz, gdzie zadzwonisz)
 - Gra udaje zwykły telefon: **iOS na iPhonie, Android na Androidzie** (automatycznie, można zmienić w Ustawieniach)
@@ -97,6 +97,12 @@ Aktualny interfejs telefonu korzysta z systemowych fontów, jasnego/ciemnego wyg
 Pełna walidacja dodatku: `node --test tests/story.test.cjs tests/conversations.test.cjs`, następnie przy działającym serwerze `node tests/browser.cjs` i `node tests/conversations.browser.cjs`. Narzędzia testowe pozostają zewnętrzne; sama gra nie wymaga instalacji zależności.
 
 Testy nowej powłoki: `node tests/native-ui.browser.cjs`. Przejście prologu przez połączenia, SMS-y, dwie strony wyszukiwarki i grupę: `node tests/prolog.browser.cjs`. `npm test` obejmuje też eksport zasobów aplikacji. Workflow `Mobile build` próbuje kompilacji Android debug i iOS Simulator przy zmianach PR; wynik kompilacji trzeba odczytać z konkretnego uruchomienia Actions.
+
+### Do Oli · mrok i ślady (1.3)
+
+Nocna kopia w rozdziale 3 przynosi notatkę, której treść zastąpiono żądaniem przerwania poszukiwań. W Nimbus → Notatki Mai → Do Oli → Historia wersji można zachować oba zapisy i porównać źródła w Notatkach. Pięć dodatkowych rozmów rozwija ten wątek przez codzienne przedmioty, presję Gajdy oraz reakcje Kuby i Mai na decyzję gracza o przekazaniu plików. Rozmowy pozostają dostępne do odczytu po zmianie etapu, ale nie pozwalają ujawniać nowych informacji w trakcie ratunku.
+
+W tense/dark tło ma ciche, nieregularne brzmienia metalu zamiast wysokich melodyjnych dzwonków. Odkrycia nie grają zwycięskiej fanfary; dźwięk zatrzymuje się w tle. Głośność i ambient można wyłączyć. [Zakres i chronologia](docs/MROK-I-SLADY.md). Test interakcji, źródeł, wznowienia, konsekwencji i offline: `node tests/dark-threads.browser.cjs`.
 
 ## Narzędzia deweloperskie
 

@@ -297,6 +297,21 @@
     G.markSeen('mj:note:' + n.id);
     const pg = UI.page({ title: n.title, sub: fmtT(n.t) });
     pg.body.appendChild(h('div', { class: 'paper', html: U.rich(n.body) }));
+    if (n.versions) {
+      pg.body.append(h('p', { class: 'nb-hint' }, `Kopia odebrana: ${fmtT(n.synced)}. Historia zawiera wcześniejsze zapisy z tego urządzenia.`),
+        h('div', { class: 'pad' }, h('button', { class: 'btn wide', onclick: () => {
+          const body = h('div', { class: 'note-history' }, h('p', { class: 'nb-hint' }, 'Godziny zapisu pochodzą z urządzenia. Synchronizacja nie ustala, kto pisał tekst. Wersje są tylko do odczytu.'));
+          n.versions.slice().reverse().forEach(v => body.append(h('article', { class: 'note-version' },
+            h('h4', {}, `${v.label} · ${fmtT(v.t)}`), h('div', { class: 'paper', html: U.rich(v.body) }),
+            h('button', { class: 'btn wide', onclick: e => {
+              if (G.addEv(v.ev)) UI.evidenceToast(v.ev);
+              e.currentTarget.textContent = 'Zapisano w Notatkach';
+            } }, G.has(v.ev) ? 'Zapisano w Notatkach' : 'Zachowaj tę wersję'))));
+          body.append(h('div', { class: 'pad' }, h('button', { class: 'btn pri wide', onclick: () => { sh.close(true); UI.openApp('notes', { note: 'questions', ded: n.deduction }); } }, 'Porównaj wersje w Notatkach')));
+          G.unlock('ded:' + n.deduction);
+          const sh = UI.sheet({ title: 'Historia wersji', body });
+        } }, 'Historia wersji')));
+    }
     if (n.ev) [].concat(n.ev).forEach(e => { if (G.addEv(e)) UI.evidenceToast(e); });
     G.change();
     return { el: pg.el };

@@ -231,7 +231,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     set('majaOnline'),
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest online.', sound: 'notif' }),
     pause(1800),
-    sync('maja:sync1', { count: 5, text: 'Zsynchronizowano zaległe pliki (5) z urządzenia „Telefon Mai”.' }),
+    sync('maja:sync1', { count: 6, text: 'Zsynchronizowano zaległe pliki (6) z urządzenia „Telefon Mai”. W tym notatkę z historią wersji.' }),
     fx('vibrate'),
     K('MAMA DOSTAŁA SMS OD MAI'),
     K('TERAZ'),

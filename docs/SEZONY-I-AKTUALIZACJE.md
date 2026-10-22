@@ -1,6 +1,8 @@
-# Sezony, zapis i powiadomienia — wydanie 1.2
+# Sezony, zapis i powiadomienia — wydanie 1.3
 
 ## Obecny zakres
+
+Rewizja zawartości sezonu `s1`: 2. Wydanie 1.3 dodaje historię wersji notatki „Do Oli”, pięć rozmów i konsekwencje udostępnienia plików. Numery kroków głównej historii i format zapisu v2 pozostają zgodne. Zaczęte rozmowy zachowują transkrypcję po utracie dostępności; możliwość odpowiedzi zależy od aktualnego etapu. [Ustalenia fabularne i źródła](MROK-I-SLADY.md).
 
 `js/data/seasons.js` zawiera wydany sezon `s1`, rewizję i 30 stabilnych identyfikatorów etapów. To indeks istniejącej historii, a nie 30 nowych odcinków. `js/core/seasons.js` wylicza widoczny postęp z poznanych materiałów i rozdziału, zapisuje podsumowania i archiwizuje konsekwencje finału. Dalsze tytuły są ukryte. „Po zakończeniu” w menu daje dostęp do świata po finale i odpowiednich rozmów.
 

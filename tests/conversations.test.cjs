@@ -7,7 +7,7 @@ function game(){
  const ctx=vm.createContext({console,Date, setTimeout:()=>0,clearTimeout:()=>{},
   window:{addEventListener(){}},document:{addEventListener(){}},Art:{def(){}},
   localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)}});
- for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/conversations.js','js/data/season-conversations.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+ for(const f of ['js/core/util.js','js/data/migrations.js','js/core/state.js','js/data/characters.js','js/data/evidence.js','js/data/world.js','js/data/maja.js','js/data/conversations.js','js/data/season-conversations.js','js/data/dark-threads.js','js/core/conversations.js'])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
  return vm.runInContext('({G, DATA, Conversations})',ctx);
 }
 function unlock(G){
@@ -29,10 +29,14 @@ test('every dialogue path terminates, saves once, and leaves main story intact',
  }
  for(const [id,d]of Object.entries(DATA.conversations))for(const route of routes(d)){
   unlock(G);
-  for(const ev of ['ev_not_gajda','ev_bartek_conf','ev_interview'])G.addEv(ev,true);
+  for(const ev of ['ev_not_gajda','ev_bartek_conf','ev_interview','ev_note_original','ev_note_revised','ev_tomek'])G.addEv(ev,true);
   G.setFlag('wallpapersImported');G.solve('ded_bus');G.s.finished=true;G.setFlag('majaFound');G.s.vars.endingId='swit';
   if(id==='kuba_missing'){G.s.vars.endingId='cisza';G.s.flags.majaFound=false;}
   G.s.pc=89;G.s.chapter='ch3';G.s.pending={chat:'group',type:'choose'};
+  G.unlock('chat:gajda');G.solve('ded_note_versions');
+  if(['ola_container','kuba_room'].includes(id))G.s.flags.majaFound=false;
+  if(id==='gajda_versions')G.s.finished=false;
+  if(id==='maja_words')G.s.flags.noteCopyShared=route[0][1]===0;
   C.open(id);let trust=0;
   for(const [node,i]of route){
    const expected=d.nodes[node].choices[i];trust+=expected.trust||0;
@@ -72,4 +76,56 @@ test('character ages, evidence references, and dialogue destinations are valid',
   for(const ev of d.reward||[])assert.ok(DATA.evidence[ev]);
   if(d.deduction)assert.ok(DATA.deductions[d.deduction]);
  }
+});
+
+test('note disclosures apply once, survive reload, and stop when the rescue starts',()=>{
+ const {G,Conversations:C}=game();unlock(G);G.s.chapter='ch3';G.unlock('chat:gajda');
+ assert.equal(C.open('gajda_versions'),null,'no future note is revealed');
+ G.addEv('ev_note_revised',true);C.open('gajda_versions');
+ const pending={type:'choose',chat:'group'};G.s.pending=pending;G.s.pc=101;
+ assert.ok(C.answer('gajda_versions','start',1));
+ assert.equal(G.v('leaks'),1);assert.ok(G.flag('noteCopyShared'));assert.ok(G.has('ev_note_shared'));
+ assert.equal(C.answer('gajda_versions','start',1),false);
+ G.save(true);G.load();assert.equal(G.v('leaks'),1);
+ const length=C.state('gajda_versions').transcript.length;
+ C.open('gajda_versions');assert.equal(C.state('gajda_versions').transcript.length,length);
+ G.s.chapter='ch5';
+ assert.ok(C.open('gajda_versions'),'existing transcript stays readable');
+ assert.equal(C.available('gajda').length,0);
+ assert.equal(C.answer('gajda_versions','boundary',0),false,'no disclosure during rescue');
+ assert.equal(G.s.pc,101);assert.equal(G.s.pending.chat,'group');
+ unlock(G);G.s.chapter='ch3';G.unlock('chat:gajda');G.addEv('ev_note_revised',true);
+ C.open('gajda_versions');C.answer('gajda_versions','start',0);
+ assert.equal(G.v('leaks'),0);assert.equal(G.has('ev_note_shared'),false);
+ assert.ok(G.flag('noteCopyRefused'));
+});
+
+test('Maja’s response respects disclosure, rescue, and persisted memory',()=>{
+ const {G,Conversations:C}=game();unlock(G);G.solve('ded_note_versions');
+ assert.equal(C.open('maja_words'),null);G.s.finished=true;G.s.flags.majaFound=false;
+ assert.equal(C.open('maja_words'),null,'no messages from missing Maja');
+ G.setFlag('majaFound');C.open('maja_words');
+ assert.equal(C.answer('maja_words','start',0),false,'hidden conditional reply cannot be forged');
+ assert.equal(C.answer('maja_words','start',1),true);
+ G.save(true);G.load();assert.equal(C.state('maja_words').node,'voice');
+ unlock(G);G.s.finished=true;G.setFlag('majaFound');G.solve('ded_note_versions');G.setFlag('noteCopyShared');
+ const shared=C.open('maja_words');assert.match(shared.transcript.at(-1).text,/dostał te zapisy/);
+ assert.equal(C.answer('maja_words','start',1),false);
+ assert.equal(C.answer('maja_words','start',0),true);
+ const saved=JSON.stringify(C.state('maja_words').transcript);G.save(true);G.load();C.open('maja_words');
+ assert.equal(JSON.stringify(C.state('maja_words').transcript),saved);
+});
+
+test('versioned note has consistent dates and is not a shortcut into the finale',()=>{
+ const {G,DATA}=game();unlock(G);const note=DATA.maja.notes.find(n=>n.id==='pojemnik');
+ assert.equal(G.isUnlocked(note.unlock),false);G.unlock('maja:sync1');assert.ok(G.isUnlocked(note.unlock));
+ assert.equal(note.versions.length,2);assert.equal(note.t,note.versions[1].t);
+ assert.ok(note.versions[0].t<'2026-10-14T23:44');assert.ok(note.t<note.synced);
+ const d=DATA.deductions[note.deduction];
+ assert.deepEqual(Array.from(d.support.from),Array.from(note.versions,v=>v.ev));
+ for(const v of note.versions)assert.ok(DATA.evidence[v.ev]);
+ assert.equal(d.answer,'changed');
+ const notesSource=fs.readFileSync(path.join(root,'js/apps/notes.js'),'utf8');
+ const key=notesSource.match(/const KEY = \[([^;]+)\];/)[1];
+ assert.equal(/ev_note/.test(key),false,'extra clues do not inflate key evidence score');
 });

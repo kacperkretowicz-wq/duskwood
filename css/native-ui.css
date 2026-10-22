@@ -132,3 +132,7 @@ body.os-android .delivery::before { content:' · '; }
 @media(max-width:360px) { #home { padding-left:14px; padding-right:14px; }.home-widgets { gap:10px; }.home-weather,.home-note { padding:13px; height:145px; }.home-apps { gap:15px 5px; }.app-ic .ic { width:54px; height:54px; }.case-card div>span { font-size:12px; } }
 @media(max-width:1000px) { .stage-side { display:none; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.001ms!important; transition-duration:.001ms!important; } }
+/* Notatki z kopii używają tego samego kroju i powierzchni co telefon. */
+.paper { background:var(--s1); color:var(--tx); font:17px/1.55 var(--font); border:0; border-radius:12px; box-shadow:none; padding:20px; }
+.paper b { color:var(--tx); }
+.note-history .nb-hint { color:var(--tx2); padding:12px 0; text-align:left; line-height:1.5; }

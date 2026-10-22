@@ -30,3 +30,9 @@
 .side-typing { color:var(--acc); }
 .side-attachments { display:flex; flex-direction:column; gap:3px; margin-top:7px; }
 .side-attachments button { display:flex; align-items:center; gap:9px; min-height:44px; border-bottom:1px solid var(--line); color:var(--acc2); font-size:12px; text-align:left; line-height:1.5; }
+.side-choice small { display:block; font-size:13px; line-height:1.45; margin-top:7px; color:var(--tx2); }
+.note-history { padding:0 18px 22px; }
+.note-version { border-top:1px solid var(--line); padding:18px 0; }
+.note-version h4 { margin:0 0 12px; font-size:15px; font-weight:600; color:var(--tx); line-height:1.45; }
+.note-version .paper { margin:0 0 16px; padding:18px; font-size:17px; line-height:1.55; overflow-wrap:anywhere; }
+.note-history>.pad { padding:16px 0 0; }
