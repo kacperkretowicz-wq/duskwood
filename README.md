@@ -68,7 +68,17 @@ docs/KONCEPCJA.md     dokument projektowy: świat, postacie, prawda, rozdziały,
 
 ## Oprawa i testy
 
+### Na osobności · Ostatni kurs
+
+Po dołączeniu do grupy pojawia się **Na osobności** w Rozmowach i Notatkach. To sześć dodatkowych rozmów, otwieranych wraz z postępem śledztwa. Możesz poznać codzienność Kuby, Oli i Bartka, wspomnienia Weroniki i reakcję Igora po jego wyznaniu. Wybory zmieniają relacje; każdą rozmowę można przerwać i wznowić.
+
+Po odnalezieniu wiadomości o aucie na tamie dostępny jest też **Ostatni kurs**: Lena Cicha (24 lata), relacja świadka, karta przejazdu, porównanie zegarów, zdjęcie przystanku i dodatkowy wniosek w Notatkach. Sama relacja nie potwierdza tożsamości osoby. Trzeba dobrać właściwe dokumenty i odróżnić sprawdzony czas od przypuszczenia.
+
+Główna młoda ekipa ma 19–24 lata. Nowe grafiki mają charakter zwykłych zdjęć telefonem; pochodzenie i prompty opisano w [ASSETY-OSTATNI-KURS.md](docs/ASSETY-OSTATNI-KURS.md). Zasoby działają lokalnie i offline. [Szczegóły dodatku i weryfikacji](docs/OSTATNI-KURS.md).
+
 Komunikator, głosy postaci, tempo rozmów, grafiki i zgodność starych zapisów opisano w [OPRAWA-I-DIALOGI.md](docs/OPRAWA-I-DIALOGI.md). Walidacja fabuły: `node --test tests/story.test.cjs`. Testy przeglądarkowe po uruchomieniu serwera: `node tests/browser.cjs` (wymagają Playwright i Chromium).
+
+Pełna walidacja dodatku: `node --test tests/story.test.cjs tests/conversations.test.cjs`, następnie przy działającym serwerze `node tests/browser.cjs` i `node tests/conversations.browser.cjs`. Narzędzia testowe pozostają zewnętrzne; sama gra nie wymaga instalacji zależności.
 
 ## Narzędzia deweloperskie
 

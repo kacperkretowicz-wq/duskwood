@@ -5,7 +5,7 @@ try { ({chromium}=require('playwright')); }
 catch { ({chromium}=require(process.env.PLAYWRIGHT_MODULE || '/workspace/.onboarding-tools/node_modules/playwright')); }
 const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:5173';
 (async()=>{
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+const browser=await chromium.launch({...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {}),headless:true,args:['--no-sandbox']});
 let passed=0;
 try {
  for(const viewport of [{width:1440,height:1050},{width:390,height:844}]) {

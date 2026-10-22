@@ -390,6 +390,8 @@ const UI = (() => {
 
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
+    const photo = DATA.chars[who]?.photo;
+    if (photo) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
     if (who === 'gajda') return h('span', { class: 'av gajda-av ' + cls, role: 'img', 'aria-label': DATA.chars.gajda.name });
     const photos = { kuba: [0, 0], ola: [1, 0], bartek: [2, 0], igor: [0, 1], maja: [1, 1], maja2: [1, 1], weronika: [2, 1] };
     if (photos[who]) {

@@ -1,8 +1,10 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'mglisko-v3';
+const VERSION = 'mglisko-v4';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
+  './css/conversations.css', './js/data/conversations.js', './js/core/conversations.js', './js/apps/conversations.js',
+  './assets/lena-v2.jpg', './assets/bus-stop-v2.jpg',
   './assets/people.png', './assets/forest.png', './assets/maja-river.png', './assets/gajda.png', './js/data/migrations.js',
   './js/core/util.js', './js/core/state.js', './js/core/audio.js', './js/core/engine.js', './js/core/ui.js',
   './js/art/kit.js', './js/art/avatars.js', './js/art/scenes.js', './js/art/film.js', './js/art/maps.js',

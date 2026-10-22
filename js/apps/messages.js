@@ -27,7 +27,8 @@
       h('p', { class: 'profile-role' }, c.role || cd.sub || 'Numer spoza kontaktów'),
       c.status ? h('p', { class: 'profile-status' }, c.status) : null,
       c.bio ? h('div', { class: 'profile-bio' }, h('small', {}, 'O MNIE'), h('p', {}, c.bio)) : null,
-      c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null) });
+      c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null,
+      known && Conversations.all().some(([, d]) => d.who === id) ? h('button', { class: 'btn wide side-profile-link', onclick: () => UI.openConversations(id) }, 'Porozmawiaj na osobności') : null) });
   }
 
   function stamp(t) {
@@ -80,14 +81,18 @@
     const caseCard = h('button', { class: 'case-card', onclick: () => stack.push(chatPage(stack, 'maja')) },
       UI.avatar('maja'), h('div', {}, h('small', {}, 'ZAGINIONA / 14 PAŹDZIERNIKA'), h('b', {}, 'Maja Wrona'), h('span', {}, 'Ostatnie połączenie było do ciebie.')), U.ico('back', 16));
     const list = h('div', { class: 'chatlist' });
+    const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
-    pg.body.append(caseCard, search, tabs, list);
+    pg.body.append(caseCard, sideEntry, search, tabs, list);
     pg.el.appendChild(h('nav', { class: 'messenger-nav', 'aria-label': 'Nawigacja' },
       h('button', { class: 'on', 'aria-current': 'page' }, U.ico('chat', 20), 'Rozmowy'),
       h('button', { onclick: () => UI.openApp('notes') }, U.ico('note', 20), 'Ślady'),
       h('button', { onclick: () => UI.goHome() }, U.ico('grid', 20), 'Telefon')));
     function render() {
       caseCard.hidden = !G.isUnlocked('chat:maja');
+      const sideCount = Conversations.available().length;
+      sideEntry.hidden = !G.isUnlocked('chat:group');
+      sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';
       const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
         .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
         .sort((a, b) => ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
@@ -111,7 +116,7 @@
             h('div', { class: 'cp' }, h('span', { class: 'pv' }, prev), p ? h('span', { class: 'turn' }, 'Odpowiedz') : null, c.unread ? h('span', { class: 'cnt' }, c.unread) : null))));
       });
     }
-    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock'].map(e => BUS.on(e, render));
+    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock', 'evidence', 'conversations'].map(e => BUS.on(e, render));
     render();
     return { el: pg.el, destroy: () => offs.forEach(f => f()), onShow: () => { G.viewing = null; render(); } };
   }

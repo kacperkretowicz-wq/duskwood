@@ -145,7 +145,14 @@ const G = (() => {
     seen(key) { return !!api.s.seen[key]; },
     markSeen(key) { if (!api.s.seen[key]) { api.s.seen[key] = true; BUS.emit('badges'); api.change(); } },
 
-    solve(id) { if (!api.s.solved[id]) { api.s.solved[id] = true; BUS.emit('solved', id); api.change(); } },
+    solve(id) {
+      if (!api.s.solved[id]) {
+        api.s.solved[id] = true;
+        const reward = DATA.deductions[id] && DATA.deductions[id].reward;
+        if (reward) api.addEv(reward);
+        BUS.emit('solved', id); api.change();
+      }
+    },
 
     // Warunki dla kroków skryptu: funkcja albo krótki zapis tekstowy.
     test(cond) {

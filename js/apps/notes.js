@@ -23,6 +23,8 @@
     const o = G.s.objective;
     const list = [];
     list.push({ id: 'todo', pin: true, title: 'Co teraz?', t: G.now(), prev: o ? plain(o.text) : 'Nic pilnego. Sprawdzaj wiadomości.' });
+    if (G.isUnlocked('chat:group')) list.push({ id: 'conversations', pin: true, title: 'Na osobności', t: G.now() - 30000,
+      prev: `${Conversations.available().length} tematów · prywatne rozmowy i dodatkowe tropy` });
     if (deds.length) list.push({ id: 'questions', pin: true, title: 'Pytania', t: G.now() - 60000, prev: openDeds().length ? `${openDeds().length} bez odpowiedzi · ${DATA.deductions[openDeds()[0]].q}` : 'Wszystko rozstrzygnięte.', dot: openDeds().some(id => !G.seen('ded:' + id)) });
     if (ev.length) list.push({ id: 'saved', title: 'Zapisane', t: G.s.ev[ev[0].id].t, prev: `${ev.length} ${ev.length === 1 ? 'element' : ev.length < 5 ? 'elementy' : 'elementów'} · ${ev[0].title}`, dot: G.freshEvidence() > 0, thumb: (ev.find(e => e.img) || {}).img });
     if (ppl.length) list.push({ id: 'people', title: 'Ludzie', t: G.now() - 120000, prev: ppl.map(([, p]) => p.name.split(' ')[0]).join(', ') });
@@ -48,6 +50,7 @@
   });
 
   function openNote(stack, id) {
+    if (id === 'conversations') { UI.openConversations(); return; }
     if (id === 'todo') stack.push(todoPage());
     else if (id === 'saved') stack.push(savedPage(stack));
     else if (id === 'people') stack.push(peoplePage());
@@ -76,7 +79,7 @@
       pg.body.appendChild(h('div', { class: 'nt-count' }, `${all.length} notatek`));
     };
     render();
-    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges'].map(e => BUS.on(e, render));
+    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges', 'conversations'].map(e => BUS.on(e, render));
     return { el: pg.el, onShow: render, destroy: () => offs.forEach(f => f()) };
   }
 
@@ -177,7 +180,8 @@
       title: '', body: h('div', { class: 'pp-detail' },
         h('div', { class: 'pp-top' }, UI.avatar(p.av || id, 'lg'), h('div', {}, h('h2', {}, p.name), h('span', {}, U.tpl(p.role || '')))),
         t != null ? h('div', { class: 'pp-trust' }, h('span', {}, 'Relacja'), h('div', { class: 'pp-bar' }, h('i', { style: `width:${U.clamp(50 + t * 10, 6, 100)}%` })), h('small', {}, t > 1 ? 'ufa ci' : t < -1 ? 'nie ufa ci' : 'ostrożnie')) : null,
-        h('ul', { class: 'pp-facts' }, facts.map(f => h('li', { html: U.rich(f.text) }))))
+        h('ul', { class: 'pp-facts' }, facts.map(f => h('li', { html: U.rich(f.text) }))),
+        Conversations.all().some(([, d]) => d.who === id) ? h('button', { class: 'btn wide', onclick: () => UI.openConversations(id) }, 'Porozmawiaj na osobności') : null)
     });
   }
 
@@ -188,7 +192,7 @@
     const tl = h('div', { class: 'tl' });
     let year = null;
     items.forEach(t => {
-      const d = U.parseLocal(t.t);
+      const d = new Date(U.parseLocal(t.t));
       if (d.getFullYear() !== year) { year = d.getFullYear(); tl.appendChild(h('div', { class: 'tl-y' }, String(year))); }
       tl.appendChild(h('div', { class: 'tl-i' + (t.key ? ' key' : '') },
         h('div', { class: 'tl-d' }, `${d.getDate()} ${U.MONTHS_GEN[d.getMonth()].slice(0, 3)}`, t.time !== false ? h('small', {}, U.time(d)) : null),

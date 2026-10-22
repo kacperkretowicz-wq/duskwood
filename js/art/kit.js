@@ -465,6 +465,8 @@ const Art = (() => {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300"><rect width="400" height="300" fill="#1a1d22"/><text x="200" y="155" fill="#556" font-size="16" text-anchor="middle" font-family="${FONT}">${esc(id)}</text></svg>`;
   }
   function url(id) {
+    const source = get(id)?.src;
+    if (source) return source;
     if (id === 'k_maja') return 'assets/maja-river.png';
     if (!cache[id]) cache[id] = URL.createObjectURL(new Blob([build(id)], { type: 'image/svg+xml' }));
     return cache[id];
