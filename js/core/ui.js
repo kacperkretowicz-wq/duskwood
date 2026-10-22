@@ -372,11 +372,15 @@ const UI = (() => {
     if (snd && SFX.play[snd]) SFX.play[snd]();
     U.vibrate(40);
   }
+  /* Błysk to osobna (fikcyjna) aplikacja: własna ikona zamiast ikony Wiadomości. */
+  const BLYSK_SVG = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z" fill="#ffd84d"/></svg>`;
   function bannerEl(o) {
-    const icn = o.who ? avatar(o.who) : h('span', { class: 'b-ic', style: `background:${GRAD[o.app] || '#333'}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="26" height="26"') });
+    const blysk = o.icon === 'blysk' || o.title === 'Błysk';
+    const icn = o.who ? avatar(o.who) : blysk ? h('span', { class: 'b-ic b-blysk', style: 'background:#1c1c22', html: BLYSK_SVG(26) }) : h('span', { class: 'b-ic', style: `background:${GRAD[o.app] || '#333'}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="26" height="26"') });
     const a = apps[o.app || 'messages'];
-    return h('div', { class: 'banner' + (o.glitch ? ' glitchy' : '') },
-      h('div', { class: 'b-app' }, h('span', { style: `background:${GRAD[o.app || 'messages']}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="12" height="12"') }), a ? appName(a) : '', h('i', {}, ' · ' + (o.when || 'teraz'))),
+    return h('div', { class: 'banner' + (o.glitch ? ' glitchy' : '') + (blysk ? ' blysk' : '') },
+      blysk ? h('div', { class: 'b-app' }, h('span', { style: 'background:#1c1c22', html: BLYSK_SVG(12) }), 'Błysk', h('i', {}, ' · ' + (o.when || 'teraz')))
+        : h('div', { class: 'b-app' }, h('span', { style: `background:${GRAD[o.app || 'messages']}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="12" height="12"') }), a ? appName(a) : '', h('i', {}, ' · ' + (o.when || 'teraz'))),
       o.who ? h('span', { class: 'b-ic' }, icn) : icn,
       h('div', { class: 'b-m' },
         h('div', { class: 'b-h' }, h('b', {}, o.title || ''), h('span', {}, o.when || 'teraz')),
