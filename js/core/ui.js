@@ -607,7 +607,7 @@ const UI = (() => {
     SFX.play.chapter();
     if (ch.mood) SFX.ambient(ch.mood);
     return curtain('', [
-      h('div', { class: 'cu-k' }, ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`),
+      h('div', { class: 'cu-k' }, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)),
       h('div', { class: 'cu-t' }, ch.title),
       h('div', { class: 'cu-line' }),
       ch.when ? h('div', { class: 'cu-s' }, ch.when) : null
@@ -618,7 +618,7 @@ const UI = (() => {
     const evs = Object.keys(G.s.ev).length;
     const total = Object.keys(DATA.evidence).length;
     return curtain('', [
-      h('div', { class: 'cu-k' }, ch.num === 0 ? 'Koniec prologu' : `Koniec rozdziału ${ch.num}`),
+      h('div', { class: 'cu-k' }, (ch.kicker ? ch.kicker + ' · ' : '') + (ch.num === 0 ? 'Koniec prologu' : `Koniec rozdziału ${ch.num}`)),
       h('div', { class: 'cu-t' }, ch.title),
       h('div', { class: 'cu-line' }),
       h('div', { class: 'cu-stats' },

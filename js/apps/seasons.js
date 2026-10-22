@@ -8,7 +8,7 @@
     const render = () => {
       const s = Seasons.current(), eps = Seasons.progress(), complete = eps.filter(e => e.done).length;
       body.innerHTML = '';
-      body.append(h('small', { class: 'season-kicker' }, 'SEZON 1'), h('h2', {}, s.title), h('p', {}, s.description),
+      body.append(h('small', { class: 'season-kicker' }, s.kicker || 'SEZON 1'), h('h2', {}, s.title), h('p', {}, s.description),
         h('progress', { max: eps.length, value: complete, 'aria-label': 'Postęp sezonu' }),
         h('p', { class: 'season-meta' }, `${complete} z ${eps.length} etapów historii`),
         h('p', { class: 'season-pacing' }, 'Graj we własnym tempie. Etapy nie oznaczają dni ani obietnicy jednakowej długości. Nieobecność nie zmienia losów postaci.'),
@@ -38,7 +38,12 @@
         h('span', { class: 'episode-num' }, String(ep.number).padStart(2, '0')),
         h('div', {}, h('b', {}, ep.available ? ep.title : 'Kolejny etap'), h('small', {}, ep.done ? 'Zapisany w historii' : ep.available ? 'W toku · wróć do wiadomości' : 'Odkryjesz w toku śledztwa')),
         U.ico(ep.done ? 'check' : ep.available ? 'chat' : 'lock', 17))));
-      body.append(list, h('p', { class: 'season-pacing' }, 'Kolejny sezon będzie osobnym wydaniem. Zakończenie i relacje zapisują się do kontynuacji.'),
+      const next = Seasons.nextCase();
+      if (next && G.s.finished) body.append(h('section', { class: 'season-recap' }, h('h3', {}, `${next.kicker || 'Kolejna sprawa'}: ${next.title}`), h('p', {}, next.description),
+        Seasons.canStartNext()
+          ? h('button', { class: 'btn pri wide', onclick: () => { if (Seasons.startNext()) { sh.close(true); UI.renderHome(); Engine.restart(); } } }, 'Otwórz teczkę')
+          : h('p', { class: 'season-pacing' }, 'Po zakończeniu „Cisza” ta sprawa zacznie się od prologu „Adres na paczce”. Ten prolog jest jeszcze w przygotowaniu.')));
+      body.append(list, h('p', { class: 'season-pacing' }, 'Zakończenie i relacje zapisują się do kontynuacji.'),
         h('button', { class: 'btn wide', onclick: () => { sh.close(true); UI.openApp('notes', { note: 'todo' }); } }, 'Wróć do śledztwa'));
     };
     render();

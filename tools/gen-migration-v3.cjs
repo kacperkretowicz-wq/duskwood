@@ -10,7 +10,7 @@ const old=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const out={};
 for(const [ch,c] of Object.entries(chapters)){
   const keep=[];c.steps.forEach((s,i)=>{if(!s.scene)keep.push(i);});
-  const o=old[ch];
+  const o=old[ch];if(!o)continue; // nowe rozdziały (np. sprawa 2) nie mają zapisów v2
   if(keep.length!==o.length)throw new Error(ch+': liczba kroków nie zgadza się '+keep.length+'/'+o.length);
   keep.forEach((ni,i)=>{if(sig(c.steps[ni])!==o[i].sig)throw new Error(ch+': rozbieżny krok '+i);});
   if(keep.every((ni,i)=>ni===i))continue;

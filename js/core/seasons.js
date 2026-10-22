@@ -49,5 +49,24 @@ const Seasons = (() => {
         trust: Object.fromEntries(['kuba', 'ola', 'bartek', 'igor', 'weronika'].map(id => [id, G.v('trust_' + id)])) } };
     G.save(true); return true;
   }
-  return { current, progress, saveSession, recap, archive };
+  // Kolejna sprawa w tym samym zapisie: zostają czaty, Notatki, flagi i relacje z S1.
+  function nextCase() {
+    const i = DATA.seasons.findIndex(x => x.id === current().id), next = DATA.seasons[i + 1];
+    return next && next.released ? next : null;
+  }
+  function canStartNext() {
+    if (!G.s?.finished || !nextCase()) return false;
+    const ending = G.s.vars.endingId || G.s.seasonArchive?.[current().id]?.outcome?.ending;
+    return ending === 'swit' || ending === 'odlamki';
+  }
+  function startNext() {
+    if (!canStartNext()) return false;
+    archive();
+    const next = nextCase();
+    Object.assign(G.s, { seasonId: next.id, chapter: next.chapters[0], pc: 0, finished: false, pending: null, objective: null, call: null });
+    G.s.vars.s1Ending = G.s.vars.endingId;
+    G.checkpoint(next.chapters[0]); G.save(true); BUS.emit('season');
+    return true;
+  }
+  return { current, progress, saveSession, recap, archive, nextCase, canStartNext, startNext };
 })();
