@@ -203,6 +203,10 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
     W('Oryginał kasety i obie kopie strony 41 są w depozycie redakcji, protokół przekazania podpisaliśmy z panią Martą i rodziną pana Adama. Teczka wróciła do pudła, bez kasety.'),
     pause(2500),
+    scene('f3lena', [
+      W('I jeszcze coś, zanim zapomnę. Lena Cicha, ta od busa, pytała mnie, czy w pudle pana Adama są nagrania z 2019 roku.'),
+      W('Mówi, że kiedyś z nim długo rozmawiała. Nie powiedziałam jej nic, bo nic nie wiem.')
+    ]),
     run(s => {
       const full = G.flag('m_krystynaOk') && G.flag('m_henrykOnRecord') && G.flag('m_correctionFirst');
       s.vars.s2Ending = full ? 'pelny_kadr' : 'margines';

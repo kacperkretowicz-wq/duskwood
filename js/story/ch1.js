@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 1 — Chmura */
 
 Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października · noc', mood: 'calm' }, D => {
-  const { say, me, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust } = D;
+  const { say, me, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust, scene } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const O = (t, o) => say('ola', 'ola', t, o);
   const g = (who, t, o) => say('group', who, t, o);
@@ -41,6 +41,14 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     choose('kuba', [
       opt('Jestem w środku.', []),
       opt('Kluska i Kometa. Mam dostęp.', [K('KLUSKA. no jasne'), K('jamniczka. umarła, jak miałem 12 lat. maja płakała tydzień')], { trust: { kuba: 1 } })
+    ]),
+    /* Zapowiedź sprawy 3: Kuba widzi, jak działa reset konta. */
+    scene('f3reset', [
+      K('ej. czyli jak ktoś zna odpowiedzi, to po prostu wchodzi na czyjeś konto i tyle?'),
+      choose('kuba', [
+        opt('Tak. Dlatego pytania bezpieczeństwa to słabe zabezpieczenie.', [K('dobra. zmienię swoje. u mnie wszystko jest na kadrze 💀')]),
+        opt('Skup się. Szukamy Mai.', [K('sorry. tak tylko')])
+      ])
     ]),
     g('kuba', '%name% {wszedł|weszła} na nimbusa!!'),
     g('ola', 'Okej. Tylko nic nie usuwaj, błagam. Nawet głupich zdjęć.'),

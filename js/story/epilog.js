@@ -53,6 +53,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('A ty jak się trzymasz?', [K('trochę lepiej. wczoraj przespałem noc bez sprawdzania telefonu. pierwszy raz'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
+      scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀')]),
       notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [

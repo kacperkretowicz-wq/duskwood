@@ -3,7 +3,7 @@
    Plan: docs/SPRAWA-2-PLAN.md. Startuje z zapisu po Świcie lub Odłamkach (Seasons.startNext). */
 
 Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', when: 'Piątek, 20 listopada · 19:30', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, rename, end, title, clock, dial, callEnd, typing } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, rename, end, title, clock, dial, callEnd, typing, scene } = D;
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
@@ -31,6 +31,10 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         M('dziwnie. jakbym czytała cudzy pamiętnik, ale za pozwoleniem'),
         M('dobra, nie rozkręcajmy tego. pani Weronika już wyciąga resztę')
       ])
+    ]),
+    scene('f3ewa', [
+      M('a żona pana Adama, pani Ewa, nie chciała nawet wiedzieć, co tu jest'),
+      M('powiedziała bratu przez telefon: „on już wszystko nagrał, wystarczy”. pani Weronika mówi, że on nagrywał każdą rozmowę telefonem. od zawsze')
     ]),
     pause(1500),
     unlock('chat:weronika'),

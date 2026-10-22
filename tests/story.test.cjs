@@ -37,7 +37,7 @@ test('v3 migration: every v2 step maps to the identical step; resume lands on a 
   const {chapters,v3}=stories();
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v2-steps.json'),'utf8'));
   const sig=s=>JSON.stringify([s.t,s.name,s.to,s.self,s.text,s.chat,s.who,s.ev,s.k,s.iso]);
-  assert.deepEqual([...Object.keys(v3)].sort(),['ch2','ch3','ch4','ch5','epilog']);
+  assert.deepEqual([...Object.keys(v3)].sort(),['ch1','ch2','ch3','ch4','ch5','epilog']);
   for(const [ch,steps] of Object.entries(old)){
     const m=v3[ch]||{exact:steps.map((_,i)=>i).concat(steps.length),resume:steps.map((_,i)=>i).concat(steps.length)};
     assert.equal(m.exact.length,steps.length+1);
@@ -58,7 +58,7 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
   const {chapters}=stories();
   const ids=new Set();
   for(const ch of Object.values(chapters))for(const s of ch.steps)if(s.scene){ids.add(s.scene);if(s.t==='label')assert.ok(s.name.startsWith(s.scene+'.'),s.name);}
-  const fixed=['epBartek','epIgor','epOla','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
+  const fixed=['epBartek','epIgor','epOla','f3ewa','f3lena','f3lib','f3noc','f3reset','igorMid','m2anon','m2kto','m2zrzut','m3kier','m5babcia','s12','s13','s13at','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
   // sceny straszaków mają prefiks „sc” i zawierają co najmniej jeden krok scare
   assert.deepEqual(Array.from(ids).filter(x=>!/^sc[A-Z]/.test(x)).sort(),fixed);
 });

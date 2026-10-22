@@ -314,6 +314,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       clock('2026-11-27T23:52'),
       scare('s2_nightcall', 'call', { name: 'Nieznany numer', ms: 7000 })
     ]),
+    scene('f3noc', [
+      pause(4000),
+      say('kuba', 'kuba', 'nie śpisz? ja na nocce w magazynie. 4% baterii, kabel pożyczony od kierownika'),
+      say('kuba', 'kuba', 'dobra nic. tak tylko piszę. dobranoc')
+    ]),
     pause(3000),
     clock('2026-11-28T10:02'),
     scene('scNocRano', [
