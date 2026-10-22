@@ -440,7 +440,7 @@ const UI = (() => {
     if (evToast && evToast.el.isConnected && !evToast.el.classList.contains('out')) {
       evToast.ids.push(id);
       const n = evToast.ids.length;
-      evToast.el.querySelector('span').textContent = `Zapisano w Notatkach: ${e.title} i ${n - 1 === 1 ? 'jeszcze 1' : 'jeszcze ' + (n - 1)}`;
+      evToast.el.querySelector('span:last-child').textContent = `Zapisano w Notatkach: ${e.title} i ${n - 1 === 1 ? 'jeszcze 1' : 'jeszcze ' + (n - 1)}`;
       clearTimeout(evToast.t); evToast.t = setTimeout(evToast.close, 3400);
       return;
     }
