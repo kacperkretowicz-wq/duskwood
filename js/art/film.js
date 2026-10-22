@@ -96,16 +96,16 @@
   }
   const negEdit = (res, ev) => ({ neg: true, target: { exp: [2.3, 3.9], con: [0.9, 1.7] }, result: res, ev, darkMsg: 'Pozytyw jest bardzo ciemny — przeterminowana klisza. Rozjaśnij mocno.' });
   const fexif = n => ({ date: '06.10.2026', time: '21:1' + (n % 10), device: 'Galaxy A54 · zdjęcie negatywu na podświetlarce', file: `NEG_${n}.jpg`, note: 'Klisza 35 mm z 1997 roku, wywołana 5.10' });
-  D('p_08', { title: 'Negatyw 8', style: 'film', exif: fexif(8), edit: negEdit('p_08d', 'ev_frame08'), draw: k => frame08(k, 0.32) });
-  D('p_14', { title: 'Negatyw 14', style: 'film', exif: fexif(14), edit: negEdit('p_14d', null), draw: k => frame14(k, 0.32) });
-  D('p_21', { title: 'Negatyw 21', style: 'film', exif: fexif(21), edit: negEdit('p_21d', 'ev_frame21'), draw: k => frame21(k, 0.32) });
-  D('p_22', { title: 'Negatyw 22', style: 'film', exif: fexif(22), edit: negEdit('p_22d', 'ev_frame22'), draw: k => frame22(k, 0.32) });
-  D('p_23fog', { title: 'Negatyw 23', style: 'film', exif: Object.assign(fexif(23), { note: 'Klatka prześwietlona na podglądzie. Niewiele widać.' }), draw: k => k.full('#0a0806') + k.glow(600, 400, 500, '#2a2018', 0.6) + filmBorder(k, 23) });
-  D('p_08d', { title: 'Kadr 8 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:00', device: 'Aparat jednorazowy 400 ASA', note: 'Data przybliżona' }, draw: k => frame08(k) });
-  D('p_14d', { title: 'Kadr 14 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:20', device: 'Aparat jednorazowy 400 ASA' }, draw: k => frame14(k) });
-  D('p_21d', { title: 'Kadr 21 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:40', device: 'Aparat jednorazowy 400 ASA' }, hotspots: [{ x: 940, y: 470, r: 110, label: 'Dziecko w żółtej pelerynie. Na szyi coś różowego na sznurku.' }], draw: k => frame21(k) });
-  D('p_22d', { title: 'Kadr 22 (wywołany)', style: 'film', exif: { date: '08.07.1997', time: '~00:10', device: 'Aparat jednorazowy 400 ASA' }, hotspots: [{ x: 620, y: 580, r: 90, label: 'W czarnej wodzie — coś żółtego.' }], draw: k => frame22(k) });
-  D('p_23d', { title: 'Kadr 23 · skan 2400 dpi', style: 'film', exif: { date: '08.07.1997', time: '~00:15', device: 'Skan: IGOR-SERWIS-PC · 2400 dpi', note: 'Plik otrzymany od nieznanego nadawcy' }, onView: 'ev_frame23', hotspots: [{ x: 520, y: 70, r: 90, label: 'Za duża czapka. Policyjna, z orzełkiem. Jak u syna komendanta.' }, { x: 950, y: 640, r: 110, label: 'W kanale pieca, w czarnej wodzie — żółta peleryna.' }], draw: k => frame23(k) });
+  D('p_08', { src: 'assets/film/p_08.jpg', title: 'Negatyw 8', style: 'film', exif: fexif(8), edit: negEdit('p_08d', 'ev_frame08'), draw: k => frame08(k, 0.32) });
+  D('p_14', { src: 'assets/film/p_14.jpg', title: 'Negatyw 14', style: 'film', exif: fexif(14), edit: negEdit('p_14d', null), draw: k => frame14(k, 0.32) });
+  D('p_21', { src: 'assets/film/p_21.jpg', title: 'Negatyw 21', style: 'film', exif: fexif(21), edit: negEdit('p_21d', 'ev_frame21'), draw: k => frame21(k, 0.32) });
+  D('p_22', { src: 'assets/film/p_22.jpg', title: 'Negatyw 22', style: 'film', exif: fexif(22), edit: negEdit('p_22d', 'ev_frame22'), draw: k => frame22(k, 0.32) });
+  D('p_23fog', { src: 'assets/film/p_23fog.jpg', title: 'Negatyw 23', style: 'film', exif: Object.assign(fexif(23), { note: 'Klatka prześwietlona na podglądzie. Niewiele widać.' }), draw: k => k.full('#0a0806') + k.glow(600, 400, 500, '#2a2018', 0.6) + filmBorder(k, 23) });
+  D('p_08d', { src: 'assets/film/p_08d.jpg', title: 'Kadr 8 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:00', device: 'Aparat jednorazowy 400 ASA', note: 'Data przybliżona' }, draw: k => frame08(k) });
+  D('p_14d', { src: 'assets/film/p_14d.jpg', title: 'Kadr 14 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:20', device: 'Aparat jednorazowy 400 ASA' }, draw: k => frame14(k) });
+  D('p_21d', { src: 'assets/film/p_21d.jpg', title: 'Kadr 21 (wywołany)', style: 'film', exif: { date: '07.07.1997', time: '~23:40', device: 'Aparat jednorazowy 400 ASA' }, hotspots: [{ x: 988, y: 516, r: 110, label: 'Dziecko w żółtej pelerynie. Na szyi coś różowego na sznurku.' }], draw: k => frame21(k) });
+  D('p_22d', { src: 'assets/film/p_22d.jpg', title: 'Kadr 22 (wywołany)', style: 'film', exif: { date: '08.07.1997', time: '~00:10', device: 'Aparat jednorazowy 400 ASA' }, hotspots: [{ x: 557, y: 621, r: 95, label: 'W czarnej wodzie — coś żółtego.' }], draw: k => frame22(k) });
+  D('p_23d', { src: 'assets/film/p_23d.jpg', title: 'Kadr 23 · skan 2400 dpi', style: 'film', exif: { date: '08.07.1997', time: '~00:15', device: 'Skan: IGOR-SERWIS-PC · 2400 dpi', note: 'Plik otrzymany od nieznanego nadawcy' }, onView: 'ev_frame23', hotspots: [{ x: 610, y: 94, r: 95, label: 'Za duża czapka. Policyjna, z orzełkiem. Jak u syna komendanta.' }, { x: 902, y: 686, r: 120, label: 'W kanale pieca, w czarnej wodzie — żółta peleryna.' }], draw: k => frame23(k) });
 
   /* ================= TOMEK, 1997 ================= */
   D('w_tomek', {
@@ -150,7 +150,7 @@
       return s;
     }
   });
-  D('k_poster', {
+  D('k_poster', { src: 'assets/kuba/k_poster.jpg',
     title: 'Plakat', w: 900, h: 1200, grade: 'cold',
     draw: k => {
       const { W, H } = k;
@@ -167,7 +167,7 @@
       return s;
     }
   });
-  D('k_kluska', {
+  D('k_kluska', { src: 'assets/kuba/k_kluska.jpg',
     title: 'Kluska, 2008', style: 'print', exif: ph('16.05.2008', '', { note: 'Skan starego zdjęcia' }), onView: 'ev_kluska',
     draw: k => {
       const { W, H } = k;
@@ -180,7 +180,7 @@
       return s;
     }
   });
-  D('k_zenit', {
+  D('k_zenit', { src: 'assets/kuba/k_zenit.jpg',
     title: 'Zenit-E', grade: 'warm', exif: ph('28.09.2026', '11:02', { device: 'Galaxy A54', place: 'Mglisko, ul. Szklarska 4' }), onView: 'ev_zenit',
     draw: k => {
       const { W, H } = k;
@@ -192,7 +192,7 @@
       return s;
     }
   });
-  D('k_skate', { title: '.', grade: 'cold', w: 900, h: 900, draw: k => k.sky([[0, '#2a3a5a'], [1, '#d08a5a']]) + k.path('M0,600 Q300,600 450,420 L900,420 L900,900 L0,900 Z', '#5a5a5e') + k.rect(0, 600, 900, 300, '#4a4a4e') + k.g(k.rect(-90, -14, 180, 28, '#c23', 'rx="14"') + k.circle(-60, 20, 14, '#eee') + k.circle(60, 20, 14, '#eee'), 'transform="translate(520,640) rotate(-8)"') });
+  D('k_skate', { src: 'assets/kuba/k_skate.jpg', title: '.', grade: 'cold', w: 900, h: 900, draw: k => k.sky([[0, '#2a3a5a'], [1, '#d08a5a']]) + k.path('M0,600 Q300,600 450,420 L900,420 L900,900 L0,900 Z', '#5a5a5e') + k.rect(0, 600, 900, 300, '#4a4a4e') + k.g(k.rect(-90, -14, 180, 28, '#c23', 'rx="14"') + k.circle(-60, 20, 14, '#eee') + k.circle(60, 20, 14, '#eee'), 'transform="translate(520,640) rotate(-8)"') });
   D('o_cat', { title: 'Pani Fasolka', grade: 'warm', w: 900, h: 900, draw: k => k.full('#c9b8a0') + k.rect(120, 100, 660, 560, '#9ab0c0') + k.rect(100, 640, 700, 60, '#e8e0d0') + k.g(k.ell(0, 0, 110, 70, '#3a3a40') + k.circle(80, -70, 54, '#3a3a40') + k.path('M50,-110 L60,-150 L84,-116 Z M100,-114 L120,-150 L126,-104 Z', '#3a3a40') + k.path('M-100,20 Q-180,0 -170,-80', 'none', 'stroke="#3a3a40" stroke-width="22" stroke-linecap="round"'), 'transform="translate(430,600)"') + k.circle(700, 560, 70, '#3a6a2a') + k.rect(660, 580, 80, 70, '#b05a3a') });
   D('o_candle', { title: '🕯️', style: 'night', w: 900, h: 900, draw: k => k.full('#05070a') + k.rect(0, 600, 900, 300, '#1a140e') + k.glow(450, 420, 420, '#ffb347', 0.6) + k.rect(380, 440, 140, 180, '#e8d8b0', 'rx="12" opacity=".85"') + k.path('M450,330 Q474,372 462,400 Q450,420 438,400 Q426,372 450,330 Z', '#ffcf66') + k.path('M450,360 Q460,380 455,396 Q450,404 445,396 Q440,380 450,360 Z', '#fff4c2') + Array.from({ length: 40 }, () => { const x = k.r() * 900, y = k.r() * 580; return k.line(x, y, x, y + 20, '#9ab', 1.2, 'opacity=".2"'); }).join('') });
   D('b_car', { title: 'Warsztat', grade: 'cold', w: 900, h: 900, draw: k => k.full('#2a2e32') + k.rect(0, 0, 900, 30, '#ddeeff', 'opacity=".9"') + k.glow(450, 20, 400, '#e8f4ff', 0.4) + k.rect(0, 760, 900, 140, '#3a3a38') + k.rect(160, 520, 20, 240, '#c8b020') + k.rect(720, 520, 20, 240, '#c8b020') + k.rect(140, 500, 620, 24, '#c8b020') + k.car(450, 500, 1.6, { view: 'rear', fill: '#5a6a7a', glass: '#1a2028', plate: 'DDZ 4P02' }) });

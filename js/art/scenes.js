@@ -222,7 +222,7 @@
   }
   D('m_lehr', { src: 'assets/maja/m_lehr.jpg',
     title: 'Odprężarka — zamurowany fragment', exif: phone('08.10.2026', '14:05', { place: 'Huta „Jutrzenka”, hala A, poziom −1', note: 'Lampa błyskowa + czołówka' }), style: 'flash',
-    hotspots: [{ x: 592, y: 469, r: 200, ev: 'ev_bricks' }, { x: 307, y: 818, r: 45, ev: 'ev_toy', zoom: 1.8 }],
+    hotspots: [{ x: 598, y: 398, r: 220, ev: 'ev_bricks' }, { x: 334, y: 797, r: 45, ev: 'ev_toy', zoom: 1.8 }],
     draw: k => lehrWall(k, { toy: [290, 772, 0.5] })
   });
   D('m_bricks', { src: 'assets/maja/m_bricks.jpg',
@@ -400,13 +400,13 @@
     title: 'CAM-01 · 15.10, 01:20', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 22, '15.10.2026', '01:20'), stamp: tstamp('CAM-01', 22, '15.10.2026', '01:20:17', 2, 'wax'), onView: 'ev_cam1_car',
     draw: k => yard(k) + k.car(420, 600, 1.15, { view: 'front', lights: true, fill: '#262626', glass: '#0a0a0a', plateFill: '#ddd' }) + k.glow(330, 520, 320, '#fff', 0.7) + k.glow(510, 520, 320, '#fff', 0.7)
   });
-  D('c1_0023', {
+  D('c1_0023', { src: 'assets/trap/c1_0023.jpg',
     title: 'CAM-01 · 15.10, 02:05', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 23, '15.10.2026', '02:05', { note: 'Zdjęcie bardzo ciemne' }), stamp: tstamp('CAM-01', 23, '15.10.2026', '02:05:44', 1, 'wax'),
     edit: { target: { exp: [2.2, 3.6], con: [1.2, 1.9] }, result: 'c1_0023e', ev: 'ev_plate_cam', darkMsg: 'Zdjęcie jest niedoświetlone — IR nie doświetlił odjeżdżającego auta. Rozjaśnij mocno.', doneMsg: 'Tablica częściowo czytelna: DDZ 6K1… Zapisano w Galerii → Wywołane.' },
     fx: { grain: 0.4 },
     draw: k => `<g opacity=".32">${yard(k)}</g>` + `<g opacity=".38">${k.car(430, 590, 1.0, { view: 'rear', tail: true, fill: '#3a3a3a', glass: '#141414', plate: 'DDZ 6K1', plateFill: '#9a9a9a', plateText: '#3a3a3a' })}</g>` + k.ell(470, 543, 14, 12, '#141414', 'opacity=".9"')
   });
-  D('c1_0023e', {
+  D('c1_0023e', { src: 'assets/trap/c1_0023e.jpg',
     title: 'CAM-01 · 15.10, 02:05 (rozjaśnione)', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 23, '15.10.2026', '02:05', { note: 'Rozjaśnione w Ciemni' }), stamp: tstamp('CAM-01', 23, '15.10.2026', '02:05:44', 1, 'wax'),
     fx: { grain: 0.5 },
     draw: k => `<g opacity=".85">${yard(k)}</g>` + k.car(430, 590, 1.0, { view: 'rear', tail: true, fill: '#5a5a5a', glass: '#2a2a2a', plate: 'DDZ 6K1', plateFill: '#e0e0e0', plateText: '#111' }) + k.ell(470, 543, 14, 12, '#3a3226') + k.glow(330, 522, 90, '#fff', 0.6) + k.glow(530, 522, 90, '#fff', 0.6)
@@ -523,7 +523,7 @@
       return s;
     }
   });
-  D('k_gate', {
+  D('k_gate', { src: 'assets/kuba/k_gate.jpg',
     title: 'Brama', w: 900, h: 1200, exif: phone('22.10.2026', '23:36', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”' }), style: 'flash',
     draw: k => {
       const { W, H } = k;
@@ -538,7 +538,7 @@
       return s;
     }
   });
-  D('k_locker', {
+  D('k_locker', { src: 'assets/kuba/k_locker.jpg',
     title: 'Szafka 17 od środka', w: 900, h: 1200, exif: phone('22.10.2026', '23:58', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, szatnia' }), style: 'flash', onView: 'ev_dk97',
     draw: k => {
       const { W, H } = k;
@@ -552,11 +552,11 @@
       return s;
     }
   });
-  D('k_wall', {
+  D('k_wall', { src: 'assets/kuba/k_wall.jpg',
     title: 'Mur w odprężarce', exif: phone('23.10.2026', '00:04', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, odprężarka' }), style: 'flash', onView: 'ev_patch',
     draw: k => lehrWall(k, { patch: true, pallets: true })
   });
-  D('k_headlamp', {
+  D('k_headlamp', { src: 'assets/kuba/k_headlamp.jpg',
     title: 'Czołówka', exif: phone('23.10.2026', '00:06', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, odprężarka' }), style: 'flash', onView: 'ev_headlamp',
     draw: k => {
       const { W, H } = k;
@@ -569,7 +569,7 @@
       return s;
     }
   });
-  D('k_mount', {
+  D('k_mount', { src: 'assets/kuba/k_mount.jpg',
     title: 'Filar w hali A', w: 900, h: 1200, exif: phone('23.10.2026', '00:09', { device: 'Telefon Igora', place: 'Huta „Jutrzenka”, hala A' }), style: 'flash', onView: 'ev_mount',
     draw: k => {
       const { W, H } = k;
