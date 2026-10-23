@@ -787,6 +787,16 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     unlock('chat:ida'),
     Id('przepraszam. nie chciałam dzwonić'),
     Id('jutro o 21 pojawi się klip z olą. już go wgrałam i ustawiłam publikację na 21:00'),
+    /* P6 / S4: Ida i Zenon. Wnuczka robi coś za plecami dziadka, nie z nienawiści. */
+    scene('xIdaDziadek', [
+      pause(2500),
+      Id('dziadek myśli że wieczorami siedzę na rozmowach o pracę. online. od stażu w gazecie to nawet się zgadza'),
+      Id('te kasety trzymał w szafie po babci. nie wie ile z nich widziało już pół miasta'),
+      choose('ida', [
+        opt('Powiedz mu sama, zanim zobaczy w internecie.', [Id('wiem. jutro. przy śniadaniu. jak pies nie będzie szczekał')], { set: { c_idaTellZenon: true } }),
+        opt('Czemu go nie zapytałaś o zgodę?', [Id('bo by powiedział nie. i miałby rację. dlatego nie zapytałam')])
+      ])
+    ]),
     end('c4')
   ];
 });
