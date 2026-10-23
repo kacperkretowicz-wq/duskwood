@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 2 — Huta */
 
 Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października · wieczór', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene, label, go, scare } = D;
+  const { say, pic, me, sys, pause, choose, menu, opt, show, waitFor, openChat, goal, give, unlock, set, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, trust , scene, label, go, scare, edit } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -218,13 +218,16 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
 
     /* P4: wyciszona grupa to zwykłe zachowanie, nie dowód winy. */
     scene('xWyciszona', [
-      g('kuba', 'bartek ty odpisujesz po godzinie. wszystko ok?'),
+      g('kuba', 'bartek ty coś przed nami ukrywasz', { uid: 'x_ke1' }),
+      pause(2500),
+      edit('group', 'x_ke1', 'bartek ty odpisujesz po godzinie. wszystko ok?', { flag: 'x_edycjaSeen' }),
       g('bartek', 'wyciszylem grupe. 140 wiadomosci jak lezalem pod podnosnikiem. czytam jak mam przerwe'),
       g('bartek', 'nie kazdy ma caly dzien na telefon'),
       choose('group', [
         opt('Normalne. Odcisz, jak będziemy czegoś od ciebie potrzebować.', [g('bartek', 'jak bedzie cos waznego to dzwoncie. telefon odbieram')]),
         opt('Kuba, nie każda cisza coś znaczy.', [g('kuba', 'wiem. sorry. wszystko mi się teraz wydaje podejrzane')], { trust: { kuba: 1 } })
-      ])
+      ]),
+      iff('flag:x_edycjaSeen', [say('kuba', 'kuba', '{widziałeś|widziałaś} co napisałem zanim poprawiłem? nie mów mu. głupio wyszło', { wording: '{widziałeś|widziałaś} pierwszą wersję? nie mów bartkowi. głupio wyszło' })])
     ]),
     /* --- wyprawa --- */
     g('igor', 'dobra. z kubą jedziemy dziś o 23. bartek, jedziesz czy nie?'),
