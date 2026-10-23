@@ -65,3 +65,4 @@ Sprawdzenie: test jednostkowy podglądu vs. otwartego czatu; reload w trakcie wy
 ```
 
 - Wdrożone 23.10: `xWycofana` (P4, wycofana wiadomość), `xAutobus` (P2, ostatni autobus).
+- Wdrożone 23.10 (popołudnie): P3 `xNieSpisz`, `xPojechali`, `xRanoNoc`, `xRanoSync`; P4 `xDataPliku`, `xWyswietlono`, `xWyciszona`, `xReupload`, `xProsby` → `xProsbaWyjasnienie`.

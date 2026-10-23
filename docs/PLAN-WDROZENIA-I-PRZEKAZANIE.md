@@ -626,3 +626,9 @@ Testy po pakiecie: `node --test tests/*.test.cjs` 49/49 PASS (w tym nowy test ta
 - P3 (początek): scena `xNieSpisz` (ch1, po przerwie `s1_night`): spokojne „nie śpisz?” Kuby przed nocnym alarmem. Cache SW v53.
 - Test `tests/unsend.browser.cjs`: dymek „Wiadomość została usunięta” w otwartym czacie i podgląd (PASS).
 - P3: scena `xPojechali` (ch2, po przerwie `s1_departure`): Bartek prywatnie pyta, czy pojechali; gracz streszcza cel. Tylko gdy czat z Bartkiem odblokowany. Cache SW v54. Test `rhythm` poprawiony pod `xNieSpisz` (PASS iOS/Android).
+
+### 17.2 Aktualizacja 23.10, popołudnie (P3, P4, P6)
+- P3: `SeasonPacing` zapisuje flagę `rano_<id przerwy>`, gdy gracz wraca co najmniej 4 h po terminie (bez kary, bez zmiany kolejności). Reakcje: `xRanoNoc` (ch1), `xRanoSync` (ch3), `xRanoKlip` (S3). Spokojne powroty: `xNieSpisz` (ch1), `xPojechali` (ch2), `xPoTreningu` (S2), `xPoPracy` (S4). Test jednostkowy: późny powrót, powrót na czas, okno nocne w dniu zmiany czasu (25.10.2026). Przerwa `s5_voice` kończy się nocnym telefonem; bez osobnej sceny porannej.
+- P4: `xDataPliku` (data pliku a czas synchronizacji), `xWyswietlono`, `xWyciszona`, `xReupload` (relacja → screen → reupload → komentarze → mama Mai), `xProsby` (prośby o wiadomość, prywatny profil) z wyjaśnieniem `xProsbaWyjasnienie` w epilogu.
+- P6: S2 `xNatanBlad`, `xMartaKuchnia`; S3 `xKopieZostaja` (tylko po `k_kubaOff`); S4 `xIdaDziadek`; S5 `xMamaNatana`.
+- Bez zmian: anonimowy materiał wideo (P4, czeka na rozdział 12), Ola o dawnym nagraniu w S4 (istnieje w c4), rozpoznawanie rozmówcy w S5 (istnieje).
