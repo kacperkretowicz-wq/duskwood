@@ -24,7 +24,7 @@ const KronikaCast = D => {
 /* ---------- c0 · Studniówka ---------- */
 Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka', when: 'Poniedziałek, 18 stycznia · 20:10', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, vanish } = D;
-  const { M, O, S, B, V, Gr, K } = KronikaCast(D);
+  const { M, O, S, B, V, Gr, K, W } = KronikaCast(D);
   return [
     clock('2027-01-18T20:10'),
     ambient('calm'),
@@ -107,6 +107,9 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     ]),
     scene('xAlbum', [
       pause(2000),
+      Gr('bartek', 'moja ciotka tez jest w tym polonezie. juz dzwoni do wszystkich, ze to nie ona'),
+      Gr('ola', 'Moja mama też jest. I to na pewno ona.'),
+      pause(1500),
       O('Mama wyciągnęła album i pokazuje mi wszystkich po kolei. „Ta się rozwiodła, ten wyjechał do Niemiec, a ta ma teraz sklep z firankami”.'),
       choose('ola', [
         opt('Posiedź z nią. Album to dobry pomysł.', [O('Siedzę. Dostałam herbatę i kawałek sernika. Chyba jest dobrze.')]),
@@ -140,6 +143,13 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       ])
     ]),
     give('ev_c_klip1', { silent: true }),
+    scene('xWeronikaCiasta', [
+      W('Widziałam tę studniówkę. Ja też tam jestem, przy stoliku z ciastami. Nikt mnie nie poznał i bardzo dobrze.'),
+      choose('weronika', [
+        opt('Teraz będę pani szukać w każdym kadrze.', [W('Proszę nie szukać. Miałam wtedy trwałą, której się wstydzę do dziś.')]),
+        opt('Kto wtedy piekł te ciasta?', [W('Ja i pani Basia od pana Henryka. Sernik był jej. Mój zakalec też ktoś zjadł.')])
+      ])
+    ]),
     scene('xKubaCiocia', [
       clock('2027-01-18T22:40'),
       K('mama ogląda studniówkę i gada z ciocią na głośniku. ciocia też tam była. kłócą się, która miała gorszą fryzurę'),
@@ -197,6 +207,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     I('w 0:27 na górze ekranu jest odbicie. jakby świeciła lampka na biurku'),
     I('na samym nagraniu z kasety nie powinno być takiego odbicia. chyba że ktoś filmuje telewizor telefonem'),
     set('c_tvFilmed'),
+    I('to ważne, bo ktoś ma kasety i telewizor w jednym pokoju. to bardzo zawęża listę'),
     pause(3000),
     W('Dzień dobry. Pani Maja mówi, że {Pan|Pani} pyta o kronikę.'),
     W('Lepiej zadzwonię. Pisanie mi dziś nie idzie.'),
@@ -208,6 +219,13 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     c('weronika', 'To porządny człowiek. Nie wierzę, żeby to robił. Ale kasety są u niego. Wszyscy to wiedzą.'),
     callEnd(),
     set('c_zenonNamed'),
+    scene('xKubaSiniak', [
+      M('kuba wrócił z sanek z siniakiem na pół uda. mama każe mu smarować maścią końską'),
+      choose('maja2', [
+        opt('Maść końska rozwiązuje wszystko.', [M('mówi, że śmierdzi jak stajnia. ale smaruje')]),
+        opt('A ty nie jeździłaś?', [M('jeździłam. ja umiem hamować')])
+      ])
+    ]),
     give('ev_c_tv'),
     scene('xZenonKamera', [
       pause(2000),
@@ -217,7 +235,8 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
         opt('Kamera na ramieniu, wysoko, ze sceny. Stąd te ujęcia z góry.', [W('Tak. Mówił, że z dołu widać tylko plecy.')], { set: { c_heightLink: true } }),
         opt('Uśmiecha się do kogoś obok kamery.', [W('Do mnie. Stałam z boku z kanapkami dla zespołu. Dawno temu.')]),
         opt('Zwykłe zdjęcie z festynu.', [W('Zwykłe. Takich miał setki, tylko zawsze bez siebie.')])
-      ])
+      ]),
+      W('Dał mi tę odbitkę dziesięć lat temu. Powiedział, że to jedyne zdjęcie, na którym jest on, a nie wszyscy inni.')
     ]),
     pause(5000),
     clock('2027-01-19T21:00'),
@@ -292,7 +311,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
 /* ---------- c2 · O.N. ---------- */
 Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.', when: 'Środa, 20 stycznia · 10:15', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, nearby, vanish, sys } = D;
-  const { M, O, Z, B, I, S, Nt, Gr, c, V } = KronikaCast(D);
+  const { M, O, Z, B, I, S, Nt, Gr, W, K, c, V } = KronikaCast(D);
   return [
     clock('2027-01-20T10:15'),
     ambient('calm'),
@@ -337,6 +356,8 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     ]),
     scene('xRamowka', [
       pause(2500),
+      K('maja mówi, że {dzwoniłeś|dzwoniłaś} do pana zenona. ja bym nie umiał'),
+      pause(2000),
       Nt('mam w archiwum ramowke tv dolina z sierpnia 2011. festyn mial isc w sobote, 2 minuty'),
       Nt('a w notatce operatora dopisek recznie: „bójka — nie emitować. Z.G.”'),
       choose('natan', [
@@ -361,6 +382,15 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
         ], { set: { c_idaSeen: true, c_peronLink: true } }),
         opt('Ktoś wyszedł z psem. Normalny wieczór.', [M('no normalny. tylko u nas nikt normalny nie chodzi o 22 z psem po tej stronie bloku')], { set: { c_idaLater: true } })
       ])
+    ]),
+    scene('xKrzyzowki', [
+      pause(2000),
+      W('Pan Zenon przyszedł do czytelni pożyczyć krzyżówki. Zapytał, czy ludzie naprawdę myślą, że to on. Nie umiałam skłamać.'),
+      choose('weronika', [
+        opt('Co mu pani powiedziała?', [W('Że niektórzy tak. I że ja nie. Wziął trzy krzyżówki, chociaż zawsze bierze jedną.')]),
+        opt('Dobrze, że ma panią.', [W('Ja jego też. Czterdzieści lat temu kręcił mój ślub. Za darmo, bo „młodym się nie liczy”.')])
+      ]),
+      say('zuza', 'zuza', 'babcia znalazła pana zenona na kasecie z mojego chrztu. widać go przez sekundę w lustrze. jedyny raz')
     ]),
     give('ev_c_spacer'),
     scene('xIgorPies', [
@@ -569,6 +599,15 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       choose('weronika', [
         opt('Rano do niego zadzwonimy. Razem.', [W('Dobrze. Rano. O tej porze ludzi się nie budzi.')]),
         opt('Może wie więcej, niż pani myśli.', [W('Może. Ale wtedy nie spałby tak spokojnie.')])
+      ]),
+      pause(2500),
+      I('laptop złożony. idę spać. ty też idź'),
+      O('Mama zasnęła na fotelu. Przykryłam ją kocem. Zwykle jest odwrotnie.'),
+      pause(2000),
+      M('Kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty'),
+      choose('maja2', [
+        opt('Idź spać. Rano pogadamy.', [M('dobra. jeszcze jeden odcinek. żartuję')]),
+        opt('Napisz, jak coś zobaczysz.', [M('napiszę. ale chyba nic już nie zobaczę. śnieg zasypał ślady')])
       ])
     ]),
     set('c_festynSeen'),
@@ -579,7 +618,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
 /* ---------- c3 · Wogóle ---------- */
 Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogóle', when: 'Czwartek, 21 stycznia · 9:30', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, vanish } = D;
-  const { M, O, W, S, I, Id, B, K, Nt, Gr, c } = KronikaCast(D);
+  const { M, O, W, S, I, Id, B, K, Nt, Gr, Z, c } = KronikaCast(D);
   return [
     clock('2027-01-21T09:30'),
     ambient('calm'),
@@ -592,6 +631,13 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
         S('Nie lubię zakazywać. Ale mam dość.')
       ], { set: { c_zenonDefended: true } }),
       opt('Na razie nic nie przypinajmy. Zobaczymy, co dalej.', [S('Rozumiem. Tylko że potem może już być za późno.')])
+    ]),
+    scene('xPaczki', [
+      M('kupiłam pączki dla pani weroniki. nie wiem czemu. chyba żeby coś zrobić z rękami'),
+      choose('maja2', [
+        opt('Dobry powód. Z różą?', [M('z różą i jeden z budyniem. dla mnie')]),
+        opt('Weź też dla pana Zenona.', [M('wzięłam. zaniosę mu pod drzwi. bez dzwonienia')], { set: { c_majaZenon: true } })
+      ])
     ]),
     scene('xGrupaBlok', [
       pause(2000),
@@ -644,6 +690,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     scene('xPoRozmowie', [
       pause(2500),
       W('Pan Zenon zostawił u mnie rano parasol. Wróci po niego, jak będzie miał siłę wyjść z domu.'),
+      Z('{Szanowny Panie|Szanowna Pani}, przepraszam za ten telefon. Ida mówi, że niepotrzebnie się żalę. Z poważaniem, Z. Gil'),
       pause(2500),
       O('Byłam. Powiedziała, że widziała zapowiedź i że „poczekajmy do piątku”.'),
       O('Poczekajmy. Jakbym miała jakiś wybór.'),
