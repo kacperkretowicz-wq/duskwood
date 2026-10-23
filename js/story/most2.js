@@ -562,6 +562,20 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     ]),
     Ma('ona jest w kuchni. słyszę jak zmywa'),
     Ma('nie wiem, jak mam teraz tam wejść'),
+    /* P6 / S2: konflikt Marty z matką. Bez wielkiej konfrontacji, w kuchni. */
+    scene('xMartaKuchnia', [
+      choose('marta', [
+        opt('Nie musisz dziś nic mówić. Możesz po prostu wejść i pomóc wycierać.', [
+          Ma('weszłam. wycieram. ona nuci coś z radia'),
+          Ma('a ja nie umiem spojrzeć jej w oczy')
+        ], { trust: { marta: 1 } }),
+        opt('Zapytaj ją wprost, komu dała to ksero.', [
+          Ma('zapytałam'),
+          Ma('powiedziała „to nie twoja sprawa, córcia” i dalej zmywała'),
+          Ma('pierwszy raz w życiu tak do mnie powiedziała')
+        ], { set: { m_martaAsked: true } })
+      ])
+    ]),
     set('m_act3'),
     end('m4')
   ];
