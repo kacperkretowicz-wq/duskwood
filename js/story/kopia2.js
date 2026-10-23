@@ -644,6 +644,18 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
         opt('To twoja decyzja, co dalej. Ja nie będę jej za ciebie podejmować.', [K('to nie wiem'), K('jeszcze nie wiem')])
       ])
     ]),
+    /* P6 / S3: usunięcie konta nie cofa pobrań ani nie oddaje zaufania. */
+    scene('xKopieZostaja', [
+      iff('flag:k_kubaOff', [
+        pause(3000),
+        K('konto zniknęło. myślałem, że to coś da'),
+        K('pod postem o pawlakach są trzy reuploady. ktoś zgrał wszystko w pierwszą noc'),
+        choose('kuba', [
+          opt('Usunięcie konta nie kasuje cudzych kopii. Zgłaszaj każdą osobno.', [K('zgłosiłem trzy. w międzyczasie pojawiła się czwarta'), K('będę zgłaszał. nie mam nic lepszego do roboty')]),
+          opt('Zaufanie też nie wróci od jednego kliknięcia.', [K('wiem. maja dalej nie patrzy mi w oczy przy stole')], { trust: { kuba: 1 } })
+        ])
+      ])
+    ]),
     scene('xGrupaSwieta', [
       pause(2500),
       clock('2026-12-24T18:05'),
