@@ -66,3 +66,9 @@ Sprawdzenie: test jednostkowy podglądu vs. otwartego czatu; reload w trakcie wy
 
 - Wdrożone 23.10: `xWycofana` (P4, wycofana wiadomość), `xAutobus` (P2, ostatni autobus).
 - Wdrożone 23.10 (popołudnie): P3 `xNieSpisz`, `xPojechali`, `xRanoNoc`, `xRanoSync`; P4 `xDataPliku`, `xWyswietlono`, `xWyciszona`, `xReupload`, `xProsby` → `xProsbaWyjasnienie`.
+
+## Karta: anonimowy materiał (P4, scena rozpisana, bez produkcji)
+- Nadawca: konto bez zdjęcia na Klipo, plik opisany neutralnie „MATERIAŁ_ROBOCZY_01”. Źródło: kopia z karty pamięci fotopułapki, którą ktoś wyjął przed policją.
+- Dostęp: link wygasa po 24 h. Jeśli gracz go nie otworzy, Igor ma zrzut ekranu z miniaturą i godziną; trop zostaje osiągalny bez „magicznego” odtworzenia pliku.
+- Działanie gracza: porównać godzinę z miniatury z CAM01_IMG_0057 (02:13). Wyjaśnienie później: materiał jest prawdziwy, ale z innej nocy (data w pliku).
+- Produkcja klipu czeka na rozdział 12 i etap mediów; do tego czasu nie wdrażać.

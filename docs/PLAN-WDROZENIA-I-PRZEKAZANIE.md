@@ -632,3 +632,42 @@ Testy po pakiecie: `node --test tests/*.test.cjs` 49/49 PASS (w tym nowy test ta
 - P4: `xDataPliku` (data pliku a czas synchronizacji), `xWyswietlono`, `xWyciszona`, `xReupload` (relacja → screen → reupload → komentarze → mama Mai), `xProsby` (prośby o wiadomość, prywatny profil) z wyjaśnieniem `xProsbaWyjasnienie` w epilogu.
 - P6: S2 `xNatanBlad`, `xMartaKuchnia`; S3 `xKopieZostaja` (tylko po `k_kubaOff`); S4 `xIdaDziadek`; S5 `xMamaNatana`.
 - Bez zmian: anonimowy materiał wideo (P4, czeka na rozdział 12), Ola o dawnym nagraniu w S4 (istnieje w c4), rozpoznawanie rozmówcy w S5 (istnieje).
+
+### 17.3 P7: szacunek długości z E2E (23.10, Android, ścieżka swit → pelny_kadr → wlasnym_glosem → przewiniecie → haslo)
+Szacunek czytania: słowa / 150 na minutę + 3 s na wiadomość. Bez szukania dowodów, przerw i namysłu przy wyborach, więc realna sesja będzie dłuższa. Pomiar z ludźmi nadal do zrobienia.
+
+| Rozdział | Wiadomości | Słowa | Minuty czytania |
+|---|---|---|---|
+| prolog | 86 | 713 | ~9 |
+| ch1 | 85 | 670 | ~9 |
+| ch2 | 162 | 1252 | ~16 |
+| ch3 | 203 | 1755 | ~22 |
+| ch4 | 81 | 748 | ~9 |
+| ch5 | 78 | 647 | ~8 |
+| epilog | 38 | 412 | ~5 |
+| m0 | 88 | 932 | ~11 |
+| m1 | 70 | 831 | ~9 |
+| m2 | 82 | 1004 | ~11 |
+| m3 | 83 | 927 | ~10 |
+| m4 | 69 | 804 | ~9 |
+| m5 | 75 | 853 | ~9 |
+| k0 | 61 | 633 | ~7 |
+| k1 | 72 | 688 | ~8 |
+| k2 | 79 | 740 | ~9 |
+| k3 | 73 | 761 | ~9 |
+| k4 | 72 | 750 | ~9 |
+| c0 | 58 | 566 | ~7 |
+| c1 | 61 | 624 | ~7 |
+| c2 | 63 | 624 | ~7 |
+| cf | 68 | 632 | ~8 |
+| c3 | 68 | 737 | ~8 |
+| c4 | 47 | 408 | ~5 |
+| g0 | 77 | 684 | ~8 |
+| g1 | 67 | 732 | ~8 |
+| g2 | 76 | 780 | ~9 |
+| g3 | 68 | 681 | ~8 |
+| g4 | 59 | 708 | ~8 |
+| g5 | 69 | 750 | ~8 |
+| g6 | 61 | 631 | ~7 |
+
+Uwaga: ch3 (~22 min czytania) jest wyraźnie najdłuższy w S1 po dopisaniu scen P2/P4. Przy pomiarze z graczami sprawdzić, czy nie podzielić go przerwą przed `s19`.
