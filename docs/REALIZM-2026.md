@@ -2,6 +2,8 @@
 
 23.10.2026. Baza: `feature/ostatni-kurs`, `c6cf040`. Zmiany robocze: `feat/realizm-2026`.
 
+Kompletna instrukcja dalszych prac: [PLAN-WDROZENIA-I-PRZEKAZANIE.md](PLAN-WDROZENIA-I-PRZEKAZANIE.md). Poniżej zachowano zapis wykonanych pakietów; dokument przekazania porządkuje również braki, kolejność wdrażania i późniejszy etap zdjęć oraz klipów.
+
 ## Obowiązujące decyzje
 
 Zachowujemy pulpit telefonu, aplikacje, kolory, typografię i układ tej wersji. Pięć istniejących sezonów jest punktem wyjścia do redakcji. Nie nakładamy eksperymentalnej kampanii z poprzedniej kopii opartej na `main`.
