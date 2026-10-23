@@ -753,3 +753,133 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     end('g5')
   ];
 });
+
+/* ---------- g5 · Przewijanie ---------- */
+Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewijanie', when: 'Piątek, 19 marca · 7:30', mood: 'calm' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing } = D;
+  const { M, K, O, I, W, S, Nt, Z, Id, Os, Mr, Gr, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-19T07:30'),
+    ambient('calm'),
+    title(),
+    Nt('zatrzymali go. o 6:10, w kawalerce nad pizzeria'),
+    Nt('laptop, dwa telefony, mikrofon. i folder „glosy”. 60 osob z mgliska i okolic. ty tez'),
+    Nt('policjant mowi, ze w zyciu czegos takiego nie widzial. a widzial duzo'),
+    choose('natan', [
+      opt('Dzięki, Natan. Bez ciebie by tego nie było.', [Nt('bez oskara i ciebie. ja tylko jezdzilem samochodem'), Nt('i pije trzecia kawe. o 7:30')]),
+      opt('Co mówi Dudek?', [Nt('nic. ma adwokata od razu. jakby czekal na to'), Nt('adwokat jest z wroclawia. drogi. skad kierownik budowy ma na takiego')], { set: { g_lawyer: true } })
+    ]),
+    M('ZŁAPALI GO??'),
+    M('kuba skacze po kuchni. mama płacze. ja jem płatki i nie wiem, co czuję'),
+    M('hasło. dla zasady'),
+    ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}. I tak, złapali go.`, [M('dobra. to dziś pierwszy raz od tygodnia idę na zajęcia bez strachu')])])]),
+    scene('xGrupaUlga', [
+      pause(3000),
+      Gr('bartek', 'pizza jutro aktualna? bo ja juz kupilem 4 litry coli'),
+      Gr('ola', 'Aktualna! Teraz to już nawet musi być.'),
+      Gr('igor', 'oskar napisał, że przeprasza wszystkich. i że odda kasę z tych telefonów. 850 zł. zbiera z kieszonkowego'),
+      Gr('kuba', 'niech odda pani krysi na ciasto. ona najwięcej się wystraszyła'),
+      choose('group', [
+        opt('Oskar dostał nauczkę. Dajmy mu szansę.', [Gr('igor', 'dostanie. ale od teraz kasuję sam. przy nim')], { set: { g_oskarChance: true } }),
+        opt('Jutro pizza. Dziś jeszcze uważajmy. Jeszcze nie wszystko wiemy.', [Gr('ola', 'Masz rację. Ale pozwól nam się chociaż trochę cieszyć 😊')])
+      ])
+    ]),
+    pause(3000),
+    S('W grupie wszyscy dziękują policji. I trochę Natanowi. O {panu|pani} nikt już nie pisze źle.'),
+    S('Pani Krysia napisała: „wnuczek dzwonił naprawdę i powiedział hasło”. Dwieście serduszek.'),
+    pause(3500),
+    clock('2027-03-19T11:20'),
+    /* Pierwsza rysa: scenariusze rozmów. */
+    Nt('mam cos dziwnego. policjant pokazal mi wydruk z laptopa. scenariusze rozmow'),
+    Nt('przepisuje ci jeden. dla pani weroniki:'),
+    Nt('„Wera, to ja. Jest mi zimno. (pauza 2 s) Wera? — Głos: Tomek L., kaseta 12, 0:04. Uwaga: mówić wolno, dziecięco, bez «no».”'),
+    Nt('i jeszcze plik ma autora w wlasciwosciach. „Pracownia_UG”'),
+    give('ev_g_scenariusz'),
+    choose('natan', [
+      opt('„Pracownia_UG” to komputer z urzędu gminy. Z pracowni archiwum.', [Nt('kurde. masz racje. tak sie nazywaja komputery w gminie. sprawdzalem kiedys przy przetargu'), Nt('czyli scenariusz napisal ktos z gminy. nie dudek')], { set: { g_ugAuthor: true } }),
+      opt('Pełne zdania, przecinki, „uwaga: mówić wolno”. Dudek tak nie pisze.', [Nt('dudek pisze jak ja. bez przecinkow i z bledami. to pisal ktos inny'), Nt('ktos bardzo dokladny')], { set: { g_commas: true } }),
+      opt('„Kaseta 12, 0:04”. Ktoś znał numer kasety i sekundę.', [Nt('dokladnie. tego nie bylo w sieci. ktos to sprawdzal na oryginale')], { set: { g_kaseta12: true } })
+    ]),
+    iff('flag:g_dudekSlip', [Nt('i pamietasz, co ci napisal? „ja tylko dzwonie. ktos inny mowi co”. to sie zgadza')]),
+    scene('xWeraSluchawki', [
+      pause(3000),
+      W('Odsłuchałam jeszcze raz wiadomość od „Tomka”. Na słuchawkach, które pożyczyłam od Kuby.'),
+      W('Na końcu coś piszczy. Potem trzask. Jakby ktoś przewijał kasetę.'),
+      W('Znam ten dźwięk. W czytelni mieliśmy kiedyś taki magnetowid.'),
+      choose('weronika', [
+        opt('Czyli ktoś odtwarzał oryginalną kasetę, kiedy nagrywał tę wiadomość.', [W('Na żywo. Z magnetowidu. Nie z internetu.'), W('A tej kasety nigdy nie było w internecie.')], { set: { g_liveTape: true } }),
+        opt('Zapytajmy pana Zenona. On zna każdy magnetowid.', [W('Dobrze. Przesyłam mu nagranie. Jest w tym lepszy niż ktokolwiek.')])
+      ]),
+      W('Mam jeszcze to. Zrobiłam w środę w pracowni, jak pani Marta wkładała kasetę.'),
+      pic('weronika', 'weronika', 'g_magnetowid', 'Ten sam piskliwy magnetowid. Kaseta dwunasta.'),
+      give('ev_g_magnetowid')
+    ]),
+    pause(3000),
+    Z('{Szanowny Panie|Szanowna Pani}, pani Weronika przesłała mi nagranie. Słuchałem pięć razy.'),
+    Z('Ten pisk na końcu to magnetowid japoński z lat dziewięćdziesiątych. Przy przewijaniu piszczy jak czajnik. Miałem dwa takie.'),
+    Z('Oba oddałem w lutym do archiwum gminy, razem z kasetami. Pani Jasińska bardzo chciała, żeby zgrywać „na oryginalnym sprzęcie”.'),
+    choose('zenon', [
+      opt('Czy ktoś poza panią Jasińską ma dostęp do tych magnetowidów?', [Z('Z tego, co wiem, nikt. Pracownia jest zamykana na klucz. Pani Jasińska sama mi to pokazywała, z dumą.')], { set: { g_onlyKey: true } }),
+      opt('Dziękuję, panie Zenonie. Bardzo pan pomógł.', [Z('Cieszę się. Choć wolałbym, żeby moje magnetowidy służyły do czegoś lepszego.')])
+    ]),
+    iff(s => s.vars.s4Ending === 'przewiniecie', [
+      pause(2000),
+      Id('ej. dziadek mi powiedział. o pracowni'),
+      Id('jak w lutym oddawaliśmy kasety, pani marta pytała, czy dziadek ma coś z mostu. z 2011'),
+      Id('dziadek powiedział, że ma. kasetę z dnia po wypadku. ludzie przy barierce, wywiady'),
+      Id('ona bardzo chciała tę kasetę. powiedziała, że „zabezpieczy ją przed procesem”'),
+      give('ev_g_most2011')
+    ], [
+      pause(2000),
+      Z('Jeszcze jedno. Pani Jasińska pytała, czy mam kasetę z mostu z 2011 roku. Miałem. Dzień po wypadku, ludzie przy barierce, wywiady.'),
+      Z('Bardzo jej zależało. Mówiła, że „zabezpieczy ją przed procesem”. Wtedy wydało mi się to troskliwe.'),
+      give('ev_g_most2011')
+    ]),
+    pause(3000),
+    clock('2027-03-19T15:45'),
+    Nt('sprawdzilem. marta jasinska z domu kurek. corka janiny kurek. kurek-bud'),
+    Nt('wiedzielismy to w listopadzie. przeciek o kasecie poszedl „przez kuchnie”. i zapomnielismy'),
+    Nt('a dudek to kierownik budowy z kurek-bud. adwokat z wroclawia. to sie sklada'),
+    choose('natan', [
+      opt('Marta pisze scenariusze, zgrywa głosy z kaset, Dudek tylko dzwoni. A wszystko po to, żeby świadkowie wypadku na moście się wycofali.', [Nt('i zeby pokazac, ze to „zwykla szajka na wnuczka”. przy okazji kase wyludzali, zeby policja szukala zlodziei'), Nt('kurde. tak'), Nt('ale to tylko nasze domysly. potrzebujemy dowodu. czegos z pracowni')], { set: { g_twist: true } }),
+      opt('Nie mamy dowodu. Marta jest miła, pomaga. Może ktoś używa jej komputera.', [Nt('moze. ale klucz ma tylko ona. magnetowidy ma ona. kaseta 12 jest u niej'), Nt('jak ktos uzywa jej komputera, to ona by wiedziala')], { set: { g_twist: true, g_doubt: true } })
+    ]),
+    scene('xMartaPisze', [
+      pause(3000),
+      Mr('Dzień dobry. Słyszałam, że zatrzymali tego pana z Dzierżoniowa. Bardzo się cieszę. Pani Weronika na pewno też odetchnie.'),
+      Mr('Mam jedną prośbę. Czy ma {Pan|Pani} jeszcze nagrania tych telefonów? Od pani Weroniki albo swoje?'),
+      Mr('Chciałabym je zabezpieczyć w archiwum. Jako dokument. Takie rzeczy szybko giną z telefonów.'),
+      choose('marta', [
+        opt('Wysłał{em|am} je już policji. Kopie ma też Natan.', [Mr('Ach, tak. To dobrze. Bardzo dobrze.'), Mr('Proszę pozdrowić pana Natana.')], { set: { g_martaBluff: true } }),
+        opt('Prześlę wieczorem. Dziękuję, że pani o tym pamięta.', [Mr('Dziękuję. Najlepiej wszystkie. Także te, które {Pan|Pani} sam{|a} nagrał{|a}.')], { set: { g_martaAsk: true } }),
+        opt('Po co pani nagrania, skoro sprawca jest zatrzymany?', [Mr('To odruch zawodowy. Archiwista zbiera wszystko. Nie wiadomo, co się kiedyś przyda.'), Mr('Ale rozumiem, jeśli {Pan|Pani} woli ich nie przesyłać.')], { set: { g_martaQuestion: true } })
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-19T19:10'),
+    ambient('dark'),
+    O('Pizza jutro o 18. Mama już kupiła mąkę. Tylko proszę, niech nikt nie przynosi ananasa.'),
+    K('maja kazała mi przynieść ananasa. dla zasady'),
+    M('to nie dla zasady. to dla smaku'),
+    choose('maja2', [
+      opt('Ja przyniosę ananasa. W puszce. Dla świętego spokoju.', [M('wiedziałam, że mogę na ciebie liczyć')]),
+      opt('Maja, muszę ci coś powiedzieć. To jeszcze nie koniec.', [M('wiedziałam. czułam. mów'), M('ok. czyli dudek dzwonił, a ktoś inny mu pisał. ktoś stąd. ktoś, kto ma kasety'), M('nie mów kubie dziś. niech się cieszy. jutro')], { set: { g_majaKnows: true } })
+    ]),
+    pause(3500),
+    clock('2027-03-19T22:40'),
+    W('Pani Marta zadzwoniła. Zaprosiła mnie jutro do pracowni. Mówi, że znalazła „jeszcze jeden fragment z Tomkiem”. Dłuższy.'),
+    W('Mam iść o dziewiątej rano. Sama, bo „nie chce robić tłumu przy takich wspomnieniach”.'),
+    choose('weronika', [
+      opt('Proszę nie iść sama. Niech pani zaczeka do jutra rana, wszystko pani wyjaśnię.', [W('Dobrze. Ale nie rozumiem. Ona była dla mnie taka dobra.'), W('Zaczekam.')], { set: { g_weraWait: true } }),
+      opt('Pójdzie pani z kimś? Z panią Grażyną?', [W('Może. Pani Grażyna i tak chodzi do urzędu w sobotę po zaświadczenia.')])
+    ]),
+    pause(4000),
+    clock('2027-03-19T23:47'),
+    scene('scPrzewijanie', [scare('s5_przewijanie', 'call', { name: 'Marta Jasińska', number: '694 117 302', ms: 6000, listen: 3500 })]),
+    Mr('Przepraszam, że dzwoniłam tak późno. Nie odebrał{|a} {Pan|Pani}.'),
+    Mr('Chciałabym jutro porozmawiać. Tylko my. Bez pani Weroniki i bez pana Natana.'),
+    Mr('Myślę, że wie {Pan|Pani} już dużo. Może za dużo jak na jeden tydzień.'),
+    set('g_day5'),
+    end('g6')
+  ];
+});

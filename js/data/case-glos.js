@@ -42,7 +42,13 @@ Object.assign(DATA.evidence, {
   ev_g_dudek: { title: 'Kupujący: P. Dudek', cat: 'digital', source: 'Oskar · zrzut przelewu',
     desc: 'Konto „pd_audio” na Błysku kupowało paczki z telefonów z Mgliska. Za telefon Idy zapłaciło 300 zł. Przelew podpisany: P. Dudek.' },
   ev_g_serwis: { title: 'Serwis Igora nocą', cat: 'photo', source: 'Przesyłanie w pobliżu · 18.03, 22:17', img: 'g_serwis_noc',
-    desc: 'Ktoś fotografuje serwis Igora z samochodu po drugiej stronie ulicy. Igor jest w środku.' }
+    desc: 'Ktoś fotografuje serwis Igora z samochodu po drugiej stronie ulicy. Igor jest w środku.' },
+  ev_g_scenariusz: { title: 'Scenariusz rozmowy z „Tomkiem”', cat: 'digital', source: 'Natan · wydruk z laptopa Dudka',
+    desc: '„Wera, to ja. Jest mi zimno. (pauza 2 s) Wera? — Głos: Tomek L., kaseta 12, 0:04.” Pełne zdania, przecinki. Autor pliku: „Pracownia_UG”.' },
+  ev_g_magnetowid: { title: 'Magnetowid w pracowni', cat: 'photo', source: 'Weronika · archiwum gminy, 17.03', img: 'g_magnetowid',
+    desc: 'Japoński magnetowid pana Zenona, piszczy przy przewijaniu. Ten sam pisk jest na końcu wiadomości od „Tomka”. Pracownię zamyka na klucz tylko Marta Jasińska.' },
+  ev_g_most2011: { title: 'Kaseta z mostu, 2011', cat: 'testimony', source: 'pan Zenon / Ida',
+    desc: 'W lutym Marta Jasińska dopytywała o kasetę TV Dolina z dnia po wypadku na moście. Chciała ją „zabezpieczyć przed procesem”. Jest córką Janiny Kurek z Kurek-Bud.' }
 });
 
 (() => {
@@ -57,7 +63,8 @@ Object.assign(DATA.evidence, {
     ['g_pracownia', 'assets/glos/g_pracownia.jpg', 'Archiwum gminy · pracownia', 1024, 768],
     ['v_festyn96', 'assets/video/v_festyn96.jpg', 'kaseta nr 12 · 17.08.1996', 360, 270],
     ['g_kuba_kostka', 'assets/glos/g_kuba_kostka.jpg', 'Kostka u sąsiada', 768, 1024],
-    ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024]
+    ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024],
+    ['g_magnetowid', 'assets/glos/g_magnetowid.jpg', 'Pracownia · kaseta 12', 1024, 768]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
@@ -65,7 +72,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0', 'g1', 'g2', 'g3', 'g4'],
+  chapters: ['g0', 'g1', 'g2', 'g3', 'g4', 'g5'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -86,6 +93,8 @@ DATA.seasons.push({
     ['s5.07', 'Kaseta nr 12', 'g3', 'ev:ev_g_festyn96'],
     ['s5.08', 'Twój głos', 'g3', 'ev:ev_g_telefon'],
     ['s5.09', 'Próbki', 'g4', 'ev:ev_g_probki'],
-    ['s5.10', 'pd_audio', 'g4', 'ev:ev_g_dudek']
+    ['s5.10', 'pd_audio', 'g4', 'ev:ev_g_dudek'],
+    ['s5.11', 'Scenariusz', 'g5', 'ev:ev_g_scenariusz'],
+    ['s5.12', 'Przewijanie', 'g5', 'flag:g_twist']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });
