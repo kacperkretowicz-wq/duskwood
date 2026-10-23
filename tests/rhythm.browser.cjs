@@ -23,6 +23,9 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
   await page.waitForFunction(()=>!!G.s.pacing.rest&&G.s.clock.paused);
   assert.deepEqual(await page.evaluate(()=>({at:G.s.pacing.rest.at,pc:G.s.pc,count:Object.values(G.s.chats).reduce((n,c)=>n+c.msgs.length,0)})),before);
   await page.evaluate(()=>UI.openSeason());await page.getByRole('button',{name:'Własne tempo',exact:true}).click();
+  // xNieSpisz: spokojne „nie śpisz?” Kuby po przerwie, przed nocnym alarmem.
+  await page.waitForFunction(()=>Engine.pending()?.type==='choose');
+  await page.evaluate(()=>UI.openApp('messages',{chat:'kuba'}));await page.locator('.composer .opt').first().click();
   await page.waitForFunction(()=>G.isUnlocked('maja:cam57'));
   assert.equal(await page.evaluate(()=>!!G.s.pacing.rest),false);
   // A real deadline can also release a break in the middle of a later season.
