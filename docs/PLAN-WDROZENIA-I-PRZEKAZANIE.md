@@ -671,3 +671,5 @@ Szacunek czytania: słowa / 150 na minutę + 3 s na wiadomość. Bez szukania do
 | g6 | 61 | 631 | ~7 |
 
 Uwaga: ch3 (~22 min czytania) jest wyraźnie najdłuższy w S1 po dopisaniu scen P2/P4. Przy pomiarze z graczami sprawdzić, czy nie podzielić go przerwą przed `s19`.
+- P4: silnik obsługuje też edycję (`edit(chat, uid, text, {flag})`, dopisek „edytowano · godzina”). Scena: Kuba poprawia „bartek ty coś przed nami ukrywasz” w `xWyciszona` (ch2); flaga `x_edycjaSeen`, gdy gracz widział pierwszą wersję. Test `unsend.browser.cjs` obejmuje edycję.
+- Testy przeglądarkowe spraw 3–5 oczekują teraz wersji zapisu 5 (wcześniej 4, nieaktualne po migracji V5).
