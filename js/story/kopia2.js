@@ -102,7 +102,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     ]),
     scene('xFiszki', [
       pause(2000),
-      pic('kuba', 'kuba', 'k_fiszki', 'a to mam przepisać do świąt. fiszki pana adama. pisał ołówkiem jak mrówka. przypomina ci to coś?'),
+      pic('kuba', 'kuba', 'k_fiszki', 'a to mam przepisać do świąt. fiszki pana adama. pisał ołówkiem, malutkimi literkami. przypomina ci to coś?'),
       choose('kuba', [
         opt('Całe Mglisko na kartkach. Imiona, ulice, daty.', [
           K('no. nawet ulice, na których ktoś mieszkał jako dziecko'),

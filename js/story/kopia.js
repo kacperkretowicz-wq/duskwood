@@ -227,7 +227,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
       pic('kuba', 'kuba', 'k_rampa', 'koniec nocki. tak wygląda moje „dzień dobry”'),
       choose('kuba', [
         opt('Ładny wschód. Idź spać.', [K('idę. nie budzić do dziewiątej 💀')]),
-        opt('Rozładowaliście tego tira?', [K('dwa. trzeci jutro. plecy mam jak dziadek')])
+        opt('Rozładowaliście tego tira?', [K('dwa. trzeci jutro. plecy bolą jak u dziadka')])
       ]),
       pause(3000)
     ]),
