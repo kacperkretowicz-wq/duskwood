@@ -29,7 +29,9 @@ Object.assign(DATA.evidence, {
   ev_g_czapka: { title: 'Czerwona czapka na bramie huty', cat: 'photo', source: 'Kuba · 15.03, 2:51', img: 'g_huta_czapka',
     desc: 'Dziecięca czapka z daszkiem, mokra, zawieszona na bramie huty. Świeże ślady butów w błocie. Nikogo w środku.' },
   ev_g_przystanek: { title: 'Moje zdjęcie z przystanku', cat: 'photo', source: 'Przesyłanie w pobliżu · 15.03, 18:47', img: 'g_przystanek',
-    desc: 'Ktoś zrobił mi zdjęcie z drugiej strony ulicy, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' }
+    desc: 'Ktoś zrobił mi zdjęcie z drugiej strony ulicy, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' },
+  ev_g_album: { title: 'Tomek na festynie, 1996', cat: 'photo', source: 'Weronika · album', img: 'g_tomek_album',
+    desc: 'Tomek Lis, 8 lat, w czerwonej czapce z daszkiem. Obok Weronika. Z boku kadru kamera kablówki z kablem. Festyn, sierpień 1996.' }
 });
 
 (() => {
@@ -39,7 +41,8 @@ Object.assign(DATA.evidence, {
     ['g_kostka', 'assets/glos/g_kostka.jpg', 'Podwórko Sowów', 768, 1024],
     ['g_huta_czapka', 'assets/glos/g_huta_czapka.jpg', 'Brama huty · 2:51', 768, 1024],
     ['g_maja_korytarz', 'assets/glos/g_maja_korytarz.jpg', 'Po kolokwium', 768, 1024],
-    ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024]
+    ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024],
+    ['g_tomek_album', 'assets/glos/g_tomek_album.jpg', 'Festyn · 1996', 1024, 768]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
@@ -47,7 +50,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0', 'g1'],
+  chapters: ['g0', 'g1', 'g2'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -62,6 +65,8 @@ DATA.seasons.push({
     ['s5.01', '2:14', 'g0', 'ev:ev_g_glosowka'],
     ['s5.02', 'Czapka', 'g0', 'ev:ev_g_czapka'],
     ['s5.03', 'Hasło', 'g1', 'flag:g_haslo'],
-    ['s5.04', 'Trzy głosy', 'g1', 'flag:g_threeVoices']
+    ['s5.04', 'Trzy głosy', 'g1', 'flag:g_threeVoices'],
+    ['s5.05', 'Wera', 'g2', 'ev:ev_g_album'],
+    ['s5.06', 'Przewijanie', 'g2', 'flag:g_day2']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });

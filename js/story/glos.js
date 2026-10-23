@@ -334,3 +334,157 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
     end('g2')
   ];
 });
+
+/* ---------- g2 · Wera ---------- */
+Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera', when: 'Poniedziałek, 15 marca · 23:33', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing, vanish } = D;
+  const { M, K, O, I, W, S, Nt, Z, Id, Mr, Gr, Bt, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-15T23:33'),
+    ambient('dark'),
+    title(),
+    W('Powiedział: „Wera, to ja. Jest mi zimno”.'),
+    W('Tak mówił do mnie tylko Tomek. Nikt inny nie mówił „Wera”. Nawet mama.'),
+    W('Od grudnia nagrywam wszystkie rozmowy. Po tamtych telefonach. Nagrało się.'),
+    V('weronika', 'weronika', '0:11', 'Wera, to ja. Jest mi zimno. Wera? [szum, jakby z daleka; na końcu krótki trzask]', 'Rozmowa · 23:24'),
+    choose('weronika', [
+      opt('Pani Weroniko, to nie jest Tomek. Ktoś zrobił to z jakiegoś nagrania.', [W('Wiem. Głowa wie. Ale ręce mi się trzęsą tak, że nie mogę utrzymać kubka.')], { set: { g_weraTold: true } }),
+      opt('Czy mogę do pani zadzwonić? Teraz?', [W('Tak. Proszę.')], { set: { g_weraCall: true } })
+    ]),
+    callIn('weronika'),
+    c('weronika', 'Dziękuję. Musiałam usłyszeć kogoś prawdziwego.'),
+    c('weronika', 'On by miał teraz trzydzieści osiem lat. A w słuchawce był mały. Taki, jakim go pamiętam.'),
+    c('weronika', 'Ktoś wiedział, jak do mnie mówił. Skąd ktoś to wie?'),
+    choose('call', [
+      opt('Z jakiegoś starego nagrania. Może z kroniki kablówki.', [c('weronika', 'Z kroniki… Pan Zenon kręcił festyny od dziewięćdziesiątego szóstego.'), c('weronika', 'Tomek wszędzie pchał się przed kamerę.')], { set: { g_weraKronika: true } }),
+      opt('Nie wiem. Ale się dowiem. Obiecuję.', [c('weronika', 'Niech {Pan|Pani} nie obiecuje. Proszę tylko szukać.')])
+    ]),
+    c('weronika', 'Pójdę spać. Zostawię światło w przedpokoju. Dobranoc.'),
+    callEnd(),
+    pause(3000),
+    clock('2027-03-16T00:12'),
+    unlock('chat:blysk3'),
+    notify({ app: 'messages', title: 'Błysk', text: '%name% wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blysk3' } }),
+    Bt('no. słyszysz siebie?'),
+    Bt('ładnie mówisz. tylko za dużo'),
+    choose('blysk3', [
+      opt('Zrób zrzut ekranu', [Bt('rób. twoje zdjęcie, twoje imię. kto ci uwierzy, że to nie ty'), vanish('blysk3', 'Wiadomości zniknęły po przeczytaniu.')], { shot: true, set: { g_shotBlysk: true } }),
+      opt('Kim jesteś?', [Bt('tobą'), vanish('blysk3', 'Wiadomości zniknęły po przeczytaniu.')])
+    ]),
+    pause(4000),
+    clock('2027-03-16T08:10'),
+    ambient('calm'),
+    M('dzień dobry. test'),
+    M('jakie hasło?'),
+    choose('maja2', [
+      opt('Pachołek.', [M('ok. to ty. dzień dobry naprawdę')], { cond: 'flag:g_hasloP' }),
+      opt('Jodełka.', [M('ok. to ty. dzień dobry naprawdę')], { cond: 'flag:g_hasloJ' }),
+      opt('Trzy kości.', [M('ok. to ty. i nadal mnie to boli')], { cond: 'flag:g_hasloK' }),
+      opt('Serio? Przecież piszę, nie dzwonię.', [M('wiem. ale chcę się przyzwyczaić. dzień dobry')])
+    ]),
+    M('kolokwium zdane. na 3. kość udowa uratowała mi życie'),
+    M('a kuba oddał wniosek. 20 minut przed końcem. jak zawsze'),
+    scene('xKubaRano', [
+      pause(3000),
+      K('wniosek złożony. pani w dziekanacie powiedziała „no proszę, pan Wrona na czas”. nie wiem czy to był żart'),
+      K('a te ślady pod hutą. 43. bartek mówi, że to rozmiar „pół mgliska”'),
+      choose('kuba', [
+        opt('Czyli nic nie wiemy. Ale ktoś czekał tam na Maję.', [K('albo chciał, żeby ktoś przyszedł. ktokolwiek. ja przyszedłem')]),
+        opt('Brawo za wniosek. Serio.', [K('dzięki. mama upiekła ciasto. jakby mnie przyjęli na studia na księżycu')])
+      ])
+    ]),
+    scene('xBartekMama', [
+      pause(3000),
+      say('bartek', 'bartek', 'stary'),
+      say('bartek', 'bartek', 'mama dostala wczoraj telefon ODE MNIE. ze mialem stluczke i potrzebuje kodu na 3 tysiace'),
+      say('bartek', 'bartek', 'siedzialem obok niej na kanapie. jadlem kanapke. pokazala mi telefon i sie trzesla'),
+      choose('bartek', [
+        opt('Dobrze, że siedziałeś obok. Powiedz jej o haśle rodzinnym.', [say('bartek', 'bartek', 'juz mamy. nie powiem jakie. ale dotyczy kapusty')], { set: { g_bartekHaslo: true } }),
+        opt('Skąd ktoś ma twój głos?', [say('bartek', 'bartek', 'z klipo. wrzucam filmiki z budowy. jak klade kostke i gadam'), say('bartek', 'bartek', '40 filmikow. kurde')])
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-16T11:20'),
+    W('Dzień dobry. Spałam trzy godziny, ale spałam.'),
+    W('Wyjęłam album. Nie wiem po co. Może po to, żeby sprawdzić, czy dobrze pamiętam.'),
+    pic('weronika', 'weronika', 'g_tomek_album', 'Festyn, sierpień 1996. Tomek i ja. Ta trwała to niestety też ja.'),
+    W('Miał tę czapkę cały tamten rok. Spał w niej.'),
+    give('ev_g_album'),
+    choose('weronika', [
+      opt('Czapka z huty jest nowa. Kolor nie wyblakł, a minęło trzydzieści lat. Ktoś ją kupił, żeby wyglądała jak ta.', [W('Czyli ktoś widział to zdjęcie. Albo nagranie.'), W('Ktoś przygotował się do tego jak do przedstawienia.')], { set: { g_capNew: true } }),
+      opt('Z boku stoi kamera z kablem. To kamera kablówki?', [W('Tak. Pan Zenon. Kręcił cały festyn. Tomek chodził za nim jak cień.'), W('Czyli on nagrał też jego głos.')], { set: { g_camLink: true } }),
+      opt('To ta sama czapka co na bramie huty?', [W('To nie może być ta sama. Tomek miał ją na sobie… wtedy.'), W('Przepraszam. Muszę chwilę odejść od telefonu.'), pause(4000), W('Już. Wróciłam.')])
+    ]),
+    iff('flag:g_capNew', [W('Pan Zenon na pewno wie, co jest na tej kasecie. Zapytam go.')]),
+    scene('xZenon', [
+      pause(3000),
+      unlock('chat:zenon'),
+      Z('{Szanowny Panie|Szanowna Pani}, dzwoniła do mnie pani Weronika. Pytała o festyn z 1996 roku.'),
+      Z('Kręciłem go nową kamerą, pierwszy raz. Pamiętam, bo chłopiec w czerwonej czapce cały dzień chciał nią nagrywać.'),
+      iff(s => s.vars.s4Ending === 'przewiniecie', [Z('Kaseta jest w archiwum gminy, razem z innymi. Oddaliśmy je z Idą w lutym.')], [Z('Po styczniu oddałem wszystkie kasety do archiwum gminy. Nie chciałem ich już mieć w domu.')]),
+      Z('Tam ich pilnuje pani Jasińska. Bardzo porządna osoba.'),
+      choose('zenon', [
+        opt('Czy ktoś jeszcze ma kopię tego festynu?', [Z('Nigdy go nie wydawałem. Nie był ciekawy dla nikogo oprócz rodzin. Kopii nie robiłem.')], { set: { g_noCopy96: true } }),
+        opt('Dziękuję, panie Zenonie. Jak pan się czuje?', [Z('Dziękuję, dobrze. Pies przybrał na wadze. Weterynarz mnie skrzyczał.')])
+      ])
+    ]),
+    iff(s => s.vars.s4Ending === 'przewiniecie', [
+      pause(2000),
+      Id('dziadek mówi, że pytasz o festyn 96. to była jego pierwsza kamera. japońska, ważyła z pięć kilo. opowiada o niej jak o dziecku'),
+      Id('sorry. z tamtym telefonem w styczniu. wiesz, że go nagrywałam. ten telefon już oddałam do czyszczenia. igorowi'),
+      choose('ida', [
+        opt('Igorowi? Kiedy?', [Id('w lutym. kupiłam nowy, stary chciałam sprzedać. oskar go czyścił')], { set: { g_idaPhone: true } }),
+        opt('Nie przepraszaj. Dobrze, że mówisz.', [Id('mówię, bo się boję. tam były wszystkie moje nagrania')], { set: { g_idaPhone: true } })
+      ])
+    ]),
+    scene('xGrupaWtorek', [
+      pause(3000),
+      Gr('ola', 'Pani Krysia przyniosła do świetlicy ciasto i powiedziała, że teraz z wnuczkiem mają hasło. Nie zdradziła jakie.'),
+      Gr('bartek', 'u nas kapusta. ups'),
+      Gr('ola', 'Bartek 😂'),
+      Gr('igor', 'zmień od razu. ja mam z mamą słowo z czasów jak miałem 5 lat. nikt go nie zna, bo jest obrzydliwe'),
+      choose('group', [
+        opt('Dobrze, że to się rozchodzi. Hasło działa lepiej niż blokowanie numerów.', [Gr('ola', 'Zrobię w świetlicy kartkę dla rodziców. Dużymi literami.')], { set: { g_olaKartka: true } }),
+        opt('Bartek, zmieniasz hasło. Teraz.', [Gr('bartek', 'zmienione. teraz jest… nie powiem xd')])
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-16T15:40'),
+    Nt('mam drugiego. pan henryk wisniewski'),
+    Nt('w sobote dzwonila do niego corka. ze ma nie zeznawac w kwietniu, bo „ktos mu zrobi krzywde”. plakala'),
+    Nt('corka byla wtedy na dyzurze w szpitalu we wroclawiu. telefon w szafce'),
+    choose('natan', [
+      opt('Twoja mama, córka pana Henryka. Wszyscy ze sprawy mostu. To nie są przypadkowe telefony.', [Nt('wlasnie. oszustwa na kase to przykrywka. albo przy okazji'), Nt('ktos chce, zeby swiadkowie sie wycofali')], { set: { g_mostMotive: true } }),
+      opt('Pan Henryk dobrze się czuje?', [Nt('siedzi w domu i nie odbiera od nikogo oprocz mnie. i to po trzecim sygnale')])
+    ]),
+    scene('xMarta', [
+      pause(3000),
+      unlock('chat:marta'),
+      Mr('Dzień dobry. Tu Marta Jasińska, archiwum gminy. Pani Weronika dała mi {Pana|Pani} numer.'),
+      Mr('Mówiła, że pyta {Pan|Pani} o festyn z 1996 roku. Mamy tę kasetę, jest już zgrana.'),
+      Mr('Jeśli to pomoże, mogę jutro pokazać nagranie w pracowni. Wolę na miejscu niż mailem, z szacunku dla rodziny.'),
+      choose('marta', [
+        opt('Dziękuję. Przyjdę z panią Weroniką.', [Mr('Dobrze. Zrobię herbatę. Od dziesiątej jestem na miejscu.')], { set: { g_martaVisit: true } }),
+        opt('Czy ktoś jeszcze oglądał tę kasetę?', [Mr('Nie. Jest w kolejce do opisu. Klucz do pracowni mam tylko ja.'), Mr('Dlatego jestem spokojna.')], { set: { g_martaKey: true } })
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-16T21:15'),
+    ambient('dark'),
+    O('Kartka dla rodziców wisi. „Ustalcie z dziećmi hasło”. Dzieci od razu wymyśliły swoje. Jedno brzmi „dinozaur w kaloszach”.'),
+    M('idę spać wcześnie. kuba ogląda mecz i krzyczy na telewizor. normalny wieczór'),
+    M('dobranoc. bez telefonów w nocy, proszę'),
+    pause(5000),
+    clock('2027-03-16T23:47'),
+    W('Znowu dzwonił.'),
+    W('Nie odebrałam. Zostawił wiadomość głosową.'),
+    V('weronika', 'weronika', '0:06', 'Wera, czemu nie odbierasz? Jest mi zimno. [szum; w tle coś cicho piszczy i trzaska, jakby ktoś przewijał]', 'Poczta głosowa · 23:46'),
+    scene('scWera', [scare('s5_wera', 'face', { img: 'g_tomek_album', caption: 'Festyn · sierpień 1996' })]),
+    choose('weronika', [
+      opt('Proszę wyłączyć telefon do rana. Jutro idziemy razem do archiwum.', [W('Wyłączam. Do jutra.')], { set: { g_weraOff: true } }),
+      opt('Proszę mi przesłać tę wiadomość. Każdą. Zbieram je.', [W('Przesłałam. I wyłączam telefon.')], { set: { g_weraVoices: true } })
+    ]),
+    set('g_day2'),
+    end('g3')
+  ];
+});
