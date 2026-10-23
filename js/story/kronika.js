@@ -12,7 +12,7 @@ const KronikaCast = D => {
     S: (t, o) => say('sylwia', 'sylwia', t, o),
     K: (t, o) => say('kuba', 'kuba', t, o),
     Nt: (t, o) => say('natan', 'natan', t, o),
-    G: (who, t, o) => say('group', who, t, o),
+    Gr: (who, t, o) => say('group', who, t, o),
     Z: (t, o) => say('zenon', 'zenon', t, o),
     Id: (t, o) => say('ida', 'ida', t, o),
     B: t => say('blysk2', 'blysk2', t, { vanish: true }),
@@ -24,7 +24,7 @@ const KronikaCast = D => {
 /* ---------- c0 · Studniówka ---------- */
 Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka', when: 'Poniedziałek, 18 stycznia · 20:10', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, vanish } = D;
-  const { M, O, S, B, V, G, K } = KronikaCast(D);
+  const { M, O, S, B, V, Gr, K } = KronikaCast(D);
   return [
     clock('2027-01-18T20:10'),
     ambient('calm'),
@@ -61,12 +61,12 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     ]),
     scene('xGrupaSanki', [
       pause(2500),
-      G('ola', 'Kto jutro na sanki za blokami? Biorę termos.'),
-      G('bartek', 'ja. mam sanki po dziadku. drewniane, ciezkie jak lodowka'),
-      G('kuba', 'ja po południu. rano śpię'),
+      Gr('ola', 'Kto jutro na sanki za blokami? Biorę termos.'),
+      Gr('bartek', 'ja. mam sanki po dziadku. drewniane, ciezkie jak lodowka'),
+      Gr('kuba', 'ja po południu. rano śpię'),
       choose('group', [
-        opt('Jestem. Kto robi herbatę?', [G('ola', 'Ja! Z sokiem malinowym, nie negocjuję.')]),
-        opt('Ja popatrzę z okna. Ktoś musi nagrywać upadki.', [G('bartek', 'deal. tylko nie wrzucaj na klipo')])
+        opt('Jestem. Kto robi herbatę?', [Gr('ola', 'Ja! Z sokiem malinowym, nie negocjuję.')]),
+        opt('Ja popatrzę z okna. Ktoś musi nagrywać upadki.', [Gr('bartek', 'deal. tylko nie wrzucaj na klipo')])
       ])
     ]),
     pause(4000),
@@ -166,7 +166,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
 /* ---------- c1 · Boisko ---------- */
 Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko', when: 'Wtorek, 19 stycznia · 16:40', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock } = D;
-  const { M, O, I, W, S, Nt, G, c, V } = KronikaCast(D);
+  const { M, O, I, W, S, Nt, Gr, c, V } = KronikaCast(D);
   return [
     clock('2027-01-19T16:40'),
     ambient('calm'),
@@ -182,12 +182,12 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     choose('igor', [opt('Ja też kiedyś wierzył{em|am}.', [I('wszyscy wierzyli. potem przychodzili do mnie z ryżem w porcie ładowania')]), opt('Daj jej ten ryż na drogę.', [I('dałem. powiedziała, że zrobi z niego kaszę. nie wiem, czy żartowała')])]),
     pause(2500),
     scene('xSankiWideo', [
-      G('ola', 'Dowód, że Bartek żyje 😄'),
+      Gr('ola', 'Dowód, że Bartek żyje 😄'),
       say('group', 'ola', '', { vid: 'assets/video/v_sanki.mp4', img: 'v_sanki' }),
-      G('bartek', 'czapka nie przezyla'),
+      Gr('bartek', 'czapka nie przezyla'),
       choose('group', [
-        opt('Lądowanie 9/10.', [G('bartek', 'za co ten punkt w dol')]),
-        opt('Bartek, śmiejesz się czy płaczesz?', [G('bartek', 'smieje sie. plecy placza')])
+        opt('Lądowanie 9/10.', [Gr('bartek', 'za co ten punkt w dol')]),
+        opt('Bartek, śmiejesz się czy płaczesz?', [Gr('bartek', 'smieje sie. plecy placza')])
       ]),
       pause(2500)
     ]),
@@ -240,9 +240,9 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     give('ev_c_boisko'),
     scene('xBoiskoEcho', [
       pause(2000),
-      G('bartek', 'na tym boisku w tle gra moj stary. w dresie z 2008. matka placze ze smiechu'),
-      G('kuba', 'a wójt dalej jest wójtem?'),
-      G('bartek', 'nie. teraz ma myjnie'),
+      Gr('bartek', 'na tym boisku w tle gra moj stary. w dresie z 2008. matka placze ze smiechu'),
+      Gr('kuba', 'a wójt dalej jest wójtem?'),
+      Gr('bartek', 'nie. teraz ma myjnie'),
       pause(2000),
       S('Były wójt dzwonił do mnie, żebym usunęła klip z grupy. Ja go nie wrzucałam. Ktoś wkleił link.'),
       S('Powiedziałam, że usuwam tylko wyzwiska. Rozłączył się.'),
@@ -292,7 +292,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
 /* ---------- c2 · O.N. ---------- */
 Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.', when: 'Środa, 20 stycznia · 10:15', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, nearby, vanish, sys } = D;
-  const { M, O, Z, B, I, S, Nt, G, c, V } = KronikaCast(D);
+  const { M, O, Z, B, I, S, Nt, Gr, c, V } = KronikaCast(D);
   return [
     clock('2027-01-20T10:15'),
     ambient('calm'),
@@ -388,14 +388,14 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     iff('flag:c_olaFirst', [O('Piszę ten tekst. Na razie mam dwa zdania i pięć razy je skasowałam.')]),
     scene('xGrupaFestyn', [
       pause(2000),
-      G('bartek', 'ja tez bylem na tym festynie. 12 lat mialem. pamietam ze ktos krwawil i ze'),
+      Gr('bartek', 'ja tez bylem na tym festynie. 12 lat mialem. pamietam ze ktos krwawil i ze'),
       pause(1500),
       sys('group', 'Bartek usunął wiadomość'),
-      G('bartek', 'sorry. glupi jestem'),
-      G('ola', 'Spoko, Bartek. I tak wszyscy pamiętają.'),
+      Gr('bartek', 'sorry. glupi jestem'),
+      Gr('ola', 'Spoko, Bartek. I tak wszyscy pamiętają.'),
       choose('group', [
-        opt('Ola, nie jesteś z tym sama.', [G('ola', 'Wiem. Dzięki.')], { trust: { ola: 1 } }),
-        opt('Nie piszmy o tym tutaj.', [G('bartek', 'ok. juz nic nie pisze')])
+        opt('Ola, nie jesteś z tym sama.', [Gr('ola', 'Wiem. Dzięki.')], { trust: { ola: 1 } }),
+        opt('Nie piszmy o tym tutaj.', [Gr('bartek', 'ok. juz nic nie pisze')])
       ]),
       pause(2000),
       S('Ktoś napisał pod zapowiedzią „O.N. = Ola Nowicka”. Usunęłam po minucie. Sześćdziesiąt osób zdążyło polubić.'),
@@ -444,7 +444,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
 /* ---------- cf · Festyn (noc z 20 na 21.01) ---------- */
 Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when: 'Środa, 20 stycznia · 23:58', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, nearby, vanish, typing } = D;
-  const { M, O, I, B, W, K, G, c, V } = KronikaCast(D);
+  const { M, O, I, B, W, K, Gr, c, V } = KronikaCast(D);
   return [
     clock('2027-01-20T23:58'),
     ambient('dark'),
@@ -548,13 +548,13 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     scene('xNocDalej', [
       pause(4000),
       clock('2027-01-21T00:41'),
-      G('bartek', 'kto nie spi'),
-      G('ola', 'Ja.'),
-      G('bartek', 'o 21 cala gmina bedzie siedziec przed telefonem jak na skoki'),
-      G('ola', 'A ja o 21 wyłączam telefon i idę do mamy.'),
+      Gr('bartek', 'kto nie spi'),
+      Gr('ola', 'Ja.'),
+      Gr('bartek', 'o 21 cala gmina bedzie siedziec przed telefonem jak na skoki'),
+      Gr('ola', 'A ja o 21 wyłączam telefon i idę do mamy.'),
       choose('group', [
-        opt('Dobry plan. Ja będę miał{|a} oko na wszystko.', [G('ola', 'Dziękuję. Naprawdę.')]),
-        opt('Bartek, idź spać.', [G('bartek', 'ide. dobranoc wam')])
+        opt('Dobry plan. Ja będę miał{|a} oko na wszystko.', [Gr('ola', 'Dziękuję. Naprawdę.')]),
+        opt('Bartek, idź spać.', [Gr('bartek', 'ide. dobranoc wam')])
       ]),
       pause(3000),
       say('zuza', 'zuza', 'nie śpię. babcia chrapie przez ścianę jak traktor'),
@@ -579,7 +579,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
 /* ---------- c3 · Wogóle ---------- */
 Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogóle', when: 'Czwartek, 21 stycznia · 9:30', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, vanish } = D;
-  const { M, O, W, S, I, Id, B, K, Nt, G, c } = KronikaCast(D);
+  const { M, O, W, S, I, Id, B, K, Nt, Gr, c } = KronikaCast(D);
   return [
     clock('2027-01-21T09:30'),
     ambient('calm'),
@@ -595,9 +595,9 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     ]),
     scene('xGrupaBlok', [
       pause(2000),
-      G('bartek', 'widzialem tych trzech pod blokiem zenona. jednego znam z silowni. napisalem mu zeby spadal'),
-      G('ola', 'Dziękuję, Bartek.'),
-      G('bartek', 'spadli. jeden jeszcze zrobil zdjecie balkonu. debil'),
+      Gr('bartek', 'widzialem tych trzech pod blokiem zenona. jednego znam z silowni. napisalem mu zeby spadal'),
+      Gr('ola', 'Dziękuję, Bartek.'),
+      Gr('bartek', 'spadli. jeden jeszcze zrobil zdjecie balkonu. debil'),
       pause(2000),
       O('Dyrektorka świetlicy poprosiła mnie na rozmowę o dwunastej. Nie napisała, po co.'),
       choose('ola', [
@@ -716,7 +716,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
 /* ---------- c4 · 20:58 ---------- */
 Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust, camera } = D;
-  const { M, O, Id, c, Z, W, K, I, Nt, G, V } = KronikaCast(D);
+  const { M, O, Id, c, Z, W, K, I, Nt, Gr, V } = KronikaCast(D);
   return [
     clock('2027-01-22T18:20'),
     ambient('calm'),
@@ -778,12 +778,12 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       ]),
       pause(2500),
       clock('2027-01-22T20:31'),
-      G('bartek', 'pol godziny. wylaczam neta i ide z ojcem odsniezac'),
-      G('ola', 'Jestem u mamy. Pieczemy szarlotkę, żeby mieć co robić z rękami.'),
-      G('kuba', 'jestem'),
+      Gr('bartek', 'pol godziny. wylaczam neta i ide z ojcem odsniezac'),
+      Gr('ola', 'Jestem u mamy. Pieczemy szarlotkę, żeby mieć co robić z rękami.'),
+      Gr('kuba', 'jestem'),
       choose('group', [
-        opt('Jestem z wami. Do 21 i po 21.', [G('ola', '❤️')]),
-        opt('Bartek, zostaw sobie chociaż SMS-y.', [G('bartek', 'ok. ale tylko dla was')])
+        opt('Jestem z wami. Do 21 i po 21.', [Gr('ola', '❤️')]),
+        opt('Bartek, zostaw sobie chociaż SMS-y.', [Gr('bartek', 'ok. ale tylko dla was')])
       ])
     ]),
     pause(5000),
