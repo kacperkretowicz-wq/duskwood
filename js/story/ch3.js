@@ -78,6 +78,15 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         ])
       ])
     ]),
+    /* P4: „wyświetlono” to zachowanie, nie dowód. */
+    scene('xWyswietlono', [
+      g('ola', 'Bartek, wyświetliłeś i cisza. Super.'),
+      g('bartek', 'leze pod autem. telefon jest na masce. jak go podnosze to sie samo otwiera'),
+      choose('group', [
+        opt('„Wyświetlono” znaczy tylko, że otworzył czat. Nie że olewa.', [g('ola', 'Wiem. Po prostu mam za mało snu na cierpliwość.')]),
+        opt('Daj mu skończyć to auto, Ola.', [g('ola', 'Dobra. Przepraszam, Bartek.'), g('bartek', 'spoko')])
+      ])
+    ]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
     g('ola', 'Kuba, zjedz coś. Serio.', { wording: 'Kuba, masz jeszcze te bułki w kuchni? Zrób coś z nimi, zanim mama je wyrzuci.' }),
@@ -364,6 +373,15 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('ola', 'Peleryna.'),
     g('kuba', 'tomek'),
     pause(2000),
+    /* P4: data pliku a czas powiadomienia. Synchronizacja nie dowodzi, kiedy zrobiono zdjęcie. */
+    scene('xDataPliku', [
+      g('igor', 'zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. nimbus dosyła zaległe pliki, jak telefon złapie zasięg'),
+      g('kuba', 'czyli to nie jest z dzisiaj'),
+      choose('group', [
+        opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('igor', 'dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust')]),
+        opt('Ale SMS do mamy jest z dzisiaj.', [g('igor', 'sms tak. zdjęcia nie. dwie różne rzeczy, nie mieszajmy ich'), g('ola', 'Czyli ktoś miał dziś jej telefon w ręku. To akurat jest pewne.')])
+      ])
+    ]),
     g('kuba', 'jest coś jeszcze?'),
     show('group', { prompt: 'Pokaż zdjęcie z 23:53', accept: [{ ev: ['ev_sync_door', 'ev_sms_kluska'] }], wrong: [['kuba', 'jeszcze coś z tej nocy?']] }),
     iff('ev:ev_sync_door', [
