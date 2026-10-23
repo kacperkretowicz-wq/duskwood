@@ -300,6 +300,23 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),
 
+    /* P4: relacja → screen → reupload → komentarze → reakcja bliskich. Usunięcie oryginału nie usuwa kopii. */
+    scene('xReupload', [
+      g('ola', 'Ktoś zrobił screena ostatniej relacji Mai z Kadru i wrzucił na „Mglisko bez cenzury”. Z podpisem „pewnie uciekła z chłopakiem”.'),
+      g('ola', 'Pod spodem sześćdziesiąt komentarzy.'),
+      g('kuba', 'mama to widziała. siedzi w kuchni i czyta wszystkie po kolei'),
+      choose('group', [
+        opt('Zgłośmy post. Ale screen już krąży, samo usunięcie go nie zatrzyma.', [
+          g('ola', 'Zgłosiłam. Admin odpisał, że „to było publiczne”.'),
+          g('kuba', 'mama sama do niego napisała. usunął po godzinie'),
+          g('kuba', 'ktoś zdążył wrzucić na grupę osiedla')
+        ], { set: { x_reuploadReported: true } }),
+        opt('Kuba, nie szukaj teraz autora. Posiedź z mamą.', [
+          g('kuba', 'dobra. siedzę'),
+          g('kuba', 'zrobiła screeny komentarzy. mówi że „żeby pamiętać kto”')
+        ], { trust: { kuba: 1 } })
+      ])
+    ]),
     scene('s19', SC.s19),
     /* P2: ostatni autobus. Zwykły powrót Oli, bez tropu. */
     scene('xAutobus', [
