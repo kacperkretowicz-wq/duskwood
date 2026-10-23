@@ -109,6 +109,11 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Dobrze, że jej odpisałaś.', [O('Jeszcze nie wiem, czy dobrze. Ale odpisałam.')]),
         opt('Daj znać, jak się będziesz czuła.', [O('Dam. Tym razem naprawdę.')])
       ])]),
+      /* P4: późniejsze wyjaśnienie wiadomości z próśb (xProsby w ch3). */
+      scene('xProsbaWyjasnienie', [
+        O('I jeszcze jedno. To konto m.k.2009 w końcu odpisało. Magda z drugiej klasy, Maja dawała jej korepetycje z biologii.'),
+        O('Bała się napisać do kogoś, kogo zna, więc napisała do mnie. Ludzie dziwnie się zachowują, kiedy się boją.')
+      ]),
       pause(4000),
       unlock('chat:maja2'),
       M('hej, maja. kuba mówi że mam zacząć od imienia a nie od „to ja” 🙂'),
