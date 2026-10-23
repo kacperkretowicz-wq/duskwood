@@ -70,12 +70,15 @@ const SeasonPacing = (() => {
       G.pauseClock();
       if (p.waiting?.chapter !== chapter || p.waiting.at !== at) {
         p.waiting = { chapter, at };
-        G.s.objective = { text: 'Kolejna rozmowa pojawi się w wybranym rytmie. Termin i tempo możesz zmienić w Ustawieniach → Sezony i sesje.', hints: [], level: 0 };
+        // P3: po dłuższej nieobecności zostaje krótki kontekst ostatniego celu.
+        const prev = G.s.objective?.text, wait = 'Kolejna rozmowa pojawi się w wybranym rytmie. Termin i tempo możesz zmienić w Ustawieniach → Sezony i sesje.';
+        if (prev && !prev.startsWith('Kolejna rozmowa')) p.lastGoal = prev;
+        G.s.objective = { text: p.lastGoal ? wait + ' Ostatni cel: ' + p.lastGoal : wait, hints: [], level: 0 };
         G.save(true); BUS.emit('goal'); BUS.emit('release'); NativeNotifications.sync();
       }
       return true;
     }
-    if (p?.waiting) { delete p.waiting; G.s.objective = null; if (!document.hidden) G.resumeClock(); G.save(true); NativeNotifications.sync(); BUS.emit('release'); }
+    if (p?.waiting) { delete p.waiting; delete p.lastGoal; G.s.objective = null; if (!document.hidden) G.resumeClock(); G.save(true); NativeNotifications.sync(); BUS.emit('release'); }
     return false;
   }
   function wake() {

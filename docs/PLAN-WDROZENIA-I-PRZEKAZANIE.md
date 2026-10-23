@@ -673,3 +673,11 @@ Szacunek czytania: słowa / 150 na minutę + 3 s na wiadomość. Bez szukania do
 Uwaga: ch3 (~22 min czytania) jest wyraźnie najdłuższy w S1 po dopisaniu scen P2/P4. Przy pomiarze z graczami sprawdzić, czy nie podzielić go przerwą przed `s19`.
 - P4: silnik obsługuje też edycję (`edit(chat, uid, text, {flag})`, dopisek „edytowano · godzina”). Scena: Kuba poprawia „bartek ty coś przed nami ukrywasz” w `xWyciszona` (ch2); flaga `x_edycjaSeen`, gdy gracz widział pierwszą wersję. Test `unsend.browser.cjs` obejmuje edycję.
 - Testy przeglądarkowe spraw 3–5 oczekują teraz wersji zapisu 5 (wcześniej 4, nieaktualne po migracji V5).
+
+### 17.4 Stan na 23.10.2026, 17:00
+
+- Push działa: `gh` zalogowany na koncie kacperkretowicz-wq, każdy commit idzie od razu na `origin/feat/realizm-2026` (bez force-push, nigdy na `main` ani `feature/ostatni-kurs`).
+- P2: dzień po wyznaniu Igora — opcjonalna rozmowa `igor_sunday` w epilogu (S1). Zrobione.
+- P3: poranne odczyty nocnych wiadomości (`rano_<restId>`), czas przez północ i DST, sceny powrotu po przerwach S1–S5, a przy oczekiwaniu na rozdział krótki „Ostatni cel”. Zrobione. Otwarte: brak sceny porannej po `s5_voice` (kończy się nocnym telefonem, celowo).
+- P4: usunięte i edytowane wiadomości (`unsend`, `edit`), wyciszona grupa, reupload, prośby o wiadomość. Zrobione.
+- P7: szacunki długości w 17.3; rozbicie ch3 (~22 min) zostaje do decyzji — wymaga nowego punktu przerwy w `rhythm.js` i migracji.

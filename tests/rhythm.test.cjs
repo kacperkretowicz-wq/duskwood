@@ -94,3 +94,9 @@ test('late return after a night break is remembered without penalty; DST change 
  const after=P.nextWindow(new Date(2026,9,25,3,0).getTime(),[21,26]);
  assert.equal(new Date(after).getHours(),21);assert.equal(new Date(after).getDate(),25);
 });
+test('waiting for the next chapter keeps a short note of the last goal',()=>{
+ const {G,SeasonPacing:P}=game();G.s.chapter='ch2';G.s.pc=0;P.configure('daily');
+ G.s.objective={text:'Napisz do Bartka.'};
+ assert.equal(P.hold('ch3'),true);{assert.ok(G.s.objective.text.includes('Ostatni cel: Napisz do Bartka.'));
+  G.save(true);G.load();assert.equal(P.hold('ch3'),true);assert.ok(G.s.objective.text.includes('Ostatni cel: Napisz do Bartka.'));}
+});
