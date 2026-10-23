@@ -4,7 +4,7 @@
 (() => {
   const { h, $ } = U;
 
-  const chatName = id => (G.s.chats[id] && G.s.chats[id].name) || (DATA.chats[id] && DATA.chats[id].name) || id;
+  const chatName = id => U.tpl((G.s.chats[id] && G.s.chats[id].name) || (DATA.chats[id] && DATA.chats[id].name) || id);
   const chatAv = id => (G.s.chats[id] && G.s.chats[id].avatar) || (DATA.chats[id] && DATA.chats[id].avatar) || id;
   const charName = w => (DATA.chars[w] && (DATA.chars[w].short || DATA.chars[w].name)) || w;
   const pendingFor = id => { const p = Engine.pending(); return p && p.chat === id ? p : null; };

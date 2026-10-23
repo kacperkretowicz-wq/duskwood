@@ -407,7 +407,7 @@ const UI = (() => {
     if (G.viewing === chat) { SFX.play.tap(); return; }
     const cd = DATA.chats[chat] || {};
     const who = DATA.chars[msg.from] || {};
-    const name = (G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name;
+    const name = U.tpl((G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name || '');
     const title = cd.group ? `${who.short || who.name} · ${name}` : name;
     banner({
       app: 'messages', open: { chat }, who: cd.group ? msg.from : (G.chat(chat).avatar || cd.avatar || msg.from), title,
