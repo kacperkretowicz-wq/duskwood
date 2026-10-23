@@ -15,16 +15,18 @@
 
   function title() {
     const has = G.hasSave() && G.load();
+    if (has && G.s.finished && !G.s.seasonArchive?.[Seasons.current().id]) Seasons.archive();
     const scr = UI.screen;
     const el = h('div', { class: 'title-scr' },
       h('div', { class: 'ts-bg', style: `background-image:url(${Art.url('title_bg')})` }),
       h('div', { class: 'ts-fog' }), h('div', { class: 'ts-fog f2' }),
       h('div', { class: 'ts-c' },
         h('div', { class: 'ts-k' }, 'Gra detektywistyczna'),
-        h('h1', { class: 'ts-t' }, 'MGLISKO'),
+        h('h1', { class: 'ts-t' }, 'QUIET IS SAFER'),
         h('div', { class: 'ts-s' }, 'Ostatnie połączenie było do ciebie.'),
         h('div', { class: 'ts-b' },
           has && !G.s.finished ? h('button', { class: 'btn pri wide', onclick: () => go(() => resume()) }, 'Kontynuuj') : null,
+          has && G.s.finished ? h('button', { class: 'btn wide', onclick: () => go(() => { close(); UI.renderHome(); UI.openSeason(); }) }, 'Po zakończeniu') : null,
           h('button', { class: 'btn wide' + (has && !G.s.finished ? ' ghost' : ' pri'), onclick: () => go(() => has ? confirmNew() : setup()) }, 'Nowa gra'),
           has && Object.keys(G.checkpoints()).length > 1 ? h('button', { class: 'btn ghost wide', onclick: () => go(() => chapters()) }, 'Rozdziały') : null),
         h('div', { class: 'ts-n' }, '🎧 Najlepiej ze słuchawkami, po zmroku.'),
@@ -41,7 +43,7 @@
       const list = h('div', { class: 'list' }, Engine.order.filter(id => cps[id]).map(id => {
         const ch = Engine.chapters[id];
         return h('button', { class: 'row', onclick: () => { G.loadCheckpoint(id); sh.close(); close(); start(); } },
-          h('span', { class: 'ri', html: U.icon('refresh', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`), h('span', {}, ch.title)));
+          h('span', { class: 'ri', html: U.icon('refresh', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)), h('span', {}, ch.title)));
       }));
       const sh = UI.sheet({ title: 'Wybierz rozdział', body: list });
     }
@@ -93,6 +95,7 @@
     if (G.s.call) UI.callScreen();
     BUS.emit('badges');
     Engine.restart();
+    BUS.emit('game:ready');
     if (DEBUG) debugPanel();
   }
 

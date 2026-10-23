@@ -87,7 +87,7 @@
     BUS.emit('search', q); G.change();
     if (!res.length) pg.body.appendChild(h('div', { class: 'empty' }, h('b', { style: 'display:block;color:var(--tx);margin-bottom:6px' }, `Brak wyników dla „${q}”.`), 'Spróbuj innych słów: nazwiska, miejsca, wydarzenia.'));
     else {
-      pg.body.appendChild(h('div', { class: 'res-n' }, `Około ${res.length * 137 + 12} wyników`));
+      pg.body.appendChild(h('div', { class: 'res-n' }, `${res.length} ${res.length === 1 ? 'wynik' : res.length < 5 ? 'wyniki' : 'wyników'}`));
       res.forEach(p => pg.body.appendChild(h('button', { class: 'res', onclick: () => stack.push(webPage(stack, p.id)) },
         h('div', { class: 'res-u' }, h('span', { class: 'fav', style: `background:${p.favColor || '#456'}` }, (p.fav || p.title[0]).slice(0, 1)), p.url),
         h('div', { class: 'res-t' }, p.title),

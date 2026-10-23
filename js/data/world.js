@@ -37,8 +37,8 @@ DATA.persons = {
     name: 'Bartek Sowa', role: 'były chłopak Mai · mechanik w Auto-Sowa', cond: 'unlocked:chat:group',
     facts: [
       { text: 'Rozstał się z Mają w kwietniu. Nadal mu na niej zależy.' },
-      { text: '14.10 spotkał się z Mają na stacji. Pytała o jego ojca.', cond: 'ev:ev_bartek_sms' },
-      { text: 'W nocy z 21 na 22.10 był sam w hucie — złapała go fotopułapka.', cond: 'ev:ev_jacket' },
+      { text: '14.10 spotkał się z Mają na stacji. Pytała o jego ojca.', cond: 'ev:ev_bartek_conf' },
+      { text: 'Przyznał, że w nocy z 21 na 22.10 poszedł sam do huty. Rozpoznał siebie na zdjęciu.', cond: 'ev:ev_bartek_conf' },
       { text: 'Jego ojciec, Marek Sowa, był jednym z czterech chłopaków w hucie w 1997.', cond: 'ev:ev_interview' },
       { text: 'Rozpoznał tablicę DDZ 6K19 — auto Gajdy, serwisowane w ich warsztacie.', cond: 'ev:ev_owner' }
     ]
@@ -68,7 +68,7 @@ DATA.persons = {
       { text: '13.10 odwiedził dom Wronów i pytał o projekt Mai w hucie.', cond: 'ev:ev_mom_gajda' },
       { text: 'Syn komendanta Zbigniewa Gajdy, który w 1997 szukał Tomka „w rzece”.', cond: 'ev:ev_questions' },
       { text: 'W 1997 miał 17 lat i był w hucie z Tomkiem i trzema kolegami.', cond: 'ev:ev_interview' },
-      { text: 'Jego skoda DDZ 6K19 była pod hutą noc po zniknięciu Mai i ponownie 23.10.', cond: 'ev:ev_owner' },
+      { text: 'Jego sevra DDZ 6K19 była pod hutą noc po zniknięciu Mai i ponownie 23.10.', cond: 'ev:ev_owner' },
       { text: 'Łowczy koła „Sokół”. Ma jedyny klucz do kraty sztolni Ewa.', cond: 'ev:ev_kolo' },
       { text: 'Na kadrze 23 z 1997: siedemnastolatek z ręką wyciągniętą w stronę aparatu.', cond: 'ev:ev_frame23' }
     ]
@@ -124,7 +124,7 @@ DATA.timeline = [
   { t: '1997-07-07T23:30', title: 'Czterech chłopaków w hucie. W drzwiach — Tomek.', text: 'Kadr 21 z kliszy z szafki 17.', cond: 'ev:ev_frame21', key: true },
   { t: '1997-07-08T00:10', title: 'Tomek wpada przez podłogę do zalanego kanału pieca.', text: 'Ciało ukryto w odprężarce, wejście zamurowano.', cond: 'solved:ded_1997', key: true },
   { t: '2007-07-07T08:00', title: 'Reportaż Rybickiego „Dziesięć lat ciszy”.', cond: 'ev:ev_article2007', time: false },
-  { t: '2011-03-14T03:00', title: 'Dariusz Kruk ginie na moście kolejowym.', cond: 'seen:web:m24_kruk', time: false },
+  { t: '2011-09-14T06:50', title: 'Dariusz Kruk ginie przy remoncie mostu kolejowego.', cond: 'seen:web:m24_kruk', time: false },
   { t: '2021-02-11T12:00', title: 'Umiera Adam Rybicki. Jego numer trafia później do ciebie.', cond: 'ev:ev_obit', time: false },
   { t: '2026-10-03T16:02', title: 'Maja znajduje aparat w szafce 17.', cond: any('ev:ev_szafka17', 'ev:ev_darkroom') },
   { t: '2026-10-05T23:48', title: 'Maja wywołuje kliszę.', cond: 'ev:ev_darkroom' },
@@ -138,7 +138,7 @@ DATA.timeline = [
   { t: '2026-10-13T21:12', title: 'Maja pisze SMS do „Pana Adama” — trafia do ciebie.', cond: 'ev:ev_sms_maja' },
   { t: '2026-10-13T21:40', title: 'Kłótnia Mai i Oli.', cond: 'ev:ev_ola_fight' },
   { t: '2026-10-13T23:10', title: 'Ciemne auto pod domem Wronów.', cond: 'ev:ev_car_window' },
-  { t: '2026-10-14T17:05', title: 'Maja spotyka się z Bartkiem na stacji.', cond: 'ev:ev_bartek_sms' },
+  { t: '2026-10-14T17:05', title: 'Maja spotyka się z Bartkiem na stacji.', cond: 'ev:ev_bartek_conf' },
   { t: '2026-10-14T22:57', title: 'Fotopułapka 1: Maja wchodzi na teren huty.', cond: 'ev:ev_cam1_maja', key: true },
   { t: '2026-10-14T23:31', title: 'SMS do Oli: „Przepraszam za wczoraj”.', cond: 'ev:ev_ola_sorry' },
   { t: '2026-10-14T23:44', title: 'Maja wybija otwór w murze odprężarki.', cond: 'ev:ev_sync_wall', key: true },
@@ -148,7 +148,7 @@ DATA.timeline = [
   { t: '2026-10-15T01:20', title: 'Ciemne auto przy bramie huty.', cond: 'ev:ev_cam1_car' },
   { t: '2026-10-15T06:40', title: 'Auto Mai „znalezione” na tamie.', cond: 'ev:ev_dam_news' },
   { t: '2026-10-21T21:03', title: 'Kuba pisze do ciebie.', cond: 'flag:knowKuba' },
-  { t: '2026-10-22T02:13', title: 'Bartek nocą w hucie.', cond: 'ev:ev_jacket' },
+  { t: '2026-10-22T02:13', title: 'Bartek nocą w hucie.', cond: 'ev:ev_bartek_conf' },
   { t: '2026-10-23T00:12', title: 'DDZ 6K19 znów pod hutą, gdy są tam Kuba i Igor.', cond: 'ev:ev_car_igor' },
   { t: '2026-10-24T03:05', title: 'Telefon Mai włączony w lesie. SMS do mamy.', cond: 'ev:ev_sms_kluska', key: true }
 ];
@@ -169,7 +169,7 @@ DATA.deductions = {
   },
   ded_szklarz: {
     q: 'Kim jest Szklarz?', kind: 'person',
-    intro: 'Ktoś zna fotopułapki Mai, zna jej skany i pisze do ciebie z zastrzeżonego numeru. Kto?',
+    intro: 'Ktoś zna fotopułapki Mai, zna jej skany i pisze do ciebie z nieznanego numeru. Kto?',
     options: [
       { id: 'kuba', label: 'Kuba', av: 'kuba' }, { id: 'ola', label: 'Ola', av: 'ola' }, { id: 'bartek', label: 'Bartek', av: 'bartek' },
       { id: 'igor', label: 'Igor', av: 'igor' }, { id: 'weronika', label: 'Weronika', av: 'weronika' }, { id: 'gajda', label: 'Gajda', av: 'gajda' }
@@ -189,7 +189,7 @@ DATA.deductions = {
     answer: 'gajda',
     support: { need: 2, from: ['ev_plate', 'ev_owner', 'ev_kolo', 'ev_gajda_hunt', 'ev_sync_door', 'ev_frame23', 'ev_not_gajda', 'ev_questions', 'ev_cam1_car'], prompt: 'Wybierz *dwa* dowody, które wskazują sprawcę.', fail: 'Połącz samochód spod huty z właścicielem albo klucz do kraty z konkretną osobą.' },
     fail: 'Kto miał samochód pod hutą tamtej nocy? Kto ma klucz do kraty?',
-    done: 'Skoda DDZ 6K19 komendanta Gajdy była pod hutą noc po zniknięciu Mai. Gajda jest łowczym koła, które trzyma klucz do kraty sztolni Ewa — i wymienił kłódkę 16.10. *Maję porwał Robert Gajda.*'
+    done: 'Sevra DDZ 6K19 komendanta Gajdy była pod hutą noc po zniknięciu Mai. Gajda jest łowczym koła, które trzyma klucz do kraty sztolni Ewa — i wymienił kłódkę 16.10. *Maję porwał Robert Gajda.*'
   }
 };
 

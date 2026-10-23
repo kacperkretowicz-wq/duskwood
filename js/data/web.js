@@ -23,7 +23,7 @@
       <div class="gz-sec">Z archiwum</div>
       <article class="gz-card"><h3>${go('gazeta2007', 'Dziesięć lat ciszy. Kto widział Tomka Lisa?')}</h3><p>Reportaż o chłopcu, który zniknął w noc powodzi. Adam Rybicki, 2007.</p><small>07.07.2007</small></article>
       <article class="gz-card"><h3>${go('nekrolog', 'Odszedł Adam Rybicki (1961–2021)')}</h3><p>Wspomnienie o naszym redakcyjnym koledze.</p><small>15.02.2021</small></article>
-      <div class="gz-sec">Kontakt</div><p class="gz-small">Redakcja: ul. Świdnicka 12, Dzierżoniów · tel. <a href="#" data-call="748422010">74 842 20 10</a> · redakcja@gazetasudecka.pl</p></main>`
+      <div class="gz-sec">Kontakt</div><p class="gz-small">Redakcja: ul. Kolejowa 3, Dzierżoniów · tel. <a href="#" data-call="748321040">74 832 10 40</a> · redakcja@gazetasudecka.pl</p></main>`
   });
   page('gazeta2007', {
     url: 'gazetasudecka.pl/archiwum/2007/07/dziesiec-lat-ciszy', title: 'Dziesięć lat ciszy. Kto widział Tomka Lisa?', site: 'gazeta', fav: 'G', favColor: '#7b2b21',
@@ -58,7 +58,7 @@ Jeśli ktoś z Państwa pamięta tamtą noc, proszę o kontakt. Każda informacj
       <div class="gz-kick">Wspomnienie</div>
       <h1>Odszedł Adam Rybicki (1961–2021)</h1>
       <figure class="gz-por">${im('web_rybicki', '', 'Adam Rybicki')}<figcaption>Adam Rybicki. Fot. archiwum redakcji</figcaption></figure>
-      ${P(`11 lutego 2021 roku, w wieku 59 lat, zmarł nagle nasz redakcyjny kolega, Adam Rybicki. Przez trzydzieści lat jeździł po Sudetach starym oplem i pisał o sprawach, o których inni woleli zapomnieć.
+      ${P(`11 lutego 2021 roku, w wieku 59 lat, zmarł nagle nasz redakcyjny kolega, Adam Rybicki. Przez trzydzieści lat jeździł po Sudetach starym kombi i pisał o sprawach, o których inni woleli zapomnieć.
 
 Uparty, czasem nieznośny, zawsze przy telefonie. Mówił, że reporter, który nie odbiera, przestaje być reporterem. Do końca miał ten sam numer komórki, który podawał pod każdym tekstem.
 
@@ -82,7 +82,7 @@ Adamie, odbierz tam, gdzie jesteś.`)}
 Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Odnalazła ją grupa przyjaciół i rodzina — w porozumieniu z kimś, kogo w Mglisku nikt nie znał.
 
 Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.`
-        : `Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym miesiąc wcześniej stało auto Mai W. Mężczyzny nie odnaleziono.
+        : `${G.flag('gajdaCaught') ? 'Robert G. został zatrzymany przy leśnym szlabanie. Nie wszystkie materiały z dawnej sprawy udało się zabezpieczyć; część okoliczności pozostaje do wyjaśnienia.' : 'Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym wcześniej stało auto Mai W. Mężczyzny nie odnaleziono. Poszukiwania trwają.'}
 
 Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Dwaj mężczyźni, którzy w 1997 roku mieli po 16 i 17 lat, złożyli wyjaśnienia w sprawie śmierci Tomasza Lisa.
 
@@ -100,18 +100,18 @@ Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Mia�
       <a href="#" data-go="m24_maja" class="m24-hero">${`<img src="${Art.url('web_dam')}" alt="">`}<div><span class="m24-tag">PILNE</span><h2>Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie</h2></div></a>
       <a href="#" data-go="m24_huta" class="m24-row"><b>Huta „Jutrzenka”: ruina czy szansa? Wójt: „brak inwestora”</b><small>03.03.2025</small></a>
       <a href="#" data-go="m24_powodz" class="m24-row"><b>20 lat po powodzi tysiąclecia. „Woda zabrała nam pół miasta”</b><small>08.07.2017</small></a>
-      <a href="#" data-go="m24_kruk" class="m24-row"><b>Tragiczny wypadek na moście kolejowym</b><small>14.03.2011</small></a>
+      <a href="#" data-go="m24_kruk" class="m24-row"><b>Tragiczny wypadek na moście kolejowym</b><small>14.09.2011</small></a>
       <div class="m24-ad">Auto-Sowa · mechanika · wulkanizacja · tel. 669 301 552</div></main>`
   });
   page('m24_maja', {
     url: 'mglisko24.pl/wiadomosci/poszukiwania-mai-w', title: 'Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie', site: 'm24', fav: 'M', favColor: '#c43d2f',
-    kw: ['maja wrona', 'maja w', 'zaginiona maja', 'zaginięcie mai', 'zaginiona studentka', 'zaginiona mglisko', 'tama', 'tama zalew', 'samochód na tamie', 'auto na tamie', 'zalew mgliski', 'poszukiwania mai', 'panda tama'],
-    snippet: 'Czerwonego fiata pandę zauważył na koronie tamy wędkarz. Na barierce wisiała damska kurtka…',
+    kw: ['maja wrona', 'maja w', 'zaginiona maja', 'zaginięcie mai', 'zaginiona studentka', 'zaginiona mglisko', 'tama', 'tama zalew', 'samochód na tamie', 'auto na tamie', 'zalew mgliski', 'poszukiwania mai', 'iskra tama'],
+    snippet: 'Czerwoną iskrę zauważył na koronie tamy wędkarz. Na barierce wisiała damska kurtka…',
     ev: 'ev_dam_news',
     html: () => `${m24Head()}<main class="m24-m m24-art">
       <span class="m24-tag">PILNE</span><h1>Trwają poszukiwania 22-letniej Mai W. Auto znalezione na tamie</h1><small class="m24-d">16.10.2026, 9:12 · red.</small>
       <figure>${im('web_dam', '', 'Tama Zalewu Mgliskiego, 15.10')}<figcaption>Korona tamy Zalewu Mgliskiego, czwartek rano. Fot. czytelnik</figcaption></figure>
-      ${P(`W czwartek, 15 października, około *6:40* wędkarz zauważył na koronie tamy Zalewu Mgliskiego czerwonego fiata pandę. Na barierce wisiała damska kurtka. Samochód należy do 22-letniej *Mai W.*, studentki z Mgliska, której nikt nie widział od środy wieczorem.
+      ${P(`W czwartek, 15 października, około *6:40* wędkarz zauważył na koronie tamy Zalewu Mgliskiego czerwoną iskrę. Na barierce wisiała damska kurtka. Samochód należy do 22-letniej *Mai W.*, studentki z Mgliska, której nikt nie widział od środy wieczorem.
 
 Na miejscu pracowała policja i strażacy. Przez dwa dni zalew przeszukiwali płetwonurkowie z Wrocławia. Bez rezultatu.
 
@@ -144,8 +144,8 @@ Jedyną ofiarą śmiertelną w gminie był *9-letni Tomasz L.*, którego ciała 
     url: 'mglisko24.pl/wiadomosci/2011/wypadek-most-kolejowy', title: 'Tragiczny wypadek na moście kolejowym', site: 'm24', fav: 'M', favColor: '#c43d2f',
     kw: ['darek kruk', 'dariusz kruk', 'kruk', 'dariusz k', 'most kolejowy', 'wypadek most', 'kruk mglisko', 'kruk 2011'],
     snippet: '30-letni Dariusz K. spadł z mostu kolejowego nad Mglicą. Znajomi: „ostatnio powtarzał, że musi coś komuś oddać”.',
-    html: () => `${m24Head()}<main class="m24-m m24-art"><h1>Tragiczny wypadek na moście kolejowym</h1><small class="m24-d">14.03.2011</small>
-      ${P(`W nocy z niedzieli na poniedziałek z mostu kolejowego nad Mglicą spadł *30-letni Dariusz K.*, mieszkaniec Mgliska. Mężczyzna zginął na miejscu. Według wstępnych ustaleń był pod wpływem alkoholu.
+    html: () => `${m24Head()}<main class="m24-m m24-art"><h1>Tragiczny wypadek na moście kolejowym</h1><small class="m24-d">14.09.2011</small>
+      ${P(`W środę rano z przęsła remontowanego mostu kolejowego nad Mglicą spadł *30-letni Dariusz K.*, mieszkaniec Mgliska, pracownik firmy wykonującej remont. Mężczyzna zginął na miejscu. Nieoficjalnie mówi się, że mógł być pod wpływem alkoholu.
 
 Sąsiedzi mówią, że od lat zmagał się z problemami. — Dobry chłopak, tylko się pogubił. Od tej powodzi jakby go nie było — mówi jedna z mieszkanek bloku przy Wodnej.
 
@@ -206,7 +206,7 @@ _W grze Mglisko rzeka Mglica i samo miasteczko są fikcyjne._`))
       feed: [
         { art: 'm_mirror', date: '12.10.2026', likes: 212, text: 'Szkło pamięta. Wkrótce. 🕯️', comments: [['ola.nowicka', '🖤'], ['kuba.wrona', 'spoko foto (jak na ciebie)'], ['leszek.malicki.wojt', 'Piękne zdjęcie, ale proszę uważać — budynek grozi zawaleniem. Wstęp wzbroniony.'], ['r.gajda', 'Teren prywatny 🙂 Pozdrawiam mamę.'], ['weronika.lis', 'Czekam. W.']] },
         { art: 'm_huta_ext', date: '03.10.2026', likes: 156, text: 'Październik w Mglisku: mgła 8 dni na 10. Pozostałe 2 dni: też mgła.', comments: [['igor.malicki', 'technicznie rzecz biorąc to jest jedna długa mgła'], ['bartek_sowa', 'nie wchodz tam sama']] },
-        { art: 'k_zenit', date: '28.09.2026', likes: 301, ev: 'ev_zenit', text: 'Zenit-E od dziadka na 12. urodziny. Mój pierwszy aparat. Waży tonę, kocham go. Wraca do gry. #analog #zenit', comments: [['ola.nowicka', 'ten aparat jest starszy od nas razem wziętych'], ['weronika.lis', 'Pamiętam, jak chodziłaś z nim po bibliotece. 🙂']] },
+        { art: 'k_kometa', date: '28.09.2026', likes: 301, ev: 'ev_kometa', text: 'Kometa-E od dziadka na 12. urodziny. Mój pierwszy aparat. Waży tonę, kocham go. Wraca do gry. #analog #kometa', comments: [['ola.nowicka', 'ten aparat jest starszy od nas razem wziętych'], ['weronika.lis', 'Pamiętam, jak chodziłaś z nim po bibliotece. 🙂']] },
         { art: 'm_bandzior', date: '24.09.2026', likes: 188, text: 'Bandzior, lat 11, zawód: dywan.', comments: [['kuba.wrona', 'mój pies'], ['maja.wrona', '@kuba.wrona NASZ pies']] },
         { art: 'm_ola_lake', date: '21.09.2026', likes: 244, text: 'Z @ola.nowicka nad zalewem. Ona twierdzi, że wyszła jak ziemniak. Kłamie.', comments: [['ola.nowicka', 'usuń to']] },
         { art: 'k_kluska', date: '16.08.2026', likes: 410, ev: 'ev_kluska', text: '#tbt Kluska, moja pierwsza psia miłość 🐾 (2006–2019). Zanim pojawił się Bandzior. Do dziś trzymam jej obrożę w szufladzie.', comments: [['kuba.wrona', 'najlepszy jamnik świata'], ['ola.nowicka', '😭']] }

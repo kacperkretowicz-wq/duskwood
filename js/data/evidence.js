@@ -31,14 +31,14 @@ DATA.evidence = {
 
   /* ---------- rozdział 1 ---------- */
   ev_kluska: { title: 'Kluska — pierwszy pies Mai', cat: 'photo', source: 'Kadr: @maja.wrona', img: 'k_kluska', desc: 'Jamniczka Kluska (2006–2019). Pierwsza psia miłość Mai — „zanim pojawił się Bandzior”.' },
-  ev_zenit: { title: 'Zenit-E — pierwszy aparat Mai', cat: 'object', source: 'Kadr: @maja.wrona', img: 'k_zenit', desc: 'Prezent od dziadka na 12. urodziny. „Mój pierwszy aparat. Waży tonę, kocham go.”' },
+  ev_kometa: { title: 'Kometa-E — pierwszy aparat Mai', cat: 'object', source: 'Kadr: @maja.wrona', img: 'k_kometa', desc: 'Prezent od dziadka na 12. urodziny. „Mój pierwszy aparat. Waży tonę, kocham go.”' },
   ev_dam_news: {
     title: 'Samochód Mai na tamie', cat: 'msg', source: 'Mglisko24.pl', img: 'web_dam',
-    desc: 'Czerwoną pandę Mai znalazł wędkarz *15.10 o 6:40* na koronie tamy Zalewu Mgliskiego. Na barierce wisiała jej kurtka. Komendant Gajda: „wszystko wskazuje na tragiczny wypadek lub targnięcie się na życie”. Nurkowie nic nie znaleźli.'
+    desc: 'Czerwoną iskrę Mai znalazł wędkarz *15.10 o 6:40* na koronie tamy Zalewu Mgliskiego. Na barierce wisiała jej kurtka. Komendant Gajda: „wszystko wskazuje na tragiczny wypadek lub targnięcie się na życie”. Nurkowie nic nie znaleźli.'
   },
   ev_loc_1410: {
     title: 'Lokalizacja Mai: 14.10', cat: 'digital', source: 'Nimbus · historia lokalizacji', img: 'map_snip1410',
-    desc: 'Dom → stacja „Mglica” (17:05–17:40) → dom → *22:58 Huta Szkła „Jutrzenka”*. Ostatni sygnał telefonu: *23:58, w hucie*, dokładność 12 m. *Telefon nigdy nie był na tamie* — tama leży 3 km dalej.',
+    desc: 'Dom → stacja „Mglica” (17:05–17:40) → dom → *22:58 Huta Szkła „Jutrzenka”*. Ostatni zapis telefonu: *23:58, w hucie*, dokładność 12 m. W zachowanej historii nie ma pozycji na tamie, która leży 3 km dalej. Po utracie sygnału nie da się odtworzyć dalszej trasy z tych danych. Lokalizacja telefonu nie jest pewną lokalizacją właścicielki.',
     open: { app: 'nimbus', params: { section: 'loc', day: '2026-10-14' }, label: 'Otwórz historię lokalizacji' }
   },
   ev_ola_fight: { title: 'Kłótnia Mai i Oli (13.10)', cat: 'msg', source: 'Nimbus · SMS', desc: 'Dzień przed zniknięciem Ola nazwała poszukiwania Mai „obsesją”. Maja: „Jego siostra czeka od 29 lat”. Ola twierdziła w grupie, że ostatni raz pisały *12.10* i „wszystko było normalnie”. *To nieprawda.*' },
@@ -82,11 +82,11 @@ DATA.evidence = {
   ev_interview: { title: 'Wywiad z Weroniką: czterech chłopaków', cat: 'testimony', source: 'Dyktafon Mai (oczyszczone)', desc: 'Tomek chodził tamtego lata za starszymi chłopakami: *Darkiem Krukiem, Robertem Gajdą, Leszkiem Malickim i Markiem Sową*. Poszukiwania prowadził komendant Gajda — ojciec Roberta.' },
   ev_plate_cam: { title: 'Tablica z fotopułapki: DDZ 6K1?', cat: 'photo', source: 'Ciemnia · fotopułapka 1', img: 'c1_0023e', desc: 'Po rozjaśnieniu zdjęcia z 15.10, 02:05, widać tablicę odjeżdżającego auta: *DDZ 6K1…* — ostatni znak zasłania błoto.' },
   ev_plate: { title: 'Tablica rejestracyjna: DDZ 6K19', cat: 'digital', source: 'Zestawienie dwóch zdjęć', desc: 'Fotopułapka (15.10): *DDZ 6K1?* + zdjęcie Igora (23.10): *…19*. Ten sam samochód był pod hutą noc po zniknięciu Mai i wczoraj w nocy.' },
-  ev_owner: { title: 'DDZ 6K19 należy do Roberta Gajdy', cat: 'testimony', source: 'Zeszyt napraw Auto-Sowa', img: 'b_ledger', desc: 'W zeszycie warsztatu Sowów: *DDZ 6K19 — Skoda Superb, gr. — R. Gajda*. Prywatne auto komendanta.' },
+  ev_owner: { title: 'DDZ 6K19 należy do Roberta Gajdy', cat: 'testimony', source: 'Zeszyt napraw Auto-Sowa', img: 'b_ledger', desc: 'W zeszycie warsztatu Sowów: *DDZ 6K19 — Sevra Magna, gr. — R. Gajda*. Prywatne auto komendanta.' },
   ev_gajda_call: { title: 'Rozmowa z komendantem Gajdą', cat: 'testimony', source: 'Połączenie przychodzące', desc: 'Gajda zażądał kopii plików z chmury Mai i wiedział o tobie więcej, niż powinien.' },
   ev_sms_kluska: { title: 'SMS do mamy: „Pozdrów Kluskę”', cat: 'msg', source: 'Telefon Mai · 24.10, 03:05', desc: '„Mamo, nic mi nie jest. Potrzebuję czasu. Nie szukajcie mnie. Pozdrów Kluskę.” Maja zawsze pisała „Mamuś”. A Kluska nie żyje od 2019 roku. *To wołanie o pomoc.*' },
   ev_sync_wall: { title: 'Zdjęcie Mai: otwór w murze (14.10, 23:44)', cat: 'photo', source: 'Nimbus · zaległa synchronizacja', img: 's_wall', desc: 'Maja wybiła kilka cegieł. W świetle czołówki, w głębi tunelu: strzęp żółtego materiału.' },
-  ev_sync_door: { title: 'Zdjęcie Mai: postać w drzwiach (14.10, 23:53)', cat: 'photo', source: 'Nimbus · zaległa synchronizacja', img: 's_door', desc: 'Poruszone zdjęcie: w drzwiach hali stoi mężczyzna z latarką. Na ramieniu — jasna naszywka. Sześć minut potem telefon Mai milknie.' },
+  ev_sync_door: { title: 'Zdjęcie Mai: postać w drzwiach (14.10, 23:53)', cat: 'photo', source: 'Nimbus · zaległa synchronizacja', img: 's_door', desc: 'Poruszone zdjęcie: w drzwiach hali stoi mężczyzna z latarką. Na ramieniu — jasna naszywka. Pięć minut potem telefon Mai traci sygnał.' },
 
   /* ---------- rozdział 4 ---------- */
   ev_findphone: { title: 'Ostatnia pozycja telefonu Mai', cat: 'digital', source: 'Nimbus · Znajdź urządzenie', img: 'find_snip', desc: '24.10, 03:07. Telefon Mai był online przez dwie minuty. Pozycja z masztów: las na stoku *Sowiej Kopy*, dokładność ±800 m. W tym kręgu są trzy stare sztolnie.' },
@@ -94,8 +94,8 @@ DATA.evidence = {
   ev_kolo: { title: 'Koło Łowieckie „Sokół”: łowczy R. Gajda', cat: 'msg', source: 'kl-sokol.pl', desc: 'Obwód łowiecki nr 117 obejmuje wschodni stok Sowiej Kopy ze sztolniami Ewa i Waltraud. *Łowczy koła: Robert Gajda.*' },
   ev_gajda_hunt: { title: 'Gajda przy paśniku „pod Ewą”', cat: 'photo', source: 'Kadr: @r.gajda', img: 'kadr_hunt', desc: 'Zdjęcie z profilu Gajdy: „Paśnik pod Ewą gotowy na zimę. Darz bór!”. W tle — stalowa krata wejścia do sztolni.' },
   ev_frame23: { title: 'Kadr 23 — pełna rozdzielczość', cat: 'photo', source: 'Od Szklarza', img: 'p_23d', desc: 'Klatka, która „była prześwietlona”. Flesz wydobywa z ciemności twarz siedemnastolatka z wyciągniętą ręką: „nie rób zdjęć”. To *Robert Gajda*. Za nim, w kanale pieca, coś żółtego.' },
-  ev_szklarz_phrase: { title: 'Szklarz: „technicznie rzecz biorac”', cat: 'msg', source: 'Rozmowa ze Szklarzem', desc: 'Szklarz pisze bez polskich znaków i bez wielkich liter. Ale jedno zdanie brzmi znajomo: „technicznie rzecz biorac, nie zyje od 2011”.' },
+  ev_szklarz_phrase: { title: 'Szklarz: „technicznie rzecz biorac”', cat: 'msg', source: 'Rozmowa ze Szklarzem', desc: 'Szklarz pisze bez polskich znaków i bez wielkich liter. Ale jedno zdanie brzmi znajomo: „technicznie rzecz biorac, ta klatka nigdy nie byla przeswietlona”.' },
   ev_marek: { title: 'Wyznanie Marka Sowy', cat: 'testimony', source: 'Przez Bartka', desc: 'Ojciec Bartka opowiada noc z 1997: Tomek wpadł do zalanego kanału pieca. Wyciągnęli go martwego. *Robert zdecydował*, że nikt się nie dowie. Marek zamurował wejście. Robert ma klucz do kraty sztolni Ewa.' },
   ev_igor_conf: { title: 'Wyznanie Igora', cat: 'testimony', source: 'Rozmowa z Igorem', desc: 'Igor rozpoznał ojca na kadrze 23 i 12.10 zapytał go o to wprost. Ojciec zadzwonił do Gajdy. Dwa dni później Maja zniknęła. Igor jest Szklarzem.' },
-  ev_jerrycans: { title: 'BushView: kanistry przy hucie', cat: 'photo', source: 'Panel BushView · CAM-01', img: 'c1_live_gajda', desc: 'Ciemna skoda przy bramie huty, otwarty bagażnik, dwa kanistry. Ktoś chce spalić to, co jest za murem.' }
+  ev_jerrycans: { title: 'BushView: kanistry przy hucie', cat: 'photo', source: 'Panel BushView · CAM-01', img: 'c1_live_gajda', desc: 'Ciemna sevra przy bramie huty, otwarty bagażnik, dwa kanistry. Ktoś chce spalić to, co jest za murem.' }
 };

@@ -17,8 +17,10 @@
       if (entry.who === 'maja' && !G.flag('knowMaja')) return '+48 ' + fmtNum(DATA.chars.maja.number);
       return DATA.chars[entry.who].name;
     }
-    const c = DATA.contacts.find(x => digits(x.number) === digits(entry.number));
-    return c ? c.name : '+48 ' + fmtNum(entry.number);
+    const c = entry.number && DATA.contacts.find(x => digits(x.number) === digits(entry.number));
+    if (c) return c.name;
+    if (!entry.number) return entry.label || 'Nieznany numer';
+    return '+48 ' + fmtNum(entry.number);
   }
 
   UI.def('phone', {
@@ -28,12 +30,14 @@
       const stack = new UI.Stack(host);
       let tab = params.tab || 'recent';
       const pg = UI.page({ title: 'Telefon', big: true });
-      const seg = h('div', { class: 'seg' });
+      const seg = h('nav', { class: 'phone-tabs', 'aria-label': 'Telefon — zakładki' });
       const content = h('div', { class: 'ph-content' });
-      pg.body.append(seg, content);
+      pg.body.append(content);
+      pg.el.append(seg);
       function render() {
         seg.innerHTML = '';
-        [['recent', 'Ostatnie'], ['contacts', 'Kontakty'], ['keypad', 'Klawiatura']].forEach(([k, l]) => seg.appendChild(h('button', { class: tab === k ? 'on' : '', onclick: () => { tab = k; render(); } }, l)));
+        pg.setTitle({ recent: 'Ostatnie', contacts: 'Kontakty', keypad: 'Klawiatura' }[tab]);
+        [['recent', 'Ostatnie', 'clock'], ['contacts', 'Kontakty', 'user'], ['keypad', 'Klawiatura', 'keypad']].forEach(([k, l, icon]) => seg.appendChild(h('button', { class: tab === k ? 'on' : '', 'aria-current': tab === k ? 'page' : null, onclick: () => { tab = k; render(); } }, U.ico(icon, 23), h('span', {}, l))));
         content.innerHTML = '';
         if (tab === 'recent') recent(); else if (tab === 'contacts') contacts(); else keypad();
       }

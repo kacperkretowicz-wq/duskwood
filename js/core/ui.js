@@ -8,13 +8,14 @@ const UI = (() => {
   const apps = {};
   const overlays = [];
   let locked = false;
+  let lockWallpaperCleanup = null;
 
   /* ---------- ikony aplikacji ---------- */
   const GLYPH = {
-    messages: '<path d="M7 9.5h18a3 3 0 013 3v9a3 3 0 01-3 3H15l-6 4.5v-4.5H7a3 3 0 01-3-3v-9a3 3 0 013-3z" fill="#fff"/><circle cx="11" cy="17" r="1.6" fill="#c97a12"/><circle cx="16" cy="17" r="1.6" fill="#c97a12"/><circle cx="21" cy="17" r="1.6" fill="#c97a12"/>',
+    messages: '<path d="M27 15c0 6-5 10-11 10-2 0-4-.4-5-1L5 27l2-6c-2-2-3-4-3-6C4 9 9 5 16 5s11 4 11 10z" fill="#fff"/>',
     phone: '<path d="M10.5 6h4l2 5.5-2.6 2a14 14 0 006.6 6.6l2-2.6 5.5 2v4a2.5 2.5 0 01-2.5 2.5A20.5 20.5 0 018 8.5 2.5 2.5 0 0110.5 6z" fill="#fff"/>',
     browser: '<circle cx="16" cy="16" r="10.5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M20.5 11.5l-3 6-6 3 3-6z" fill="#fff"/><circle cx="16" cy="16" r="1.4" fill="#2a6fb0"/>',
-    gallery: '<rect x="5" y="7" width="22" height="18" rx="3.5" fill="#fff"/><path d="M5 22l6.5-7 5 5 3.5-3.5L27 23v-1 1.5a1.5 1.5 0 01-1.5 1.5h-19A1.5 1.5 0 015 23.5z" fill="#7b4fb8"/><circle cx="21.5" cy="12.5" r="2.4" fill="#e9a23b"/>',
+    gallery: ['#ffb444','#ff704b','#ed5f9a','#b87cc4','#7a8fd8','#6cc6dc','#6acb9b','#b7d765'].map((color,i)=>`<ellipse cx="16" cy="9.7" rx="4.6" ry="7.1" fill="${color}" opacity=".82" transform="rotate(${i*45} 16 16)"/>`).join(''),
     nimbus: '<path d="M10 24h13.5a5.5 5.5 0 00.8-10.9A8 8 0 009 14.5 4.8 4.8 0 0010 24z" fill="#fff"/><path d="M16 15v6M13.2 18l2.8-3 2.8 3" stroke="#c4466a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     maps: '<path d="M6 9l6.5-2.5L19.5 9 26 6.5v16.5L19.5 25.5 12.5 23 6 25.5z" fill="#fff" opacity=".9"/><path d="M12.5 6.5V23M19.5 9v16.5" stroke="#1d7c74" stroke-width="1.5"/><path d="M19.5 7.5c-2.2 0-4 1.8-4 4 0 3 4 6.5 4 6.5s4-3.5 4-6.5c0-2.2-1.8-4-4-4z" fill="#e5484d"/><circle cx="19.5" cy="11.5" r="1.4" fill="#fff"/>',
     case: '<path d="M5 10h8l2 2.5h12V25a1.5 1.5 0 01-1.5 1.5h-19A1.5 1.5 0 015 25z" fill="#fff"/><circle cx="17.5" cy="19" r="3.6" fill="none" stroke="#8a5a12" stroke-width="2"/><path d="M20.2 21.7l3 3" stroke="#8a5a12" stroke-width="2.2" stroke-linecap="round"/>',
@@ -22,15 +23,15 @@ const UI = (() => {
     ciemnia: '<circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M16 6l3 8.5M26 16l-8.5 3M16 26l-3-8.5M6 16l8.5-3M23 9l-6 6.3M9 23l6-6.3M23 23l-6.3-6M9 9l6.3 6" stroke="#fff" stroke-width="1.6"/><circle cx="16" cy="16" r="3" fill="#ff5a4a"/>',
     bushview: '<rect x="9" y="5" width="14" height="22" rx="4" fill="#fff"/><circle cx="16" cy="13" r="3.8" fill="#4d5a2a"/><circle cx="16" cy="13" r="1.5" fill="#c6d38a"/><rect x="12" y="20" width="8" height="2" rx="1" fill="#4d5a2a"/><circle cx="12" cy="8" r=".9" fill="#e5484d"/>',
     weather: '<path d="M8 21h15M6 25h20M10 17h14" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><circle cx="20" cy="10" r="4" fill="#ffd27a"/>',
-    notes: '<rect x="7" y="5" width="18" height="22" rx="2.5" fill="#fff"/><rect x="7" y="5" width="18" height="5" rx="2" fill="#f5c400"/><path d="M10.5 14h11M10.5 18h11M10.5 22h7" stroke="#b9b2a0" stroke-width="1.6" stroke-linecap="round"/>',
+    notes: '<path d="M7 13h18M7 18h18M7 23h18" stroke="#b4b4b8" stroke-width="1"/>',
     calendar: '<rect x="6" y="7" width="20" height="19" rx="3" fill="#fff"/><rect x="6" y="7" width="20" height="6" rx="2.5" fill="#e5484d"/><text x="16" y="23.5" font-size="10" font-weight="700" text-anchor="middle" fill="#222" font-family="Inter,Segoe UI,sans-serif">DAY</text>',
     clock: '<circle cx="16" cy="16" r="10.5" fill="#fff"/><path d="M16 9v7l4.5 3" stroke="#111" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="16" cy="16" r="1.4" fill="#e5484d"/>'
   };
   const GRAD = {
-    messages: 'linear-gradient(160deg,#ffbe55,#e08a17)',
+    messages: 'linear-gradient(#64e175,#20c543)',
     phone: 'linear-gradient(160deg,#5be38f,#1f9d55)',
     browser: 'linear-gradient(160deg,#5aa8f0,#1e5a9e)',
-    gallery: 'linear-gradient(160deg,#f6f1ea,#d9cfe6)',
+    gallery: '#fff',
     nimbus: 'linear-gradient(160deg,#f49bb4,#b8355c)',
     maps: 'linear-gradient(160deg,#58d0c0,#17716a)',
     case: 'linear-gradient(160deg,#f2c25c,#a46a10)',
@@ -38,7 +39,7 @@ const UI = (() => {
     ciemnia: 'linear-gradient(160deg,#a8322b,#3d0c0a)',
     bushview: 'linear-gradient(160deg,#94a550,#3d4a1b)',
     weather: 'linear-gradient(160deg,#6b8ba8,#2c3e52)',
-    notes: 'linear-gradient(160deg,#fff7d6,#f1d36a)',
+    notes: 'linear-gradient(#ffcc00 0 29%,#fff 29%)',
     calendar: 'linear-gradient(160deg,#ffffff,#e9e9ee)',
     clock: 'linear-gradient(160deg,#2b2b2e,#0b0b0c)'
   };
@@ -54,7 +55,7 @@ const UI = (() => {
   }
   let OS = 'ios';
   const LABELS = {
-    ios: { gallery: 'Zdjęcia', browser: 'Internet', messages: 'Wiadomości', phone: 'Telefon' },
+    ios: { gallery: 'Zdjęcia', browser: 'Safari', messages: 'Wiadomości', phone: 'Telefon' },
     android: { gallery: 'Galeria', browser: 'Internet', messages: 'Wiadomości', phone: 'Telefon' }
   };
   const appName = a => (LABELS[OS] && LABELS[OS][a.id]) || a.name;
@@ -64,8 +65,12 @@ const UI = (() => {
 
   /* ---------- budowa ---------- */
   function build() {
+    SeasonPacing.init();
     OS = detectOS();
     document.body.classList.add('os-' + OS);
+    applyAppearance();
+    BUS.on('settings', applyAppearance);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyAppearance);
     const stage = h('div', { id: 'stage' },
       h('aside', { class: 'stage-side' }, h('div', { class: 'stage-kicker' }, 'INTERAKTYWNY THRILLER'), h('b', {}, 'MGLISKO'),
         h('p', {}, 'Nie znasz tych ludzi.', h('br'), 'Jeszcze.'),
@@ -76,6 +81,7 @@ const UI = (() => {
     island = h('div', { id: 'island' });
     statusEl = h('div', { id: 'status' });
     home = h('div', { id: 'home' });
+    Wallpapers.bind(home, () => UI.openWallpapers());
     appsLayer = h('div', { id: 'apps' });
     bannersEl = h('div', { id: 'banners' });
     toastsEl = h('div', { id: 'toasts' });
@@ -89,6 +95,16 @@ const UI = (() => {
     renderStatus();
     fit();
     window.addEventListener('resize', fit);
+    const keyboardFit = () => {
+      const viewport = window.visualViewport;
+      const editing = document.activeElement?.matches('input,textarea');
+      const inset = viewport && editing ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop) : 0;
+      document.body.style.setProperty('--keyboard-inset', inset > 100 ? `${inset}px` : '0px');
+      document.body.classList.toggle('keyboard-open', inset > 100);
+    };
+    window.visualViewport?.addEventListener('resize', keyboardFit);
+    document.addEventListener('focusin', keyboardFit);
+    document.addEventListener('focusout', () => setTimeout(keyboardFit, 0));
     document.addEventListener('fullscreenchange', fit);
     setInterval(tick, 1000);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') back(); });
@@ -107,14 +123,17 @@ const UI = (() => {
     });
     BUS.on('msg', onMsg);
     BUS.on('evidence', () => scheduleHome());
+    ['goal', 'clock', 'solved', 'conversations', 'wallpaper'].forEach(event => BUS.on(event, scheduleHome));
+    BUS.on('wallpaper', () => { if (lockEl) lockEl.style.cssText = Wallpapers.style(Wallpapers.selected()); });
   }
 
   function fit() {
     const mobile = window.innerWidth <= 520 || (window.matchMedia('(pointer: coarse)').matches && window.innerWidth < 900);
     document.body.classList.toggle('mobile', mobile);
     // Na prawdziwym telefonie pokazujemy własny pasek stanu tylko na pełnym ekranie — inaczej widać systemowy.
-    const full = !!document.fullscreenElement || window.matchMedia('(display-mode: fullscreen)').matches;
-    document.body.classList.toggle('real-status', mobile && !full);
+    const full = !!document.fullscreenElement || window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: standalone)').matches || navigator.standalone || window.Capacitor?.isNativePlatform();
+    const hardware = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    document.body.classList.toggle('real-status', mobile && hardware && !full);
     const dev = $('#device');
     if (!mobile) {
       const k = Math.min(1, (window.innerHeight - 32) / dev.offsetHeight, (window.innerWidth - 32) / dev.offsetWidth);
@@ -141,36 +160,60 @@ const UI = (() => {
     const st = $('.st-t', statusEl); if (st && st.textContent !== t) renderStatus();
     const wt = $('.w-time', home); if (wt && wt.textContent !== t) { wt.textContent = t; $('.w-date', home).textContent = cap(U.dayLong(G.now())); }
     if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; }
-    if (G.s) G.s.playMs = (G.s.playMs || 0) + 1000;
+    if (G.s && !document.hidden && !G.s.clock.paused) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  function applyAppearance() {
+    const pref = G.settings.appearance || 'light';
+    document.body.classList.toggle('dark-ui', pref === 'dark' || pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
 
   /* ---------- ekran główny ---------- */
   let homeQueued = false;
   function scheduleHome() { if (homeQueued) return; homeQueued = true; requestAnimationFrame(() => { homeQueued = false; renderHome(); }); }
   function renderHome() {
     if (!G.s) return;
-    home.style.backgroundImage = `url(${Art.url('wallpaper')})`;
+    home.style.cssText = Wallpapers.style(Wallpapers.selected());
     home.innerHTML = '';
-    const ch = Engine.chapters[G.s.chapter];
-    const recent = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id)).sort((a, b) => (G.chat(b).last || 0) - (G.chat(a).last || 0)).slice(0, 3);
+    const dock = ['phone', 'messages', 'browser', 'gallery'];
+    function appIcon(id) {
+      const a = apps[id], n = a.badge ? a.badge() : 0;
+      return h('button', { class: 'app-ic', 'aria-label': appName(a), onclick: e => openApp(id, {}, e.currentTarget) },
+        h('span', { class: 'ic', style: `--g:${GRAD[id]}` }, h('span', { html: glyph(id) }), n ? h('span', { class: 'badge' + (n === 'dot' ? ' dot' : '') }, n === 'dot' ? '' : n) : null), h('span', { class: 'lb' }, appName(a)));
+    }
+    const weather = DATA.weather();
     home.append(
-      h('div', { class: 'hub-heading' }, h('small', {}, 'MGLISKO / TWÓJ TELEFON'), h('h1', {}, 'Po drugiej stronie.'), h('p', {}, cap(U.dayLong(G.now())) + ' · ' + U.time(G.now()))),
-      h('button', { class: 'hub-case', onclick: () => openApp('messages') },
-        h('div', { class: 'hub-case-shade' }, h('span', { class: 'case-tag' }, ch ? (ch.num === 0 ? 'PROLOG' : ch.num === 99 ? 'EPILOG' : 'ROZDZIAŁ ' + ch.num) : 'MGLISKO'),
-          h('h2', {}, ch ? ch.title : 'Nieodebrane'), h('p', {}, 'Maja Wrona, 22 lata. Nie wróciła do domu.'), h('span', { class: 'hub-continue' }, 'Otwórz rozmowy', U.ico('chat', 18)))),
-      h('div', { class: 'hub-section' }, h('b', {}, 'Ostatnie rozmowy'), h('button', { onclick: () => openApp('messages') }, 'Wszystkie')),
-      h('div', { class: 'hub-recent' }, recent.length ? recent.map(id => {
-        const c = G.chat(id), last = c.msgs.at(-1);
-        return h('button', { class: 'row', onclick: () => openApp('messages', { chat: id }) }, avatar(c.avatar || DATA.chats[id].avatar || id),
-          h('div', { class: 'rm' }, h('b', {}, c.name || DATA.chats[id].name), h('span', {}, last ? preview(last) : 'Otwórz rozmowę')),
-          c.unread ? h('span', { class: 'hub-unread' }, c.unread) : null);
-      }) : h('p', { class: 'empty' }, 'Wiadomości pojawią się tutaj.')),
-      h('div', { class: 'hub-section' }, h('b', {}, 'Pod ręką')),
-      h('div', { class: 'hub-tools' }, ['phone', 'notes', 'browser', 'gallery', 'maps', 'nimbus', 'ciemnia', 'bushview', 'weather', 'calendar', 'clock', 'settings'].filter(appUnlocked).map(id =>
-        h('button', { onclick: () => openApp(id) }, h('span', { class: 'hub-tool-icon', html: glyph(id) }), h('span', {}, appName(apps[id])), apps[id].badge && apps[id].badge() ? h('i') : null))),
-      h('p', { class: 'hub-footer' }, 'Słuchawki. Zgaszone światło. I jeszcze jedna wiadomość.')
+      h('div', { class: 'home-widgets' },
+        h('button', { class: 'home-weather', onclick: () => openApp('weather'), 'aria-label': 'Pogoda w Mglisku' },
+          h('b', {}, 'Mglisko'), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', {}, cap(U.dayShort(G.now())))),
+        h('button', { class: 'home-note', onclick: () => openApp('notes', { note: 'todo' }), 'aria-label': 'Co teraz? Otwórz notatkę' },
+          h('small', {}, 'NOTATKI'), h('b', {}, 'Co teraz?'), h('p', {}, G.s.objective ? U.tpl(G.s.objective.text).replace(/[*_]/g, '') : 'Sprawdź wiadomości.'))),
+      h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['calendar', 'maps', 'weather', 'clock', 'notes', 'nimbus', 'ciemnia', 'bushview', 'settings'].filter(appUnlocked).map(appIcon)),
+      h('button', { class: 'home-search', onclick: searchPhone }, U.ico('search', 13), 'Szukaj'),
+      h('div', { class: 'dock', 'aria-label': 'Dock' }, dock.filter(appUnlocked).map(appIcon))
     );
+  }
+
+  function searchPhone() {
+    const input = h('input', { type: 'search', class: 'field', placeholder: 'Aplikacje, osoby, zapisane ślady', 'aria-label': 'Szukaj w telefonie' });
+    const results = h('div', { class: 'list plain spotlight-results' });
+    const body = h('div', { class: 'spotlight' }, input, results);
+    let focusTimer;
+    const sh = sheet({ title: 'Szukaj', body, onClose: () => clearTimeout(focusTimer) });
+    function render() {
+      results.innerHTML = '';
+      const q = U.norm(input.value);
+      const items = Object.values(apps).filter(a => appUnlocked(a.id)).map(a => ({ label: appName(a), sub: 'Aplikacja', run: () => openApp(a.id) }));
+      if (q) {
+        Object.entries(DATA.persons).filter(([, p]) => G.test(p.cond)).forEach(([id, p]) => items.push({ label: p.name, sub: p.role, run: () => openApp('notes', { note: 'people' }) }));
+        Object.keys(G.s.ev).map(G.ev).filter(Boolean).forEach(e => items.push({ label: e.title, sub: e.source || 'Zapisany ślad', run: () => openApp('notes', { ev: e.id }) }));
+      }
+      const visible = items.filter(i => !q || U.norm(i.label + ' ' + i.sub).includes(q));
+      visible.forEach(i => results.append(h('button', { class: 'row', onclick: () => { sh.close(true); i.run(); } }, h('div', { class: 'rm' }, h('b', {}, i.label), h('span', {}, i.sub)), U.ico('back', 15))));
+      if (!visible.length) results.append(h('p', { class: 'empty' }, 'Brak wyników'));
+    }
+    input.addEventListener('input', render); render();
+    focusTimer = setTimeout(() => input.focus(), 150);
   }
 
   /* ---------- aplikacje ---------- */
@@ -283,6 +326,7 @@ const UI = (() => {
 
   function sheet({ title = '', body, onClose, cls = '' }) {
     const wrap = h('div', { class: 'ovl' });
+    if (locked) wrap.style.zIndex = '72';
     const scrim = h('div', { class: 'scrim', onclick: () => o.close() });
     const sh = h('div', { class: 'sheet ' + cls },
       h('div', { class: 'grab' }),
@@ -320,7 +364,11 @@ const UI = (() => {
   let bShowing = false;
   function banner(o) {
     if (locked && lockEl) { addLockNotif(o); playBannerSound(o); return; }
+    /* Kolejka nie może zostawać w tyle za rozmową: z jednego czatu zostaje tylko najnowszy baner, a w kolejce najwyżej dwa. */
+    const key = o.open && o.open.chat;
+    if (key) { const i = bq.findIndex(b => b.open && b.open.chat === key); if (i >= 0) bq.splice(i, 1); }
     bq.push(o);
+    while (bq.length > 2) bq.shift();
     if (!bShowing) nextBanner();
   }
   function playBannerSound(o) {
@@ -328,18 +376,23 @@ const UI = (() => {
     if (snd && SFX.play[snd]) SFX.play[snd]();
     U.vibrate(40);
   }
+  /* Błysk to osobna (fikcyjna) aplikacja: własna ikona zamiast ikony Wiadomości. */
+  const BLYSK_SVG = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z" fill="#ffd84d"/></svg>`;
   function bannerEl(o) {
-    const icn = o.who ? avatar(o.who) : h('span', { class: 'b-ic', style: `background:${GRAD[o.app] || '#333'}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="26" height="26"') });
+    const blysk = o.icon === 'blysk' || o.title === 'Błysk';
+    const icn = o.who ? avatar(o.who) : blysk ? h('span', { class: 'b-ic b-blysk', style: 'background:#1c1c22', html: BLYSK_SVG(26) }) : h('span', { class: 'b-ic', style: `background:${GRAD[o.app] || '#333'}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="26" height="26"') });
     const a = apps[o.app || 'messages'];
-    return h('div', { class: 'banner' + (o.glitch ? ' glitchy' : '') },
-      h('div', { class: 'b-app' }, h('span', { style: `background:${GRAD[o.app || 'messages']}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="12" height="12"') }), a ? appName(a) : '', h('i', {}, ' · ' + (o.when || 'teraz'))),
+    return h('div', { class: 'banner' + (o.glitch ? ' glitchy' : '') + (blysk ? ' blysk' : '') },
+      blysk ? h('div', { class: 'b-app' }, h('span', { style: 'background:#1c1c22', html: BLYSK_SVG(12) }), 'Błysk', h('i', {}, ' · ' + (o.when || 'teraz')))
+        : h('div', { class: 'b-app' }, h('span', { style: `background:${GRAD[o.app || 'messages']}`, html: glyph(o.app || 'messages').replace('width="34" height="34"', 'width="12" height="12"') }), a ? appName(a) : '', h('i', {}, ' · ' + (o.when || 'teraz'))),
       o.who ? h('span', { class: 'b-ic' }, icn) : icn,
       h('div', { class: 'b-m' },
         h('div', { class: 'b-h' }, h('b', {}, o.title || ''), h('span', {}, o.when || 'teraz')),
         h('div', { class: 'b-t' }, o.text || '')));
   }
   function nextBanner() {
-    const o = bq.shift();
+    let o = bq.shift();
+    while (o && o.open && o.open.chat && G.viewing === o.open.chat) o = bq.shift();
     if (!o) { bShowing = false; return; }
     bShowing = true;
     const el = bannerEl(o);
@@ -359,7 +412,7 @@ const UI = (() => {
     if (G.viewing === chat) { SFX.play.tap(); return; }
     const cd = DATA.chats[chat] || {};
     const who = DATA.chars[msg.from] || {};
-    const name = (G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name;
+    const name = U.tpl((G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name || '');
     const title = cd.group ? `${who.short || who.name} · ${name}` : name;
     banner({
       app: 'messages', open: { chat }, who: cd.group ? msg.from : (G.chat(chat).avatar || cd.avatar || msg.from), title,
@@ -367,7 +420,10 @@ const UI = (() => {
     });
   }
   function preview(msg) {
+    if (msg.vanish) return '👁 Wiadomość znikająca';
+    if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');
+    if (msg.vid) return '🎬 Wideo';
     if (msg.img) return '📷 Zdjęcie';
     if (msg.ev) return '📎 Załącznik';
     if (msg.place) return '📍 Lokalizacja';
@@ -382,14 +438,51 @@ const UI = (() => {
     while (toastsEl.children.length > 3) toastsEl.firstChild.remove();
     setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 300); }, o.ms || 2800);
   }
+  /* Kilka dowodów naraz: jeden dymek, który zbiera tytuły, zamiast stosu takich samych. */
+  let evToast = null;
   function evidenceToast(id) {
     const e = G.ev(id); if (!e) return;
+    if (evToast && evToast.el.isConnected && !evToast.el.classList.contains('out')) {
+      evToast.ids.push(id);
+      const n = evToast.ids.length;
+      evToast.el.querySelector('span:last-child').textContent = `Zapisano w Notatkach: ${e.title} i ${n - 1 === 1 ? 'jeszcze 1' : 'jeszcze ' + (n - 1)}`;
+      clearTimeout(evToast.t); evToast.t = setTimeout(evToast.close, 3400);
+      return;
+    }
     SFX.play.discover(); U.vibrate([30, 30, 50]);
-    toast(`Zapisano w Notatkach: ${e.title}`, { kind: 'ev', icon: 'note', ms: 3400, onclick: () => openApp('notes', { ev: id }) });
+    const ids = [id];
+    const el = h('div', { class: 'toast ev' }, U.ico('note', 17), h('span', {}, `Zapisano w Notatkach: ${e.title}`));
+    el.addEventListener('click', () => openApp('notes', ids.length > 1 ? {} : { ev: id }));
+    toastsEl.appendChild(el);
+    while (toastsEl.children.length > 3) toastsEl.firstChild.remove();
+    const close = () => { el.classList.add('out'); setTimeout(() => el.remove(), 300); };
+    evToast = { el, ids, close, t: setTimeout(close, 3400) };
+  }
+
+  /* Wiadomość głosowa: `voice:0:38|Kto|transkrypcja`. Bez pliku audio pokazujemy przebieg i zapis. */
+  function textOrVoice(text) {
+    const m = /^voice:(\d+:\d\d)\|([^|]*)\|([\s\S]*)$/.exec(String(text || ''));
+    if (!m) return h('p', { html: U.rich(text) });
+    const bars = Array.from({ length: 28 }, (_, i) => h('i', { style: `height:${4 + ((i * 7 + m[3].length) % 13)}px` }));
+    const tr = h('p', { class: 'voice-tr', hidden: true, html: U.rich(m[3]) });
+    const btn = h('button', { class: 'voice-play', 'aria-label': 'Pokaż transkrypcję wiadomości głosowej', 'aria-expanded': 'false', onclick: () => { tr.hidden = !tr.hidden; btn.setAttribute('aria-expanded', String(!tr.hidden)); wrap.classList.toggle('open', !tr.hidden); } }, '▶');
+    const wrap = h('div', { class: 'voice-msg' },
+      h('div', { class: 'voice-row' }, btn, h('span', { class: 'voice-wave', 'aria-hidden': 'true' }, bars), h('small', {}, m[1])),
+      m[2] ? h('small', { class: 'voice-from' }, 'Nagranie: ' + m[2]) : null, tr);
+    return wrap;
   }
 
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
+    if (who === 'szklarz') who = 'unknown';
+    const photo = DATA.chars[who]?.photo;
+    if (photo && !/^assets\/people\//.test(photo)) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
+    if (photo) {
+      const sp = h('span', { class: 'av ' + cls });
+      const img = h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' });
+      img.onerror = () => { const c = DATA.chars[who]; const keep = c.photo; c.photo = null; sp.replaceWith(UI.avatar(who, cls.trim())); c.photo = keep; };
+      sp.appendChild(img); return sp;
+    }
     if (who === 'gajda') return h('span', { class: 'av gajda-av ' + cls, role: 'img', 'aria-label': DATA.chars.gajda.name });
     const photos = { kuba: [0, 0], ola: [1, 0], bartek: [2, 0], igor: [0, 1], maja: [1, 1], maja2: [1, 1], weronika: [2, 1] };
     if (photos[who]) {
@@ -403,15 +496,16 @@ const UI = (() => {
   function lock() {
     if (lockEl) return;
     locked = true;
-    lockEl = h('div', { id: 'lock', style: `background-image:url(${Art.url('wallpaper')})` },
+    lockEl = h('div', { id: 'lock', style: Wallpapers.style(Wallpapers.selected()) },
       h('div', { class: 'lk-ic', html: U.icon('lock', 20) }),
       h('div', { class: 'lk-d' }, cap(U.dayLong(G.now()))),
       h('div', { class: 'lk-t' }, U.time(G.now())),
       h('div', { class: 'lk-n' }),
       h('div', { class: 'lk-u', onclick: unlockScreen }, 'Dotknij, aby odblokować'));
+    lockWallpaperCleanup = Wallpapers.bind(lockEl, () => UI.openWallpapers());
     let sy = null;
     lockEl.addEventListener('pointerdown', e => { sy = e.clientY; });
-    lockEl.addEventListener('pointerup', e => { if (sy != null && sy - e.clientY > 60) unlockScreen(); sy = null; });
+    lockEl.addEventListener('pointerup', e => { if (sy != null && sy - e.clientY > 60 && !overlays.length) unlockScreen(); sy = null; });
     screen.appendChild(lockEl);
     homebar.classList.add('hide');
   }
@@ -425,6 +519,7 @@ const UI = (() => {
     if (!lockEl) return;
     SFX.unlockAudio(); SFX.play.unlock();
     const el = lockEl; lockEl = null; locked = false;
+    lockWallpaperCleanup?.(); lockWallpaperCleanup = null;
     el.classList.add('gone');
     setTimeout(() => el.remove(), 550);
     homebar.classList.remove('hide');
@@ -538,7 +633,7 @@ const UI = (() => {
     SFX.play.chapter();
     if (ch.mood) SFX.ambient(ch.mood);
     return curtain('', [
-      h('div', { class: 'cu-k' }, ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`),
+      h('div', { class: 'cu-k' }, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)),
       h('div', { class: 'cu-t' }, ch.title),
       h('div', { class: 'cu-line' }),
       ch.when ? h('div', { class: 'cu-s' }, ch.when) : null
@@ -549,7 +644,7 @@ const UI = (() => {
     const evs = Object.keys(G.s.ev).length;
     const total = Object.keys(DATA.evidence).length;
     return curtain('', [
-      h('div', { class: 'cu-k' }, ch.num === 0 ? 'Koniec prologu' : `Koniec rozdziału ${ch.num}`),
+      h('div', { class: 'cu-k' }, (ch.kicker ? ch.kicker + ' · ' : '') + (ch.num === 0 ? 'Koniec prologu' : `Koniec rozdziału ${ch.num}`)),
       h('div', { class: 'cu-t' }, ch.title),
       h('div', { class: 'cu-line' }),
       h('div', { class: 'cu-stats' },
@@ -574,16 +669,25 @@ const UI = (() => {
       ...e.text.map(p => h('div', { class: 'cu-p', html: U.rich(typeof p === 'function' ? p() : p) })),
       h('div', { class: 'cu-stats' },
         h('div', {}, h('b', {}, Object.keys(G.s.ev).length + '/' + Object.keys(DATA.evidence).length), 'odkryte'),
-        h('div', {}, h('b', {}, G.s.endings.length + '/3'), 'zakończeń'))
+        h('div', {}, h('b', {}, G.s.endings.filter(x => (DATA.endings[x]?.season || 's1') === (e.season || 's1')).length + '/3'), 'zakończeń'))
     ], { button: 'Dalej', tap: false });
   }
   function credits() {
     SFX.ambient('dawn');
+    const season = typeof Seasons !== 'undefined' ? Seasons.current() : null;
+    if (season && season.credits) return curtain('ending credits-' + season.id, [
+      h('div', { class: 'cu-k' }, season.credits.kicker),
+      h('div', { class: 'cu-t' }, season.credits.title),
+      h('div', { class: 'cu-line' }),
+      ...season.credits.lines.map(t => h('div', { class: 'cu-p', style: 'text-align:center', html: U.rich(t) })),
+      h('div', { class: 'cu-p cu-teaser', style: 'text-align:center' }, h('b', {}, season.credits.teaser.title), h('br'), season.credits.teaser.text),
+      h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, season.credits.note)
+    ], { button: 'Menu główne', tap: false }).then(() => { location.reload(); });
     return curtain('ending', [
       h('div', { class: 'cu-k' }, 'Dziękujemy za grę'),
       h('div', { class: 'cu-t' }, 'MGLISKO'),
       h('div', { class: 'cu-line' }),
-      h('div', { class: 'cu-p', style: 'text-align:center' }, 'Scenariusz, oprogramowanie, grafika i dźwięk powstały w całości w tej grze — bez zewnętrznych plików.'),
+      h('div', { class: 'cu-p', style: 'text-align:center' }, 'Scenariusz i postacie są fikcyjne. Grafiki są dostarczane z grą, a efekty dźwiękowe powstają lokalnie. Gra nie czyta danych z prawdziwego telefonu.'),
       h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, 'Wszystkie postacie i miejsca są fikcyjne. Powódź tysiąclecia z lipca 1997 roku wydarzyła się naprawdę.'),
       h('div', { class: 'cu-p', style: 'text-align:center' }, h('b', {}, 'MGLISKO: TEREN'), h('br'), 'Notatki Rybickiego prowadzą w prawdziwe miejsca. Wkrótce.'),
       h('div', { class: 'cu-p', style: 'text-align:center;color:var(--tx3)' }, 'Inne zakończenia odblokujesz w Ustawieniach → Rozdziały.')
@@ -594,10 +698,9 @@ const UI = (() => {
   function fx(name, o = {}) {
     switch (name) {
       case 'glitch':
-        SFX.play.glitch(); U.vibrate([20, 30, 20, 30, 60]);
-        screen.classList.remove('glitch'); void screen.offsetWidth; screen.classList.add('glitch');
-        setTimeout(() => screen.classList.remove('glitch'), 950);
-        return U.sleep(o.wait ? 950 : 0);
+        // Nieznany nadawca nie może zmieniać systemowego interfejsu gracza.
+        U.vibrate([30, 70, 30]);
+        return U.sleep(o.wait ? 650 : 0);
       case 'shake':
         screen.classList.remove('shake'); void screen.offsetWidth; screen.classList.add('shake');
         U.vibrate(200);
@@ -613,11 +716,118 @@ const UI = (() => {
     }
   }
 
+  /* ---------- straszaki ----------
+     Rzadkie i jednorazowe (engine pilnuje s.scares). Tryb łagodny (Ustawienia): bez głośnego dźwięku,
+     błysku i nagłego zbliżenia. Dźwięk idzie przez wspólny master, więc słucha głośności gry i urządzenia. */
+  function scare(kind, o = {}) {
+    const soft = !!(G.settings.softScares || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches));
+    const fast = G.settings.speed === 'instant';
+    const wait = ms => U.sleep(fast ? Math.min(ms, 120) : ms);
+    closeOverlays();
+    if (kind === 'glitch') {
+      screen.classList.add('scare-glitch'); if (soft) screen.classList.add('soft');
+      SFX.play.staticHit(soft); if (!soft) U.vibrate([20, 40, 20, 40, 60]);
+      return wait(soft ? 700 : 560).then(() => { screen.classList.remove('scare-glitch', 'soft'); });
+    }
+    if (kind === 'breath') { SFX.play.breath(soft); if (!soft) U.vibrate(40); return wait(2600); }
+    if (kind === 'photo' || kind === 'face') {
+      const el = h('div', { class: 'scare-ov' + (soft ? ' soft' : '') + (kind === 'face' ? ' zoom' : '') },
+        h('img', { src: o.src || Art.url(o.img), alt: '' }),
+        o.caption ? h('div', { class: 'scare-cap' }, o.caption) : null);
+      screen.appendChild(el);
+      if (kind === 'face') { SFX.play.sting(soft); if (!soft) U.vibrate(260); } else SFX.play.staticHit(true);
+      return wait(o.ms || (kind === 'face' ? 1300 : 1700)).then(() => { el.classList.add('out'); return wait(500); }).then(() => el.remove());
+    }
+    if (kind === 'call') {
+      // Połączenie, które dzwoni samo i samo się urywa. Odebranie = cisza i oddech, nic więcej.
+      return new Promise(res => {
+        const el = h('div', { class: 'call scare-call' },
+          h('div', { class: 'c-av' }, o.who ? avatar(o.who, 'xl') : h('div', { class: 'av xl', style: 'background:#333' })),
+          h('h2', {}, o.name || 'Nieznany numer'),
+          h('div', { class: 'c-s' }, o.number || 'Połączenie przychodzące'),
+          h('div', { style: 'flex:1' }),
+          h('div', { class: 'c-btns' },
+            h('button', { class: 'c-btn dec', 'aria-label': 'Odrzuć', html: U.icon('hang', 32), onclick: () => end('decline') }),
+            h('button', { class: 'c-btn acc', 'aria-label': 'Odbierz', html: U.icon('phone', 30), onclick: () => pick() })));
+        screen.appendChild(el);
+        if (soft) SFX.play.vibe(); else SFX.ringStart('in');
+        let over = false;
+        const timer = setTimeout(() => end('missed'), fast ? 150 : (o.ms || 6500));
+        function pick() {
+          if (over) return; SFX.ringStop(); clearTimeout(timer);
+          el.querySelector('.c-btns').remove();
+          el.querySelector('.c-s').textContent = '00:00';
+          SFX.play.breath(soft);
+          let sec = 0; const t = setInterval(() => { sec++; const n = el.querySelector('.c-s'); if (n) n.textContent = '00:0' + sec; }, 1000);
+          wait(o.listen || 3600).then(() => { clearInterval(t); end('accept'); });
+        }
+        function end(r) {
+          if (over) return; over = true; clearTimeout(timer); SFX.ringStop(); SFX.play.hangup();
+          el.classList.add('out'); setTimeout(() => el.remove(), 450);
+          if (o.log !== false && G.s.calls) { G.s.calls.unshift({ who: o.who || null, number: o.number || '', label: o.name || 'Nieznany numer', dir: r === 'accept' ? 'in' : r === 'decline' ? 'declined' : 'missed', t: G.now(), dur: r === 'accept' ? 4 : 0, seen: false }); BUS.emit('badges'); G.save(); }
+          res(r);
+        }
+      });
+    }
+    return U.sleep(0);
+  }
+
+  /* Przesyłanie w pobliżu: obce urządzenie chce wysłać zdjęcie. Podgląd rozmyty do decyzji. */
+  function nearby(o = {}) {
+    return new Promise(res => {
+      closeOverlays();
+      const fast = G.settings.speed === 'instant';
+      const el = h('div', { class: 'nearby-ov' },
+        h('div', { class: 'nearby-card' },
+          h('div', { class: 'nb-k' }, 'Przesyłanie w pobliżu'),
+          h('div', { class: 'nb-prev' }, o.img ? h('img', { src: Art.url(o.img), alt: '' }) : null),
+          h('div', { class: 'nb-t' }, U.tpl(`„${o.device || 'Telefon'}” chce udostępnić ${o.what || 'zdjęcie'}`)),
+          o.note ? h('div', { class: 'nb-s' }, U.tpl(o.note)) : null,
+          h('div', { class: 'nb-btns' },
+            h('button', { class: 'btn', onclick: () => end('decline') }, 'Odrzuć'),
+            h('button', { class: 'btn pri', onclick: () => end('accept') }, 'Akceptuj'))));
+      screen.appendChild(el);
+      SFX.play.notif ? SFX.play.notif() : null; U.vibrate(30);
+      let over = false;
+      const timer = setTimeout(() => end('decline'), o.ms || 20000);
+      function end(r) {
+        if (over) return; over = true; clearTimeout(timer);
+        el.classList.add('out'); setTimeout(() => el.remove(), 300);
+        if (r === 'accept' && o.img && !fast) setTimeout(() => UI.viewImage(o.img, { from: o.device || 'W pobliżu' }), 320);
+        res(r);
+      }
+    });
+  }
+  /* Aparat w grze: gracz kadruje scenę (kilka ujęć) albo wybiera z galerii i wysyła zdjęcie do czatu. */
+  function camera(options) {
+    return new Promise(res => {
+      closeOverlays();
+      const shots = options.filter(o => !o.gallery), gal = options.filter(o => o.gallery);
+      let tab = shots.length ? 'cam' : 'gal', cur = (shots[0] || gal[0]);
+      const view = h('div', { class: 'cam-view' }), chips = h('div', { class: 'cam-chips' });
+      const el = h('div', { class: 'cam-ov' },
+        h('div', { class: 'cam-top' }, h('button', { class: 'cam-x', 'aria-label': 'Zamknij', onclick: () => { el.remove(); res(null); } }, '✕'),
+          h('div', { class: 'cam-tabs' }, shots.length ? h('button', { class: 'cam-tab', 'data-t': 'cam', onclick: () => { tab = 'cam'; cur = shots[0]; draw(); } }, 'Aparat') : null,
+            gal.length ? h('button', { class: 'cam-tab', 'data-t': 'gal', onclick: () => { tab = 'gal'; cur = gal[0]; draw(); } }, 'Galeria') : null)),
+        view, chips,
+        h('div', { class: 'cam-bottom' }, h('button', { class: 'cam-shutter', 'aria-label': 'Zrób zdjęcie i wyślij', onclick: () => { SFX.play.tap(); el.classList.add('flash'); setTimeout(() => { el.remove(); res(cur.i); }, fast() ? 0 : 260); } })));
+      const fast = () => G.settings.speed === 'instant';
+      function draw() {
+        view.innerHTML = ''; chips.innerHTML = '';
+        if (cur.img) view.appendChild(h('img', { src: Art.url(cur.img), alt: '' }));
+        (tab === 'cam' ? shots : gal).forEach(o => chips.appendChild(h('button', { class: 'cam-chip' + (o === cur ? ' on' : ''), onclick: () => { cur = o; draw(); } },
+          o.img ? h('img', { src: Art.url(o.img), alt: '' }) : null, h('span', {}, U.tpl(o.text)))));
+        el.querySelectorAll('.cam-tab').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
+      }
+      draw(); screen.appendChild(el);
+    });
+  }
+
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
-    banner, toast, evidenceToast, avatar, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
+    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
-    fx, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
+    fx, scare, nearby, camera, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };
 })();

@@ -2,7 +2,8 @@
 /* ROZDZIAŁ 3 — Peleryna */
 
 Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 października', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene } = D;
+  const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -15,13 +16,39 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
   return [
     clock('2026-10-23T17:30'),
     title(),
+    scene('xPiatek', [
+      K('zanim zaczniemy. mój kot od rana siedzi w praniu i nie da go wyjąć'),
+      pic('kuba', 'kuba', 's1_mem_kot', 'mama mówi że to moja wina bo go rozpieściłem'),
+      choose('kuba', [
+        opt('Zostaw go. Wygrał.', [K('no wygrał. ręczniki są teraz jego')]),
+        opt('Kot ma rację. Ręczniki są ciepłe.', [K('xD babcia mówi dokładnie to samo')])
+      ]),
+      pause(2500),
+      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.'),
+      pause(5000),
+      pic('group', 'ola', 's1_lumpeks', 'Wisiało między kurtkami. Przypomina wam to coś?'),
+      choose('group', [
+        opt('Peleryna jak z kliszy. Żółta, z kapturem.', [
+          g('ola', 'Też od razu o tym pomyślałam. Zapytałam sprzedawczynię. Przyszło w tym tygodniu w worku z Niemiec.'),
+          g('ola', 'Czyli to nie ta. Ale przez chwilę serce mi stanęło.'),
+          g('kuba', 'na kliszy dziecko ma taką samą. tylko bez paska')
+        ], { set: { x_pelerynaLink: true } }),
+        opt('Kurtka z fotopułapki?', [
+          g('kuba', 'nie no, tamta była ciemna i z napisem'),
+          g('ola', 'To zwykła dziecięca peleryna. Ale teraz jak patrzę, to przypomina mi kliszę.')
+        ], { set: { x_pelerynaDetour: true } }),
+        opt('Zwykła peleryna. Szukaj tej kurtki.', [g('ola', 'Znalazłam. 25 zł i jeszcze ciepła.')], { set: { x_pelerynaLater: true } })
+      ])
+    ]),
+    scene('s15', SC.s15),
+    scene('xPeleryna', [iff('flag:x_pelerynaLater', [g('ola', 'Czekajcie. Ta peleryna z lumpeksu. Dopiero teraz mi się skojarzyła.')])]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
     g('ola', 'Kuba, zjedz coś. Serio.'),
     g('kuba', 'musimy pogadać z kimś, kto pamięta tamtą noc w 97'),
     g('ola', 'Pani Weronika. Siostra Tomka. Maja nagrała z nią rozmowę 11.10 — jest w dyktafonie.'),
     g('bartek', 'ona prowadzi biblioteke. zawsze byla mila'),
-    g('kuba', '%name%, napiszesz do niej? ty jesteś… z zewnątrz. my się boimy, że ją zranimy'),
+    g('kuba', '%name%, napiszesz do niej? ja ją znam od dziecka i nie wiem jak zapytać o to zdjęcie'),
     unlock('chat:weronika'),
     goal('Napisz do Weroniki Lis.', ['Rozmowa z Weroniką Lis jest już w *Wiadomościach*.']),
     openChat('weronika'),
@@ -37,11 +64,11 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Mam na imię %name%. Pani numer był w telefonie Mai.', []),
       opt('Kuba Wrona poprosił, żebym {napisał|napisała}.', [])
     ]),
-    W('Maja była u mnie dwa tygodnie temu. Pytała o Tomka. Nikt nie pytał od lat.'),
+    W('Maja była u mnie dwa tygodnie temu. Pytała o Tomka. Od dawna nikt się tym nie interesował.'),
     W('A potem zniknęła. Od tygodnia nie śpię i myślę: czy to przeze mnie? Czy coś jej powiedziałam…'),
     choose('weronika', [
       opt('To nie przez panią.', [W('Dziękuję. Chciałabym w to wierzyć.')], { trust: { weronika: 1 } }),
-      opt('Co jej pani powiedziała?', [W('Wszystko, co pamiętam. Ale pamięć dwunastoletniej dziewczynki to marny świadek.')])
+      opt('Co jej pani powiedziała?', [W('Opowiedziałam to, co pamiętam. Miałam wtedy dwanaście lat. Dziś nie zawsze wiem, co sama widziałam, a co mi opowiedziano.')])
     ]),
     W('Czego {Pan|Pani} ode mnie potrzebuje?'),
     choose('weronika', [opt('Chcę pani coś pokazać. To może być trudne.', [])]),
@@ -63,6 +90,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     W('W hucie.'),
     W('Pani Halina miała rację.'),
     W('Dwadzieścia dziewięć lat palę znicze nad rzeką.'),
+    scene('s16', SC.s16),
     goal('Weronika mówi o tamagotchi Tomka. Czy {widziałeś|widziałaś} coś takiego w hucie?', [
       'Przejrzyj jeszcze raz zdjęcia Mai z odprężarki (8.10).',
       'Przybliż lewy dolny róg zdjęcia „Odprężarka — zamurowany fragment”. W pyle coś leży.'
@@ -85,13 +113,13 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'i co? pani weronika odpisała?'),
     g('kuba', '%name%??'),
     pause(2000),
-    g('igor', 'Nagranie z dyktafonu jest częściowo zagłuszone. Ale Nimbus ma odszumianie — trzeba ręcznie złapać pasmo głosu.'),
+    g('igor', 'słuchałem dyktafonu. szumi, ale w Nimbusie jest filtr. spróbuj złapać pasmo głosu'),
     unlock('tool:tuner'),
     goal('Oczyść zagłuszony fragment rozmowy Mai z Weroniką.', [
       'Nimbus → Dyktafon → „Rozmowa z p. Weroniką Lis” → *Oczyść nagranie*.',
       'Przesuń filtr tam, gdzie słupki głosu są najwyższe — około 1500 Hz. Potem zdejmij szum do mniej więcej 70%.'
     ]),
-    waitFor('ev:ev_interview', { hints: [{ after: 120, chat: 'group', who: 'igor', text: 'Głos ludzki to pasmo mniej więcej 1–2 kHz. Szum zdejmij mocno, ale nie do zera, bo zniekształcisz mowę.' }] }),
+    waitFor('ev:ev_interview', { hints: [{ after: 120, chat: 'group', who: 'igor', text: 'spróbuj okolic 1500 Hz. szum w dół, ale jak zgłoski zaczynają znikać to cofnij suwak' }] }),
     g('kuba', 'słychać coś?'),
     show('group', { prompt: 'Pokaż oczyszczone nagranie', accept: [{ ev: ['ev_interview'] }], wrong: [['kuba', 'chodzi mi o nagranie z panią weroniką']] }),
     typing('group', 'kuba', 5000),
@@ -104,8 +132,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     typing('group', 'igor', 7000),
     pause(1500),
     typing('group', 'igor', 3500),
-    g('igor', 'Mój ojciec też.'),
-    g('igor', 'Muszę się przewietrzyć.'),
+    g('igor', 'mój ojciec też'),
+    g('igor', 'muszę wyjść na chwilę'),
     sys('group', 'Igor opuścił grupę.'),
     members(['kuba', 'ola', 'bartek']),
     g('bartek', 'to jakas paranoja. czterech chlopakow pilo piwo w hucie, a wy robicie z nich mordercow'),
@@ -122,6 +150,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'a teraz on mówi, że maja skoczyła z tamy'),
     pause(4000),
 
+    scene('s17', SC.s17),
+
     /* --- telefon od Gajdy --- */
     callIn('gajda'),
     C('Dobry wieczór. Robert Gajda. Nie przeszkadzam?'),
@@ -135,7 +165,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Co pan robił pod hutą wczoraj o północy?', [C('…'), C('Nie wiem, o czym {Pan|Pani} mówi.')], { cond: 'ev:ev_car_igor', set: { gajdaAlert: true }, inc: { leaks: 1 } })
     ]),
     C('Jeszcze jedno.'),
-    C('Nie jest {Pan|Pani} stąd, prawda? Proszę uważać. W Mglisku łatwo się zgubić we mgle.'),
+    C('Nie jest {Pan|Pani} stąd. Proszę nie namawiać tych dzieciaków do kolejnej wyprawy. Ich matki będą dzwoniły do mnie, nie do {Pana|Pani}.'),
     callEnd(),
     give('ev_gajda_call'),
     iff('flag:leakFiles', [
@@ -148,7 +178,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       g('ola', 'Ktoś się zalogował i skasował zdjęcia z fotopułapek.'),
       g('ola', '%name%… komu {dałeś|dałaś} hasło?'),
       choose('group', [
-        opt('Gajdzie. Prosił o materiał dowodowy.', [g('kuba', 'gajdzie…'), g('ola', 'Policjant, który kasuje dowody.')], { trust: { ola: -1 } }),
+        opt('Gajdzie. Prosił o materiał dowodowy.', [g('kuba', 'gajdzie…'), g('ola', 'Miał je zabezpieczyć. Dlaczego je kasuje?')], { trust: { ola: -1 } }),
         opt('Nikomu.', [g('ola', 'Jasne.')], { trust: { ola: -2 } })
       ])
     ], [
@@ -179,7 +209,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       give('ev_plate'),
       g('kuba', 'DDZ 6K19. czyje to?')
     ]),
-    g('ola', 'Bartek. Warsztat. Oni prowadzą zeszyt napraw — mają tam połowę aut z gminy.'),
+    scene('s18', SC.s18),
+    g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),
     unlock('chat:bartek'),
     goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka w *Wiadomościach*.']),
@@ -200,12 +231,12 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       prompt: 'Pokaż numer albo zdjęcie auta',
       accept: [
         { ev: ['ev_plate'], then: [B('ddz 6k19. sprawdze w zeszycie')] },
-        { ev: ['ev_car_igor', 'ev_plate_cam'], then: [B('tylko koncowka? ciemny superb, tak?'), B('sprawdze w zeszycie')] }
+        { ev: ['ev_car_igor', 'ev_plate_cam'], then: [B('tylko koncowka? ciemna magna, tak?'), B('sprawdze w zeszycie')] }
       ],
       wrong: [['bartek', 'potrzebuje numeru albo zdjecia auta']]
     }),
     typing('bartek', 'bartek', 8000),
-    pic('bartek', 'bartek', 'b_ledger', 'superb gajdy'),
+    pic('bartek', 'bartek', 'b_ledger', 'magna gajdy'),
     give('ev_owner'),
     B('byl u nas 16.10. mycie podwozia i dywanikow. cale w blocie'),
     B('stary go obslugiwal. mowil potem ze gajda byl dziwny. dal 200 zl napiwku za mycie'),
@@ -216,13 +247,15 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     B('wracam do grupy'),
     sys('group', 'Bartek dołączył do grupy.'),
     members(['kuba', 'ola', 'bartek']),
-    g('bartek', 'auto pod huta to superb gajdy. DDZ 6K19. mam to w zeszycie'),
+    g('bartek', 'auto pod huta to magna gajdy. DDZ 6K19. mam to w zeszycie'),
     typing('group', 'kuba', 5000),
     g('kuba', 'może sprawdzał hutę. jest policjantem'),
     g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?'),
     typing('group', 'kuba', 6000),
     g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),
+
+    scene('s19', SC.s19),
 
     /* --- noc: telefon Mai ożywa --- */
     interlude('Noc', 'Nikt w Mglisku nie śpi spokojnie.', 3400),
@@ -231,7 +264,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     set('majaOnline'),
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest online.', sound: 'notif' }),
     pause(1800),
-    sync('maja:sync1', { count: 5, text: 'Zsynchronizowano zaległe pliki (5) z urządzenia „Telefon Mai”.' }),
+    sync('maja:sync1', { count: 6, text: 'Zsynchronizowano zaległe pliki (6) z urządzenia „Telefon Mai”. W tym notatkę z historią wersji.' }),
     fx('vibrate'),
     K('MAMA DOSTAŁA SMS OD MAI'),
     K('TERAZ'),
@@ -268,12 +301,12 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     show('group', { prompt: 'Pokaż zdjęcie z 23:53', accept: [{ ev: ['ev_sync_door', 'ev_sms_kluska'] }], wrong: [['kuba', 'jeszcze coś z tej nocy?']] }),
     iff('ev:ev_sync_door', [
       g('kuba', 'ktoś stoi w drzwiach'),
-      g('bartek', '23:53. szesc minut przed tym jak jej telefon zamilkl'),
+      g('bartek', '23:53. piec minut przed tym jak jej telefon zamilkl'),
       g('ola', 'Ma coś jasnego na ramieniu. Naszywkę?')
     ]),
-    g('ola', 'Ona żyje. Ktoś ją trzyma. I włączył jej telefon, żeby napisać do mamy.'),
+    g('ola', 'Jeśli ktoś ją trzyma, mógł dać jej telefon tylko na ten SMS. Albo sam go napisać. Musimy ją znaleźć.'),
     g('bartek', 'albo kazal jej odblokowac. telefon na odcisk palca'),
-    g('kuba', 'czyli była przy telefonie. o 3:05. gdzieś'),
+    g('kuba', 'jeśli to ona pisała, to była przy nim. o 3:05. musiała gdzieś być'),
     g('ola', 'Igor mówił, że Nimbus zapisuje lokalizację. Mamy ją?'),
     pause(2500),
     fx('glitch'),

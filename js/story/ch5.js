@@ -2,7 +2,8 @@
 /* ROZDZIAŁ 5 — Światło */
 
 Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 października · noc', mood: 'dark' }, D => {
-  const { say, sys, pause, choose, menu, opt, show, waitFor, goal, give, unlock, set, inc, iff, run, task, fx, typing, end, title, ambient, dial, callIn, callEnd, notify, trust } = D;
+  const { say, sys, pause, choose, menu, opt, show, waitFor, goal, give, unlock, set, inc, iff, run, task, fx, typing, end, title, ambient, dial, callIn, callEnd, notify, trust , scene, interlude, scare } = D;
+  const SC = StoryScenes(D);
   const I = (t, o) => say('igor', 'igor', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
@@ -21,11 +22,11 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- kamera przy hucie --- */
     iff('flag:cam1Dead', [
-      igorSays('Przejechałem koło huty. Pod bramą stoi superb Gajdy. Bagażnik otwarty, w środku kanistry.'),
+      igorSays('przejechałem koło huty. magna gajdy pod bramą, otwarty bagażnik. widziałem kanistry'),
       set('sawJerrycans')
     ], [
       set('panelGajda'),
-      igorSays('%name%, zajrzyj przez kamerę przy bramie. Coś mi tu nie gra — w hucie pali się światło.'),
+      igorSays('%name%, sprawdź kamerę przy bramie. w hucie pali się światło'),
       goal('Zajrzyj przez kamerę przy hucie. Co się tam dzieje?', [
         'Zainstaluj aplikację *BushView* — wyszukaj „bushview” w przeglądarce i pobierz ją ze strony.',
         'Zaloguj się danymi od Szklarza: login *maja.cam*, hasło *Jutrzenka1996*.',
@@ -33,6 +34,12 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       ]),
       waitFor('flag:sawJerrycans', { hints: [{ after: 120, chat: 'szklarz', who: 'szklarz', text: 'bushview . cam-01 . zrob zdjecie . teraz' }] }),
       give('ev_jerrycans'),
+      scene('scHand', [
+        pause(2500),
+        scare('s1_hand', 'face', { img: 'c1_0061', caption: 'CAM-01 · NA ŻYWO · sygnał utracony' }),
+        igorSays('ktoś zasłonił kamerę ręką. sygnał padł'),
+        igorSays('on wie, że patrzymy')
+      ]),
       show('group', { prompt: 'Pokaż zdjęcie z kamery', accept: [{ ev: ['ev_jerrycans'] }], wrong: [['ola', 'Co pokazuje kamera przy hucie?']] })
     ]),
     g('bartek', 'kanistry'),
@@ -41,8 +48,8 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
     g('weronika', 'Jedźcie do Mai. Ja… ja wracam do huty.'),
     choose('group', [
       opt('Nie! Pani Weroniko, proszę zostać z nimi. Zadzwonię po pomoc.', [g('weronika', 'Dobrze. Ale niech {Pan|Pani} dzwoni. Teraz.')], { trust: { weronika: 1 } }),
-      opt('Niech pani jedzie z Olą pod hutę. Ale nie wychodźcie z auta.', [g('ola', 'Jadę po nią. Staniemy przy drodze, z daleka.')], { set: { weronikaToHuta: true } }),
-      opt('Najpierw Maja. Huta poczeka.', [g('weronika', '…'), g('weronika', 'Ma {Pan|Pani} rację. Żywi są ważniejsi.')], { trust: { weronika: -1 } })
+      opt('Ola, obserwuj drogę pod hutą z daleka. Pani Weroniko, proszę zostać z Kubą.', [g('ola', 'Dobrze. Stanę przy drodze. Nie będę podchodzić do budynku.')], { set: { weronikaToHuta: true } }),
+      opt('Najpierw Maja. Huta poczeka.', [g('weronika', '…'), g('weronika', 'Dobrze. Zostaję przy Kubie. Proszę tylko nie zapomnieć o hucie.')], { trust: { weronika: -1 } })
     ]),
 
     /* --- telefon po pomoc --- */
@@ -72,7 +79,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
               ], { set: { named112: true } }),
               opt('Nie wiem.', [c('dispatcher', 'Przekazuję zgłoszenie do najbliższej jednostki policji.')], { set: { dispatchLocal: true } })
             ]),
-            iff('flag:reportBoth', [c('dispatcher', 'Straż pożarna jedzie też pod hutę. Proszę nikomu nie zbliżać się do budynku.')]),
+            iff('flag:reportBoth', [c('dispatcher', 'Straż pożarna jedzie też pod hutę. Proszę przekazać wszystkim, żeby nie zbliżali się do budynku.')]),
             c('dispatcher', 'Jeśli musi {Pan|Pani} kończyć, proszę zostać pod telefonem. Oddzwonimy.'),
             callEnd(),
             set('called112')
@@ -91,7 +98,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
             callEnd(),
             set('calledPosterunek'),
             inc('leaks', 1),
-            igorSays('{Zadzwoniłeś|Zadzwoniłaś} na posterunek?? Oni mają radio z Gajdą! Dzwoń na 112, teraz!'),
+            igorSays('{Zadzwoniłeś|Zadzwoniłaś} na posterunek?? Oni są na tym samym radiu co Gajda! Usłyszy wszystko! Dzwoń na 112, teraz!'),
             dial({
               goal: 'Zadzwoń na 112.',
               numbers: {
@@ -114,7 +121,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- pakiet dowodów --- */
     g('ola', '%name%, wyślij wszystko prokuraturze. Teraz. Zanim on zdąży cokolwiek zniszczyć.'),
-    g('ola', 'I do Gazety Sudeckiej. Niech pan Rybicki skończy swój tekst.'),
+    g('ola', 'I do Gazety Sudeckiej. Niech redakcja dokończy tekst, który zaczął Rybicki.'),
     goal('Wyślij zebrane materiały do prokuratury i gazety.', ['Wybierz najmocniejsze rzeczy z Notatek: to, co łączy Gajdę z hutą w 1997 i z porwaniem Mai.']),
     task(async () => { const n = await UI.packageSheet(); G.setVar('pkg', n); }),
     notify({ app: 'nimbus', title: 'Poczta', text: 'Wiadomość wysłana: biuro.podawcze@dzierzoniow.po.gov.pl, redakcja@gazetasudecka.pl', sound: 'notif' }),
@@ -173,7 +180,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       c('maja', 'Myślałam, że to pan Adam.'),
       choose('call', [
         opt('Przepraszam. Nie {odebrałem|odebrałam}.', [c('maja', 'Ale teraz {odebrałeś|odebrałaś}.')]),
-        opt('Pan Adam nie żyje. Ale jego numer cię znalazł.', [c('maja', 'To… dziwnie piękne.'), c('maja', 'Albo mam gorączkę.')])
+        opt('Numer należał kiedyś do niego. Kuba znalazł mnie po twoim połączeniu.', [c('maja', 'Kuba… dobrze. Dobrze, że sprawdził.'), c('maja', 'Nie mogę się teraz skupić.')])
       ]),
       c('maja', 'Tomek… on jest w hucie. Za murem. Widziałam pelerynę.'),
       c('maja', 'To był Gajda. Przyjechał za mną. Spadłam ze schodów, a potem było ciemno.'),
@@ -184,10 +191,10 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
         c('bartek', 'niebieskie swiatla. to radiowoz. dzierzoniow'),
         c('kuba', 'POLICJA. PRAWDZIWA'),
         c('weronika', 'Przy szlabanie stoi jeszcze jedno auto. Ciemne. Zatrzymali je.'),
-        c('bartek', 'superb. wyciagaja gajde z auta'),
+        c('bartek', 'magna. wyciagaja gajde z auta'),
         set('gajdaCaught')
       ], [
-        c('bartek', 'to superb. to on'),
+        c('bartek', 'to magna. to on'),
         c('kuba', 'gajda idzie tutaj. ma latarkę'),
         c('kuba', '…i sztucer'),
         c('bartek', 'stary wyszedl mu naprzeciw'),
@@ -201,7 +208,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       ]),
       c('maja', 'Nie rozłączaj się. Proszę. Jeszcze chwilę.'),
       pause(4000),
-      c('maja', 'Dobrze. Już dobrze.'),
+      c('maja', 'Jesteś jeszcze? Słyszę cię.'),
       callEnd(),
       set('majaFound'),
       run(s => {
@@ -210,6 +217,8 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       })
     ]),
     pause(2000),
+    scene('s28', [interlude('25 października', 'Dzień później.', 3000), SC.s28]),
+    scene('s29', [interlude('2 listopada', 'Dziewięć dni później.', 3000), SC.s29]),
     end('epilog')
   ];
 });

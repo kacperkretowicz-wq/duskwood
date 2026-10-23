@@ -4,9 +4,9 @@ Mglisko jest thrillerem opowiadanym przez telefon. Punktem odniesienia jest napi
 
 ## Ekrany
 
-Komunikator ma jednolitą oprawę na iOS i Androidzie: grafitowo zielone tło, oszczędne nagłówki, przygaszone zielone odpowiedzi, wyraźne wybory bez punktów i odznak. Lista zawiera wyszukiwanie, filtr nieprzeczytanych, kartę Mai i wejścia do śladów oraz telefonu. Kliknięcie nagłówka czatu otwiera profil; nagłówek grupy pokazuje jej uczestników. Zanim Kuba się przedstawi, widoczny jest sam numer i anonimowy awatar.
+Telefon używa wyglądu systemowego: na iOS białe/czarne powierzchnie, systemowa typografia, niebieskie wysłane wiadomości, szare odebrane i profil wyśrodkowany w nagłówku. Android ma własne fonty i kolory. `css/native-ui.css` zastępuje poprzednią zieloną oprawę. Lista zawiera wyszukiwanie, filtr nieprzeczytanych, przypięty kontakt Mai i wejście „Na osobności”. Kliknięcie nagłówka czatu otwiera profil; nagłówek grupy pokazuje jej uczestników. Zanim Kuba się przedstawi, widoczny jest sam numer i anonimowy awatar.
 
-Telefon zachowuje dostęp do połączeń, wyszukiwarki, zdjęć, notatek i narzędzi fabularnych. Ekran główny zaczyna się od aktualnego rozdziału i ostatnich rozmów. Na komputerze grze towarzyszy tło huty, na telefonie ekran wypełnia urządzenie. Ograniczenie animacji respektuje ustawienie systemowe.
+Ekran główny jest siatką aplikacji z dockiem i dwoma widżetami. Notatka „Co teraz?” reaguje na zmianę celu fabuły; pogoda i daty wynikają z dnia opowieści. Aplikacje odblokowują się według skryptu, a wyszukiwanie telefonu nie ujawnia nieodkrytych postaci ani śladów. Notatki mają działające pole szukania. Jasny/ciemny wygląd można przełączyć bez restartu. Font pochodzi z urządzenia, bez pobierania Intera lub fontów Apple na inne systemy. Ograniczenie animacji respektuje ustawienie systemowe.
 
 ## Głosy
 
@@ -28,6 +28,8 @@ Nie dopisujemy losowych literówek ani „XD” automatycznie do każdego tekstu
 Trzy główne odwrócenia znaczenia już są w fabule: numer należał wcześniej do zmarłego dziennikarza; uspokajający SMS z telefonu Mai zawiera błąd o nieżyjącym psie; anonimowy nadawca jest kimś z grupy. Wzmocnione wyznanie Igora łączy jego „spokojnie” na grupie ze straszeniem z drugiej karty. To unikanie własnej odpowiedzialności, nie nadnaturalne moce.
 
 Każdy kolejny zwrot musi mieć wcześniejszy, możliwy do znalezienia ślad i zrozumiały motyw. Codzienne, ciepłe rozmowy dają powód, żeby przejąć się ludźmi. Powroty do gry mają wynikać z ciekawości i relacji; bez kar za odejście, utraty serii czy wymuszonych płatności.
+
+Anonimowy nadawca ma zwykłą rozmowę z nieznanego numeru. Nie zmienia fontów, kolorów ani systemu telefonu. Usunięto globalne zakłócenia oraz powiadomienia „X to zapamięta”; zaufanie nadal wpływa na stan gry. Wiadomość tekstowa nie jest opisywana jako pochodząca z „numeru zastrzeżonego”.
 
 ## Grafiki i spójność
 

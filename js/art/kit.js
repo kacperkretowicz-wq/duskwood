@@ -13,7 +13,17 @@ const Art = (() => {
   const MONO = "Consolas, 'Courier New', monospace";
   const HAND = "'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive";
 
-  function def(id, meta) { reg[id] = meta; }
+  // Zdjęcie bazowe z nakładką rysowaną na canvasie (np. podgląd na żywo z fotopułapki, gdzie data jest parametrem).
+  const photoImg = {};
+  const photoCache = {};
+  function loadPhoto(src) {
+    if (photoImg[src] || typeof Image === 'undefined') return;
+    const im = new Image();
+    im.onload = () => { im._ok = true; };
+    im.src = src;
+    photoImg[src] = im;
+  }
+  function def(id, meta) { reg[id] = meta; if (meta && meta.photo) loadPhoto(meta.photo); }
   // Identyfikator może mieć parametr: "c1_live_night@2026-10-24T23:41" — wtedy exif i stamp są funkcjami parametru.
   function get(id) {
     const [b, p] = String(id).split('@');
@@ -340,11 +350,11 @@ const Art = (() => {
           (o.dust ? k.rect(-110, -60, 220, 120, '#6b5a40', `rx="10" opacity="${o.dust}"`) : ''),
           `transform="translate(${f(x)},${f(y)}) scale(${s}) rotate(${o.rot || 0})"`);
       },
-      zenit(x, y, s) {
+      kometa(x, y, s) {
         return k.g(
           k.rect(-140, -55, 280, 110, '#151515', 'rx="12"') + k.rect(-140, -55, 280, 34, '#b9bcbf', 'rx="10"') + k.path('M-40,-55 L-22,-100 L22,-100 L40,-55 Z', '#b9bcbf') +
           k.rect(-30, -96, 60, 18, '#2a2a2a') + k.circle(0, 20, 64, '#0d0d0d') + k.circle(0, 20, 50, '#1e2328') + k.circle(0, 20, 30, '#2f4554') + k.circle(-12, 6, 10, '#fff', 'opacity=".25"') +
-          k.circle(95, -62, 14, '#888') + k.circle(-100, -62, 16, '#888') + k.text(-12, -64, 'ZENIT-E', 13, '#222', 'text-anchor="middle" font-weight="800" letter-spacing="2"'),
+          k.circle(95, -62, 14, '#888') + k.circle(-100, -62, 16, '#888') + k.text(-12, -64, 'KOMETA-E', 13, '#222', 'text-anchor="middle" font-weight="800" letter-spacing="2"'),
           `transform="translate(${f(x)},${f(y)}) scale(${s})"`);
       },
       paper(x, y, w, h, rot, inner, o = {}) {
@@ -464,8 +474,35 @@ const Art = (() => {
   function placeholder(id) {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300"><rect width="400" height="300" fill="#1a1d22"/><text x="200" y="155" fill="#556" font-size="16" text-anchor="middle" font-family="${FONT}">${esc(id)}</text></svg>`;
   }
+  function canvasStamp(x, s, W, H) {
+    if (!s || s.kind !== 'trap') return;
+    const bh = 40, mi = { full: '●', half: '◐', new: '○', wax: '◑' }[s.moon || 'half'] || '◐';
+    const t = s.temp != null ? s.temp : 4;
+    x.fillStyle = 'rgba(0,0,0,.88)'; x.fillRect(0, H - bh, W, bh);
+    x.fillStyle = '#fff'; x.textBaseline = 'alphabetic';
+    x.font = `700 19px ${MONO}`; x.textAlign = 'left'; x.fillText('BUSHVIEW', 18, H - 13);
+    x.font = `19px ${MONO}`; x.fillText(s.cam || 'CAM-01', 170, H - 13);
+    x.fillText(`${mi}  ${t}°C ${Math.round(t * 1.8 + 32)}°F`, W * 0.44, H - 13);
+    x.textAlign = 'right'; x.fillText(`${s.date}  ${s.time}`, W - 18, H - 13);
+    if (s.id) { x.globalAlpha = 0.8; x.font = `16px ${MONO}`; x.fillText(s.id, W - 18, 30); x.globalAlpha = 1; }
+  }
+  function photoUrl(id, m) {
+    const im = photoImg[m.photo];
+    if (!im || !im._ok || typeof document === 'undefined') return null;
+    if (photoCache[id]) return photoCache[id];
+    const c = document.createElement('canvas');
+    c.width = m.w || 1280; c.height = m.h || 720;
+    const x = c.getContext('2d');
+    if (!x) return null;
+    x.drawImage(im, 0, 0, c.width, c.height);
+    canvasStamp(x, m.stamp, c.width, c.height);
+    return (photoCache[id] = c.toDataURL('image/jpeg', 0.86));
+  }
   function url(id) {
-    if (id === 'k_maja') return 'assets/maja-river.png';
+    const meta = get(id);
+    if (meta?.src) return meta.src;
+    if (meta?.photo) { const u = photoUrl(String(id), meta); if (u) return u; loadPhoto(meta.photo); }
+    if (id === 'k_maja') return 'assets/maja-river.jpg';
     if (!cache[id]) cache[id] = URL.createObjectURL(new Blob([build(id)], { type: 'image/svg+xml' }));
     return cache[id];
   }

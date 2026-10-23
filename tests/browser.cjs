@@ -5,7 +5,7 @@ try { ({chromium}=require('playwright')); }
 catch { ({chromium}=require(process.env.PLAYWRIGHT_MODULE || '/workspace/.onboarding-tools/node_modules/playwright')); }
 const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:5173';
 (async()=>{
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+const browser=await chromium.launch({...(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {}),headless:true,args:['--no-sandbox']});
 let passed=0;
 try {
  for(const viewport of [{width:1440,height:1050},{width:390,height:844}]) {
@@ -54,7 +54,7 @@ try {
  await page.locator('.contact-profile').waitFor({state:'detached'});
  console.log('PASS search, unread filter, contact profile, close with Escape');passed++;
  await page.evaluate(()=>UI.openApp('browser',{page:'kadr:maja.wrona'}));
- assert.ok(await page.locator('.photo-av').count()>0);
+assert.ok(await page.locator('.photo-av, .av img[src*="assets/people/"]').count()>0);
  await page.evaluate(()=>UI.goHome());
  for(const app of ['phone','browser','gallery','maps','settings']) {
   await page.evaluate(id=>UI.openApp(id),app);
@@ -68,7 +68,7 @@ try {
  });
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  await page.evaluate(()=>G.loadCheckpoint('prolog'));
- assert.equal(await page.evaluate(()=>G.s.v),2);
+ assert.equal(await page.evaluate(()=>G.s.v),4);
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  console.log('PASS legacy save and checkpoint migration');passed++;
  const timing=await page.evaluate(async()=>{
@@ -89,7 +89,7 @@ try {
  await op.goto(base+'/');await op.evaluate(async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}));});
  await offline.setOffline(true);await op.reload();await op.getByRole('button',{name:'Nowa gra',exact:true}).waitFor();
  const assets=await op.evaluate(async()=>{
-  const urls=['css/messenger.css','assets/people.png','assets/forest.png','assets/maja-river.png','assets/gajda.png','js/data/migrations.js'];
+  const urls=['css/messenger.css','assets/people.jpg','assets/forest.jpg','assets/maja-river.jpg','assets/gajda.jpg','js/data/migrations.js'];
   return Promise.all(urls.map(async u=>(await fetch(u)).ok));
  });assert.ok(assets.every(Boolean));
  console.log('PASS offline reload with new styles, photos, migration');passed++;

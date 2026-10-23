@@ -1,0 +1,63 @@
+name: Mobile build
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - run: npm test
+      - run: npm run build && npx cap sync android
+      - run: chmod +x android/gradlew && cd android && ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mglisko-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 20
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: xcodebuild -version
+      - run: npm ci
+      - run: npm run build && npx cap sync ios
+      - name: Compile for iOS Simulator without signing
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -sdk iphonesimulator -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO build
+      - name: Launch on an available iPhone Simulator
+        shell: bash
+        run: |
+          device=$(python3 -c "import json,subprocess; data=json.loads(subprocess.check_output(['xcrun','simctl','list','devices','available','--json'])); print(next(d['udid'] for group in data['devices'].values() for d in group if d['name'].startswith('iPhone')))")
+          xcrun simctl boot "$device" || true
+          xcrun simctl bootstatus "$device" -b
+          xcrun simctl install "$device" build/ios/Build/Products/Debug-iphonesimulator/App.app
+          xcrun simctl launch --terminate-running-process "$device" pl.mglisko.game
+          sleep 5
+          xcrun simctl io "$device" screenshot build/ios/mglisko-ios-launch.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mglisko-ios-launch
+          path: build/ios/mglisko-ios-launch.png
+          retention-days: 7

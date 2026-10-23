@@ -140,6 +140,7 @@
     { id: 'mail', name: 'Poczta', icon: 'mail', count: () => M().mail.filter(vis).length },
     { id: 'audio', name: 'Dyktafon', icon: 'mic', count: () => M().audio.filter(vis).length },
     { id: 'web', name: 'Internet', icon: 'globe', count: () => M().web.filter(vis).length },
+    { id: 'wallpapers', name: 'Tapety', icon: 'image', count: () => 2, cond: () => G.isUnlocked('maja:base') },
     { id: 'find', name: 'Znajdź urządzenie', icon: 'target', count: () => 0, cond: () => G.isUnlocked('maja:find') }
   ];
 
@@ -157,7 +158,7 @@
       pg.body.append(
         h('div', { class: 'nb-dev' },
           h('div', { class: 'nb-dev-ic', html: U.icon('phone', 26) }),
-          h('div', {}, h('b', {}, 'Telefon Mai'), h('span', {}, 'Galaxy A54 · ' + DATA.chars.maja.number)),
+          h('div', {}, h('b', {}, 'Telefon Mai'), h('span', {}, 'Tellio A54 · ' + DATA.chars.maja.number)),
           h('div', { class: 'nb-dev-st' }, h('span', { class: 'dot ' + (G.flag('majaOnline') ? 'on' : '') }), G.flag('majaOnline') ? 'online' : 'offline')),
         h('div', { class: 'nb-bk' }, U.ico('cloud', 16), `Ostatnia kopia: ${fmtT(bk)}`),
         h('div', { class: 'nb-bar' }, h('i', { style: 'width:63%' })),
@@ -173,6 +174,7 @@
   }
 
   function openSection(stack, id, params = {}) {
+    if (id === 'wallpapers') { UI.openWallpaperBackup(); return; }
     const fn = { photos: albumsPage, sms: threadsPage, calls: callsPage, notes: notesPage, loc: daysPage, mail: mailPage, audio: audioPage, web: webPage, find: findPage }[id];
     if (fn) stack.push(fn(stack, params));
   }
@@ -295,6 +297,21 @@
     G.markSeen('mj:note:' + n.id);
     const pg = UI.page({ title: n.title, sub: fmtT(n.t) });
     pg.body.appendChild(h('div', { class: 'paper', html: U.rich(n.body) }));
+    if (n.versions) {
+      pg.body.append(h('p', { class: 'nb-hint' }, `Kopia odebrana: ${fmtT(n.synced)}. Historia zawiera wcześniejsze zapisy z tego urządzenia.`),
+        h('div', { class: 'pad' }, h('button', { class: 'btn wide', onclick: () => {
+          const body = h('div', { class: 'note-history' }, h('p', { class: 'nb-hint' }, 'Godziny zapisu pochodzą z urządzenia. Synchronizacja nie ustala, kto pisał tekst. Wersje są tylko do odczytu.'));
+          n.versions.slice().reverse().forEach(v => body.append(h('article', { class: 'note-version' },
+            h('h4', {}, `${v.label} · ${fmtT(v.t)}`), h('div', { class: 'paper', html: U.rich(v.body) }),
+            h('button', { class: 'btn wide', onclick: e => {
+              if (G.addEv(v.ev)) UI.evidenceToast(v.ev);
+              e.currentTarget.textContent = 'Zapisano w Notatkach';
+            } }, G.has(v.ev) ? 'Zapisano w Notatkach' : 'Zachowaj tę wersję'))));
+          body.append(h('div', { class: 'pad' }, h('button', { class: 'btn pri wide', onclick: () => { sh.close(true); UI.openApp('notes', { note: 'questions', ded: n.deduction }); } }, 'Porównaj wersje w Notatkach')));
+          G.unlock('ded:' + n.deduction);
+          const sh = UI.sheet({ title: 'Historia wersji', body });
+        } }, 'Historia wersji')));
+    }
     if (n.ev) [].concat(n.ev).forEach(e => { if (G.addEv(e)) UI.evidenceToast(e); });
     G.change();
     return { el: pg.el };

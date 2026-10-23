@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Quiet Is Safer</string>
+    <string name="title_activity_main">Quiet Is Safer</string>
+    <string name="package_name">pl.mglisko.game</string>
+    <string name="custom_url_scheme">pl.mglisko.game</string>
+</resources>

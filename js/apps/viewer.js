@@ -64,6 +64,8 @@
       img.src = Art.url(art);
       img.className = opts.neg ? 'neg' : '';
       title.textContent = U.tpl(opts.title || meta.title || 'Zdjęcie');
+      img.alt = meta.title || 'Zdjęcie';
+      hint.textContent = (meta.hotspots || []).some(p => G.test(p.cond)) ? 'Przybliż palcami lub kółkiem · dotknij szczegółu' : 'Przybliż palcami lub kółkiem';
       const ex = meta.exif || {};
       sub.textContent = [ex.date && `${ex.date}${ex.time ? ', ' + ex.time : ''}`, opts.from].filter(Boolean).join(' · ');
       s = 1; tx = 0; ty = 0; apply(false);

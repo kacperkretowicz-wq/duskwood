@@ -31,7 +31,7 @@ DATA.chats = {
   igor: { name: 'Igor Malicki', avatar: 'igor' },
   weronika: { name: 'Weronika Lis', avatar: 'weronika' },
   gajda: { name: 'Robert Gajda', avatar: 'gajda', sub: 'asp. sztab. · Posterunek Policji Mglisko' },
-  szklarz: { name: 'Nieznany', avatar: 'szklarz', glitch: true, sub: 'numer zastrzeżony' },
+  szklarz: { name: 'Nieznany', avatar: 'szklarz', sub: 'Numer spoza kontaktów' },
   maja2: { name: 'Maja', avatar: 'maja' }
 };
 
@@ -39,8 +39,8 @@ DATA.chats = {
 Object.assign(DATA.chars.kuba, { age: 19, role: 'Studia · Wrocław / Mglisko', bio: 'informatyka, pierwszy rok. kawa z automatu i ostatni autobus do domu.', status: 'jak coś ważnego to pisz', cadence: { key: 48, think: 1100 } });
 Object.assign(DATA.chars.ola, { age: 22, role: 'Technik farmacji · Mglisko', bio: 'Praca, zaoczne, praca. Oddzwonię po zmianie 🫶', status: 'telefon na cichym', cadence: { key: 60, think: 1900 } });
 Object.assign(DATA.chars.bartek, { age: 24, role: 'Auto-Sowa · Mglisko', bio: 'auta robie na miejscu. wycen przez telefon nie robie', status: 'w warsztacie', cadence: { key: 79, think: 2600 } });
-Object.assign(DATA.chars.igor, { age: 23, role: 'Serwis GSM-PC · Rynek 8', bio: 'wyłącz i włącz. jak nie działa, kawa i dopiero wtedy dzwoń xD', status: 'zaraz wracam', cadence: { key: 44, think: 1500 } });
-Object.assign(DATA.chars.maja, { age: 22, role: 'Fotografia · ASP Wrocław', bio: 'zbieram światło, stare aparaty i bilety, których nie wyrzucam. 📷', status: 'jeszcze jedno zdjęcie i wracam', cadence: { key: 55, think: 1800 } });
+Object.assign(DATA.chars.igor, { age: 23, role: 'Serwis GSM-PC · Rynek 7', bio: 'wyłącz i włącz. jak nie działa, kawa i dopiero wtedy dzwoń xD', status: 'zaraz wracam', cadence: { key: 44, think: 1500 } });
+Object.assign(DATA.chars.maja, { age: 22, role: 'Fotografia · ASP Wrocław', bio: 'ASP Wrocław. Kometa po dziadku, telefon z wiecznie pełną pamięcią 📷', status: 'jeszcze jedno zdjęcie i wracam', cadence: { key: 55, think: 1800 } });
 Object.assign(DATA.chars.weronika, { age: 41, role: 'Biblioteka Gminna · Mglisko', bio: 'Książki, góry, ogród. Wiadomości czytam zwykle wieczorem.', status: 'Do zobaczenia w bibliotece', cadence: { key: 90, think: 3000 } });
 Object.assign(DATA.chars.gajda, { age: 46, role: 'Posterunek Policji · Mglisko', bio: 'Kontakt służbowy. W nagłych sytuacjach proszę dzwonić pod 112.', cadence: { key: 85, think: 2800 } });
 
@@ -53,7 +53,7 @@ DATA.contacts = [
   { name: 'Weronika Lis', who: 'weronika', number: '608 117 942', cond: 'unlocked:chat:weronika' },
   { name: 'Robert Gajda', who: 'gajda', number: '601 450 219', cond: 'unlocked:chat:gajda' },
   { name: 'Posterunek Policji Mglisko', who: 'duty', number: '74 873 41 20', cond: 'seen:web:posterunek', auto: '„Posterunek Policji w Mglisku. Wszystkie linie są zajęte. W sytuacji zagrożenia życia dzwoń pod numer 112.”' },
-  { name: 'Gazeta Sudecka — redakcja', number: '74 842 20 10', cond: 'seen:web:gazeta_home', auto: '„Redakcja Gazety Sudeckiej. Zapraszamy od poniedziałku do piątku w godzinach 9–16.”' },
+  { name: 'Gazeta Sudecka — redakcja', number: '74 832 10 40', cond: 'seen:web:gazeta_home', auto: '„Redakcja Gazety Sudeckiej. Zapraszamy od poniedziałku do piątku w godzinach 8–18.”' },
   { name: 'Biblioteka Gminna w Mglisku', number: '74 873 40 55', cond: 'seen:web:biblioteka', auto: '„Biblioteka Gminna w Mglisku jest teraz nieczynna. Zapraszamy od wtorku do soboty w godzinach 10–18.”' },
   { name: 'Serwis GSM-PC (Igor)', who: 'igor', number: '733 905 014', cond: 'seen:web:kadr:igor.malicki' }
 ];
@@ -68,8 +68,13 @@ DATA.weather = () => {
     ch3: { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 6, feel: 3, hum: 88, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
     ch4: { now: 'pochmurno', nowLong: 'Przelotne przejaśnienia', temp: 8, feel: 5, hum: 81, alert: 'Przymrozek przy gruncie w nocy, do −3°C.', moon: 'przybywający księżyc', i: 'cloud' },
     ch5: { now: 'mgła', nowLong: 'Mgła i przymrozek', temp: 1, feel: -3, hum: 96, alert: 'Przymrozek przy gruncie, do −3°C. Mgła w dolinach.', moon: 'przybywający księżyc', i: 'fog' },
-    epilog: { now: 'śnieg', nowLong: 'Pierwszy śnieg', temp: -1, feel: -5, hum: 90, alert: null, moon: 'nów', i: 'cloud' }
-  }[ch] || {};
+    epilog: { now: 'śnieg', nowLong: 'Pierwszy śnieg', temp: -1, feel: -5, hum: 90, alert: null, moon: 'nów', i: 'cloud' },
+    mp: { now: 'pochmurno', nowLong: 'Zachmurzenie całkowite', temp: 2, feel: -2, hum: 91, alert: null, moon: 'przybywający sierp', i: 'cloud' },
+    m0: { now: 'mżawka', nowLong: 'Mżawka', temp: 3, feel: 0, hum: 94, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    m1: { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 4, feel: 1, hum: 89, alert: null, moon: 'pierwsza kwadra', i: 'cloud' },
+    m2: { now: 'deszcz', nowLong: 'Słaby deszcz', temp: 5, feel: 2, hum: 93, alert: 'Wzrost stanu wody na Mglicy, bez przekroczenia stanu ostrzegawczego.', moon: 'przybywający księżyc', i: 'cloud' },
+    m3: { now: 'śnieg z deszczem', nowLong: 'Śnieg z deszczem', temp: 1, feel: -3, hum: 95, alert: null, moon: 'pełnia', i: 'cloud' }
+  }[ch] || { now: 'pochmurno', nowLong: 'Zachmurzenie duże', temp: 3, feel: 0, hum: 90, alert: null, moon: '—', i: 'cloud' };
   const base = W.temp;
   return Object.assign({
     hourly: [{ t: base, i: W.i }, { t: base, i: W.i }, { t: base - 1, i: 'fog' }, { t: base - 1, i: 'fog' }, { t: base - 2, i: 'fog' }, { t: base - 2, i: 'cloud' }, { t: base - 1, i: 'cloud' }, { t: base, i: 'cloud' }],
@@ -84,11 +89,11 @@ DATA.endings = {
   swit: {
     title: 'ŚWIT', tag: 'Zakończenie 1 z 3', mood: 'dawn',
     text: [
-      'Maję wynoszą ze sztolni o 1:52. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
-      'Radiowóz z Dzierżoniowa zatrzymuje ciemną skodę na leśnym szlabanie pół godziny później. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
+      'Tej nocy Maję wynoszą ze sztolni. Jest wychłodzona, odwodniona, ma pękniętą kość przedramienia. Żyje.',
+      'Radiowóz z Dzierżoniowa zatrzymuje ciemną sevrę przy leśnym szlabanie. Robert Gajda nie stawia oporu. Na tylnym siedzeniu leży kanister z benzyną.',
       'Rano strażacy rozbierają mur w odprężarce. Za nim, pod żółtym strzępem peleryny, czeka dziewięcioletni chłopiec. Czekał dwadzieścia dziewięć lat.',
       () => (G.flag('leszekTestify') ? 'Marek Sowa i Leszek Malicki składają zeznania tego samego dnia.' : 'Marek Sowa składa zeznania tego samego dnia. Leszek Malicki milczy przez tydzień — potem też zaczyna mówić.') + ' Gazeta Sudecka drukuje tekst, który zaczął pisać Adam Rybicki.',
-      'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale potem {odebrałeś|odebrałaś} wszystko, co było ważne.'
+      'Tamtej nocy nie {odebrałeś|odebrałaś}. Ale teraz na ekranie jest wiadomość od Mai.'
     ]
   },
   odlamki: {
@@ -96,9 +101,9 @@ DATA.endings = {
     text: [
       'Maję wynoszą ze sztolni nad ranem. Żyje — i tylko to się liczy. Przynajmniej tak powtarzają wszyscy.',
       () => G.flag('gajdaCaught')
-        ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Ale materiałów jest za mało: po czterdziestu ośmiu godzinach wychodzi na wolność. Dzień później jego skodę znajdują na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.'
-        : 'Robert Gajda nie wraca do domu. Jego skodę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
-      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + 'Ciała Gajdy nie odnaleziono. Śledztwo w sprawie Tomka Lisa zostaje umorzone „wobec śmierci podejrzanego”. Nikt już nie może go o nic zapytać.',
+        ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Zeznanie Mai i odnalezienie jej w sztolni pozostają ważne, nawet jeśli dokumentacja dawnych wydarzeń jest niepełna. On milczy. Część pytań wciąż pozostaje bez odpowiedzi.'
+        : 'Robert Gajda nie wraca do domu. Jego sevrę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
+      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + (G.flag('gajdaCaught') ? 'Ratunek się udał. Złożenie pełnego obrazu tego, co wydarzyło się w hucie, zajmie dłużej.' : 'Gajdy nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania trwają, podobnie jak sprawa Tomka.'),
       'Weronika dostaje szczątki brata i list z prokuratury. Pisze ci jedno zdanie: „Wiem, gdzie on jest. To dużo. To za mało.”'
     ]
   },
@@ -107,8 +112,31 @@ DATA.endings = {
     text: [
       'Krata sztolni Ewa jest otwarta. W środku: koc, puste butelki po wodzie, gumka do włosów z różowym koralikiem.',
       'Na ścianie, wydrapane czymś ostrym, przy samej ziemi: TU BYŁAM. M.',
-      'Robert Gajda prowadzi poszukiwania osobiście. Mówi kamerom, że nie spocznie, dopóki jej nie znajdzie.',
+      'Robert Gajda znika. Po przekazaniu materiałów spoza Mgliska trwają poszukiwania jego i Mai. Telewizja przypomina jego dawne zapewnienia, że nie spocznie, dopóki jej nie znajdzie.',
       'Twój telefon milczy. Tylko czasem, późną nocą, wyświetla się połączenie z zastrzeżonego numeru — i nikt się nie odzywa.'
     ]
   }
 };
+
+/* Portrety i codzienne zdjęcia postaci (assets/people). Gdy plik się nie wczyta, UI.avatar wraca do people.jpg. */
+(() => {
+  const people = {
+    kuba: ['Zasnął nad kodem', 'Pociąg do Mgliska'],
+    ola: ['Sesja zaoczna', 'Zapiekanka na dniach miasta'],
+    bartek: ['Pod Astrą', 'Świt nad zalewem'],
+    igor: ['Serwis w rynku', 'Balkon, wieczór'],
+    weronika: ['Działka', 'Spotkanie w bibliotece'],
+    maja: ['Stara fabryka', 'Dni miasta z Olą']
+  };
+  const files = { maja: ['maja_life1', 'ola_life2'] };
+  Object.entries(people).forEach(([who, titles]) => {
+    const c = DATA.chars[who]; if (!c) return;
+    c.photo = 'assets/people/' + who + '.jpg';
+    c.life = titles.map((title, i) => {
+      const id = 'life_' + who + '_' + (i + 1);
+      const f = (files[who] || [])[i] || who + '_life' + (i + 1);
+      if (typeof Art !== 'undefined') Art.def(id, { src: 'assets/people/' + f + '.jpg', title, w: 1200, h: 900, draw: k => k.svg || '' });
+      return id;
+    });
+  });
+})();

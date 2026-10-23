@@ -16,22 +16,40 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 2,
+      v: 4,
+      seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
       clock: { t: U.parseLocal(START), at: Date.now() },
       vars: {}, flags: {}, unlocked: {}, chats: {}, ev: {}, evx: {}, tl: {}, hot: {}, seen: {},
       solved: {}, used: {}, hints: {}, calls: [], pending: null, objective: null, saved: [],
-      tries: {}, endings: [], done: {}, started: Date.now(), playMs: 0
+      tries: {}, scares: {}, endings: [], done: {}, started: Date.now(), playMs: 0
     };
   }
 
-  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, volume: 0.8, os: 'auto' };
+  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, volume: 0.8, os: 'auto', appearance: 'light' };
   function migrate(saved) {
     if ((saved.v || 1) < 2) {
       const map = STORY_MIGRATIONS[saved.chapter];
       if (map && Number.isInteger(saved.pc) && map[saved.pc] != null) saved.pc = map[saved.pc];
       saved.v = 2;
+    }
+    if (saved.v < 3) {
+      // v3: dopisane sceny. Zapis w trakcie wyboru wraca dokładnie do tego wyboru;
+      // zapis między krokami wznawia od początku nowej sceny stojącej tuż przed nim.
+      const map = typeof STORY_MIGRATIONS_V3 !== 'undefined' && STORY_MIGRATIONS_V3[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 4; // tabela V3 jest generowana wprost do bieżących kroków
+    }
+    if (saved.v < 4) {
+      // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
+      const map = typeof STORY_MIGRATIONS_V4 !== 'undefined' && STORY_MIGRATIONS_V4[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 4;
     }
     return saved;
   }
@@ -44,15 +62,15 @@ const G = (() => {
     viewing: null,
     saveSettings() { store.set(SKEY, JSON.stringify(settings)); BUS.emit('settings'); },
 
-    newGame(player) { api.s = fresh(player); api.save(true); },
+    newGame(player) { api.s = fresh(player); api.save(true); BUS.emit('game-reset'); },
     hasSave() { return !!store.get(KEY); },
     load() {
       const raw = store.get(KEY);
       if (!raw) return false;
-      try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); return true; }
+      try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; return true; }
       catch (e) { console.warn('Zapis uszkodzony', e); return false; }
     },
-    wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; },
+    wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; BUS.emit('game-reset'); },
 
     _t: null,
     save(now) {
@@ -78,14 +96,20 @@ const G = (() => {
     loadCheckpoint(ch) {
       const raw = store.get(CP + ch); if (!raw) return false;
       const keepEndings = api.s ? api.s.endings : [];
+      const keepArchive = api.s ? U.clone(api.s.seasonArchive || {}) : {};
+      const keepPacing = api.s?.pacing ? U.clone(api.s.pacing) : null;
       api.s = Object.assign(fresh(), migrate(JSON.parse(raw)));
       api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
-      api.s.clock.at = Date.now(); api.save(true); return true;
+      api.s.seasonArchive = Object.assign({}, api.s.seasonArchive, keepArchive);
+      if (keepPacing) { delete keepPacing.waiting; api.s.pacing = keepPacing; }
+      api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; api.save(true); return true;
     },
 
     // Zegar fabularny płynie w czasie rzeczywistym od ostatniego ustawienia.
-    now() { const c = api.s.clock; return c.t + (Date.now() - c.at); },
-    setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now() }; BUS.emit('clock'); },
+    now() { const c = api.s.clock; return c.t + (c.paused ? 0 : Date.now() - c.at); },
+    pauseClock() { if (api.s && !api.s.clock.paused) api.s.clock = { t: api.now(), at: Date.now(), paused: true }; },
+    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && api.s.pacing.waiting?.at > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
+    setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now(), paused: !!document.hidden }; BUS.emit('clock'); },
 
     chat(id) {
       const c = api.s.chats;
@@ -145,7 +169,14 @@ const G = (() => {
     seen(key) { return !!api.s.seen[key]; },
     markSeen(key) { if (!api.s.seen[key]) { api.s.seen[key] = true; BUS.emit('badges'); api.change(); } },
 
-    solve(id) { if (!api.s.solved[id]) { api.s.solved[id] = true; BUS.emit('solved', id); api.change(); } },
+    solve(id) {
+      if (!api.s.solved[id]) {
+        api.s.solved[id] = true;
+        const reward = DATA.deductions[id] && DATA.deductions[id].reward;
+        if (reward) api.addEv(reward);
+        BUS.emit('solved', id); api.change();
+      }
+    },
 
     // Warunki dla kroków skryptu: funkcja albo krótki zapis tekstowy.
     test(cond) {
@@ -172,7 +203,8 @@ const G = (() => {
     change() { BUS.emit('change'); api.save(); }
   };
 
-  window.addEventListener('pagehide', () => api.save(true));
-  document.addEventListener('visibilitychange', () => { if (document.hidden) api.save(true); });
+  window.addEventListener('pagehide', () => { api.pauseClock(); api.save(true); });
+  window.addEventListener('pageshow', () => { if (!document.hidden) api.resumeClock(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { api.pauseClock(); api.save(true); } else api.resumeClock(); });
   return api;
 })();

@@ -71,7 +71,7 @@ const U = (() => {
 
   // Szablony tekstu: %name%, {forma męska|forma żeńska}, *pogrubienie*, _kursywa_.
   function tpl(text) {
-    const p = (window.G && G.s && G.s.player) || { name: 'Ty', gender: 'm' };
+    const p = (typeof G !== 'undefined' && G.s && G.s.player) || { name: 'Ty', gender: 'm' };
     return String(text)
       .replace(/%name%/g, p.name)
       .replace(/\{([^{}|]*)\|([^{}]*)\}/g, (_, m, f) => p.gender === 'f' ? f : m);
@@ -165,7 +165,7 @@ const U = (() => {
   }
   const ico = (name, size, extra) => { const s = document.createElement('span'); s.className = 'icw'; s.innerHTML = icon(name, size, extra); return s; };
 
-  function vibrate(p) { try { if (window.G && G.s && G.s.settings.vibrate && navigator.vibrate) navigator.vibrate(p); } catch (e) { /* brak wsparcia */ } }
+  function vibrate(p) { try { if (typeof G !== 'undefined' && G.settings.vibrate && typeof navigator !== 'undefined') navigator.vibrate?.(p); } catch (e) { /* brak wsparcia */ } }
   const clone = o => JSON.parse(JSON.stringify(o));
   const uid = () => Math.random().toString(36).slice(2, 10);
 

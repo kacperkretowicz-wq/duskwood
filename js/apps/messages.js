@@ -4,7 +4,7 @@
 (() => {
   const { h, $ } = U;
 
-  const chatName = id => (G.s.chats[id] && G.s.chats[id].name) || (DATA.chats[id] && DATA.chats[id].name) || id;
+  const chatName = id => U.tpl((G.s.chats[id] && G.s.chats[id].name) || (DATA.chats[id] && DATA.chats[id].name) || id);
   const chatAv = id => (G.s.chats[id] && G.s.chats[id].avatar) || (DATA.chats[id] && DATA.chats[id].avatar) || id;
   const charName = w => (DATA.chars[w] && (DATA.chars[w].short || DATA.chars[w].name)) || w;
   const pendingFor = id => { const p = Engine.pending(); return p && p.chat === id ? p : null; };
@@ -26,8 +26,10 @@
       h('h2', {}, c.name || chatName(id)),
       h('p', { class: 'profile-role' }, c.role || cd.sub || 'Numer spoza kontaktów'),
       c.status ? h('p', { class: 'profile-status' }, c.status) : null,
+      c.life && c.life.length ? h('div', { class: 'profile-life' }, c.life.map(art => h('button', { class: 'life-th', 'aria-label': 'Zdjęcie', onclick: () => UI.viewImage(art, { list: c.life }) }, h('img', { src: Art.url(art), alt: '', loading: 'lazy' })))) : null,
       c.bio ? h('div', { class: 'profile-bio' }, h('small', {}, 'O MNIE'), h('p', {}, c.bio)) : null,
-      c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null) });
+      c.number ? h('div', { class: 'profile-number' }, U.ico('phone', 17), '+48 ' + c.number) : null,
+      known && Conversations.all().some(([, d]) => d.who === id) ? h('button', { class: 'btn wide side-profile-link', onclick: () => UI.openConversations(id) }, 'Porozmawiaj na osobności') : null) });
   }
 
   function stamp(t) {
@@ -64,7 +66,7 @@
 
   /* ---------- lista rozmów ---------- */
   function listPage(stack) {
-    const pg = UI.page({ title: 'Rozmowy', sub: 'MGLISKO / KOMUNIKATOR', big: true });
+    const pg = UI.page({ title: 'Wiadomości', big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
     pg.el.classList.add('conversation-list');
     let filter = 'all';
     const search = h('input', { type: 'search', placeholder: 'Szukaj rozmowy', 'aria-label': 'Szukaj rozmowy', class: 'chat-search' });
@@ -80,17 +82,17 @@
     const caseCard = h('button', { class: 'case-card', onclick: () => stack.push(chatPage(stack, 'maja')) },
       UI.avatar('maja'), h('div', {}, h('small', {}, 'ZAGINIONA / 14 PAŹDZIERNIKA'), h('b', {}, 'Maja Wrona'), h('span', {}, 'Ostatnie połączenie było do ciebie.')), U.ico('back', 16));
     const list = h('div', { class: 'chatlist' });
+    const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
-    pg.body.append(caseCard, search, tabs, list);
-    pg.el.appendChild(h('nav', { class: 'messenger-nav', 'aria-label': 'Nawigacja' },
-      h('button', { class: 'on', 'aria-current': 'page' }, U.ico('chat', 20), 'Rozmowy'),
-      h('button', { onclick: () => UI.openApp('notes') }, U.ico('note', 20), 'Ślady'),
-      h('button', { onclick: () => UI.goHome() }, U.ico('grid', 20), 'Telefon')));
+    pg.body.append(caseCard, sideEntry, search, tabs, list);
     function render() {
       caseCard.hidden = !G.isUnlocked('chat:maja');
+      const sideCount = Conversations.available().length;
+      sideEntry.hidden = !G.isUnlocked('chat:group');
+      sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';
       const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
         .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
-        .sort((a, b) => ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
+        .sort((a, b) => Number(PhoneTools.pinned(b)) - Number(PhoneTools.pinned(a)) || ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
       list.innerHTML = '';
       if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : 'Jeszcze cisza. Ktoś zaraz się odezwie.') })); return; }
       ids.forEach(id => {
@@ -107,11 +109,11 @@
         list.appendChild(h('button', { class: 'crow' + (c.unread ? ' unread' : '') + (DATA.chats[id].glitch ? ' glitchy' : ''), onclick: () => stack.push(chatPage(stack, id)) },
           UI.avatar(chatAv(id)),
           h('div', { class: 'cm' },
-            h('div', { class: 'ct' }, h('b', {}, chatName(id)), h('span', {}, last ? stamp(last.t) : '')),
+            h('div', { class: 'ct' }, h('b', {}, PhoneTools.pinned(id) ? h('span', { class: 'pinned-chat', 'aria-label': 'Przypięta rozmowa' }, '●') : null, chatName(id)), h('span', {}, last ? stamp(last.t) : '')),
             h('div', { class: 'cp' }, h('span', { class: 'pv' }, prev), p ? h('span', { class: 'turn' }, 'Odpowiedz') : null, c.unread ? h('span', { class: 'cnt' }, c.unread) : null))));
       });
     }
-    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock'].map(e => BUS.on(e, render));
+    const offs = ['msg', 'typing', 'pending', 'chats', 'unlock', 'evidence', 'conversations', 'phone-tools'].map(e => BUS.on(e, render));
     render();
     return { el: pg.el, destroy: () => offs.forEach(f => f()), onShow: () => { G.viewing = null; render(); } };
   }
@@ -126,7 +128,7 @@
       h('button', { class: 'bk', 'aria-label': 'Wstecz', onclick: () => { SFX.play.tap(); stack.pop(); }, html: U.icon(UI.os === 'android' ? 'arrowL' : 'back', 24) }),
       h('button', { class: 'profile-link', 'aria-label': 'Otwórz profil rozmówcy', onclick: () => profile(id) }, UI.avatar(chatAv(id), 'sm')),
       h('button', { class: 'tt profile-link', 'aria-label': 'Informacje o rozmowie', onclick: () => profile(id) }, h('h1', {}, chatName(id)), sub),
-      h('div', { class: 'rt' }, ffBtn));
+      h('div', { class: 'rt' }, UI.iconBtn('dots', () => UI.chatTools(id), 'Opcje rozmowy'), ffBtn));
     const msgs = h('div', { class: 'msgs' });
     const body = h('div', { class: 'body chat-body' }, msgs);
     const comp = h('div', { class: 'composer' });
@@ -163,14 +165,21 @@
       const newRun = !prev || prev.from !== m.from || m.t - prev.t > 5 * 60000 || sepNeeded(prev, m) || prev.from === 'sys';
       const ch = DATA.chars[m.from] || {};
       const b = h('div', { class: 'bub' + (m.img && !m.text ? ' media' : '') });
-      if (m.img) {
+      UI.bindMessageActions(b, id, m);
+      if (m.img && !m.vid) {
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
         b.appendChild(im);
       }
+      if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
+      if (m.vanish) { b.classList.add('vanish'); b.appendChild(h('span', { class: 'vanish-tag' }, '👁 zniknie po przeczytaniu')); }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
-      if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, ' ✓') : null));
+      if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
+      else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
+      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
+      if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
+      const reaction = PhoneTools.reaction(id, m.id);
+      if (reaction) b.append(h('button', { class: 'message-reaction', 'aria-label': 'Twoja reakcja ' + reaction, onclick: e => { e.stopPropagation(); UI.messageActions(id, m); } }, reaction));
       if (m.clue) {
         b.classList.add('clue');
         b.addEventListener('click', () => { if (G.addEv(m.clue)) UI.evidenceToast(m.clue); else UI.toast('Masz to już w dowodach.', { icon: 'folder' }); });
@@ -206,6 +215,7 @@
       requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
     }
     function append(m, animate = true) {
+      if (m.from === 'me') msgs.querySelectorAll('.delivery').forEach(el => el.remove());
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');
@@ -239,8 +249,13 @@
       if (p.type === 'choose') {
         comp.classList.add('choices');
         comp.appendChild(h('div', { class: 'reply-label' }, 'TWOJA ODPOWIEDŹ'));
+        if (p.camera) {
+          comp.appendChild(h('button', { class: 'opt cam-open', onclick: async () => { SFX.play.tap(); const i = await UI.camera(p.options); if (i != null) { comp.innerHTML = ''; Engine.answer(i); } } },
+            h('span', {}, '📷 Otwórz aparat'), U.ico('send', 15)));
+          scrollEnd(true); return;
+        }
         p.options.forEach((o, n) => comp.appendChild(h('button', {
-          class: 'opt', style: `animation-delay:${n * 60}ms`,
+          class: 'opt' + (o.shot ? ' shot' : ''), style: `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
         }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
         scrollEnd(true);
@@ -269,6 +284,7 @@
       }),
       BUS.on('typing', ({ chat }) => { if (chat === id) showTyping(); }),
       BUS.on('pending', () => renderComposer()),
+      BUS.on('phone-tools', () => { const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
       BUS.on('chats', () => { $('h1', hdr).textContent = chatName(id); setSub(); })
     ];
     renderAll();

@@ -23,6 +23,11 @@
     const o = G.s.objective;
     const list = [];
     list.push({ id: 'todo', pin: true, title: 'Co teraz?', t: G.now(), prev: o ? plain(o.text) : 'Nic pilnego. Sprawdzaj wiadomości.' });
+    list.push({ id: 'season', pin: true, title: 'Szkło pamięta', t: G.now() - 1000, prev: 'Sezon 1 · etapy historii i podsumowanie sesji' });
+    if (PhoneTools.saved().length) list.push({ id: 'quotes', title: 'Zachowane cytaty', t: G.now(), prev: `${PhoneTools.saved().length} wiadomości · nadawcy i daty` });
+    const topics = Conversations.available().length;
+    if (G.isUnlocked('chat:group')) list.push({ id: 'conversations', pin: true, title: 'Na osobności', t: G.now() - 30000,
+      prev: `${topics} ${topics === 1 ? 'temat' : topics >= 2 && topics <= 4 ? 'tematy' : 'tematów'} · prywatne rozmowy i dodatkowe tropy` });
     if (deds.length) list.push({ id: 'questions', pin: true, title: 'Pytania', t: G.now() - 60000, prev: openDeds().length ? `${openDeds().length} bez odpowiedzi · ${DATA.deductions[openDeds()[0]].q}` : 'Wszystko rozstrzygnięte.', dot: openDeds().some(id => !G.seen('ded:' + id)) });
     if (ev.length) list.push({ id: 'saved', title: 'Zapisane', t: G.s.ev[ev[0].id].t, prev: `${ev.length} ${ev.length === 1 ? 'element' : ev.length < 5 ? 'elementy' : 'elementów'} · ${ev[0].title}`, dot: G.freshEvidence() > 0, thumb: (ev.find(e => e.img) || {}).img });
     if (ppl.length) list.push({ id: 'people', title: 'Ludzie', t: G.now() - 120000, prev: ppl.map(([, p]) => p.name.split(' ')[0]).join(', ') });
@@ -48,6 +53,9 @@
   });
 
   function openNote(stack, id) {
+    if (id === 'season') { UI.openSeason(); return; }
+    if (id === 'conversations') { UI.openConversations(); return; }
+    if (id === 'quotes') { UI.savedQuotes(); return; }
     if (id === 'todo') stack.push(todoPage());
     else if (id === 'saved') stack.push(savedPage(stack));
     else if (id === 'people') stack.push(peoplePage());
@@ -58,25 +66,29 @@
 
   function rootPage(stack) {
     const pg = UI.page({ title: 'Notatki', big: true, cls: 'notes' });
+    const search = h('input', { type: 'search', class: 'nt-search', placeholder: 'Szukaj', 'aria-label': 'Szukaj w notatkach' });
+    const content = h('div', {});
+    pg.body.append(search, content);
     const render = () => {
-      pg.body.innerHTML = '';
-      const all = notesList();
-      pg.body.appendChild(h('div', { class: 'nt-search' }, U.ico('search', 16), h('span', {}, 'Szukaj')));
+      content.innerHTML = '';
+      const query = U.norm(search.value);
+      const all = notesList().filter(n => !query || U.norm(n.title + ' ' + n.prev).includes(query));
       const sec = (label, items) => {
         if (!items.length) return;
-        pg.body.appendChild(h('div', { class: 'nt-sec' }, label));
+        content.appendChild(h('div', { class: 'nt-sec' }, label));
         const box = h('div', { class: 'nt-list' });
         items.forEach(n => box.appendChild(h('button', { class: 'nt-row' + (n.dot ? ' has-new' : ''), onclick: () => openNote(stack, n.id) },
           h('div', { class: 'nt-m' }, h('b', {}, n.title), h('span', {}, h('i', {}, short(n.t)), n.prev)),
           n.thumb ? h('img', { class: 'nt-th', src: Art.url(n.thumb), alt: '' }) : null)));
-        pg.body.appendChild(box);
+        content.appendChild(box);
       };
       sec('Przypięte', all.filter(n => n.pin));
       sec('Notatki', all.filter(n => !n.pin));
-      pg.body.appendChild(h('div', { class: 'nt-count' }, `${all.length} notatek`));
+      content.appendChild(h('div', { class: 'nt-count' }, all.length ? `${all.length} notatek` : 'Brak wyników'));
     };
+    search.addEventListener('input', render);
     render();
-    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges'].map(e => BUS.on(e, render));
+    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges', 'conversations'].map(e => BUS.on(e, render));
     return { el: pg.el, onShow: render, destroy: () => offs.forEach(f => f()) };
   }
 
@@ -111,7 +123,7 @@
       }
       const n = openDeds().length;
       if (n) box.appendChild(h('p', { class: 'nt-sub' }, `Pytania bez odpowiedzi: ${n} (notatka „Pytania”).`));
-      box.appendChild(h('p', { class: 'nt-foot' }, `${ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : 'Rozdział ' + ch.num} · ${ch.title || ''} · ${Object.keys(G.s.ev).length} zapisanych`));
+      box.appendChild(h('p', { class: 'nt-foot' }, `${ch.kicker ? ch.kicker : ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : 'Rozdział ' + ch.num} · ${ch.title || ''} · ${Object.keys(G.s.ev).length} zapisanych`));
     };
     render();
     const off = BUS.on('goal', render);
@@ -120,7 +132,7 @@
 
   /* ---------- Zapisane ---------- */
   function savedPage(stack) {
-    const pg = notePage('Zapisane', Date.now());
+    const pg = notePage('Zapisane', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     const render = () => {
@@ -157,7 +169,7 @@
 
   /* ---------- Ludzie ---------- */
   function peoplePage() {
-    const pg = notePage('Ludzie', Date.now());
+    const pg = notePage('Ludzie', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     Object.entries(DATA.persons).filter(([, p]) => G.test(p.cond)).forEach(([id, p]) => {
@@ -177,18 +189,19 @@
       title: '', body: h('div', { class: 'pp-detail' },
         h('div', { class: 'pp-top' }, UI.avatar(p.av || id, 'lg'), h('div', {}, h('h2', {}, p.name), h('span', {}, U.tpl(p.role || '')))),
         t != null ? h('div', { class: 'pp-trust' }, h('span', {}, 'Relacja'), h('div', { class: 'pp-bar' }, h('i', { style: `width:${U.clamp(50 + t * 10, 6, 100)}%` })), h('small', {}, t > 1 ? 'ufa ci' : t < -1 ? 'nie ufa ci' : 'ostrożnie')) : null,
-        h('ul', { class: 'pp-facts' }, facts.map(f => h('li', { html: U.rich(f.text) }))))
+        h('ul', { class: 'pp-facts' }, facts.map(f => h('li', { html: U.rich(f.text) }))),
+        Conversations.all().some(([, d]) => d.who === id) ? h('button', { class: 'btn wide', onclick: () => UI.openConversations(id) }, 'Porozmawiaj na osobności') : null)
     });
   }
 
   /* ---------- Oś czasu ---------- */
   function timelinePage() {
-    const pg = notePage('Oś czasu', Date.now());
+    const pg = notePage('Oś czasu', G.now());
     const items = DATA.timeline.filter(t => G.test(t.cond)).sort((a, b) => U.parseLocal(a.t) - U.parseLocal(b.t));
     const tl = h('div', { class: 'tl' });
     let year = null;
     items.forEach(t => {
-      const d = U.parseLocal(t.t);
+      const d = new Date(U.parseLocal(t.t));
       if (d.getFullYear() !== year) { year = d.getFullYear(); tl.appendChild(h('div', { class: 'tl-y' }, String(year))); }
       tl.appendChild(h('div', { class: 'tl-i' + (t.key ? ' key' : '') },
         h('div', { class: 'tl-d' }, `${d.getDate()} ${U.MONTHS_GEN[d.getMonth()].slice(0, 3)}`, t.time !== false ? h('small', {}, U.time(d)) : null),
@@ -200,7 +213,7 @@
 
   /* ---------- Pytania ---------- */
   function questionsPage() {
-    const pg = notePage('Pytania', Date.now());
+    const pg = notePage('Pytania', G.now());
     const box = h('div', { class: 'nt-body' });
     pg.body.appendChild(box);
     const render = () => {

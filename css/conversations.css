@@ -1,0 +1,45 @@
+/* Prywatne rozmowy: ten sam telefon, spokojniejszy rytm. */
+.side-entry { display:block; width:calc(100% - 40px); margin:-6px 20px 18px; padding:12px 0; min-height:44px; border-bottom:1px solid var(--line); color:var(--acc2); text-align:left; font-size:12px; }
+.side-entry[hidden] { display:none; }
+.side-profile-link { margin-top:22px; }
+.side-intro { margin:2px 22px 22px; font-size:13px; line-height:1.75; color:var(--tx2); }
+.side-empty { margin:22px; color:var(--tx2); line-height:1.7; }
+.side-lead { display:flex; width:100%; gap:14px; align-items:flex-start; padding:20px 22px; text-align:left; border-top:1px solid var(--line); }
+.side-lead .av { width:48px; height:48px; flex-shrink:0; }
+.side-lead > div { flex:1; min-width:0; }
+.side-lead small { display:block; color:var(--acc); font:10px var(--mono); line-height:1.5; }
+.side-lead b { display:block; font-size:15px; font-weight:550; margin:6px 0; }
+.side-lead div > span { color:var(--tx2); font-size:12px; line-height:1.65; display:block; }
+.side-lead > .icw { transform:rotate(180deg); margin-top:17px; color:var(--tx3); }
+.side-sheet { max-height:92%; }
+.side-person { display:flex; gap:13px; align-items:center; padding:6px 0 22px; border-bottom:1px solid var(--line); margin-bottom:20px; }
+.side-person .av { width:54px; height:54px; }
+.side-person b { display:block; font-weight:550; font-size:15px; }
+.side-person div > span { display:block; color:var(--tx2); font-size:11px; line-height:1.6; margin-top:5px; }
+.side-dialogue { padding:0 20px 22px; }
+.side-message { background:var(--them); max-width:91%; border-radius:3px 10px 10px 10px; padding:11px 13px; margin:10px auto 10px 0; }
+.side-message.mine { background:var(--me); margin-left:auto; margin-right:0; border-radius:10px 3px 10px 10px; }
+.side-message small { color:var(--acc2); font-size:10px; }
+.side-message p { font-size:14px; line-height:1.7; margin:4px 0 0; overflow-wrap:anywhere; }
+.side-actions { margin-top:22px; display:flex; flex-direction:column; gap:9px; }
+.side-label { font:9px var(--mono); letter-spacing:.13em; color:var(--tx2); }
+.side-choice { display:flex; gap:12px; align-items:center; justify-content:space-between; min-height:48px; padding:13px; background:#a9c8a209; border:1px solid #8daa7950; border-radius:6px; text-align:left; font-size:13px; line-height:1.6; }
+.side-choice .icw { flex-shrink:0; color:var(--acc); }
+.side-choice:hover { background:#a9c8a220; }
+.side-typing, .side-complete { font-size:12px; line-height:1.65; color:var(--tx2); margin:0 0 6px; }
+.side-typing { color:var(--acc); }
+.side-attachments { display:flex; flex-direction:column; gap:3px; margin-top:7px; }
+.side-attachments button { display:flex; align-items:center; gap:9px; min-height:44px; border-bottom:1px solid var(--line); color:var(--acc2); font-size:12px; text-align:left; line-height:1.5; }
+.side-choice small { display:block; font-size:13px; line-height:1.45; margin-top:7px; color:var(--tx2); }
+.note-history { padding:0 18px 22px; }
+.note-version { border-top:1px solid var(--line); padding:18px 0; }
+.note-version h4 { margin:0 0 12px; font-size:15px; font-weight:600; color:var(--tx); line-height:1.45; }
+.note-version .paper { margin:0 0 16px; padding:18px; font-size:17px; line-height:1.55; overflow-wrap:anywhere; }
+.note-history>.pad { padding:16px 0 0; }
+.voice-msg { min-width:210px; }
+.voice-row { display:flex; align-items:center; gap:9px; }
+.voice-play { width:34px; height:34px; border-radius:50%; border:0; background:var(--accent,#3478f6); color:#fff; font-size:13px; flex:none; }
+.voice-wave { display:flex; align-items:center; gap:2px; flex:1; height:22px; }
+.voice-wave i { display:block; width:3px; border-radius:2px; background:currentColor; opacity:.55; }
+.voice-from { display:block; margin-top:4px; opacity:.7; }
+.voice-tr { margin:8px 0 0; font-size:15px; opacity:.9; font-style:italic; }

@@ -3,7 +3,7 @@
 
 (() => {
   const D = Art.def;
-  const phone = (date, time, extra = {}) => Object.assign({ date, time, device: 'Galaxy A54 · aparat główny', file: `IMG_${date.split('.').reverse().join('')}_${time.replace(':', '')}${String(Math.floor(Math.random() * 90 + 10))}.jpg` }, extra);
+  const phone = (date, time, extra = {}) => Object.assign({ date, time, device: 'Tellio A54 · aparat główny', file: `IMG_${date.split('.').reverse().join('')}_${time.replace(':', '')}${String(Math.floor(Math.random() * 90 + 10))}.jpg` }, extra);
   const trap = (cam, n, date, time, extra = {}) => Object.assign({ date, time, device: `BushView Trail 4G · ${cam}`, place: cam === 'CAM-01' ? 'Huta „Jutrzenka” — brama i dziedziniec' : 'Huta „Jutrzenka” — hala A, przy odprężarce', file: `${cam.replace('-', '')}_IMG_${String(n).padStart(4, '0')}.JPG` }, extra);
   const tstamp = (cam, n, date, time, temp, moon) => ({ kind: 'trap', cam, date: date.replace(/\./g, '/'), time, temp, moon, id: `IMG_${String(n).padStart(4, '0')}` });
 
@@ -47,9 +47,9 @@
   });
 
   /* ================= OGRODZENIE I TRAFOSTACJA ================= */
-  D('m_fence', {
+  D('m_fence', { src: 'assets/maja/m_fence.jpg',
     title: 'Ogrodzenie przy trafostacji', exif: phone('03.10.2026', '15:12', { place: 'Mglisko, teren huty od wschodu' }),
-    hotspots: [{ x: 880, y: 640, r: 120, ev: 'ev_fence_gap' }],
+    hotspots: [{ x: 850, y: 650, r: 130, ev: 'ev_fence_gap' }],
     draw: k => {
       const { W, H } = k;
       let s = k.sky([[0, '#66717a'], [1, '#a2a8ab']]);
@@ -140,8 +140,8 @@
     if (o.puddle) s += k.ell(W * 0.55, H * 0.82, 200, 26, winC, 'opacity=".25"');
     return s;
   }
-  D('m_hall', { title: 'Hala A', exif: phone('03.10.2026', '15:40', { place: 'Huta „Jutrzenka”, hala A' }), draw: k => hall(k, { light: 'day', puddle: true }) });
-  D('m_cam_install', {
+  D('m_hall', { src: 'assets/maja/m_hall.jpg', title: 'Hala A', exif: phone('03.10.2026', '15:40', { place: 'Huta „Jutrzenka”, hala A' }), draw: k => hall(k, { light: 'day', puddle: true }) });
+  D('m_cam_install', { src: 'assets/maja/m_cam_install.jpg',
     title: 'Fotopułapka na filarze', exif: phone('09.10.2026', '17:30', { place: 'Huta „Jutrzenka”, hala A' }),
     draw: k => {
       let s = hall(k, { light: 'dusk', cols: 2 });
@@ -168,12 +168,12 @@
     for (let i = 0; i < 20; i++) { const x = 340 + k.r() * 780; s += k.rect(x, H * 0.72 + k.r() * 180, 20 + k.r() * 50, 6 + k.r() * 6, '#0d0c0b', `transform="rotate(${(k.r() - 0.5) * 50} ${x} ${H * 0.8})"`); }
     return s;
   }
-  D('m_lockers', {
+  D('m_lockers', { src: 'assets/maja/m_lockers.jpg',
     title: 'Szatnia, hala B', exif: phone('03.10.2026', '16:02', { place: 'Huta „Jutrzenka”, hala B, piętro 1' }),
-    hotspots: [{ x: 880, y: 300, r: 80, ev: 'ev_szafka17' }, { x: 905, y: 435, r: 50, ev: 'ev_szafka17' }],
+    hotspots: [{ x: 1050, y: 180, r: 80, ev: 'ev_szafka17' }, { x: 960, y: 480, r: 55, ev: 'ev_szafka17' }],
     draw: k => lockerRoom(k, {})
   });
-  D('m_kodak', {
+  D('m_kodak', { src: 'assets/maja/m_kodak.jpg',
     title: 'Co było w szafce 17', exif: phone('03.10.2026', '16:10', { place: 'Huta „Jutrzenka”, szatnia', note: 'Lampa błyskowa' }), style: 'flash',
     draw: k => {
       const { W, H } = k;
@@ -220,12 +220,12 @@
     s += k.grime(0, 0, W, H, { op: 0.45, freq: 0.008 });
     return s;
   }
-  D('m_lehr', {
+  D('m_lehr', { src: 'assets/maja/m_lehr.jpg',
     title: 'Odprężarka — zamurowany fragment', exif: phone('08.10.2026', '14:05', { place: 'Huta „Jutrzenka”, hala A, poziom −1', note: 'Lampa błyskowa + czołówka' }), style: 'flash',
-    hotspots: [{ x: 600, y: 420, r: 190, ev: 'ev_bricks' }, { x: 290, y: 772, r: 40, ev: 'ev_toy', zoom: 1.8 }],
+    hotspots: [{ x: 598, y: 398, r: 220, ev: 'ev_bricks' }, { x: 334, y: 797, r: 45, ev: 'ev_toy', zoom: 1.8 }],
     draw: k => lehrWall(k, { toy: [290, 772, 0.5] })
   });
-  D('m_bricks', {
+  D('m_bricks', { src: 'assets/maja/m_bricks.jpg',
     title: 'Dwie cegły', exif: phone('08.10.2026', '14:09', { place: 'Huta „Jutrzenka”, odprężarka', note: 'Makro' }), style: 'flash',
     draw: k => {
       const { W, H } = k;
@@ -239,7 +239,7 @@
   });
 
   /* ================= CIEMNIA W ŁAZIENCE ================= */
-  D('m_darkroom', {
+  D('m_darkroom', { src: 'assets/maja/m_darkroom.jpg',
     title: 'Ciemnia', exif: phone('05.10.2026', '22:47', { place: 'Mglisko, ul. Szklarska 4' }), style: 'photo', grade: 'none',
     draw: k => {
       const { W, H } = k;
@@ -278,11 +278,11 @@
     }
     return s;
   }
-  D('m_library', { title: 'Biblioteka Gminna', exif: phone('11.10.2026', '16:00', { place: 'Mglisko, Rynek 9' }), grade: 'warm', draw: k => library(k) });
+  D('m_library', { src: 'assets/maja/m_library.jpg', title: 'Biblioteka Gminna', exif: phone('11.10.2026', '16:00', { place: 'Mglisko, Rynek 9' }), grade: 'warm', draw: k => library(k) });
   D('w_books', { title: 'Tydzień Bibliotek', grade: 'warm', w: 900, h: 900, draw: k => library(k, { table: false }) });
 
   /* ================= LUSTRO / ZAPOWIEDŹ ================= */
-  D('m_mirror', {
+  D('m_mirror', { src: 'assets/maja/m_mirror.jpg',
     title: 'Szkło pamięta', w: 900, h: 1125, exif: phone('12.10.2026', '15:48', { place: 'Huta „Jutrzenka”, biuro hali B' }), grade: 'cold',
     draw: k => {
       const { W, H } = k;
@@ -302,9 +302,9 @@
   });
 
   /* ================= OKNO — AUTO POD DOMEM ================= */
-  D('m_window', {
+  D('m_window', { src: 'assets/maja/m_window.jpg',
     title: 'Z okna', w: 900, h: 1200, exif: phone('13.10.2026', '23:10', { place: 'Mglisko, ul. Szklarska 4, piętro', note: 'Tryb nocny' }), style: 'night',
-    hotspots: [{ x: 470, y: 900, r: 140, ev: 'ev_car_window' }],
+    hotspots: [{ x: 500, y: 870, r: 160, ev: 'ev_car_window' }],
     draw: k => {
       const { W, H } = k;
       let s = k.sky([[0, '#06090d'], [1, '#1a1f26']]);
@@ -323,7 +323,7 @@
   });
 
   /* ================= NAD ZALEWEM / PIES ================= */
-  D('m_ola_lake', {
+  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg',
     title: 'Z Olą nad zalewem', exif: phone('21.09.2026', '18:42', { place: 'Zalew Mgliski, tama' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;
@@ -339,7 +339,7 @@
       return s;
     }
   });
-  D('m_bandzior', {
+  D('m_bandzior', { src: 'assets/maja/m_bandzior.jpg',
     title: 'Bandzior', exif: phone('24.09.2026', '20:15', { place: 'Mglisko, ul. Szklarska 4' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;
@@ -380,48 +380,48 @@
   const irF = 'fill';
   const fig = (k, x, y, H, o) => k.human(x, y, H, Object.assign({ fill: '#1c1c1c' }, o));
 
-  D('c1_0003', {
+  D('c1_0003', { src: 'assets/trap/c1_0003.jpg',
     title: 'CAM-01 · test', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 3, '09.10.2026', '18:02'), stamp: tstamp('CAM-01', 3, '09.10.2026', '18:02:11', 9, 'wax'),
     draw: k => yard(k, { mode: 'day' }) + k.g(k.ell(0, 0, 260, 330, '#d9a888') + k.ell(-180, -200, 70, 160, '#d9a888', 'transform="rotate(-20 -180 -200)"') + k.ell(-60, -300, 60, 170, '#d9a888') + k.ell(70, -300, 58, 160, '#d9a888') + k.ell(190, -230, 54, 150, '#d9a888', 'transform="rotate(18 190 -230)"'), `transform="translate(900,760)" ${k.blur(22)}`)
   });
-  D('c1_0011', {
+  D('c1_0011', { src: 'assets/trap/c1_0011.jpg',
     title: 'CAM-01 · lis', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 11, '10.10.2026', '02:44'), stamp: tstamp('CAM-01', 11, '10.10.2026', '02:44:52', 3, 'wax'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 90, 34, '#8a8a8a') + k.ell(96, -30, 34, 26, '#8a8a8a') + k.path('M110,-46 L104,-80 L124,-50 Z M86,-50 L84,-82 L102,-52 Z', '#8a8a8a') + k.ell(132, -22, 22, 10, '#8a8a8a') + k.pl([[-60, 20], [-64, 60]], '#8a8a8a', 12) + k.pl([[50, 20], [54, 60]], '#8a8a8a', 12) + k.path('M-88,-6 Q-170,-20 -200,30 Q-150,10 -86,14 Z', '#9a9a9a') + k.circle(108, -34, 7, '#fff') + k.circle(126, -32, 6, '#fff') + k.glow(117, -33, 30, '#fff', 0.8), 'transform="translate(560,560)"')
   });
-  D('c1_0014', {
+  D('c1_0014', { src: 'assets/trap/c1_0014.jpg',
     title: 'CAM-01 · sarna', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 14, '11.10.2026', '06:58'), stamp: tstamp('CAM-01', 14, '11.10.2026', '06:58:03', 2, 'wax'),
     draw: k => yard(k, { mode: 'dawn' }) + k.g(k.ell(0, 0, 110, 50, '#6b4a30') + k.pl([[-70, 30], [-76, 130]], '#5a3c26', 12) + k.pl([[-40, 30], [-38, 130]], '#5a3c26', 12) + k.pl([[60, 30], [64, 130]], '#5a3c26', 12) + k.pl([[86, 30], [92, 130]], '#5a3c26', 12) + k.path('M90,-20 L130,-110 L160,-100 L120,-10 Z', '#6b4a30') + k.ell(160, -110, 30, 20, '#6b4a30') + k.ell(184, -104, 14, 9, '#3a2a1a') + k.path('M146,-126 L138,-160 L152,-128 Z M160,-126 L166,-160 L170,-126 Z', '#5a3c26') + k.ell(-100, -10, 22, 18, '#e8e0d0'), 'transform="translate(820,470) scale(.8)"') + k.fog(250, 300, { op: 0.4 })
   });
-  D('c1_0021', {
+  D('c1_0021', { src: 'assets/trap/c1_0021.jpg',
     title: 'CAM-01 · 14.10, 22:57', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 21, '14.10.2026', '22:57'), stamp: tstamp('CAM-01', 21, '14.10.2026', '22:57:40', 4, 'wax'), onView: 'ev_cam1_maja',
     draw: k => yard(k) + fig(k, 760, 560, 300, { fill: '#4a4a4a', hair: 'tail', hairFill: '#555', la: [-14, -8], ra: [16, 10], stride: 0.4 }) + k.rect(728, 330, 64, 90, '#3a3a3a', 'rx="12"') + k.glow(768, 286, 60, '#fff', 1) + k.beam(768, 286, -20, 600, 14, '#fff', 0.35, 10)
   });
-  D('c1_0022', {
+  D('c1_0022', { src: 'assets/trap/c1_0022.jpg',
     title: 'CAM-01 · 15.10, 01:20', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 22, '15.10.2026', '01:20'), stamp: tstamp('CAM-01', 22, '15.10.2026', '01:20:17', 2, 'wax'), onView: 'ev_cam1_car',
     draw: k => yard(k) + k.car(420, 600, 1.15, { view: 'front', lights: true, fill: '#262626', glass: '#0a0a0a', plateFill: '#ddd' }) + k.glow(330, 520, 320, '#fff', 0.7) + k.glow(510, 520, 320, '#fff', 0.7)
   });
-  D('c1_0023', {
+  D('c1_0023', { src: 'assets/trap/c1_0023.jpg',
     title: 'CAM-01 · 15.10, 02:05', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 23, '15.10.2026', '02:05', { note: 'Zdjęcie bardzo ciemne' }), stamp: tstamp('CAM-01', 23, '15.10.2026', '02:05:44', 1, 'wax'),
     edit: { target: { exp: [2.2, 3.6], con: [1.2, 1.9] }, result: 'c1_0023e', ev: 'ev_plate_cam', darkMsg: 'Zdjęcie jest niedoświetlone — IR nie doświetlił odjeżdżającego auta. Rozjaśnij mocno.', doneMsg: 'Tablica częściowo czytelna: DDZ 6K1… Zapisano w Galerii → Wywołane.' },
     fx: { grain: 0.4 },
     draw: k => `<g opacity=".32">${yard(k)}</g>` + `<g opacity=".38">${k.car(430, 590, 1.0, { view: 'rear', tail: true, fill: '#3a3a3a', glass: '#141414', plate: 'DDZ 6K1', plateFill: '#9a9a9a', plateText: '#3a3a3a' })}</g>` + k.ell(470, 543, 14, 12, '#141414', 'opacity=".9"')
   });
-  D('c1_0023e', {
+  D('c1_0023e', { src: 'assets/trap/c1_0023e.jpg',
     title: 'CAM-01 · 15.10, 02:05 (rozjaśnione)', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 23, '15.10.2026', '02:05', { note: 'Rozjaśnione w Ciemni' }), stamp: tstamp('CAM-01', 23, '15.10.2026', '02:05:44', 1, 'wax'),
     fx: { grain: 0.5 },
     draw: k => `<g opacity=".85">${yard(k)}</g>` + k.car(430, 590, 1.0, { view: 'rear', tail: true, fill: '#5a5a5a', glass: '#2a2a2a', plate: 'DDZ 6K1', plateFill: '#e0e0e0', plateText: '#111' }) + k.ell(470, 543, 14, 12, '#3a3226') + k.glow(330, 522, 90, '#fff', 0.6) + k.glow(530, 522, 90, '#fff', 0.6)
   });
-  D('c1_0031', {
+  D('c1_0031', { src: 'assets/trap/c1_0031.jpg',
     title: 'CAM-01 · 16.10, 11:12', w: 1280, h: 720, style: 'irday', exif: trap('CAM-01', 31, '16.10.2026', '11:12'), stamp: tstamp('CAM-01', 31, '16.10.2026', '11:12:30', 8, 'half'),
     draw: k => yard(k, { mode: 'day' }) + fig(k, 520, 600, 260, { fill: '#1d2638', cap: true, capFill: '#151c2a', la: [-10, -4], ra: [80, 80] }) + fig(k, 680, 590, 250, { fill: '#1d2638', cap: true, capFill: '#151c2a' }) + k.rect(620, 480, 120, 14, '#c9d0d8', 'opacity=".7"')
   });
-  D('c1_0044', {
+  D('c1_0044', { src: 'assets/trap/c1_0044.jpg',
     title: 'CAM-01 · 19.10, 03:30', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 44, '19.10.2026', '03:30'), stamp: tstamp('CAM-01', 44, '19.10.2026', '03:30:02', 0, 'half'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 26, 36, '#8a8a8a') + k.circle(0, -38, 20, '#8a8a8a') + k.circle(-8, -40, 5, '#fff') + k.circle(8, -40, 5, '#fff') + k.path('M-16,-52 L-12,-66 L-4,-56 Z M16,-52 L12,-66 L4,-56 Z', '#8a8a8a'), 'transform="translate(574,140)"')
   });
-  D('c1_0057', {
+  D('c1_0057', { src: 'assets/trap/c1_0057.jpg',
     title: 'CAM-01 · 22.10, 02:13', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 57, '22.10.2026', '02:13'), stamp: tstamp('CAM-01', 57, '22.10.2026', '02:13:26', 3, 'wax'),
-    hotspots: [{ x: 700, y: 410, r: 70, ev: 'ev_jacket', zoom: 1.8 }],
+    hotspots: [{ x: 470, y: 360, r: 90, ev: 'ev_jacket', zoom: 1.8 }],
     draw: k => {
       let s = yard(k);
       s += fig(k, 700, 640, 420, { fill: '#5c5c5c', broad: true, hood: true, hoodFill: '#555', la: [-12, -6], ra: [30, 70], stripes: '#f2f2f2', stride: 0.3 });
@@ -430,23 +430,23 @@
       return s;
     }
   });
-  D('c1_0058', {
+  D('c1_0058', { src: 'assets/trap/c1_0058.jpg',
     title: 'CAM-01 · 22.10, 23:41', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 58, '22.10.2026', '23:41'), stamp: tstamp('CAM-01', 58, '22.10.2026', '23:41:09', 2, 'half'),
     draw: k => yard(k) + fig(k, 880, 600, 250, { fill: '#4e4e4e', beanie: true, beanieFill: '#5a5a5a', la: [-20, -60], ra: [20, 10], stride: 0.5 }) + fig(k, 1010, 610, 270, { fill: '#555', hair: 'short', la: [-10, -5], ra: [40, 90] }) + k.circle(1000, 446, 6, '#fff', 'opacity=".8"') + k.circle(1020, 446, 6, '#fff', 'opacity=".8"') + k.glow(1060, 520, 30, '#fff', 0.8)
   });
-  D('c1_0060', {
+  D('c1_0060', { src: 'assets/trap/c1_0060.jpg',
     title: 'CAM-01 · 23.10, 00:12', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 60, '23.10.2026', '00:12'), stamp: tstamp('CAM-01', 60, '23.10.2026', '00:12:51', 2, 'half'),
     draw: k => yard(k) + k.car(420, 600, 1.15, { view: 'front', lights: true, fill: '#262626', glass: '#0a0a0a', plateFill: '#ddd' }) + k.glow(330, 520, 300, '#fff', 0.7) + k.glow(510, 520, 300, '#fff', 0.7) + fig(k, 640, 590, 260, { fill: '#4a4a4a', broad: true, la: [-8, -4], ra: [60, 90] }) + k.glow(700, 470, 40, '#fff', 1)
   });
-  D('c1_0061', {
+  D('c1_0061', { src: 'assets/trap/c1_0061.jpg',
     title: 'CAM-01 · 23.10, 00:31', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 61, '23.10.2026', '00:31', { note: 'Ostatnie zdjęcie przed utratą połączenia' }), stamp: tstamp('CAM-01', 61, '23.10.2026', '00:31:12', 2, 'half'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 300, 360, '#4a4a4a') + k.ell(-200, -240, 80, 190, '#4a4a4a', 'transform="rotate(-20 -200 -240)"') + k.ell(-70, -340, 70, 200, '#4a4a4a') + k.ell(70, -340, 66, 190, '#4a4a4a') + k.ell(200, -270, 60, 170, '#4a4a4a', 'transform="rotate(18 200 -270)"'), `transform="translate(640,820)" ${k.blur(16)}`) + k.glow(1100, 120, 260, '#fff', 0.9)
   });
   const liveExif = p => { const d = p.split('T')[0].split('-').reverse().join('.'); return trap('CAM-01', 'LIVE', d, p.split('T')[1].slice(0, 5), { file: 'CAM01_LIVE.JPG', note: 'Zdjęcie na żądanie (panel)' }); };
   const liveStamp = (temp) => p => { const [d, t] = p.split('T'); return { kind: 'trap', cam: 'CAM-01', date: d.split('-').reverse().join('/'), time: t, temp, moon: 'wax', id: 'LIVE' }; };
-  D('c1_live_day', { title: 'CAM-01 · na żywo', w: 1280, h: 720, style: 'irday', exif: liveExif, stamp: liveStamp(7), draw: k => yard(k, { mode: 'day' }) });
-  D('c1_live_night', { title: 'CAM-01 · na żywo', w: 1280, h: 720, style: 'ir', exif: liveExif, stamp: liveStamp(1), draw: k => yard(k) });
-  D('c1_live_gajda', {
+  D('c1_live_day', { photo: 'assets/trap/live_day.jpg', title: 'CAM-01 · na żywo', w: 1280, h: 720, style: 'irday', exif: liveExif, stamp: liveStamp(7), draw: k => yard(k, { mode: 'day' }) });
+  D('c1_live_night', { photo: 'assets/trap/live_night.jpg', title: 'CAM-01 · na żywo', w: 1280, h: 720, style: 'ir', exif: liveExif, stamp: liveStamp(1), draw: k => yard(k) });
+  D('c1_live_gajda', { photo: 'assets/trap/live_gajda.jpg',
     title: 'CAM-01 · na żywo', w: 1280, h: 720, style: 'ir', exif: liveExif, stamp: liveStamp(1),
     draw: k => {
       let s = yard(k);
@@ -470,21 +470,21 @@
     for (let i = 0; i < 5; i++) s += k.rect(W * 0.72 + i * 10, H * 0.66 + i * 26, W * 0.24, 6, '#262626');
     return s;
   }
-  D('c2_0004', {
+  D('c2_0004', { src: 'assets/trap/c2_0004.jpg',
     title: 'CAM-02 · test', w: 1280, h: 720, style: 'ir', exif: trap('CAM-02', 4, '09.10.2026', '18:20'), stamp: tstamp('CAM-02', 4, '09.10.2026', '18:20:45', 7, 'wax'),
     draw: k => hallTrap(k) + fig(k, 640, 640, 330, { fill: '#555', hair: 'tail', hairFill: '#5a5a5a', stride: 0.4 }) + k.rect(600, 380, 80, 110, '#444', 'rx="14"')
   });
-  D('c2_0019', {
+  D('c2_0019', { src: 'assets/trap/c2_0019.jpg',
     title: 'CAM-02 · 13.10, 02:40', w: 1280, h: 720, style: 'ir', exif: trap('CAM-02', 19, '13.10.2026', '02:40'), stamp: tstamp('CAM-02', 19, '13.10.2026', '02:40:33', 3, 'wax'), onView: 'ev_cam2_0019',
     draw: k => hallTrap(k) + fig(k, 760, 650, 400, { fill: '#4a4a4a', broad: true, la: [-10, -6], ra: [-60, -110] }) + k.glow(700, 340, 260, '#fff', 1) + k.glow(700, 340, 90, '#fff', 1) + k.circle(700, 340, 30, '#fff') + k.beam(700, 340, 160, 900, 18, '#fff', 0.3, 20)
   });
 
   /* ================= ZALEGŁE ZDJĘCIA MAI (14.10) ================= */
-  D('s_wall', {
+  D('s_wall', { src: 'assets/maja/s_wall.jpg',
     title: '14.10, 23:44', exif: phone('14.10.2026', '23:44', { place: 'Huta „Jutrzenka”, odprężarka', note: 'Zsynchronizowano 24.10, 03:06' }), style: 'flash', onView: 'ev_sync_wall',
     draw: k => lehrWall(k, { hole: true }) + k.rect(0, 0, k.W, k.H, k.rad([[0, '#fff', 0.0], [0.3, '#000', 0.1], [1, '#000', 0.85]], 0.5, 0.62, 0.6))
   });
-  D('s_door', {
+  D('s_door', { src: 'assets/maja/s_door.jpg',
     title: '14.10, 23:53', exif: phone('14.10.2026', '23:53', { place: 'Huta „Jutrzenka”, hala A', note: 'Poruszone · zsynchronizowano 24.10, 03:06' }), style: 'night', fx: { soft: 2.5, grain: 0.4 }, onView: 'ev_sync_door',
     draw: k => {
       const { W, H } = k;
@@ -497,7 +497,7 @@
       return s;
     }
   });
-  D('s_blur', {
+  D('s_blur', { src: 'assets/maja/s_blur.jpg',
     title: '14.10, 23:54', exif: phone('14.10.2026', '23:54', { place: 'Huta „Jutrzenka”, hala A', note: 'Zsynchronizowano 24.10, 03:06' }), style: 'night', fx: { soft: 6, grain: 0.5 },
     draw: k => {
       const { W, H } = k;
@@ -523,7 +523,7 @@
       return s;
     }
   });
-  D('k_gate', {
+  D('k_gate', { src: 'assets/kuba/k_gate.jpg',
     title: 'Brama', w: 900, h: 1200, exif: phone('22.10.2026', '23:36', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”' }), style: 'flash',
     draw: k => {
       const { W, H } = k;
@@ -538,7 +538,7 @@
       return s;
     }
   });
-  D('k_locker', {
+  D('k_locker', { src: 'assets/kuba/k_locker.jpg',
     title: 'Szafka 17 od środka', w: 900, h: 1200, exif: phone('22.10.2026', '23:58', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, szatnia' }), style: 'flash', onView: 'ev_dk97',
     draw: k => {
       const { W, H } = k;
@@ -552,11 +552,11 @@
       return s;
     }
   });
-  D('k_wall', {
+  D('k_wall', { src: 'assets/kuba/k_wall.jpg',
     title: 'Mur w odprężarce', exif: phone('23.10.2026', '00:04', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, odprężarka' }), style: 'flash', onView: 'ev_patch',
     draw: k => lehrWall(k, { patch: true, pallets: true })
   });
-  D('k_headlamp', {
+  D('k_headlamp', { src: 'assets/kuba/k_headlamp.jpg',
     title: 'Czołówka', exif: phone('23.10.2026', '00:06', { device: 'Telefon Kuby', place: 'Huta „Jutrzenka”, odprężarka' }), style: 'flash', onView: 'ev_headlamp',
     draw: k => {
       const { W, H } = k;
@@ -569,7 +569,7 @@
       return s;
     }
   });
-  D('k_mount', {
+  D('k_mount', { src: 'assets/kuba/k_mount.jpg',
     title: 'Filar w hali A', w: 900, h: 1200, exif: phone('23.10.2026', '00:09', { device: 'Telefon Igora', place: 'Huta „Jutrzenka”, hala A' }), style: 'flash', onView: 'ev_mount',
     draw: k => {
       const { W, H } = k;

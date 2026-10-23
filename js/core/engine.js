@@ -74,14 +74,20 @@ const Engine = (() => {
     rename: (chat, name, avatar) => ({ t: 'rename', chat, name, avatar }),
     ambient: mood => ({ t: 'ambient', mood }),
     deduce: id => ({ t: 'unlock', keys: ['ded:' + id] }),
-    tl: id => ({ t: 'tl', id })
+    tl: id => ({ t: 'tl', id }),
+    scene: (id, steps) => ({ t: 'scene', id, steps }),
+    // Straszak: odpala się raz na zapis (s.scares), nigdy przy przewijaniu ani po wczytaniu.
+    scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o }),
+    nearby: (id, o = {}) => ({ t: 'nearby', id, ...o }),
+    vanish: (chat, text) => ({ t: 'vanish', chat, text }),
+    camera: (chat, options, o = {}) => ({ t: 'choose', chat, options, camera: true, ...o })
   };
 
   /* ---------- Kompilacja ---------- */
   function compile(raw, chId) {
     const out = [];
-    let n = 0;
-    const L = p => `${p}${n++}`;
+    let n = 0, prefix = '';
+    const L = p => `${prefix}${p}${n++}`;
     const hasSteps = a => Array.isArray(a) ? a.flat(Infinity).filter(Boolean).length > 0 : !!a;
     function branches(list, end) {
       return (list || []).map(b => {
@@ -154,6 +160,16 @@ const Engine = (() => {
             out.push({ t: 'go', to: end });
             for (const b of bs) { out.push({ t: 'label', name: b.lab }); emit([b.then]); out.push({ t: 'go', to: end }); }
             out.push({ t: 'label', name: end });
+            break;
+          }
+          case 'scene': {
+            // Sceny dopisane po wydaniu mają własną przestrzeń etykiet: stare identyfikatory
+            // wyborów (zapis `used`, `tries`) nie przesuwają się, zmienia się tylko indeks kroku.
+            const pn = n, pp = prefix, start = out.length;
+            prefix = st.id + '.'; n = 0;
+            emit([st.steps]);
+            for (let i = start; i < out.length; i++) out[i] = Object.assign({}, out[i], { scene: out[i].scene || st.id });
+            n = pn; prefix = pp;
             break;
           }
           default: out.push(st);
@@ -254,8 +270,6 @@ const Engine = (() => {
   }
   function doTrust(who, n) {
     G.inc('trust_' + who, n);
-    const c = DATA.chars[who];
-    if (c && n) UI.toast(`${c.short || c.name} to zapamięta.`, { kind: n > 0 ? 'trust-up' : 'trust-down' });
   }
 
   function clearWaiter() {
@@ -278,7 +292,7 @@ const Engine = (() => {
 
       case 'say': {
         const msg = {};
-        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
+        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         await talk(st.chat, st.who, st.text, { msg, gap: st.gap, typing: st.typing });
         return;
       }
@@ -295,11 +309,12 @@ const Engine = (() => {
         const vis = st.options.map((o, i) => Object.assign({ i }, o))
           .filter(o => !(st.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
         if (!vis.length) return st.end;
-        const pick = await interact({ type: 'choose', chat: st.chat, options: vis.map(o => ({ i: o.i, text: o.text })) });
+        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
         guard(my);
         const o = st.options[pick];
         if (st.menu && !o.exit) s.used[key] = [...used, pick];
-        if (!o.silent) { G.post(st.chat, { from: 'me', text: o.say || o.text }); SFX.play.sent(); }
+        if (o.shot) G.post(st.chat, { from: 'sys', text: U.tpl(o.sys || '{Zrobiłeś|Zrobiłaś} zrzut ekranu. Druga strona dostała powiadomienie.') });
+        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : o.text }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
         apply(o);
         return o.lab || st.end;
       }
@@ -410,6 +425,33 @@ const Engine = (() => {
       case 'rename': G.chat(st.chat).name = st.name; if (st.avatar) G.chat(st.chat).avatar = st.avatar; BUS.emit('chats'); G.change(); return;
       case 'toast': UI.toast(st.text, st); return;
       case 'fx': await UI.fx(st.name, st); guard(my); return;
+      case 'scare': {
+        s.scares = s.scares || {};
+        if (s.scares[st.id]) return;
+        s.scares[st.id] = G.now ? G.now() : Date.now();
+        G.save();
+        if (ff) return;
+        const r = await UI.scare(st.kind, st); guard(my);
+        if (r === 'accept' && st.onAccept) G.setFlag(st.onAccept);
+        return;
+      }
+      case 'nearby': {
+        // Przesyłanie w pobliżu: obce urządzenie proponuje zdjęcie. Decyzja raz na zapis.
+        s.nearby = s.nearby || {};
+        if (!s.nearby[st.id]) {
+          s.nearby[st.id] = ff ? 'accept' : await UI.nearby(st); guard(my);
+          G.save();
+        }
+        if (s.nearby[st.id] === 'accept') { if (st.flag) G.setFlag(st.flag); if (st.ev) G.addEv(st.ev, true); }
+        else if (st.declineFlag) G.setFlag(st.declineFlag);
+        return;
+      }
+      case 'vanish': {
+        // Znikające wiadomości: po przeczytaniu zostaje tylko informacja, że były.
+        const c = s.chats[st.chat];
+        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
+        G.change(); return;
+      }
       case 'run': { const r = st.fn(s, G); return typeof r === 'string' ? r : undefined; }
       case 'task': { stopFF(); const r = await st.fn(s, G); guard(my); return typeof r === 'string' ? r : undefined; }
 
@@ -466,6 +508,7 @@ const Engine = (() => {
       }
       case 'credits': {
         s.finished = true; G.save(true);
+        Seasons.archive();
         await UI.credits(); guard(my);
         return 'STOP';
       }
@@ -488,6 +531,7 @@ const Engine = (() => {
       while (G.s && my === gen) {
         const ch = chapters[G.s.chapter];
         if (!ch) break;
+        if (G.s.pc === 0 && SeasonPacing.hold(ch.id)) break;
         const st = ch.steps[G.s.pc];
         if (!st) break;
         let next;
