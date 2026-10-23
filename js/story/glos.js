@@ -281,6 +281,15 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       opt('Jaki most? Ten z 2011?', [Nt('ten. w kwietniu rusza proces. pisze o tym od stycznia'), Nt('i nagle mama prosi, zebym przestal. jej glosem')])
     ]),
     Nt('sprawdze, czy ktos jeszcze ze swiadkow dostal takie telefony. dam znac'),
+    /* P6 / S5: skutek fałszywego telefonu w zwykłym życiu. */
+    scene('xMamaNatana', [
+      pause(2500),
+      Nt('i jeszcze. mama od piatku nie odbiera nieznanych numerow. wczoraj nie odebrala od przychodni'),
+      choose('natan', [
+        opt('Ustalcie hasło. Wtedy będzie mogła odbierać spokojnie.', [Nt('ustalilismy. mowi ze czuje sie jak w filmie szpiegowskim'), Nt('ale potem zapytala mnie o haslo, jak dzwonilem. pierwszy raz sie zasmialem od piatku')], { set: { g_natanHaslo: true } }),
+        opt('Lepiej, że nie odbiera, niż że uwierzy.', [Nt('niby tak. tylko przychodnia przelozyla jej wizyte na maj')])
+      ])
+    ]),
     scene('xIgorEcho', [
       pause(3000),
       I('sprawdziłem jak to działa. ściągnąłem tę apkę. echo. nagrałem się 30 sekund'),
