@@ -218,8 +218,8 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
 
     /* P4: wyciszona grupa to zwykłe zachowanie, nie dowód winy. */
     scene('xWyciszona', [
-      g('kuba', 'bartek czemu ty nic nie piszesz od rana'),
-      g('bartek', 'wyciszylem grupe. 140 wiadomosci jak lezalem pod podnosnikiem'),
+      g('kuba', 'bartek ty odpisujesz po godzinie. wszystko ok?'),
+      g('bartek', 'wyciszylem grupe. 140 wiadomosci jak lezalem pod podnosnikiem. czytam jak mam przerwe'),
       g('bartek', 'nie kazdy ma caly dzien na telefon'),
       choose('group', [
         opt('Normalne. Odcisz, jak będziemy czegoś od ciebie potrzebować.', [g('bartek', 'jak bedzie cos waznego to dzwoncie. telefon odbieram')]),
