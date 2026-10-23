@@ -27,7 +27,9 @@ Object.assign(DATA.evidence, {
   ev_g_profil: { title: 'Konto na Błysku z moim zdjęciem', cat: 'digital', source: 'zrzut od Mai',
     desc: 'Nazwa jak moja, zdjęcie z mojego profilu na Kwartale, z lata. Konto założone 15.03 o 1:58, szesnaście minut przed głosówką.' },
   ev_g_czapka: { title: 'Czerwona czapka na bramie huty', cat: 'photo', source: 'Kuba · 15.03, 2:51', img: 'g_huta_czapka',
-    desc: 'Dziecięca czapka z daszkiem, mokra, zawieszona na bramie huty. Świeże ślady butów w błocie. Nikogo w środku.' }
+    desc: 'Dziecięca czapka z daszkiem, mokra, zawieszona na bramie huty. Świeże ślady butów w błocie. Nikogo w środku.' },
+  ev_g_przystanek: { title: 'Moje zdjęcie z przystanku', cat: 'photo', source: 'Przesyłanie w pobliżu · 15.03, 18:47', img: 'g_przystanek',
+    desc: 'Ktoś zrobił mi zdjęcie z drugiej strony ulicy, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' }
 });
 
 (() => {
@@ -35,7 +37,9 @@ Object.assign(DATA.evidence, {
   for (const [id, src, title, w, h] of [
     ['g_ola_umowa', 'assets/glos/g_ola_umowa.jpg', 'Świetlica', 768, 1024],
     ['g_kostka', 'assets/glos/g_kostka.jpg', 'Podwórko Sowów', 768, 1024],
-    ['g_huta_czapka', 'assets/glos/g_huta_czapka.jpg', 'Brama huty · 2:51', 768, 1024]
+    ['g_huta_czapka', 'assets/glos/g_huta_czapka.jpg', 'Brama huty · 2:51', 768, 1024],
+    ['g_maja_korytarz', 'assets/glos/g_maja_korytarz.jpg', 'Po kolokwium', 768, 1024],
+    ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
@@ -43,7 +47,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0'],
+  chapters: ['g0', 'g1'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -56,6 +60,8 @@ DATA.seasons.push({
   },
   episodes: [
     ['s5.01', '2:14', 'g0', 'ev:ev_g_glosowka'],
-    ['s5.02', 'Czapka', 'g0', 'ev:ev_g_czapka']
+    ['s5.02', 'Czapka', 'g0', 'ev:ev_g_czapka'],
+    ['s5.03', 'Hasło', 'g1', 'flag:g_haslo'],
+    ['s5.04', 'Trzy głosy', 'g1', 'flag:g_threeVoices']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });

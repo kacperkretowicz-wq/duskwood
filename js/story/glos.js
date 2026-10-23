@@ -191,3 +191,146 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
     end('g1')
   ];
 });
+
+/* Hasło rodzinne: trzy warianty, ten sam krok w różnych miejscach. */
+const GlosHaslo = (D, mk) => [
+  D.iff('flag:g_hasloP', mk('pachołek')),
+  D.iff('flag:g_hasloJ', mk('jodełka')),
+  D.iff('flag:g_hasloK', mk('trzy kości'))
+];
+
+/* ---------- g1 · Hasło ---------- */
+Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło', when: 'Poniedziałek, 15 marca · 7:50', mood: 'calm' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, callIn, callEnd, unlock, typing, nearby, vanish } = D;
+  const { M, K, O, I, W, S, Nt, Gr, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-15T07:50'),
+    ambient('calm'),
+    title(),
+    M('dzień dobry. piszę, nie dzwonię. tak jak mówiłam'),
+    M('spałam 3 godziny. kolokwium o 9. czuję się jak ten szkielet z atlasu'),
+    M('zanim cokolwiek. potrzebujemy słowa. takiego, które znamy tylko my. jak ktoś zadzwoni twoim głosem, zapytam o nie'),
+    choose('maja2', [
+      opt('„Pachołek”. Jak czapka bałwana z ferii.', [M('xD idealne. nikt normalny nie wpadnie na pachołek')], { set: { g_hasloP: true } }),
+      opt('„Jodełka”. Jak kostka Bartka.', [M('ok. bartek by się wzruszył. ale mu nie mówimy')], { set: { g_hasloJ: true } }),
+      opt('„Trzy kości”. Tyle zapamiętałaś na anatomię.', [M('bardzo śmieszne. ale dobre. nikt tego nie zgadnie, bo to wstyd')], { set: { g_hasloK: true } })
+    ]),
+    ...GlosHaslo(D, w => [M(`zapisane w głowie. „${w}”. nigdzie tego nie piszemy, nawet tu więcej`)]),
+    set('g_haslo'),
+    M('idę. trzymaj kciuki'),
+    scene('xRanoGrupa', [
+      pause(3000),
+      Gr('bartek', 'ktos mi wyslal na kwartale ze „%name% robi jakies dziwne glosowki”. co jest'),
+      Gr('ola', 'Do mnie też ktoś napisał. Konto bez zdjęcia. Zablokowałam.'),
+      Gr('kuba', 'w nocy ktoś wysłał mai głosówkę głosem %name%. to nie był{|a} on{|a}'),
+      Gr('igor', 'klonowanie głosu. dziś to apka za 20 zł. wystarczy 30 sekund nagrania'),
+      choose('group', [
+        opt('To nie ja. Jak dostaniecie coś „ode mnie”, oddzwońcie na mój zwykły numer.', [Gr('ola', 'Jasne. I nie odbieramy nieznanych numerów w nocy.'), Gr('bartek', 'ok. ale jak mi zaspiewasz to wiem ze to nie ty xd')], { set: { g_groupTold: true } }),
+        opt('Igor, skąd ktoś mógł mieć 30 sekund mojego głosu?', [Gr('igor', 'głosówki, filmiki, nagrane rozmowy. każdy coś zostawia'), Gr('igor', 'pomyśl, komu ostatnio długo coś mówił{eś|aś} do telefonu')], { set: { g_whereVoice: true } })
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-15T10:42'),
+    pic('maja2', 'maja', 'g_maja_korytarz', 'po. nie pytaj. kość udowa to jedyna, której byłam pewna'),
+    choose('maja2', [
+      opt('Wyglądasz jak ktoś, kto zdał.', [M('wyglądam jak ktoś, kto nie spał. ale miło')], { trust: { maja: 1 } }),
+      opt('Idź spać. Serio.', [M('mam jeszcze ćwiczenia. potem śpię do jutra')])
+    ]),
+    /* Trzy głosówki do Kuby: tylko jedna jest od Mai. */
+    scene('xTrzyGlosy', [
+      pause(3000),
+      K('ej. pomocy'),
+      K('dostałem trzy głosówki „od mai” w ciągu minuty. dwie z nowych kont na błysku, jedna z jej numeru'),
+      K('tylko że numer też można podrobić. słuchaj'),
+      V('kuba', 'kuba', '0:06', 'Kubuś, przyjdź po mnie pod hutę. Szybko. [cisza w tle, idealnie czysto]', 'od mai?'),
+      V('kuba', 'kuba', '0:08', 'Kuba, napisz do %name%, że wiem, że to nie on{|a}. Dobra? [w tle dzwonek na przerwę, ktoś woła „Maja, idziesz?”]', 'od mai?'),
+      V('kuba', 'kuba', '0:05', 'Hej. Weź zabierz mi ładowarkę z pokoju. Przyjdź pod hutę. [w tle szum, jakby wiatr]', 'od mai?'),
+      K('która jest prawdziwa?'),
+      choose('kuba', [
+        opt('Druga. Słychać dzwonek i ktoś woła ją po imieniu. Ona jest teraz na uczelni.', [K('kurde. faktycznie. jest po kolokwium'), K('i nigdy nie mówi do mnie „kubuś”. nigdy. tylko mama tak mówi')], { set: { g_voiceFast: true } }),
+        opt('Trzecia. Ładowarka to coś, o co zawsze cię prosi.', [K('zawsze. ale pod hutę? po ładowarkę?'), K('nie wiem. zapytam ją o hasło. tylko że go nie znam')]),
+        opt('Pierwsza. Najczystszy dźwięk, pewnie z jej numeru.', [K('czysty, bo nie ma żadnego tła. jak z apki'), K('ok. sprawdzę inaczej. napiszę do niej coś, co wie tylko ona')])
+      ]),
+      iff('flag:g_voiceFast', [K('napisałem do niej. odpisała „druga, debilu”. czyli żyjemy')], [
+        pause(2500),
+        K('napisałem do niej. odpisała, że wysłała tylko jedną. drugą. z korytarza'),
+        K('czyli dwie z trzech to klony. w ciągu minuty. ktoś się bawi')
+      ]),
+      set('g_threeVoices')
+    ]),
+    scene('xSylwiaPanika', [
+      pause(3000),
+      S('Grupa „Mglisko — co się dzieje” wariuje. Od rana siedem zgłoszeń.'),
+      S('Pan Stach dostał telefon od „syna z Holandii”. Pani Gienia od „pani z gminy”, że ma zapłacić za wywóz śmieci kodem.'),
+      S('I jeszcze jedno. Ktoś wkleił głosówkę z %name% w nazwie. Usunęłam, ale ludzie pytają, czy to {pan|pani}.'),
+      choose('sylwia', [
+        opt('To nie ja. Ktoś podszywa się pode mnie. Mogę napisać sprostowanie.', [S('Proszę. Wkleję je i przypnę. Krótko, bez nazwisk.')], { set: { g_sprostowanie: true } }),
+        opt('Niech pani nikogo nie oskarża w grupie. Nawet mnie.', [S('Staram się. Ale ludzie są przestraszeni. Wolą mieć winnego niż nie mieć nikogo.')])
+      ]),
+      iff('flag:g_sprostowanie', [S('Przypięte. Trzy serduszka i jeden komentarz „a skąd mamy wiedzieć, że to pisze prawdziwy {pan|pani}?”. No właśnie.')])
+    ]),
+    pause(3500),
+    clock('2027-03-15T13:05'),
+    unlock('chat:natan'),
+    Nt('hej. dawno. mam dziwna sprawe'),
+    Nt('w piatek dzwonila do mnie mama. prosila zebym „odpuscil sobie ten most”. ze to stara sprawa i ze sie boi o mnie'),
+    Nt('tylko ze mama w piatek o 19 byla na zumbie. telefon miala w szafce. sprawdzilem z jej trenerka'),
+    choose('natan', [
+      opt('Ktoś sklonował głos twojej mamy. Tak samo jak mój.', [Nt('twoj? kurde'), Nt('czyli to nie jest zwykla szajka na wnuczka. ktos dzwoni do ludzi od mostu')], { set: { g_natanLink: true } }),
+      opt('Jaki most? Ten z 2011?', [Nt('ten. w kwietniu rusza proces. pisze o tym od stycznia'), Nt('i nagle mama prosi, zebym przestal. jej glosem')])
+    ]),
+    Nt('sprawdze, czy ktos jeszcze ze swiadkow dostal takie telefony. dam znac'),
+    scene('xIgorEcho', [
+      pause(3000),
+      I('sprawdziłem jak to działa. ściągnąłem tę apkę. echo. nagrałem się 30 sekund'),
+      V('igor', 'igor', '0:04', 'Kocham brokuły i oglądam seriale o ślubach.', 'Echo · Igor'),
+      I('to nie ja. to apka moim głosem. słyszysz to „k”? ja tak nie mówię. ale mama by się nabrała'),
+      choose('igor', [
+        opt('Przerażające. I trochę śmieszne.', [I('bardziej przerażające. usuwam apkę i konto. i wszystkie nagrania')]),
+        opt('Czego apka potrzebuje oprócz nagrania?', [I('niczego. nagranie i tekst. żadnego dowodu, że to twój głos'), I('regulamin mówi „nie używaj cudzego głosu”. no to już wszyscy przestrzegają')], { set: { g_echoKnown: true } })
+      ])
+    ]),
+    pause(3000),
+    O('Dzieci w świetlicy dziś bawiły się w „głuchy telefon”. Na końcu wyszło „kot ma kalosze”. Zaczynało się od „mama robi pierogi”.'),
+    O('Pomyślałam o tobie. Sorry, to chyba nie było śmieszne.'),
+    choose('ola', [
+      opt('Było. Trochę. Dzięki.', [O('Uff. Przynajmniej dzieci się śmiały.')]),
+      opt('Dokładnie tak to działa. Każdy coś przekręca.', [O('Tylko że tu ktoś przekręca specjalnie.')])
+    ]),
+    pause(4000),
+    clock('2027-03-15T18:47'),
+    ambient('dark'),
+    /* Przystanek: ktoś przesyła ci twoje własne zdjęcie. */
+    scene('xPrzystanek', [
+      M('jestem w domu. śpię godzinę i wstaję na serial. kuba gotuje makaron. wszystko ok'),
+      pause(3500),
+      nearby('g_przystanek', { device: 'Telefon', img: 'g_przystanek', note: 'Nieznane urządzenie w pobliżu', flag: 'g_przystOk', declineFlag: 'g_przystNo', ev: 'ev_g_przystanek' }),
+      iff('flag:g_przystOk', [
+        M('czekaj. to ty? na przystanku przy szkole?'),
+        M('ktoś stał po drugiej stronie ulicy i robił ci zdjęcie. kiedy?'),
+        choose('maja2', [
+          opt('Teraz. Wracam z miasta. Nikogo nie widzę.', [M('idź do sklepu. tam, gdzie są ludzie. i pisz do mnie')], { set: { g_przystNow: true } }),
+          opt('Nie wiem. Odrzuć wszystko, co przyjdzie z „Telefonu”.', [M('już. odrzucam wszystko. nawet przesyłanie od kuby')])
+        ])
+      ], [
+        M('kuba mówi, że jego telefon też coś chciał przesłać. od „Telefonu”. odrzucił'),
+        M('ty też odrzucaj. nie wiadomo, co tam jest')
+      ])
+    ]),
+    pause(3000),
+    W('Dobry wieczór. Pani Marta z archiwum zadzwoniła z podziękowaniem za kasety z kiermaszu.'),
+    W('Powiedziała, że jedna jest z festynu w 1996. Że mogę przyjść i obejrzeć, jeśli chcę.'),
+    choose('weronika', [
+      opt('Pójdzie pani?', [W('Nie wiem. Tomek tam może być. Nie wiem, czy chcę go zobaczyć na ekranie.')], { set: { g_weraFestyn: true } }),
+      opt('To miłe, że dzwoni osobiście.', [W('Bardzo. Dziś mało kto dzwoni. Wszyscy piszą.')])
+    ]),
+    pause(4000),
+    clock('2027-03-15T23:31'),
+    typing('weronika', 'weronika', 5000),
+    W('Przepraszam, że tak późno.'),
+    W('Ktoś do mnie dzwonił. Odebrałam, bo numer był z Mgliska.'),
+    W('To było dziecko.'),
+    set('g_day1'),
+    end('g2')
+  ];
+});
