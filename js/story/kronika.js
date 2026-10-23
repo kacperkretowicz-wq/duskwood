@@ -135,7 +135,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
         opt('Pozdrów babcię.', [say('zuza', 'zuza', 'pozdrowiła. i kazała ci się ciepło ubrać. nie wiem skąd wie że się za lekko ubieram')])
       ]),
       pause(2000),
-      pic('zuza', 'zuza', 'c_kasety_babci', 'babcia trzyma je w meblościance jak relikwie. przypomina ci to coś?'),
+      pic('zuza', 'zuza', 'c_kasety_babci', 'babcia trzyma je w meblościance jak relikwie. widzisz coś znajomego?'),
       choose('zuza', [
         opt('Na każdej jest ta sama naklejka z anteną. Ktoś opisywał kasety TV Dolina ręcznie.', [say('zuza', 'zuza', 'babcia mówi że pan zenon sam podpisywał każdą kasetę. „ładnym pismem, nie to co dzisiaj”')], { set: { c_labelLink: true } }),
         opt('Ania z wesela to twoja ciocia?', [say('zuza', 'zuza', 'tak. podobno wujek tańczy tam z teściową i się przewraca. tego pan zenon nie wyciął, bo było śmieszne')]),
@@ -230,7 +230,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     scene('xZenonKamera', [
       pause(2000),
       pic('weronika', 'weronika', 'c_zenon_kamera', 'Znalazłam w archiwum czytelni. Festyn, 2005. Pan Zenon zawsze stawał na scenie, bo „stamtąd widać wszystkich”.'),
-      W('Przypomina to {Panu|Pani} coś?'),
+      W('Coś {Panu|Pani} to mówi?'),
       choose('weronika', [
         opt('Kamera na ramieniu, wysoko, ze sceny. Stąd te ujęcia z góry.', [W('Tak. Mówił, że z dołu widać tylko plecy.')], { set: { c_heightLink: true } }),
         opt('Uśmiecha się do kogoś obok kamery.', [W('Do mnie. Stałam z boku z kanapkami dla zespołu. Dawno temu.')]),
@@ -243,7 +243,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     set('c_day2'),
     notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „boisko, 2008”', sound: 'notif', open: { page: 'tt_kronika' } }),
     scene('xBoisko', [
-      pic('igor', 'igor', 'c_boisko', 'nowy. boisko za szkołą, 2008. przypomina ci to coś?'),
+      pic('igor', 'igor', 'c_boisko', 'nowy. boisko za szkołą, 2008. coś ci się rzuca w oczy?'),
       choose('igor', [
         opt('Tak jak na nagraniu ze studniówki: u góry znowu widać odbicie lampki.', [
           I('tak. i jeszcze w rogu, przy samochodzie, widać zielone cyferki. 23:47'),
@@ -369,7 +369,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     scene('xSnieg', [
       M('wreszcie porządny śnieg. wyszłam z psem sąsiadki, bo poprosiła'),
       pic('maja2', 'maja', 'c_ida_pies', 'kocham to światło po zmroku'),
-      M('czekaj. przypomina ci to coś? ta dziewczyna z psem'),
+      M('czekaj. ta dziewczyna z psem. kogoś ci przypomina?'),
       choose('maja2', [
         opt('To pies pana Zenona. Ten, który piszczał w telefonie.', [
           M('tak. to on. a ona to wnuczka. Ida. przyjechała na ferie, chodzi z nim po nocach'),
@@ -545,7 +545,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     pause(3000),
     scene('xKadrFestyn', [
       I('nie śpię, składam laptopa klientce. obejrzałem tę zapowiedź, zanim zniknęła u kogoś w grupie'),
-      pic('igor', 'igor', 'c_festyn', 'zrobiłem kadr. przypomina ci to coś?'),
+      pic('igor', 'igor', 'c_festyn', 'zrobiłem kadr. co tu widzisz?'),
       choose('igor', [
         opt('Kamera jest wyżej niż ludzie. Ktoś stał na scenie. Operator kablówki.', [
           I('tak. czyli nie nagrał tego nikt z tłumu telefonem. to oficjalna kaseta TV Dolina'),
@@ -579,7 +579,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       say('maja2', 'maja', '', { vid: 'assets/video/v_pies_noc.mp4', img: 'v_pies_noc' }),
       M('stanęła i spojrzała w górę. na moje okno albo na twoje'),
       pause(3000),
-      pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. na schodach jest to. przypomina ci to coś?'),
+      pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. na schodach jest to. co o tym myślisz?'),
       choose('maja2', [
         opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku'), M('pies pana Zenona')], { set: { c_pawLink: true } }),
         opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy')], { set: { c_smallShoe: true } }),
@@ -763,6 +763,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
         opt('Nie mieszaj się w to.', [K('ok. ale wiem, co ona teraz czuje')])
       ]),
       pause(2500),
+      iff('flag:c_gsTemplate', [Nt('sprawdzilem serwer, jak obiecalem. konto stazystki ma dalej dostep do szablonu napisow. ostatnie logowanie: 18 stycznia, 20:47. dzien pierwszego klipu')]),
       Nt('maja pisze, ze to ida. byla u nas na stazu. po listopadzie zniknela i nikt do niej nie zadzwonil. ja tez nie'),
       choose('natan', [
         opt('Możesz zadzwonić teraz.', [Nt('moge. tylko co jej powiem? „sorry, ze zostawilismy cie z tym sama”?'), Nt('chociaz to akurat byloby prawdziwe')]),

@@ -441,6 +441,12 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej'), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
     K('zdjęcie okna też ja. szedłem z dyżuru'),
     K('chciałem żebyście przestali szukać w pudle. pani weronika się przestraszyła. usunąłem po sześciu minutach'),
+    scene('xKubaPrzerwa', [
+      choose('kuba', [
+        opt('Pani Weronika siedziała tam sama. W ciemności.', [K('wiem. widziałem przez szybę, jak gasi światło. stałem tam jeszcze minutę i nie umiałem odejść')]),
+        opt('Mów dalej. Słucham.', [K('dobra. jeszcze chwila')])
+      ])
+    ]),
     pause(2500),
     K('ja nie chciałem nikogo krzywdzić'),
     K('chciałem żeby usłyszeli, co sami mówili'),
@@ -570,6 +576,12 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     L('W 2009 tata woził drewno dla starego Pawlaka. Byłam z nim tej nocy w szoferce. Widziałam, kto stał przy stodole z kanistrem.'),
     L('Tata powiedział: nic nie widziałaś. I tak było przez dziesięć lat. Cicho było.'),
     give('ev_k_lena'),
+    scene('xLenaPrzerwa', [
+      choose('lena', [
+        opt('Byłaś wtedy małą dziewczynką.', [L('Siedem lat. Zapach benzyny pamiętam lepiej niż własne urodziny.')]),
+        opt('Dlaczego mówisz mi to dopiero teraz?', [L('Bo jutro Wigilia, a ja nie chcę siedzieć przy stole z tym w gardle.')])
+      ])
+    ]),
     pause(2500),
     L('Jak zobaczyłam, że ktoś ma jego nagrania, wiedziałam, że prędzej czy później wrzuci też moje. Wolałam, żeby ludzie usłyszeli, co powiedziałam, zamiast poznawać tę historię z komentarzy.'),
     L('Najpierw poprosiłam o listę plików z 2019 i wskazałam swoją rozmowę. Myślałam, że jak sama wskażę, to będę miała wpływ na to, co wyjdzie.'),
