@@ -220,6 +220,17 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     g('igor', 'dobra. z kubą jedziemy dziś o 23. bartek, jedziesz czy nie?'),
     g('bartek', 'nie'),
     interlude('23:20', 'Kuba i Igor jadą pod hutę.', 3200, { rest: 's1_departure' }),
+    /* P3: powrót po przerwie z krótkim kontekstem; Bartek odzywa się prywatnie. */
+    scene('xPojechali', [
+      clock('2026-10-22T23:12'),
+      iff('unlocked:chat:bartek', [
+      say('bartek', 'bartek', 'pojechali?'),
+      choose('bartek', [
+        opt('Pojechali. Mają wejść od strony trafostacji, jak wyjdzie.', [say('bartek', 'bartek', 'kuba nigdy nie mial wyczucia kiedy odpuscic'), say('bartek', 'bartek', 'pisz jak cos. ja tu nie spie i tak')], { trust: { bartek: 1 } }),
+        opt('Pojechali. Mogłeś jechać z nimi.', [say('bartek', 'bartek', 'moglem. nie pojade'), say('bartek', 'bartek', 'nie pytaj czemu')])
+      ])
+      ])
+    ]),
     clock('2026-10-22T23:20'),
     ambient('tense'),
     g('kuba', 'jesteśmy pod bramą'),
