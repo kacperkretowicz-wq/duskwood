@@ -1,6 +1,6 @@
 # QUIET IS SAFER — historia, ludzie i sezony
 
-Wersja redakcyjna 1.4, 22.10.2026. Mglisko pozostaje nazwą miejscowości. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
+Wersja redakcyjna 1.5, 23.10.2026 (dopisane S2–S5 w grze i kanon międzysezonowy). Mglisko pozostaje nazwą miejscowości. Dokument zawiera pełne spoilery. Ustalenia poniżej zastępują sprzeczne, starsze zapisy koncepcji.
 
 ## Co jest grą, a co celem produkcji
 
@@ -138,7 +138,7 @@ Powiadomienie lokalne może poinformować o dostępności zapisanej części his
 
 ## Sezon drugi: Druga strona — zamknięta konstrukcja fabularna
 
-Status: scenariusz kierunkowy do produkcji, nie zaimplementowany sezon.
+Status (23.10.2026): **sezon jest w grze** jako sprawa 2 „Most” (`js/story/most*.js`, `js/data/case-most.js`). Opis poniżej to pierwotny kierunek; tam, gdzie gra ustaliła coś inaczej (np. Marta pracuje w archiwum *Gazety Sudeckiej*, cięcie zamówił Paweł Dudek, wykonała je stażystka Ida Gil), obowiązuje gra i sekcja „Kanon międzysezonowy” niżej.
 
 Punkt wyjścia: pudło Rybickiego zawiera materiały o śmierci Darka w 2011. Maja nie ma obowiązku natychmiast do niego wracać. Weronika, za zgodą brata dziennikarza, porządkuje katalog. W grudniu kontaktuje się Marta Jasińska, 24-letnia pracownica archiwum lokalnej redakcji. Ktoś wypuścił fragment dawnego nagrania, który obciąża niewłaściwą osobę, a w publikacji można odtworzyć tożsamość współczesnej informatorki.
 
@@ -170,6 +170,42 @@ Akt V, sesje 25–30: zestawienie ustaleń, zgoda źródła na zakres publikacji
 8. W grudniowej części jej obecność jest dobrowolna. Osobne linie dialogowe pamiętają, że w tej gałęzi została odnaleziona później. Ocalenie nie jest nagrodą za serię logowań; błędną analizę adresu można zweryfikować, a historia nie nakłada kolejnej dobowej bramki podczas ratunku.
 
 Po pozostałych finałach prolog dotyczy zabezpieczenia materiałów i zgody na pracę z archiwum, bez ponownego porwania. Do czasu implementacji i przejścia gałęzi Nina–adres–poszukiwanie sezon drugi nie jest gotowy dla zapisu Cisza. Cały opis S2 w tym dokumencie pozostaje planem scenariusza.
+
+## Sezony 3–5 w grze (skrót prawdy)
+
+**S3 „Kopia zapasowa” (18–24.12.2026, rozdziały k0–k4).** Konto @archiwum.rybickiego wrzuca nagrania z chmury Rybickiego. Konto prowadzi Kuba (reset przez pytania bezpieczeństwa, metodę widział w październiku przy koncie Mai). Fragmenty wybiera mu @cicho.bylo, czyli Lena Cicha. Zakończenia: `wlasnym_glosem`, `kopia`, `cisza` (s3). Ewa Rybicka (63) decyduje o chmurze męża.
+
+**S4 „Kronika” (18–22.01.2027, rozdziały c0–c4 i noc cf).** @kronika.mglisko codziennie o 21:00 wrzuca fragment kroniki kablówki TV Dolina (1996–2018). Kasety zebrał Zenon Gil (69), dawny operator. Wrzuca jego wnuczka Ida Gil (22), była stażystka *Gazety Sudeckiej*, która w S2 wycięła 40 sekund dla Dudka. Pies Zenona to kundel po owczarku, bez imienia w grze. Ola (O.N.) ma na kasecie bójkę z festynu 2018 (miała 14 lat). Rozmowa z Idą o 20:58 jest przez nią nagrywana. Zakończenia: `przewiniecie` (kasety do archiwum gminy, odbiera je Marta), `transmisja` (Ida wyjeżdża do Bielawy), `kopia2` (gracz bierze kopię).
+
+**S5 „Twoim głosem” (14–20.03.2027, rozdziały g0–g6).** Klony głosu: twoja głosówka do Mai o 2:14, „Tomek” dzwoni do Weroniki, „mama” do Natana. Źródła: rozmowa z Idą o 20:58 (jej telefon przeszedł przez serwis Igora, praktykant Oskar Wilk, 17, zgrał pamięć i sprzedał paczkę kontu pd_audio), kasety TV Dolina (Tomek, 8 lat, festyn 17.08.1996, kaseta nr 12). Dzwoni Paweł Dudek, scenariusze pisze Marta Jasińska, od lutego w pracowni archiwum gminy. Motyw: kwietniowy proces o most 2011, telefony idą do świadków. Fałszywe rozwiązanie: zatrzymanie Dudka (g5). Zwrot: pisk magnetowidu z pracowni w nagraniu „Tomka”, przecinki w scenariuszach. Marta jest córką Janiny Kurek. Gracz wie to od S2, więc zwrot polega na tym, że Marta, która jesienią pomogła ujawnić prawdę, teraz chroni matkę przed procesem. Rodzinne hasło gracza i Mai (pachołek / jodełka / trzy kości) zostaje na kolejne sezony. Zakończenia: `haslo` (nagranie Marty u prokuratury), `echo` (świadkowie się wycofują, twój głos krąży, straszak s5_echo), `cisza2` (wszyscy kasują nagrania, spokój bez dowodów).
+
+## Kanon międzysezonowy
+
+Wiek liczymy od stanu na październik 2026 (S1); w 2027 doliczamy rok tylko tam, gdzie minęły urodziny w tekście.
+
+| Osoba | Ustalenie | Lata kontrolne |
+|---|---|---|
+| Maja Wrona | 22, ASP Wrocław; pierwszy pies Kluska, aparat Kometa; zaginiona 13/14.10, w Ciszy S1 odnaleziona 15.11 | — |
+| Kuba Wrona | 19, informatyka; pies rodziny teraz: Bandzior | — |
+| Ola Nowicka | 22, technik farmacji, od marca 2027 umowa w świetlicy | festyn 2018: 14 lat |
+| Bartek Sowa | 24, warsztat Auto-Sowa | 2011: 9 lat; 2018: 16 lat |
+| Igor | 23, serwis GSM-PC, Rynek 7 | — |
+| Weronika Lis | 41 (bibliotekarka) | 1996–97: 11–12 lat; Tomek 8 lat w VIII 1996, 9 w VII 1997, w 2027 miałby 38–39 |
+| Marta Jasińska | 24; nazwisko po ojcu (rodzice po rozwodzie), córka Janiny Kurek; S2: archiwum *Gazety Sudeckiej*; od II 2027 archiwum gminy | — |
+| Janina Kurek | 48 w 2026, 49 w 2027; kierowniczka kontraktu 2011, potem zarząd Kurek-Bud | 2011: 33 lata |
+| Paweł Dudek | kierownik budowy Kurek-Bud; zamówił cięcie (S2); w S5 dzwoni, mieszka w kawalerce w Dzierżoniowie | — |
+| Ida Gil | 22, wnuczka Zenona; „wogóle”; po S4 piekarnia na rynku albo Bielawa | — |
+| Zenon Gil | 69, operator TV Dolina 1996–2018; pies kundel po owczarku; pisze „Szanowny Panie” | — |
+| Natan Brzeziński | 25, *Gazeta Sudecka*; mama dostaje telefon w S5 | — |
+| Henryk Wiśniewski | 74, brygadzista 2011; nie założył siatki z powrotem, bo mu zabroniono | — |
+| Krystyna Kruk | 71, matka Darka (zm. 14.09.2011), babcia Zuzy (16) | — |
+| Sylwia Pietrzak | 35, adminka grupy „Mglisko — co się dzieje” | — |
+| Lena Cicha | 24, kierowczyni busa; @cicho.bylo w S3 | — |
+
+Stałe detale: *Gazeta Sudecka*, ul. Kolejowa 3, Dzierżoniów, sekretariat 74 832 10 40; numer Dudka w S5 +48 731 008 214 (pokazywany jako nieznany numer); TV Dolina upadła w 2018, kasety były u Zenona, po `przewiniecie` w archiwum gminy; magnetowid z pracowni piszczy przy przewijaniu.
+
+### Poprawki ciągłości (23.10.2026)
+Ola: festyn 2011 i „17 lat” zamienione na festyn 2018 i 14 lat. Rok upadku TV Dolina przesunięty z 2014 na 2018. Bartek na festynie miał 16 lat. Weronika nagrana przez Zenona na ślubie 20, nie 40 lat temu. Pies Zenona nie może piszczeć w telefonie i być jednocześnie na spacerze. Zegar Błysku Idy w S2: 26.11, nie 24.11. Telefon i adres redakcji ujednolicone. Kuba wspomina pytanie o pierwszy aparat (nie „pierwszą szkołę”) i nie siedział obok gracza. W gałęzi Cisza Maja była nieobecna ponad miesiąc. Kuba 20.11 nie pisze „od miesiąca w domu”. Sylwia liczy dwa dni do poniedziałku. Maja cytuje Rybickiego przez Weronikę. Henryk mówi o siatce zgodnie z nagraniem. S5: Marta nie przedstawia się jak obca, ma 49-letnią matkę (nie 71-letnią), nie jest „z domu Kurek”, a jej przemiana od S2 jest powiedziana wprost. Przelew od Dudka ma go jako nadawcę. Zdanie o wdowie z kiosku jest jasne. Druga runda S5: Maja widzi zdjęcie z przystanku dopiero, gdy gracz jej je prześle; godzinę założenia fałszywego profilu widać przed zagadką; telefon twoim głosem zawsze mówi o kasetach i moście, bo Maja to potem cytuje; trzy próbki głosu naprawdę mogą pochodzić z jednej rozmowy z Idą (Ida wychodzi z pokoju na klatkę i na ulicę); wyłączny klucz Marty nie jest faktem, którego gracz mógł nie usłyszeć; Maja nie mówi Kubie o Marcie, zanim się o niej dowie; „głos Mai z hasłem” zamieniony na zwykłą głosówkę, bo hasła nikt nie nagrywał; obietnica nagrań dla Marty zamienia się w faktyczne wysłanie, a Natan w Echu mówi, czemu to zaszkodziło; zapowiedź po S5 nie twierdzi, że proces ruszył, bo w Echu go odroczono.
 
 ## Dalsza ciągłość i granice
 
