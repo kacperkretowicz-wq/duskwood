@@ -71,6 +71,8 @@ const Engine = (() => {
     run: fn => ({ t: 'run', fn }),
     // Wycofanie wiadomości: nadawca usuwa swoją wiadomość (uid) u wszystkich. flag = czy gracz miał wtedy otwarty ten czat.
     unsend: (chat, uid, o = {}) => ({ t: 'unsend', chat, uid, ...o }),
+    // Edycja wiadomości: nowa treść z dopiskiem „edytowano”. flag = czy gracz widział wersję przed edycją (miał otwarty czat).
+    edit: (chat, uid, text, o = {}) => ({ t: 'edit', chat, uid, text, ...o }),
     task: fn => ({ t: 'task', fn }),
     toast: (text, o = {}) => ({ t: 'toast', text, ...o }),
     rename: (chat, name, avatar) => ({ t: 'rename', chat, name, avatar }),
@@ -461,6 +463,16 @@ const Engine = (() => {
         if (m && !m.deleted) {
           if (st.flag) G.setFlag(st.flag, G.viewing === st.chat);
           m.deleted = true; m.text = ''; delete m.img; delete m.ev;
+          G.save(); BUS.emit('msg-edit', { chat: st.chat });
+        }
+        return;
+      }
+      case 'edit': {
+        const c = G.chat(st.chat);
+        const m = c && c.msgs ? [...c.msgs].reverse().find(x => x.uid === st.uid) : null;
+        if (m && !m.deleted && !m.edited) {
+          if (st.flag) G.setFlag(st.flag, G.viewing === st.chat);
+          m.text = st.text; m.edited = true;
           G.save(); BUS.emit('msg-edit', { chat: st.chat });
         }
         return;

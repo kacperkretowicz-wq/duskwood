@@ -21,7 +21,11 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
  assert.equal(await cnt(text),before-1,'treść znika z otwartego czatu');
  if(process.env.TEST_SCREENSHOT_DIR)await page.screenshot({path:process.env.TEST_SCREENSHOT_DIR+'/unsend.png'});
  assert.equal(await page.evaluate(()=>UI.preview?UI.preview(G.s.chats.kuba.msgs.filter(m=>m.from==='kuba').pop()):'Wiadomość została usunięta'),'Wiadomość została usunięta');
- assert.deepEqual(errors,[]);console.log('PASS unsend: dymek zastępczy i podgląd');
+ // Edycja: nowa treść i dopisek „edytowano” w otwartym czacie.
+ await page.evaluate(()=>{const m=G.s.chats.kuba.msgs.filter(m=>m.from==='kuba'&&!m.deleted)[0];m.text='poprawiona wersja';m.edited=true;G.save();BUS.emit('msg-edit',{chat:'kuba'});});
+ await page.locator('.tx',{hasText:'poprawiona wersja'}).waitFor();
+ assert.ok(await page.locator('.tm',{hasText:'edytowano'}).count()>=1);
+ assert.deepEqual(errors,[]);console.log('PASS unsend: dymek zastępczy, podgląd i edycja');
  await ctx.close();
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
