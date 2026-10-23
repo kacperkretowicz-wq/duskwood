@@ -132,6 +132,7 @@ Object.assign(DATA.endings, {
       'O 20:59 konto @kronika.mglisko znika. Klip z Olą się nie pojawia.',
       'Ida mówi dziadkowi o wszystkim w kuchni, przy herbacie. Pan Zenon długo milczy, potem pyta tylko, czy pies był wyprowadzony.',
       'W lutym kasety jadą do archiwum gminy. Na każdej jest nowa naklejka: „do pamięci, nie do Klipo”.',
+      'W archiwum odbiera je pani Marta Jasińska. Podpisuje protokół i mówi panu Zenonowi, że wszystko będzie zapisane.',
       () => G.flag('c_olaFirst') ? 'Ola sama opowiada o festynie w grupie. Pod jej wpisem są trzy serduszka i jeden komentarz: „też byłam głupia w liceum”.' : 'Ola nigdy się nie dowiaduje, jak blisko było.'
     ]
   },

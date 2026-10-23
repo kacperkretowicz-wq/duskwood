@@ -285,6 +285,10 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
         opt('Niech pani nie siedzi za długo. Jest ciemno i pusto.', [W('Jeszcze kwadrans. Lubię tę ciszę.')], { trust: { weronika: 1 } }),
         opt('Kubek z odpryskiem to klasyka bibliotek.', [W('Ma dwadzieścia lat. Pan Adam przywiózł mi go z jakiegoś festynu. Nie wyrzucę.')])
       ]),
+      pause(2500),
+      W('W szafce stoi jeszcze jeden kubek. Z festynu w 1996 roku. Ostatniego, na którym był Tomek.'),
+      W('Miał czerwoną czapkę z daszkiem i cały dzień biegał za kamerą z kablówki. Krzyczał do mnie: „Wera, chodź, jest zimno!”. A był sierpień.'),
+      W('Nie wiem, czemu pamiętam akurat to.'),
       pause(6000)
     ]),
     clock('2026-12-20T21:58'),
