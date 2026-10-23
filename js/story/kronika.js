@@ -579,7 +579,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       say('maja2', 'maja', '', { vid: 'assets/video/v_pies_noc.mp4', img: 'v_pies_noc' }),
       M('stanęła i spojrzała w górę. na moje okno albo na twoje'),
       pause(3000),
-      pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. na schodach jest to. co o tym myślisz?'),
+      pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. to było na schodach. co o tym myślisz?'),
       choose('maja2', [
         opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku'), M('pies pana Zenona')], { set: { c_pawLink: true } }),
         opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy')], { set: { c_smallShoe: true } }),
