@@ -317,6 +317,22 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         ], { trust: { kuba: 1 } })
       ])
     ]),
+    /* P4: prośby o wiadomość i prywatny profil. Zachowanie ludzi, nie automatyczny dowód. */
+    scene('xProsby', [
+      pause(3000),
+      g('ola', 'Weszłam przy okazji w prośby o wiadomość na Kadrze. Nigdy tam nie zaglądam.'),
+      g('ola', 'Leży wiadomość z 15.10 od konta bez zdjęcia: „wiesz gdzie jest maja?”. Profil prywatny, zero postów.'),
+      choose('group', [
+        opt('Nie odpisuj jeszcze. Zrób screena z datą i nazwą konta.', [
+          g('ola', 'Zrobione. „m.k.2009”. Nic mi to nie mówi.'),
+          g('igor', 'prywatne konto bez postów to połowa kont w liceum. ktoś też mógł jej szukać')
+        ], { set: { x_prosbaSaved: true } }),
+        opt('Odpisz i zapytaj, kim jest.', [
+          g('ola', 'Napisałam. Jedna szara kreska.'),
+          g('igor', 'może nie zagląda. ja do próśb też nie zaglądam od roku')
+        ])
+      ])
+    ]),
     scene('s19', SC.s19),
     /* P2: ostatni autobus. Zwykły powrót Oli, bez tropu. */
     scene('xAutobus', [
