@@ -69,6 +69,8 @@ const Engine = (() => {
     fx: (name, o = {}) => ({ t: 'fx', name, ...o }),
     typing: (chat, who, ms = 2500) => ({ t: 'typing', chat, who, ms }),
     run: fn => ({ t: 'run', fn }),
+    // Wycofanie wiadomości: nadawca usuwa swoją wiadomość (uid) u wszystkich. flag = czy gracz miał wtedy otwarty ten czat.
+    unsend: (chat, uid, o = {}) => ({ t: 'unsend', chat, uid, ...o }),
     task: fn => ({ t: 'task', fn }),
     toast: (text, o = {}) => ({ t: 'toast', text, ...o }),
     rename: (chat, name, avatar) => ({ t: 'rename', chat, name, avatar }),
@@ -292,7 +294,7 @@ const Engine = (() => {
 
       case 'say': {
         const msg = {};
-        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
+        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
         await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing });
         return;
@@ -452,6 +454,16 @@ const Engine = (() => {
         const c = s.chats[st.chat];
         if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
         G.change(); return;
+      }
+      case 'unsend': {
+        const c = G.chat(st.chat);
+        const m = c && c.msgs ? [...c.msgs].reverse().find(x => x.uid === st.uid) : null;
+        if (m && !m.deleted) {
+          if (st.flag) G.setFlag(st.flag, G.viewing === st.chat);
+          m.deleted = true; m.text = ''; delete m.img; delete m.ev;
+          G.save(); BUS.emit('msg-edit', { chat: st.chat });
+        }
+        return;
       }
       case 'run': { const r = st.fn(s, G); return typeof r === 'string' ? r : undefined; }
       case 'task': { stopFF(); const r = await st.fn(s, G); guard(my); return typeof r === 'string' ? r : undefined; }

@@ -420,6 +420,7 @@ const UI = (() => {
     });
   }
   function preview(msg) {
+    if (msg.deleted) return 'Wiadomość została usunięta';
     if (msg.vanish) return '👁 Wiadomość znikająca';
     if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');
