@@ -681,3 +681,15 @@ Uwaga: ch3 (~22 min czytania) jest wyraźnie najdłuższy w S1 po dopisaniu scen
 - P3: poranne odczyty nocnych wiadomości (`rano_<restId>`), czas przez północ i DST, sceny powrotu po przerwach S1–S5, a przy oczekiwaniu na rozdział krótki „Ostatni cel”. Zrobione. Otwarte: brak sceny porannej po `s5_voice` (kończy się nocnym telefonem, celowo).
 - P4: usunięte i edytowane wiadomości (`unsend`, `edit`), wyciszona grupa, reupload, prośby o wiadomość. Zrobione.
 - P7: szacunki długości w 17.3; rozbicie ch3 (~22 min) zostaje do decyzji — wymaga nowego punktu przerwy w `rhythm.js` i migracji.
+
+### 17.5 P7 — przegląd słabszych finałów i wejść do sezonów (23.10)
+
+| Wejście | Poprzedni finał | Stan |
+|---|---|---|
+| S2 | `cisza` → prolog `mp`; `odlamki` bez zatrzymania Gajdy → nowa scena `xBezGajdy` (m0); `swit` bez zmian | ✅ |
+| S3 | `cudzy_podpis` / `margines` → nowa scena `xPoMoscie` (k0, Weronika); `pelny_kadr` bez zmian; `cisza` już w k4 | ✅ |
+| S4 | `kopia` → `xKopiaStart` (było); `zasiegi` → nowa scena `xPoZasiegach` (c0) | ✅ |
+| S5 | `przewiniecie` / `transmisja` / `kopia2` → osobne linie w g0 i dalej (było) | ✅ |
+
+Kontakty jako same numery są zamierzone: SMS-y Mai w prologu przychodzą z nieznanego numeru (rejestr i dowód `+48 731 402 118`), a numer Dudka w S5 według BIBLIA-SEZONOW.md „pokazywany jako nieznany numer”.
+Nadal bez pomiaru z ludźmi: odbiór finałów `odlamki`, `cudzy_podpis`, `zasiegi`, `echo`, `cisza2`.
