@@ -108,7 +108,8 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         opt('Z galerii: zamknięta teczka', [W('Dobrze. Teczka zamknięta, nic nie widać ze środka. Tak będzie najlepiej.')], { img: 'most_teczka', gallery: true, set: { m_sentTeczka: true } }),
         opt('Z galerii: kotka na wycinkach', [W('Odpisał po minucie: „Adam by się śmiał”. Chyba o to mu chodziło.')], { img: 'm_kot_wycinki', gallery: true, set: { m_sentKot: true } }),
         opt('Z galerii: zdjęcie mostu z 2011', [W('Poprosił, żeby nie wysyłać mu więcej zdjęć mostu.'), W('Napisałam mu, że to moja wina. Nie {Pana|Pani}.')], { img: 'm_brygada', gallery: true })
-      ])
+      ]),
+      W('Odkładam już telefon, bo pani Ziuta siada mi na klawiaturze.')
     ]),
     pause(1500),
     M('ok, pani Weronika kazała mi iść do domu, bo „masz jutro pracę”. skąd ona wie'),
@@ -129,6 +130,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         opt('„Herbata u pani Weroniki”', [rename('group', 'Herbata u pani Weroniki ☕'), sys('group', 'Kuba zmienił nazwę grupy na „Herbata u pani Weroniki ☕”'), say('group', 'ola', 'Pani Weronika będzie zachwycona 😄')], { set: { m_groupHerbata: true } }),
         opt('„Znalezieni”', [rename('group', 'Znalezieni'), sys('group', 'Kuba zmienił nazwę grupy na „Znalezieni”'), say('group', 'kuba', 'trochę ckliwe. ale zostaje'), say('group', 'ola', 'Mnie się podoba.')], { set: { m_groupZnalezieni: true } })
       ]),
+      say('group', 'bartek', 'maja jak to zobaczy to sie poplacze'),
       say('group', 'kuba', 'maja jeszcze nie wie. zobaczy rano')
     ]),
     scene('xWieczor', [
@@ -243,6 +245,13 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       opt('Skasuj wszystkie wpisy z tym nagraniem.', [
         S('Wszystkich nie dam rady, to pół grupy. A jak usunę wpis gazety, to powiedzą, że coś ukrywam.'),
         S('Zostawię link, ale wyłączę komentarze pod nim.')
+      ])
+    ]),
+    scene('xSylwiaFotel', [
+      S('Klientka na fotelu mówi, że jej szwagier „zawsze wiedział”. Nic nie wiedział. Siedzi z farbą na odrostach i ogląda to piąty raz.'),
+      choose('sylwia', [
+        opt('Niech pani nie wchodzi z nią w dyskusję. Szkoda nerwów.', [S('Nie wchodzę. Podgłośniłam suszarkę.')]),
+        opt('Może jej pani powiedzieć, że to fragment z dłuższego nagrania.', [S('Powiedziałam. Odpowiedziała, że „fragment też jest prawdziwy”. No i jest. Tylko nie cały.')])
       ])
     ]),
     S('Jeszcze jedno. Pan Henryk do mnie dzwonił. Na stacjonarny do salonu. Prosił o kontakt z {Panem|Panią}. Dałam numer.'),

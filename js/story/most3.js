@@ -129,6 +129,10 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     clock('2026-12-01T19:10'),
     scene('xZuzaGlos', [
       V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza'),
+      choose('zuza', [
+        opt('Niech ogląda teleturnieje. Też trzeba odpocząć.', [Z('ona mówi, że przynajmniej tam wiadomo, kto wygrał')]),
+        opt('Załóż rękawiczki, zanim odpiszesz.', [Z('nie mam. zgubiłam w autobusie. trzecie w tym roku')])
+      ]),
       pause(2000)
     ]),
     Z('hej'),
@@ -186,6 +190,12 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     W('Poprosiła, żeby kaseta dalej leżała u mnie. Jak dawniej u pana Adama: dopóki nie będzie wiadomo, komu ją oddać.'),
     give('ev_m_chain'),
     W('Jeszcze jedno, drobiazg. Kuba Wrona pytał mnie dziś w bibliotece, czy pan Adam też trzymał wszystko „w chmurze”, jak Maja. Powiedziałam, że nie wiem. On tylko kiwnął głową.'),
+    scene('xWeronikaKuba', [
+      choose('weronika', [
+        opt('Może chce coś zabezpieczyć po Mai.', [W('Może. Dobry z niego chłopak. Tylko ostatnio jakiś zmęczony. Mówi, że to nocki.')]),
+        opt('Dobrze, że pani to zapamiętała.', [W('Zapisuję takie rzeczy w zeszycie. Nauczyłam się od pana Adama.')])
+      ])
+    ]),
     set('m_act4'),
     end('m5')
   ];
@@ -341,6 +351,13 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       ])
     ]),
     Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
+    scene('xNatanKorekta', [
+      Nt('mama pyta, czy to wstyd, że pod moim nazwiskiem jest korekta'),
+      choose('natan', [
+        opt('Wstydem byłoby jej nie dać.', [Nt('naczelny powiedział to samo. tylko dłużej')]),
+        opt('To uczciwe. Ludzie to zapamiętają.', [Nt('oby. a jak nie, to chociaż ja zapamiętam')])
+      ])
+    ]),
     iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
     iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
     scene('xGrupaWyszlo', [
