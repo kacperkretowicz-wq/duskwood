@@ -579,7 +579,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
 /* ---------- c3 · Wogóle ---------- */
 Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogóle', when: 'Czwartek, 21 stycznia · 9:30', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, vanish } = D;
-  const { M, O, W, S, I, Id, B, c } = KronikaCast(D);
+  const { M, O, W, S, I, Id, B, K, Nt, G, c } = KronikaCast(D);
   return [
     clock('2027-01-21T09:30'),
     ambient('calm'),
@@ -592,6 +592,18 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
         S('Nie lubię zakazywać. Ale mam dość.')
       ], { set: { c_zenonDefended: true } }),
       opt('Na razie nic nie przypinajmy. Zobaczymy, co dalej.', [S('Rozumiem. Tylko że potem może już być za późno.')])
+    ]),
+    scene('xGrupaBlok', [
+      pause(2000),
+      G('bartek', 'widzialem tych trzech pod blokiem zenona. jednego znam z silowni. napisalem mu zeby spadal'),
+      G('ola', 'Dziękuję, Bartek.'),
+      G('bartek', 'spadli. jeden jeszcze zrobil zdjecie balkonu. debil'),
+      pause(2000),
+      O('Dyrektorka świetlicy poprosiła mnie na rozmowę o dwunastej. Nie napisała, po co.'),
+      choose('ola', [
+        opt('Napisz mi, jak wyjdziesz.', [O('Napiszę. Idę w zielonym swetrze. Dzieci mówią, że przynosi szczęście.')]),
+        opt('Może chce cię wesprzeć.', [O('Obyś miał{|a} rację. Mam ściśnięty żołądek.')])
+      ])
     ]),
     pause(3000),
     W('Pan Zenon był rano w czytelni. Przyniósł mi zdjęcie, które wnuczka zrobiła mu telefonem.'),
@@ -616,6 +628,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     scene('xCzwartek', [
       pause(2000),
       I('ludzie przynoszą mi dziś magnetowidy. trzy sztuki od rana. chcą sprawdzić, czy na ich kasetach nie ma czegoś złego'),
+      pic('igor', 'igor', 'c_magnetowidy', 'mój dzisiejszy stos. każdy z kartką, co w nim nie działa'),
       I('jedna pani przyniosła kasetę „wesele 1997” i zapytała, czy da się wyciąć szwagra'),
       choose('igor', [opt('Da się?', [I('da się. ale powiedziałem, że szwagier jest w każdej klatce, bo tak było')]), opt('Mglisko w pigułce.', [I('no. każdy ma swoje 30 sekund, jak piszą')])]),
       say('zuza', 'zuza', 'babcia nie wierzy że to pan zenon. mówi że on by nikomu nie zrobił wstydu'),
@@ -628,6 +641,18 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     c('zenon', 'Ida to dobra dziewczyna. Miała w listopadzie kłopoty w gazecie, przez jakieś nagranie. Od tamtej pory mało mówi.'),
     c('zenon', 'Ja już nie wiem, kogo pytać. Do widzenia.'),
     callEnd(),
+    scene('xPoRozmowie', [
+      pause(2500),
+      W('Pan Zenon zostawił u mnie rano parasol. Wróci po niego, jak będzie miał siłę wyjść z domu.'),
+      pause(2500),
+      O('Byłam. Powiedziała, że widziała zapowiedź i że „poczekajmy do piątku”.'),
+      O('Poczekajmy. Jakbym miała jakiś wybór.'),
+      choose('ola', [
+        opt('To nie jest „nie”. To jest „poczekajmy”.', [O('Wiem. Trzymam się tego jak poręczy.')]),
+        opt('Chcesz, żebym z nią porozmawiał{|a}?', [O('Nie. To moja rozmowa. Ale dziękuję.')], { trust: { ola: 1 } })
+      ]),
+      iff('flag:c_zenonDefended', [S('Przypięłam. Dziś pierwszy raz od tygodnia nikt nie podał adresu.')], [S('Ktoś znowu wkleił adres pana Zenona. Usunęłam. Czwarty raz dzisiaj.')])
+    ]),
     pause(5000),
     clock('2027-01-21T22:58'),
     ambient('dark'),
@@ -656,6 +681,27 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
         ], { set: { c_twist: true, c_wrongZenon: true } })
       ])
     ]),
+    scene('xPoOdkryciu', [
+      M('co robimy? mówimy panu Zenonowi?'),
+      choose('maja2', [
+        opt('Jeszcze nie. Najpierw muszę porozmawiać z Idą.', [M('dobra. ale nie zasnę, dopóki nie dasz znać')]),
+        opt('Rano powiemy pani Weronice. Ona go zna najlepiej.', [M('ok. ona będzie wiedziała, jak mu to powiedzieć')], { set: { c_tellWeronika: true } })
+      ]),
+      pause(2500),
+      K('maja mi mówi, że to ida'),
+      K('czyli to ona w wigilię pisała do ciebie, że ma więcej plików niż ja'),
+      K('robiła to samo co ja. tylko dłużej'),
+      choose('kuba', [
+        opt('Ty przestałeś. Ona też jeszcze może.', [K('mogę jej to napisać. jak ktoś, kto wie, jak to jest')], { set: { c_kubaHelps: true } }),
+        opt('Nie mieszaj się w to.', [K('ok. ale wiem, co ona teraz czuje')])
+      ]),
+      pause(2500),
+      Nt('maja pisze, ze to ida. byla u nas na stazu. po listopadzie zniknela i nikt do niej nie zadzwonil. ja tez nie'),
+      choose('natan', [
+        opt('Możesz zadzwonić teraz.', [Nt('moge. tylko co jej powiem? „sorry, ze zostawilismy cie z tym sama”?'), Nt('chociaz to akurat byloby prawdziwe')]),
+        opt('To nie tylko twoja wina.', [Nt('troche moja. to ja wrzucilem te 40 sekund')])
+      ])
+    ]),
     give('ev_c_wogole'),
     pause(4000),
     scene('scCisza', [scare('s4_cisza', 'call', { name: 'Ida Gil', number: '533 019 274', ms: 6000, listen: 3500 })]),
@@ -670,7 +716,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
 /* ---------- c4 · 20:58 ---------- */
 Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust, camera } = D;
-  const { M, O, Id, c, Z, W } = KronikaCast(D);
+  const { M, O, Id, c, Z, W, K, I, Nt, G, V } = KronikaCast(D);
   return [
     clock('2027-01-22T18:20'),
     ambient('calm'),
@@ -691,6 +737,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
     scene('xCzekanie', [
       pause(3000),
       Z('{Szanowny Panie|Szanowna Pani}, Ida nie przyszła na obiad. Zostawiłem jej talerz w piekarniku. Gdyby {Pan|Pani} ją widział{|a}, proszę powiedzieć, że pies tęskni.'),
+      Z('Pies leży pod drzwiami jej pokoju. Nie chce jeść.'),
       pause(2500),
       W('Siedzę w czytelni i nie umiem nic robić. Zrobiłam sobie trzecią herbatę.'),
       W('Pani z biblioteki powiatowej pyta, czy „jakby co” przyjmiemy kasety TV Dolina. Powiedziałam, że tak.'),
@@ -702,10 +749,48 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         opt('Z galerii: Ida z psem', [M('to mnie nie uspokaja'), M('ale dobrze, że ją pamiętamy taką. z psem, nie z kamerą')], { img: 'c_ida_pies', gallery: true })
       ])
     ]),
+    scene('xPrzed21', [
+      clock('2027-01-22T19:35'),
+      O('Poszłam do świetlicy po swoje rzeczy. Na wszelki wypadek.'),
+      pic('ola', 'ola', 'c_rysunki', 'Nie umiem tego zdjąć z tablicy.'),
+      choose('ola', [
+        opt('Nie zdejmuj. Wrócisz tam w poniedziałek.', [O('Obyś miał{|a} rację.')]),
+        opt('Zrób im zdjęcie. Niezależnie od tego, co będzie.', [O('Zrobiłam. To jest tylko dla mnie.')])
+      ]),
+      pause(2500),
+      iff('flag:c_kubaHelps', [
+        K('napisałem do idy. że wiem, jak to jest, i że można przestać'),
+        K('przeczytała. nie odpisała'),
+        choose('kuba', [
+          opt('Przeczytała. To już dużo.', [K('może. ja też kiedyś tylko czytałem')]),
+          opt('Dzięki, że spróbowałeś.', [K('nie dziękuj. jakoś jestem jej to winny')])
+        ])
+      ], [K('nie wiem, czy do niej napisać. chyba nie mam prawa nikogo pouczać')]),
+      pause(2500),
+      Nt('naczelny obiecal: jak klip wyjdzie, gs nie robi z tego newsa. zadnego linku'),
+      Nt('pierwszy raz od listopada mam wrazenie, ze cos robimy dobrze, zanim jest za pozno'),
+      pause(2500),
+      clock('2027-01-22T20:15'),
+      I('mam otwarte konto kroniki w drugiej karcie. jak je usunie, mogę zapisać to, co mi się wczytało. zapisać?'),
+      choose('igor', [
+        opt('Nie. Niech zniknie naprawdę.', [I('ok. zamykam kartę')], { set: { c_igorClosed: true } }),
+        opt('Zapisz, ale nikomu nie dawaj.', [I('zapisane. folder bez nazwy, na pendrivie w szufladzie. nikt o nim nie wie')])
+      ]),
+      pause(2500),
+      clock('2027-01-22T20:31'),
+      G('bartek', 'pol godziny. wylaczam neta i ide z ojcem odsniezac'),
+      G('ola', 'Jestem u mamy. Pieczemy szarlotkę, żeby mieć co robić z rękami.'),
+      G('kuba', 'jestem'),
+      choose('group', [
+        opt('Jestem z wami. Do 21 i po 21.', [G('ola', '❤️')]),
+        opt('Bartek, zostaw sobie chociaż SMS-y.', [G('bartek', 'ok. ale tylko dla was')])
+      ])
+    ]),
     pause(5000),
     clock('2027-01-22T20:58'),
     ambient('dark'),
     Id('jestem przy telewizorze. dziadek śpi. pies śpi'),
+    V('ida', 'ida', '0:09', 'Dziadek chrapie. Telewizor szumi. A pies patrzy na mnie, jakby wiedział.', 'Ida'),
     Id('zadzwoń, jak chcesz. masz dwie minuty'),
     dial({
       goal: 'Zadzwoń do Idy (533 019 274). Zostały dwie minuty.',
@@ -738,11 +823,13 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
     iff(s => s.vars.s4Ending === 'transmisja', [
       scene('scTransmisja', [scare('s4_transmisja', 'glitch')]),
       O('Wyszło.'),
+      O('Mama trzyma mnie za rękę. Telefon leży ekranem w dół.'),
       ending('transmisja')
     ], [
       iff(s => s.vars.s4Ending === 'kopia2', [M('konto zniknęło. 21:00 i nic'), M('skąd wiedział{eś|aś}, że zniknie?'), ending('kopia2')], [
         M('konto zniknęło. 21:00 i nic'),
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
+        Z('Ida przyszła do kuchni. Zjadła z piekarnika. Siedzimy. Pies też.'),
         ending('przewiniecie')
       ])
     ]),
