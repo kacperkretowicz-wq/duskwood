@@ -14,7 +14,7 @@ unit; [ ${#browser[@]} -gt 0 ] && brow
 if [ ${#paths[@]} -gt 0 ]; then git add -- "${paths[@]}"; else git add -A; fi
 git diff --cached --quiet && { echo "brak zmian do commitu"; exit 1; }
 git -c user.name="Kacper Kretowicz" -c user.email="$(git log -1 --format=%ae)" commit -qm "$msg"
-git pull --rebase -q origin "$REMOTE_BRANCH"
+git pull --rebase --autostash -q origin "$REMOTE_BRANCH"
 unit   # ponownie po rebase: cudze zmiany mogły coś zepsuć
 git push -q origin "HEAD:$REMOTE_BRANCH"
 git log --oneline -1

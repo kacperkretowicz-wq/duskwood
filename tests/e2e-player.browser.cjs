@@ -12,7 +12,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
  const out={};
  try{
   for(const os of (process.env.E2E_OS||'ios,android').split(',')){
-   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[];
+   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[],numbered={},badNames=[];
    page.on('crash',()=>console.error(os,'RENDERER CRASH',JSON.stringify(process.memoryUsage())));
    page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    let bytes=0;page.on('response',async r=>{if(r.url().startsWith(base)){if(r.status()>=400)errors.push(r.status()+' '+r.url());const l=+r.headers()['content-length']||0;bytes+=l;}});
@@ -52,6 +52,9 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
      chapters[st.ch]={t:Date.now(),m0:st.msgs,season:st.season};lastCh=st.ch;console.log(os,'→',st.ch,Math.round((Date.now()-tStart)/1000)+'s');
      const lay=await page.evaluate(()=>{const W=innerWidth,bad=[...document.querySelectorAll('.screen *')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.right>W+2&&getComputedStyle(e).position!=='fixed';}).slice(0,3).map(e=>e.className||e.tagName);return {sw:document.documentElement.scrollWidth,W,bad};});
      if(lay.sw>lay.W||lay.bad.length)layout.push({ch:st.ch,...lay});
+     // Nazwy kontaktów przechodzą między sprawami: Kuba nie może wrócić jako sam numer.
+     const nums=await page.evaluate(()=>Object.keys(G.s.chats).filter(id=>G.s.chats[id].msgs?.length).map(id=>[id,G.s.chats[id].name||DATA.chats[id]?.name||id]).filter(([,n])=>/^\+48/.test(n)));
+     numbered[st.ch]=nums;if(st.season!=='s1'||!['prolog'].includes(st.ch))for(const [id] of nums)if(id==='kuba')badNames.push(st.ch);
     }
     if(st.scare&&!scares.find(s=>s.ch===st.ch&&s.kind===st.scare&&Date.now()-s.at<15000)){scares.push({ch:st.ch,pc:st.pc,kind:st.scare,at:Date.now(),msgsIn:st.msgs-chapters[st.ch].m0});
      if(shots)await page.screenshot({path:path.join(shots,`${os}-scare-${st.ch}-${scares.length}.png`)});}
@@ -87,6 +90,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
    console.log(os,JSON.stringify(out[os]));
    assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');assert.equal(fin.s4,'przewiniecie');
    assert.ok(offline,'start offline z cache');
+   console.log(os,'numery zamiast nazw',JSON.stringify(numbered));assert.deepEqual(badNames,[],'Kuba jako numer w: '+badNames.join(','));
    assert.deepEqual(out[os].errors,[]);assert.deepEqual(layout,[]);
    await ctx.close();console.log('PASS e2e-player',os);
   }
