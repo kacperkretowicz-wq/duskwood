@@ -47,8 +47,8 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 - ✅ S4 c4: Ida na początku rozmowy o 20:58: „nagrywam. nawyk z redakcji. spokojnie, nikomu tego nie dam”.
 
 ### Do dodania przed sprawą 5
-- Z1: w napisach S4 (`przewiniecie`) Marta odbiera kasety w archiwum gminy. Jedno zdanie.
-- Z2: w S1/S3 jedno wspomnienie Weroniki o festynie 1996 i Tomku w czerwonej czapce.
+- ✅ Z1: w napisach S4 (`przewiniecie`) Marta odbiera kasety w archiwum gminy.
+- ✅ Z2: S3 `xKubek`: Weronika wspomina festyn 1996 i Tomka w czerwonej czapce („Wera, chodź, jest zimno!”).
 
 ## 6. Obsada i głosy
 - **Maja**: po głosówce nie ufa niczyjemu głosowi. Pisze tylko tekstem i prosi o rodzinne hasło. Pierwsze dwa rozdziały gracz nie może do niej zadzwonić.
@@ -92,3 +92,15 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 - Głos dziecka, które zginęło: pokazywać przez reakcję Weroniki, bez dosłownej grozy. Bez szczegółów śmierci Tomka.
 - Oszustwa na seniorach: gra ma pokazać, jak się bronić (hasło, oddzwonienie), a nie instrukcję.
 - Marta nie jest potworem. Chroni matkę i firmę, w której wyrosła. W finale może sama przyjść do gracza (warunek: zaufanie z S2).
+
+## 12. Stan produkcji (23.10.2026, rano)
+Zrobione: `js/data/case-glos.js`, `js/story/glos.js`, test `tests/case-glos.browser.cjs` (start z każdego zakończenia S4, trzy zakończenia S5). Sezon wydany (`released: true`), e2e gra do końca S5 (zakończenie `haslo`).
+Siedem dni z punktu 8 = siedem rozdziałów, każdy ok. 55–75 wiadomości:
+- **g0 „2:14”** (14/15.03): niedziela (kostka Bartka, umowa Oli, ostrzeżenie Sylwii), głosówka twoim głosem do Mai, zagadka z profilem na Błysku, Kuba pod hutą, czerwona czapka, straszak `s5_ty`.
+- **g1 „Hasło”** (15.03): rodzinne hasło (pachołek / jodełka / trzy kości), trzy głosówki „od Mai” do Kuby, panika w grupie, telefon „od mamy” Natana, apka Echo, przesyłanie w pobliżu z przystanku.
+- **g2 „Wera”** (15/16.03): nagrany telefon od „Tomka”, rozmowa z Weroniką, Błysk z kontem z twoim zdjęciem, album z 1996 i zagadka z czapką, Zenon i archiwum, Marta zaprasza, straszak `s5_wera`.
+- **g3 „Twój głos”** (17.03): pracownia, wideo z kasety nr 12, zagadka (nowe zdania / trzy kubki / kaseta niepokazywana), zeszyt Igora, telefon twoim głosem do ciebie, straszak `s5_smiech`.
+- **g4 „Serwis”** (18.03): Oskar, trzy próbki twojego głosu (źródło: rozmowa z Idą o 20:58), pd_audio = Dudek, przesyłanie w pobliżu: serwis nocą, SMS od Dudka, straszak `s5_serwis`.
+- **g5 „Przewijanie”** (19.03): zatrzymanie Dudka (fałszywe rozwiązanie), scenariusz z laptopa (Pracownia_UG), pisk magnetowidu, kaseta z mostu 2011, Marta z domu Kurek, telefon o 23:47 (`s5_przewijanie`).
+- **g6 „Rozprawa”** (20.03): plan z prokuraturą, nagrywanie rozmów, zdjęcie-dowód z galerii, rozmowa z Martą, zakończenia `haslo` / `echo` / `cisza2`.
+Warunek `haslo`: gracz nagrywa rozmowę (`g_recOn`), mówi Marcie o nagraniu (`g_recordMarta`) i nie obiecał jej nagrań (`g_martaAsk`). `cisza2`: „skasuję wszystko”. Pozostałe przypadki: `echo`.
