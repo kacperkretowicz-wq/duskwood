@@ -13,6 +13,16 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
   return [
     clock('2026-10-22T19:40'),
     title(),
+    /* P2: zwykły wieczór przed sprawą. Kończy się niczym. */
+    scene('xSerwis', [
+      g('igor', 'sorry, dopiero zamknąłem'),
+      g('igor', 'pani przyszła 18:58 z tabletem wnuczka. „tylko na chwileczkę”. wyszła 19:35'),
+      g('ola', 'Ja dopiero wstałam po nocce. Kawa, pies i czytam wszystko od góry.'),
+      choose('group', [
+        opt('Igor, a tablet chociaż działa?', [g('igor', 'działa. wnuczek zmienił język na koreański. tyle było awarii'), g('igor', 'dostałem drożdżówkę zamiast zapłaty. leży na ladzie')]),
+        opt('Ola, czytaj spokojnie. Nic nie ucieknie.', [g('ola', 'Dzięki. Chociaż widzę jakieś zdjęcie z drugiej w nocy, więc chyba jednak ucieka.')], { trust: { ola: 1 } })
+      ])
+    ]),
     K('{widziałeś|widziałaś} to zdjęcie z nocy?? 2:13'),
     K('ktoś był w hucie. sam. z latarką'),
     goal('Przyjrzyj się zdjęciu z fotopułapki z 22.10, 02:13. Kto to może być?', [

@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 3 — Peleryna */
 
 Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 października', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene, scare } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -42,6 +42,17 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     ]),
     scene('s15', SC.s15),
     scene('xPeleryna', [iff('flag:x_pelerynaLater', [g('ola', 'Czekajcie. Ta peleryna z lumpeksu. Dopiero teraz mi się skojarzyła.')])]),
+    /* P2: Bartek dzień po przyznaniu się. Nie ma nowego tropu, jest tylko odkładana rozmowa. */
+    scene('xBartek', [
+      pause(2000),
+      g('bartek', 'bylem rano u starego w garazu'),
+      g('bartek', 'nie pytalem. pomoglem mu wymienic olej w passacie i tyle'),
+      g('bartek', 'dzis mam trzy auta na podnosniku. moze jutro'),
+      choose('group', [
+        opt('Nie musisz dziś. Tylko nie odkładaj tego za długo.', [g('bartek', 'wiem')], { trust: { bartek: 1 } }),
+        opt('Bartek, to może być ważne dla Mai.', [g('bartek', 'myslisz ze nie wiem'), g('ola', 'Dajcie mu ten dzień. Sama bym nie umiała zapytać ojca o coś takiego.')])
+      ])
+    ]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
     g('ola', 'Kuba, zjedz coś. Serio.', { wording: 'Kuba, masz jeszcze te bułki w kuchni? Zrób coś z nimi, zanim mama je wyrzuci.' }),
@@ -273,6 +284,24 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     K('ej'),
     K('ona żyje???'),
     pause(1500),
+    /* P5 / G1: krótki powrót telefonu do sieci. Gajda ma telefon Mai i sprawdza ostatni numer, pod który dzwoniła. */
+    scene('scMajaNumer', [
+      scare('s1_maja_numer', 'call', { who: 'maja', name: 'Maja Wrona', number: '+48 731 402 118', ms: 5000, listen: 2600, onAccept: 's1_pickedMaja' }),
+      iff('flag:s1_pickedMaja', [
+        K('czekaj. dzwoniła do ciebie?? teraz?'),
+        K('co było słychać'),
+        choose('kuba', [
+          opt('Nic. Jakby ktoś przesuwał telefon po stole.', [K('to nie ona. ona by coś powiedziała. cokolwiek')]),
+          opt('Ktoś oddychał i się rozłączył.', [K('nie mów tego mamie. błagam')])
+        ])
+      ], [
+        K('masz coś od jej numeru? mama widzi że był online'),
+        choose('kuba', [
+          opt('Nieodebrane połączenie. Kilka sekund.', [K('kurwa'), K('ktoś ma jej telefon. ona by napisała, nie dzwoniła o trzeciej')]),
+          opt('Nie zdążyłem odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy')])
+        ])
+      ])
+    ]),
     unlock('maja:find'),
     set('majaOnline', false),
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest offline.', sound: 'notif' }),

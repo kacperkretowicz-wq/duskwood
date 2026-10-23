@@ -2,7 +2,7 @@
 /* PROLOG — Nieodebrane */
 
 Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 października · 21:03', mood: 'calm' }, D => {
-  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title } = D;
+  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title, scene } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
@@ -187,6 +187,21 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     g('igor', 'Spokojnie. Technicznie rzecz biorąc, Nimbus blokuje dopiero po dziesięciu próbach. Ale lepiej nie strzelać na ślepo.', { clue: 'ev_igor_phrase' }),
     g('ola', 'Jutro mam na szóstą 🙃 Jeszcze chwilę jestem. %name%, zerkniesz? My już te ekrany znamy na pamięć.'),
     g('kuba', 'zaraz podeślę ci jej maila'),
+    /* P1: Kuba porządkuje to, co już wiadomo, i jedną rzecz, która się nie zgadza. */
+    scene('xCel', [
+      pause(1800),
+      K('dobra, piszę tu, bo na grupie ola mnie zje że spamuję'),
+      K('muszę to sobie poukładać, bo mi się miesza'),
+      K('maja dzwoniła do ciebie, bo myślała że to numer rybickiego. to już wiemy'),
+      K('nie wiemy, czemu w ogóle szukała kogoś od sprawy tomka. i gdzie była tamtej nocy'),
+      K('policja mówi że koło północy była na tamie. a ona o 23:47 jeszcze dzwoniła do ciebie. telefon ostatni raz złapał sieć 23:58'),
+      K('kto dzwoni do dziennikarza z 2007 roku 10 minut przed czymś takim. nie pasuje mi to'),
+      choose('kuba', [
+        opt('Najpierw sprawdźmy, gdzie był wtedy jej telefon.', [K('nimbus zapisuje lokalizację. tylko trzeba się dostać na konto')], { set: { p1_planLoc: true } }),
+        opt('Same godziny jeszcze niczego nie dowodzą. Ale warto je sprawdzić.', [K('wiem. nie chcę sobie nic wmawiać'), K('ale jak w nimbusie będzie lokalizacja, to chociaż będzie wiadomo')]),
+        opt('Kuba, połóż się chociaż na godzinę.', [K('nie dam rady. mama siedzi w kuchni i patrzy w telefon'), K('wyślę ci tego maila i może się położę')], { trust: { kuba: 1 } })
+      ])
+    ]),
     pause(2500),
     fx('glitch', { wait: true }),
     unlock('chat:szklarz'),
