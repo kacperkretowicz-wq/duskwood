@@ -64,15 +64,47 @@ Object.assign(DATA.evidence, {
     ['v_festyn96', 'assets/video/v_festyn96.jpg', 'kaseta nr 12 · 17.08.1996', 360, 270],
     ['g_kuba_kostka', 'assets/glos/g_kuba_kostka.jpg', 'Kostka u sąsiada', 768, 1024],
     ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024],
-    ['g_magnetowid', 'assets/glos/g_magnetowid.jpg', 'Pracownia · kaseta 12', 1024, 768]
+    ['g_magnetowid', 'assets/glos/g_magnetowid.jpg', 'Pracownia · kaseta 12', 1024, 768],
+    ['g_pizza', 'assets/glos/g_pizza.jpg', 'Sobota u Oli', 1024, 768]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
-/* Sezon 5: ten sam zapis. W produkcji (released: false) — test włącza go ręcznie. */
+const GlosHasloWord = () => G.flag('g_hasloP') ? 'pachołek' : G.flag('g_hasloJ') ? 'jodełka' : 'trzy kości';
+Object.assign(DATA.endings, {
+  haslo: {
+    season: 's5', title: 'HASŁO', tag: 'Sprawa 5 · zakończenie 1 z 3', mood: 'dawn',
+    text: [
+      'W poniedziałek policja zabezpiecza pracownię archiwum. Na laptopie są pliki z głosami sześćdziesięciu osób i scenariusze rozmów.',
+      'Marta Jasińska nie zaprzecza. Mówi tylko, że „chciała, żeby proces odbył się bez krzyku”.',
+      'W kwietniu rusza rozprawa o most. Pani Jadwiga, pan Henryk i mama Natana siedzą w pierwszym rzędzie.',
+      () => `Maja zapisała twój numer jako „${GlosHasloWord()}”. Mówi, że tak jest bezpieczniej.`
+    ]
+  },
+  echo: {
+    season: 's5', title: 'ECHO', tag: 'Sprawa 5 · zakończenie 2 z 3', mood: 'dark',
+    text: [
+      'Dudek bierze winę na siebie. Mówi, że sam wszystko wymyślił. Adwokat z Wrocławia kiwa głową.',
+      'Dwóch świadków wycofuje zeznania. Proces o most zostaje odroczony do jesieni.',
+      'Twój głos krąży po Mglisku jeszcze przez miesiąc. Przeprasza, prosi o pieniądze, śmieje się w nocy.',
+      () => G.flag('g_martaAsk') ? 'Pani Marta dziękuje ci mailem za przesłane nagrania. „Zostały zabezpieczone.” Nikt ich więcej nie widział.' : 'Pani Marta dalej digitalizuje kasety. Pani Weronika już do niej nie chodzi.'
+    ]
+  },
+  cisza2: {
+    season: 's5', title: 'CISZA', tag: 'Sprawa 5 · zakończenie 3 z 3', mood: 'dark',
+    text: [
+      'Telefony ustają. Głosy znikają z laptopów, folderów i telefonów. Razem z nimi znikają dowody.',
+      'Dudek dostaje wyrok w zawieszeniu za oszustwa. O scenariuszach nikt nie mówi.',
+      'Kasety stoją w szafie archiwum. Kaseta numer dwanaście też. Pani Weronika ogląda ją raz w miesiącu, przy pani Marcie.',
+      'W Mglisku jest cicho. Tylko ty wiesz, ile ta cisza kosztowała.'
+    ]
+  }
+});
+
+/* Sezon 5: ten sam zapis. Identyfikatory odcinków są kontraktem zapisu. */
 DATA.seasons.push({
-  id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
+  id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: true,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0', 'g1', 'g2', 'g3', 'g4', 'g5'],
+  chapters: ['g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -95,6 +127,7 @@ DATA.seasons.push({
     ['s5.09', 'Próbki', 'g4', 'ev:ev_g_probki'],
     ['s5.10', 'pd_audio', 'g4', 'ev:ev_g_dudek'],
     ['s5.11', 'Scenariusz', 'g5', 'ev:ev_g_scenariusz'],
-    ['s5.12', 'Przewijanie', 'g5', 'flag:g_twist']
+    ['s5.12', 'Przewijanie', 'g5', 'flag:g_twist'],
+    ['s5.13', 'Rozprawa', 'g6', s => !!G.s.vars.s5Ending]
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });

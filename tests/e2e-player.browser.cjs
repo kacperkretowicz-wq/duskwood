@@ -5,8 +5,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE));}
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.TEST_SCREENSHOT_DIR,report=process.env.PLAYTEST_REPORT;
 if(shots)fs.mkdirSync(shots,{recursive:true});
-const WANT=['m_protectK','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays','k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff','k_zuzaHelped','k_police','k_requestLog','c_idaStops','c_olaFirst','c_zenonDefended'];
-const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_martaOut','k_outedKuba','k_lenaPublic','k_ewaWait','k_zuzaAlone','c_tookCopy','c_gaveUp'];
+const WANT=['m_protectK','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays','k_lenaTalks','k_ewaOk','k_quiet','k_kubaOff','k_zuzaHelped','k_police','k_requestLog','c_idaStops','c_olaFirst','c_zenonDefended','g_recordMarta','g_recOn','g_strong','g_confess','g_martaBluff'];
+const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_martaOut','k_outedKuba','k_lenaPublic','k_ewaWait','k_zuzaAlone','c_tookCopy','c_gaveUp','g_wipeAll','g_letGo','g_martaAsk'];
 (async()=>{
  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
  const out={};
@@ -60,7 +60,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
      if(shots)await page.screenshot({path:path.join(shots,`${os}-scare-${st.ch}-${scares.length}.png`)});}
     if(st.credits){
      credits++;if(shots)await page.screenshot({path:path.join(shots,`${os}-credits-${st.season}.png`)});
-     if(st.season==='s4')break;
+     if(st.season==='s5')break;
      await Promise.all([page.waitForNavigation(),page.evaluate(()=>document.querySelector('.curtain button').click())]);
      await page.waitForFunction(()=>typeof G!=='undefined'&&G.s&&typeof Seasons!=='undefined');
      const ok=await page.evaluate(()=>{document.querySelector('.title-scr')?.remove();UI.packageSheet=async()=>6;const ok=Seasons.startNext();UI.renderHome();Engine.restart();return ok;});
@@ -80,7 +80,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
     await page.waitForTimeout(25);
    }
    if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t;
-   const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,scaresSaved:Object.keys(G.s.scares)}));
+   const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,s5:G.s.vars.s5Ending,scaresSaved:Object.keys(G.s.scares)}));
    // offline: po pierwszym wczytaniu service worker musi wystarczyć do startu bez sieci
    await page.reload();await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
    await ctx.setOffline(true);let offline=true;try{await page.reload();await page.waitForFunction(()=>typeof G!=='undefined'&&typeof Engine!=='undefined',{timeout:8000});}catch{offline=false;}
@@ -88,7 +88,7 @@ const AVOID=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_mar
    out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),
     chapters:Object.fromEntries(Object.entries(chapters).map(([k,v])=>[k,{season:v.season,sec:Math.round(v.ms/1000),msgs:v.msgs}]))};
    console.log(os,JSON.stringify(out[os]));
-   assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');assert.equal(fin.s4,'przewiniecie');
+   assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');assert.equal(fin.s4,'przewiniecie');assert.equal(fin.s5,'haslo');
    assert.ok(offline,'start offline z cache');
    console.log(os,'numery zamiast nazw',JSON.stringify(numbered));assert.deepEqual(badNames,[],'Kuba jako numer w: '+badNames.join(','));
    assert.deepEqual(out[os].errors,[]);assert.deepEqual(layout,[]);

@@ -883,3 +883,156 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     end('g6')
   ];
 });
+
+/* ---------- g6 · Rozprawa ---------- */
+Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozprawa', when: 'Sobota, 20 marca · 8:20', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, run, ending, credits, camera } = D;
+  const { M, K, O, I, W, S, Nt, Z, Mr, Gr, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-20T08:20'),
+    ambient('calm'),
+    title(),
+    iff('flag:g_weraWait', [
+      W('Dzień dobry. Nie poszłam. Siedzę w kuchni w płaszczu, jakbym miała zaraz wyjść.'),
+      W('Proszę mi powiedzieć, o co chodzi. Wytrzymam.')
+    ], [
+      W('Dzień dobry. Pani Grażyna idzie ze mną do urzędu na dziewiątą. Ja do archiwum, ona po zaświadczenie.'),
+      W('Czy coś jest nie tak? Pisał{|a} {Pan|Pani} wczoraj tak dziwnie.')
+    ]),
+    choose('weronika', [
+      opt('To pani Marta pisała scenariusze telefonów. Głos Tomka pochodzi z jej pracowni. Proszę dziś tam nie iść.', [W('…'), W('Częstowała mnie herbatą. Patrzyła, jak płaczę nad Tomkiem.'), W('Nie pójdę. Zostaję w domu. Proszę mnie informować.')], { set: { g_weraTold2: true } }),
+      opt('Jeszcze nie mogę powiedzieć. Proszę zostać w domu do południa.', [W('Dobrze. Zaufam {Panu|Pani}. Ale w południe chcę wiedzieć wszystko.')])
+    ]),
+    pause(3000),
+    M('hasło'),
+    ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('ok. powiedziałam kubie. siedzi obok i milczy. to u niego najgorszy znak')])])]),
+    K('marta. ta z archiwum. która w listopadzie dała ci plik z mostu'),
+    K('jak mogę pomóc. serio. powiedz co mam robić'),
+    choose('kuba', [
+      opt('Bądź z Mają i z mamą. I idźcie wieczorem na pizzę. Normalnie.', [K('ok. normalnie. umiem to. chyba')]),
+      opt('Pilnuj, żeby nikt z grupy nie pisał do Marty. Ani słowa.', [K('napiszę im. bez szczegółów. „nie piszcie do nikogo z gminy”. zrozumieją')], { set: { g_kubaGroup: true } })
+    ]),
+    pause(3000),
+    clock('2027-03-20T09:40'),
+    Nt('rozmawialem z prokuratorka od mostu. pani prokurator jest zainteresowana, ale mowi jasno: domysly to za malo'),
+    Nt('potrzebuje czegos, co wiaze marte z telefonami. nagrania, w ktorym ona sama to mowi. albo dowodu z pracowni'),
+    Nt('marta chce z toba gadac. to moze byc jedyna szansa'),
+    choose('natan', [
+      opt('Zadzwonię do niej. Nagram rozmowę. Ty bądź w pobliżu z prokuraturą.', [Nt('bede pod urzedem. z policjantem, ktory zatrzymal dudka. zgodzil sie przyjechac'), Nt('nagrywaj wszystko. i nie daj sie sprowokowac')], { set: { g_plan: true } }),
+      opt('Boję się, że ona mnie przechytrzy. Pisze lepiej ode mnie.', [Nt('ona pisze scenariusze. ty umiesz pytac. to wieksza sila'), Nt('bede pod urzedem z policjantem. nagrywaj wszystko')], { set: { g_plan: true } })
+    ]),
+    scene('xIgorNagrywanie', [
+      pause(2500),
+      I('słyszałem od kuby. tylko tyle: w ustawieniach połączeń masz „nagrywaj automatycznie”. włącz. i sprawdź, czy masz miejsce w pamięci'),
+      I('jak chcesz, przyjadę i posiedzę obok. oskar też chce pomóc. powiedziałem mu, że dziś pomaga, siedząc cicho'),
+      choose('igor', [
+        opt('Włączone. Dzięki, Igor.', [I('powodzenia. i pamiętaj: jak ona zacznie mówić twoim głosem, to się rozłącz')], { set: { g_recOn: true } }),
+        opt('Przyjedź. Wolę nie być sam{|a}.', [I('jadę. biorę ładowarkę i powerbank. i herbatę od mamy')], { set: { g_recOn: true, g_igorHere: true } })
+      ])
+    ]),
+    pause(2500),
+    Nt('wyslij mi jeszcze jedno zdjecie, ktore pokazemy prokuratorce na start. jedno, najmocniejsze'),
+    camera('natan', [
+      opt('Z galerii: magnetowid i kaseta nr 12', [Nt('to jest dobre. ten sam sprzet, ta sama kaseta, jej pracownia'), Nt('pokaze to razem z nagraniem od pani weroniki')], { img: 'g_magnetowid', gallery: true, set: { g_strong: true } }),
+      opt('Z galerii: pracownia z trzema kubkami', [Nt('ladne. ale kubki niczego nie udowodnia'), Nt('dobra. mam jeszcze wydruk scenariusza')], { img: 'g_pracownia', gallery: true }),
+      opt('Z galerii: Tomek na festynie', [Nt('to jest wzruszajace. ale to zdjecie rodzinne, nie dowod'), Nt('ok. dolacze wydruk scenariusza')], { img: 'g_tomek_album', gallery: true })
+    ]),
+    scene('xSobotaRano', [
+      pause(3000),
+      O('Piekę sernik na wieczór. Mama mówi, że za dużo cukru. Ja mówię, że po takim tygodniu nie ma czegoś takiego jak za dużo cukru.'),
+      Gr('bartek', 'ja kupuje cole i lod. kuba niesie ananasa. i swoje plecy, bo moje odpadly'),
+      Gr('igor', 'ja przyniosę głośnik. bez głosów. tylko muzyka'),
+      choose('group', [
+        opt('Będę. Może trochę później.', [Gr('ola', 'Czekamy z pierwszym kawałkiem. Albo z drugim. Zależy od Bartka.')]),
+        opt('Igor, sama muzyka, bez gadania. Proszę.', [Gr('igor', 'obiecuję. same kawałki instrumentalne. nawet bez refrenów')])
+      ]),
+      pause(2500),
+      say('oskar', 'oskar', 'dzień dobry. igor mówi, że dziś ważny dzień. nie wiem jaki, ale trzymam kciuki 🤞'),
+      say('oskar', 'oskar', 'i jeszcze raz sorry. oddałem pani krysi 200 zł. powiedziała, że jestem „głupi, ale dobry”. chyba lepiej niż odwrotnie'),
+      choose('oskar', [
+        opt('Lepiej niż odwrotnie. Trzymaj się, Oskar.', [say('oskar', 'oskar', 'dzięki. idę do serwisu. igor kazał mi dziś tylko zamiatać 🧹')], { set: { g_oskarForgiven: true } }),
+        opt('Dobrze, że oddajesz. A resztę też oddasz?', [say('oskar', 'oskar', 'zbieram. do wakacji oddam wszystko. mama pilnuje')])
+      ]),
+      pause(2500),
+      Z('{Szanowny Panie|Szanowna Pani}, pani Weronika dzwoniła. Nie powiedziała wiele, ale zrozumiałem.'),
+      Z('Gdyby trzeba było zeznać, że magnetowidy i kasety są moje i że oddałem je do archiwum, zrobię to. Jestem stary, ale pamięć mam dobrą.')
+    ]),
+    pause(3000),
+    clock('2027-03-20T11:58'),
+    ambient('dark'),
+    Mr('Dzień dobry. Czy możemy porozmawiać teraz? Zadzwonię.'),
+    callIn('marta'),
+    c('marta', 'Dzień dobry. Dziękuję, że {Pan|Pani} odebrał{|a}.'),
+    c('marta', 'Wiem, że pan Natan był wczoraj na policji. I wiem, że pani Weronika nie przyszła dziś do pracowni.'),
+    c('marta', 'Chcę tylko powiedzieć jedno: moja mama ma siedemdziesiąt jeden lat. Firma to całe jej życie. Most to był wypadek.'),
+    choose('call', [
+      opt('Dlatego pisała pani scenariusze? Głos Tomka, mama Natana, córka pana Henryka?', [
+        c('marta', '…'),
+        c('marta', 'Nikomu nie stała się krzywda. To były tylko słowa. Ładnie napisane, prawda?'),
+        c('marta', 'Pan Dudek miał tylko czytać. On nawet nie umiał wymówić „rekolekcje”.'),
+        c('marta', 'Wszystko jest na kasetach. Wszyscy kiedyś coś powiedzieli do kamery pana Zenona. Wystarczyło słuchać.')
+      ], { set: { g_confess: true } }),
+      opt('Czego pani ode mnie chce?', [
+        c('marta', 'Żeby {Pan|Pani} przestał{|a}. Proces i tak się odbędzie. Niech się odbędzie bez krzyku.'),
+        c('marta', 'Mam {Pana|Pani} głos. Mam głos Mai. Ale nie chcę go używać.')
+      ], { set: { g_threat: true } })
+    ]),
+    choose('call', [
+      opt('Ta rozmowa jest nagrywana. Za chwilę będzie ją miała prokuratura.', [c('marta', 'Rozumiem.'), c('marta', 'Archiwista wie, że nagranie to dokument. Ja zawsze to wiedziałam.'), c('marta', 'Do widzenia.')], { set: { g_recordMarta: true } }),
+      opt('Dobrze. Przestanę. Niech pani zostawi w spokoju Weronikę i Maję.', [c('marta', 'Dziękuję. Wiedziałam, że {Pan|Pani} jest rozsądn{y|a}.'), c('marta', 'A nagrania od pani Weroniki? Proszę mi je jednak przesłać. Dla porządku.')], { set: { g_letGo: true } }),
+      opt('Skasuję wszystko, co mam. Pani skasuje kasety i głosy. Wszyscy zapomną.', [c('marta', 'Kasety to pamięć. Ale dobrze. Głosy skasuję. Kasety zostaną w szafie.'), c('marta', 'Zgoda.')], { set: { g_wipeAll: true } })
+    ]),
+    callEnd(),
+    run(s => {
+      s.vars.s5Ending = G.flag('g_wipeAll') ? 'cisza2' : (G.flag('g_recordMarta') && G.flag('g_recOn') && !G.flag('g_martaAsk')) ? 'haslo' : 'echo';
+    }),
+    pause(2500),
+    W('Czekam w kuchni. Woda w czajniku gotowała się już trzy razy. Czy to już?'),
+    iff(s => s.vars.s5Ending === 'haslo', [W('Pan Natan zadzwonił. Powiedział: „mamy ją”. Usiadłam na podłodze. Tomek by się śmiał.')], [W('Rozumiem. Czyli dalej nie wiemy, czy ktoś za to odpowie.')]),
+    pause(2500),
+    iff(s => s.vars.s5Ending === 'haslo', [
+      Nt('mam nagranie. prokuratorka slucha go w samochodzie drugi raz'),
+      iff('flag:g_confess', [Nt('„wszystko jest na kasetach. wystarczylo sluchac”. powiedziala to sama. pani prokurator tylko kiwnela glowa')], [Nt('nie przyznala sie wprost. ale jest grozba i „mam glos mai”. to wystarczy na przeszukanie pracowni')]),
+      iff('flag:g_strong', [Nt('i zdjecie magnetowidu. policjant mowi, ze zabezpiecza sprzet od razu')]),
+      Nt('ida, zenon, weronika, henryk. wszyscy zeznaja. dzieki tobie'),
+      pause(3000),
+      clock('2027-03-20T18:40'),
+      pic('ola', 'ola', 'g_pizza', 'Pizza! Ananas zniknął pierwszy. Nikt się nie przyznaje.'),
+      Gr('bartek', 'ja zjadlem ananasa. oficjalnie. dla mai'),
+      Gr('kuba', 'za %name%. za normalną sobotę'),
+      V('maja2', 'maja', '0:05', 'To ja. Wiesz, po czym poznasz. Dzięki. Za wszystko.', 'Maja'),
+      ...GlosHaslo(D, w => [M(`p.s. „${w}”. zawsze`)]),
+      ending('haslo')
+    ], [
+      iff(s => s.vars.s5Ending === 'echo', [
+        scene('scEcho', [scare('s5_echo', 'glitch')]),
+        Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”'),
+        Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „maz dzwonil we snie”'),
+        Nt('jej maz nie zyje od pieciu lat'),
+        pause(3000),
+        clock('2027-03-20T22:10'),
+        W('Znowu dzwonił. Nie odebrałam. Wyłączyłam telefon i wyjęłam baterię. Mam stary telefon, z baterią.'),
+        M('ktoś wrzucił twoją głosówkę do grupy sylwii. mówisz w niej, że „przepraszasz za wszystko”'),
+        M('wiem, że to nie ty. hasło znam tylko ja. ale reszta miasta go nie zna'),
+        S('Usunęłam tę głosówkę. Ktoś ją wkleił znowu. I znowu. W końcu zamknęłam komentarze.'),
+        S('Przepraszam. Wiem, że to nie {pan|pani}. Ale ja nie mam już siły tłumaczyć ludziom, co jest prawdziwe.'),
+        K('siedzę z mają na balkonie. pizza była, ale nikt nie miał ochoty się śmiać'),
+        ending('echo')
+      ], [
+        Nt('rozumiem. naprawde rozumiem. ale prokuratorka bedzie miala tylko to, co mam ja'),
+        Nt('skasowal{es|as} wszystko?'),
+        choose('natan', [
+          opt('Tak. Głosówki, nagrania, zrzuty. Proszę Idę, Igora i Zenona o to samo.', [Nt('ok. wtedy ja tez. nie bede trzymal glosow ludzi w telefonie'), Nt('i tak nie mamy dowodu. tylko domysly')]),
+          opt('Prawie. Został mi jeden plik. Głos Mai z hasłem.', [Nt('ten zostaw. to nie dowod. to pamiatka')])
+        ]),
+        pause(3000),
+        clock('2027-03-20T19:20'),
+        pic('ola', 'ola', 'g_pizza', 'Jest pizza. Trochę ciszej, niż miało być. Ale jest.'),
+        M('już nikt nie dzwoni. ani tomek, ani ty, ani nikt'),
+        M('nie wiem, czy to dobrze'),
+        ending('cisza2')
+      ])
+    ]),
+    credits()
+  ];
+});

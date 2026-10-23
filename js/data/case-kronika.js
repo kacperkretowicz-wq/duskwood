@@ -108,7 +108,7 @@ DATA.seasons.push({
       'Wszystkie osoby, konta i usługi w tej sprawie są fikcyjne. TV Dolina, Klipo i Błysk nie istnieją.',
       'Dziękujemy, że {pytałeś|pytałaś}, kto trzyma kamerę.'
     ],
-    teaser: { title: 'MGLISKO', text: 'Lodowisko otwierają w lutym. Bałwan z pachołkiem jeszcze stoi.' },
+    teaser: { title: 'MGLISKO', text: 'Lodowisko otwierają w lutym. Bałwan z pachołkiem jeszcze stoi. A w marcu ktoś zacznie mówić twoim głosem.' },
     note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 4 · Rozdział 5.'
   },
   episodes: [
