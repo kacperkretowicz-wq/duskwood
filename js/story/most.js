@@ -143,6 +143,15 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     ]),
     pause(4000),
     clock('2026-11-20T21:07', { rest: 's2_archive' }),
+    /* P3: spokojny powrót po przerwie. Nic się nie stało i to też jest odpowiedź. */
+    scene('xPoTreningu', [
+      say('kuba', 'kuba', 'wróciłem z treningu. zjadłem pół lodówki'),
+      say('kuba', 'kuba', 'coś się działo jak mnie nie było?'),
+      choose('kuba', [
+        opt('Cisza. Nic nowego.', [say('kuba', 'kuba', 'i dobrze. pierwszy piątek od miesiąca bez afery')]),
+        opt('Nic. Odpocznij, jutro pogadamy.', [say('kuba', 'kuba', 'tak jest. mama i tak każe mi wynieść śmieci')])
+      ])
+    ]),
     unlock('chat:marta'),
     Ma('Dobry wieczór. Nazywam się Marta Jasińska, pracuję w archiwum Gazety Sudeckiej. Numer dostałam od Mai Wrony.'),
     Ma('Piszę w sprawie kasety mini-DV opisanej „H.W. 2/2” z materiałów śp. Adama Rybickiego.'),

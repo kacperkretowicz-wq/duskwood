@@ -153,7 +153,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
 });
 
 Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura', when: 'Sobota, 19 grudnia · 21:30', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run, callIn, callEnd } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run, callIn, callEnd, sys } = D;
   const c = (who, t, o) => say('call', who, t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
@@ -228,6 +228,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     ]),
     pause(4000),
     clock('2026-12-20T03:11', { rest: 's3_upload' }),
+    scene('xRanoKlip', [iff('flag:rano_s3_upload', [sys('kuba', 'Powiadomienia z nocy. Klip dodano o 03:11.')])]),
     ambient('dark'),
     notify({ app: 'browser', title: 'Klipo', text: '@archiwum.rybickiego dodał nowy klip', sound: 'notif', open: { page: 'tt_archiwum' } }),
     set('k_clip5'),

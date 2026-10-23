@@ -240,6 +240,14 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     ]),
     pause(5000),
     clock('2027-01-19T21:00', { rest: 's4_evening' }),
+    /* P3: Weronika wraca po pracy; zwykła rozmowa przed nowym klipem. */
+    scene('xPoPracy', [
+      W('Wróciłam. Dwanaście godzin na nogach, a w autobusie ktoś jadł śledzie.'),
+      choose('weronika', [
+        opt('Odpocznij. Kronika poczeka do jutra.', [W('Nie poczeka. Ale dzięki.')]),
+        opt('Jak w pracy?', [W('Jak zawsze we wtorek. Ktoś zgubił klucze, ktoś krzyczał na kasie. Normalnie.')])
+      ])
+    ]),
     set('c_day2'),
     notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „boisko, 2008”', sound: 'notif', open: { page: 'tt_kronika' } }),
     scene('xBoisko', [
