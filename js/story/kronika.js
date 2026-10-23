@@ -215,7 +215,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     callIn('weronika'),
     c('weronika', 'Kronikę „TV Dolina” kręcił jeden człowiek. Pan Zenon Gil.'),
     c('weronika', 'Osiemnaście lat z kamerą na ramieniu. Każdy festyn, każde zebranie, każdy pogrzeb.'),
-    c('weronika', 'Jak kablówka upadła w 2014, kasety zabrał do domu. Mówił, że „szkoda wyrzucić ludzi”.'),
+    c('weronika', 'Jak kablówka upadła w 2018, kasety zabrał do domu. Mówił, że „szkoda wyrzucić ludzi”.'),
     c('weronika', 'To porządny człowiek. Nie wierzę, żeby to robił. Ale kasety są u niego. Wszyscy to wiedzą.'),
     callEnd(),
     set('c_zenonNamed'),
@@ -282,10 +282,10 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     O('Pod klipem z boiskiem ktoś napisał „jutro: O.N.”.'),
     O('O.N. To mogę być ja. Aleksandra Nowicka.'),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola'),
 
-    O('Wiem, co może być na tej kasecie. Festyn, 2011. Nie chcę o tym pisać.'),
+    O('Wiem, co może być na tej kasecie. Festyn, 2018. Nie chcę o tym pisać.'),
     choose('ola', [
       opt('Nie musisz. Jestem tu.', [O('Dziękuję. Muszę to przemyśleć.')], { trust: { ola: 1 } }),
-      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2011 na festynie.')])
+      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2018 na festynie.')])
     ]),
     scene('xOlaMama', [
       pause(4000),
@@ -317,7 +317,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     ambient('calm'),
     title(),
     O('Nie spałam. Dobra, powiem ci. Tylko tobie.'),
-    O('Festyn w 2011. Miałam siedemnaście lat. Pobiłam się z dziewczyną z Bielawy. Złamałam jej nos.'),
+    O('Festyn w 2018. Miałam czternaście lat. Pobiłam się z dziewczyną z Bielawy. Złamałam jej nos.'),
     O('Była sprawa w sądzie dla nieletnich. Przeprosiłam ją. Mama przez rok spłacała koszty jej leczenia.'),
     O('Teraz pracuję z dziećmi w świetlicy. Jak to wyjdzie, nikt mnie już nie zatrudni.'),
     choose('ola', [
@@ -338,7 +338,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
           c('zenon', 'Gil, słucham.'),
           c('zenon', 'Tak, kasety są u mnie. Tysiąc czterysta z hakiem. Nikomu ich nie dawałem.'),
           c('zenon', 'Ja tego Klipo nawet nie mam. Ktoś mi wczoraj pokazał w sklepie. Wstyd mi było.'),
-          c('zenon', 'Przepraszam, pies piszczy. Wnuczka z nim wyszła, a on i tak piszczy. Do widzenia.'),
+          c('zenon', 'Przepraszam, pies piszczy. Wnuczka zaraz z nim wyjdzie, a on już piszczy. Do widzenia.'),
           callEnd()
         ] }
       }
@@ -358,7 +358,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       pause(2500),
       K('maja mówi, że {dzwoniłeś|dzwoniłaś} do pana zenona. ja bym nie umiał'),
       pause(2000),
-      Nt('mam w archiwum ramowke tv dolina z sierpnia 2011. festyn mial isc w sobote, 2 minuty'),
+      Nt('mam w archiwum ramowke tv dolina z sierpnia 2018. festyn mial isc w sobote, 2 minuty'),
       Nt('a w notatce operatora dopisek recznie: „bójka — nie emitować. Z.G.”'),
       choose('natan', [
         opt('Czyli pan Zenon sam to wtedy wyciął.', [Nt('na to wyglada. 15 lat temu ktos juz zdecydowal, ze tego nie trzeba pokazywac')], { set: { c_zenonCut: true } }),
@@ -388,7 +388,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       W('Pan Zenon przyszedł do czytelni pożyczyć krzyżówki. Zapytał, czy ludzie naprawdę myślą, że to on. Nie umiałam skłamać.'),
       choose('weronika', [
         opt('Co mu pani powiedziała?', [W('Że niektórzy tak. I że ja nie. Wziął trzy krzyżówki, chociaż zawsze bierze jedną.')]),
-        opt('Dobrze, że ma panią.', [W('Ja jego też. Czterdzieści lat temu kręcił mój ślub. Za darmo, bo „młodym się nie liczy”.')])
+        opt('Dobrze, że ma panią.', [W('Ja jego też. Dwadzieścia lat temu kręcił mój ślub. Za darmo, bo „młodym się nie liczy”.')])
       ]),
       say('zuza', 'zuza', 'babcia znalazła pana zenona na kasecie z mojego chrztu. widać go przez sekundę w lustrze. jedyny raz')
     ]),
@@ -414,12 +414,12 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     pause(4000),
     clock('2027-01-20T21:00'),
     set('c_day3'),
-    notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „festyn, 2011. jutro: O.N.”', sound: 'notif', open: { page: 'tt_kronika' } }),
+    notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „festyn, 2018. jutro: O.N.”', sound: 'notif', open: { page: 'tt_kronika' } }),
     O('Wrzucili zapowiedź. Sam napis i plac festynowy. Jutro ja.'),
     iff('flag:c_olaFirst', [O('Piszę ten tekst. Na razie mam dwa zdania i pięć razy je skasowałam.')]),
     scene('xGrupaFestyn', [
       pause(2000),
-      Gr('bartek', 'ja tez bylem na tym festynie. 12 lat mialem. pamietam ze ktos krwawil i ze'),
+      Gr('bartek', 'ja tez bylem na tym festynie. 16 lat mialem. pamietam ze ktos krwawil i ze'),
       pause(1500),
       sys('group', 'Bartek usunął wiadomość'),
       Gr('bartek', 'sorry. glupi jestem'),
@@ -508,7 +508,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
         B('pokaż go komu chcesz. nikt ci nie uwierzy, że to nie ty masz te kasety'),
         vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
       ], { shot: true, set: { c_shotFestyn: true } }),
-      opt('Ona miała 17 lat.', [
+      opt('Ona miała 14 lat.', [
         B('a ja w listopadzie byłam tylko stażystką. i jakoś nikt się nade mną nie litował'),
         vanish('blysk2')
       ], { set: { c_pleaded: true } })
@@ -592,7 +592,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     pause(3000),
     typing('blysk2', 'blysk2', 4000),
     pause(2500),
-    scene('scFestyn', [scare('s4_festyn', 'face', { img: 'c_festyn', caption: 'TV Dolina · 14.08.2011 · 21:12' })]),
+    scene('scFestyn', [scare('s4_festyn', 'face', { img: 'c_festyn', caption: 'TV Dolina · 11.08.2018 · 21:12' })]),
     pause(2000),
     M('dobra. zamknij drzwi na dwa zamki. ja nie śpię'),
     scene('xNocDalej', [
@@ -720,7 +720,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
         opt('To nie jest „nie”. To jest „poczekajmy”.', [O('Wiem. Trzymam się tego jak poręczy.')]),
         opt('Chcesz, żebym z nią porozmawiał{|a}?', [O('Nie. To moja rozmowa. Ale dziękuję.')], { trust: { ola: 1 } })
       ]),
-      iff('flag:c_zenonDefended', [S('Przypięłam. Dziś pierwszy raz od tygodnia nikt nie podał adresu.')], [S('Ktoś znowu wkleił adres pana Zenona. Usunęłam. Czwarty raz dzisiaj.')])
+      iff('flag:c_zenonDefended', [S('Przypięłam. Od rana nikt więcej nie podał adresu.')], [S('Ktoś znowu wkleił adres pana Zenona. Usunęłam. Czwarty raz dzisiaj.')])
     ]),
     pause(5000),
     clock('2027-01-21T22:58'),
@@ -798,7 +798,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
     ]),
     iff('flag:c_olaFirst', [
       O('Napisałam. Pokażę ci, zanim wrzucę.'),
-      O('„W 2011 na festynie zrobiłam komuś krzywdę. Miałam 17 lat. Przeprosiłam i spłaciliśmy koszty leczenia. Jeśli ktoś to zobaczy na Klipo, wolę, żebyście najpierw usłyszeli to ode mnie.”'),
+      O('„W 2018 na festynie zrobiłam komuś krzywdę. Miałam 14 lat. Przeprosiłam i spłaciliśmy koszty leczenia. Jeśli ktoś to zobaczy na Klipo, wolę, żebyście najpierw usłyszeli to ode mnie.”'),
       choose('ola', [
         opt('Wrzuć. To jest uczciwe.', [O('Wrzucam. Ręce mi się trzęsą.')], { set: { c_olaPosted: true } }),
         opt('Poczekaj jeszcze. Może uda się zatrzymać klip.', [O('Dobrze. Ale tylko do 21.')])
@@ -872,7 +872,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
           c('ida', 'w listopadzie wszyscy pisali, że to ja jestem fejkiem. że przeze mnie przez tydzień wszyscy mieli pana Henryka za mordercę'),
           c('ida', 'a całe miasto ma takie swoje 40 sekund. tylko nikt ich nie wyciął'),
           choose('call', [
-            opt('Ola miała 17 lat i dawno za to przeprosiła. Nie rób jej tego, co zrobiono tobie.', [
+            opt('Ola miała 14 lat i dawno za to przeprosiła. Nie rób jej tego, co zrobiono tobie.', [
               c('ida', '…'),
               c('ida', 'usuwam. konto też'),
               c('ida', 'powiesz ze mną dziadkowi? sama nie dam rady')

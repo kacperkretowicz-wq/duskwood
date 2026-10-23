@@ -333,7 +333,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
         S('I wyłączę komentarze pod tym jednym. Niech raz będzie spokój.')
       ], { set: { m_correctionFirst: true } }),
       opt('Poczekaj na tekst. Lepiej z linkiem do całości.', [
-        S('Rozumiem. Tylko że do poniedziałku jeszcze trzy dni komentarzy.'),
+        S('Rozumiem. Tylko że do poniedziałku jeszcze dwa dni komentarzy.'),
         S('No nic. Poczekam.')
       ], { set: { m_correctionLater: true } })
     ]),
@@ -374,7 +374,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     W('Kasetę i obie kopie strony 41 przechowuje teraz redakcja. Razem z panią Martą i rodziną pana Adama podpisaliśmy protokół przekazania. Teczka wróciła do pudła, już bez kasety.'),
     scene('xMajaRano', [
       say('maja2', 'maja', 'czytam w autobusie. trzeci raz'),
-      say('maja2', 'maja', 'pan Adam by się ucieszył. on zawsze mówił, że najlepszy tekst to taki, po którym nikt nie musi się wstydzić. ani bohater, ani autor'),
+      say('maja2', 'maja', 'pan Adam by się ucieszył. pani Weronika mówi, że powtarzał: najlepszy tekst to taki, po którym nikt nie musi się wstydzić. ani bohater, ani autor'),
       choose('maja2', [
         opt('A ty? Jak się czujesz po tym wszystkim?', [say('maja2', 'maja', 'lepiej niż w listopadzie. dużo lepiej'), say('maja2', 'maja', 'i pierwszy raz od dawna nie boję się otworzyć komentarzy')], { trust: { maja: 1 } }),
         opt('To też twoja zasługa. Ty znalazłaś teczkę.', [say('maja2', 'maja', 'kotka znalazła. ja ją tylko przesunęłam'), say('maja2', 'maja', 'ale dzięki 🫶')])
@@ -385,7 +385,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       pause(2500),
       callIn('henryk'),
       c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.'),
-      c('henryk', 'Ja tam nikogo nie oskarżam. Ale teraz ludzie wiedzą, że tej siatki nie zdjąłem sam z siebie.'),
+      c('henryk', 'Ja tam nikogo nie oskarżam. Ale teraz ludzie wiedzą, że to nie ja kazałem zostawić tę siatkę zdjętą.'),
       choose('call', [
         opt('Dziękuję, że mi pan zaufał.', [c('henryk', 'To ja dziękuję. Że ktoś w końcu sprawdził.')], { trust: { henryk: 1 } }),
         opt('Jak się pan czuje?', [c('henryk', 'Jak po burzy. Mokro, ale lepiej się oddycha.')])

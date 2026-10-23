@@ -17,7 +17,7 @@ Object.assign(DATA.persons, {
   zenon: {
     name: 'Zenon Gil', role: '69 lat · emeryt, dawniej operator „TV Dolina”', cond: 'flag:c_zenonNamed',
     facts: [
-      { text: 'Przez osiemnaście lat kręcił kronikę kablówki. Po upadku TV Dolina w 2014 zabrał kasety do domu.' },
+      { text: 'Przez dwadzieścia dwa lata kręcił kronikę kablówki. Po upadku TV Dolina w 2018 zabrał kasety do domu.' },
       { text: 'Mówi, że nikomu nie dawał kaset. „Nie umiem nawet wrzucić zdjęcia na Kwartał.”', cond: 'flag:c_zenonCalled' },
       { text: 'Na ferie przyjechała do niego wnuczka. To ona wychodzi nocą z psem.', cond: 'flag:c_idaSeen' }
     ]
@@ -38,7 +38,7 @@ Object.assign(DATA.evidence, {
   ev_c_boisko: { title: 'Klip nr 2 · „boisko, 2008”', cat: 'digital', source: 'klipo.app/@kronika.mglisko', img: 'c_boisko',
     desc: 'Ówczesny wójt Kalinowski i pan Wrzos z firmy Wrzos-Bud podają sobie ręce przy budowie boiska. Przetarg wygrała firma szwagra wójta.' },
   ev_c_tv: { title: 'Kronika „TV Dolina”', cat: 'testimony', source: 'Weronika · telefon 19.01',
-    desc: 'Lokalna kablówka, 1996–2014. Kronikę kręcił jeden operator: Zenon Gil. Po upadku kablówki kasety zostały u niego.' },
+    desc: 'Lokalna kablówka, 1996–2018. Kronikę kręcił jeden operator: Zenon Gil. Po upadku kablówki kasety zostały u niego.' },
   ev_c_okno: { title: 'Zdjęcie mojego okna', cat: 'photo', source: 'Przesyłanie w pobliżu · 20.01, 23:41', img: 'c_blok_noc',
     desc: 'Ktoś zrobił zdjęcie mojego okna z parkingu przed blokiem i przesłał je z telefonu bez nazwy.' },
   ev_c_spacer: { title: 'Spacer z psem pana Zenona', cat: 'photo', source: 'Maja · 20.01', img: 'c_ida_pies',
@@ -58,11 +58,11 @@ DATA.web.tt_kronika = {
     const clips = [
       ['18.01 · 21:00', 'studniówka, 1999. „jutro kolejna osoba”', '34 tys.'],
       ['19.01 · 21:00', 'boisko, 2008. kto wygrał przetarg', '51 tys.'],
-      ['20.01 · 21:00', 'festyn, 2011. jutro: O.N.', '77 tys.'],
+      ['20.01 · 21:00', 'festyn, 2018. jutro: O.N.', '77 tys.'],
       ['21.01 · 21:00', G.flag('c_zenonDefended') ? 'przerwa. „ktoś za bardzo się wtrąca”' : 'adres operatora? sami znajdźcie', '90 tys.']
     ].slice(0, G.flag('c_day4') ? 4 : G.flag('c_day3') ? 3 : G.flag('c_day2') ? 2 : 1).reverse();
     return `<header class="tt-h"><b>klipo</b></header><main class="tt-m">
-      <div class="tt-prof"><b>@kronika.mglisko</b><p>tv dolina 1996–2014. każdy ma swoje 30 sekund</p></div>
+      <div class="tt-prof"><b>@kronika.mglisko</b><p>tv dolina 1996–2018. każdy ma swoje 30 sekund</p></div>
       ${clips.map(([t, d, v]) => `<article class="tt-v"><p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
       <div class="tt-com"><p><b>gosia_z_bielawy</b> moja ciocia tam tańczy 😭</p><p><b>m.kowal</b> kto ma te kasety to wiadomo. operator</p><p><b>sylwia_salon</b> Proszę bez adresów w komentarzach.</p></div></main>`;
   }
@@ -77,7 +77,7 @@ DATA.web.tt_kronika = {
     ['c_blok_noc', 'assets/kronika/c_blok_noc.jpg', 'Parking · 23:41', 768, 1024],
     ['c_ida_pies', 'assets/kronika/c_ida_pies.jpg', 'Pierwszy śnieg', 768, 1024],
     ['c_lodowisko', 'assets/kronika/c_lodowisko.jpg', 'Lodowisko', 768, 1024],
-    ['c_festyn', 'assets/kronika/c_festyn.jpg', 'TV Dolina · festyn 2011', 1024, 768],
+    ['c_festyn', 'assets/kronika/c_festyn.jpg', 'TV Dolina · festyn 2018', 1024, 768],
     ['c_ryz', 'assets/kronika/c_ryz.jpg', 'Serwis Igora', 768, 1024],
     ['c_gorka', 'assets/kronika/c_gorka.jpg', 'Górka za blokami', 768, 1024],
     ['c_rysunek', 'assets/kronika/c_rysunek.jpg', 'Świetlica', 768, 1024],
@@ -90,7 +90,7 @@ DATA.web.tt_kronika = {
     ['c_rysunki', 'assets/kronika/c_rysunki.jpg', 'Tablica w świetlicy', 768, 1024],
     ['v_sanki', 'assets/video/v_sanki.jpg', 'Górka za blokami', 360, 636],
     ['v_pies_noc', 'assets/video/v_pies_noc.jpg', 'Parking · noc', 360, 636],
-    ['v_festyn', 'assets/video/v_festyn.jpg', 'festyn, 2011', 360, 270],
+    ['v_festyn', 'assets/video/v_festyn.jpg', 'festyn, 2018', 360, 270],
     ['v_studniowka', 'assets/video/v_studniowka.jpg', 'studniówka, 1999', 360, 270],
     ['v_telewizor', 'assets/video/v_telewizor.jpg', 'on śpi', 360, 640]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
@@ -139,7 +139,7 @@ Object.assign(DATA.endings, {
   transmisja: {
     season: 's4', title: 'TRANSMISJA', tag: 'Sprawa 4 · zakończenie 2 z 3', mood: 'dark',
     text: [
-      'O 21:00 klip pojawia się na Klipo. Festyn, 2011. Ola Nowicka, siedemnaście lat, i dziewczyna z Bielawy z krwią na twarzy.',
+      'O 21:00 klip pojawia się na Klipo. Festyn, 2018. Ola Nowicka, czternaście lat, i dziewczyna z Bielawy z krwią na twarzy.',
       'Ola nie przychodzi w poniedziałek do pracy. Pisze tylko: „wiedział{eś|aś}?”.',
       'Ida wyjeżdża z Mgliska pierwszym busem. Ostatnia wiadomość na Błysku znika, zanim zdążysz ją przeczytać do końca.',
       () => G.flag('c_zenonDefended') ? 'Pan Zenon dalej wyprowadza psa. Sam, o szóstej rano. Ktoś zmazał mu z drzwi napis.' : 'Na drzwiach pana Zenona ktoś pisze sprayem „KAMERZYSTA”. Pan Zenon nie zmywa.'

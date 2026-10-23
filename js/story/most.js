@@ -121,7 +121,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     ]),
     scene('xGrupa', [
       pause(2500),
-      say('group', 'kuba', 'dobra. maja od miesiąca jest w domu, a my dalej mamy grupę „szukamy mai”'),
+      say('group', 'kuba', 'dobra. maja jest w domu, a my dalej mamy grupę „szukamy mai”'),
       say('group', 'ola', 'Mnie też to gryzło. Tylko jakoś głupio było zmieniać.'),
       say('group', 'bartek', 'zmieniajcie. matka mysli ze dalej kogos szukamy'),
       say('group', 'kuba', 'ty wymyśl. ja wymyślę coś głupiego'),

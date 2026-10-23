@@ -111,7 +111,7 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
     W('Ktoś oddał pudło starych kaset wideo. Odesłałam je do archiwum gminy. Tam teraz wszystko digitalizują.'),
     choose('weronika', [
       opt('Czajnik to najważniejszy sprzęt w bibliotece.', [W('Zdecydowanie. Bez niego nikt by nie przychodził na spotkania.')]),
-      opt('Kto tam digitalizuje?', [W('Pani Marta Jasińska. Bardzo dokładna. Dzwoni, żeby podziękować za każdą kasetę.')], { set: { g_martaArch: true } })
+      opt('Kto tam digitalizuje?', [W('Pani Marta Jasińska. Ta z gazety, z jesieni. Teraz pracuje u nas w gminie. Bardzo dokładna. Dzwoni, żeby podziękować za każdą kasetę.')], { set: { g_martaArch: true } })
     ]),
     pause(4000),
     clock('2027-03-14T23:12'),
@@ -460,7 +460,7 @@ Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera',
     scene('xMarta', [
       pause(3000),
       unlock('chat:marta'),
-      Mr('Dzień dobry. Tu Marta Jasińska, archiwum gminy. Pani Weronika dała mi {Pana|Pani} numer.'),
+      Mr('Dzień dobry. Tu Marta Jasińska. Dawno nie pisałam. Od lutego pracuję w archiwum gminy, przy kasetach pana Zenona.'),
       Mr('Mówiła, że pyta {Pan|Pani} o festyn z 1996 roku. Mamy tę kasetę, jest już zgrana.'),
       Mr('Jeśli to pomoże, mogę jutro pokazać nagranie w pracowni. Wolę na miejscu niż mailem, z szacunku dla rodziny.'),
       choose('marta', [
@@ -665,7 +665,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     ]),
     Os('ja nie wiedziałem, że tak można. tzn. wiedziałem. ale myślałem, że on robi memy 😶'),
     choose('oskar', [
-      opt('Masz z nim jakąś wiadomość, numer, cokolwiek?', [Os('konto „pd_audio”. usunął je wczoraj. ale mam zrzut z przelewu. odbiorca: P. Dudek'), Os('igor mówi, że to ten od mostu')], { set: { g_dudekNamed: true } }),
+      opt('Masz z nim jakąś wiadomość, numer, cokolwiek?', [Os('konto „pd_audio”. usunął je wczoraj. ale mam zrzut z przelewu. nadawca: P. Dudek'), Os('igor mówi, że to ten od mostu')], { set: { g_dudekNamed: true } }),
       opt('Powiesz to wszystko policji?', [Os('mama mnie zawiezie po południu. ona już wie. płakała. ja też'), Os('mam zrzut z przelewu. nazwisko: P. Dudek')], { set: { g_dudekNamed: true, g_oskarPolice: true } })
     ]),
     give('ev_g_dudek'),
@@ -837,9 +837,9 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     ]),
     pause(3000),
     clock('2027-03-19T15:45'),
-    Nt('sprawdzilem. marta jasinska z domu kurek. corka janiny kurek. kurek-bud'),
-    Nt('wiedzielismy to w listopadzie. przeciek o kasecie poszedl „przez kuchnie”. i zapomnielismy'),
-    Nt('a dudek to kierownik budowy z kurek-bud. adwokat z wroclawia. to sie sklada'),
+    Nt('marta jasinska. nazwisko po ojcu. corka janiny kurek z kurek-bud'),
+    Nt('wiedzielismy to od listopadu. przeciek o kasecie poszedl wtedy „przez kuchnie”. a potem uznalismy, ze marta jest po naszej stronie'),
+    Nt('a dudek to kierownik budowy z kurek-bud. i nagle stac go na drogiego adwokata z wroclawia. to sie sklada'),
     choose('natan', [
       opt('Marta pisze scenariusze, zgrywa głosy z kaset, Dudek tylko dzwoni. A wszystko po to, żeby świadkowie wypadku na moście się wycofali.', [Nt('i zeby pokazac, ze to „zwykla szajka na wnuczka”. przy okazji kase wyludzali, zeby policja szukala zlodziei'), Nt('kurde. tak'), Nt('ale to tylko nasze domysly. potrzebujemy dowodu. czegos z pracowni')], { set: { g_twist: true } }),
       opt('Nie mamy dowodu. Marta jest miła, pomaga. Może ktoś używa jej komputera.', [Nt('moze. ale klucz ma tylko ona. magnetowidy ma ona. kaseta 12 jest u niej'), Nt('jak ktos uzywa jej komputera, to ona by wiedziala')], { set: { g_twist: true, g_doubt: true } })
@@ -964,7 +964,8 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     callIn('marta'),
     c('marta', 'Dzień dobry. Dziękuję, że {Pan|Pani} odebrał{|a}.'),
     c('marta', 'Wiem, że pan Natan był wczoraj na policji. I wiem, że pani Weronika nie przyszła dziś do pracowni.'),
-    c('marta', 'Chcę tylko powiedzieć jedno: moja mama ma siedemdziesiąt jeden lat. Firma to całe jej życie. Most to był wypadek.'),
+    c('marta', 'Chcę tylko powiedzieć jedno: moja mama ma czterdzieści dziewięć lat. Od listopada całe Mglisko wie, co zrobiła. A proces może jej zabrać resztę. Most to był wypadek.'),
+    c('marta', 'Jesienią pomogłam to wszystko ujawnić. Myślałam, że postępuję uczciwie. Potem patrzyłam, jak ona gaśnie.'),
     choose('call', [
       opt('Dlatego pisała pani scenariusze? Głos Tomka, mama Natana, córka pana Henryka?', [
         c('marta', '…'),
@@ -1007,7 +1008,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
       iff(s => s.vars.s5Ending === 'echo', [
         scene('scEcho', [scare('s5_echo', 'glitch')]),
         Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”'),
-        Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „maz dzwonil we snie”'),
+        Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „dzwonil maz i prosil, zeby dala spokoj”'),
         Nt('jej maz nie zyje od pieciu lat'),
         pause(3000),
         clock('2027-03-20T22:10'),

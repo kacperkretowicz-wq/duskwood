@@ -325,7 +325,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     give('ev_m_terminy', { silent: true }),
     scene('xIda', [
       pause(6000),
-      clock('2026-11-24T23:41'),
+      clock('2026-11-26T23:41'),
       unlock('chat:blyskm'),
       notify({ app: 'messages', title: 'Błysk', text: 'i.k_00 wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blyskm' } }),
       IK('nie pytaj skąd mam twój numer'),

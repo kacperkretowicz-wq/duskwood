@@ -18,8 +18,8 @@ Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Ha
     K('masz chwilę?'),
     K('pani weronika kazała mi zrobić nowe hasła do komputerów w czytelni'),
     K('i tak siedzę i myślę'),
-    K('pamiętasz jak w październiku weszł{eś|aś} na nimbusa mai? przez te pytania. imię psa, pierwsza szkoła'),
-    K('trzy minuty. siedziałem obok'),
+    K('pamiętasz jak w październiku weszł{eś|aś} na nimbusa mai? przez te pytania. imię psa, pierwszy aparat'),
+    K('trzy minuty. ja ci dałem pytania, ty znalazł{eś|aś} odpowiedzi'),
     choose('kuba', [
       opt('Pamiętam. Ustaw w czytelni długie hasła, nie pytania.', [
         K('ustawiłem. szesnaście znaków'),
@@ -435,7 +435,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     typing('kuba', 'kuba', 4000),
     pause(3000),
     K('to ty mnie nauczył{eś|aś}'),
-    K('w październiku. imię psa, pierwsza szkoła. siedziałem obok i patrzyłem'),
+    K('w październiku. imię psa, pierwszy aparat. pisał{eś|aś} mi na bieżąco, a ja patrzyłem'),
     K('pan adam miał „pierwsza redakcja”. jest w nekrologu. „ulica dzieciństwa” była na fiszce. pani weronika mi ją sama pokazała'),
     K('weszło za drugim razem'),
     iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej'), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
@@ -452,7 +452,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     K('chciałem żeby usłyszeli, co sami mówili'),
     K('o tomku milczeli 29 lat. po gajdzie też zaraz miało być normalnie'),
     K('ciągle tylko że cicho jest bezpieczniej'),
-    iff(s => (s.vars.s1Ending || s.vars.endingId) === 'cisza', [K('o mai też było cicho. trzy tygodnie. pani od pieczywa dalej mówi że sama poszła')]),
+    iff(s => (s.vars.s1Ending || s.vars.endingId) === 'cisza', [K('o mai też było cicho. ponad miesiąc. pani od pieczywa dalej mówi że sama poszła')]),
     choose('kuba', [
       opt('Kuba, po tych klipach ktoś pomazał Pawlakom bramę i podał adres Zuzy. Jest jeszcze ta nauczycielka. Widzisz, jak ich to krzywdzi?', [K('wiem'), K('o zuzie nie wiedziałem. serio')], { set: { k_toldHarm: true } }),
       opt('Rozumiem, czemu to zrobiłeś. Ale musisz to zatrzymać.', [K('wiem'), K('próbowałem w niedzielę. nie umiem')], { set: { k_askedStop: true } })

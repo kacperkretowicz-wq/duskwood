@@ -53,7 +53,7 @@ DATA.contacts = [
   { name: 'Weronika Lis', who: 'weronika', number: '608 117 942', cond: 'unlocked:chat:weronika' },
   { name: 'Robert Gajda', who: 'gajda', number: '601 450 219', cond: 'unlocked:chat:gajda' },
   { name: 'Posterunek Policji Mglisko', who: 'duty', number: '74 873 41 20', cond: 'seen:web:posterunek', auto: '„Posterunek Policji w Mglisku. Wszystkie linie są zajęte. W sytuacji zagrożenia życia dzwoń pod numer 112.”' },
-  { name: 'Gazeta Sudecka — redakcja', number: '74 842 20 10', cond: 'seen:web:gazeta_home', auto: '„Redakcja Gazety Sudeckiej. Zapraszamy od poniedziałku do piątku w godzinach 9–16.”' },
+  { name: 'Gazeta Sudecka — redakcja', number: '74 832 10 40', cond: 'seen:web:gazeta_home', auto: '„Redakcja Gazety Sudeckiej. Zapraszamy od poniedziałku do piątku w godzinach 8–18.”' },
   { name: 'Biblioteka Gminna w Mglisku', number: '74 873 40 55', cond: 'seen:web:biblioteka', auto: '„Biblioteka Gminna w Mglisku jest teraz nieczynna. Zapraszamy od wtorku do soboty w godzinach 10–18.”' },
   { name: 'Serwis GSM-PC (Igor)', who: 'igor', number: '733 905 014', cond: 'seen:web:kadr:igor.malicki' }
 ];

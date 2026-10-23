@@ -23,7 +23,7 @@
       <div class="gz-sec">Z archiwum</div>
       <article class="gz-card"><h3>${go('gazeta2007', 'Dziesięć lat ciszy. Kto widział Tomka Lisa?')}</h3><p>Reportaż o chłopcu, który zniknął w noc powodzi. Adam Rybicki, 2007.</p><small>07.07.2007</small></article>
       <article class="gz-card"><h3>${go('nekrolog', 'Odszedł Adam Rybicki (1961–2021)')}</h3><p>Wspomnienie o naszym redakcyjnym koledze.</p><small>15.02.2021</small></article>
-      <div class="gz-sec">Kontakt</div><p class="gz-small">Redakcja: ul. Świdnicka 12, Dzierżoniów · tel. <a href="#" data-call="748422010">74 842 20 10</a> · redakcja@gazetasudecka.pl</p></main>`
+      <div class="gz-sec">Kontakt</div><p class="gz-small">Redakcja: ul. Kolejowa 3, Dzierżoniów · tel. <a href="#" data-call="748321040">74 832 10 40</a> · redakcja@gazetasudecka.pl</p></main>`
   });
   page('gazeta2007', {
     url: 'gazetasudecka.pl/archiwum/2007/07/dziesiec-lat-ciszy', title: 'Dziesięć lat ciszy. Kto widział Tomka Lisa?', site: 'gazeta', fav: 'G', favColor: '#7b2b21',
