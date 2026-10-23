@@ -134,15 +134,15 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       pause(2000),
       pic('zuza', 'zuza', 'c_kasety_babci', 'babcia trzyma je w meblościance jak relikwie. przypomina ci to coś?'),
       choose('zuza', [
-        opt('Na każdej jest ta sama naklejka z anteną. Ktoś opisywał kasety TV Dolina ręcznie.', [say('zuza', 'zuza', 'babcia mówi że pan zenon sam pisał każdą naklejkę. „ładnym pismem, nie to co dzisiaj”')], { set: { c_labelLink: true } }),
-        opt('Wesele Ani to twoja ciocia?', [say('zuza', 'zuza', 'tak. podobno wujek tańczy tam z teściową i się przewraca. tego pan zenon nie wyciął, bo było śmieszne')]),
+        opt('Na każdej jest ta sama naklejka z anteną. Ktoś opisywał kasety TV Dolina ręcznie.', [say('zuza', 'zuza', 'babcia mówi że pan zenon sam podpisywał każdą kasetę. „ładnym pismem, nie to co dzisiaj”')], { set: { c_labelLink: true } }),
+        opt('Ania z wesela to twoja ciocia?', [say('zuza', 'zuza', 'tak. podobno wujek tańczy tam z teściową i się przewraca. tego pan zenon nie wyciął, bo było śmieszne')]),
         opt('Ładnie opisane. Ktoś o nie dba.', [say('zuza', 'zuza', 'babcia. wyciera je z kurzu w każdą sobotę')])
       ])
     ]),
     give('ev_c_klip1', { silent: true }),
     scene('xKubaCiocia', [
       clock('2027-01-18T22:40'),
-      K('mama ogląda studniówkę z ciocią na głośniku. ciocia też tam była. kłócą się, która miała gorszą fryzurę'),
+      K('mama ogląda studniówkę i gada z ciocią na głośniku. ciocia też tam była. kłócą się, która miała gorszą fryzurę'),
       choose('kuba', [
         opt('Kto wygrywa?', [K('ciocia. trwała na pół głowy')]),
         opt('Dobrze, że się z tego śmieją.', [K('no. lepiej niż w październiku')])
@@ -273,7 +273,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
       clock('2027-01-19T22:30'),
       V('ola', 'ola', '0:14', 'Mama przyszła i usiadła na moim łóżku, jak kiedyś przed sprawdzianem. Nic nie mówi. Po prostu siedzi.', 'Ola'),
       choose('ola', [
-        opt('Dobrze, że jest obok.', [O('Tak. Chyba zasnę przy niej, jak dziecko.')]),
+        opt('Dobrze, że jest obok.', [O('Tak. Chyba zasnę przy niej jak dziecko.')]),
         opt('Powiedziałaś jej o O.N.?', [O('Sama się domyśliła. Ona pamięta ten festyn lepiej niż ja.')])
       ]),
       I('jakby co, mam w serwisie magnetowid. jak ktoś przyniesie kasetę, sprawdzę, czy zegar pokazuje to samo co w klipie')
@@ -829,7 +829,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       iff(s => s.vars.s4Ending === 'kopia2', [M('konto zniknęło. 21:00 i nic'), M('skąd wiedział{eś|aś}, że zniknie?'), ending('kopia2')], [
         M('konto zniknęło. 21:00 i nic'),
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
-        Z('Ida przyszła do kuchni. Zjadła z piekarnika. Siedzimy. Pies też.'),
+        Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.'),
         ending('przewiniecie')
       ])
     ]),
