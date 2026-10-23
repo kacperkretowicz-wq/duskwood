@@ -101,6 +101,21 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     ]),
     pause(3000),
 
+    /* P5 / G2: głosówka z drugiej karty Igora, nagrana w zamkniętym serwisie. Źródło wyjaśnia wyznanie w ch4. */
+    scene('scOdsluch', [
+      pause(2500),
+      say('szklarz', 'szklarz', 'voice:0:09||[cichy szum pomieszczenia, tyka zegar, ktoś stuka paznokciem w szybę… nagły trzask szkła tuż przy mikrofonie]'),
+      pause(4200),
+      scare('s1_odsluch', 'glitch'),
+      say('szklarz', 'szklarz', 'tak brzmi szklo jak peka'),
+      pause(2000),
+      g('kuba', 'ktoś mi znowu pisze z tego numeru?? czy tylko ja to dostaję'),
+      choose('group', [
+        opt('Ja {dostałem|dostałam} głosówkę. Szum, zegar i trzask szkła.', [g('igor', 'ktoś się bawi w horror. nie dawajcie mu tej satysfakcji'), g('ola', 'Zegar. Ktoś to nagrał w środku, nie na dworze.')], { wording: 'Mam od niego głosówkę. Szum, tykanie zegara i trzask szkła na końcu.', set: { s1_odsluchTold: true } }),
+        opt('Nie odpisujmy mu. Zapisuję to i wracamy do Mai.', [g('kuba', 'ok. ale nie usuwaj tego')])
+      ])
+    ]),
+
     /* --- komendant Gajda --- */
     unlock('chat:gajda'),
     GJ('Dobry wieczór. Aspirant sztabowy Robert Gajda, komendant posterunku w Mglisku.'),

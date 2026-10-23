@@ -124,6 +124,11 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     I('bałem się powiedzieć wam wprost. pisałem z drugiej karty jako szklarz. wiem. brzmi jeszcze gorzej kiedy to piszę'),
     I('najgorsze że pisałem na grupie „spokojnie”. a minutę później straszyłem cię z tego drugiego numeru'),
     I('bo jak baliście się szklarza, nikt nie pytał o mnie'),
+    /* Ślad po G2: źródło głosówki z czwartku. */
+    scene('xOdsluchIgor', [iff(s => !!(s.scares && s.scares.s1_odsluch), [
+      I('ta głosówka w czwartek to też ja. serwis po zamknięciu. zegar nad ladą i zbita szybka od starego telefonu'),
+      iff('flag:s1_odsluchTold', [I('a potem napisałem na grupie, że ktoś się bawi w horror. sam to przeczytałem trzy razy zanim wysłałem')])
+    ])]),
     pause(3500),
     I('nie był to żaden plan. po prostu z każdą wiadomością trudniej było przestać kłamać', { wording: 'mam oba telefony na biurku. na jednym kuba pyta czy coś znalazłem. na drugim mam nasz czat jako szklarz. nie wiem co sobie wyobrażałem' }),
     give('ev_igor_conf'),
