@@ -39,6 +39,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
  await show('ev_obit');await choice();await choice();
  await page.waitForFunction(()=>G.isUnlocked('chat:group'));
  await open('messages',{chat:'group'});await choice();await choice();
+ await open('messages',{chat:'kuba'});await choice();await log('Kuba recap (xCel)');
  await page.waitForFunction(()=>G.isUnlocked('chat:szklarz'),null,{timeout:60000});
  await open('messages',{chat:'szklarz'});
  assert.equal(await page.locator('.chat.glitchy').count(),0);
