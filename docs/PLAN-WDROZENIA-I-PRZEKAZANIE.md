@@ -141,7 +141,7 @@ To minimum plus ewentualne oczekiwanie na okno, a nie obietnica powrotu dokładn
 | Mocniejsza pierwsza sesja | **DO WDROŻENIA.** Potrzebny przegląd z nowym graczem i sceny, które porządkują cel bez zasypywania nazwami. |
 | Codzienność w głównym przebiegu | **CZĘŚCIOWO.** Sześć nowych tematów jest opcjonalnych. Potrzebne są także naturalne zdarzenia w głównej rozmowie. |
 | Pełne sceny przed przerwą i po niej | **CZĘŚCIOWO.** Mechanizm przerw działa; zapowiedzi, powroty i spokojne sesje wymagają rozwinięcia. |
-| Dwa dodatkowe jumpscare'y | **DO WDROŻENIA.** Ostatni pakiet nie dodał żadnego nowego wywołania straszaka. Sam niepokojący cytat nie zalicza drugiego jumpscare'a. |
+| Dwa dodatkowe jumpscare'y | **WDROŻONE TECHNICZNIE (23.10, pakiet P0–P5a).** `s1_maja_numer` (G1, połączenie z numeru Mai, ch3) i `s1_odsluch` (G2, głosówka z serwisu, ch2) działają i zapisują się jednorazowo. Brak oceny strachu i odsłuchu przez człowieka; G2 używa istniejącego efektu `glitch`, bez nowego pliku dźwięku. |
 | Rozwinięcie telefonu i społeczności | **CZĘŚCIOWO.** Narzędzia i przykłady istnieją; nowe użycia, konsekwencje oraz przejścia między aplikacjami trzeba napisać i wdrożyć. |
 | Dłuższy sezon / miesiąc gry | **DO WDROŻENIA.** 30 etapów nie oznacza 30 pełnych odcinków. Nie osiągnięto miesiąca aktywnej zawartości. |
 | Pomiar gry człowieka i wszystkich finałów | **DO WYKONANIA.** Automat i wybrane gałęzie przeszły; brak pełnego pomiaru z nowymi graczami. |
@@ -587,6 +587,8 @@ Po pakiecie wykonawca ma podać: co faktycznie działa, co nadal jest planem, ja
 
 Pakiet scenariuszowy jest gotowy dopiero, gdy nowa scena działa, pasuje do wszystkich swoich wejść, ma właściwą wiedzę postaci, zachowuje zapis i została przeczytana w kontekście. Pakiet mediów wymaga również akceptacji obrazu/klipu, spójności tożsamości i logicznego podłączenia do historii. Zielony test nie zastępuje tej oceny.
 
+**Stan 23.10, popołudnie — patrz rozdział 17.**
+
 **Najbliższe zadanie:** P0 → P1 → P2 → P3 → P4 → P5 w S1, z testami po kolejnych zmianach; następnie P6 dla S2–S5. P7 domyka odbiór i pomiar. Produkcja zdjęć oraz proces pierwsza/ostatnia klatka → Omni Flash pozostają zapisanym, odłożonym etapem mediów.
 
 ### Materiały źródłowe tego przekazania
@@ -599,3 +601,19 @@ Pakiet scenariuszowy jest gotowy dopiero, gdy nowa scena działa, pasuje do wszy
 - `outputs/realizm-2026/STATUS.md`, `DIALOGI-PRZYKLADY.md`, `PROBY-ZDJEC.md` i raporty testów — materiały zadania poza repo.
 
 Dokument zbiera stan i ustalenia; jego sporządzenie nie wdraża pól oznaczonych „DO WDROŻENIA” lub „ODŁOŻONE”.
+
+## 17. Stan pakietu P0–P5a (23.10.2026, popołudnie)
+
+Gałąź `feat/realizm-2026`. Zmiany są **zapisane lokalnie w commitach**; push wymaga uwierzytelnienia, którego wykonawca nie miał — sprawdzić `git log origin/feat/realizm-2026..` przed dalszą pracą.
+
+| Pakiet | Status | Co faktycznie działa |
+|---|---|---|
+| P0 | **WDROŻONE** | `docs/MAPA-S1.md`: mapa scen S1, odstępy straszaków, identyfikatory nowych scen. Migracja zapisów v5 (`STORY_MIGRATIONS_V5`, fixture `story-v4-steps.json`, `tools/regen-migrations.cjs`). Stare tabele V3/V4 mapują wprost na bieżące kroki. |
+| P1 | **CZĘŚCIOWO** | Scena `xCel` w prologu: Kuba porządkuje to, co wiadomo (zamknięta niewiadoma: czemu Maja dzwoniła pod ten numer), co jest otwarte (gdzie była), i sprawdzalna rozbieżność 23:47/23:58 vs „tama koło północy”; następny krok = lokalizacja w Nimbusie. Brak pomiaru z nowym graczem. |
+| P2 | **CZĘŚCIOWO** | `xSerwis` (ch2, klientka przed zamknięciem serwisu, Ola po nocce — bez dowodu), `xBartek` (ch3, Bartek dzień po przyznaniu się, odkładana rozmowa z ojcem). Brak sceny dnia po wyznaniu Oli i Igora oraz zakupów/autobusu. |
+| P3 | **CZĘŚCIOWO** | Teksty przerw `s1_night`, `s1_departure`, `s1_sync` przypominają ostatni cel i mówią, że nocne wiadomości poczekają. Brak nowych scen powrotu. |
+| P4 | **DO WDROŻENIA** | — |
+| P5 | **WDROŻONE TECHNICZNIE** | `scMajaNumer` / `s1_maja_numer` (call; odebranie/odrzucenie mają osobną reakcję Kuby i wpis w rejestrze), `scOdsluch` / `s1_odsluch` (głosówka + glitch; wyjaśnienie w wyznaniu Igora `xOdsluchIgor`, tylko jeśli straszak się odbył). |
+| P6, P7 | **DO WDROŻENIA** | — |
+
+Testy po pakiecie: `node --test tests/*.test.cjs` 49/49 PASS (w tym nowy test tabeli V5 i wczytania zapisu v4 w ch3). Przeglądarka (Playwright/Chromium na Linuksie): `rhythm` PASS iOS/Android, `scares` PASS (zwykły i łagodny), `prolog` PASS (test uzupełniony o wybór w `xCel`), `e2e-player` iOS PASS (31 rozdziałów, pięć finałów, offline, 0 błędów strony; zapisane straszaki obejmują `s1_odsluch` i `s1_maja_numer`). Nie testowano fizycznego telefonu.
