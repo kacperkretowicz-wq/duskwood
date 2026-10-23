@@ -134,6 +134,19 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
       opt('Cokolwiek się stało ze stodołą, nikt nie powinien im mazać po bramie.', [K('no'), K('on to szoruje a ludzie dalej wrzucają link')], { set: { k_kubaTruthTalk: true } }),
       opt('Trzymaj się z daleka od komentarzy, dobrze?', [K('spoko. i tak mam nockę dzisiaj')])
     ]),
+    scene('xGrupaBrama', [
+      pause(2000),
+      say('group', 'ola', 'Widzieliście bramę Pawlaków? Mama tamtędy jechała rano do pracy.'),
+      say('group', 'bartek', 'ktos na kwartale pisze ze to igor bo „umie w komputery”. juz sam nie wiem co myslec'),
+      say('group', 'ola', 'Bartek, nie zaczynaj.'),
+      say('group', 'kuba', 'nie piszmy tu o tym, ok? mam tego dość'),
+      say('group', 'ola', 'Kuba, wszystko dobrze?'),
+      say('group', 'kuba', 'tak. po prostu jestem zmęczony'),
+      choose('group', [
+        opt('Nie zgadujmy po ludziach. Jak macie pytanie do Igora, zadajcie je jemu.', [say('group', 'bartek', 'no dobra. zapytam go wprost')], { set: { k_groupNoGuess: true } }),
+        opt('Kuba, idź się przespać przed nocką.', [say('group', 'kuba', 'idę. dzięki')])
+      ])
+    ]),
     pause(2000),
     end('k1')
   ];
@@ -148,6 +161,8 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
   const I = (t, o) => say('igor', 'igor', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const A = (t, o) => say('archiwum', 'archiwum', t, o);
+  const S = (t, o) => say('sylwia', 'sylwia', t, o);
+  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
 
   return [
     clock('2026-12-19T21:30'),
@@ -233,6 +248,15 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     ]),
     clock('2026-12-20T09:20'),
     ambient('calm'),
+    scene('xPrzepraszamy', [
+      S('Dzień dobry. Ktoś w nocy zostawił pod bramą Pawlaków znicz i kartkę „przepraszamy”. Bez podpisu.'),
+      S('Pan Pawlak postawił znicz na słupku. Nie wyrzucił.'),
+      choose('sylwia', [
+        opt('Może ktoś z tych, którzy pisali komentarze.', [S('Też tak myślę. Wolę takie „przepraszam” niż żadne.')]),
+        opt('Niech pani tego nie wrzuca do grupy.', [S('Nie wrzucam. Niech to zostanie między nimi.')], { set: { k_sylwiaQuietNote: true } })
+      ]),
+      pause(2500)
+    ]),
     goal('Sprawdź nowy klip na koncie @archiwum.rybickiego.', ['Otwórz Klipo w przeglądarce. Zwróć uwagę na opis i godzinę.']),
     waitFor(s => G.has('ev_k_klip1') && G.flag('k_clip5'), {}),
     give('ev_k_opis'),
@@ -244,6 +268,14 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     pause(3000),
     M('{widziałeś|widziałaś} opis? „4% baterii a i tak wrzucam”'),
     M('serio, „a i tak wrzucam”. jakby wrzucał zdjęcie kolacji'),
+    scene('xKubaSpi', [
+      pause(2000),
+      V('maja2', 'maja', '0:13', 'Kuba znowu śpi. Wstał na pół godziny, zjadł zimne naleśniki i wrócił do łóżka. Mama pyta, czy on nie jest chory. Mówię, że to nocki.', 'Maja'),
+      choose('maja2', [
+        opt('Nocki potrafią rozwalić człowieka.', [M('no. tylko że on w dzień też siedzi z telefonem. widzę światło pod drzwiami')]),
+        opt('A ty jak się trzymasz?', [M('jakoś. mam dzisiaj w pracy inwentaryzację, więc przynajmniej nie myślę')])
+      ])
+    ]),
     pause(5000),
     scene('xKubek', [
       clock('2026-12-20T21:41'),
@@ -273,6 +305,18 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     ]),
     pause(3000),
     W('Zdjęcie zniknęło. Wisiało sześć minut.'),
+    scene('xGrupaOkno', [
+      pause(2000),
+      say('group', 'ola', 'Ktoś wrzucił zdjęcie okna czytelni. Z panią Weroniką w środku. Ona jest bezpieczna?'),
+      say('group', 'bartek', 'jak sie dowiem kto to robi to'),
+      say('group', 'ola', 'Bartek. Nie.'),
+      typing('group', 'kuba', 3000),
+      pause(1500),
+      choose('group', [
+        opt('Jest bezpieczna. Nie róbcie nic na własną rękę.', [say('group', 'bartek', 'ok ok. tylko mowie')]),
+        opt('Napiszcie do niej jutro. Dzisiaj dajcie jej spokój.', [say('group', 'ola', 'Dobrze. Jutro przyjdę do niej z ciastem.')])
+      ])
+    ]),
     pause(4000),
     clock('2026-12-20T22:31'),
     unlock('chat:archiwum'),

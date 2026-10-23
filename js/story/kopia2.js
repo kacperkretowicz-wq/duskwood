@@ -632,6 +632,22 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
         opt('To twoja decyzja, co dalej. Ja nie będę jej za ciebie podejmować.', [K('to nie wiem'), K('jeszcze nie wiem')])
       ])
     ]),
+    scene('xGrupaSwieta', [
+      pause(2500),
+      clock('2026-12-24T18:05'),
+      say('group', 'ola', 'Wesołych Świąt wszystkim 🎄 Lampki dalej mrugają, ale już mi to nie przeszkadza.'),
+      say('group', 'bartek', 'wesolych. stary pierwszy raz od tygodnia sie smieje. wujek opowiada te same kawaly co rok temu'),
+      iff('!flag:k_outedKuba', [
+        say('group', 'kuba', 'wesołych'),
+        say('group', 'ola', 'Kuba, dobrze, że jesteś.')
+      ], [
+        say('group', 'ola', 'Kuba, jakbyś chciał pogadać, to jestem. Nawet dzisiaj.')
+      ]),
+      choose('group', [
+        opt('Wesołych. Zjedzcie za mnie pieroga z kapustą.', [say('group', 'bartek', 'zjem dwa. jeden za ciebie, jeden za siebie')]),
+        opt('Wesołych. Wyłączcie dziś telefony.', [say('group', 'ola', 'Wyłączam po opłatku. Obiecuję.')])
+      ])
+    ]),
     pause(3000),
     /* Zaczep na sprawę 4: ktoś trzeci obserwował od początku. */
     scene('kZaczep', [
