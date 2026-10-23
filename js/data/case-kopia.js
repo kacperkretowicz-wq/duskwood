@@ -148,7 +148,11 @@ Object.assign(DATA.evidence, {
     ['k_ladowarka', 'assets/kopia/k_ladowarka.jpg', 'Parapet Igora · 2:04', 768, 1024],
     ['k_czytelnia_kubek', 'assets/kopia/k_czytelnia_kubek.jpg', 'Czytelnia · 21:41', 1024, 768],
     ['k_lampki', 'assets/kopia/k_lampki.jpg', 'Okno Oli', 768, 1024],
-    ['k_wigilia', 'assets/kopia/k_wigilia.jpg', 'Wigilia u Wronów', 1024, 768]
+    ['k_wigilia', 'assets/kopia/k_wigilia.jpg', 'Wigilia u Wronów', 1024, 768],
+    ['k_fiszki', 'assets/kopia/k_fiszki.jpg', 'Fiszki pana Adama', 1024, 768],
+    ['k_poczta', 'assets/kopia/k_poczta.jpg', 'Poczta · przerwa', 1024, 768],
+    ['k_uszka', 'assets/kopia/k_uszka.jpg', 'Uszka · 2:40', 1024, 768],
+    ['k_rampa', 'assets/kopia/k_rampa.jpg', 'Rampa · 6:12', 768, 1024]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
   DATA.chars.ewa.photo = 'assets/people/ewa.jpg';
 })();

@@ -100,6 +100,18 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
       opt('Pomarańczowa lampka to zwykle papier albo zacięcie. Otwórz przednią klapkę.', [pause(4000), K('była kartka w środku. zgnieciona. działa'), K('dzięki. jesteś lepsz{y|a} niż serwis igora 💀')]),
       opt('Wyłącz ją na minutę z prądu. A potem sprawdź papier.', [pause(4000), K('zadziałało. nie wiem co, ale zadziałało')])
     ]),
+    scene('xFiszki', [
+      pause(2000),
+      pic('kuba', 'kuba', 'k_fiszki', 'a to mam przepisać do świąt. fiszki pana adama. pisał ołówkiem jak mrówka. przypomina ci to coś?'),
+      choose('kuba', [
+        opt('Całe Mglisko na kartkach. Imiona, ulice, daty.', [
+          K('no. nawet ulice, na których ktoś mieszkał jako dziecko'),
+          K('trochę creepy. ale fajnie się czyta')
+        ], { set: { k_fiszkiSeen: true } }),
+        opt('Katalog jak w mojej szkolnej bibliotece.', [K('u nas w szkole był komputer. i nie działał')]),
+        opt('Ile tego jest?', [K('dwa tysiące z hakiem. jak skończę, będę znał pół mgliska')])
+      ])
+    ]),
     pause(3500),
     clock('2026-12-21T21:40'),
     ambient('dark'),
@@ -189,6 +201,14 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
           O('Proszę, nie powtarzaj tego dalej. Pawlakowie i tak mają dość.')
         ], { set: { k_toldOla: true } }),
         opt('Nic. Jak tam w pracy?', [O('Kolejka po paczki do Wigilii. Dwie godziny słuchałam o pierogach.'), O('Czyli normalnie. Dobrze, że ktoś pyta o normalne rzeczy.')])
+      ])
+    ]),
+    scene('xPoczta', [
+      pause(2000),
+      pic('ola', 'ola', 'k_poczta', 'Stoję na poczcie w przerwie. Wysyłam bratu paczkę do Holandii. Przede mną dwanaście osób i każda ma pięć paczek.'),
+      choose('ola', [
+        opt('Wytrzymaj. To już ostatnie dni przed świętami.', [O('Półtora dnia. Liczę w godzinach.')]),
+        opt('Co jest w paczce?', [O('Kiełbasa, pierniki i opłatek. Brat mówi, że w Holandii nie ma prawdziwego chleba.')])
       ])
     ]),
     pause(2500),
@@ -284,6 +304,15 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
         opt('Śpij, Maja. Jutro ważny dzień.', [M('wiem. dobranoc')])
       ])
     ]),
+    scene('xUszkaFoto', [
+      pause(2000),
+      pic('maja2', 'maja', 'k_uszka', 'dowód. 2:40, a stół wygląda jak fabryka'),
+      M('te krzywe po prawej to moje. nie oceniaj'),
+      choose('maja2', [
+        opt('Krzywe są najsmaczniejsze.', [M('wiem. mama mówi to samo, żebym się nie zniechęciła')]),
+        opt('Policz je jeszcze raz.', [M('213. dwanaście zjadłam na surowo. nie mów mamie')])
+      ])
+    ]),
     scene('kKlatka', [
       pause(5000),
       M('ktoś chodzi po klatce. o tej porze'),
@@ -308,6 +337,14 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     ambient('calm'),
     W('Dzień dobry. Wolałabym pokazać {Panu|Pani} ten zeszyt na miejscu. Przez telefon nie umiem.'),
     W('Pociąg o 7:12 jest w Mglisku za kwadrans dziewiąta. Odbiorę ze stacji.'),
+    scene('xPociag', [
+      pause(2000),
+      M('jedziesz do Mgliska? weź mi z dworca drożdżówkę z budki. z serem. pani Halinka wie, którą'),
+      choose('maja2', [
+        opt('Jasne. Z serem.', [M('jesteś skarbem')]),
+        opt('A co dostanę w zamian?', [M('uszko. jedno. krzywe')])
+      ])
+    ]),
     interlude('Pociąg do Mgliska', 'Środa, 23 grudnia · 8:44'),
     clock('2026-12-23T08:46'),
     /* Ktoś na peronie robi zdjęcie gracza od tyłu i proponuje je przez przesyłanie w pobliżu. */
@@ -429,6 +466,15 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     choose('kuba', [
       opt('Dzień. Ale dziś nie wrzucasz niczego.', [K('nie wrzucę')], { set: { k_kubaDay: true } }),
       opt('Nie obiecam. Najpierw ustalimy, kto to @cicho.bylo.', [K('ok'), K('rozumiem')])
+    ]),
+    scene('xKolacja', [
+      pause(4000),
+      clock('2026-12-23T13:20'),
+      say('maja2', 'maja', 'voice:0:14|Maja|(cicho) Kuba wrócił. Siedzi w kuchni i lepi z mamą uszka. Nic nie mówi. Ja też nic nie mówię. Mama się cieszy, że wszyscy są w domu.'),
+      choose('maja2', [
+        opt('Usiądź z nimi. Nie musisz nic mówić.', [M('siedzę. lepię krzywe. on lepi jeszcze bardziej krzywe')], { trust: { maja: 1 } }),
+        opt('Jak się trzymasz?', [M('nie wiem. jakbym miała kamień w brzuchu'), M('ale mama się śmieje. więc się trzymam')])
+      ])
     ]),
     set('k_ch3Done'),
     end('k4')

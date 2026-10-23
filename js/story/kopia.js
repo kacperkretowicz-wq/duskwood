@@ -222,6 +222,15 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     pause(2500),
     typing('kuba', 'kuba', 2500),
     pause(5000),
+    scene('xRampa', [
+      clock('2026-12-20T06:12'),
+      pic('kuba', 'kuba', 'k_rampa', 'koniec nocki. tak wygląda moje „dzień dobry”'),
+      choose('kuba', [
+        opt('Ładny wschód. Idź spać.', [K('idę. nie budzić do dziewiątej 💀')]),
+        opt('Rozładowaliście tego tira?', [K('dwa. trzeci jutro. plecy mam jak dziadek')])
+      ]),
+      pause(3000)
+    ]),
     clock('2026-12-20T09:20'),
     ambient('calm'),
     goal('Sprawdź nowy klip na koncie @archiwum.rybickiego.', ['Otwórz Klipo w przeglądarce. Zwróć uwagę na opis i godzinę.']),
