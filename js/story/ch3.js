@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 3 — Peleryna */
 
 Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 października', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene, scare } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene, scare, unsend } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -51,6 +51,31 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       choose('group', [
         opt('Nie musisz dziś. Tylko nie odkładaj tego za długo.', [g('bartek', 'wiem')], { trust: { bartek: 1 } }),
         opt('Bartek, to może być ważne dla Mai.', [g('bartek', 'myslisz ze nie wiem'), g('ola', 'Dajcie mu ten dzień. Sama bym nie umiała zapytać ojca o coś takiego.')])
+      ])
+    ]),
+    /* P4: wycofana wiadomość. Treść zna tylko ten, kto miał wtedy otwartą grupę. */
+    scene('xWycofana', [
+      pause(3000),
+      g('bartek', 'stary dzis rano pytal czy ktos z was byl w hucie. skad on to wie', { uid: 'x_bw1' }),
+      pause(3500),
+      unsend('group', 'x_bw1', { flag: 'x_wycofanaSeen' }),
+      pause(1200),
+      g('kuba', 'bartek co usunąłeś'),
+      g('bartek', 'nic. nie do was bylo'),
+      iff('flag:x_wycofanaSeen', [
+        choose('group', [
+          opt('{Zdążyłem|Zdążyłam} przeczytać. Twój ojciec pytał, czy ktoś z nas był w hucie.', [
+            g('bartek', 'no. pytal. nie wiem skad wie'),
+            g('ola', 'Może ktoś widział twoje auto pod bramą. To jeszcze nic nie znaczy.'),
+            g('bartek', 'pogadam z nim. nie dzis')
+          ], { set: { x_wycofanaTold: true } }),
+          opt('Nie naciskajmy go.', [g('bartek', 'dzieki')], { trust: { bartek: 1 } })
+        ])
+      ], [
+        choose('group', [
+          opt('Bartek, jak to było ważne, napisz jeszcze raz.', [g('bartek', 'nie bylo wazne'), g('ola', 'Jasne. Na pewno.')]),
+          opt('Nie naciskajmy go.', [g('bartek', 'dzieki')], { trust: { bartek: 1 } })
+        ])
       ])
     ]),
     g('kuba', 'nie spałem całą noc'),
@@ -267,6 +292,18 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     pause(3000),
 
     scene('s19', SC.s19),
+    /* P2: ostatni autobus. Zwykły powrót Oli, bez tropu. */
+    scene('xAutobus', [
+      pause(3000),
+      g('ola', 'Uciekł mi ostatni autobus. Kierowca widział, że biegnę, i i tak ruszył.'),
+      g('ola', 'Idę pieszo. Mapa mówi 28 minut. Mapa kłamie.'),
+      choose('group', [
+        opt('Mam do ciebie zadzwonić, żebyś nie szła sama?', [g('ola', 'Nie trzeba. Mam słuchawki i podcast o grzybach. Napiszę, jak dojdę.')], { trust: { ola: 1 } }),
+        opt('Igor, nie podjedziesz po nią?', [g('igor', 'mam rozkręcony laptop na ladzie. 20 minut?'), g('ola', 'Do tego czasu będę w połowie drogi. Dzięki, idę.')])
+      ]),
+      pause(6000),
+      g('ola', 'Jestem w domu. Nogi mi odpadają.')
+    ]),
 
     /* --- noc: telefon Mai ożywa --- */
     interlude('Noc', 'Nikt w Mglisku nie śpi spokojnie.', 3400, { rest: 's1_sync' }),

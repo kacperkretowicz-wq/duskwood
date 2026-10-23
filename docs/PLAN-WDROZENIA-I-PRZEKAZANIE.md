@@ -617,3 +617,9 @@ Gałąź `feat/realizm-2026`. Zmiany są **zapisane lokalnie w commitach**; push
 | P6, P7 | **DO WDROŻENIA** | — |
 
 Testy po pakiecie: `node --test tests/*.test.cjs` 49/49 PASS (w tym nowy test tabeli V5 i wczytania zapisu v4 w ch3). Przeglądarka (Playwright/Chromium na Linuksie): `rhythm` PASS iOS/Android, `scares` PASS (zwykły i łagodny), `prolog` PASS (test uzupełniony o wybór w `xCel`), `e2e-player` iOS PASS (31 rozdziałów, pięć finałów, offline, 0 błędów strony; zapisane straszaki obejmują `s1_odsluch` i `s1_maja_numer`). Nie testowano fizycznego telefonu.
+
+### 17.1 Aktualizacja 23.10, ~15:00
+- P4 (częściowo): silnik obsługuje wycofane wiadomości (`unsend(chat, uid, {flag})`, `say(..., {uid})`), dymek „Wiadomość została usunięta”, podgląd w liście czatów. Scena `xWycofana` (ch3, po `xBartek`): Bartek wysyła i cofa wiadomość o pytaniu starego o hutę; flaga `x_wycofanaSeen` tylko gdy gracz miał czat otwarty, `x_wycofanaTold` przy konfrontacji.
+- P2: scena codzienna `xAutobus` (ch3, po `s19`): Ola i ostatni autobus.
+- Migracja V5 przegenerowana, cache SW v52.
+- Do zrobienia: P3 (sceny powrotów), ukryta wiadomość wideo w P4, P6.

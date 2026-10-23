@@ -63,3 +63,5 @@ Zapis: nowa flaga x_wycofanaSeen; wymaga obsługi „usuniętej wiadomości” w
   osobny krok techniczny bez zmiany wyglądu dymków poza tekstem systemowym.
 Sprawdzenie: test jednostkowy podglądu vs. otwartego czatu; reload w trakcie wycofania.
 ```
+
+- Wdrożone 23.10: `xWycofana` (P4, wycofana wiadomość), `xAutobus` (P2, ostatni autobus).
