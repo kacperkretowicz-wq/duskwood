@@ -43,6 +43,15 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu')]),
       opt('Czyli całe ferie na sankach?', [M('sanki, herbata, seriale. jak w podstawówce'), M('mama już kupiła trzy paczki pierniczków „na wszelki wypadek”')])
     ]),
+    // P7: wejście do S4 po „Zasięgach”.
+    scene('xPoZasiegach', [iff(s => s.vars.s3Ending === 'zasiegi', [
+      M('kuba dalej nic nie znalazł. w dwóch miejscach powiedzieli, że „oddzwonią”'),
+      M('kartki już nikt nie przykleja. ale pani ze sklepu dalej mówi do niego „panie informatyku”'),
+      choose('maja2', [
+        opt('Napiszę do niego. Może razem coś wymyślimy.', [M('napisz. tylko nie pytaj o robotę. sam powie')], { trust: { maja: 1 } }),
+        opt('A ty jak się trzymasz?', [M('ja? ja zdjęłam tę kartkę. i tyle o tym'), M('dobra, ferie. o bałwanach miało być')])
+      ])
+    ])]),
     scene('xFerie', [
       pause(2500),
       say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj'),

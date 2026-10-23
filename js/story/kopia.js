@@ -68,6 +68,16 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     W('Dobry wieczór. Przepraszam, że tak późno.'),
     W('Dzwoniła do mnie pani Ewa, żona pana Adama. Ktoś jej wysłał ten klip. Płakała. Nie mogłam jej zrozumieć.'),
     W('Powiedziała tylko, że to jest „z telefonu Adama” i że ona „nawet nie wie, jak to się wyłącza”.'),
+    // P7: wejście do S3 po słabszych finałach S2.
+    scene('xPoMoscie', [
+      iff(s => s.vars.s2Ending === 'cudzy_podpis', [
+        W('Pani Krystyna dalej nie otwiera. W niedzielę zostawiłam jej opłatek w skrzynce. Nie wiem, czy go wzięła.'),
+        W('Proszę mi wybaczyć, że o tym piszę. Po tamtym tekście boję się, że i to rozejdzie się po ludziach.')
+      ]),
+      iff(s => s.vars.s2Ending === 'margines', [
+        W('Teczka KRUK stoi u mnie na półce, obok pudła. Czasem ją otwieram, jakby coś miało w niej przybyć.')
+      ])
+    ]),
     choose('weronika', [
       opt('Czy mogę do niej napisać? Tylko jeśli się zgodzi.', [W('Zapytam ją rano. Dziś niech już śpi.')], { set: { k_askEwa: true } }),
       opt('Niech pani do niej jutro zadzwoni. Ja poczekam.', [W('Dobrze. Pani Ewa nie lubi obcych numerów.')])
