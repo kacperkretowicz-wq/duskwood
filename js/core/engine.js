@@ -35,7 +35,7 @@ const Engine = (() => {
     pic: (chat, who, img, text = '', o = {}) => ({ t: 'say', chat, who, text, img, ...o }),
     me: (chat, text, o = {}) => ({ t: 'say', chat, who: 'me', text, ...o }),
     sys: (chat, text) => ({ t: 'sys', chat, text }),
-    pause: ms => ({ t: 'pause', ms }),
+    pause: (ms, o = {}) => ({ t: 'pause', ms, ...o }),
     choose: (chat, options, o = {}) => ({ t: 'choose', chat, options, ...o }),
     menu: (chat, options, o = {}) => ({ t: 'choose', chat, options, menu: true, ...o }),
     opt: (text, then = [], o = {}) => ({ text, then, ...o }),
@@ -57,8 +57,8 @@ const Engine = (() => {
     go: to => ({ t: 'go', to }),
     notify: o => ({ t: 'notify', ...o }),
     sync: (key, o = {}) => ({ t: 'sync', key, ...o }),
-    clock: iso => ({ t: 'clock', iso }),
-    interlude: (text, sub = '', ms = 3400) => ({ t: 'interlude', text, sub, ms }),
+    clock: (iso, o = {}) => ({ t: 'clock', iso, ...o }),
+    interlude: (text, sub = '', ms = 3400, o = {}) => ({ t: 'interlude', text, sub, ms, ...o }),
     title: () => ({ t: 'title' }),
     callIn: (who, o = {}) => ({ t: 'callIn', who, ...o }),
     callEnd: (o = {}) => ({ t: 'callEnd', ...o }),
@@ -293,7 +293,8 @@ const Engine = (() => {
       case 'say': {
         const msg = {};
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
-        await talk(st.chat, st.who, st.text, { msg, gap: st.gap, typing: st.typing });
+        // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
+        await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;
@@ -309,12 +310,12 @@ const Engine = (() => {
         const vis = st.options.map((o, i) => Object.assign({ i }, o))
           .filter(o => !(st.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
         if (!vis.length) return st.end;
-        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
+        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
         guard(my);
         const o = st.options[pick];
         if (st.menu && !o.exit) s.used[key] = [...used, pick];
         if (o.shot) G.post(st.chat, { from: 'sys', text: U.tpl(o.sys || '{Zrobiłeś|Zrobiłaś} zrzut ekranu. Druga strona dostała powiadomienie.') });
-        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : o.text }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
+        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : (o.wording ?? o.text) }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
         apply(o);
         return o.lab || st.end;
       }
@@ -534,6 +535,7 @@ const Engine = (() => {
         if (G.s.pc === 0 && SeasonPacing.hold(ch.id)) break;
         const st = ch.steps[G.s.pc];
         if (!st) break;
+        if (SeasonPacing.holdRest(st)) break;
         let next;
         try { next = await exec(st, ch); }
         catch (e) { if (e === ABORT) return; throw e; }

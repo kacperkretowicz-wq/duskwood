@@ -1,4 +1,4 @@
-// Playtest jak gracz: S1 → sprawa 2 → sprawa 3 w jednym zapisie, na skórkach iOS i Android, w widoku telefonu.
+// Playtest: S1 → S5 w jednym zapisie, na skórkach iOS i Android, w widoku telefonu.
 // Klika prawdziwe przyciski odpowiedzi, odbiera połączenia, przechodzi kurtyny i napisy. Straszaki odpalają się naprawdę.
 // Mierzy tempo (czas i liczba wiadomości na rozdział), odstępy straszaków, błędy, przepełnienie układu, start i cache offline.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
@@ -32,7 +32,12 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
      G.s.finished=true;G.s.chapter='c4';G.s.vars.s4Ending='przewiniecie';Seasons.startNext();}
     UI.packageSheet=async()=>6;UI.renderHome();Engine.restart();},FROM);
    // Glitch trwa w trybie instant ~120 ms, więc liczymy go przy wywołaniu, a nie tylko po klasie ekranu.
-   const hookGlitch=()=>page.evaluate(()=>{if(UI.__hooked)return;const o=UI.scare;UI.scare=(k,x)=>{if(k==='glitch')window.__glitch=1;return o(k,x);};UI.__hooked=1;});await hookGlitch();
+   const hookGlitch=()=>page.evaluate(()=>{if(UI.__hooked)return;const o=UI.scare;UI.scare=(k,x)=>{if(k==='glitch')window.__glitch=1;return o(k,x);};UI.__hooked=1;
+    // Zliczamy faktycznie opublikowane teksty jednej ścieżki, także przed zmianą sezonu.
+    window.__reading=JSON.parse(sessionStorage.getItem('playtest-reading')||'{}');const post=G.post;
+    G.post=function(chat,msg){const result=post.call(this,chat,msg),text=U.tpl(msg.text||'').replace(/^voice:[^|]*\|[^|]*\|/,'');
+     if(text){const r=window.__reading[G.s.chapter]||={messages:0,words:0,characters:0};r.messages++;r.words+=(text.match(/\p{L}+(?:['’-]\p{L}+)*/gu)||[]).length;r.characters+=text.length;sessionStorage.setItem('playtest-reading',JSON.stringify(window.__reading));}return result;};
+   });await hookGlitch();
    const chapters={},scares=[],layout=[];let season=FROM,lastCh='',tick=0,lastKey='',same=0,credits=0;const tStart=Date.now();
    while(true){
     if(Date.now()-tStart>2700000)throw new Error('e2e: przekroczony czas w rozdziale '+lastCh+' (maszyna przeciążona?)');
@@ -92,12 +97,13 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
     await page.waitForTimeout(25);
    }
    if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t;
+   const reading=await page.evaluate(()=>window.__reading);
    const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,s5:G.s.vars.s5Ending,scaresSaved:Object.keys(G.s.scares)}));
    // offline: po pierwszym wczytaniu service worker musi wystarczyć do startu bez sieci
    await page.reload();await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
    await ctx.setOffline(true);let offline=true;try{await page.reload();await page.waitForFunction(()=>typeof G!=='undefined'&&typeof Engine!=='undefined',{timeout:8000});}catch{offline=false;}
    await ctx.setOffline(false);
-   out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),
+   out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),reading,
     chapters:Object.fromEntries(Object.entries(chapters).map(([k,v])=>[k,{season:v.season,sec:Math.round(v.ms/1000),msgs:v.msgs}]))};
    console.log(os,JSON.stringify(out[os]));
    if(FROM==='s1'){assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');}assert.equal(fin.s4,'przewiniecie');assert.equal(fin.s5,S5);

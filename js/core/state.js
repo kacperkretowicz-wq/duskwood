@@ -51,6 +51,12 @@ const G = (() => {
       }
       saved.v = 4;
     }
+    // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
+    // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.
+    if (typeof DATA !== 'undefined' && DATA.storyTexts) {
+      const first = saved.chats?.maja?.msgs?.find(m => m.id === 'm0' && m.from === 'maja' && m.text === DATA.storyTexts.legacyFirstMajaSMS);
+      if (first) first.text = DATA.storyTexts.firstMajaSMS;
+    }
     return saved;
   }
   let settings = Object.assign({}, defaults);
@@ -108,7 +114,7 @@ const G = (() => {
     // Zegar fabularny płynie w czasie rzeczywistym od ostatniego ustawienia.
     now() { const c = api.s.clock; return c.t + (c.paused ? 0 : Date.now() - c.at); },
     pauseClock() { if (api.s && !api.s.clock.paused) api.s.clock = { t: api.now(), at: Date.now(), paused: true }; },
-    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && api.s.pacing.waiting?.at > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
+    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && Math.max(api.s.pacing.waiting?.at || 0, api.s.pacing.rest?.at || 0) > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
     setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now(), paused: !!document.hidden }; BUS.emit('clock'); },
 
     chat(id) {

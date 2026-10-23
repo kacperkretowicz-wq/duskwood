@@ -8,7 +8,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
   const c = (who, t, o) => say('call', who, t, o);
-  const igorSays = t => iff('flag:igorBack', [g('igor', t)], [I(t)]);
+  const igorSays = (t, o) => iff('flag:igorBack', [g('igor', t, o)], [I(t, o)]);
 
   return [
     title(),
@@ -38,7 +38,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
         pause(2500),
         scare('s1_hand', 'face', { img: 'c1_0061', caption: 'CAM-01 · NA ŻYWO · sygnał utracony' }),
         igorSays('ktoś zasłonił kamerę ręką. sygnał padł'),
-        igorSays('on wie, że patrzymy')
+        igorSays('on wie, że patrzymy', { wording: 'znalazł ją. ostatni plik jest zapisany, nie usuwaj go' })
       ]),
       show('group', { prompt: 'Pokaż zdjęcie z kamery', accept: [{ ev: ['ev_jerrycans'] }], wrong: [['ola', 'Co pokazuje kamera przy hucie?']] })
     ]),
@@ -121,7 +121,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
 
     /* --- pakiet dowodów --- */
     g('ola', '%name%, wyślij wszystko prokuraturze. Teraz. Zanim on zdąży cokolwiek zniszczyć.'),
-    g('ola', 'I do Gazety Sudeckiej. Niech redakcja dokończy tekst, który zaczął Rybicki.'),
+    g('ola', 'I do Gazety Sudeckiej. Niech redakcja dokończy tekst, który zaczął Rybicki.', { wording: 'Redakcji też. Niech ktoś jeszcze ma kopię, poza naszymi telefonami.' }),
     goal('Wyślij zebrane materiały do prokuratury i gazety.', ['Wybierz najmocniejsze rzeczy z Notatek: to, co łączy Gajdę z hutą w 1997 i z porwaniem Mai.']),
     task(async () => { const n = await UI.packageSheet(); G.setVar('pkg', n); }),
     notify({ app: 'nimbus', title: 'Poczta', text: 'Wiadomość wysłana: biuro.podawcze@dzierzoniow.po.gov.pl, redakcja@gazetasudecka.pl', sound: 'notif' }),
@@ -171,15 +171,15 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       pause(3500),
       c('weronika', 'Jest. Leży na kocu. Żyje. Jest bardzo zimna.'),
       c('kuba', 'ona coś mówi'),
-      c('kuba', 'chce z tobą rozmawiać. z tym numerem'),
+      c('kuba', 'chce z tobą rozmawiać. z tym numerem', { wording: 'podałem jej telefon. spytała, kto jest po drugiej stronie' }),
       pause(2000),
       c('maja', 'Halo…?'),
-      c('maja', 'To ty? Ten numer?'),
+      c('maja', 'To ty? Ten numer?', { wording: 'Kuba mówi, że to ty mu pomagasz?' }),
       choose('call', [opt('Tak. To ja.', []), opt('Cześć, Maja. Jestem %name%.', [])]),
-      c('maja', 'Dzwoniłam do ciebie. Wtedy. Nie {odebrałeś|odebrałaś}.'),
-      c('maja', 'Myślałam, że to pan Adam.'),
+      c('maja', 'Dzwoniłam do ciebie. Wtedy. Nie {odebrałeś|odebrałaś}.', { wording: 'Dzwoniłam pod ten numer. Pamiętam, że długo czekałam na sygnał.' }),
+      c('maja', 'Myślałam, że to pan Adam.', { wording: 'To nie był numer pana Adama?' }),
       choose('call', [
-        opt('Przepraszam. Nie {odebrałem|odebrałam}.', [c('maja', 'Ale teraz {odebrałeś|odebrałaś}.')]),
+        opt('Przepraszam. Nie {odebrałem|odebrałam}.', [c('maja', 'Ale teraz {odebrałeś|odebrałaś}.', { wording: 'Dobrze. Dobrze, że tu jest Kuba.' })], { wording: 'Mam go od roku. Wtedy cię jeszcze nie {znałem|znałam}.' }),
         opt('Numer należał kiedyś do niego. Kuba znalazł mnie po twoim połączeniu.', [c('maja', 'Kuba… dobrze. Dobrze, że sprawdził.'), c('maja', 'Nie mogę się teraz skupić.')])
       ]),
       c('maja', 'Tomek… on jest w hucie. Za murem. Widziałam pelerynę.'),
@@ -189,7 +189,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
       fx('heartbeat'),
       iff(s => G.flag('called112') && G.flag('named112') && G.v('lost') < 2, [
         c('bartek', 'niebieskie swiatla. to radiowoz. dzierzoniow'),
-        c('kuba', 'POLICJA. PRAWDZIWA'),
+      c('kuba', 'POLICJA. PRAWDZIWA', { wording: 'przyjechali. są już przy szlabanie' }),
         c('weronika', 'Przy szlabanie stoi jeszcze jedno auto. Ciemne. Zatrzymali je.'),
         c('bartek', 'magna. wyciagaja gajde z auta'),
         set('gajdaCaught')
@@ -200,7 +200,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
         c('bartek', 'stary wyszedl mu naprzeciw'),
         pause(3000),
         c('kuba', 'stoją naprzeciwko siebie. pan marek coś mówi'),
-        c('kuba', '„robert, koniec. dwadzieścia dziewięć lat. wystarczy”'),
+      c('kuba', '„robert, koniec. dwadzieścia dziewięć lat. wystarczy”', { wording: 'mówi mu żeby odłożył. że policja jedzie i że on już wszystko powiedział bartkowi' }),
         pause(4500),
         c('kuba', 'gajda opuścił broń'),
         c('kuba', 'wsiada do auta. odjeżdża'),

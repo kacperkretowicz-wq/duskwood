@@ -30,7 +30,7 @@ const StoryScenes = D => {
         opt('Przypnij oficjalny kontakt: 112 i Komenda Powiatowa w Dzierżoniowie. Bez prywatnych wiadomości.', [
           S('Tak zrobię. Dopiszę, że materiały przyjmuje komenda, z numerem sprawy.'),
           S('Pan komendant pewnie się obrazi. Trudno, strzygę jego żonę od dziesięciu lat, przeżyję 🙃')
-        ], { set: { sylwiaOfficial: true } }),
+        ], { wording: 'Przypnij kontakt do komendy w Dzierżoniowie. Niech zdjęcia trafiają tam.', set: { sylwiaOfficial: true } }),
         opt('Nie przypinaj niczego, dopóki ktoś nie poda numeru sprawy.', [
           S('Dobrze. Napiszę mu, że czekam na numer sprawy.'),
           S('Ciekawe, co odpisze.')
@@ -57,7 +57,7 @@ const StoryScenes = D => {
         opt('Na obu szatnia jest w hali B. Plany się zgadzają, więc idziemy według nich.', [
           g('igor', 'ok. czyli nie zgadujemy na miejscu'),
           g('kuba', 'zrzucam sobie oba na pulpit. bateria 61%')
-        ], { set: { planChecked: true } }),
+        ], { wording: 'Na obu szatnia jest w B. Zapiszcie je sobie, na miejscu porównacie.', set: { planChecked: true } }),
         opt('Sprawdźmy, czy coś zmieniło się po 1995.', [
           g('bartek', 'stary mowi ze po zamknieciu w 96 nic nie przebudowywali. ale sam tego nie sprawdzalem'),
           g('igor', 'czyli na obu szatnia jest w B. na miejscu sprawdzimy')
@@ -70,7 +70,7 @@ const StoryScenes = D => {
       g('igor', 'i jedna prośba. nie puszczajcie tego przez żadne „ai enhance”'),
       g('igor', 'to dorysuje twarze, których na kliszy nie ma. a potem ktoś to wydrukuje w gazecie'),
       choose('group', [
-        opt('Zostawiam negatyw i plik z telefonu Mai bez zmian. Pracuję na kopii.', [g('igor', 'dzięki. serio. to jest różnica między dowodem a fanartem')], { set: { keptOriginal: true } }),
+        opt('Zostawiam negatyw i plik z telefonu Mai bez zmian. Pracuję na kopii.', [g('igor', 'dzięki. serio. to jest różnica między dowodem a fanartem', { wording: 'dzięki. bo ja potem już nie rozpoznam, co tam było naprawdę' })], { wording: 'Ok, zrobię kopię. Tych plików od Mai nie ruszam.', set: { keptOriginal: true } }),
         opt('Rozjaśnienie wystarczy. Nic nie dorysowuję.', [g('igor', 'tak. tylko zachowaj oryginał i zapisz ustawienia')], { set: { keptOriginal: true } })
       ]),
       pause(2500),
@@ -86,12 +86,12 @@ const StoryScenes = D => {
 
     /* Sesja 15 — Żółta peleryna: zestawienie kadrów, cegieł i przedmiotu. Pytanie o chłopca. */
     s15: [
-      g('ola', 'Zanim napiszemy do kogokolwiek. Zbierzmy, co naprawdę mamy.'),
+      g('ola', 'Zanim napiszemy do kogokolwiek. Zbierzmy, co naprawdę mamy.', { wording: 'Czekajcie z pisaniem do ludzi. Bo ja już się w tym gubię.' }),
       g('ola', 'Na kliszy jest dziecko w żółtej pelerynie. Maja znalazła też ten nowszy mur i kamerę. Co jeszcze?'),
       g('kuba', 'i to że w artykule tomek miał żółtą pelerynę'),
       choose('group', [
-        opt('To pasuje do Tomka, ale nie wiemy, czy to on. Zapytajmy kogoś, kto go znał.', [g('ola', 'Tak. Napisanie „to Tomek” jego siostrze bez pewności byłoby okrutne.')], { trust: { ola: 1 }, set: { askedAboutBoy: true } }),
-        opt('Peleryna, huta, ta noc. To musi być on.', [g('ola', 'Może. Ale „musi” to jeszcze nie jest dowód.'), g('kuba', 'też mi się wydaje że to on'), g('kuba', 'ale co jeśli się mylimy?')], { set: { askedAboutBoy: true } })
+        opt('To pasuje do Tomka, ale nie wiemy, czy to on. Zapytajmy kogoś, kto go znał.', [g('ola', 'Tak. Napisanie „to Tomek” jego siostrze bez pewności byłoby okrutne.', { wording: 'Dobra. Tylko bez pisania jego siostrze, że już go znaleźliśmy.' })], { wording: 'Może to Tomek. Ktoś, kto go znał, powinien zobaczyć ten kadr.', trust: { ola: 1 }, set: { askedAboutBoy: true } }),
+        opt('Peleryna, huta, ta noc. To musi być on.', [g('ola', 'Może. Ale „musi” to jeszcze nie jest dowód.', { wording: 'Też mi pasuje. Ale twarzy przecież nie widać.' }), g('kuba', 'też mi się wydaje że to on'), g('kuba', 'ale co jeśli się mylimy?')], { set: { askedAboutBoy: true } })
       ])
     ],
 
@@ -113,7 +113,7 @@ const StoryScenes = D => {
       S('Ale mamy w grupie album „Mglisko lat 90”. Pod zdjęciem z dożynek 1997 jest podpis: „Robert G., Leszek M., Marek S., Darek K. — nasza młodzież 😄”. Dodała go pani Bożena w 2016.'),
       give('ev_album97'),
       choose('sylwia', [
-        opt('To potwierdza, że znali się w 1997. Nie mówi, co robili w hucie.', [S('No właśnie. Dlatego nie przypinam. Ludzie i tak już robią z tego wyrok.')], { set: { namesChecked: true } }),
+        opt('To potwierdza, że znali się w 1997. Nie mówi, co robili w hucie.', [S('No właśnie. Dlatego nie przypinam. Ludzie i tak już robią z tego wyrok.')], { wording: 'Czyli znali się wtedy. Ale pod tym zdjęciem nie ma nic o hucie.', set: { namesChecked: true } }),
         opt('Możesz zablokować komentarze pod albumem?', [S('Zablokowałam. Dostałam już trzy wiadomości, że „ukrywam prawdę” 🙄'), S('Zdjęcia nie usuwam, ale nie pozwolę tam ludzi wyzywać.')], { set: { namesChecked: true } })
       ]),
       S('I jeszcze… Darek K. to Darek Kruk. Wujek tej Zuzy.'),
@@ -130,7 +130,7 @@ const StoryScenes = D => {
       g('ola', 'Igor napisał do mnie prywatnie. Na grupę nie chce wracać, ale pyta, czy to na pewno jedno auto.'),
       g('ola', 'Na zdjęciu z fotopułapki widać DDZ 6K1, a na zdjęciu Igora końcówkę 19. Zrobiono je różnymi urządzeniami, w dwie różne noce.'),
       choose('group', [
-        opt('Na obu zdjęciach jest ciemna magna, a fragmenty tablicy do siebie pasują. To różne noce. Kierowcy nie widać.', [g('ola', 'Przekażę mu. Dopiszę, że kierowcy nie widać.'), g('kuba', 'czyli auto mamy, człowieka nie')], { set: { plateCareful: true } }),
+        opt('Na obu zdjęciach jest ciemna magna, a fragmenty tablicy do siebie pasują. To różne noce. Kierowcy nie widać.', [g('ola', 'Przekażę mu. Dopiszę, że kierowcy nie widać.', { wording: 'Ok, prześlę mu oba. Może zobaczy coś, czego my nie widzimy.' }), g('kuba', 'czyli auto mamy, człowieka nie')], { wording: 'Wygląda na tę samą magnę, tablica pasuje. Ale kto nią jeździł?', set: { plateCareful: true } }),
         opt('Numer się zgadza, więc wiemy, kto tam był.', [g('ola', 'Igor odpisał od razu: „mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać”.'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
       ])
       ], [
@@ -148,11 +148,11 @@ const StoryScenes = D => {
       give('ev_kb_invoice'),
       choose('bartek', [
         opt('Zrób zdjęcie i odłóż. To inna sprawa, nie mieszajmy jej z Mają.', [B('ok. zrobione. odlozylem tak jak lezalo')], { set: { invoiceAside: true } }),
-        opt('Faktura potwierdza serwis, nie to, że ktoś był przy wypadku.', [B('wiem. samo to ze robil auto niczego nie dowodzi'), B('odlozylem')], { set: { invoiceAside: true } })
+        opt('Faktura potwierdza serwis, nie to, że ktoś był przy wypadku.', [B('wiem. samo to ze robil auto niczego nie dowodzi'), B('odlozylem')], { wording: 'To był tylko serwis. Nie nakręcajmy się jeszcze.', set: { invoiceAside: true } })
       ]),
       B('i jak mam z nim pogadac. o 97. on siedzi w garazu i nic'),
       choose('bartek', [
-        opt('Zapytaj, co pamięta z tamtej nocy. Nie oskarżaj. Daj mu skończyć.', [B('sprobuje. on jak sie go przycisnie to wychodzi'), B('zrobie mu herbate. z cukrem, jak lubi')], { trust: { bartek: 1 }, set: { bartekPrepared: true } }),
+        opt('Zapytaj, co pamięta z tamtej nocy. Nie oskarżaj. Daj mu skończyć.', [B('sprobuje. on jak sie go przycisnie to wychodzi'), B('zrobie mu herbate. z cukrem, jak lubi')], { wording: 'Usiądź z nim. Zapytaj o tamtą noc, może w końcu coś powie.', trust: { bartek: 1 }, set: { bartekPrepared: true } }),
         opt('Powiedz mu, co już wiemy: kadr 21 i mur.', [B('dobra. jak bedzie wiedzial ze wiemy to moze przestanie udawac'), B('albo wyjdzie z garazu i bedzie trzaskal drzwiami')], { set: { bartekPrepared: true } })
       ])
     ],

@@ -23,7 +23,8 @@
     const o = G.s.objective;
     const list = [];
     list.push({ id: 'todo', pin: true, title: 'Co teraz?', t: G.now(), prev: o ? plain(o.text) : 'Nic pilnego. Sprawdzaj wiadomości.' });
-    list.push({ id: 'season', pin: true, title: 'Szkło pamięta', t: G.now() - 1000, prev: 'Sezon 1 · etapy historii i podsumowanie sesji' });
+    const season = Seasons.current();
+    list.push({ id: 'season', pin: true, title: season.title, t: G.now() - 1000, prev: `${season.kicker || 'Sezon 1'} · etapy historii i podsumowanie sesji` });
     if (PhoneTools.saved().length) list.push({ id: 'quotes', title: 'Zachowane cytaty', t: G.now(), prev: `${PhoneTools.saved().length} wiadomości · nadawcy i daty` });
     const topics = Conversations.available().length;
     if (G.isUnlocked('chat:group')) list.push({ id: 'conversations', pin: true, title: 'Na osobności', t: G.now() - 30000,
@@ -88,7 +89,7 @@
     };
     search.addEventListener('input', render);
     render();
-    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges', 'conversations'].map(e => BUS.on(e, render));
+    const offs = ['evidence', 'goal', 'solved', 'unlock', 'badges', 'conversations', 'season'].map(e => BUS.on(e, render));
     return { el: pg.el, onShow: render, destroy: () => offs.forEach(f => f()) };
   }
 

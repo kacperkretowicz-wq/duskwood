@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v45';
+const VERSION = 'quiet-is-safer-v50';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -26,7 +26,7 @@ const FILES = [
   './assets/trap/c1_0061.jpg', './assets/trap/c2_0004.jpg', './assets/trap/c2_0019.jpg', './assets/trap/live_day.jpg',
   './assets/trap/live_gajda.jpg', './assets/trap/live_night.jpg',
   './js/core/seasons.js', './js/core/wallpapers.js', './js/apps/seasons.js', './js/apps/wallpapers.js',
-  './js/core/pacing.js',
+  './js/core/pacing.js', './js/data/rhythm.js', './js/data/today.js',
   './js/vendor/capacitor-runtime.js',
   './assets/lena-v2.jpg', './assets/bus-stop-v2.jpg',
   './assets/people.jpg', './assets/forest.jpg', './assets/maja-river.jpg', './assets/gajda.jpg', './js/data/migrations.js',

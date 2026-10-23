@@ -169,11 +169,11 @@ Akt V, sesje 25–30: zestawienie ustaleń, zgoda źródła na zakres publikacji
 7. Zatrzymanie Gajdy wynika z działań poszukiwawczych i potwierdzonego miejsca. Ratunek nie kasuje straconych tygodni ani szkód po ujawnieniu planu. Pierwsza wiadomość pochodzi od Kuby; Maja nie musi natychmiast odpisywać graczowi.
 8. W grudniowej części jej obecność jest dobrowolna. Osobne linie dialogowe pamiętają, że w tej gałęzi została odnaleziona później. Ocalenie nie jest nagrodą za serię logowań; błędną analizę adresu można zweryfikować, a historia nie nakłada kolejnej dobowej bramki podczas ratunku.
 
-Po pozostałych finałach prolog dotyczy zabezpieczenia materiałów i zgody na pracę z archiwum, bez ponownego porwania. Do czasu implementacji i przejścia gałęzi Nina–adres–poszukiwanie sezon drugi nie jest gotowy dla zapisu Cisza. Cały opis S2 w tym dokumencie pozostaje planem scenariusza.
+Powyżej zachowano pierwotny plan, a nie aktualną specyfikację każdego kroku. Stan implementacji 23.10.2026: gałąź Cisza ma rozdział `mp` z Niną, porównaniem adresów i kontynuacją poszukiwań; po pozostałych zakończeniach sezon zaczyna się od `m0`. Sprawa 2 „Most” działa już w grze. Bieżące rozdziały `most*.js` i sekcja „Kanon międzysezonowy” mają pierwszeństwo przed starszą rozpiską. Zakres wykonanych testów opisuje `REALIZM-2026.md`.
 
 ## Sezony 3–5 w grze (skrót prawdy)
 
-**S3 „Kopia zapasowa” (18–24.12.2026, rozdziały k0–k4).** Konto @archiwum.rybickiego wrzuca nagrania z chmury Rybickiego. Konto prowadzi Kuba (reset przez pytania bezpieczeństwa, metodę widział w październiku przy koncie Mai). Fragmenty wybiera mu @cicho.bylo, czyli Lena Cicha. Zakończenia: `wlasnym_glosem`, `kopia`, `cisza` (s3). Ewa Rybicka (63) decyduje o chmurze męża.
+**S3 „Kopia zapasowa” (18–24.12.2026, rozdziały k0–k4).** Konto @archiwum.rybickiego wrzuca nagrania z chmury Rybickiego. Konto prowadzi Kuba (reset przez pytania bezpieczeństwa, metodę widział w październiku przy koncie Mai). Fragmenty wybiera mu @cicho.bylo, czyli Lena Cicha. Zakończenia: `wlasnym_glosem`, `kopia`, `zasiegi`. Ewa Rybicka (63) decyduje o chmurze męża.
 
 **S4 „Kronika” (18–22.01.2027, rozdziały c0–c4 i noc cf).** @kronika.mglisko codziennie o 21:00 wrzuca fragment kroniki kablówki TV Dolina (1996–2018). Kasety zebrał Zenon Gil (69), dawny operator. Wrzuca jego wnuczka Ida Gil (22), była stażystka *Gazety Sudeckiej*, która w S2 wycięła 40 sekund dla Dudka. Pies Zenona to kundel po owczarku, bez imienia w grze. Ola (O.N.) ma na kasecie bójkę z festynu 2018 (miała 14 lat). Rozmowa z Idą o 20:58 jest przez nią nagrywana. Zakończenia: `przewiniecie` (kasety do archiwum gminy, odbiera je Marta), `transmisja` (Ida wyjeżdża do Bielawy), `kopia2` (gracz bierze kopię).
 

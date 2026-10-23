@@ -66,14 +66,14 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
 test('generated v3 migration table is up to date with the story sources',()=>{
   const {execFileSync}=require('node:child_process');
   const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v3.cjs'),path.join(__dirname,'fixtures/story-v2-steps.json')],{encoding:'utf8'});
-  assert.ok(fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8').endsWith(gen),'run tools/gen-migration-v3.cjs');
+  assert.ok(fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8').replace(/\r\n/g,'\n').endsWith(gen.replace(/\r\n/g,'\n')),'run tools/gen-migration-v3.cjs');
 });
 
 test('v4 migration table is up to date and maps every v3 step monotonically',()=>{
   const {execFileSync}=require('node:child_process');
   const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v4.cjs'),path.join(__dirname,'fixtures/story-v3-steps.json')],{encoding:'utf8'});
   const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');
-  assert.ok(src.includes(gen),'run tools/gen-migration-v4.cjs');
+  assert.ok(src.replace(/\r\n/g,'\n').includes(gen.replace(/\r\n/g,'\n')),'run tools/gen-migration-v4.cjs');
   const v4=JSON.parse(gen.split('V4 = ')[1].replace(/;\s*$/,''));
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v3-steps.json'),'utf8'));
   const {chapters,sig}=require(path.join(root,'tools/dump-steps.cjs'));
