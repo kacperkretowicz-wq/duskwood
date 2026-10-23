@@ -76,6 +76,21 @@ Object.assign(DATA.conversations, {
       ] }
     }
   },
+  igor_sunday: {
+    who: 'igor', title: 'Niedziela po wszystkim', label: 'Dzień po',
+    cond: s => (s.seasonId || 's1') === 's1' && s.chapter === 'epilog' && !!s.unlocked['chat:igor'],
+    preview: 'Igor opowiada, jak wyglądała niedziela po tym, jak się przyznał.',
+    nodes: {
+      start: { lines: ['wiesz co robiłem w niedzielę? dzień po tym jak wam wszystko powiedziałem', 'otworzyłem serwis o dziewiątej jak zawsze. przyszła pani z tabletem wnuka. jakby nic', 'a ja cały dzień czekałem aż ktoś wejdzie i powie że wie'], choices: [
+        sideChoice('Ktoś wszedł?', ['nikt. tylko kuba napisał o 14 „jesteś?”', 'odpisałem „jestem”. i tyle. przez tydzień nic więcej'], 'shop'),
+        sideChoice('To normalne, że praca trzymała cię w pionie.', ['no. lutownica nie pyta czy jesteś dobrym człowiekiem', 'trzeba tylko nie drżeć ręką'], 'shop')
+      ] },
+      shop: { lines: ['wieczorem wyłączyłem w serwisie wszystkie stare telefony z ładowarek. te co leżą od lat', 'głupie. jakby one coś słyszały'], choices: [
+        sideChoice('Nie głupie. Po tamtym nagraniu każdy by tak zrobił.', ['dzięki. dalej leżą wyłączone', 'klienci pytają czemu taka cisza w serwisie. mówię że remont'], null, { trust: 1 }),
+        sideChoice('A teraz? Lepiej?', ['inaczej. bartek zaczął przychodzić na kawę. siedzi i nic nie mówi', 'to chyba jest lepiej'])
+      ] }
+    }
+  },
   igor_oldphone: {
     who: 'igor', title: 'Stary telefon', label: 'Marzec',
     cond: s => s.seasonId === 's5' && !!s.unlocked['chat:igor'],
