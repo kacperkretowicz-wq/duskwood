@@ -242,6 +242,7 @@ Object.assign(DATA.evidence, {
   P('m_parapet_babci', 'm_parapet_babci.jpg', 'Parapet u pani Krystyny', 768, 1024);
   P('m_tablet_kuchnia', 'm_tablet_kuchnia.jpg', 'Kuchnia · 22:31', 1024, 768);
   P('m_obiad_drzwi', 'm_obiad_drzwi.jpg', 'Pod drzwiami', 768, 1024);
+  P('m_lodowka', 'm_lodowka.jpg', 'Lodówka u Oli', 768, 1024);
   Art.def('v_licznik', { src: 'assets/video/v_licznik.jpg', title: 'Archiwum · noc', w: 360, h: 640, draw: () => '' });
   Art.def('v_kotka', { src: 'assets/video/v_kotka.jpg', title: 'Pani Ziuta', w: 360, h: 480, draw: () => '' });
   Art.def('v_szyba', { src: 'assets/video/v_szyba.jpg', title: 'Pod inspekcją', w: 360, h: 480, draw: () => '' });

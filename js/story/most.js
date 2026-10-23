@@ -62,7 +62,11 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       pause(1200),
       M('a pani Ziuta właśnie się obudziła i sprawdza, czy niczego nie ruszyłyśmy'),
       say('maja2', 'maja', '', { vid: 'assets/video/v_kotka.mp4', img: 'v_kotka' }),
-      M('ruszyłyśmy. jest obrażona')
+      M('ruszyłyśmy. jest obrażona'),
+      choose('maja2', [
+        opt('Przeproście ją. Najlepiej szynką.', [M('pani Weronika już kroi. kotka ma tu lepiej niż my')]),
+        opt('Sprawdza, czy wszystko jest na swoim miejscu. Jak dobry archiwista.', [M('xD pani Weronika mówi, że to jej najlepsza pracownica. i jedyna')])
+      ])
     ]),
     scene('xBrygada', [
       pause(1500),
@@ -200,6 +204,13 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       choose('kuba', [
         opt('Powodzenia na nocce.', [say('kuba', 'kuba', 'dzięki. termos mam, playlistę mam. przeżyję')]),
         opt('Od kiedy pracujesz na nocki?', [say('kuba', 'kuba', 'od listopada. lepiej płacą. a w dzień i tak nie umiem spać')])
+      ]),
+      pause(3500),
+      M('kto zmienił nazwę grupy 😭'),
+      M('obudziłam się, żeby się napić wody, i myślałam, że to jakaś inna grupa'),
+      choose('maja2', [
+        opt('Ja. Ale Kuba zatwierdził.', [M('wiedziałam, że on maczał w tym palce. zostawiam. podoba mi się')]),
+        opt('Cała grupa. Uznaliśmy, że już czas.', [M('no. już czas'), M('dobranoc. drugi raz')])
       ])
     ]),
     pause(1500),

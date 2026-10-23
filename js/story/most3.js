@@ -347,6 +347,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       pause(1500),
       say('group', 'bartek', 'henryk dostal brawa w sklepie. w kolejce po chleb. serio'),
       say('group', 'ola', 'Mama wycięła artykuł i przykleiła na lodówkę. Obok mojego świadectwa z podstawówki.'),
+      pic('group', 'ola', 'm_lodowka', 'Dowód.'),
       say('group', 'kuba', 'maja wrzuciła to na kwartał. 3 lajki. jeden mój'),
       choose('group', [
         opt('Dwa pozostałe to pewnie pani Weronika i pani Ziuta.', [say('group', 'kuba', 'xD kotka ma konto. serio. maja jej założyła')]),
@@ -354,6 +355,14 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       ])
     ]),
     W('Kasetę i obie kopie strony 41 przechowuje teraz redakcja. Razem z panią Martą i rodziną pana Adama podpisaliśmy protokół przekazania. Teczka wróciła do pudła, już bez kasety.'),
+    scene('xMajaRano', [
+      say('maja2', 'maja', 'czytam w autobusie. trzeci raz'),
+      say('maja2', 'maja', 'pan Adam by się ucieszył. on zawsze mówił, że najlepszy tekst to taki, po którym nikt nie musi się wstydzić. ani bohater, ani autor'),
+      choose('maja2', [
+        opt('A ty? Jak się czujesz po tym wszystkim?', [say('maja2', 'maja', 'lepiej niż w listopadzie. dużo lepiej'), say('maja2', 'maja', 'i pierwszy raz od dawna nie boję się otworzyć komentarzy')], { trust: { maja: 1 } }),
+        opt('To też twoja zasługa. Ty znalazłaś teczkę.', [say('maja2', 'maja', 'kotka znalazła. ja ją tylko przesunęłam'), say('maja2', 'maja', 'ale dzięki 🫶')])
+      ])
+    ]),
     scene('xHenrykTel', [
       W('Pani Ziuta wróciła na swój karton. Pusty, ale jej to nie przeszkadza.'),
       pause(2500),
