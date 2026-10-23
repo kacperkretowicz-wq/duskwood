@@ -185,7 +185,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       ], { set: { m_askFamily: true } })
     ]),
     scene('xNatanZapowiedz', [
-      Ma('Przy okazji: nasz Natan z działu wideo pyta, czy może się kiedyś do {Pana|Pani} odezwać. Uprzedzam, jak się spieszy, pisze bez polskich znaków.'),
+      Ma('Przy okazji: nasz Natan z działu wideo pyta, czy może się kiedyś do {Pana|Pani} odezwać. Uprzedzam: jak się spieszy, pisze bez polskich znaków.'),
       choose('marta', [
         opt('Może. Jak będzie miał konkretną sprawę.', [Ma('Przekażę. On zawsze ma konkretną sprawę. Zwykle o drugiej w nocy.')]),
         opt('Wolę na razie tylko z panią.', [Ma('Rozumiem. Ja też wolę mniej ludzi naraz.')])

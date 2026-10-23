@@ -143,7 +143,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
       say('group', 'ola', 'Kuba, wszystko dobrze?'),
       say('group', 'kuba', 'tak. po prostu jestem zmęczony'),
       choose('group', [
-        opt('Nie zgadujmy po ludziach. Jak macie pytanie do Igora, zadajcie je jemu.', [say('group', 'bartek', 'no dobra. zapytam go wprost')], { set: { k_groupNoGuess: true } }),
+        opt('Nie oskarżajmy nikogo na ślepo. Jak macie pytanie do Igora, zadajcie je jemu.', [say('group', 'bartek', 'no dobra. zapytam go wprost')], { set: { k_groupNoGuess: true } }),
         opt('Kuba, idź się przespać przed nocką.', [say('group', 'kuba', 'idę. dzięki')])
       ])
     ]),

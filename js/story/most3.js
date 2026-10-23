@@ -176,9 +176,9 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xSloik', [
       pause(2000),
-      V('marta', 'marta', '0:16', 'Oddałam mamie słoik. Otworzyła drzwi, wzięła go i zapytała: „umyty?”. I tyle. Ale chyba się uśmiechnęła. Chyba.', 'Marta'),
+      V('marta', 'marta', '0:16', 'Oddałam mamie słoik. Otworzyła drzwi, wzięła go i zapytała: „Umyty?”. I tyle. Ale chyba się uśmiechnęła. Chyba.', 'Marta'),
       choose('marta', [
-        opt('Jak na pierwszy krok, to sporo.', [Ma('Też tak myślę. W niedzielę idę na obiad. Bez tabletu na stole.')]),
+        opt('Jak na pierwszy krok to sporo.', [Ma('Też tak myślę. W niedzielę idę na obiad. Bez tabletu na stole.')]),
         opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.')], { trust: { marta: 1 } })
       ])
     ]),
