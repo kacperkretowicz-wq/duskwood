@@ -219,6 +219,17 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     g('kuba', 'dobranoc %name%. jak coś przyjdzie, mam dźwięk na maksa'),
     pause(2000),
     interlude('Kilka godzin później', 'Mglisko śpi. Prawie wszyscy.', 3600, { rest: 's1_night' }),
+    /* P3: spokojny powrót. Przerwa nie zawsze kończy się alarmem. */
+    scene('xNieSpisz', [
+      clock('2026-10-22T01:48'),
+      say('kuba', 'kuba', 'nie śpisz?'),
+      choose('kuba', [
+        opt('Nie śpię. Co jest?', [say('kuba', 'kuba', 'nic. leżę i odświeżam tego nimbusa jak debil'), say('kuba', 'kuba', 'mama chodzi po korytarzu. słyszę ją przez ścianę')], { trust: { kuba: 1 } }),
+        opt('Prawie. Ty też powinieneś.', [say('kuba', 'kuba', 'wiem. jeszcze chwila')])
+      ]),
+      pause(2500),
+      say('kuba', 'kuba', 'dobra. jakby co, mam dźwięk na maksa. serio')
+    ]),
     clock('2026-10-22T02:13'),
     ambient('tense'),
     fx('vibrate'),
