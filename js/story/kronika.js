@@ -474,7 +474,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
 /* ---------- cf · Festyn (noc z 20 na 21.01) ---------- */
 Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when: 'Środa, 20 stycznia · 23:58', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, nearby, vanish, typing } = D;
-  const { M, O, I, B, W, K, Gr, c, V } = KronikaCast(D);
+  const { M, O, I, B, W, K, Gr, S, Nt, c, V } = KronikaCast(D);
   return [
     clock('2027-01-20T23:58'),
     ambient('dark'),
@@ -489,6 +489,8 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     c('ola', 'Dobra. Już. Dziękuję, że {odebrałeś|odebrałaś}.'),
     callEnd(),
     scene('xMajaPrysznic', [
+      pause(2000),
+      V('ola', 'ola', '0:07', 'Przepraszam, że płakałam do słuchawki. Już jestem. Idę umyć twarz zimną wodą.', 'Ola'),
       pause(2000),
       M('ola dzwoniła? do mnie też próbowała, ale byłam pod prysznicem'),
       M('oddzwoniłam. mówi, że pogadała z tobą i jej lżej')
@@ -523,6 +525,21 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       choose('kuba', [
         opt('Ty to wiesz najlepiej.', [K('no. dlatego mi niedobrze')]),
         opt('Idź spać, Kuba.', [K('nie umiem. zrobię herbatę. mama też nie śpi')])
+      ])
+    ]),
+    scene('xNatanSzablon', [
+      pause(2500),
+      Nt('nie spie. montuje cos dla siebie, zeby nie myslec. widzialem te zapowiedz'),
+      Nt('napisy na dole sa w naszym starym szablonie z gs. tym z jesieni. tylko my go uzywalismy'),
+      choose('natan', [
+        opt('Kto miał do niego dostęp?', [Nt('pol redakcji. stazysci tez. rano sprawdze, kto mial konto na serwerze')], { set: { c_gsTemplate: true } }),
+        opt('Może ktoś go po prostu skopiował.', [Nt('moze. ale to by musial byc ktos, kto wie, gdzie go szukac')])
+      ]),
+      pause(2000),
+      S('Przepraszam, że piszę w nocy. Ktoś wrzucił do grupy zapowiedź z Błysku. Usunęłam po czterdziestu sekundach.'),
+      choose('sylwia', [
+        opt('Niech pani idzie spać. Rano też da się usuwać.', [S('Nie zasnę. Ustawiłam budzik co godzinę i sprawdzam.')]),
+        opt('Dziękuję, że pani pilnuje.', [S('Ktoś musi. Mąż mówi, że jestem jak nocny stróż. Tylko bez latarki.')])
       ])
     ]),
     pause(3000),
@@ -567,7 +584,9 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
         opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku'), M('pies pana Zenona')], { set: { c_pawLink: true } }),
         opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy')], { set: { c_smallShoe: true } }),
         opt('Ktoś wrócił z psem do domu. Zwykłe błoto.', [M('o pierwszej w nocy? no może')])
-      ])
+      ]),
+      K('stoję na klatce w kapciach. zimno jak w psiarni'),
+      K('drzwi do piwnicy były otwarte. zamknąłem kluczem pani z parteru')
     ]),
     pause(3000),
     typing('blysk2', 'blysk2', 4000),
@@ -608,7 +627,8 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       choose('maja2', [
         opt('Idź spać. Rano pogadamy.', [M('dobra. jeszcze jeden odcinek. żartuję')]),
         opt('Napisz, jak coś zobaczysz.', [M('napiszę. ale chyba nic już nie zobaczę. śnieg zasypał ślady')])
-      ])
+      ]),
+      M('dobranoc. tym razem naprawdę')
     ]),
     set('c_festynSeen'),
     end('c3')
