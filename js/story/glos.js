@@ -215,7 +215,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       opt('„Jodełka”. Jak kostka Bartka.', [M('ok. bartek by się wzruszył. ale mu nie mówimy')], { set: { g_hasloJ: true } }),
       opt('„Trzy kości”. Tyle zapamiętałaś na anatomię.', [M('bardzo śmieszne. ale dobre. nikt tego nie zgadnie, bo to wstyd')], { set: { g_hasloK: true } })
     ]),
-    ...GlosHaslo(D, w => [M(`zapisane w głowie. „${w}”. nigdzie tego nie piszemy, nawet tu więcej`)]),
+    ...GlosHaslo(D, w => [M(`zapisane w głowie. „${w}”. nigdzie już tego nie piszemy, nawet tutaj`)]),
     set('g_haslo'),
     M('idę. trzymaj kciuki'),
     scene('xRanoGrupa', [
@@ -267,7 +267,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
         opt('To nie ja. Ktoś podszywa się pode mnie. Mogę napisać sprostowanie.', [S('Proszę. Wkleję je i przypnę. Krótko, bez nazwisk.')], { set: { g_sprostowanie: true } }),
         opt('Niech pani nikogo nie oskarża w grupie. Nawet mnie.', [S('Staram się. Ale ludzie są przestraszeni. Wolą mieć winnego niż nie mieć nikogo.')])
       ]),
-      iff('flag:g_sprostowanie', [S('Przypięte. Trzy serduszka i jeden komentarz „a skąd mamy wiedzieć, że to pisze prawdziwy {pan|pani}?”. No właśnie.')])
+      iff('flag:g_sprostowanie', [S('Przypięte. Trzy serduszka i jeden komentarz „a skąd mamy wiedzieć, że to pisze {prawdziwy pan|prawdziwa pani}?”. No właśnie.')])
     ]),
     pause(3500),
     clock('2027-03-15T13:05'),
@@ -319,7 +319,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
     ]),
     pause(3000),
     W('Dobry wieczór. Pani Marta z archiwum zadzwoniła z podziękowaniem za kasety z kiermaszu.'),
-    W('Powiedziała, że jedna jest z festynu w 1996. Że mogę przyjść i obejrzeć, jeśli chcę.'),
+    W('Powiedziała, że jedna jest z festynu w 1996 roku i że mogę przyjść i obejrzeć, jeśli chcę.'),
     choose('weronika', [
       opt('Pójdzie pani?', [W('Nie wiem. Tomek tam może być. Nie wiem, czy chcę go zobaczyć na ekranie.')], { set: { g_weraFestyn: true } }),
       opt('To miłe, że dzwoni osobiście.', [W('Bardzo. Dziś mało kto dzwoni. Wszyscy piszą.')])
