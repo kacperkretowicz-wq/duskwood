@@ -245,6 +245,14 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     clock('2026-11-25T09:14'),
     Nt('hej. sorry że od rana'),
     Nt('po wczorajszym od marty siedzimy z naczelnym. bedzie korekta, ale najpierw chce wszystko na papierze'),
+    /* P6 / S2: Natan po własnym błędzie. Bierze winę bez zrzucania jej na innych. */
+    scene('xNatanBlad', [
+      Nt('i zeby bylo jasne. ten material o moscie puszczalem ja. nie sprawdzilem skad jest plik, wzialem z dysku i poszlo'),
+      choose('natan', [
+        opt('Dobrze, że to mówisz. Napisz to w korekcie wprost.', [Nt('naczelny nie bedzie zachwycony. ale tak. napisze ze to moj blad, nie stazystki')], { set: { m_natanOwns: true } }),
+        opt('Kto jeszcze to widział przed publikacją?', [Nt('nikt. ja mialem sprawdzic. sorry, nie ma tu kogo obwiniac')])
+      ])
+    ]),
     Nt('i jest problem z drugiej strony. w komentarzach pod klipo ktoś wrzucił fakture z 2011. warsztat sowów serwisował furgonetkę kurek-bud dzień przed wypadkiem'),
     pic('natan', 'natan', 'most_faktura', 'to krąży od nocy'),
     give('ev_m_faktura'),
