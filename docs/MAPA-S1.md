@@ -31,6 +31,7 @@ Glitche `fx('glitch')` przy wiadomościach Szklarza nie są liczone jako jumpsca
 |---|---|---|---|
 | `xCel` | P1 | prolog, po „zaraz podeślę ci jej maila” | flaga `p1_planLoc` (opcjonalna); migracja v5 |
 | `xSerwis` | P2 | ch2 po tytule | brak nowych flag; trust Oli w 1 opcji |
+| `xOla` | P2 (dzień po przyznaniu Oli) | ch2 po `s14` | trust Oli w 1 opcji; dwa warianty wg `olaPrivate` |
 | `xBartek` | P2 (dzień po przyznaniu Bartka) | ch3 po `xPeleryna` | trust Bartka w 1 opcji |
 | `scMajaNumer` | P5 / G1 | ch3, po SMS-ie o 03:05 | `s.scares.s1_maja_numer` (jednorazowe), flaga `s1_pickedMaja`, wpis w rejestrze połączeń |
 
@@ -39,6 +40,26 @@ Migracja: zapisy v4 → v5 przez `STORY_MIGRATIONS_V5` (fixture `tests/fixtures/
 ## 4. Do zrobienia (kolejne pakiety)
 
 - G2 (odsłuch od Szklarza przed wyprawą, ch2 przed `s1_departure`) — wymaga projektu dźwięku; niewdrożone.
-- P2: scena zakupów/ostatniego autobusu poza opcjonalnym `kuba_delivery`; zachowanie Oli i Igora następnego dnia po wyznaniach.
+- P2: scena zakupów/ostatniego autobusu poza opcjonalnym `kuba_delivery`; zachowanie Igora następnego dnia po wyznaniu (ch5 to ta sama noc — miejsce dopiero w `s28`).
 - P4: łańcuch edycji/wycofania wiadomości i reuploadu.
 - P1: pomiar z nowym graczem (czas czytania vs zagadek).
+
+## 5. Karta sceny P4 (rozpisana, niewdrożona)
+
+```text
+ID / status / priorytet: xWycofana / plan / P4
+Sezon, rozdział i miejsce: S1, ch3, po xBartek (piątek 23.10 wieczór)
+Warunki wejścia: zawsze; wariant zależny od ev_bartek_conf w grupie/prywatnie
+Osoby i wiedza: Bartek (wie o zaprawie), Kuba, Ola; gracz widzi grupę
+Przebieg: Bartek pisze na grupie „stary dzis pytal czy ktos byl w hucie” → po chwili wiadomość zostaje
+  wycofana („Bartek usunął wiadomość”). Gracz, który miał otwarty czat, ma treść w podglądzie powiadomienia;
+  gracz, który był gdzie indziej — tylko znacznik usunięcia. Kuba: „co on napisał?”.
+Opcje: powiedzieć treść z podglądu / zapytać Bartka prywatnie / zostawić.
+Źródło faktu: podgląd powiadomienia (tylko gdy powiadomienie przyszło przed wycofaniem).
+Podejrzenie: ojciec Bartka coś wie; nie dowód winy.
+Konsekwencja: ch4 — Bartek pisze, że „stary gadał ze mną całą noc”; wcześniejsze pytanie gracza
+  zmienia jedno zdanie jego wstępu.
+Zapis: nowa flaga x_wycofanaSeen; wymaga obsługi „usuniętej wiadomości” w silniku (brak dziś) —
+  osobny krok techniczny bez zmiany wyglądu dymków poza tekstem systemowym.
+Sprawdzenie: test jednostkowy podglądu vs. otwartego czatu; reload w trakcie wycofania.
+```

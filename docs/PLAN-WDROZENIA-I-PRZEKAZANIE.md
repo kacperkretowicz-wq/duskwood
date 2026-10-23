@@ -610,9 +610,9 @@ Gałąź `feat/realizm-2026`. Zmiany są **zapisane lokalnie w commitach**; push
 |---|---|---|
 | P0 | **WDROŻONE** | `docs/MAPA-S1.md`: mapa scen S1, odstępy straszaków, identyfikatory nowych scen. Migracja zapisów v5 (`STORY_MIGRATIONS_V5`, fixture `story-v4-steps.json`, `tools/regen-migrations.cjs`). Stare tabele V3/V4 mapują wprost na bieżące kroki. |
 | P1 | **CZĘŚCIOWO** | Scena `xCel` w prologu: Kuba porządkuje to, co wiadomo (zamknięta niewiadoma: czemu Maja dzwoniła pod ten numer), co jest otwarte (gdzie była), i sprawdzalna rozbieżność 23:47/23:58 vs „tama koło północy”; następny krok = lokalizacja w Nimbusie. Brak pomiaru z nowym graczem. |
-| P2 | **CZĘŚCIOWO** | `xSerwis` (ch2, klientka przed zamknięciem serwisu, Ola po nocce — bez dowodu), `xBartek` (ch3, Bartek dzień po przyznaniu się, odkładana rozmowa z ojcem). Brak sceny dnia po wyznaniu Oli i Igora oraz zakupów/autobusu. |
+| P2 | **CZĘŚCIOWO** | `xSerwis` (ch2, klientka przed zamknięciem serwisu, Ola po nocce — bez dowodu), `xOla` (ch2, Ola dzień po przyznaniu się do kłótni; odpisuje Mai, wiadomość niedostarczona), `xBartek` (ch3, Bartek dzień po przyznaniu się, odkładana rozmowa z ojcem). Brak sceny dnia po wyznaniu Igora oraz zakupów/autobusu. |
 | P3 | **CZĘŚCIOWO** | Teksty przerw `s1_night`, `s1_departure`, `s1_sync` przypominają ostatni cel i mówią, że nocne wiadomości poczekają. Brak nowych scen powrotu. |
-| P4 | **DO WDROŻENIA** | — |
+| P4 | **DO WDROŻENIA** | Karta sceny `xWycofana` w `docs/MAPA-S1.md`; silnik nie obsługuje dziś wycofania wiadomości. |
 | P5 | **WDROŻONE TECHNICZNIE** | `scMajaNumer` / `s1_maja_numer` (call; odebranie/odrzucenie mają osobną reakcję Kuby i wpis w rejestrze), `scOdsluch` / `s1_odsluch` (głosówka + glitch; wyjaśnienie w wyznaniu Igora `xOdsluchIgor`, tylko jeśli straszak się odbył). |
 | P6, P7 | **DO WDROŻENIA** | — |
 

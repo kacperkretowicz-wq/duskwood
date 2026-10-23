@@ -176,6 +176,22 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     pause(2000),
 
     scene('s14', SC.s14),
+    /* P2: Ola dzień po przyznaniu się do kłótni z Mają. Zwykłe domknięcie, bez tropu. */
+    scene('xOla', [
+      pause(2500),
+      iff('flag:olaPrivate', [
+        say('ola', 'ola', 'Powiedziałam Kubie o kłótni. Sama, tak jak mówiłam.'),
+        say('ola', 'ola', 'Odpisał „ok”. Tylko tyle.')
+      ], [
+        say('ola', 'ola', 'Kuba od wczoraj odpisuje mi samo „ok”.')
+      ]),
+      say('ola', 'ola', 'I odpisałam Mai. Na to „przepraszam”. Wiem, że nie przeczyta, wisi jedna szara kreska.'),
+      say('ola', 'ola', 'Ale przynajmniej nie mam już tego nieodpisanego u siebie.'),
+      choose('ola', [
+        opt('Dobrze, że to zrobiłaś.', [say('ola', 'ola', 'Nie wiem, czy dobrze. Ale trochę lżej.')], { trust: { ola: 1 } }),
+        opt('Kuba się odezwie. Daj mu czas.', [say('ola', 'ola', 'Wiem. On tak ma. Najpierw cisza, potem pisze o trzeciej w nocy.')])
+      ])
+    ]),
 
     /* --- zablokowana notatka --- */
     g('ola', 'W notatkach Mai jest jedna zablokowana. „Pytania”. Widzieliście?'),
