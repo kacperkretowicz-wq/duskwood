@@ -623,3 +623,5 @@ Testy po pakiecie: `node --test tests/*.test.cjs` 49/49 PASS (w tym nowy test ta
 - P2: scena codzienna `xAutobus` (ch3, po `s19`): Ola i ostatni autobus.
 - Migracja V5 przegenerowana, cache SW v52.
 - Do zrobienia: P3 (sceny powrotów), ukryta wiadomość wideo w P4, P6.
+- P3 (początek): scena `xNieSpisz` (ch1, po przerwie `s1_night`): spokojne „nie śpisz?” Kuby przed nocnym alarmem. Cache SW v53.
+- Test `tests/unsend.browser.cjs`: dymek „Wiadomość została usunięta” w otwartym czacie i podgląd (PASS).
