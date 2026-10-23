@@ -37,7 +37,7 @@ test('v3 migration: every v2 step maps to the identical step; resume lands on a 
   const {chapters,v3}=stories();
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v2-steps.json'),'utf8'));
   const sig=s=>JSON.stringify([s.t,s.name,s.to,s.self,s.text,s.chat,s.who,s.ev,s.k,s.iso]);
-  assert.deepEqual([...Object.keys(v3)].sort(),['ch1','ch2','ch3','ch4','ch5','epilog']);
+  assert.deepEqual([...Object.keys(v3)].sort(),['ch1','ch2','ch3','ch4','ch5','epilog','prolog']);
   for(const [ch,steps] of Object.entries(old)){
     const m=v3[ch]||{exact:steps.map((_,i)=>i).concat(steps.length),resume:steps.map((_,i)=>i).concat(steps.length)};
     assert.equal(m.exact.length,steps.length+1);
@@ -97,4 +97,21 @@ test('every scare has a unique id, sits in its own scene and is rare (≤3 per c
     for(const st of sc){assert.ok(!seen.has(st.id),st.id);seen.add(st.id);assert.ok(st.scene&&/^sc[A-Z]/.test(st.scene),st.id+' w scenie sc*');assert.ok(['call','photo','face','glitch','breath'].includes(st.kind));}
   }
   assert.ok(seen.size>=4);
+});
+
+test('v5 migration table is up to date; v4 saves map monotonically and keep choice ids',()=>{
+  const {execFileSync}=require('node:child_process');
+  const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v5.cjs'),path.join(__dirname,'fixtures/story-v4-steps.json')],{encoding:'utf8'});
+  const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');
+  assert.ok(src.replace(/\r\n/g,'\n').includes(gen.replace(/\r\n/g,'\n')),'run tools/regen-migrations.cjs');
+  const v5=JSON.parse(gen.split('V5 = ')[1].replace(/;\s*$/,''));
+  const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v4-steps.json'),'utf8'));
+  const {chapters,sig}=require(path.join(root,'tools/dump-steps.cjs'));
+  for(const [ch,m] of Object.entries(v5)){
+    assert.equal(m.exact.length,old[ch].length+1,ch);
+    m.exact.forEach((x,i)=>{assert.ok(x>=0&&x<=chapters[ch].steps.length);if(i)assert.ok(x>=m.exact[i-1],ch+':'+i);assert.ok(m.resume[i]<=x);});
+    // każdy krok v4 nadal istnieje i trafia dokładnie na siebie (pakiet tylko dopisuje sceny)
+    old[ch].forEach((o,i)=>assert.equal(sig(chapters[ch].steps[m.exact[i]]),o,ch+':'+i));
+    for(let i=0;i<old[ch].length;i++)for(let j=m.resume[i];j<m.exact[i];j++)assert.ok(chapters[ch].steps[j].scene,ch+':'+i+' resume skips only new scenes');
+  }
 });

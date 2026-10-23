@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 4,
+      v: 5,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -41,7 +41,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 4; // tabela V3 jest generowana wprost do bieżących kroków
+      saved.v = 5; // tabela V3 jest generowana wprost do bieżących kroków
     }
     if (saved.v < 4) {
       // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -49,7 +49,15 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 4;
+      saved.v = 5; // tabela V4 też mapuje wprost na bieżące kroki
+    }
+    if (saved.v < 5) {
+      // v5: sceny S1 z planu wdrożenia. Wybór wraca do wyboru, krok — do początku nowej sceny.
+      const map = typeof STORY_MIGRATIONS_V5 !== 'undefined' && STORY_MIGRATIONS_V5[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 5;
     }
     // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
     // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.

@@ -67,7 +67,7 @@ test('Lena unlocks corroboration, gallery, and person facts without awarding a p
 test('old version 2 saves and checkpoints accept the additive conversation state',()=>{
  const {G,Conversations:C}=game();unlock(G);delete G.s.conversations;
  G.s.v=2;G.checkpoint('ch1');assert.ok(G.loadCheckpoint('ch1'));
- assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,4);
+ assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,5);
 });
 test('character ages, evidence references, and dialogue destinations are valid',()=>{
  const {DATA}=game();
@@ -165,7 +165,7 @@ test('v2 save inside chapter 2 resumes at the new Komendant scene; a pending cho
  assert.ok(i>0);assert.ok(M.ch2.resume[i]<M.ch2.exact[i]);
  for(const [pending,want] of [[null,M.ch2.resume[i]],[{chat:'group',type:'choose',options:[]},M.ch2.exact[i]]]){
   G.newGame({name:'Alex',gender:'f'});G.s.v=2;G.s.chapter='ch2';G.s.pc=i;G.s.pending=pending;G.s.flags.keep=true;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,4);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want);
+  assert.equal(G.load(),true);assert.equal(G.s.v,5);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'second load does not migrate again');
  }
 });
@@ -176,9 +176,19 @@ test('v3 save in chapter 4 (Igor confession) and m2 lands on the same step after
  for(const [ch,text] of [['ch4','ciągle sobie odtwarzam jak wchodzę do tej kuchni. mogłem nic nie mówić'],['m3','moja mama to Janina Kurek']]){
   const i=old[ch].findIndex(s=>JSON.parse(s)[4]===text);assert.ok(i>0,ch);
   G.newGame({name:'Alex',gender:'f'});G.s.v=3;G.s.chapter=ch;G.s.pc=i;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,4);
+  assert.equal(G.load(),true);assert.equal(G.s.v,5);
   const want=M4[ch]?M4[ch].resume[i]:i;assert.equal(G.s.pc,want,ch);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'no double migration');
  }
  assert.ok(M4.ch4.exact.some((x,i)=>x!==i),'ch4 shifted by the new reaction scene');
 });
+test('v4 save in chapter 3 after the Maja SMS keeps its step after the v5 scenes',()=>{
+ const {G}=game();
+ const M5=STORY_V5();
+ const old=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/story-v4-steps.json'),'utf8'));
+ const i=old.ch3.findIndex(s=>JSON.parse(s)[4]==='kluska nie żyje od 7 lat');assert.ok(i>0);
+ G.newGame({name:'Alex',gender:'f'});G.s.v=4;G.s.chapter='ch3';G.s.pc=i;G.s.flags.keep=true;G.save(true);
+ assert.equal(G.load(),true);assert.equal(G.s.v,5);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,M5.ch3.resume[i]);assert.ok(M5.ch3.exact[i]>i);
+ G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,M5.ch3.resume[i],'no double migration');
+});
+function STORY_V5(){const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');return JSON.parse(src.split('STORY_MIGRATIONS_V5 = ')[1].split(';\n')[0]);}
