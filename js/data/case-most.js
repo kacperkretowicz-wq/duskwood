@@ -238,6 +238,10 @@ Object.assign(DATA.evidence, {
   P('m_inspekcja', 'm_inspekcja.jpg', 'Wrocław · parking przed inspekcją', 768, 1024);
   P('m_znicz_most', 'm_znicz_most.jpg', 'Most nad Mglicą · 16:20', 768, 1024);
   P('m_salon_herbata', 'm_salon_herbata.jpg', 'Salon Sylwii', 1024, 768);
+  P('m_kamera_kotka', 'm_kamera_kotka.jpg', 'Kuchnia pani Weroniki · odsłuch', 1024, 768);
+  P('m_parapet_babci', 'm_parapet_babci.jpg', 'Parapet u pani Krystyny', 768, 1024);
+  P('m_tablet_kuchnia', 'm_tablet_kuchnia.jpg', 'Kuchnia · 22:31', 1024, 768);
+  P('m_obiad_drzwi', 'm_obiad_drzwi.jpg', 'Pod drzwiami', 768, 1024);
   Art.def('v_licznik', { src: 'assets/video/v_licznik.jpg', title: 'Archiwum · noc', w: 360, h: 640, draw: () => '' });
   Art.def('s1_mem_kot', { src: 'assets/s1x/s1_mem_kot.jpg', title: 'Kot w praniu', w: 768, h: 1024, draw: () => '' });
   Art.def('s1_lumpeks', { src: 'assets/s1x/s1_lumpeks.jpg', title: 'Lumpeks na Kolejowej', w: 768, h: 1024, draw: () => '' });

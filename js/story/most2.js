@@ -179,6 +179,13 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     Ma('Dzień dobry. Przywiozłam kamerę z archiwum. Ten sam model, którego pan Adam używał do zgrywania w 2019. Taśma jest w dobrym stanie, tylko przez pierwsze 20 sekund nagranie się urywa.'),
     pic('marta', 'marta', 'most_biurko', 'Tak wyglądało moje biurko do wczoraj. Kamera już jest tutaj.'),
     give('ev_m_kubek', { silent: true }),
+    scene('xKotka', [
+      pic('weronika', 'weronika', 'm_kamera_kotka', 'Pani Ziuta sprawdza sprzęt. Pani Marta mówi, że kot w archiwum to marzenie. U nich nie wolno nawet kwiatka.'),
+      choose('weronika', [
+        opt('Niech uważa na kabel. Bez kasety zostaniemy z niczym.', [W('Przesunęłam kabel. Kotka się obraziła i poszła na parapet.')]),
+        opt('Kotka-archiwistka. Należy jej się etat.', [W('Pani Marta się śmieje. Pierwszy raz dzisiaj.')], { trust: { weronika: 1 } })
+      ])
+    ]),
     Ma('Puszczam od początku. Będę pisać znaczniki czasu.'),
     pause(2500),
     Ma('03:12–03:51. To jest fragment z publikacji. Słowo w słowo do „nie założyłem z powrotem”.'),
@@ -281,6 +288,14 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     S('Napisałam w grupie: „Faktura dotyczy wymiany klocków. Proszę nie wskazywać osób, które nic z tym nie mają wspólnego”. Przypięłam.'),
     scene('m2zrzut', [iff('flag:m_showSylwia', [S('Przypięłam też zrzut od pani Marty, trzy pierwsze klatki obok siebie. Pierwszy raz ktoś pod spodem napisał „aha”.')])]),
     S('Pan Henryk zadzwonił do mnie na salon i podziękował. Nie wiem nawet za co. Chyba za to, że ktoś coś przypiął.'),
+    scene('xSalonPlotki', [
+      pause(2500),
+      V('sylwia', 'sylwia', '0:19', 'Przepraszam, że głosówka, mam farbę na rękach. Klientki gadają tylko o moście. Jedna pani powiedziała, że jej szwagier „wszystko widział”. W 2011 był w Anglii. Tak to u nas wygląda.', 'Sylwia'),
+      choose('sylwia', [
+        opt('Dobrze, że pani to wyłapuje.', [S('Trzydzieści lat w zawodzie. Fryzjerka wie wszystko pierwsza. Bzdury też.')]),
+        opt('Niech pani nie wchodzi w dyskusje.', [S('Nie wchodzę. Tylko głośniej suszę.')])
+      ])
+    ]),
     pause(3000),
     clock('2026-11-26T20:40'),
     Nt('wrzuciliśmy wczoraj na stronę tekst „pytania o most”. bez nagrania. ze jest „brakujący dokument” do którego dotarła redakcja'),
@@ -444,6 +459,20 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
         Z('chyba babcia to K. mleko. pan adam woził jej mleko po pogrzebie')
       ], { trust: { zuza: 1 } })
     ]),
+    scene('xParapet', [
+      pause(1500),
+      pic('zuza', 'zuza', 'm_parapet_babci', 'to stoi u babci na parapecie od zawsze. przypomina ci to coś?'),
+      choose('zuza', [
+        opt('Pocztówki z górami. Jak ta bez podpisu z pudła pana Adama.', [
+          Z('kurde. to chyba ta sama seria. babcia ma ich z dziesięć'),
+          Z('nie ruszam. zrobiłam tylko zdjęcie')
+        ], { set: { m_postcardTwin: true } }),
+        opt('Pusta butelka po mleku.', [
+          Z('babcia trzyma ją w oknie od lat. mówi, że na kwiaty, ale nigdy nie widziałam w niej kwiatów')
+        ], { set: { m_bottleSeen: true } }),
+        opt('Pelargonie jak u każdej babci w Polsce.', [Z('xD babcia mówi, że pelargonia to jedyna roślina, która ją rozumie')])
+      ])
+    ]),
     Z('mogę ją zapytać czy chce z kimś pogadać. ale ona może powiedzieć nie'),
     choose('zuza', [
       opt('Zapytaj, jeśli chcesz. Jak odmówi, zostawmy to.', [Z('ok. zapytam przy obiedzie. ona przy obiedzie jest najspokojniejsza')], { set: { m_askGrandma: true } }),
@@ -477,6 +506,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     unlock('chat:henryk_sms'),
     pic('henryk_sms', 'henryk', 'most_szuflada', 'ZDJECIE. OD WNUCZKI. H.W.'),
     give('ev_m_s41_h'),
+    scene('xHenrykSms', [
+      pause(2000),
+      say('henryk_sms', 'henryk', 'WNUCZKA MÓWI ŻE NIE TRZEBA PISAĆ DUŻYMI LITERAMI. ALE TAK LEPIEJ WIDZĘ.'),
+      say('henryk_sms', 'henryk', 'DOBRANOC.')
+    ]),
     pause(2000),
     Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.'),
     Ma('To ta sama strona 41, ten sam wpis z 13.09, ta sama „zał. nr 3”. Druga kopia, od innej osoby. Zgadza się z kserem z teczki.'),
@@ -485,6 +519,15 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     pause(2500),
     Ma('Natan zapytał mnie dziś, skąd Dudek wiedział o kasecie w archiwum.'),
     Ma('Sprawdzam, kto w ogóle pytał o „H.W.” i „załącznik nr 3”. Mam dostęp do historii zamówień archiwum. To moja praca, nie hakowanie.'),
+    scene('xTablet', [
+      pause(2000),
+      pic('marta', 'marta', 'm_tablet_kuchnia', 'Mój gabinet na dziś. Mama ogląda serial w drugim pokoju. Mandarynki są jej, okulary też.'),
+      choose('marta', [
+        opt('Nie siedź za długo. Jutro też jest dzień.', [Ma('Wiem. Jeszcze tylko sprawdzę zamówienia z listopada.')]),
+        opt('Twoja mama ma tablet starszy niż mój telefon.', [Ma('Ma osiem lat. Mama mówi, że „jeszcze działa”. Robi na nim wszystko: przepisy, krzyżówki, maile.')])
+      ]),
+      Ma('Idę do siebie. Mama zaraz przyjdzie zmywać.')
+    ]),
     pause(5000),
     clock('2026-11-28T22:47'),
     Ma('W archiwum nikt.'),

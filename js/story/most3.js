@@ -23,6 +23,14 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
     ]),
+    scene('xObiad', [
+      pause(1500),
+      pic('marta', 'marta', 'm_obiad_drzwi', 'Od soboty śpię u koleżanki z redakcji. Mama wczoraj przywiozła to pod jej drzwi. Gołąbki i ogórki.'),
+      choose('marta', [
+        opt('To chyba znaczy, że dalej jesteś jej córką.', [Ma('Może. Zjadłam dwa. Smakowały jak w podstawówce.')], { trust: { marta: 1 } }),
+        opt('Zadzwoń do niej, kiedy będziesz gotowa.', [Ma('Nie dziś. Ale słoik oddam osobiście. Zawsze to jakiś pretekst.')])
+      ])
+    ]),
     scene('xLicznik', [
       pause(2500),
       Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.'),
