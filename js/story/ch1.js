@@ -234,6 +234,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     ambient('tense'),
     fx('vibrate'),
     sync('maja:cam57', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0057.JPG' }),
+    scene('xRanoNoc', [iff('flag:rano_s1_night', [sys('kuba', 'Wiadomości z nocy. Nimbus zsynchronizował plik o 02:13.')])]),
     goal('Nimbus właśnie coś zsynchronizował. Sprawdź nowe zdjęcie.', ['Nimbus → Galeria → Fotopułapki → najnowsze zdjęcie (22.10, 02:13).']),
     waitFor('seen:img:c1_0057'),
     give('ev_cam1_0057'),

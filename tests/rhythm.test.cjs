@@ -81,3 +81,16 @@ test('the opening SMS agrees in old saves, backup and evidence without resetting
  assert.ok(DATA.evidence.ev_sms_maja.desc.includes(msg.text));
  assert.ok(DATA.maja.threads.find(t=>t.id==='rybicki').msgs.some(m=>m.text===msg.text));
 });
+test('late return after a night break is remembered without penalty; DST change keeps the window',()=>{
+ const {G,SeasonPacing:P,at}=game();G.s.chapter='ch1';G.s.pc=170;P.configure('daily');
+ P.holdRest({rest:'s1_night'});const due=G.s.pacing.rest.at;
+ at(due+8*3600000);assert.equal(P.holdRest({rest:'s1_night'}),false);
+ assert.equal(G.flag('rano_s1_night'),true);assert.equal(G.s.pc,170);
+ const g2=game();g2.G.s.chapter='ch3';g2.G.s.pc=5;g2.SeasonPacing.configure('daily');
+ g2.SeasonPacing.holdRest({rest:'s1_sync'});g2.at(g2.G.s.pacing.rest.at+60000);g2.SeasonPacing.holdRest({rest:'s1_sync'});
+ assert.equal(g2.G.flag('rano_s1_sync'),false,'on-time return is not marked');
+ // 25.10.2026: w Europie zmiana czasu z letniego na zimowy w nocy.
+ const dst=new Date(2026,9,25,1,30).getTime(),due2=P.nextWindow(dst,[21,26]);assert.equal(due2,dst);
+ const after=P.nextWindow(new Date(2026,9,25,3,0).getTime(),[21,26]);
+ assert.equal(new Date(after).getHours(),21);assert.equal(new Date(after).getDate(),25);
+});

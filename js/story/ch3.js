@@ -347,6 +347,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Żyje! To najważniejsze.', [K('tak tylko'), K('czekaj')]),
       opt('To nie brzmi jak ona.', [K('nie brzmi')])
     ]),
+    scene('xRanoSync', [iff('flag:rano_s1_sync', [K('i nie przepraszaj, że czytasz dopiero rano. ja bym też spał, gdyby nie mama')])]),
     K('kluska nie żyje od 7 lat'),
     K('i maja nigdy nie pisze „mamo”. zawsze „mamuś”. zawsze'),
     K('to nie ona to pisała. albo ktoś jej kazał'),

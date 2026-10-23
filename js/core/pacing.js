@@ -4,6 +4,7 @@
 const SeasonPacing = (() => {
   const days = { prolog: 0, ch1: 0, ch2: 1, ch3: 2, ch4: 3, ch5: 3, epilog: 4 };
   let installed = false;
+  const LATE = 4 * 3600000;
   const state = () => G.s?.pacing;
   // Okno może przechodzić przez północ, np. [22, 26] = 22:00–02:00.
   // setHours/setDate zachowują lokalną strefę również przy zmianie czasu.
@@ -19,6 +20,8 @@ const SeasonPacing = (() => {
     const p = state(), r = p?.rest;
     if (!r) return;
     p.restDone ||= {}; p.restDone[r.id] = true;
+    // P3: gracz wrócił długo po terminie (np. rano po nocnej przerwie). Scena może to zauważyć, bez kary.
+    if (restoreGoal && Date.now() - r.at >= LATE) G.setFlag('rano_' + r.id);
     if (restoreGoal) G.s.objective = r.goal || null;
     delete p.rest;
     if (!document.hidden) G.resumeClock();
