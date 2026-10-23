@@ -364,7 +364,11 @@ const UI = (() => {
   let bShowing = false;
   function banner(o) {
     if (locked && lockEl) { addLockNotif(o); playBannerSound(o); return; }
+    /* Kolejka nie może zostawać w tyle za rozmową: z jednego czatu zostaje tylko najnowszy baner, a w kolejce najwyżej dwa. */
+    const key = o.open && o.open.chat;
+    if (key) { const i = bq.findIndex(b => b.open && b.open.chat === key); if (i >= 0) bq.splice(i, 1); }
     bq.push(o);
+    while (bq.length > 2) bq.shift();
     if (!bShowing) nextBanner();
   }
   function playBannerSound(o) {
@@ -387,7 +391,8 @@ const UI = (() => {
         h('div', { class: 'b-t' }, o.text || '')));
   }
   function nextBanner() {
-    const o = bq.shift();
+    let o = bq.shift();
+    while (o && o.open && o.open.chat && G.viewing === o.open.chat) o = bq.shift();
     if (!o) { bShowing = false; return; }
     bShowing = true;
     const el = bannerEl(o);
