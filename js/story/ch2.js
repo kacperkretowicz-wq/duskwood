@@ -216,6 +216,16 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
 
     scene('s13', SC.s13),
 
+    /* P4: wyciszona grupa to zwykłe zachowanie, nie dowód winy. */
+    scene('xWyciszona', [
+      g('kuba', 'bartek czemu ty nic nie piszesz od rana'),
+      g('bartek', 'wyciszylem grupe. 140 wiadomosci jak lezalem pod podnosnikiem'),
+      g('bartek', 'nie kazdy ma caly dzien na telefon'),
+      choose('group', [
+        opt('Normalne. Odcisz, jak będziemy czegoś od ciebie potrzebować.', [g('bartek', 'jak bedzie cos waznego to dzwoncie. telefon odbieram')]),
+        opt('Kuba, nie każda cisza coś znaczy.', [g('kuba', 'wiem. sorry. wszystko mi się teraz wydaje podejrzane')], { trust: { kuba: 1 } })
+      ])
+    ]),
     /* --- wyprawa --- */
     g('igor', 'dobra. z kubą jedziemy dziś o 23. bartek, jedziesz czy nie?'),
     g('bartek', 'nie'),
