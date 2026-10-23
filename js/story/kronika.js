@@ -399,7 +399,8 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       choose('igor', [
         opt('Pamiętasz ją?', [I('młoda. mało mówiła. zapłaciła drobnymi i powiedziała „dziadek mówi, że wszystko da się naprawić”')], { set: { c_igorIda: true } }),
         opt('Psy wszędzie wejdą.', [I('ten akurat grzecznie leżał. lepiej niż niejeden klient')])
-      ])
+      ]),
+      I('a w ogóle mam praktykanta z technikum. oskar. czyści stare telefony do sprzedaży szybciej niż ja. trochę za szybko, ale nie narzekam')
     ]),
     scene('xSwietlica', [
       O('Upiekliśmy pierniki. Połowa ma kształt dinozaura, choć foremki były w gwiazdki.'),
@@ -664,6 +665,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       Gr('bartek', 'widzialem tych trzech pod blokiem zenona. jednego znam z silowni. napisalem mu zeby spadal'),
       Gr('ola', 'Dziękuję, Bartek.'),
       Gr('bartek', 'spadli. jeden jeszcze zrobil zdjecie balkonu. debil'),
+      Gr('bartek', 'ten z silowni to pawel dudek. ten od mostu. myslalem ze wyjechal. mowi ze teraz „robi w glosach” i dobrze placa'),
       pause(2000),
       O('Dyrektorka świetlicy poprosiła mnie na rozmowę o dwunastej. Nie napisała, po co.'),
       choose('ola', [
@@ -866,6 +868,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       numbers: {
         '533 019 274': { who: 'ida', then: [
           c('ida', 'halo'),
+          c('ida', 'nagrywam. nawyk z redakcji. spokojnie, nikomu tego nie dam'),
           c('ida', 'w listopadzie wszyscy pisali, że to ja jestem fejkiem. że przeze mnie przez tydzień wszyscy mieli pana Henryka za mordercę'),
           c('ida', 'a całe miasto ma takie swoje 40 sekund. tylko nikt ich nie wyciął'),
           choose('call', [
