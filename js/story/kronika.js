@@ -220,7 +220,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     callEnd(),
     set('c_zenonNamed'),
     scene('xKubaSiniak', [
-      M('kuba wrócił z sanek z siniakiem na pół uda. mama każe mu smarować maścią końską'),
+      M('kuba wrócił z sanek z siniakiem na pół uda. mama każe mu smarować siniak maścią końską'),
       choose('maja2', [
         opt('Maść końska rozwiązuje wszystko.', [M('mówi, że śmierdzi jak stajnia. ale smaruje')]),
         opt('A ty nie jeździłaś?', [M('jeździłam. ja umiem hamować')])
