@@ -620,3 +620,136 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
     end('g4')
   ];
 });
+
+/* ---------- g4 · Serwis ---------- */
+Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis', when: 'Czwartek, 18 marca · 9:15', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing, nearby, rename } = D;
+  const { M, K, O, I, W, S, Nt, Os, Gr, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-18T09:15'),
+    ambient('calm'),
+    title(),
+    I('oskar przyszedł. blady. siedzi na zapleczu i nie patrzy mi w oczy'),
+    I('zapytałem o telefon idy. powiedział, że „nic złego nie zrobił”. czyli zrobił'),
+    I('dam mu twój numer. niech sam ci powie. mnie się wstydzi bardziej niż policji'),
+    choose('igor', [
+      opt('Dobrze. Powiedz mu, że nie będę krzyczeć.', [I('powiem. on ma 17 lat. ja w jego wieku też robiłem głupoty. tylko mniejsze')], { set: { g_oskarSoft: true } }),
+      opt('Najpierw niech wszystko zapisze. Daty, kwoty, komu.', [I('dobra. daję mu kartkę i długopis. jak w szkole')], { set: { g_oskarList: true } })
+    ]),
+    pause(3000),
+    unlock('chat:oskar'),
+    set('g_oskarNamed'),
+    Os('dzień dobry. tu oskar. od igora'),
+    Os('sorry, że tak. nie wiem, jak zacząć 😬'),
+    Os('ja nie kasowałem od razu. zgrywałem pamięć na dysk. tak na wszelki wypadek. żeby jak klient się rozmyśli, to miał zdjęcia'),
+    Os('a potem na błysku ktoś napisał, że kupi „paczki z telefonów z mgliska”. 50 zł za telefon. za jeden dał 300'),
+    choose('oskar', [
+      opt('Za który dał 300?', [Os('za telefon idy. pytał o niego konkretnie. wiedział, że był w serwisie'), Os('to mnie powinno wkurzyć. a ja się ucieszyłem, że 300 😔')], { set: { g_oskar300: true } }),
+      opt('Ile telefonów sprzedałeś?', [Os('jedenaście. w lutym i marcu'), Os('najdroższy był telefon idy. 300. pytał o niego konkretnie')], { set: { g_oskar300: true } })
+    ]),
+    Os('i jeszcze jedno. przed wysłaniem paczki kazał mi wyciąć z nagrań czyste kawałki głosu. po 30 sekund. pokazał jak'),
+    Os('mam jeszcze trzy, które wyciąłem z nagrań idy. wszystkie to ty. sorry. serio sorry'),
+    /* Trzy próbki twojego głosu: skąd każda pochodzi. */
+    scene('xTrzyProbki', [
+      V('oskar', 'oskar', '0:30', 'Halo… No, Ida, posłuchaj mnie… [w tle szum telewizora, ktoś chrapie, pies wzdycha]', 'próbka 1'),
+      V('oskar', 'oskar', '0:30', 'No, dzień dobry, chciał{em|am} zapytać o festyn… [w tle szelest kartek, cicha muzyka z radia]', 'próbka 2'),
+      V('oskar', 'oskar', '0:30', 'No dobra, ja już kończę, ale… [w tle wiatr i przejeżdżający autobus]', 'próbka 3'),
+      Os('która jest z czego? ja tylko ciąłem. nie słuchałem'),
+      choose('oskar', [
+        opt('Pierwsza. Telewizor, chrapanie i pies. To moja rozmowa z Idą o 20:58 w styczniu. Pan Zenon spał obok.', [Os('kurde. ida nagrywała tę rozmowę. nagranie było w jej folderze „styczeń”'), Os('czyli on ma twój głos z tamtego wieczoru. cały')], { set: { g_sourceIda: true } }),
+        opt('Druga. Kartki i radio. Dzwonił{em|am} do czytelni, do pani Weroniki.', [Os('nie wiem. ida nie była w czytelni. to musiało być coś innego'), Os('w jej folderze były tylko rozmowy z jej telefonu')]),
+        opt('Trzecia. Wiatr i autobus. Nagrał{em|am} głosówkę na przystanku.', [Os('głosówki też były. ale ja wycinałem tylko z rozmów. tak kazał')])
+      ]),
+      iff('flag:g_sourceIda', [], [pause(2000), Os('sprawdziłem nazwy plików. wszystkie trzy są z jednej rozmowy. 22 stycznia, 20:58'), Os('po prostu w różnych momentach różnie szumiało')]),
+      give('ev_g_probki')
+    ]),
+    Os('ja nie wiedziałem, że tak można. tzn. wiedziałem. ale myślałem, że on robi memy 😶'),
+    choose('oskar', [
+      opt('Masz z nim jakąś wiadomość, numer, cokolwiek?', [Os('konto „pd_audio”. usunął je wczoraj. ale mam zrzut z przelewu. odbiorca: P. Dudek'), Os('igor mówi, że to ten od mostu')], { set: { g_dudekNamed: true } }),
+      opt('Powiesz to wszystko policji?', [Os('mama mnie zawiezie po południu. ona już wie. płakała. ja też'), Os('mam zrzut z przelewu. nazwisko: P. Dudek')], { set: { g_dudekNamed: true, g_oskarPolice: true } })
+    ]),
+    give('ev_g_dudek'),
+    scene('xKubaKostka', [
+      pause(3500),
+      clock('2027-03-18T12:40'),
+      pic('kuba', 'kuba', 'g_kuba_kostka', 'pierwszy dzień. bartek mówi, że młotek trzymam jak długopis. kłamie. jak widelec'),
+      K('i ręce mam z betonu. ale fajnie. nie myślę'),
+      choose('kuba', [
+        opt('Jak widelec, potwierdzam. Ale kostka równa.', [K('bartek poprawia po mnie co trzeci kamień. dyskretnie. myśli, że nie widzę')]),
+        opt('Oskar sprzedał nagrania. Kupił je Paweł Dudek.', [K('dudek. ten od mostu? ten, co był pod blokiem zenona w styczniu?'), K('bartek go zna z siłowni. pytam go')], { cond: 'flag:g_dudekNamed', set: { g_kubaDudek: true } })
+      ]),
+      iff('flag:g_kubaDudek', [
+        say('bartek', 'bartek', 'dudek. tak. mowil mi w styczniu ze „robi w glosach”. myslalem ze nagrywa reklamy do radia'),
+        say('bartek', 'bartek', 'wynajmuje kawalerke nad pizzeria w dzierzoniowie. widzialem jak wchodzil z laptopem. w nocy swieci sie tam do rana')
+      ])
+    ]),
+    pause(3000),
+    clock('2027-03-18T14:05'),
+    Nt('dudek. to sie zgadza. w 2011 odebral furgon z warsztatu. w listopadzie zamowil wyciecie 40 sekund u idy'),
+    Nt('a teraz kupuje glosy ludzi od mostu. on dzwoni do swiadkow'),
+    choose('natan', [
+      opt('Zgłośmy to razem na policję. Oskar już tam jedzie.', [Nt('jade do dzierzoniowa. bede z oskarem i jego mama. dam znac')], { set: { g_police: true } }),
+      opt('Tylko po co mu to? Kierownik budowy nie dzwoni do świadków ot tak.', [Nt('dla kurek-bud. firma odpowiada za most. jak swiadkowie sie wycofaja, nie bedzie winnych'), Nt('ale tak, to dziwne. dudek nie jest typem, ktory pisze scenariusze rozmow')], { set: { g_whyDudek: true } })
+    ]),
+    scene('xSylwiaCzwartek', [
+      pause(3000),
+      S('W grupie ktoś napisał, że „ktoś z Dzierżoniowa” dzwoni do ludzi od mostu. Nie wiem, skąd to wie.'),
+      S('Ludzie przestali pisać o {panu|pani}. Teraz piszą o mafii z Wrocławia. Wolę już to.'),
+      choose('sylwia', [
+        opt('Niech pani pilnuje, żeby nikt nie podawał nazwisk. Policja już działa.', [S('Pilnuję. Usunęłam już trzy adresy dzisiaj. Jak w styczniu.')]),
+        opt('Dziękuję, że pani mnie broniła.', [S('Nie broniłam. Po prostu nie wierzyłam w bzdury. To co innego.')])
+      ])
+    ]),
+    pause(3000),
+    O('Pani od kiosku przy moście przyszła po wnuczka do świetlicy. Pytała, czy ja też „słyszę głosy w telefonie”.'),
+    O('Powiedziałam jej o haśle. Zapisała je sobie na ręce długopisem. Potem się zorientowała i zmyła 😅'),
+    choose('ola', [
+      opt('Najlepsza rada dnia: nie zapisuj hasła na ręce.', [O('Też tak powiedziałam. Śmiałyśmy się obie. Pierwszy raz od tygodnia, mówiła.')]),
+      opt('Dobrze, że przyszła do ciebie.', [O('Ludzie przychodzą do świetlicy po dzieci i zostają pogadać. Lubię to.')], { trust: { ola: 1 } })
+    ]),
+    scene('xWeraCzwartek', [
+      pause(3000),
+      W('Byłam dziś na cmentarzu. Pierwszy raz od listopada. Zaniosłam Tomkowi znicz i powiedziałam mu, że ktoś używa jego głosu.'),
+      W('Wiem, że to głupie. Ale ulżyło mi.'),
+      choose('weronika', [
+        opt('To nie jest głupie. Dobrze, że pani poszła.', [W('Pani Grażyna poszła ze mną. Trzymała mnie pod rękę jak starszą panią. Bo jestem.')], { trust: { weronika: 1 } }),
+        opt('Policja zajmuje się już człowiekiem, który dzwonił.', [W('Dobrze. Ale ja chcę wiedzieć, kto mu dał Tomka. Ta kaseta nie leżała na ulicy.')], { set: { g_weraWho: true } })
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-18T18:30'),
+    iff('flag:g_police', [Nt('zlozylismy zawiadomienie. oskar opowiedzial wszystko. policjant zapisal i powiedzial „glosy, no tak, teraz wszystko jest mozliwe”'), Nt('maja jutro jechac do dudka')], [Nt('oskar z mama zlozyli zawiadomienie. policja jutro jedzie do dudka')]),
+    M('jutro mają go zatrzymać? serio?'),
+    M('kuba mówi, że się cieszy. a ja się boję jeszcze bardziej. jak ktoś się boi, że go złapią, to robi głupie rzeczy'),
+    choose('maja2', [
+      opt('Dziś nie wychodźcie z domu. Ja też zostaję w domu.', [M('mama robi naleśniki. nikt nie wychodzi. nawet pies sąsiadów nie szczeka')]),
+      opt('Jutro będzie po wszystkim. Obiecuję, że to się kończy.', [M('nie obiecuj. ostatnio jak ktoś mi obiecał, to dzwonił potem twoim głosem')])
+    ]),
+    pause(3500),
+    clock('2027-03-18T22:17'),
+    ambient('dark'),
+    nearby('g_serwis', { device: 'Telefon', img: 'g_serwis_noc', note: 'Nieznane urządzenie w pobliżu', flag: 'g_serwisOk', declineFlag: 'g_serwisNo', ev: 'ev_g_serwis' }),
+    iff('flag:g_serwisOk', [
+      scene('scSerwis', [scare('s5_serwis', 'photo', { img: 'g_serwis_noc', ms: 2200 })]),
+      choose('igor', [
+        opt('Igor, jesteś w serwisie? Ktoś cię obserwuje z samochodu. Zamknij drzwi.', [I('jestem. kończę płytę główną dla klientki'), I('zgasiłem światło. nikogo nie widzę. tylko samochód z wyłączonymi światłami po drugiej stronie'), I('odjechał. teraz. jak tylko zgasiłem'), I('dzwonię na 112. nie wychodzę')], { set: { g_igorSafe: true } }),
+        opt('Igor, wyjdź tylnym wyjściem i idź do domu.', [I('serio? ok. wychodzę. zostawiam światło, niech myśli, że jestem'), I('w domu. drzwi na klucz. dzięki')], { set: { g_igorSafe: true } })
+      ])
+    ], [
+      I('ktoś mi chciał przesłać zdjęcie. „Telefon”. odrzuciłem'),
+      I('siedzę jeszcze w serwisie. jakiś samochód stoi naprzeciwko z wyłączonymi światłami. pewnie ktoś czeka na kogoś'),
+      I('dobra, zamykam. idę do domu')
+    ]),
+    pause(4000),
+    clock('2027-03-18T23:51'),
+    unlock('chat:dudek'),
+    say('dudek', 'dudek', 'nie wiem kim jestes ale wiem jak brzmisz'),
+    say('dudek', 'dudek', 'jutro twoja mama zadzwoni do ciebie. nie odbieraj'),
+    choose('dudek', [
+      opt('Nie odpisuj. Zrób zrzut i wyślij Natanowi.', [say('dudek', 'dudek', 'grzecznie')], { silent: true, set: { g_dudekShot: true } }),
+      opt('Wiem, kim jesteś, Paweł.', [say('dudek', 'dudek', 'nic nie wiesz'), say('dudek', 'dudek', 'ja tylko dzwonie. ktos inny mowi co')], { set: { g_dudekSlip: true } })
+    ]),
+    set('g_day4'),
+    end('g5')
+  ];
+});

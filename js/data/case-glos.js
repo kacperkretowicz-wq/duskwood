@@ -9,6 +9,7 @@ Object.assign(DATA.chars, {
 
 Object.assign(DATA.chats, {
   oskar: { name: 'Oskar Wilk', avatar: 'oskar', sub: 'od Igora' },
+  dudek: { name: '+48 731 008 214', avatar: 'unknown', sub: 'SMS' },
   blysk3: { name: '%name%', avatar: 'blysk3', sub: 'Błysk · znika po przeczytaniu', readonly: true, ephemeral: true }
 });
 
@@ -35,7 +36,13 @@ Object.assign(DATA.evidence, {
   ev_g_festyn96: { title: 'Kaseta nr 12 · festyn 1996', cat: 'digital', source: 'Marta Jasińska · archiwum gminy', img: 'v_festyn96',
     desc: 'Cztery sekundy z 17.08.1996. Tomek w czerwonej czapce biegnie do kamery i woła: „Wera, chodź, jest zimno!”. Kaseta nigdy nie była pokazywana publicznie.' },
   ev_g_telefon: { title: 'Telefon moim głosem · 17.03, 21:34', cat: 'testimony', source: 'połączenie od nieznanego numeru',
-    desc: 'Ktoś dzwoni do mnie moim głosem. Każe przestać pytać o kasety i most. Nie zna hasła. Mówi, że „ma nagrania” i że zawsze nagrywa.' }
+    desc: 'Ktoś dzwoni do mnie moim głosem. Każe przestać pytać o kasety i most. Nie zna hasła. Mówi, że „ma nagrania” i że zawsze nagrywa.' },
+  ev_g_probki: { title: 'Trzy próbki mojego głosu', cat: 'digital', source: 'Oskar · serwis Igora',
+    desc: 'Po 30 sekund mojego głosu wyciętych z nagrania rozmowy z Idą (22.01, 20:58). Kupujący kazał je wyciąć, zanim dostał paczkę z jej telefonu.' },
+  ev_g_dudek: { title: 'Kupujący: P. Dudek', cat: 'digital', source: 'Oskar · zrzut przelewu',
+    desc: 'Konto „pd_audio” na Błysku kupowało paczki z telefonów z Mgliska. Za telefon Idy zapłaciło 300 zł. Przelew podpisany: P. Dudek.' },
+  ev_g_serwis: { title: 'Serwis Igora nocą', cat: 'photo', source: 'Przesyłanie w pobliżu · 18.03, 22:17', img: 'g_serwis_noc',
+    desc: 'Ktoś fotografuje serwis Igora z samochodu po drugiej stronie ulicy. Igor jest w środku.' }
 });
 
 (() => {
@@ -48,7 +55,9 @@ Object.assign(DATA.evidence, {
     ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024],
     ['g_tomek_album', 'assets/glos/g_tomek_album.jpg', 'Festyn · 1996', 1024, 768],
     ['g_pracownia', 'assets/glos/g_pracownia.jpg', 'Archiwum gminy · pracownia', 1024, 768],
-    ['v_festyn96', 'assets/video/v_festyn96.jpg', 'kaseta nr 12 · 17.08.1996', 360, 270]
+    ['v_festyn96', 'assets/video/v_festyn96.jpg', 'kaseta nr 12 · 17.08.1996', 360, 270],
+    ['g_kuba_kostka', 'assets/glos/g_kuba_kostka.jpg', 'Kostka u sąsiada', 768, 1024],
+    ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
@@ -56,7 +65,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0', 'g1', 'g2', 'g3'],
+  chapters: ['g0', 'g1', 'g2', 'g3', 'g4'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -75,6 +84,8 @@ DATA.seasons.push({
     ['s5.05', 'Wera', 'g2', 'ev:ev_g_album'],
     ['s5.06', 'Poczta głosowa', 'g2', 'flag:g_day2'],
     ['s5.07', 'Kaseta nr 12', 'g3', 'ev:ev_g_festyn96'],
-    ['s5.08', 'Twój głos', 'g3', 'ev:ev_g_telefon']
+    ['s5.08', 'Twój głos', 'g3', 'ev:ev_g_telefon'],
+    ['s5.09', 'Próbki', 'g4', 'ev:ev_g_probki'],
+    ['s5.10', 'pd_audio', 'g4', 'ev:ev_g_dudek']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });
