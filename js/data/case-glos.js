@@ -31,7 +31,11 @@ Object.assign(DATA.evidence, {
   ev_g_przystanek: { title: 'Moje zdjęcie z przystanku', cat: 'photo', source: 'Przesyłanie w pobliżu · 15.03, 18:47', img: 'g_przystanek',
     desc: 'Ktoś zrobił mi zdjęcie z drugiej strony ulicy, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' },
   ev_g_album: { title: 'Tomek na festynie, 1996', cat: 'photo', source: 'Weronika · album', img: 'g_tomek_album',
-    desc: 'Tomek Lis, 8 lat, w czerwonej czapce z daszkiem. Obok Weronika. Z boku kadru kamera kablówki z kablem. Festyn, sierpień 1996.' }
+    desc: 'Tomek Lis, 8 lat, w czerwonej czapce z daszkiem. Obok Weronika. Z boku kadru kamera kablówki z kablem. Festyn, sierpień 1996.' },
+  ev_g_festyn96: { title: 'Kaseta nr 12 · festyn 1996', cat: 'digital', source: 'Marta Jasińska · archiwum gminy', img: 'v_festyn96',
+    desc: 'Cztery sekundy z 17.08.1996. Tomek w czerwonej czapce biegnie do kamery i woła: „Wera, chodź, jest zimno!”. Kaseta nigdy nie była pokazywana publicznie.' },
+  ev_g_telefon: { title: 'Telefon moim głosem · 17.03, 21:34', cat: 'testimony', source: 'połączenie od nieznanego numeru',
+    desc: 'Ktoś dzwoni do mnie moim głosem. Każe przestać pytać o kasety i most. Nie zna hasła. Mówi, że „ma nagrania” i że zawsze nagrywa.' }
 });
 
 (() => {
@@ -42,7 +46,9 @@ Object.assign(DATA.evidence, {
     ['g_huta_czapka', 'assets/glos/g_huta_czapka.jpg', 'Brama huty · 2:51', 768, 1024],
     ['g_maja_korytarz', 'assets/glos/g_maja_korytarz.jpg', 'Po kolokwium', 768, 1024],
     ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024],
-    ['g_tomek_album', 'assets/glos/g_tomek_album.jpg', 'Festyn · 1996', 1024, 768]
+    ['g_tomek_album', 'assets/glos/g_tomek_album.jpg', 'Festyn · 1996', 1024, 768],
+    ['g_pracownia', 'assets/glos/g_pracownia.jpg', 'Archiwum gminy · pracownia', 1024, 768],
+    ['v_festyn96', 'assets/video/v_festyn96.jpg', 'kaseta nr 12 · 17.08.1996', 360, 270]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 
@@ -50,7 +56,7 @@ Object.assign(DATA.evidence, {
 DATA.seasons.push({
   id: 's5', revision: 1, title: 'Twoim głosem', kicker: 'SPRAWA 5', released: false,
   description: 'Marzec, roztopy. O 2:14 Maja dostaje głosówkę twoim głosem. Ty niczego nie nagrywał{eś|aś}.',
-  chapters: ['g0', 'g1', 'g2'],
+  chapters: ['g0', 'g1', 'g2', 'g3'],
   credits: {
     kicker: 'Koniec sprawy 5', title: 'TWOIM GŁOSEM',
     lines: [
@@ -67,6 +73,8 @@ DATA.seasons.push({
     ['s5.03', 'Hasło', 'g1', 'flag:g_haslo'],
     ['s5.04', 'Trzy głosy', 'g1', 'flag:g_threeVoices'],
     ['s5.05', 'Wera', 'g2', 'ev:ev_g_album'],
-    ['s5.06', 'Przewijanie', 'g2', 'flag:g_day2']
+    ['s5.06', 'Poczta głosowa', 'g2', 'flag:g_day2'],
+    ['s5.07', 'Kaseta nr 12', 'g3', 'ev:ev_g_festyn96'],
+    ['s5.08', 'Twój głos', 'g3', 'ev:ev_g_telefon']
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });

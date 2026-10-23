@@ -488,3 +488,135 @@ Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera',
     end('g3')
   ];
 });
+
+/* ---------- g3 · Twój głos ---------- */
+Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój głos', when: 'Środa, 17 marca · 9:40', mood: 'tense' }, D => {
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing, vanish } = D;
+  const { M, K, O, I, W, S, Nt, Z, Mr, Gr, c, V } = GlosCast(D);
+  return [
+    clock('2027-03-17T09:40'),
+    ambient('calm'),
+    title(),
+    W('Dzień dobry. Spałam z wyłączonym telefonem. Pierwszy raz od lat.'),
+    W('Idę do archiwum na dziesiątą. Wzięłam ciasto, bo z pustymi rękami nie wypada.'),
+    choose('weronika', [
+      opt('Proszę pisać mi wszystko na bieżąco. Jestem przy telefonie.', [W('Będę pisać. Wolniej niż młodzi, ale będę.')]),
+      opt('Jakie ciasto?', [W('Drożdżowe ze śliwkami. Z zamrażarki. Pani Marta nie musi wiedzieć.')])
+    ]),
+    scene('xRanoMaja', [
+      pause(3000),
+      M('rano. hasło. wiem, wiem. przyzwyczajam się'),
+      ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('dzięki. dziś mam zajęcia do 15. potem pomagam mamie z oknami')])])]),
+      M('kuba mówi, że w nocy ktoś dzwonił na domowy. nikt nie odebrał. mama wyciągnęła kabel'),
+      M('jak w latach 90. domowy bez kabla'),
+      choose('maja2', [
+        opt('Dobrze zrobiła. Nikt ważny nie dzwoni na domowy w nocy.', [M('nikt w ogóle nie dzwoni na domowy. tylko ankiety i babcia')]),
+        opt('Ktoś dzwonił na domowy? Czyli ma też wasz stary numer.', [M('jest w książce telefonicznej od zawsze. wrona, mglisko. każdy go ma')])
+      ])
+    ]),
+    pause(3500),
+    clock('2027-03-17T10:25'),
+    pic('weronika', 'weronika', 'g_pracownia', 'Tu pracuje pani Marta. Wszystko podpisane i poukładane. Lepiej niż u mnie w czytelni.'),
+    W('Zaparzyła herbatę. Ciasto bardzo chwaliła.'),
+    Mr('Dzień dobry. Pani Weronika jest u mnie. Pokazuję jej fragment nagrania z festynu, a ona pozwoliła przesłać go także {Panu|Pani}.'),
+    unlock('chat:marta'),
+    say('marta', 'marta', '', { vid: 'assets/video/v_festyn96.mp4', img: 'v_festyn96' }),
+    Mr('Fragment z 17 sierpnia 1996 roku, kaseta nr 12. Dźwięk jest słaby, ale słychać. Chłopiec woła: „Wera, chodź, jest zimno!”.'),
+    Mr('Pani Weronika mówi, że był wtedy upał. Pewnie się z nią droczył.'),
+    give('ev_g_festyn96'),
+    W('Płaczę. Ale dobrze. Pierwszy raz od lat widzę go, jak się rusza.'),
+    choose('marta', [
+      opt('W telefonie mówił „Wera, to ja. Jest mi zimno”. Tych słów nie ma na kasecie. Ktoś zrobił z jego głosu nowe zdania.', [Mr('Ma {Pan|Pani} rację. Na całej kasecie Tomek mówi może osiem słów. Sprawdzałam.'), Mr('Ktoś musiał mieć ten fragment, żeby nauczyć program jego głosu.')], { set: { g_cloneFromTape: true } }),
+      opt('Na zdjęciu z pracowni są trzy kubki. A były panie we dwie.', [Mr('Trzeci jest mój. Zawsze piję z dwóch kubków naraz: z jednego herbatę, z drugiego wodę. Taki nawyk.'), Mr('Ale dziękuję, że {Pan|Pani} patrzy tak uważnie.')], { set: { g_threeMugs: true } }),
+      opt('Czy ta kaseta była kiedyś pokazywana publicznie?', [Mr('Nie. Pan Zenon nigdy jej nie wydawał. Była w szafie razem z innymi z 1996 roku.')])
+    ]),
+    Mr('Gdyby {Pan|Pani} czegoś potrzebował{|a}, proszę pisać. Wolę wiedzieć więcej niż mniej.'),
+    scene('xIgorOskar', [
+      pause(3000),
+      I('oskar dziś nie przyszedł. pierwszy raz od lutego'),
+      I('nie odbiera. napisał tylko „chory”. bez emotki. on zawsze daje emotki'),
+      choose('igor', [
+        opt('Ida mówiła, że w lutym oddała ci stary telefon. Oskar go czyścił.', [I('możliwe. przez serwis przechodzi 30 telefonów tygodniowo'), I('sprawdzę w zeszycie. zapisuję każdy')], { cond: 'flag:g_idaPhone', set: { g_igorCheck: true } }),
+        opt('Może naprawdę jest chory.', [I('może. marzec, pół technikum kaszle')]),
+        opt('Sprawdź, które telefony czyścił w lutym.', [I('mam zeszyt. sprawdzę wieczorem. nie strasz mnie')], { set: { g_igorCheck: true } })
+      ])
+    ]),
+    pause(3000),
+    clock('2027-03-17T13:10'),
+    Nt('trzeci swiadek. pani jadwiga z kiosku przy moscie. dzwonil do niej „ksiadz z parafii”. ze dla spokoju duszy ma nie zeznawac'),
+    Nt('ksiadz byl wtedy na rekolekcjach w gorach. bez zasiegu'),
+    Nt('pisze artykul. „glosy przed rozprawa”. chce ich ostrzec wszystkich naraz'),
+    choose('natan', [
+      opt('Napisz. Ale bez nazwisk świadków. Ktoś może to wykorzystać.', [Nt('jasne. bez nazwisk, bez adresow. tylko mechanizm i haslo rodzinne')], { set: { g_natanArticle: true } }),
+      opt('Poczekaj. Jak napiszesz, ten ktoś się schowa.', [Nt('a jak nie napisze, to ktos sie wycofa z zeznan. nie mam czasu czekac'), Nt('ale ok. dwa dni. nie wiecej')], { set: { g_natanWait: true } })
+    ]),
+    scene('xGrupaSroda', [
+      pause(3000),
+      Gr('bartek', 'sasiad chce kostke. 30 metrow. biore kube do pomocy'),
+      Gr('kuba', 'nikt mnie nie pytał'),
+      Gr('bartek', 'pytam teraz. 50 zl za dzien i obiad u mojej mamy. ona robi schabowe jak z reklamy'),
+      Gr('kuba', 'ok. sprzedałem się za schabowego'),
+      Gr('ola', 'Jestem z was dumna. Przynajmniej ktoś w tym mieście robi coś normalnego.'),
+      choose('group', [
+        opt('Bartek, Kuba, zróbcie zdjęcie po pierwszym dniu. Muszę zobaczyć, jak Kuba trzyma młotek.', [Gr('kuba', 'trzymam go jak długopis. zobaczysz')]),
+        opt('Uważajcie na siebie wieczorem. Nie chodźcie sami po ciemku.', [Gr('bartek', 'nie strasz. ale ok. chodzimy w dwojke')])
+      ])
+    ]),
+    pause(3000),
+    O('Dziecko w świetlicy zapytało mnie, czy telefon może mówić głosem zmarłej babci. Bo babcia „dzwoniła” do jego mamy.'),
+    O('Nie wiedziałam, co powiedzieć. Powiedziałam, że to był ktoś zły, a nie babcia.'),
+    choose('ola', [
+      opt('Dobrze powiedziałaś. Prosto i prawdziwie.', [O('Mam nadzieję. Jego mama płakała w szatni. Przytuliłam ją, choć ledwo ją znam.')], { trust: { ola: 1 } }),
+      opt('Ktoś dzwoni głosem zmarłych? Do kogo jeszcze?', [O('Nie wiem. Ale ta mama to córka pana od kiosku przy moście. Tak mi się wydaje.')], { set: { g_olaMost: true } })
+    ]),
+    pause(3500),
+    clock('2027-03-17T19:52'),
+    ambient('dark'),
+    I('zeszyt. 9 lutego. „Ida G., telefon do wyczyszczenia i sprzedaży”. podpis oskara'),
+    I('sprzedany 12 lutego. komu, nie wpisał. on zawsze wpisuje'),
+    iff('flag:g_igorCheck', [I('dobrze, że kazał{eś|aś} mi sprawdzić. jutro z nim pogadam. twarzą w twarz')]),
+    pause(4000),
+    clock('2027-03-17T21:34'),
+    /* Dzwoni ktoś twoim głosem. Do ciebie. */
+    callIn('unknown'),
+    c('unknown', 'no. cześć'),
+    c('unknown', 'to ja. znaczy ty'),
+    c('unknown', 'ładnie mówisz, jak się denerwujesz. szybciej. połykasz końcówki'),
+    choose('call', [
+      opt('Jakie jest hasło?', [c('unknown', '…'), c('unknown', 'dobre pytanie. zapytaj jutro maję, czy zna moje')], { set: { g_askedHaslo: true } }),
+      opt('Czego chcesz?', [c('unknown', 'żebyś przestał{|a} pytać o kasety. i o most. masz dużo nagrań w mieście. ja mam twoje')]),
+      opt('Nagrywam tę rozmowę.', [c('unknown', 'ja też. zawsze. dzięki za nowe próbki')], { set: { g_recordedCall: true } })
+    ]),
+    c('unknown', 'dobranoc. śpij spokojnie. ja za ciebie pogadam'),
+    callEnd(),
+    scene('scSmiech', [scare('s5_smiech', 'glitch')]),
+    give('ev_g_telefon'),
+    pause(2500),
+    M('kuba mówi, że coś się stało. dlaczego nie piszesz'),
+    M('jakie hasło?'),
+    choose('maja2', [
+      opt('Pachołek. Dzwonił do mnie ktoś moim głosem.', [M('kurde. ok. to ty')], { cond: 'flag:g_hasloP' }),
+      opt('Jodełka. Dzwonił do mnie ktoś moim głosem.', [M('kurde. ok. to ty')], { cond: 'flag:g_hasloJ' }),
+      opt('Trzy kości. Dzwonił do mnie ktoś moim głosem.', [M('kurde. ok. to ty')], { cond: 'flag:g_hasloK' })
+    ]),
+    M('co mówił?'),
+    choose('maja2', [
+      opt('Że mam przestać pytać o kasety i most. I że ma nagrania mojego głosu.', [M('czyli to ktoś, kto wie, czym się zajmujesz. od tygodnia'), M('to nie jest jakaś szajka z neta. to ktoś stąd')], { set: { g_local: true } }),
+      opt('Nieważne. Ważne, że nie zna hasła.', [M('ważne. ale chcę wiedzieć. jutro mi powiesz. wszystko')])
+    ]),
+    pause(3000),
+    K('siedzę przy mai. mama zamknęła drzwi na dwa zamki. pierwszy raz od lat'),
+    K('jutro idę z bartkiem kłaść kostkę. nie wiem czy dam radę. ale pójdę. muszę coś robić rękami'),
+    choose('kuba', [
+      opt('Idź. Normalne rzeczy pomagają.', [K('wiem. tak mówiła pani psycholog w styczniu')]),
+      opt('Zostań z Mają, jeśli trzeba.', [K('mama z nią będzie. maja mówi, że nie potrzebuje niańki. potrzebuje')])
+    ]),
+    pause(4000),
+    clock('2027-03-17T23:58'),
+    W('Nie dzwonił dziś. Tomek. To znaczy… ten ktoś.'),
+    W('Oglądam ten fragment z archiwum co godzinę. Pani Marta mówi, że mogę przyjść jeszcze raz w piątek.'),
+    W('Dobranoc. Niech {Pan|Pani} też śpi.'),
+    set('g_day3'),
+    end('g4')
+  ];
+});
