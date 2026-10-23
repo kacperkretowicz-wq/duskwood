@@ -143,6 +143,7 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
     pause(2000),
     M('zrobiłam zrzut profilu, zanim zniknął'),
     M('nazwa jak twoja. zdjęcie z twojego kwartału, z lata, przy jeziorze'),
+    M('pod nazwą szarym drobnym: „na Błysku od 1:58”'),
     M('co tu jest nie tak? bo ja już nie myślę'),
     choose('maja2', [
       opt('Konto ma 16 minut. Założone o 1:58, a głosówka jest z 2:14.', [M('o kurde. faktycznie. „dołączył dziś”'), M('czyli ktoś je założył tylko po to, żeby wysłać mi to jedno nagranie')], { set: { g_profileFast: true } }),
@@ -201,7 +202,7 @@ const GlosHaslo = (D, mk) => [
 
 /* ---------- g1 · Hasło ---------- */
 Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło', when: 'Poniedziałek, 15 marca · 7:50', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, callIn, callEnd, unlock, typing, nearby, vanish } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, callIn, callEnd, unlock, typing, nearby, vanish, me } = D;
   const { M, K, O, I, W, S, Nt, Gr, c, V } = GlosCast(D);
   return [
     clock('2027-03-15T07:50'),
@@ -306,6 +307,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       pause(3500),
       nearby('g_przystanek', { device: 'Telefon', img: 'g_przystanek', note: 'Nieznane urządzenie w pobliżu', flag: 'g_przystOk', declineFlag: 'g_przystNo', ev: 'ev_g_przystanek' }),
       iff('flag:g_przystOk', [
+        me('maja2', 'Ktoś mi właśnie przesłał przez przesyłanie w pobliżu zdjęcie. Mnie. Na przystanku.'),
         M('czekaj. to ty? na przystanku przy szkole?'),
         M('ktoś stał po drugiej stronie ulicy i robił ci zdjęcie. kiedy?'),
         choose('maja2', [
@@ -584,9 +586,10 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
     c('unknown', 'ładnie mówisz, jak się denerwujesz. szybciej. połykasz końcówki'),
     choose('call', [
       opt('Jakie jest hasło?', [c('unknown', '…'), c('unknown', 'dobre pytanie. zapytaj jutro maję, czy zna moje')], { set: { g_askedHaslo: true } }),
-      opt('Czego chcesz?', [c('unknown', 'żebyś przestał{|a} pytać o kasety. i o most. masz dużo nagrań w mieście. ja mam twoje')]),
+      opt('Czego chcesz?', [c('unknown', 'pogadać. ze sobą. rzadko mam okazję')]),
       opt('Nagrywam tę rozmowę.', [c('unknown', 'ja też. zawsze. dzięki za nowe próbki')], { set: { g_recordedCall: true } })
     ]),
+    c('unknown', 'i przestań pytać o kasety. i o most. ty masz dużo nagrań w mieście. ja mam twoje'),
     c('unknown', 'dobranoc. śpij spokojnie. ja za ciebie pogadam'),
     callEnd(),
     scene('scSmiech', [scare('s5_smiech', 'glitch')]),
@@ -601,7 +604,7 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
     ]),
     M('co mówił?'),
     choose('maja2', [
-      opt('Że mam przestać pytać o kasety i most. I że ma nagrania mojego głosu.', [M('czyli to ktoś, kto wie, czym się zajmujesz. od tygodnia'), M('to nie jest jakaś szajka z neta. to ktoś stąd')], { set: { g_local: true } }),
+      opt('Że mam przestać pytać o kasety i most. I że ma nagrania mojego głosu.', [M('czyli to ktoś, kto wie, czym się zajmujesz od kilku dni'), M('to nie jest jakaś szajka z neta. to ktoś stąd')], { set: { g_local: true } }),
       opt('Nieważne. Ważne, że nie zna hasła.', [M('ważne. ale chcę wiedzieć. jutro mi powiesz. wszystko')])
     ]),
     pause(3000),
@@ -652,15 +655,15 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     /* Trzy próbki twojego głosu: skąd każda pochodzi. */
     scene('xTrzyProbki', [
       V('oskar', 'oskar', '0:30', 'Halo… No, Ida, posłuchaj mnie… [w tle szum telewizora, ktoś chrapie, pies wzdycha]', 'próbka 1'),
-      V('oskar', 'oskar', '0:30', 'No, dzień dobry, chciał{em|am} zapytać o festyn… [w tle szelest kartek, cicha muzyka z radia]', 'próbka 2'),
+      V('oskar', 'oskar', '0:30', 'No, nie rozłączaj się, proszę… [w tle trzask drzwi i kroki na klatce schodowej]', 'próbka 2'),
       V('oskar', 'oskar', '0:30', 'No dobra, ja już kończę, ale… [w tle wiatr i przejeżdżający autobus]', 'próbka 3'),
       Os('która jest z czego? ja tylko ciąłem. nie słuchałem'),
       choose('oskar', [
         opt('Pierwsza. Telewizor, chrapanie i pies. To moja rozmowa z Idą o 20:58 w styczniu. Pan Zenon spał obok.', [Os('kurde. ida nagrywała tę rozmowę. nagranie było w jej folderze „styczeń”'), Os('czyli on ma twój głos z tamtego wieczoru. cały')], { set: { g_sourceIda: true } }),
-        opt('Druga. Kartki i radio. Dzwonił{em|am} do czytelni, do pani Weroniki.', [Os('nie wiem. ida nie była w czytelni. to musiało być coś innego'), Os('w jej folderze były tylko rozmowy z jej telefonu')]),
+        opt('Druga. Klatka schodowa. To z nocy, kiedy ktoś przesłał mi zdjęcie z klatki.', [Os('nie. tamtej nocy nikt z tobą nie rozmawiał przez telefon'), Os('w jej folderze były tylko rozmowy z jej telefonu')]),
         opt('Trzecia. Wiatr i autobus. Nagrał{em|am} głosówkę na przystanku.', [Os('głosówki też były. ale ja wycinałem tylko z rozmów. tak kazał')])
       ]),
-      iff('flag:g_sourceIda', [], [pause(2000), Os('sprawdziłem nazwy plików. wszystkie trzy są z jednej rozmowy. 22 stycznia, 20:58'), Os('po prostu w różnych momentach różnie szumiało')]),
+      iff('flag:g_sourceIda', [], [pause(2000), Os('sprawdziłem nazwy plików. wszystkie trzy są z jednej rozmowy. 22 stycznia, 20:58'), Os('ida w trakcie wyszła z pokoju. słychać drzwi, klatkę, a na końcu ulicę. pewnie nie chciała budzić dziadka')]),
       give('ev_g_probki')
     ]),
     Os('ja nie wiedziałem, że tak można. tzn. wiedziałem. ale myślałem, że on robi memy 😶'),
@@ -688,7 +691,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     Nt('dudek. to sie zgadza. w 2011 odebral furgon z warsztatu. w listopadzie zamowil wyciecie 40 sekund u idy'),
     Nt('a teraz kupuje glosy ludzi od mostu. on dzwoni do swiadkow'),
     choose('natan', [
-      opt('Zgłośmy to razem na policję. Oskar już tam jedzie.', [Nt('jade do dzierzoniowa. bede z oskarem i jego mama. dam znac')], { set: { g_police: true } }),
+      opt('Zgłośmy to razem na policję. Weź ze sobą Oskara i jego mamę.', [Nt('jade do dzierzoniowa. bede z oskarem i jego mama. dam znac')], { set: { g_police: true } }),
       opt('Tylko po co mu to? Kierownik budowy nie dzwoni do świadków ot tak.', [Nt('dla kurek-bud. firma odpowiada za most. jak swiadkowie sie wycofaja, nie bedzie winnych'), Nt('ale tak, to dziwne. dudek nie jest typem, ktory pisze scenariusze rozmow')], { set: { g_whyDudek: true } })
     ]),
     scene('xSylwiaCzwartek', [
@@ -756,7 +759,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
 
 /* ---------- g5 · Przewijanie ---------- */
 Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewijanie', when: 'Piątek, 19 marca · 7:30', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, typing, me } = D;
   const { M, K, O, I, W, S, Nt, Z, Id, Os, Mr, Gr, c, V } = GlosCast(D);
   return [
     clock('2027-03-19T07:30'),
@@ -842,7 +845,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     Nt('a dudek to kierownik budowy z kurek-bud. i nagle stac go na drogiego adwokata z wroclawia. to sie sklada'),
     choose('natan', [
       opt('Marta pisze scenariusze, zgrywa głosy z kaset, Dudek tylko dzwoni. A wszystko po to, żeby świadkowie wypadku na moście się wycofali.', [Nt('i zeby pokazac, ze to „zwykla szajka na wnuczka”. przy okazji kase wyludzali, zeby policja szukala zlodziei'), Nt('kurde. tak'), Nt('ale to tylko nasze domysly. potrzebujemy dowodu. czegos z pracowni')], { set: { g_twist: true } }),
-      opt('Nie mamy dowodu. Marta jest miła, pomaga. Może ktoś używa jej komputera.', [Nt('moze. ale klucz ma tylko ona. magnetowidy ma ona. kaseta 12 jest u niej'), Nt('jak ktos uzywa jej komputera, to ona by wiedziala')], { set: { g_twist: true, g_doubt: true } })
+      opt('Nie mamy dowodu. Marta jest miła, pomaga. Może ktoś używa jej komputera.', [Nt('moze. ale magnetowidy i kaseta 12 sa u niej. trzeba sprawdzic, kto jeszcze ma klucz do pracowni'), Nt('jak ktos uzywa jej komputera, to ona by wiedziala')], { set: { g_twist: true, g_doubt: true } })
     ]),
     scene('xMartaPisze', [
       pause(3000),
@@ -851,7 +854,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
       Mr('Chciałabym je zabezpieczyć w archiwum. Jako dokument. Takie rzeczy szybko giną z telefonów.'),
       choose('marta', [
         opt('Wysłał{em|am} je już policji. Kopie ma też Natan.', [Mr('Ach, tak. To dobrze. Bardzo dobrze.'), Mr('Proszę pozdrowić pana Natana.')], { set: { g_martaBluff: true } }),
-        opt('Prześlę wieczorem. Dziękuję, że pani o tym pamięta.', [Mr('Dziękuję. Najlepiej wszystkie. Także te, które {Pan|Pani} sam{|a} nagrał{|a}.')], { set: { g_martaAsk: true } }),
+        opt('Prześlę wieczorem. Dziękuję, że pani o tym pamięta.', [Mr('Dziękuję. Najlepiej wszystkie. Także te, które {Pan|Pani} sam{|a} nagrał{|a}.'), me('marta', '(5 plików audio)'), Mr('Doszły. Dziękuję. Zabezpieczę je.')], { set: { g_martaAsk: true } }),
         opt('Po co pani nagrania, skoro sprawca jest zatrzymany?', [Mr('To odruch zawodowy. Archiwista zbiera wszystko. Nie wiadomo, co się kiedyś przyda.'), Mr('Ale rozumiem, jeśli {Pan|Pani} woli ich nie przesyłać.')], { set: { g_martaQuestion: true } })
       ])
     ]),
@@ -905,7 +908,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     ]),
     pause(3000),
     M('hasło'),
-    ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('ok. powiedziałam kubie. siedzi obok i milczy. to u niego najgorszy znak')])])]),
+    ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('ok. natan napisał nam rano o marcie. kuba siedzi obok i milczy. to u niego najgorszy znak')])])]),
     K('marta. ta z archiwum. która w listopadzie dała ci plik z mostu'),
     K('jak mogę pomóc. serio. powiedz co mam robić'),
     choose('kuba', [
@@ -1010,6 +1013,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
         Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”'),
         Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „dzwonil maz i prosil, zeby dala spokoj”'),
         Nt('jej maz nie zyje od pieciu lat'),
+        iff('flag:g_martaAsk', [Nt('i jeszcze jedno. w piatek wyslal{es|as} marcie nasze nagrania. wiedziala, co mamy, zanim zadzwonila')]),
         pause(3000),
         clock('2027-03-20T22:10'),
         W('Znowu dzwonił. Nie odebrałam. Wyłączyłam telefon i wyjęłam baterię. Mam stary telefon, z baterią.'),
@@ -1024,7 +1028,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
         Nt('skasowal{es|as} wszystko?'),
         choose('natan', [
           opt('Tak. Głosówki, nagrania, zrzuty. Proszę Idę, Igora i Zenona o to samo.', [Nt('ok. wtedy ja tez. nie bede trzymal glosow ludzi w telefonie'), Nt('i tak nie mamy dowodu. tylko domysly')]),
-          opt('Prawie. Został mi jeden plik. Głos Mai z hasłem.', [Nt('ten zostaw. to nie dowod. to pamiatka')])
+          opt('Prawie. Została mi jedna zwykła głosówka od Mai.', [Nt('ta zostaw. to nie dowod. to pamiatka')])
         ]),
         pause(3000),
         clock('2027-03-20T19:20'),

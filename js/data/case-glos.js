@@ -36,7 +36,7 @@ Object.assign(DATA.evidence, {
   ev_g_festyn96: { title: 'Kaseta nr 12 · festyn 1996', cat: 'digital', source: 'Marta Jasińska · archiwum gminy', img: 'v_festyn96',
     desc: 'Cztery sekundy z 17.08.1996. Tomek w czerwonej czapce biegnie do kamery i woła: „Wera, chodź, jest zimno!”. Kaseta nigdy nie była pokazywana publicznie.' },
   ev_g_telefon: { title: 'Telefon moim głosem · 17.03, 21:34', cat: 'testimony', source: 'połączenie od nieznanego numeru',
-    desc: 'Ktoś dzwoni do mnie moim głosem. Każe przestać pytać o kasety i most. Nie zna hasła. Mówi, że „ma nagrania” i że zawsze nagrywa.' },
+    desc: 'Ktoś dzwoni do mnie moim głosem. Każe przestać pytać o kasety i most. Mówi, że ma moje nagrania i że „pogada za mnie”.' },
   ev_g_probki: { title: 'Trzy próbki mojego głosu', cat: 'digital', source: 'Oskar · serwis Igora',
     desc: 'Po 30 sekund mojego głosu wyciętych z nagrania rozmowy z Idą (22.01, 20:58). Kupujący kazał je wyciąć, zanim dostał paczkę z jej telefonu.' },
   ev_g_dudek: { title: 'Kupujący: P. Dudek', cat: 'digital', source: 'Oskar · zrzut przelewu',
@@ -46,7 +46,7 @@ Object.assign(DATA.evidence, {
   ev_g_scenariusz: { title: 'Scenariusz rozmowy z „Tomkiem”', cat: 'digital', source: 'Natan · wydruk z laptopa Dudka',
     desc: '„Wera, to ja. Jest mi zimno. (pauza 2 s) Wera? — Głos: Tomek L., kaseta 12, 0:04.” Pełne zdania, przecinki. Autor pliku: „Pracownia_UG”.' },
   ev_g_magnetowid: { title: 'Magnetowid w pracowni', cat: 'photo', source: 'Weronika · archiwum gminy, 17.03', img: 'g_magnetowid',
-    desc: 'Japoński magnetowid pana Zenona, piszczy przy przewijaniu. Ten sam pisk jest na końcu wiadomości od „Tomka”. Pracownię zamyka na klucz tylko Marta Jasińska.' },
+    desc: 'Japoński magnetowid pana Zenona, piszczy przy przewijaniu. Ten sam pisk jest na końcu wiadomości od „Tomka”. Magnetowid stoi w pracowni Marty Jasińskiej.' },
   ev_g_most2011: { title: 'Kaseta z mostu, 2011', cat: 'testimony', source: 'pan Zenon / Ida',
     desc: 'W lutym Marta Jasińska dopytywała o kasetę TV Dolina z dnia po wypadku na moście. Chciała ją „zabezpieczyć przed procesem”. Jest córką Janiny Kurek z Kurek-Bud.' }
 });
@@ -112,7 +112,7 @@ DATA.seasons.push({
       'Wszystkie osoby, konta i usługi w tej sprawie są fikcyjne. Echo, Klipo i Błysk nie istnieją.',
       'Dziękujemy, że {oddzwoniłeś|oddzwoniłaś}, zanim {uwierzyłeś|uwierzyłaś}.'
     ],
-    teaser: { title: 'MGLISKO', text: 'Rozprawa o most ruszyła. Na sali było cicho.' },
+    teaser: { title: 'MGLISKO', text: 'W Mglisku znów jest cicho. Na razie.' },
     note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 5.'
   },
   episodes: [
