@@ -46,6 +46,11 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       c('natan', 'mam akta. zaraz ci wyślę zdjęcia, tylko daj mi się ogrzać'),
       callEnd()
     ]),
+    scene('xSzyba', [
+      pause(1500),
+      say('natan', 'natan', '', { vid: 'assets/video/v_szyba.mp4', img: 'v_szyba' }),
+      Nt('ogrzewanie w tym aucie działa tylko na szybę. stopy mam jak lody')
+    ]),
     scene('xInspekcja', [
       pause(2000),
       pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu'),
@@ -96,6 +101,10 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     callEnd(),
     give('ev_m_henryk_oip'),
+    scene('xHenrykSms2', [
+      pause(1500),
+      iff('flag:m_henrykOnRecord', [say('henryk_sms', 'henryk', 'NIECH MŁODY PRZYJDZIE W ŚRODĘ. PO DZIENNIKU. HERBATA BĘDZIE.')], [say('henryk_sms', 'henryk', 'DOKUMENTY TO DOKUMENTY. DOBRANOC.')])
+    ]),
     scene('xIdaBlysk', [iff('flag:m_idaTrust', [
       pause(5000),
       clock('2026-11-30T23:12'),
@@ -137,6 +146,18 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
         D.choose('zuza', [opt('Dobrze. Ja poczekam na znak od ciebie.', [Z('dzięki że {zapytałeś|zapytałaś}')])])
       ], { set: { m_toldZuzaTruth: true, m_zuzaWithGran: true } })
     ]),
+    scene('xGrupaArt', [
+      pause(2000),
+      say('group', 'ola', 'Czytaliście? Piszą, że ktoś przepisał stronę z dziennika budowy.'),
+      say('group', 'bartek', 'czyli henryk mial racje. stary otworzyl z tej okazji bezalkoholowe'),
+      say('group', 'kuba', 'pani weronika płakała w bibliotece. mówi, że ze szczęścia, ale nie wiem'),
+      say('group', 'ola', 'Kuba, zanieś jej herbatę.'),
+      say('group', 'kuba', 'zaniosłem. dała mi ciastko. chyba jest ok'),
+      choose('group', [
+        opt('Dobrze, że ktoś przy niej jest w tej bibliotece.', [say('group', 'kuba', 'no. lubię tam siedzieć. cisza i dobre wifi')], { set: { m_kubaLibrary: true } }),
+        opt('Tekst jeszcze nie wyszedł. To tylko zapowiedź.', [say('group', 'ola', 'Wiem. Ale i tak lepiej niż tamto nagranie.')])
+      ])
+    ]),
     pause(2500),
     clock('2026-12-02T21:40'),
     Ma('Naczelny zdecydował. Mogę dalej sprawdzać materiały z archiwum do tego tekstu albo się z niego wycofać. Decyzja ma być moja.'),
@@ -153,6 +174,14 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
         Ma('Przekażę Natanowi wszystkie znaczniki czasu. 03:12, 03:21, 03:47. Resztę zrobi sam.')
       ], { set: { m_martaOut: true } })
     ]),
+    scene('xSloik', [
+      pause(2000),
+      V('marta', 'marta', '0:16', 'Oddałam mamie słoik. Otworzyła drzwi, wzięła go i zapytała: „umyty?”. I tyle. Ale chyba się uśmiechnęła. Chyba.', 'Marta'),
+      choose('marta', [
+        opt('Jak na pierwszy krok, to sporo.', [Ma('Też tak myślę. W niedzielę idę na obiad. Bez tabletu na stole.')]),
+        opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.')], { trust: { marta: 1 } })
+      ])
+    ]),
     W('Dobry wieczór. Pani Marta była u mnie po kamerę. Długo stała w przedpokoju.'),
     W('Poprosiła, żeby kaseta dalej leżała u mnie. Jak dawniej u pana Adama: dopóki nie będzie wiadomo, komu ją oddać.'),
     give('ev_m_chain'),
@@ -163,7 +192,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 });
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callEnd, notify, ending, credits, run, scene, camera, nearby } = D;
+  const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callIn, callEnd, notify, ending, credits, run, scene, camera, nearby } = D;
   const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
@@ -304,10 +333,40 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     set('m_published'),
     Nt('wyszło. 7:00'),
     V('natan', 'natan', '0:12', 'nie spałem od czwartej. mama zadzwoniła, że kupiła trzy egzemplarze. jeden dla cioci w Kanadzie. ciocia ma internet', 'Natan'),
+    scene('xPaczki', [
+      Nt('naczelny kupił całej redakcji pączki. pierwszy raz od 2019'),
+      choose('natan', [
+        opt('Należą wam się.', [Nt('mnie nie bardzo. ale zjadłem dwa')]),
+        opt('A korekta pod starym nagraniem?', [Nt('jest. zaraz ci wkleję. pisałem ją dłużej niż cały tekst')])
+      ])
+    ]),
     Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
     iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
     iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
+    scene('xGrupaWyszlo', [
+      pause(1500),
+      say('group', 'bartek', 'henryk dostal brawa w sklepie. w kolejce po chleb. serio'),
+      say('group', 'ola', 'Mama wycięła artykuł i przykleiła na lodówkę. Obok mojego świadectwa z podstawówki.'),
+      say('group', 'kuba', 'maja wrzuciła to na kwartał. 3 lajki. jeden mój'),
+      choose('group', [
+        opt('Dwa pozostałe to pewnie pani Weronika i pani Ziuta.', [say('group', 'kuba', 'xD kotka ma konto. serio. maja jej założyła')]),
+        opt('Dobrze, że tym razem wszyscy poczekali na całość.', [say('group', 'ola', 'Nie wszyscy. Ale więcej osób niż w listopadzie.')])
+      ])
+    ]),
     W('Kasetę i obie kopie strony 41 przechowuje teraz redakcja. Razem z panią Martą i rodziną pana Adama podpisaliśmy protokół przekazania. Teczka wróciła do pudła, już bez kasety.'),
+    scene('xHenrykTel', [
+      W('Pani Ziuta wróciła na swój karton. Pusty, ale jej to nie przeszkadza.'),
+      pause(2500),
+      callIn('henryk'),
+      c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.'),
+      c('henryk', 'Ja tam nikogo nie oskarżam. Ale teraz ludzie wiedzą, że tej siatki nie zdjąłem sam z siebie.'),
+      choose('call', [
+        opt('Dziękuję, że mi pan zaufał.', [c('henryk', 'To ja dziękuję. Że ktoś w końcu sprawdził.')], { trust: { henryk: 1 } }),
+        opt('Jak się pan czuje?', [c('henryk', 'Jak po burzy. Mokro, ale lepiej się oddycha.')])
+      ]),
+      c('henryk', 'Dobra. Impulsy. Do widzenia.'),
+      callEnd()
+    ]),
     pause(2500),
     scene('f3lena', [
       W('I jeszcze coś, zanim zapomnę. Lena Cicha, ta od busa, pytała mnie, czy w pudle pana Adama są nagrania z 2019 roku.'),

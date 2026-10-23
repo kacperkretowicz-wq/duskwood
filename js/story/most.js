@@ -3,7 +3,7 @@
    Plan: docs/SPRAWA-2-PLAN.md. Startuje z zapisu po Świcie lub Odłamkach (Seasons.startNext). */
 
 Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', when: 'Piątek, 20 listopada · 19:30', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, rename, end, title, clock, dial, callEnd, typing, scene } = D;
+  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, rename, end, title, clock, dial, callEnd, typing, scene, camera, sys } = D;
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
@@ -58,6 +58,12 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     give('ev_m_postcard'),
     pic('weronika', 'weronika', 'most_clip', 'Na koniec wycinek z 2012 roku.'),
     give('ev_m_clip2012'),
+    scene('xKotkaWideo', [
+      pause(1200),
+      M('a pani Ziuta właśnie się obudziła i sprawdza, czy niczego nie ruszyłyśmy'),
+      say('maja2', 'maja', '', { vid: 'assets/video/v_kotka.mp4', img: 'v_kotka' }),
+      M('ruszyłyśmy. jest obrażona')
+    ]),
     scene('xBrygada', [
       pause(1500),
       M('jeszcze to. leżało luzem w notesie, między kartkami z września'),
@@ -92,6 +98,14 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         W('Ja też tak na początku pomyślałam.')
       ], { set: { m_sameEvent: true } })
     ]),
+    scene('xGaleriaBrat', [
+      W('Jeszcze jedna sprawa. Brat pana Adama prosi o jedno zdjęcie, żeby wiedział, że wszystko jest w porządku. Ma {Pan|Pani} coś od Mai w galerii?'),
+      camera('weronika', [
+        opt('Z galerii: zamknięta teczka', [W('Dobrze. Teczka zamknięta, nic nie widać ze środka. Tak będzie najlepiej.')], { img: 'most_teczka', gallery: true, set: { m_sentTeczka: true } }),
+        opt('Z galerii: kotka na wycinkach', [W('Odpisał po minucie: „Adam by się śmiał”. Chyba o to mu chodziło.')], { img: 'm_kot_wycinki', gallery: true, set: { m_sentKot: true } }),
+        opt('Z galerii: zdjęcie mostu z 2011', [W('Poprosił, żeby nie wysyłać mu więcej zdjęć mostu.'), W('Napisałam mu, że to moja wina. Nie {Pana|Pani}.')], { img: 'm_brygada', gallery: true })
+      ])
+    ]),
     pause(1500),
     M('ok, pani Weronika kazała mi iść do domu, bo „masz jutro pracę”. skąd ona wie'),
     M('jeszcze jedno. dzwoniła dziś do mnie jakaś Marta z Gazety Sudeckiej, z archiwum. pyta o kasetę H.W.'),
@@ -99,6 +113,19 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     choose('maja2', [
       opt('Spoko. Ogarnę.', [M('dzięki. idę spać jak normalny człowiek. o 20:40 🫠')]),
       opt('Następnym razem zapytaj, zanim dasz komuś mój numer.', [M('masz rację. przepraszam. ja tylko… dobra. następnym razem zapytam')], { trust: { maja: -1 } })
+    ]),
+    scene('xGrupa', [
+      pause(2500),
+      say('group', 'kuba', 'dobra. maja od miesiąca jest w domu, a my dalej mamy grupę „szukamy mai”'),
+      say('group', 'ola', 'Mnie też to gryzło. Tylko jakoś głupio było zmieniać.'),
+      say('group', 'bartek', 'zmieniajcie. matka mysli ze dalej kogos szukamy'),
+      say('group', 'kuba', 'ty wymyśl. ja wymyślę coś głupiego'),
+      choose('group', [
+        opt('„Mglisko po godzinach”', [rename('group', 'Mglisko po godzinach'), sys('group', 'Kuba zmienił nazwę grupy na „Mglisko po godzinach”'), say('group', 'bartek', 'brzmi jak audycja w radiu. biore')], { set: { m_groupPo: true } }),
+        opt('„Herbata u pani Weroniki”', [rename('group', 'Herbata u pani Weroniki ☕'), sys('group', 'Kuba zmienił nazwę grupy na „Herbata u pani Weroniki ☕”'), say('group', 'ola', 'Pani Weronika będzie zachwycona 😄')], { set: { m_groupHerbata: true } }),
+        opt('„Znalezieni”', [rename('group', 'Znalezieni'), sys('group', 'Kuba zmienił nazwę grupy na „Znalezieni”'), say('group', 'kuba', 'trochę ckliwe. ale zostaje'), say('group', 'ola', 'Mnie się podoba.')], { set: { m_groupZnalezieni: true } })
+      ]),
+      say('group', 'kuba', 'maja jeszcze nie wie. zobaczy rano')
     ]),
     scene('xWieczor', [
       pause(3000),
@@ -157,7 +184,24 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         Ma('Jeśli się zgodzą, przyjadę do Mgliska z magnetowidem. Kaseta nie musi nigdzie jechać.')
       ], { set: { m_askFamily: true } })
     ]),
+    scene('xNatanZapowiedz', [
+      Ma('Przy okazji: nasz Natan z działu wideo pyta, czy może się kiedyś do {Pana|Pani} odezwać. Uprzedzam, jak się spieszy, pisze bez polskich znaków.'),
+      choose('marta', [
+        opt('Może. Jak będzie miał konkretną sprawę.', [Ma('Przekażę. On zawsze ma konkretną sprawę. Zwykle o drugiej w nocy.')]),
+        opt('Wolę na razie tylko z panią.', [Ma('Rozumiem. Ja też wolę mniej ludzi naraz.')])
+      ])
+    ]),
     Ma('Dobranoc.'),
+    scene('xKubaNoc', [
+      pause(3000),
+      clock('2026-11-20T23:34'),
+      say('kuba', 'kuba', '{widziałeś|widziałaś} nową nazwę grupy? maja rano padnie'),
+      say('kuba', 'kuba', 'dobra, ja na nockę. od pierwszej jestem w magazynie'),
+      choose('kuba', [
+        opt('Powodzenia na nocce.', [say('kuba', 'kuba', 'dzięki. termos mam, playlistę mam. przeżyję')]),
+        opt('Od kiedy pracujesz na nocki?', [say('kuba', 'kuba', 'od listopada. lepiej płacą. a w dzień i tak nie umiem spać')])
+      ])
+    ]),
     pause(1500),
     end('m1')
   ];
@@ -239,6 +283,16 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     choose('zuza', [
       opt('Dobrze robisz. Najpierw sprawdzamy, skąd jest plik.', [Z('ok. jak cos to mam ten repost zapisany. z data')], { trust: { zuza: 1 } }),
       opt('Jak babcia się czuje?', [Z('nie wiem. robi pierogi. ona robi pierogi jak jest zle'), Z('jest ich juz chyba ze sto')])
+    ]),
+    scene('xGrupaMost', [
+      pause(2000),
+      say('group', 'bartek', 'widzieliscie to z mostem? stary mowi ze henryk to najuczciwszy facet w mglisku. pozyczyl mu kiedys warsztat na caly weekend i nawet nie chcial piwa'),
+      say('group', 'ola', 'Proszę, nie wrzucajcie tego nigdzie dalej. Mama dostała to już od dwóch ciotek.'),
+      say('group', 'kuba', 'nie wrzucam. ale czytam komentarze i mi niedobrze'),
+      choose('group', [
+        opt('Nie czytajcie komentarzy. Najpierw sprawdzimy, skąd jest nagranie.', [say('group', 'ola', 'Dobra. Wyciszam.'), say('group', 'bartek', 'ja i tak nie umiem nie czytac')]),
+        opt('Kuba, ty po nocce. Odłóż telefon i idź spać.', [say('group', 'kuba', 'spoko. tylko że na nocce telefon to jedyne, co mam')])
+      ])
     ]),
     pause(2500),
     unlock('chat:natan'),

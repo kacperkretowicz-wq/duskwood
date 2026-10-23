@@ -84,7 +84,7 @@ async function shot(page,name,fn,arg){
    const toasts=await page.evaluate(()=>{document.querySelectorAll('.toast').forEach(t=>t.remove());for(const e of ['ev_m_most2011','ev_m_terminy','ev_m_praktyki'])G.s.ev=G.s.ev.filter?G.s.ev.filter(x=>x!==e):G.s.ev;
      ['ev_mp_nina','ev_mp_karta','ev_mp_wejscie'].forEach(e=>UI.evidenceToast&&UI.evidenceToast(e));return [...document.querySelectorAll('.toast.ev')].map(t=>t.textContent);});
    if(toasts.length)assert.equal(toasts.length,1,JSON.stringify(toasts));
-   assert.ok(await page.evaluate(()=>[...document.images].every(i=>!i.src||(i.complete&&i.naturalWidth>0))));
+   { const bad=await page.evaluate(async()=>{const im=[...document.images].filter(i=>i.src);im.forEach(i=>{i.loading='eager';});await Promise.all(im.map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,3000);})));return im.filter(i=>!(i.complete&&i.naturalWidth>0)).map(i=>i.src);}); assert.deepEqual(bad,[]); }
    assert.deepEqual(errors.filter(e=>!/favicon/.test(e)),[]);
    await ctx.close();
    console.log('PASS case 2 Most from',ending,target);
