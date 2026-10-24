@@ -427,6 +427,7 @@ const UI = (() => {
     if (msg.vanish) return '👁 Wiadomość znikająca';
     if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');
+    if (msg.snap) return '▶ Film jednorazowy';
     if (msg.vid) return '🎬 Wideo';
     if (msg.img) return '📷 Zdjęcie';
     if (msg.ev) return '📎 Załącznik';

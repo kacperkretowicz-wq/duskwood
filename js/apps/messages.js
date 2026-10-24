@@ -121,7 +121,7 @@
   /* ---------- czat ---------- */
   function chatPage(stack, id) {
     const cd = DATA.chats[id] || {};
-    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') });
+    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') + (cd.skin ? ' skin-' + cd.skin : '') });
     const sub = h('small', {});
     const ffBtn = h('button', { class: 'ff', title: 'Przewiń', 'aria-label': 'Przewiń', onclick: () => { Engine.skip(); }, html: U.icon('ff', 18) });
     const hdr = h('div', { class: 'hdr chat-hdr' },
@@ -170,7 +170,8 @@
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
         b.appendChild(im);
       }
-      if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
+      if (m.snap) { b.classList.add('snap-bub'); b.appendChild(snapTile(m)); }
+      else if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
       if (m.vanish) { b.classList.add('vanish'); b.appendChild(h('span', { class: 'vanish-tag' }, '👁 zniknie po przeczytaniu')); }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
@@ -194,6 +195,25 @@
         row.appendChild(col);
       } else row.appendChild(b);
       return row;
+    }
+    /* Film jednorazowy (Błysk): kafel → pełny ekran → jedno odtworzenie → „Otwarto”. */
+    function snapTile(m) {
+      if (m.opened) return h('div', { class: 'snap-tile opened' }, h('span', { class: 'snap-ic' }, '○'), h('div', {}, h('b', {}, 'Otwarto'), h('small', {}, 'Błysk · film jednorazowy')));
+      return h('button', { class: 'snap-tile', 'aria-label': 'Otwórz film jednorazowy', onclick: e => { e.stopPropagation(); openSnap(m); } },
+        h('span', { class: 'snap-ic' }, '▶'), h('div', {}, h('b', {}, 'Film'), h('small', {}, 'Błysk · dotknij, żeby obejrzeć raz')));
+    }
+    function openSnap(m) {
+      if (m.opened) return;
+      const done = () => { if (m.opened) return; m.opened = true; G.setFlag('sawSnap'); G.save(true); ov.remove(); renderAll(); };
+      const v = h('video', { class: 'snap-video', src: m.vid, playsinline: '', muted: '', autoplay: '', preload: 'auto' });
+      const ov = h('div', { class: 'snap-ov', role: 'dialog', 'aria-label': 'Film jednorazowy', onclick: done },
+        h('div', { class: 'snap-bar' }, h('i', {})), v, h('div', { class: 'snap-meta' }, (DATA.chars[m.from] || {}).short || '', ' · Błysk'));
+      v.muted = true;
+      v.addEventListener('ended', done);
+      v.addEventListener('error', () => setTimeout(done, 1500));
+      setTimeout(done, 9000);
+      document.body.appendChild(ov);
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
     }
     function evCard(evId) {
       const e = G.ev(evId);

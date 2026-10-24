@@ -319,6 +319,13 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         ], { trust: { kuba: 1 } })
       ])
     ]),
+    /* Wyjaśnienie otwarcia: jednorazowy film z prologu to prawdziwa relacja Mai. */
+    scene('xSnapEcho', [
+      iff('flag:sawSnap', [
+        g('kuba', 'ten film z latarką, co krążył po błysku jako „ostatnia relacja”. to naprawdę jej relacja z 14.10, 23:41. tylko dla bliskich. ktoś nagrał ją ekranem i puścił dalej'),
+        g('igor', 'a czerwone kropki na końcu to podczerwień fotopułapki. tej samej, z której mamy zdjęcia. nic więcej')
+      ])
+    ]),
     /* P4: prośby o wiadomość i prywatny profil. Zachowanie ludzi, nie automatyczny dowód. */
     scene('xProsby', [
       pause(3000),

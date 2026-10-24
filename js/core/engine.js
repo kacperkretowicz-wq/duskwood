@@ -296,7 +296,7 @@ const Engine = (() => {
 
       case 'say': {
         const msg = {};
-        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
+        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
         await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing });
         return;

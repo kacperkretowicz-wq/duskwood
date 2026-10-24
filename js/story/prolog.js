@@ -23,10 +23,33 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     }),
     title(),
     fx('lock'),
+    /* Otwarcie: grupa znajomych gracza (skórka „Gadka”) i jednorazowy film z Błysku.
+       Wyjaśnienie w ch3 (xSnapEcho): to prawdziwa relacja Mai „dla bliskich” z 14.10, nagrana ekranem i puszczona dalej. */
+    scene('xEkipa', [
+      unlock('chat:ekipa'),
+      say('ekipa', 'ada', 'widzieliście to?', { gap: 0 }),
+      say('ekipa', 'ada', '', { vid: 'assets/video/v_snap.mp4', img: 'v_snap', snap: true }),
+      say('ekipa', 'ada', 'ktoś mi to wysłał na błysku. podobno ostatnia relacja tej dziewczyny, co zaginęła tydzień temu. było w wiadomościach'),
+      say('ekipa', 'szymon', 'ada, nie wrzucaj takich rzeczy na noc')
+    ]),
     pause(2400),
     K('hej, sory że tak późno', { gap: 0 }),
     K('to numer, na który dzwoniła maja wrona?'),
     waitFor('flag:unlockedPhone', { goal: 'Odblokuj telefon.' }),
+    scene('xEkipaFilm', [
+      openChat('ekipa', { goal: 'Znajomi coś wrzucili na grupę. Zobacz, co.', hints: [] }),
+      waitFor('flag:sawSnap', { goal: 'Otwórz film od Ady. Jest jednorazowy.', hints: [{ after: 40, chat: 'ekipa', who: 'ada', text: 'otwórz. tylko raz się da' }] }),
+      pause(900),
+      say('ekipa', 'szymon', 'nic nie widać. las i latarka'),
+      say('ekipa', 'ada', 'na końcu. te czerwone kropki między drzewami'),
+      say('ekipa', 'szymon', 'drugi raz się nie obejrzy, jednorazowe. i dobrze'),
+      choose('ekipa', [
+        opt('Ktoś nagrał jej relację i puścił dalej. To nie jest dla nas.', [say('ekipa', 'ada', 'masz rację. sorry. nie wysyłam dalej')], { set: { p_snapNoShare: true } }),
+        opt('Skąd wiesz, że to ona?', [say('ekipa', 'ada', 'nie wiem. tak napisał ten, kto mi wysłał. trzecia ręka')])
+      ]),
+      say('ekipa', 'szymon', 'idę spać. wy też idźcie'),
+      pause(1200)
+    ]),
     openChat('kuba', { goal: 'Ktoś do ciebie napisał. Sprawdź, kto.', hints: [] }),
     pause(700),
     choose('kuba', [
