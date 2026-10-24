@@ -17,7 +17,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
  const out={};
  try{
   for(const os of (process.env.E2E_OS||'ios,android').split(',')){
-   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[],numbered={},badNames=[];
+   const ctx=await browser.newContext({viewport:{width:+(process.env.E2E_WIDTH||390),height:+(process.env.E2E_HEIGHT||844)},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[],numbered={},badNames=[];
    page.on('crash',()=>console.error(os,'RENDERER CRASH',JSON.stringify(process.memoryUsage())));
    page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    let bytes=0;page.on('response',async r=>{if(r.url().startsWith(base)){if(r.status()>=400)errors.push(r.status()+' '+r.url());const l=+r.headers()['content-length']||0;bytes+=l;}});
@@ -67,6 +67,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
     if(st.ch!==lastCh){
      if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t,chapters[lastCh].msgs=st.msgs-chapters[lastCh].m0;
      chapters[st.ch]={t:Date.now(),m0:st.msgs,season:st.season};lastCh=st.ch;console.log(os,'→',st.ch,Math.round((Date.now()-tStart)/1000)+'s');
+     if(shots)await page.screenshot({path:path.join(shots,`${os}-ch-${st.ch}.png`)});
      const lay=await page.evaluate(()=>{const W=innerWidth,bad=[...document.querySelectorAll('.screen *')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.right>W+2&&getComputedStyle(e).position!=='fixed';}).slice(0,3).map(e=>e.className||e.tagName);return {sw:document.documentElement.scrollWidth,W,bad};});
      if(lay.sw>lay.W||lay.bad.length)layout.push({ch:st.ch,...lay});
      // Nazwy kontaktów przechodzą między sprawami: Kuba nie może wrócić jako sam numer.
