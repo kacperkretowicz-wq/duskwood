@@ -877,3 +877,6 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 
 ### 2026-10-24 — S2: Natan pamięta ostrzeżenie (SW v100, zapis v13)
 - `scNocRano` (m-rozdział S2): jeśli gracz napisał do Natana wieczorem (`m_warnedNatan`), rano Natan dodaje, że gdy dzwonił nieznany numer, był już w domu, nie sam w redakcji. Pierwsza flaga z listy „bez echa” obsłużona. Migracja v12→v13; case-most (gałąź z ostrzeżeniem) przechodzi.
+
+### 2026-10-24 — pełne E2E S1→S5 na iOS i Android (wieczór)
+- `tests/e2e-player.browser.cjs`, obie platformy: PASS. Ścieżka swit → pelny_kadr → wlasnym_glosem → przewiniecie → haslo, 21 straszaków zapisanych jednorazowo, 0 błędów konsoli, 0 problemów układu, offline OK. Numery zamiast nazw tylko tam, gdzie to zamierzone (SMS Mai w prologu, Dudek w S5).
