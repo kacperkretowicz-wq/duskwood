@@ -39,10 +39,9 @@ Migracja: zapisy v4 → v5 przez `STORY_MIGRATIONS_V5` (fixture `tests/fixtures/
 
 ## 4. Do zrobienia (kolejne pakiety)
 
-- G2 (odsłuch od Szklarza przed wyprawą, ch2 przed `s1_departure`) — wymaga projektu dźwięku; niewdrożone.
-- P2: scena zakupów/ostatniego autobusu poza opcjonalnym `kuba_delivery`; zachowanie Igora następnego dnia po wyznaniu (ch5 to ta sama noc — miejsce dopiero w `s28`).
-- P4: łańcuch edycji/wycofania wiadomości i reuploadu.
-- P1: pomiar z nowym graczem (czas czytania vs zagadek).
+Stan 24.10: G2 (`scOdsluch`), P2 (`xAutobus`, `igor_sunday`), P4 (`xWycofana`, edycja, reupload) i podział ch3 (`s1_plate`) są wdrożone. Zostaje:
+- Anonimowy materiał wideo (P4) — czeka na etap klipów.
+- P1: pomiar z nowym graczem (czas czytania vs zagadek), odsłuch straszaków i słabszych finałów przez ludzi, test na fizycznym telefonie.
 
 ## 5. Karta sceny P4 (rozpisana, niewdrożona)
 
