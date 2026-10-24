@@ -134,8 +134,8 @@ const StoryScenes = D => {
         opt('Numer się zgadza, więc wiemy, kto tam był.', [g('ola', 'Igor odpisał od razu: „mamy numer. właściciela trzeba sprawdzić, a kierowcy i tak nie widać”.'), g('kuba', 'czyli wiemy prawie wszystko i nic')])
       ])
       ], [
-        g('ola', 'Igor pisze do mnie prywatnie. Mamy tylko jego zdjęcie: końcówka 19 i ciemne auto.'),
-        g('ola', 'Mówi, że to za mało, żeby cokolwiek przesądzić. Ale wystarczy, żeby Bartek sprawdził zeszyt.')
+        g('ola', 'Igor pisze do mnie prywatnie. Mamy tylko jego zdjęcie: końcówka 19 i ciemne auto.', { wording: 'Igor pisze do mnie prywatnie.' }),
+        g('ola', 'Mówi, że to za mało, żeby cokolwiek przesądzić. Ale wystarczy, żeby Bartek sprawdził zeszyt.', { wording: 'Mówi, że to za mało, żeby cokolwiek przesądzić. Ale wystarczy, żeby Bartek sprawdził w warsztacie.' })
       ])
     ],
 

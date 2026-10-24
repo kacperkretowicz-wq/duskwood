@@ -17,7 +17,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     scene('xSerwis', [
       g('igor', 'sorry, dopiero zamknąłem'),
       g('igor', 'pani przyszła 18:58 z tabletem wnuczka. „tylko na chwileczkę”. wyszła 19:35'),
-      g('ola', 'Ja dopiero wstałam po nocce. Kawa, pies i czytam wszystko od góry.'),
+      g('ola', 'Ja dopiero wstałam po nocce. Kawa, pies i czytam wszystko od góry.', { wording: 'Ja odsypiałam przed nocką. Kawa, pies i czytam wszystko od góry. Na dyżur jadę na 21.' }),
       choose('group', [
         opt('Igor, a tablet chociaż działa?', [g('igor', 'działa. wnuczek zmienił język na koreański. tyle było awarii'), g('igor', 'dostałem drożdżówkę zamiast zapłaty. leży na ladzie')]),
         opt('Ola, czytaj spokojnie. Nic nie ucieknie.', [g('ola', 'Dzięki. Chociaż widzę jakieś zdjęcie z drugiej w nocy, więc chyba jednak ucieka.')], { trust: { ola: 1 } })

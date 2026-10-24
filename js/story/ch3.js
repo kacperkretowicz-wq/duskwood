@@ -192,7 +192,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Uciekają, bo coś wiedzą.', [g('kuba', 'albo bo się boją. jak ja')]),
       opt('Kuba, jak się trzymasz?', [g('kuba', 'gajda był na pogrzebie dziadka. przynosił mi lego. trzymał mamę za rękę, jak tata się wyprowadził')], { trust: { kuba: 1 } })
     ]),
-    g('kuba', 'a teraz on mówi, że maja skoczyła z tamy'),
+    g('kuba', 'a teraz on mówi, że maja skoczyła z tamy', { wording: 'a gajda dalej mówi mamie, że maja skoczyła z tamy' }),
     pause(4000),
 
     scene('s17', SC.s17),
@@ -257,7 +257,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     /* Podział rozdziału 3 (v6): przerwa po złożeniu tablicy DDZ 6K19, przed ustalaniem właściciela. */
     scene('xPrzerwaTablica', [interlude('Wieczór', 'Numer auta jest w notatkach. Właściciela jeszcze nikt nie zna.', 3000, { rest: 's1_plate' })]),
     scene('s18', SC.s18),
-    g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
+    g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.', { wording: 'Pół gminy jeździ do Sowów. Mają zeszyt napraw z numerami.' }),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),
     unlock('chat:bartek'),
     goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka na *Gadce*.']),
@@ -387,7 +387,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         K('masz coś od jej numeru? mama widzi że był online'),
         choose('kuba', [
           opt('Nieodebrane połączenie. Kilka sekund.', [K('kurwa'), K('ktoś ma jej telefon. ona by napisała, nie dzwoniła o trzeciej')]),
-          opt('Nie zdążyłem odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy')])
+          opt('Nie {zdążyłem|zdążyłam} odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy')])
         ])
       ])
     ]),

@@ -33,6 +33,7 @@ body.keyboard-open #homebar { display:none; }
 #status,body.os-android #status { height:calc(48px + var(--safe-t)); padding:calc(14px + var(--safe-t)) 24px 0; font-size:15px; color:var(--tx); font-weight:600; text-shadow:none; }
 body.mobile #status { padding:14px 22px 0; height:var(--chrome-top); }
 body:has(#home:not(.behind)) #status,body:has(#lock) #status,body:has(.call) #status,body:has(.viewer) #status,body:has(.title-scr) #status { color:#fff; }
+body:has(.app.msgapp-blysk:not(.closing)) #status { color:#f2f2f5; }
 #homebar::before { width:134px; height:5px; background:var(--tx); }
 body:has(#home:not(.behind)) #homebar::before,body:has(#lock) #homebar::before,body:has(.call) #homebar::before,body:has(.viewer) #homebar::before,body:has(.title-scr) #homebar::before { background:#fff; }
 body.native-app #island { display:none; }
