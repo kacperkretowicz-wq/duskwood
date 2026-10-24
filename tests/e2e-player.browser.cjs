@@ -101,7 +101,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
    const reading=await page.evaluate(()=>window.__reading);
    const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,s5:G.s.vars.s5Ending,scaresSaved:Object.keys(G.s.scares)}));
    // offline: po pierwszym wczytaniu service worker musi wystarczyć do startu bez sieci
-   await page.reload();await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
+   await page.reload({waitUntil:"domcontentloaded",timeout:60000});await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
    await ctx.setOffline(true);let offline=true;try{await page.reload();await page.waitForFunction(()=>typeof G!=='undefined'&&typeof Engine!=='undefined',{timeout:8000});}catch{offline=false;}
    await ctx.setOffline(false);
    out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),reading,
