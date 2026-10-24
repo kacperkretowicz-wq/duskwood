@@ -128,7 +128,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
     pause(2000),
 
     /* --- las --- */
-    g('kuba', 'idziemy drogą. jest rozwidlenie'),
+    g('kuba', 'idziemy drogą. jest rozwidlenie', { img: 'k_rozwidlenie' }),
     g('bartek', 'w lewo pod gore, prosto w dol do potoku, w prawo wzdluz lasu'),
     goal('Poprowadź ich do sztolni Ewa.', ['Otwórz *Mapy* z warstwą leśną. Od szlabanu do Ewy prowadzi droga leśna nr 7 — na północny wschód.']),
     menu('group', [
