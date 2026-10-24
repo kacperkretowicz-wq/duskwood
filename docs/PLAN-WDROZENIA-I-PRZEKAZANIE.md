@@ -812,3 +812,4 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
   - węzły DOM po zamknięciu klipów wracają do ~350.
   
   Wycieków nie widać, więc nie wprowadzam zmian.
+- Nowy test `text-lint`: dialogi bez podwójnych spacji, spacji przed przecinkiem i podwójnej kropki.
