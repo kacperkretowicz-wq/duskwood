@@ -323,8 +323,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     scene('xSnapEcho', [
       iff('flag:sawSnap', [
         g('kuba', 'ten film z czołówką, co krążył po błysku jako „ostatnia relacja”. to naprawdę jej relacja z kadru. 14.10, 22:56, tylko dla bliskich. ktoś nagrał ją ekranem i puścił dalej'),
-        g('igor', 'czerwone kropki na końcu to podczerwień CAM-01 przy bramie. minutę później zrobiła jej zdjęcie o 22:57'),
-        g('igor', 'a ta „postać” przy ścianie to stara kufajka na słupku. wisi tam od lat, widziałem ją, jak wieszałem kamery. nic więcej')
+        g('ola', 'Igor pisze mi na priv: czerwone kropki na końcu to podczerwień CAM-01 przy bramie. Minutę później zrobiła jej zdjęcie, 22:57.'),
+        g('ola', 'A ta „postać” przy ścianie to stara kufajka na słupku. Wisi tam od lat, widział ją, jak wieszał kamery.')
       ])
     ]),
     /* P4: prośby o wiadomość i prywatny profil. Zachowanie ludzi, nie automatyczny dowód. */
@@ -335,11 +335,11 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       choose('group', [
         opt('Nie odpisuj jeszcze. Zrób screena z datą i nazwą konta.', [
           g('ola', 'Zrobione. „m.k.2009”. Nic mi to nie mówi.'),
-          g('igor', 'prywatne konto bez postów to połowa kont w liceum. ktoś też mógł jej szukać')
+          g('kuba', 'prywatne konto bez postów to pół mojej klasy. ktoś też mógł jej szukać')
         ], { set: { x_prosbaSaved: true } }),
         opt('Odpisz i zapytaj, kim jest.', [
           g('ola', 'Napisałam. Jedna szara kreska.'),
-          g('igor', 'może nie zagląda. ja do próśb też nie zaglądam od roku')
+          g('kuba', 'może nie zagląda. ja do próśb też nie zaglądam od roku')
         ])
       ])
     ]),
@@ -351,7 +351,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       g('ola', 'Idę pieszo. Mapa mówi 28 minut. Mapa kłamie.'),
       choose('group', [
         opt('Mam do ciebie zadzwonić, żebyś nie szła sama?', [g('ola', 'Nie trzeba. Mam słuchawki i podcast o grzybach. Napiszę, jak dojdę.')], { trust: { ola: 1 } }),
-        opt('Igor, nie podjedziesz po nią?', [g('igor', 'mam rozkręcony laptop na ladzie. 20 minut?'), g('ola', 'Do tego czasu będę w połowie drogi. Dzięki, idę.')])
+        opt('Kuba, nie podjedziesz po nią?', [g('kuba', 'mama ma auto, a ja nie mam prawka jeszcze. sorry'), g('ola', 'Spokojnie. Do tego czasu będę w połowie drogi. Idę.')])
       ]),
       pause(6000),
       g('ola', 'Jestem w domu. Nogi mi odpadają.')
@@ -418,24 +418,24 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     pause(2000),
     /* P4: data pliku a czas powiadomienia. Synchronizacja nie dowodzi, kiedy zrobiono zdjęcie. */
     scene('xDataPliku', [
-      g('igor', 'zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. nimbus dosyła zaległe pliki, jak telefon złapie zasięg'),
+      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.'),
       g('kuba', 'czyli to nie jest z dzisiaj'),
       choose('group', [
-        opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('igor', 'dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust')]),
-        opt('Ale SMS do mamy jest z dzisiaj.', [g('igor', 'sms tak. zdjęcia nie. dwie różne rzeczy, nie mieszajmy ich'), g('ola', 'Czyli ktoś miał dziś jej telefon w ręku. To akurat jest pewne.')])
+        opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('ola', 'Igor: „dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust”.')]),
+        opt('Ale SMS do mamy jest z dzisiaj.', [g('ola', 'Igor mówi: SMS tak, zdjęcia nie. Dwie różne rzeczy.'), g('ola', 'Czyli ktoś miał dziś jej telefon w ręku. To akurat jest pewne.')])
       ])
     ]),
     /* P4: anonimowy materiał z kopii karty CAM-01. Prawdziwy, ale z innej nocy (data w pliku). Igor wrzuca go od razu do grupy, więc trop nie zależy od otwarcia wygasającego linku. */
     scene('xAnonim', [
-      g('igor', 'ktoś wrzucił na klipo z pustego konta. bez zdjęcia, plik MATERIAŁ_ROBOCZY_01. link wygasa za 24h, więc ściągnąłem'),
-      g('igor', '', { vid: 'assets/video/v_anonim.mp4', img: 'v_anonim' }),
+      g('ola', 'Igor przysłał mi to na priv. Ktoś wrzucił na Klipo z pustego konta, plik MATERIAŁ_ROBOCZY_01. Link wygasa za 24 h, więc ściągnął.'),
+      g('ola', '', { vid: 'assets/video/v_anonim.mp4', img: 'v_anonim' }),
       g('bartek', 'to brama huty. ta sama kamera co u mai'),
       choose('group', [
-        opt('Na dole: 15.10, 01:47. Zdjęcie z kurtką jest z 22.10, 02:13. To inna noc.', [set('x_anonimData'), g('igor', 'no właśnie. ktoś chce, żebyśmy to wzięli za tamtą noc'), g('ola', 'Albo chce pokazać, że ktoś tam chodził już tydzień wcześniej. Jedno i drugie coś znaczy.')]),
-        opt('To ten sam człowiek co na zdjęciu z kurtką.', [g('igor', 'nie wiem. spójrz na datę na dole: 15.10. kurtka była 22.10'), g('kuba', 'czyli tydzień wcześniej ktoś już tam łaził')])
+        opt('Na dole: 15.10, 01:47. Zdjęcie z kurtką jest z 22.10, 02:13. To inna noc.', [set('x_anonimData'), g('kuba', 'no właśnie. ktoś chce, żebyśmy to wzięli za tamtą noc'), g('ola', 'Albo chce pokazać, że ktoś tam chodził już tydzień wcześniej. Jedno i drugie coś znaczy.')]),
+        opt('To ten sam człowiek co na zdjęciu z kurtką.', [g('ola', 'Nie wiem. Spójrz na datę na dole: 15.10. Kurtka była 22.10.'), g('kuba', 'czyli tydzień wcześniej ktoś już tam łaził')])
       ]),
       g('kuba', 'skąd ktoś to ma? kartę z fotopułapki zabrała policja'),
-      g('igor', 'ktoś ją skopiował, zanim zabrali. i chce, żebyśmy wiedzieli, że ma kopię')
+      g('ola', 'Igor uważa, że ktoś ją skopiował, zanim zabrali. I chce, żebyśmy wiedzieli, że ma kopię.')
     ]),
     g('kuba', 'jest coś jeszcze?'),
     show('group', { prompt: 'Pokaż zdjęcie z 23:53', accept: [{ ev: ['ev_sync_door', 'ev_sms_kluska'] }], wrong: [['kuba', 'jeszcze coś z tej nocy?']] }),

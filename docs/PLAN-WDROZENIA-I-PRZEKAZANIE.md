@@ -914,3 +914,10 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Silnik: przed wyborem krótsza pauza/pisanie (gap ≤700 ms, typing ≤2,4 s, pause ≤800 ms), czytanie ≤1,8 s, typing ≤9 s — opcje pojawiają się zaraz po wiadomości.
 - Zegar 21:03 w transkrypcie to artefakt trybu natychmiastowego (zegar gry płynie w czasie rzeczywistym).
 - Narzędzie tools/transcript.browser.cjs (transkrypt rozgrywki). Testy: npm 97/97, prolog, playthrough PASS.
+
+### 2026-10-24 · v107 — przegląd S1/S2 (transkrypt)
+- ch3: po odejściu Igora jego wypowiedzi w xSnapEcho/xProsby/xAutobus/xDataPliku/xAnonim przekazuje Ola lub Kuba (spójność obsady grupy).
+- S2 m2: gracz odsyła zrzut Natanowi (xZrzutIda) zamiast nieuzasadnionej oceny zrzutu; scNocRano: Ida dzwoni rano i mówi tylko o telefonie (kolejność przed „rozmawiałem z idą”).
+- S2 m4 xLicznik: wyjaśnienie, czemu Marta nagrywała w piątek w archiwum (wróciła oddać klucze, kaseta pożyczona na noc). Oryginalne kroki v4 nienaruszalne — tylko dopisania w scenach.
+- Inspekcja: usunięte powtórzone „siedzę pod inspekcją” w wariancie, wariant czytelni spójny ze zdjęciami.
+- transcript.browser.cjs: start od dowolnego rozdziału/sezonu, autospełnianie warunków funkcyjnych.

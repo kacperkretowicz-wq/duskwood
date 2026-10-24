@@ -34,6 +34,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     scene('xLicznik', [
       pause(2500),
       Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.'),
+      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.'),
       say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
       Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
       choose('marta', [
@@ -53,9 +54,9 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xInspekcja', [
       pause(2000),
-      pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu', { wording: 'siedzę pod inspekcją. zdjęcia wysyłam za chwilę, muszę odzyskać czucie w palcach' }),
+      pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu', { wording: 'zdjęcia wysyłam za chwilę, muszę odzyskać czucie w palcach' }),
       choose('natan', [
-        opt('Ogrzej się. Akta nie uciekną.', [Nt('akta nie. ale czytelnię zamykają o 15, a pani w okienku patrzy na mnie jak na ucznia bez legitymacji', { wording: 'grzeję ręce o kubek. mam jeszcze godzinę w czytelni, o 15 zamykają' })]),
+        opt('Ogrzej się. Akta nie uciekną.', [Nt('akta nie. ale czytelnię zamykają o 15, a pani w okienku patrzy na mnie jak na ucznia bez legitymacji', { wording: 'grzeję ręce o kubek. czytelnia była od 7:30, wszystko obfociłem' })]),
         opt('Ile zdjęć zrobiłeś?', [Nt('63. połowa krzywo. ale wszystko da się przeczytać')])
       ])
     ]),

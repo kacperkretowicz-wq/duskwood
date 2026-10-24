@@ -163,7 +163,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
 });
 
 Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka', when: 'Wtorek, 24 listopada · 18:05', mood: 'calm' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, typing, scene, vanish } = D;
+  const { say, me, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, typing, scene, vanish } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
@@ -357,6 +357,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
         opt('Natan, ktoś mi napisał na Błysku, że to stażystka wycięła te 40 sekund.', [
           Nt('ida? daj spokój. ona od tygodnia robi tylko napisy do relacji z rady miasta'),
           Nt('masz to gdzieś? zrzut, cokolwiek?'),
+          scene('xZrzutIda', [iff('flag:m_shotIda', [me('natan', 'Mam. Wysyłam, tyle zdążył{em|am} złapać, zanim zniknęło.')], [me('natan', 'Nie mam. Zniknęło, zanim zdążył{em|am} zrobić.')])]),
           iff('flag:m_shotIda', [Nt('zrzut jest rozmazany i bez nazwy konta. sorry, to mi nic nie mówi')], [Nt('no właśnie. to zniknęło i tyle. nie będę jej oskarżał przez anonima')])
         ], { set: { m_toldNatan: true } }),
         opt('Nikomu nic nie piszę. Niech Ida sama powie.', [], { set: { m_keptIda: true } })
@@ -368,7 +369,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
 });
 
 Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', when: 'Piątek, 27 listopada · 23:18', mood: 'tense' }, D => {
-  const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene, scare, vanish } = D;
+  const { say, me, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, callIn, callEnd, notify, scene, scare, vanish } = D;
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -422,6 +423,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     scene('scNocRano', [
       Nt('dzwonił do ciebie ktoś w nocy? do mnie o 23:50, nieznany numer. odebrałem i cisza'),
       iff('flag:m_warnedNatan', [Nt('dobrze, że napisał{eś|aś} wieczorem. jak zadzwonił, byłem już w domu, nie sam w redakcji')]),
+      Nt('ida zadzwoniła o siódmej, roztrzęsiona. na razie powiedziała mi tylko jedno, resztę chce w cztery oczy'),
       Nt('ida mówi że dudek przeglądał jej telefon na siłowni. miała tam numery do wszystkich od mostu. twój też, bo ci go przekazywałem')
     ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),

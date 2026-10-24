@@ -5,7 +5,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  const page=await (await browser.newContext({viewport:{width:390,height:844}})).newPage();
  await page.goto(base+'/?debug');
- const out=await page.evaluate(async stopAt=>{
+ const out=await page.evaluate(async ([stopAt,START,START_SEASON])=>{
   const log=[];const done=async()=>{};
   Object.assign(UI,{chapterTitle:async ch=>{log.push(`\n===== ${ch.id} · ${ch.title} · ${ch.when||''}`);},chapterEnd:done,interlude:done,fx:done,endingScreen:done,credits:done,endCall:done,incomingCall:async()=>'accept',outgoingCall:done,callScreen(){},packageSheet:async()=>6});
   G.newGame({name:'Alex',gender:'f'});G.settings.speed='instant';G.settings.sfx=false;G.settings.ambient=false;G.settings.autoHints=false;
@@ -15,8 +15,8 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
   let lastObj='';
   const satisfy=c=>{for(const k of [].concat(c)){if(typeof k!=='string')continue;const [ty,...r]=k.split(':');const id=r.join(':');if(ty==='ev')G.addEv(id,true);else if(ty==='solved')G.solve(id);else if(ty==='flag')G.setFlag(id);else if(ty==='seen')G.markSeen(id);else if(ty==='unlocked')G.unlock(id);}};
   const chats=()=>[...new Set([...Object.keys(G.s.chats||{}),...Object.keys(DATA.chats||{})])];
-  Engine.restart();const t0=Date.now();let lastKey='',same=0;
-  while(Date.now()-t0<200000){
+  if(START){G.s.seasonId=START_SEASON;G.s.chapter=START;G.s.pc=0;G.s.vars.s1Ending='swit';}Engine.restart();const t0=Date.now();let lastKey='',same=0;
+  while(Date.now()-t0<600000){
    await new Promise(r=>setTimeout(r,15));Engine.skip();
    if(G.s.chapter===stopAt||G.s.finished)break;
    const o=G.s.objective&&G.s.objective.text;if(o&&o!==lastObj){log.push(`   >> CEL: ${o}`);lastObj=o;}
@@ -30,11 +30,11 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
     else if(p.type==='dial')Engine.answer(p.numbers.includes('112')?'112':p.numbers[0]);
     continue;}
    if(st&&st.t==='wait'&&same>2){
-    if(typeof st.cond==='function'){G.setFlag('sawCalls');if(G.s.chapter==='ch1'&&!G.has('ev_ola_sorry'))G.addEv('ev_ola_fight',true);for(const c of chats()){G.viewing=c;G.change();if(G.test(st.cond))break;}}
+    if(typeof st.cond==='function'){G.setFlag('sawCalls');if(G.s.chapter==='ch1'&&!G.has('ev_ola_sorry'))G.addEv('ev_ola_fight',true);for(const c of chats()){G.viewing=c;G.change();if(G.test(st.cond))break;}if(!G.test(st.cond)){const src=String(st.cond);for(const m of src.matchAll(/G\.has\('([^']+)'\)/g))G.addEv(m[1],true);for(const m of src.matchAll(/G\.flag\('([^']+)'\)/g))G.setFlag(m[1]);for(const m of src.matchAll(/solved\('([^']+)'\)/g))G.solve(m[1]);}}
     else satisfy(st.cond);G.change();}
    if(same>400){log.push('STUCK '+key);break;}
   }
   return log.join('\n');
- },stopAt);
+ },[stopAt,process.argv[3]||"",process.argv[4]||"s1"]);
  console.log(out);await browser.close();
 })();
