@@ -886,3 +886,6 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Migracja v14 wygenerowana narzędziem (`tools/gen-migration-v14.cjs`, zrzut `tests/fixtures/story-v13-steps.json` zrobiony przed edycją), test łańcucha migracji obejmuje v2…v13 → v14.
 - Zdjęcia (metoda realizmu, tani telefon, bez twarzy): `c_pierogi` (piątek u Mai, ręka Kuby w szarej bluzie) i `c_parking_noc` (pusty zaśnieżony parking z okna, herbata na parapecie) — dopięte do istniejących linii Mai (`img`, bez zmiany kroków).
 - Prace w osobnym worktree, żeby nie mieszać plików z trwającym E2E.
+
+### 2026-10-24 — powtórne pełne E2E na czystym buildzie (edc190f)
+- `E2E_OS=ios,android`: oba PASS, errors:[], layout:[], 21 straszaków, finały swit/pelny_kadr/wlasnym_glosem/przewiniecie/haslo. Pliki nie były zmieniane w trakcie (praca szła w osobnym worktree) — zastrzeżenie o mieszanych plikach zdjęte. Zmiany v14 (36b1652…) sprawdzone przez npm test + case-kronika/case-kopia/conversations/playthrough; kolejne pełne E2E puszczone na nowym buildzie.
