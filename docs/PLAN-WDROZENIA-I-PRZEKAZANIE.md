@@ -724,3 +724,23 @@ Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
 - Jedyną kartą sceny klipu w dokumentach (MAPA-S1, plan, SPRAWA-2…4) był anonimowy materiał P4 — zrealizowany w 17.8. Pozostałe istniejące klipy (`assets/video/v_*`) według rozdziału 12 wymagają osobnej oceny człowieka; **decyzja:** nie regenerować ich bez karty sceny i bez oceny, bo zmiana bez podstaw grozi rozjazdem z fabułą (zgodnie z zakazem automatycznego zastępowania).
 - Etapy P0–P7 nie mają już pozycji wykonalnych w kodzie (patrz 17.6). Otwarte poza kodem: ocena nowych zdjęć i klipu `v_anonim` przez Kacpra, ocena istniejących klipów, pomiar z graczami, odsłuch straszaków i finałów, test na fizycznym telefonie.
 - Weryfikacja v73: `node --test` 54/54 PASS; przeglądarka PASS: season-entries, rhythm, media, playthrough, case-glos/kopia/kronika/most, unsend, e2e-player (iOS+Android).
+
+## 18. Audyt 24.10.2026 — lista ustaleń (priorytet malejąco)
+
+| # | Obszar | Ustalenie | Decyzja / stan |
+|---|---|---|---|
+| A1 | PWA/offline | `sw.js` zapisywał do cache każdą odpowiedź, także 404 i 206 (Range z `<video>`: `cache.put` rzuca, 404 nadpisywał dobrą kopię). Offline wideo na iOS wymaga odpowiedzi 206 — dostawało pełne 200 lub nic. Nawigacja offline pod inny adres / z parametrem kończyła się błędem sieci. | **ZROBIONE** (SW v74): cache tylko pełnych 200, Range offline składany z cache (206/416), `ignoreSearch`, fallback nawigacji na `index.html`, pomijanie metod innych niż GET. Test `tests/sw.test.cjs`. |
+| A2 | Instalacja (iOS/Android) | Jedyna ikona to SVG z `purpose: "any maskable"`; iOS nie używa SVG jako `apple-touch-icon`, Android/Chrome wymaga PNG 192/512 do pełnej instalacji. | **ZROBIONE**: `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` (render z `icon.svg`, tło #050608), osobne wpisy `any`/`maskable`, pliki w cache SW i w `scripts/build.cjs`. |
+| A3 | Odporność zapisu | Przepełnienie `localStorage` kończyło się cichą utratą postępu (zapis zwracał false bez reakcji); punkty kontrolne zajmują miejsce. Uszkodzony zapis był potem nadpisywany nową grą bez kopii. `loadCheckpoint` rzucał wyjątek przy uszkodzonym punkcie. | **ZROBIONE**: przy braku miejsca usuwane są najstarsze punkty kontrolne i zapis jest ponawiany; uszkodzony zapis odkładany do `mglisko.save.v1.corrupt`; uszkodzony punkt kontrolny zwraca `false`, UI pokazuje komunikat zamiast wywracać grę. Test `tests/save-robust.test.cjs`. |
+| A4 | Rozmiar assetów | 27 MB, ok. 200 JPEG o jakości ~82 i 12 klipów po 50–315 KB. Ponowna kompresja daje ok. 5% (1,4 MB) kosztem kolejnej generacji stratnej. | **BEZ ZMIAN** (decyzja): zysk nie uzasadnia ryzyka widocznych artefaktów; test `assets.test.cjs` już pilnuje limitu wagi. |
+| A5 | Język | Skan typowych błędów (napewno, narazie, poprostu, wziąść, poszłem…) i podwójnych spacji: brak. „wogóle” to celowy tik Idy (S4, trop), „naprawde” bez ogonków to styl czatu Natana. | **BEZ ZMIAN**. Pełna lektura redakcyjna — dla człowieka. |
+| A6 | Martwy kod | Brak nieużywanych funkcji w `js/core`, `js/apps`, `js/art`; wszystkie pliki z `assets/` są używane i w cache SW, brak odwołań do nieistniejących plików; `node --check` czysty. | **BEZ ZMIAN**. |
+| A7 | Dostępność | Jest `lang="pl"`, `prefers-reduced-motion` (także łagodne straszaki), przyciski mają tekst. | **BEZ ZMIAN**. Do sprawdzenia na fizycznym telefonie: VoiceOver/TalkBack w czacie. |
+| A8 | Testy | Brak testów SW i odporności zapisu. | **ZROBIONE** (A1, A3). |
+| A9 | Klipy | Każde miejsce, w którym fabuła mówi o nagraniu, ma już plik w `assets/video/`. Nowy klip wymagałby nowej sceny — to zmiana fabuły. | **PROPOZYCJA dla Kacpra** (patrz niżej). |
+| A10 | Tempo | ch3 nadal najdłuższy w S1 (+`xAnonim`), mimo podziału z 17.6. | **PROPOZYCJA**: ocenić po pomiarze z graczami, czy `xAnonim` nie przenieść za przerwę `s1_sync`. |
+
+### Propozycje wymagające decyzji Kacpra (nie wdrażane)
+- Klip S2: 40-sekundowy plik z mostu (SPRAWA-2, akt I) występuje tylko jako opis i kadr — można dać krótki klip z „dwiema sekundami więcej” w wersji tygodnika jako zagadkę porównawczą.
+- Klip S3: pierwszy klip @archiwum.rybickiego (głos na tle stodoły) jako materiał wideo zamiast samego tekstu.
+- Przeniesienie `xAnonim` za przerwę `s1_sync` (A10).
