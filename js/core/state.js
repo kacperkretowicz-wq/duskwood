@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 4,
+      v: 7,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -27,7 +27,7 @@ const G = (() => {
     };
   }
 
-  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, volume: 0.8, os: 'auto', appearance: 'light' };
+  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, volume: 0.8, os: 'auto', appearance: 'light', textSize: 'm' };
   function migrate(saved) {
     if ((saved.v || 1) < 2) {
       const map = STORY_MIGRATIONS[saved.chapter];
@@ -41,7 +41,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 4; // tabela V3 jest generowana wprost do bieżących kroków
+      saved.v = 7; // tabela V3 jest generowana wprost do bieżących kroków
     }
     if (saved.v < 4) {
       // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -49,7 +49,38 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 4;
+      saved.v = 7; // tabela V4 też mapuje wprost na bieżące kroki
+    }
+    if (saved.v < 5) {
+      // v5: sceny S1 z planu wdrożenia. Wybór wraca do wyboru, krok — do początku nowej sceny.
+      const map = typeof STORY_MIGRATIONS_V5 !== 'undefined' && STORY_MIGRATIONS_V5[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 7; // tabela V5 też mapuje wprost na bieżące kroki
+    }
+    if (saved.v < 6) {
+      // v6: rozdział 3 podzielony przerwą s1_plate (po numerze DDZ 6K19). Zapis przed nią zostaje,
+      // zapis za nią przesuwa się o nowy krok — przerwa nie cofa ani nie zeruje postępu.
+      const map = typeof STORY_MIGRATIONS_V6 !== 'undefined' && STORY_MIGRATIONS_V6[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = map.exact[saved.pc];
+      }
+      saved.v = 7;
+    }
+    if (saved.v < 7) {
+      // v7: scena xAnonim w rozdziale 3 (anonimowy materiał z CAM-01). Krok za nią przesuwa się, wybór wraca do wyboru.
+      const map = typeof STORY_MIGRATIONS_V7 !== 'undefined' && STORY_MIGRATIONS_V7[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 7;
+    }
+    // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
+    // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.
+    if (typeof DATA !== 'undefined' && DATA.storyTexts) {
+      const first = saved.chats?.maja?.msgs?.find(m => m.id === 'm0' && m.from === 'maja' && m.text === DATA.storyTexts.legacyFirstMajaSMS);
+      if (first) first.text = DATA.storyTexts.firstMajaSMS;
     }
     return saved;
   }
@@ -68,7 +99,7 @@ const G = (() => {
       const raw = store.get(KEY);
       if (!raw) return false;
       try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; return true; }
-      catch (e) { console.warn('Zapis uszkodzony', e); return false; }
+      catch (e) { console.warn('Zapis uszkodzony', e); store.set(KEY + '.corrupt', raw); return false; }
     },
     wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; BUS.emit('game-reset'); },
 
@@ -79,7 +110,12 @@ const G = (() => {
       const doSave = () => {
         const s = api.s; if (!s) return;
         s.clock.t = api.now(); s.clock.at = Date.now();
-        store.set(KEY, JSON.stringify(s));
+        const json = JSON.stringify(s);
+        if (store.set(KEY, json)) return;
+        // Brak miejsca: usuń najstarsze punkty kontrolne (zapis bieżący jest ważniejszy) i spróbuj ponownie.
+        for (const k of store.keys().filter(k => k.startsWith(CP)).sort()) { store.del(k); if (store.set(KEY, json)) return; }
+        store.del(KEY + '.corrupt');
+        if (!store.set(KEY, json)) console.warn('Nie udało się zapisać gry (brak miejsca)');
       };
       if (now) doSave(); else api._t = setTimeout(doSave, 250);
     },
@@ -95,10 +131,11 @@ const G = (() => {
     },
     loadCheckpoint(ch) {
       const raw = store.get(CP + ch); if (!raw) return false;
+      let cp; try { cp = migrate(JSON.parse(raw)); } catch (e) { console.warn('Punkt kontrolny uszkodzony', e); store.del(CP + ch); return false; }
       const keepEndings = api.s ? api.s.endings : [];
       const keepArchive = api.s ? U.clone(api.s.seasonArchive || {}) : {};
       const keepPacing = api.s?.pacing ? U.clone(api.s.pacing) : null;
-      api.s = Object.assign(fresh(), migrate(JSON.parse(raw)));
+      api.s = Object.assign(fresh(), cp);
       api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
       api.s.seasonArchive = Object.assign({}, api.s.seasonArchive, keepArchive);
       if (keepPacing) { delete keepPacing.waiting; api.s.pacing = keepPacing; }
@@ -108,7 +145,7 @@ const G = (() => {
     // Zegar fabularny płynie w czasie rzeczywistym od ostatniego ustawienia.
     now() { const c = api.s.clock; return c.t + (c.paused ? 0 : Date.now() - c.at); },
     pauseClock() { if (api.s && !api.s.clock.paused) api.s.clock = { t: api.now(), at: Date.now(), paused: true }; },
-    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && api.s.pacing.waiting?.at > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
+    resumeClock() { if (api.s?.clock.paused && !(api.s.pacing?.mode === 'daily' && Math.max(api.s.pacing.waiting?.at || 0, api.s.pacing.rest?.at || 0) > Date.now())) { api.s.clock.at = Date.now(); api.s.clock.paused = false; } },
     setClock(iso) { api.s.clock = { t: typeof iso === 'number' ? iso : U.parseLocal(iso), at: Date.now(), paused: !!document.hidden }; BUS.emit('clock'); },
 
     chat(id) {

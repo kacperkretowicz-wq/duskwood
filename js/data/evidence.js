@@ -14,11 +14,11 @@ DATA.evidence = {
   /* ---------- prolog ---------- */
   ev_missed: {
     title: 'Nieodebrane połączenia od Mai', cat: 'digital', source: 'Twój telefon',
-    desc: 'Numer +48 731 402 118 dzwonił do ciebie dwa razy: *13.10 o 22:31* i *14.10 o 23:47*. Drugie połączenie było ostatnim, jakie Maja wykonała w życiu… albo przynajmniej przed zniknięciem.'
+    desc: 'Numer +48 731 402 118 dzwonił do ciebie dwa razy: *13.10 o 22:31* i *14.10 o 23:47*. Według bilingu drugie połączenie jest ostatnim przed zniknięciem Mai. Nie zostało odebrane.'
   },
   ev_sms_maja: {
     title: 'SMS od Mai (13.10, 21:12)', cat: 'msg', source: 'Twój telefon',
-    desc: '„Dzień dobry, Panie Adamie. Nazywam się Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Chyba znalazłam coś, co wtedy przeoczono. Nie wiem, komu tu mogę zaufać. Proszę o kontakt. M.W.”'
+    desc: '„' + DATA.storyTexts.firstMajaSMS + '”'
   },
   ev_article2007: {
     title: 'Artykuł „Dziesięć lat ciszy” (2007)', cat: 'msg', source: 'Gazeta Sudecka, archiwum', img: 'web_flood97',

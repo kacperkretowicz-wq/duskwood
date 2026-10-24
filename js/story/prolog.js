@@ -2,7 +2,7 @@
 /* PROLOG — Nieodebrane */
 
 Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 października · 21:03', mood: 'calm' }, D => {
-  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title } = D;
+  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title, scene } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
@@ -16,7 +16,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       );
       G.unlock('chat:maja');
       const c = G.chat('maja');
-      c.msgs.push({ id: 'm0', from: 'maja', t: U.parseLocal('2026-10-13T21:12'), text: 'Dzień dobry, Panie Adamie. Nazywam się Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Chyba znalazłam coś, co wtedy przeoczono. Nie wiem, komu tu mogę zaufać. Proszę o kontakt. M.W.' });
+      c.msgs.push({ id: 'm0', from: 'maja', t: U.parseLocal('2026-10-13T21:12'), text: DATA.storyTexts.firstMajaSMS });
       c.last = U.parseLocal('2026-10-13T21:12');
       c.unread = 0;
       G.unlock('app:notes');
@@ -38,11 +38,11 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     set('knowKuba'),
     K('moja siostra dzwoniła pod ten numer 14 października. 23:47'),
     pause(900),
-    K('to ostatnie połączenie w bilingu'),
+    K('to ostatnie połączenie w bilingu', { wording: 'potem już do nikogo nie dzwoniła. przynajmniej w tym bilingu nic więcej nie ma' }),
     K('od tygodnia nie wróciła do domu'),
     typing('kuba', 'kuba', 3200),
     K('mama ma nas na jednym abonamencie. wzięła biling od operatora. na końcu jest twój numer'),
-    K('więc pytam. skąd znasz maję?'),
+    K('więc pytam. skąd znasz maję?', { wording: 'powiedz tylko, czy z nią {gadałeś|gadałaś}' }),
     choose('kuba', [
       opt('Hej. Nie znam Mai. Na pewno ten numer?', [K('to czemu do ciebie dzwoniła?? o północy')]),
       opt('Nikt do mnie nie dzwonił. Na pewno?', [K('sprawdź. proszę. 14.10, 23:47')]),
@@ -115,10 +115,10 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     show('kuba', { prompt: 'Pokaż, co {znalazłeś|znalazłaś}', accept: [{ ev: ['ev_obit'] }], wrong: [['kuba', 'a co z tym rybickim?']] }),
     typing('kuba', 'kuba', 2800),
     K('nie żyje od 2021'),
-    K('czyli dzwoniła do… sorry. nie chciałem tak'),
-    K('czyli ona przez cały czas myślała że odbierze ten rybicki'),
+    K('czyli dzwoniła do… sorry. nie chciałem tak', { wording: 'ona tego nie sprawdziła. ja też bym chyba nie sprawdził' }),
+    K('czyli ona przez cały czas myślała że odbierze ten rybicki', { wording: 'miała w telefonie numer człowieka, który już nie żył' }),
     pause(1500),
-    K('sory. nie wiem co mam z tym teraz zrobić. nie zostawisz mnie z tym?'),
+    K('sory. nie wiem co mam z tym teraz zrobić. nie zostawisz mnie z tym?', { wording: 'nie wiem, do kogo jeszcze napisać. zostaniesz chwilę?' }),
     K('policja mówi, że ona skoczyła z tamy. jej auto stało na tamie. kurtka na barierce'),
     K('ale maja by nie skoczyła. nigdy. ona nie wchodziła do jeziora nawet po kolana. nigdy'),
     pic('kuba', 'kuba', 'k_maja', 'to ona. sierpień, nad mglicą. zawsze zasłania twarz aparatem'),
@@ -146,12 +146,12 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     g('kuba', 'dodałem %name%. to ta osoba, do której maja dzwoniła ostatnia'),
     g('ola', 'Kuba, serio? Nawet nie napisałeś, że kogoś dodajesz.'),
     g('bartek', 'kto to w ogole jest'),
-    g('igor', 'hej %name%. igor, serwis przy rynku. trochę nerwowo tu jest, jak widać'),
-    g('ola', 'Igor.'),
-    g('igor', 'dobra już nic nie mówię 🙃'),
-    g('kuba', 'on tak zawsze. laptop mi po zalaniu oddał z ryżem w środku'),
-    g('igor', 'bo go suszyłeś w ryżu 💀 mówiłem: wyłącz i przynieś'),
-    g('ola', 'Dobra chłopaki. Maja.'),
+    g('igor', 'hej %name%. igor, serwis przy rynku. trochę nerwowo tu jest, jak widać', { wording: 'hej, igor. pomagam mai ze sprzętem. kuba mówił o tym numerze' }),
+    g('ola', 'Igor.', { wording: 'To ty ratowałeś Kubie tego laptopa?' }),
+    g('igor', 'dobra już nic nie mówię 🙃', { wording: 'próbowałem. oddał mi go razem z ryżem 🙃' }),
+    g('kuba', 'on tak zawsze. laptop mi po zalaniu oddał z ryżem w środku', { wording: 'dobra, już nie będę nic suszył w ryżu. możemy do tego nie wracać' }),
+    g('igor', 'bo go suszyłeś w ryżu 💀 mówiłem: wyłącz i przynieś', { wording: 'możemy. ale nadal masz mi oddać zasilacz' }),
+    g('ola', 'Dobra chłopaki. Maja.', { wording: 'Dobra, potem. Co z tym numerem?' }),
     openChat('group', { goal: 'Zajrzyj do nowej grupy „Szukamy Mai”.' }),
     g('bartek', 'skąd maja cię znała'),
     choose('group', [
@@ -187,12 +187,27 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     g('igor', 'Spokojnie. Technicznie rzecz biorąc, Nimbus blokuje dopiero po dziesięciu próbach. Ale lepiej nie strzelać na ślepo.', { clue: 'ev_igor_phrase' }),
     g('ola', 'Jutro mam na szóstą 🙃 Jeszcze chwilę jestem. %name%, zerkniesz? My już te ekrany znamy na pamięć.'),
     g('kuba', 'zaraz podeślę ci jej maila'),
+    /* P1: Kuba porządkuje to, co już wiadomo, i jedną rzecz, która się nie zgadza. */
+    scene('xCel', [
+      pause(1800),
+      K('dobra, piszę tu, bo na grupie ola mnie zje że spamuję'),
+      K('muszę to sobie poukładać, bo mi się miesza'),
+      K('maja dzwoniła do ciebie, bo myślała że to numer rybickiego. to już wiemy'),
+      K('nie wiemy, czemu w ogóle szukała kogoś od sprawy tomka. i gdzie była tamtej nocy'),
+      K('policja mówi że koło północy była na tamie. a ona o 23:47 jeszcze dzwoniła do ciebie. telefon ostatni raz złapał sieć 23:58'),
+      K('kto dzwoni do dziennikarza z 2007 roku 10 minut przed czymś takim. nie pasuje mi to'),
+      choose('kuba', [
+        opt('Najpierw sprawdźmy, gdzie był wtedy jej telefon.', [K('nimbus zapisuje lokalizację. tylko trzeba się dostać na konto')], { set: { p1_planLoc: true } }),
+        opt('Same godziny jeszcze niczego nie dowodzą. Ale warto je sprawdzić.', [K('wiem. nie chcę sobie nic wmawiać'), K('ale jak w nimbusie będzie lokalizacja, to chociaż będzie wiadomo')]),
+        opt('Kuba, połóż się chociaż na godzinę.', [K('nie dam rady. mama siedzi w kuchni i patrzy w telefon'), K('wyślę ci tego maila i może się położę')], { trust: { kuba: 1 } })
+      ])
+    ]),
     pause(2500),
     fx('glitch', { wait: true }),
     unlock('chat:szklarz'),
     sz('{nie odebrales|nie odebralas} wtedy'),
-    sz('. . .'),
-    sz('teraz juz sie nie rozlaczysz'),
+    sz('. . .', { wording: 'masz jeszcze tę wiadomość od niej?' }),
+    sz('teraz juz sie nie rozlaczysz', { wording: 'tym razem odbierz' }),
     pic('szklarz', 'szklarz', 'sz_window', ''),
     pause(2000),
     end('ch1')

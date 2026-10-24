@@ -1,7 +1,7 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v45';
+const VERSION = 'quiet-is-safer-v90';
 const FILES = [
-  './', './index.html', './manifest.webmanifest', './icon.svg',
+  './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
   './css/conversations.css', './js/data/conversations.js', './js/core/conversations.js', './js/apps/conversations.js',
   './css/native-ui.css', './js/core/native.js',
@@ -26,7 +26,7 @@ const FILES = [
   './assets/trap/c1_0061.jpg', './assets/trap/c2_0004.jpg', './assets/trap/c2_0019.jpg', './assets/trap/live_day.jpg',
   './assets/trap/live_gajda.jpg', './assets/trap/live_night.jpg',
   './js/core/seasons.js', './js/core/wallpapers.js', './js/apps/seasons.js', './js/apps/wallpapers.js',
-  './js/core/pacing.js',
+  './js/core/pacing.js', './js/data/rhythm.js', './js/data/today.js',
   './js/vendor/capacitor-runtime.js',
   './assets/lena-v2.jpg', './assets/bus-stop-v2.jpg',
   './assets/people.jpg', './assets/forest.jpg', './assets/maja-river.jpg', './assets/gajda.jpg', './js/data/migrations.js',
@@ -35,7 +35,7 @@ const FILES = [
   './js/data/characters.js', './js/data/evidence.js', './js/data/maja.js', './js/data/web.js', './js/data/world.js',
   './js/apps/messages.js', './js/apps/viewer.js', './js/apps/phone.js', './js/apps/browser.js', './js/apps/gallery.js',
   './js/apps/nimbus.js', './js/apps/maps.js', './js/apps/notes.js', './js/apps/tools.js',
-  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './js/story/kopia2.js', './js/data/case-kronika.js', './js/story/kronika.js', './assets/kronika/c_festyn.jpg', './assets/kronika/c_ryz.jpg', './assets/kronika/c_gorka.jpg', './assets/kronika/c_rysunek.jpg', './assets/kronika/c_klatka.jpg', './assets/video/v_festyn.mp4', './assets/video/v_festyn.jpg', './assets/people/zenon.jpg', './assets/people/ida.jpg', './assets/kronika/c_studniowka.jpg', './assets/kronika/c_boisko.jpg', './assets/kronika/c_pokoj_kaset.jpg', './assets/kronika/c_blok_noc.jpg', './assets/kronika/c_ida_pies.jpg', './assets/kronika/c_lodowisko.jpg', './assets/video/v_studniowka.mp4', './assets/video/v_studniowka.jpg', './assets/video/v_telewizor.mp4', './assets/video/v_telewizor.jpg', './assets/kopia/k_biurko.jpg', './assets/kopia/k_petla.jpg', './assets/kopia/k_mem_krzeslo.jpg', './assets/kopia/k_kadr_kabel.jpg', './assets/kopia/k_igor_kable.jpg', './assets/kopia/k_peron.jpg', './assets/kopia/k_zeszyt.jpg', './assets/kopia/k_zeszyt_zoom.jpg', './assets/video/v_korytarz.jpg', './assets/video/v_petla.jpg', './assets/video/v_korytarz.mp4', './assets/video/v_petla.mp4', './assets/most/m_kadr_siatka.jpg', './assets/most/m_okno_redakcji.jpg', './assets/most/m_mem_radio.jpg', './assets/video/v_licznik.mp4', './assets/video/v_licznik.jpg', './assets/s1x/s1_mem_kot.jpg', './assets/s1x/s1_lumpeks.jpg', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg', './js/data/case-glos.js', './js/story/glos.js', './assets/people/oskar.jpg', './assets/glos/g_ola_umowa.jpg', './assets/glos/g_kostka.jpg', './assets/glos/g_huta_czapka.jpg', './assets/glos/g_maja_korytarz.jpg', './assets/glos/g_przystanek.jpg', './assets/glos/g_tomek_album.jpg', './assets/glos/g_pracownia.jpg', './assets/glos/g_kuba_kostka.jpg', './assets/glos/g_serwis_noc.jpg', './assets/glos/g_magnetowid.jpg', './assets/glos/g_pizza.jpg', './assets/video/v_festyn96.mp4', './assets/video/v_festyn96.jpg', './assets/kronika/c_kasety_babci.jpg', './assets/kronika/c_zenon_kamera.jpg', './assets/kronika/c_pierniki.jpg', './assets/kronika/c_slady.jpg', './assets/kronika/c_magnetowidy.jpg', './assets/kronika/c_rysunki.jpg', './assets/video/v_sanki.mp4', './assets/video/v_sanki.jpg', './assets/video/v_pies_noc.mp4', './assets/video/v_pies_noc.jpg', './assets/most/m_lodowka.jpg', './assets/video/v_kotka.mp4', './assets/video/v_kotka.jpg', './assets/video/v_szyba.mp4', './assets/video/v_szyba.jpg', './assets/most/m_kamera_kotka.jpg', './assets/most/m_parapet_babci.jpg', './assets/most/m_tablet_kuchnia.jpg', './assets/most/m_obiad_drzwi.jpg', './assets/kopia/k_fiszki.jpg', './assets/kopia/k_poczta.jpg', './assets/kopia/k_uszka.jpg', './assets/kopia/k_rampa.jpg', './assets/kopia/k_pudlo.jpg', './assets/kopia/k_ladowarka.jpg', './assets/kopia/k_czytelnia_kubek.jpg', './assets/kopia/k_lampki.jpg', './assets/kopia/k_wigilia.jpg', './assets/most/m_kot_wycinki.jpg', './assets/most/m_brygada.jpg', './assets/most/m_inspekcja.jpg', './assets/most/m_znicz_most.jpg', './assets/most/m_salon_herbata.jpg',
+  './js/story/_scenes.js', './js/story/prolog.js', './js/story/ch1.js', './js/story/ch2.js', './js/story/ch3.js', './js/story/ch4.js', './js/story/ch5.js', './js/story/epilog.js', './js/story/most.js', './js/story/most2.js', './js/story/most3.js', './assets/most/oip_s41.jpg', './assets/most/oip_protokol.jpg', './assets/people/zuza_most.jpg', './assets/people/nina.jpg', './assets/people/nina_life1.jpg', './assets/most/doreczenie.jpg', './assets/most/karta_trasy.jpg', './assets/most/wejscie_17.jpg', './assets/most/biurko_marty.jpg', './assets/most/faktura_sowa.jpg', './assets/most/mail_kb.jpg', './assets/most/czat_ida.jpg', './assets/most/szuflada_henryka.jpg', './js/data/case-most.js', './js/data/case-kopia.js', './js/story/kopia.js', './js/story/kopia2.js', './js/data/case-kronika.js', './js/story/kronika.js', './assets/kronika/c_festyn.jpg', './assets/kronika/c_ryz.jpg', './assets/kronika/c_gorka.jpg', './assets/kronika/c_rysunek.jpg', './assets/kronika/c_klatka.jpg', './assets/video/v_festyn.mp4', './assets/video/v_festyn.jpg', './assets/people/zenon.jpg', './assets/people/ida.jpg', './assets/kronika/c_studniowka.jpg', './assets/kronika/c_boisko.jpg', './assets/kronika/c_pokoj_kaset.jpg', './assets/kronika/c_blok_noc.jpg', './assets/kronika/c_ida_pies.jpg', './assets/kronika/c_lodowisko.jpg', './assets/video/v_studniowka.mp4', './assets/video/v_studniowka.jpg', './assets/video/v_telewizor.mp4', './assets/video/v_telewizor.jpg', './assets/kopia/k_biurko.jpg', './assets/kopia/k_petla.jpg', './assets/kopia/k_mem_krzeslo.jpg', './assets/kopia/k_kadr_kabel.jpg', './assets/kopia/k_igor_kable.jpg', './assets/kopia/k_peron.jpg', './assets/kopia/k_zeszyt.jpg', './assets/kopia/k_zeszyt_zoom.jpg', './assets/video/v_korytarz.jpg', './assets/video/v_petla.jpg', './assets/video/v_korytarz.mp4', './assets/video/v_petla.mp4', './assets/video/v_anonim.mp4', './assets/video/v_anonim.jpg', './assets/video/v_most40.mp4', './assets/video/v_most40.jpg', './assets/video/v_most42.mp4', './assets/video/v_most42.jpg', './assets/video/v_stodola.mp4', './assets/video/v_stodola.jpg', './assets/most/m_kadr_siatka.jpg', './assets/most/m_okno_redakcji.jpg', './assets/most/m_mem_radio.jpg', './assets/video/v_licznik.mp4', './assets/video/v_licznik.jpg', './assets/s1x/s1_mem_kot.jpg', './assets/s1x/s1_lumpeks.jpg', './assets/s1x/e_pudlo.jpg', './assets/s1x/s1_bagaznik.jpg', './assets/s1x/mp_osrodek.jpg', './assets/s1x/k_rozwidlenie.jpg', './assets/s1x/g_slady.jpg', './assets/s1x/e_czytelnia.jpg', './assets/kopia/k_okno.jpg', './assets/people/ewa.jpg', './js/data/case-glos.js', './js/story/glos.js', './assets/people/oskar.jpg', './assets/glos/g_ola_umowa.jpg', './assets/glos/g_kostka.jpg', './assets/glos/g_huta_czapka.jpg', './assets/glos/g_maja_korytarz.jpg', './assets/glos/g_przystanek.jpg', './assets/glos/g_tomek_album.jpg', './assets/glos/g_pracownia.jpg', './assets/glos/g_kuba_kostka.jpg', './assets/glos/g_serwis_noc.jpg', './assets/glos/g_magnetowid.jpg', './assets/glos/g_pizza.jpg', './assets/video/v_festyn96.mp4', './assets/video/v_festyn96.jpg', './assets/kronika/c_kasety_babci.jpg', './assets/kronika/c_zenon_kamera.jpg', './assets/kronika/c_pierniki.jpg', './assets/kronika/c_slady.jpg', './assets/kronika/c_magnetowidy.jpg', './assets/kronika/c_rysunki.jpg', './assets/video/v_sanki.mp4', './assets/video/v_sanki.jpg', './assets/video/v_pies_noc.mp4', './assets/video/v_pies_noc.jpg', './assets/most/m_lodowka.jpg', './assets/video/v_kotka.mp4', './assets/video/v_kotka.jpg', './assets/video/v_szyba.mp4', './assets/video/v_szyba.jpg', './assets/most/m_kamera_kotka.jpg', './assets/most/m_parapet_babci.jpg', './assets/most/m_tablet_kuchnia.jpg', './assets/most/m_obiad_drzwi.jpg', './assets/kopia/k_fiszki.jpg', './assets/kopia/k_poczta.jpg', './assets/kopia/k_uszka.jpg', './assets/kopia/k_rampa.jpg', './assets/kopia/k_pudlo.jpg', './assets/kopia/k_ladowarka.jpg', './assets/kopia/k_czytelnia_kubek.jpg', './assets/kopia/k_lampki.jpg', './assets/kopia/k_wigilia.jpg', './assets/most/m_kot_wycinki.jpg', './assets/most/m_brygada.jpg', './assets/most/m_inspekcja.jpg', './assets/most/m_znicz_most.jpg', './assets/most/m_salon_herbata.jpg',
   './assets/people/marta.jpg', './assets/people/marta_life1.jpg', './assets/people/natan.jpg', './assets/people/natan_life1.jpg', './assets/people/janina.jpg', './assets/people/janina_life1.jpg', './assets/people/henryk.jpg', './assets/people/henryk_life1.jpg',
   './assets/most/teczka_kruk.jpg', './assets/most/dziennik_s41.jpg', './assets/most/pocztowka.jpg', './assets/most/wycinek_2012.jpg', './assets/most/most_2011.jpg', './assets/most/hw_kadr.jpg',
   './js/main.js'
@@ -47,13 +47,38 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
+// Odpowiedź częściowa (Range) z pełnego pliku w pamięci — iOS Safari nie odtworzy wideo offline bez 206.
+async function rangeFrom(cached, range) {
+  const buf = await cached.arrayBuffer();
+  const m = /bytes=(\d*)-(\d*)/.exec(range || '');
+  let start = m && m[1] ? +m[1] : 0, end = m && m[2] ? +m[2] : buf.byteLength - 1;
+  if (m && !m[1] && m[2]) { start = Math.max(0, buf.byteLength - +m[2]); end = buf.byteLength - 1; }
+  end = Math.min(end, buf.byteLength - 1);
+  if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${buf.byteLength}` } });
+  return new Response(buf.slice(start, end + 1), { status: 206, headers: {
+    'Content-Type': cached.headers.get('Content-Type') || 'video/mp4',
+    'Content-Range': `bytes ${start}-${end}/${buf.byteLength}`, 'Content-Length': String(end - start + 1), 'Accept-Ranges': 'bytes' } });
+}
+async function fromCache(req) {
+  const hit = await caches.match(req, { ignoreSearch: true });
+  if (hit) {
+    const range = req.headers.get('range');
+    return range && hit.status === 200 ? rangeFrom(hit, range) : hit;
+  }
+  if (req.mode === 'navigate') return caches.match('./index.html');
+  return Response.error();
+}
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
   // Sieć najpierw (świeże pliki), pamięć podręczna jako zapas offline.
+  // Do pamięci trafiają tylko pełne odpowiedzi 200 (206 z Range rzuca w cache.put, 404 nadpisałby dobrą kopię).
   e.respondWith(fetch(e.request).then(r => {
-    const copy = r.clone();
-    caches.open(VERSION).then(c => c.put(e.request, copy));
+    if (r.status === 200 && r.type === 'basic' && !e.request.headers.get('range')) {
+      const copy = r.clone();
+      e.waitUntil(caches.open(VERSION).then(c => c.put(e.request, copy)).catch(() => {}));
+    }
     return r;
-  }).catch(() => caches.match(e.request)));
+  }).catch(() => fromCache(e.request)));
 });

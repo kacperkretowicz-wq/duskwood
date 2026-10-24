@@ -17,12 +17,13 @@
       const timeInput = h('input', { type: 'time', value: time, class: 'field', 'aria-label': 'Pora kolejnych rozmów' });
       timeInput.addEventListener('change', () => { if (SeasonPacing.configure(pacing?.mode || 'free', timeInput.value)) render(); });
       const rhythm = h('section', { class: 'season-recap' }, h('h3', {}, 'Rytm historii'),
-        h('p', {}, 'Zacznij bez czekania. Jeśli chcesz, kolejne rozdziały mogą pojawiać się w wybranej porze. Obecny pilot obejmuje pięć dni kalendarzowych; pełny miesiąc wymaga rozbudowanych odcinków.'),
+        h('p', {}, 'We własnym tempie grasz bez czekania. Rytm dzienny rozkłada pierwszy sezon na pięć dni. W każdej sprawie są też wybrane przerwy po kilka godzin: postacie wracają do pracy, zajęć albo odzywają się wieczorem.'),
         h('div', { class: 'seg' }, [['free', 'Własne tempo'], ['daily', 'Rytm dzienny']].map(([mode, label]) => h('button', {
           class: (pacing?.mode || 'free') === mode ? 'on' : '', 'aria-pressed': String((pacing?.mode || 'free') === mode), onclick: () => { SeasonPacing.configure(mode, timeInput.value); render(); }
         }, label))), h('label', { class: 'lbl' }, 'Pora kolejnych rozmów', timeInput),
-        h('p', {}, 'Prolog i Chmura są dostępne od razu. Następne rozdziały dochodzą codziennie. Sztolnia i akcja ratunkowa pozostają jedną sesją. Po przerwie możesz nadrobić wszystkie dostępne części.'));
+        h('p', {}, 'Prolog i początek Chmury są dostępne od razu. Pierwszy sezon ma też codzienne terminy rozdziałów. Przerwy wewnątrz rozmów działają we wszystkich pięciu sprawach i liczą się także po zamknięciu gry. Możesz zmienić tempo w każdej chwili. Akcja ratunkowa pozostaje ciągła.'));
       if (pacing?.waiting) rhythm.append(h('p', { class: 'season-release', role: 'status' }, `Kolejna część: ${new Date(SeasonPacing.release(pacing.waiting.chapter)).toLocaleString('pl-PL', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}.`));
+      if (pacing?.rest) rhythm.append(h('p', { class: 'season-release', role: 'status' }, `Powrót do rozmowy: ${new Date(pacing.rest.at).toLocaleString('pl-PL', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}. Nie musisz zostawiać gry otwartej.`));
       if (NativeNotifications.native) rhythm.append(h('button', { class: 'btn wide', onclick: async () => {
         if (pacing?.notify) await NativeNotifications.disable();
         else if (!await NativeNotifications.enable()) UI.toast('Brak zgody na powiadomienia. Możesz grać bez nich.');

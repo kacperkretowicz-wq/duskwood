@@ -175,7 +175,7 @@ DATA.web.tt_archiwum = {
     ].slice(0, n).reverse();
     return `<header class="tt-h"><b>klipo</b></header><main class="tt-m">
       <div class="tt-prof"><b>@archiwum.rybickiego</b><p>nie do druku. 2006–2021. on nagrywał wszystko</p></div>
-      ${clips.map(([t, d, v]) => `<article class="tt-v"><p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
+      ${clips.map(([t, d, v]) => `<article class="tt-v">${t.startsWith('18.12 · 22:31') ? '<video class="web-vid" src="assets/video/v_stodola.mp4" poster="assets/video/v_stodola.jpg" controls playsinline muted preload="none"></video>' : ''}<p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
       <div class="tt-com"><p><b>gosia_z_bielawy</b> to jest chore. ci ludzie żyją</p><p><b>m.kowal</b> w końcu ktoś mówi jak było</p><p><b>sylwia_salon</b> Proszę, nie wpisujcie nazwisk w komentarzach.</p></div></main>`;
   }
 };

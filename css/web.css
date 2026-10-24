@@ -195,3 +195,5 @@
 .site-doc .doc h1 { font-size: 17px; margin: 0 0 6px; }
 .site-doc .doc table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px; }
 .site-doc .doc th, .site-doc .doc td { border-bottom: 1px solid #ddd; padding: 6px 4px; text-align: left; vertical-align: top; }
+
+.web-vid { display:block; width:100%; max-height:70vh; background:#000; border-radius:6px; }

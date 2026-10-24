@@ -16,7 +16,7 @@ const KronikaCast = D => {
     Z: (t, o) => say('zenon', 'zenon', t, o),
     Id: (t, o) => say('ida', 'ida', t, o),
     B: t => say('blysk2', 'blysk2', t, { vanish: true }),
-    c: (who, t) => say('call', who, t),
+    c: (who, t, o) => say('call', who, t, o),
     V: (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`)
   };
 };
@@ -43,6 +43,15 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu')]),
       opt('Czyli całe ferie na sankach?', [M('sanki, herbata, seriale. jak w podstawówce'), M('mama już kupiła trzy paczki pierniczków „na wszelki wypadek”')])
     ]),
+    // P7: wejście do S4 po „Zasięgach”.
+    scene('xPoZasiegach', [iff(s => s.vars.s3Ending === 'zasiegi', [
+      M('kuba dalej nic nie znalazł. w dwóch miejscach powiedzieli, że „oddzwonią”'),
+      M('kartki już nikt nie przykleja. ale pani ze sklepu dalej mówi do niego „panie informatyku”'),
+      choose('maja2', [
+        opt('Napiszę do niego. Może razem coś wymyślimy.', [M('napisz. tylko nie pytaj o robotę. sam powie')], { trust: { maja: 1 } }),
+        opt('A ty jak się trzymasz?', [M('ja? ja zdjęłam tę kartkę. i tyle o tym'), M('dobra, ferie. o bałwanach miało być')])
+      ])
+    ])]),
     scene('xFerie', [
       pause(2500),
       say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj'),
@@ -207,7 +216,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     I('w 0:27 na górze ekranu jest odbicie. jakby świeciła lampka na biurku'),
     I('na samym nagraniu z kasety nie powinno być takiego odbicia. chyba że ktoś filmuje telewizor telefonem'),
     set('c_tvFilmed'),
-    I('to ważne, bo ktoś ma kasety i telewizor w jednym pokoju. to bardzo zawęża listę'),
+    I('to ważne, bo ktoś ma kasety i telewizor w jednym pokoju. to bardzo zawęża listę', { wording: "czyli ktoś raczej nagrywa ekran, zamiast wrzucać plik. szukamy miejsca z kasetami i telewizorem. samych ludzi to jeszcze nie wskazuje" }),
     pause(3000),
     W('Dzień dobry. Pani Maja mówi, że {Pan|Pani} pyta o kronikę.'),
     W('Lepiej zadzwonię. Pisanie mi dziś nie idzie.'),
@@ -239,7 +248,15 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
       W('Dał mi tę odbitkę dziesięć lat temu. Powiedział, że to jedyne zdjęcie, na którym jest on, a nie wszyscy inni.')
     ]),
     pause(5000),
-    clock('2027-01-19T21:00'),
+    clock('2027-01-19T21:00', { rest: 's4_evening' }),
+    /* P3: Weronika wraca po pracy; zwykła rozmowa przed nowym klipem. */
+    scene('xPoPracy', [
+      W('Wróciłam. Dwanaście godzin na nogach, a w autobusie ktoś jadł śledzie.'),
+      choose('weronika', [
+        opt('Odpocznij. Kronika poczeka do jutra.', [W('Nie poczeka. Ale dzięki.')]),
+        opt('Jak w pracy?', [W('Jak zawsze we wtorek. Ktoś zgubił klucze, ktoś krzyczał na kasie. Normalnie.')])
+      ])
+    ]),
     set('c_day2'),
     notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „boisko, 2008”', sound: 'notif', open: { page: 'tt_kronika' } }),
     scene('xBoisko', [
@@ -247,11 +264,11 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
       choose('igor', [
         opt('Tak jak na nagraniu ze studniówki: u góry znowu widać odbicie lampki.', [
           I('tak. i jeszcze w rogu, przy samochodzie, widać zielone cyferki. 23:47'),
-          I('to zegar magnetowidu. ktoś to filmował dzisiaj w nocy, nie w 2008')
+          I('to zegar magnetowidu. ktoś to filmował dzisiaj w nocy, nie w 2008', { wording: "wygląda jak zegar magnetowidu. godzina jest z urządzenia przed ekranem, nie z meczu w 2008. nie wiemy jeszcze, czy zegar dobrze chodzi" })
         ], { set: { c_clockSeen: true } }),
         opt('Ten samochód. Kalinowski, wójt.', [
           I('tak, wójt. a ten drugi to Wrzos z Wrzos-Bud. jego szwagier'),
-          I('ale patrz w róg ekranu. zielone cyferki, 23:47. ktoś to nagrywał niedawno, w nocy')
+          I('ale patrz w róg ekranu. zielone cyferki, 23:47. ktoś to nagrywał niedawno, w nocy', { wording: "ale patrz w róg. zielone 23:47, chyba zegar magnetowidu stojącego przed ekranem. może być źle ustawiony" })
         ], { set: { c_clockSeen: true, c_wojtSeen: true } }),
         opt('Zwykła budowa.', [I('ok. zapisuję sobie godzinę z rogu, 23:47. może się przyda')], { set: { c_clockLater: true } })
       ])
@@ -274,18 +291,18 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
       Nt('czesc. boisko 2008 to byl u nas temat. przetarg, szwagier wojta. tekst wyszedl, nic sie nie stalo'),
       Nt('czyli ktos wyciaga rzeczy, ktore juz byly w gazecie. i dorzuca takie, ktorych nie bylo'),
       choose('natan', [
-        opt('Studniówki nie było w gazecie.', [Nt('no wlasnie. to nie jest dziennikarstwo. to jest ktos, kto chce, zeby bolalo')]),
-        opt('Jak się czujesz, że znowu chodzi o jakieś nagranie?', [Nt('jakbym drugi raz jadl ten sam zly obiad')])
+        opt('Studniówki nie było w gazecie.', [Nt('no wlasnie. to nie jest dziennikarstwo. to jest ktos, kto chce, zeby bolalo', { wording: "no. przetarg to jedno. a tu juz w komentarzach rozpisuja, kto z kim przyszedl na studniowke" })]),
+        opt('Jak się czujesz, że znowu chodzi o jakieś nagranie?', [Nt('jakbym drugi raz jadl ten sam zly obiad', { wording: "od razu sprawdzilem, czy ktos znowu czegos nie wycial. nawet zanim obejrzalem do konca" })])
       ])
     ]),
     pause(3000),
     O('Pod klipem z boiskiem ktoś napisał „jutro: O.N.”.'),
-    O('O.N. To mogę być ja. Aleksandra Nowicka.'),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola'),
+    O('O.N. To mogę być ja. Aleksandra Nowicka.', { wording: "O.N. Jak Ola Nowicka. Wiem, że to tylko inicjały, ale od razu pomyślałam o sobie." }),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola'),
 
     O('Wiem, co może być na tej kasecie. Festyn, 2018. Nie chcę o tym pisać.'),
     choose('ola', [
       opt('Nie musisz. Jestem tu.', [O('Dziękuję. Muszę to przemyśleć.')], { trust: { ola: 1 } }),
-      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2018 na festynie.')])
+      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2018 na festynie.', { wording: "Może. Znam jeszcze dwie osoby z takimi inicjałami. Ale ten festyn... ja naprawdę mam czego się bać." })])
     ]),
     scene('xOlaMama', [
       pause(4000),
@@ -319,7 +336,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     O('Nie spałam. Dobra, powiem ci. Tylko tobie.'),
     O('Festyn w 2018. Miałam czternaście lat. Pobiłam się z dziewczyną z Bielawy. Złamałam jej nos.'),
     O('Była sprawa w sądzie dla nieletnich. Przeprosiłam ją. Mama przez rok spłacała koszty jej leczenia.'),
-    O('Teraz pracuję z dziećmi w świetlicy. Jak to wyjdzie, nikt mnie już nie zatrudni.'),
+    O('Teraz pracuję z dziećmi w świetlicy. Jak to wyjdzie, nikt mnie już nie zatrudni.', { wording: "Teraz przychodzę do świetlicy, a rodzice zostawiają mi dzieci. Boję się, że zobaczą tylko ten klip. Już nie mnie." }),
     choose('ola', [
       opt('Sama opowiedz, co się stało, zanim zrobi to ktoś inny. Pomogę ci napisać post.', [
         O('Sama? W grupie Sylwii?'),
@@ -329,7 +346,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     ]),
     pause(3000),
     M('mam numer do pana Zenona od pani Weroniki. 607 412 118'),
-    M('ja nie dzwonię. jak mi powie „dzień dobry”, to się rozpłaczę'),
+    M('ja nie dzwonię. jak mi powie „dzień dobry”, to się rozpłaczę', { wording: "spróbujesz zadzwonić? ja teraz nie dam rady spokojnie zapytać, czy ktoś kręcił tam Olę" }),
     dial({
       goal: 'Zadzwoń do pana Zenona (607 412 118).',
       goalHints: [],
@@ -361,7 +378,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       Nt('mam w archiwum ramowke tv dolina z sierpnia 2018. festyn mial isc w sobote, 2 minuty'),
       Nt('a w notatce operatora dopisek recznie: „bójka — nie emitować. Z.G.”'),
       choose('natan', [
-        opt('Czyli pan Zenon sam to wtedy wyciął.', [Nt('na to wyglada. 15 lat temu ktos juz zdecydowal, ze tego nie trzeba pokazywac')], { set: { c_zenonCut: true } }),
+        opt('Czyli pan Zenon sam to wtedy wyciął.', [Nt('na to wyglada. 15 lat temu ktos juz zdecydowal, ze tego nie trzeba pokazywac', { wording: "na to wyglada. podpis Z.G. i „nie emitowac”. wtedy tego nie puscili, teraz ktos wyciaga kasete" })], { set: { c_zenonCut: true } }),
         opt('Kto jeszcze ma tę ramówkę?', [Nt('my w archiwum. i ten, kto ma kasety')])
       ])
     ]),
@@ -372,15 +389,15 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       M('czekaj. ta dziewczyna z psem. kogoś ci przypomina?'),
       choose('maja2', [
         opt('To pies pana Zenona. Ten, który piszczał w telefonie.', [
-          M('tak. to on. a ona to wnuczka. Ida. przyjechała na ferie, chodzi z nim po nocach'),
+          M('tak. to on. a ona to wnuczka. Ida. przyjechała na ferie, chodzi z nim po nocach', { wording: "chyba ten sam pies. a dziewczynę kojarzę, to Ida, wnuczka pana Zenona. przyjechała na ferie" }),
           M('pan Zenon mówi o niej „moja dziennikarka”')
-        ], { set: { c_idaSeen: true } }),
+        ], { wording: "To chyba pies pana Zenona? Mówił o wnuczce, która z nim wychodzi.", set: { c_idaSeen: true } }),
         opt('Ta kurtka. Ktoś w takiej kurtce stał na peronie przed świętami?', [
           M('nie wiem. nie widziałam, kto był na peronie'),
           pause(3000),
           M('ale ten pies to pies pana Zenona. czyli to jego wnuczka. Ida')
         ], { set: { c_idaSeen: true, c_peronLink: true } }),
-        opt('Ktoś wyszedł z psem. Normalny wieczór.', [M('no normalny. tylko u nas nikt normalny nie chodzi o 22 z psem po tej stronie bloku')], { set: { c_idaLater: true } })
+        opt('Ktoś wyszedł z psem. Normalny wieczór.', [M('no normalny. tylko u nas nikt normalny nie chodzi o 22 z psem po tej stronie bloku', { wording: "no, może po prostu spacer. tylko ten pies mnie zastanawia. nie chcę teraz robić tropu z każdego, kto wychodzi wieczorem" })], { set: { c_idaLater: true } })
       ])
     ]),
     scene('xKrzyzowki', [
@@ -522,7 +539,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     scene('xKubaNoc', [
       pause(2000),
       K('nie śpię. ktoś mi wrzucił tę zapowiedź do prywatnych'),
-      K('wiem, jak to działa. jak masz czyjeś nagrania, myślisz, że masz władzę. nie masz'),
+      K('wiem, jak to działa. jak masz czyjeś nagrania, myślisz, że masz władzę. nie masz', { wording: "cały czas odświeżam, czy już coś wrzucili. po tym, co sam robiłem w grudniu. aż mi wstyd do ciebie pisać" }),
       choose('kuba', [
         opt('Ty to wiesz najlepiej.', [K('no. dlatego mi niedobrze')]),
         opt('Idź spać, Kuba.', [K('nie umiem. zrobię herbatę. mama też nie śpi')])
@@ -534,7 +551,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       Nt('napisy na dole sa w naszym starym szablonie z gs. tym z jesieni. tylko my go uzywalismy'),
       choose('natan', [
         opt('Kto miał do niego dostęp?', [Nt('pol redakcji. stazysci tez. rano sprawdze, kto mial konto na serwerze')], { set: { c_gsTemplate: true } }),
-        opt('Może ktoś go po prostu skopiował.', [Nt('moze. ale to by musial byc ktos, kto wie, gdzie go szukac')])
+        opt('Może ktoś go po prostu skopiował.', [Nt('moze. ale to by musial byc ktos, kto wie, gdzie go szukac', { wording: "moze, nie wykluczam. sprawdze dostepy, bo ten plik lezy u nas na serwerze. nie chce znowu zgadywac" })])
       ]),
       pause(2000),
       S('Przepraszam, że piszę w nocy. Ktoś wrzucił do grupy zapowiedź z Błysku. Usunęłam po czterdziestu sekundach.'),
@@ -549,13 +566,13 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       pic('igor', 'igor', 'c_festyn', 'zrobiłem kadr. co tu widzisz?'),
       choose('igor', [
         opt('Kamera jest wyżej niż ludzie. Ktoś stał na scenie. Operator kablówki.', [
-          I('tak. czyli nie nagrał tego nikt z tłumu telefonem. to oficjalna kaseta TV Dolina'),
-          I('a pełna wersja jest tylko na oryginale. czyli u pana Zenona w pokoju')
+          I('tak. czyli nie nagrał tego nikt z tłumu telefonem. to oficjalna kaseta TV Dolina', { wording: "wysokość i ten sam pasek TV Dolina. pasuje do ujęcia ze sceny, które pokazała weronika" }),
+          I('a pełna wersja jest tylko na oryginale. czyli u pana Zenona w pokoju', { wording: "szukałbym pełnej kasety u pana Zenona. nie tylko jego trzeba pytać, jeśli ktoś jeszcze bywa w tym pokoju" })
         ], { set: { c_stageLink: true } }),
         opt('Ta dziewczyna z boku. Chyba trzyma telefon.', [
           I('przybliżyłem. to puszka po napoju, nie telefon'),
           pause(3000),
-          I('ale zobacz, skąd jest ujęcie. z góry, ze sceny. to kamera kablówki. oryginał jest u pana Zenona')
+          I('ale zobacz, skąd jest ujęcie. z góry, ze sceny. to kamera kablówki. oryginał jest u pana Zenona', { wording: "ale kąt pasuje do kamery ze sceny, a pasek jest z TV Dolina. sprawdźmy oryginał u pana Zenona, zamiast zgadywać po puszce" })
         ], { set: { c_stageLink: true, c_canDetour: true } }),
         opt('Zwykły festyn. Taki jak co roku.', [I('no. tylko że nagranie z tego festynu będzie jutro w internecie')], { set: { c_stageLater: true } })
       ]),
@@ -583,7 +600,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. to było na schodach. co o tym myślisz?'),
       choose('maja2', [
         opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku'), M('pies pana Zenona')], { set: { c_pawLink: true } }),
-        opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy')], { set: { c_smallShoe: true } }),
+        opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy', { wording: "mały ślad. kuba przyłożył swój but, ale od samego rozmiaru nie poznamy, kto tu był" })], { wording: "Mały ślad buta. Możesz porównać go ze swoim, bez dotykania?", set: { c_smallShoe: true } }),
         opt('Ktoś wrócił z psem do domu. Zwykłe błoto.', [M('o pierwszej w nocy? no może')])
       ]),
       K('stoję na klatce w kapciach. zimno jak w psiarni'),
@@ -594,7 +611,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     pause(2500),
     scene('scFestyn', [scare('s4_festyn', 'face', { img: 'c_festyn', caption: 'TV Dolina · 11.08.2018 · 21:12' })]),
     pause(2000),
-    M('dobra. zamknij drzwi na dwa zamki. ja nie śpię'),
+    M('dobra. zamknij drzwi na dwa zamki. ja nie śpię', { wording: "sprawdź, czy drzwi są zamknięte. nie schodź sam{|a} na klatkę. ja też jeszcze nie zasnę" }),
     scene('xNocDalej', [
       pause(4000),
       clock('2027-01-21T00:41'),
@@ -615,10 +632,10 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       ]),
       pause(2500),
       W('Nie śpię. Pani Grażyna naprzeciwko też nie, widzę u niej światło w kuchni.'),
-      W('Myślę o panu Zenonie. On teraz śpi i niczego nie wie.'),
+      W('Myślę o panu Zenonie. On teraz śpi i niczego nie wie.', { wording: "Myślę o panu Zenonie. Zwykle już o tej porze śpi. Może nawet nie widział, co ludzie dziś pisali." }),
       choose('weronika', [
         opt('Rano do niego zadzwonimy. Razem.', [W('Dobrze. Rano. O tej porze ludzi się nie budzi.')]),
-        opt('Może wie więcej, niż pani myśli.', [W('Może. Ale wtedy nie spałby tak spokojnie.')])
+        opt('Może wie więcej, niż pani myśli.', [W('Może. Ale wtedy nie spałby tak spokojnie.', { wording: "Może. Ja też go teraz bronię, a przecież nie wiem, co robił dziś wieczorem. Musimy go zapytać." })])
       ]),
       pause(2500),
       I('laptop złożony. idę spać. ty też idź'),
@@ -682,13 +699,13 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       W('Przypomina to {Panu|Pani} coś?'),
       choose('weronika', [
         opt('Magnetowid pokazuje 23:47. Taki zegar był w rogu klipu z boiskiem.', [
-          W('Boże. Czyli te klipy są nagrywane w tym pokoju.'),
+          W('Boże. Czyli te klipy są nagrywane w tym pokoju.', { wording: "Ten sam zegar... I to odbicie lampki. Wygląda, jakby ktoś nagrywał tutaj." }),
           W('Ale pan Zenon kładzie się o dziewiątej. Mówił mi to sto razy, bo „telewizja po dziewiątej to samo zło”.')
         ], { set: { c_roomLink: true } }),
         opt('Lampka na biurku. Jej odbicie było na studniówce.', [
           W('Lampka jak lampka, takich jest pełno.'),
           pause(3000),
-          I('wrzuć mi to zdjęcie. tak, zegar magnetowidu pokazuje 23:47. jak w klipie z boiskiem. to ten pokój')
+          I('wrzuć mi to zdjęcie. tak, zegar magnetowidu pokazuje 23:47. jak w klipie z boiskiem. to ten pokój', { wording: "prześlij mi zdjęcie. zegar 23:47 i lampka się zgadzają z klipem. to już mocniejszy trop niż samo „ma kasety”" })
         ], { set: { c_roomLink: true } }),
         opt('Porządek ma. Wszystko podpisane.', [W('Zawsze był pedantem. Kasety ułożone według lat.')], { set: { c_roomLater: true } })
       ])
@@ -715,9 +732,9 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       Z('{Szanowny Panie|Szanowna Pani}, przepraszam za ten telefon. Ida mówi, że niepotrzebnie się żalę. Z poważaniem, Z. Gil'),
       pause(2500),
       O('Byłam. Powiedziała, że widziała zapowiedź i że „poczekajmy do piątku”.'),
-      O('Poczekajmy. Jakbym miała jakiś wybór.'),
+      O('Poczekajmy. Jakbym miała jakiś wybór.', { wording: "Mam czekać, a jutro znów wejść do sali i udawać, że nic. Nie wiem, jak to zrobić." }),
       choose('ola', [
-        opt('To nie jest „nie”. To jest „poczekajmy”.', [O('Wiem. Trzymam się tego jak poręczy.')]),
+        opt('To nie jest „nie”. To jest „poczekajmy”.', [O('Wiem. Trzymam się tego jak poręczy.', { wording: "Tak sobie powtarzam. Ale już mam otwartego maila i sprawdzam co pięć minut." })], { wording: "Jeszcze cię nie skreśliła. Wiem, że kiepskie pocieszenie." }),
         opt('Chcesz, żebym z nią porozmawiał{|a}?', [O('Nie. To moja rozmowa. Ale dziękuję.')], { trust: { ola: 1 } })
       ]),
       iff('flag:c_zenonDefended', [S('Przypięłam. Od rana nikt więcej nie podał adresu.')], [S('Ktoś znowu wkleił adres pana Zenona. Usunęłam. Czwarty raz dzisiaj.')])
@@ -735,16 +752,16 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     give('ev_c_wogole', { silent: true }),
     pause(3000),
     scene('xKto', [
-      M('kto pisze „wogóle” razem? moja polonistka by zemdlała'),
+      M('kto pisze „wogóle” razem? moja polonistka by zemdlała', { wording: "„wogóle”. razem. kojarzysz, kto tak pisze?" }),
       choose('maja2', [
         opt('i.k_00. W listopadzie, na Błysku, przyznała się do wycięcia 40 sekund nagrania z mostu. Napisała „wogóle”. To Ida.', [
           M('Ida. wnuczka pana Zenona'),
-          M('ona ma klucz do jego pokoju, wychodzi z psem po nocach i wie, gdzie mieszkasz'),
+          M('ona ma klucz do jego pokoju, wychodzi z psem po nocach i wie, gdzie mieszkasz', { wording: "mieszka z nim, wychodzi z tym psem. i była pod blokiem. to zaczyna pasować, nie tylko to jedno słowo" }),
           M('i miała kiedyś w telefonie numery wszystkich od mostu')
         ], { set: { c_twist: true } }),
         opt('Pan Zenon. Starsi ludzie piszą z błędami.', [
           M('pan Zenon pisze esemesy z przecinkami i „Szanowna Pani”. widziałam'),
-          M('to nie on. to ktoś młody. ktoś kto zna Błysk'),
+          M('to nie on. to ktoś młody. ktoś kto zna Błysk', { wording: "sam błąd nikogo nie wskazuje. ale porównajmy go z tamtymi wiadomościami z Błysku" }),
           pause(3000),
           M('Ida. jego wnuczka. pracowała w gazecie nad sprawą tego mostu, Natan mi mówił')
         ], { set: { c_twist: true, c_wrongZenon: true } })
@@ -759,10 +776,10 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       pause(2500),
       K('maja mi mówi, że to ida'),
       K('czyli to ona w wigilię pisała do ciebie, że ma więcej plików niż ja'),
-      K('robiła to samo co ja. tylko dłużej'),
+      K('robiła to samo co ja. tylko dłużej', { wording: "ja też sobie mówiłem, że tylko wrzucam pliki. a potem ludzie bali się odebrać telefon" }),
       choose('kuba', [
         opt('Ty przestałeś. Ona też jeszcze może.', [K('mogę jej to napisać. jak ktoś, kto wie, jak to jest')], { set: { c_kubaHelps: true } }),
-        opt('Nie mieszaj się w to.', [K('ok. ale wiem, co ona teraz czuje')])
+        opt('Nie mieszaj się w to.', [K('ok. ale wiem, co ona teraz czuje', { wording: "ok. nie napiszę. ale nie chcę jutro udawać, że nigdy nic takiego nie robiłem" })])
       ]),
       pause(2500),
       iff('flag:c_gsTemplate', [Nt('sprawdzilem serwer, jak obiecalem. konto stazystki ma dalej dostep do szablonu napisow. ostatnie logowanie: 18 stycznia, 20:47. dzien pierwszego klipu')]),
@@ -779,6 +796,16 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     unlock('chat:ida'),
     Id('przepraszam. nie chciałam dzwonić'),
     Id('jutro o 21 pojawi się klip z olą. już go wgrałam i ustawiłam publikację na 21:00'),
+    /* P6 / S4: Ida i Zenon. Wnuczka robi coś za plecami dziadka, nie z nienawiści. */
+    scene('xIdaDziadek', [
+      pause(2500),
+      Id('dziadek myśli że wieczorami siedzę na rozmowach o pracę. online. od stażu w gazecie to nawet się zgadza'),
+      Id('te kasety trzymał w szafie po babci. nie wie ile z nich widziało już pół miasta'),
+      choose('ida', [
+        opt('Powiedz mu sama, zanim zobaczy w internecie.', [Id('wiem. jutro. przy śniadaniu. jak pies nie będzie szczekał')], { set: { c_idaTellZenon: true } }),
+        opt('Czemu go nie zapytałaś o zgodę?', [Id('bo by powiedział nie. i miałby rację. dlatego nie zapytałam')])
+      ])
+    ]),
     end('c4')
   ];
 });
@@ -816,7 +843,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       camera('maja2', [
         opt('Z galerii: Kuba na górce', [M('xD to mi pomogło bardziej niż melisa'), M('wysyłam mu. niech cierpi')], { img: 'c_gorka', gallery: true }),
         opt('Z galerii: rysunek ze świetlicy Oli', [M('ok teraz płaczę'), M('ona nie może stracić tej pracy')], { img: 'c_rysunek', gallery: true, set: { c_sawDrawing: true } }),
-        opt('Z galerii: Ida z psem', [M('to mnie nie uspokaja'), M('ale dobrze, że ją pamiętamy taką. z psem, nie z kamerą')], { img: 'c_ida_pies', gallery: true })
+        opt('Z galerii: Ida z psem', [M('to mnie nie uspokaja'), M('ale dobrze, że ją pamiętamy taką. z psem, nie z kamerą', { wording: "to ten sam spacer, przy którym jeszcze myślałam, że może sobie coś wkręcam" })], { img: 'c_ida_pies', gallery: true })
       ])
     ]),
     scene('xPrzed21', [
@@ -824,7 +851,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       O('Poszłam do świetlicy po swoje rzeczy. Na wszelki wypadek.'),
       pic('ola', 'ola', 'c_rysunki', 'Nie umiem tego zdjąć z tablicy.'),
       choose('ola', [
-        opt('Nie zdejmuj. Wrócisz tam w poniedziałek.', [O('Obyś miał{|a} rację.')]),
+        opt('Nie zdejmuj. Wrócisz tam w poniedziałek.', [O('Obyś miał{|a} rację.')], { wording: "Zostaw na razie. Mam nadzieję, że w poniedziałek znowu tam wejdziesz." }),
         opt('Zrób im zdjęcie. Niezależnie od tego, co będzie.', [O('Zrobiłam. To jest tylko dla mnie.')])
       ]),
       pause(2500),
@@ -833,18 +860,18 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         K('przeczytała. nie odpisała'),
         choose('kuba', [
           opt('Przeczytała. To już dużo.', [K('może. ja też kiedyś tylko czytałem')]),
-          opt('Dzięki, że spróbowałeś.', [K('nie dziękuj. jakoś jestem jej to winny')])
+          opt('Dzięki, że spróbowałeś.', [K('nie dziękuj. jakoś jestem jej to winny', { wording: "nie wiem, czy to coś dało. ale nie chciałem tylko patrzeć na „wyświetlono”" })])
         ])
       ], [K('nie wiem, czy do niej napisać. chyba nie mam prawa nikogo pouczać')]),
       pause(2500),
       Nt('naczelny obiecal: jak klip wyjdzie, gs nie robi z tego newsa. zadnego linku'),
-      Nt('pierwszy raz od listopada mam wrazenie, ze cos robimy dobrze, zanim jest za pozno'),
+      Nt('pierwszy raz od listopada mam wrazenie, ze cos robimy dobrze, zanim jest za pozno', { wording: "mam to od niego na mailu. przynajmniej nasza gazeta nie bedzie jej tego podrzucac w wynikach wyszukiwania" }),
       pause(2500),
       clock('2027-01-22T20:15'),
       I('mam otwarte konto kroniki w drugiej karcie. jak je usunie, mogę zapisać to, co mi się wczytało. zapisać?'),
       choose('igor', [
         opt('Nie. Niech zniknie naprawdę.', [I('ok. zamykam kartę')], { set: { c_igorClosed: true } }),
-        opt('Zapisz, ale nikomu nie dawaj.', [I('zapisane. folder bez nazwy, na pendrivie w szufladzie. nikt o nim nie wie')])
+        opt('Zapisz, ale nikomu nie dawaj.', [I('zapisane. folder bez nazwy, na pendrivie w szufladzie. nikt o nim nie wie', { wording: "zapisane na pendrivie. chowam do szuflady, nie wrzucam do chmury. nikomu nie wysyłam" })])
       ]),
       pause(2500),
       clock('2027-01-22T20:31'),
@@ -870,12 +897,12 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
           c('ida', 'halo'),
           c('ida', 'nagrywam. nawyk z redakcji. spokojnie, nikomu tego nie dam'),
           c('ida', 'w listopadzie wszyscy pisali, że to ja jestem fejkiem. że przeze mnie przez tydzień wszyscy mieli pana Henryka za mordercę'),
-          c('ida', 'a całe miasto ma takie swoje 40 sekund. tylko nikt ich nie wyciął'),
+          c('ida', 'a całe miasto ma takie swoje 40 sekund. tylko nikt ich nie wyciął', { wording: "o mnie dalej piszą „ta od wyciętego nagrania”. a pod własnymi filmami serduszka, wspominki. jakby nikt nigdy nic nie zrobił" }),
           choose('call', [
             opt('Ola miała 14 lat i dawno za to przeprosiła. Nie rób jej tego, co zrobiono tobie.', [
               c('ida', '…'),
               c('ida', 'usuwam. konto też'),
-              c('ida', 'powiesz ze mną dziadkowi? sama nie dam rady')
+              c('ida', 'powiesz ze mną dziadkowi? sama nie dam rady', { wording: "będziesz na telefonie, jak mu powiem? on dalej myśli, że ktoś obcy mu to robi" })
             ], { set: { c_idaStops: true } }),
             opt('Daj mi kopię archiwum. Zajmę się tym sam{|a}.', [
               c('ida', 'serio? ty też?'),

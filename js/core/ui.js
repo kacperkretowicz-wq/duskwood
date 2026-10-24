@@ -166,6 +166,9 @@ const UI = (() => {
   function applyAppearance() {
     const pref = G.settings.appearance || 'light';
     document.body.classList.toggle('dark-ui', pref === 'dark' || pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const ts = G.settings.textSize || 'm';
+    document.body.classList.toggle('ts-l', ts === 'l');
+    document.body.classList.toggle('ts-xl', ts === 'xl');
   }
 
   /* ---------- ekran główny ---------- */
@@ -420,6 +423,7 @@ const UI = (() => {
     });
   }
   function preview(msg) {
+    if (msg.deleted) return 'Wiadomość została usunięta';
     if (msg.vanish) return '👁 Wiadomość znikająca';
     if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');

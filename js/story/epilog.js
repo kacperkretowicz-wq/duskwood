@@ -46,14 +46,14 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       /* ---------- ŚWIT / ODŁAMKI ---------- */
       ambient('dawn'),
       K('hej'),
-      K('minęły trzy tygodnie, a ja dalej nie wiem, co ci napisać'),
+      K('minęły trzy tygodnie, a ja dalej nie wiem, co ci napisać', { wording: 'mam twój czat przypięty. od trzech tygodni zaczynam coś pisać i kasuję' }),
       K('maja wyszła ze szpitala. ręka w gipsie, odmrożone palce u stóp. robi zdjęcia lewą ręką'),
       K('powiedziała że prowadzący pewnie zapyta czy lewa ręka to świadomy zabieg 💀'),
       choose('kuba', [
         opt('A ty jak się trzymasz?', [K('trochę lepiej. wczoraj przespałem noc bez sprawdzania telefonu. pierwszy raz'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
-      scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀')]),
+      scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀', { img: 'e_czytelnia' })]),
       notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [
@@ -68,7 +68,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       pause(2500),
       iff('var:trust_bartek>=1', [
         B('stary siedzi w areszcie. odwiedzam go w kazda niedziele'),
-        B('pierwszy raz od lat gadamy jak ludzie'),
+        B('pierwszy raz od lat gadamy jak ludzie', { wording: 'pytal kto mi pomaga w warsztacie. powiedzialem ze sam ogarniam. chcialem jeszcze zapytac o kilka rzeczy ale skonczyla sie wizyta' }),
         B('jak ci kiedys auto nie odpali to pisz. tylko nie o trzeciej w nocy')
       ], [
         B('stary siedzi. ja prowadze warsztat'),
@@ -89,7 +89,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       iff('flag:igorForgiven', [
         I('ojciec zeznaje. wraca po kilku godzinach i nic nie mówi. ale już nie dzwoni do gajdy'),
         I('kuba jeszcze nie odpisuje na moje prywatne. nie poganiam go'),
-        I('drugą kartę oddałem policji. technicznie rzecz biorąc w końcu mam jeden numer')
+        I('drugą kartę oddałem policji. technicznie rzecz biorąc w końcu mam jeden numer', { wording: 'oddałem drugi telefon i kartę policji. starego czatu nie kasowałem. kuba może go przeczytać, jak będzie chciał' })
       ], [
         I('jadę do wrocławia. tu każdy pyta o ojca, a ja dalej nie mam odpowiedzi na połowę rzeczy'),
         I('dzięki że nie {odpuściłeś|odpuściłaś}. ja wiem że sam strasznie dużo spieprzyłem')
@@ -109,6 +109,11 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Dobrze, że jej odpisałaś.', [O('Jeszcze nie wiem, czy dobrze. Ale odpisałam.')]),
         opt('Daj znać, jak się będziesz czuła.', [O('Dam. Tym razem naprawdę.')])
       ])]),
+      /* P4: późniejsze wyjaśnienie wiadomości z próśb (xProsby w ch3). */
+      scene('xProsbaWyjasnienie', [
+        O('I jeszcze jedno. To konto m.k.2009 w końcu odpisało. Magda z drugiej klasy, Maja dawała jej korepetycje z biologii.'),
+        O('Bała się napisać do kogoś, kogo zna, więc napisała do mnie. Ludzie dziwnie się zachowują, kiedy się boją.')
+      ]),
       pause(4000),
       unlock('chat:maja2'),
       M('hej, maja. kuba mówi że mam zacząć od imienia a nie od „to ja” 🙂'),
@@ -117,13 +122,13 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('myślałam że dzwonię do rybickiego. nawet nie sprawdziłam czy dalej ma ten numer'),
       choose('maja2', [
         opt('Cieszę się, że zadzwoniłaś pod zły numer.', [M('ja też. pierwszy raz w życiu cieszę się że pomyliłam numer 🫶')]),
-        opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.')]),
-        opt('Pan Adam byłby z ciebie dumny.', [M('Jego brat powiedział to samo. Prawie się rozpłakałam przy obcym facecie.')])
+        opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.', { wording: 'teraz? marzną mi stopy, mama trzeci raz pyta czy herbaty, a ja chcę posiedzieć sama. ale jem już normalnie' })]),
+        opt('Pan Adam byłby z ciebie dumny.', [M('Jego brat powiedział to samo. Prawie się rozpłakałam przy obcym facecie.', { wording: 'to prawda. nawet jak nic nie mówię, on siedzi obok. dzisiaj wysłałam go w końcu na spacer' })], { wording: 'Dobrze mieć Kubę obok. Bardzo na ciebie czekał.' })
       ]),
-      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.'),
-      M('Tomek był tylko jedną z jego spraw. Tam są inne.'),
-      M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.'),
-      M('Kiedyś ci pokażę, jak je znaleźć.'),
+      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.', { img: 'e_pudlo' }),
+      M('Tomek był tylko jedną z jego spraw. Tam są inne.', { wording: 'na razie zajrzałam tylko na wierzch. kasety, zeszyty, jakieś wycinki o moście' }),
+      M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.', { wording: 'pani Weronika mówi, że pomoże to poukładać. u mnie pudło stoi pod biurkiem i przeszkadza bandziorowi' }),
+      M('Kiedyś ci pokażę, jak je znaleźć.', { wording: 'jak do tego usiądę, napiszę. dzisiaj tylko chciałam się odezwać' }),
       M('tylko odbierz jak zadzwonię, ok? tym razem'),
       pause(3500),
       iff(E('swit'), [ending('swit')], [ending('odlamki')])

@@ -18,8 +18,8 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     K('ej'),
     K('napisała do mnie jakaś dziewczyna. nina. jeździ kurierem po głuszycy i rzeczce'),
     K('mówi że jak w piątek pokazali w tv że gajda jest poszukiwany to jej się coś przypomniało'),
-    K('nie wiem czy to coś jest. trzy tygodnie i każdy coś widział'),
-    K('dałem jej twój numer. ty umiesz pytać tak żeby nie wymyślali'),
+    K('nie wiem czy to coś jest. trzy tygodnie i każdy coś widział', { wording: 'nie wiem czy to coś da. ponad miesiąc i ciągle ktoś coś widział' }),
+    K('dałem jej twój numer. ty umiesz pytać tak żeby nie wymyślali', { wording: 'dałem jej twój numer. możesz z nią pogadać? ja już nie wiem o co pytać' }),
     choose('kuba', [
       opt('Dobrze zrobiłeś. Co dokładnie ci napisała?', [K('że odebrał od niej paczkę facet podobny do niego. tylko tyle. i że maji nie widziała. sama to napisała zanim zapytałem')]),
       opt('A jak to kolejna osoba, która chce się pokazać?', [K('no to sprawdzisz i powiesz. ja już nie umiem odróżnić'), K('serio nie umiem')])
@@ -27,7 +27,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     pause(3000),
     unlock('chat:nina'),
     N('cześć, tu nina, kuba dał mi numer'),
-    N('od razu mówię żeby nie było: ja maji nie widziałam. nie chcę żeby ktoś potem mówił że ją widziałam'),
+    N('od razu mówię żeby nie było: ja maji nie widziałam. nie chcę żeby ktoś potem mówił że ją widziałam', { wording: 'tylko od razu, ja maji nie widziałam. kuba wie, ale wolę ci też napisać' }),
     N('ale 6 listopada wiozłam paczki do rzeczki i odbierał facet w czapce. nie gadał. tylko „dawaj tu”'),
     N('i w piątek w wiadomościach puścili to jego stare nagranie i on tak samo mówi „dawaj tu”. aż mi się zimno zrobiło'),
     choose('nina', [
@@ -52,7 +52,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     choose('nina', [
       opt('Etykieta mówi Rynek 2 w Głuszycy. Tam trzeba sprawdzić.', [
         N('nie, czekaj. rynek 2 to biuro rachunkowe. tam o 9:12 zostawiłam list polecony, zupełnie inny'),
-        N('na etykiecie jest adres korespondencyjny firmy. jak na fakturze. ale w uwagach jest „dostarczyć na zaplecze, rzeczka 17” i tam pojechałam'),
+        N('na etykiecie jest adres korespondencyjny firmy. jak na fakturze. ale w uwagach jest „dostarczyć na zaplecze, rzeczka 17” i tam pojechałam', { wording: 'adres z etykiety to biuro firmy. w uwagach mam „dostarczyć na zaplecze, rzeczka 17”, tam zawiozłam paczki' }),
         N('popatrz jeszcze raz na kartę, o 10:25'),
         D.go('mp_adres')
       ]),
@@ -63,7 +63,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     ]),
     pause(1500),
     W('Dzień dobry. Kuba przesłał mi rozmowę z panią Niną. Proszę mi wybaczyć, że się wtrącam.'),
-    W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.'),
+    W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.', { img: 'mp_osrodek' }),
     W('Ale „woda, konserwy, olej opałowy” na zimę do pustego zaplecza? To ktoś tam jest. Albo ma być.'),
     N('byłam tam dziś rano swoim autem, mieszkam dwie wsie dalej. nie wysiadałam. zrobiłam zdjęcie przez szybę, bo numer jest przy drzwiach'),
     pic('nina', 'nina', 'mp_wejscie', 'dziś 9:58. kanistry stoją. tamtego dnia ich nie było'),
@@ -72,7 +72,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
       opt('Czyli wiemy tyle: to miejsce trzeba sprawdzić. Nie wiemy, kto jest w środku.', [
         N('ok, tyle mogę powiedzieć, więcej nie wiem'),
         W('Zgadzam się. Nie wiemy, czy Maja tam jest, ale policja powinna to sprawdzić.')
-      ], { set: { mp_placeOnly: true } }),
+      ], { wording: 'Przekażę adres. Tylko bez dopisywania, kto tam jest, bo tego nie wiemy.', set: { mp_placeOnly: true } }),
       opt('To tam ją trzyma.', [
         N('nie wiem tego. serio. ja widziałam faceta i trzy paczki'),
         W('Rozumiem, co {Pan|Pani} czuje. Ale wiemy tylko, dokąd trafiły paczki. Nie wiemy, czy Maja tam jest. Proszę to tak przekazać.')
@@ -88,7 +88,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
         K('…'),
         K('ok. ale zadzwoń teraz. nie za godzinę'),
         K('teraz')
-      ], { set: { mp_stoppedFamily: true }, trust: { kuba: 1 } }),
+      ], { wording: 'Kuba, nie jedźcie. Jeśli on was zobaczy, może ją znowu wywieźć. Dzwonię do policji spoza Mgliska.', set: { mp_stoppedFamily: true }, trust: { kuba: 1 } }),
       opt('Jedźcie, tylko nie wchodźcie.', [
         K('jedziemy'),
         pause(2500),
@@ -134,7 +134,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     pause(6000),
     clock('2026-11-15T16:52'),
     K('dzwonił ktoś do ciebie?'),
-    K('mama siedzi przy telefonie i nie odbiera od nikogo bo czeka'),
+    K('mama siedzi przy telefonie i nie odbiera od nikogo bo czeka', { wording: 'mama trzyma telefon w ręce. jak dzwoni ktoś z rodziny, odrzuca, żeby nie przegapić tego z policji' }),
     pause(8000),
     clock('2026-11-15T19:31'),
     K('ZNALEŹLI JĄ'),
@@ -176,7 +176,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     clock('2026-11-24T18:05'),
     title(),
     W('Dobry wieczór. Pani Marta przyjechała z kamerą. Siedzimy w kuchni, kaseta nie wychodzi z mieszkania, tak jak było ustalone.'),
-    Ma('Dzień dobry. Przywiozłam kamerę z archiwum. Ten sam model, którego pan Adam używał do zgrywania w 2019. Taśma jest w dobrym stanie, tylko przez pierwsze 20 sekund nagranie się urywa.'),
+    Ma('Dzień dobry. Przywiozłam kamerę z archiwum. Ten sam model, którego pan Adam używał do zgrywania w 2019. Taśma jest w dobrym stanie, tylko przez pierwsze 20 sekund nagranie się urywa.', { wording: 'Już jestem u pani Weroniki. Mam kamerę z archiwum, taki sam model jak przy zgrywaniu w 2019. Kaseta ruszyła. Przez pierwsze 20 sekund są zaniki, dalej odtwarza się dobrze.' }),
     pic('marta', 'marta', 'most_biurko', 'Tak wyglądało moje biurko do wczoraj. Kamera już jest tutaj.'),
     give('ev_m_kubek', { silent: true }),
     scene('xKotka', [
@@ -192,7 +192,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     Ma('A potem on mówi dalej. Nagrałam telefonem dźwięk z głośnika kamery, bo nie chcę jeszcze zgrywać kasety. Jakość jest słaba.'),
     V('marta', 'marta', '0:24', '(głos Henryka, przez głośnik kamery) …ja tej siatki nie założyłem z powrotem, bo mi zabroniła. Mówi: Heniu, moja wina, jak coś, ja podpiszę. No i… (szum) …i ja nie założyłem. Panie Adamie, ja to mam na sumieniu tak czy siak.', 'Marta (odsłuch kasety)'),
     give('ev_m_raw'),
-    Ma('„Moja wina” to nie są jego słowa o sobie. On powtarza, co ktoś mu powiedział.'),
+    Ma('„Moja wina” to nie są jego słowa o sobie. On powtarza, co ktoś mu powiedział.', { wording: 'Słyszy {Pan|Pani}? „Moja wina” to jej słowa, które on przytacza. W publikacji brzmi, jakby mówił o sobie.' }),
     Ma('I jeszcze coś ważnego. W opublikowanym fragmencie „moja wina” pada od razu po „z powrotem”. Na kasecie te słowa padają 9 sekund później.'),
     choose('marta', [
       opt('Czyli ktoś wyciął środek zdania i skleił.', [
@@ -213,7 +213,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
       choose('natan', [
         opt('Siatka, o której mówi pan Henryk. Zdjęta i niezałożona z powrotem.', [
           Nt('no. w opisie kroniki jest „remont mostu, wrzesień”. nikt nie zwrócił uwagi na barierkę'),
-          Nt('daję marcie do akt. teraz mamy to nie tylko z taśmy')
+        Nt('daję marcie do akt. teraz mamy to nie tylko z taśmy', { wording: 'wysyłam marcie z opisem kroniki. nie widać całego mostu, ale warto zachować' })
         ], { set: { m_meshFast: true } }),
         opt('Wygląda jak płot przy którejś budowie Kurek-Bud.', [
           Nt('sprawdziłem ich budowy na mapie. mają zielone panele, nie siatkę'),
@@ -238,23 +238,31 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     ])
     ]),
     pause(2000),
-    Ma('Pani Weronika zrobiła herbatę, więc piszę na spokojnie. U nas mówiło się, że most to przekleństwo. Że co remont, to coś.'),
+    Ma('Pani Weronika zrobiła herbatę, więc piszę na spokojnie. U nas mówiło się, że most to przekleństwo. Że co remont, to coś.', { wording: 'Pani Weronika robi herbatę. Przypomniało mi się, że u nas przy każdej awarii mostu słyszałam: „znowu ten przeklęty most”.' }),
     Ma('W Mglisku, znaczy. Tak mówią w Mglisku.'),
     give('ev_m_przeklenstwo', { silent: true }),
     pause(2500),
     clock('2026-11-25T09:14'),
     Nt('hej. sorry że od rana'),
     Nt('po wczorajszym od marty siedzimy z naczelnym. bedzie korekta, ale najpierw chce wszystko na papierze'),
+    /* P6 / S2: Natan po własnym błędzie. Bierze winę bez zrzucania jej na innych. */
+    scene('xNatanBlad', [
+      Nt('i zeby bylo jasne. ten material o moscie puszczalem ja. nie sprawdzilem skad jest plik, wzialem z dysku i poszlo'),
+      choose('natan', [
+        opt('Dobrze, że to mówisz. Napisz to w korekcie wprost.', [Nt('naczelny nie bedzie zachwycony. ale tak. napisze ze to moj blad, nie stazystki')], { set: { m_natanOwns: true } }),
+        opt('Kto jeszcze to widział przed publikacją?', [Nt('nikt. ja mialem sprawdzic. sorry, nie ma tu kogo obwiniac')])
+      ])
+    ]),
     Nt('i jest problem z drugiej strony. w komentarzach pod klipo ktoś wrzucił fakture z 2011. warsztat sowów serwisował furgonetkę kurek-bud dzień przed wypadkiem'),
     pic('natan', 'natan', 'most_faktura', 'to krąży od nocy'),
     give('ev_m_faktura'),
-    Nt('i ludzie piszą że „sowa był na moście” i że hamulce i w ogóle. ja nie wiem nawet co z tym zrobic'),
+    Nt('i ludzie piszą że „sowa był na moście” i że hamulce i w ogóle. ja nie wiem nawet co z tym zrobic', { wording: 'teraz z tego robią że sowa był na moście i majstrował przy hamulcach. każdy podaje dalej fakturę z tym samym podpisem' }),
     S('Dzień dobry. U mnie w grupie to samo. Ktoś napisał, że to „Sowa młody”. Bartek. Usuwam, a oni wrzucają od nowa.'),
     choose('natan', [
       opt('Faktura potwierdza wymianę klocków w furgonetce. Nie potwierdza, że ktoś z warsztatu był na moście.', [
         Nt('no tak. ale ludzie czytają co chcą'),
         Nt('dobra. zapytam bartka o fakture, nie o wypadek')
-      ], { set: { m_invoiceRead: true } }),
+      ], { wording: 'To faktura za klocki, nie dowód, że Sowa był na moście. Sprawdźmy najpierw tę usługę.', set: { m_invoiceRead: true } }),
       opt('Zapytam Bartka. Może coś wie.', [
         Nt('ok. tylko tak żeby nie brzmialo jak przesłuchanie, bo on i tak ma już dość')
       ])
@@ -275,7 +283,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
       opt('Dzięki. To pokazuje usługę i kto odebrał auto. Nie pokazuje, że ktoś z warsztatu był przy wypadku.', [
         B('no'),
         B('napisz to temu z gazety. ja do sylwii nie pisze, ona i tak wszystko kasuje')
-      ], { set: { m_bartekCleared: true }, trust: { bartek: 1 } }),
+      ], { wording: 'Dzięki. Mamy datę naprawy i odbiorcę, nic o pobycie na moście. Przekażę Natanowi.', set: { m_bartekCleared: true }, trust: { bartek: 1 } }),
       opt('Dzięki. Natan może napisać, że warsztat wyjaśnił. Chcesz, żeby padło twoje imię?', [
         B('nie. niech napisze „warsztat”'),
         B('ja tu dalej mam klientow. i tak polowa juz wie')
@@ -292,7 +300,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
       pause(2500),
       V('sylwia', 'sylwia', '0:19', 'Przepraszam, że głosówka, mam farbę na rękach. Klientki gadają tylko o moście. Jedna pani powiedziała, że jej szwagier „wszystko widział”. W 2011 był w Anglii. Tak to u nas wygląda.', 'Sylwia'),
       choose('sylwia', [
-        opt('Dobrze, że pani to wyłapuje.', [S('Trzydzieści lat w zawodzie. Fryzjerka wie wszystko pierwsza. Bzdury też.')]),
+        opt('Dobrze, że pani to wyłapuje.', [S('Trzydzieści lat w zawodzie. Fryzjerka wie wszystko pierwsza. Bzdury też.', { wording: 'Tego akurat strzygłam przed wyjazdem. Chwalił się pracą w Anglii, dlatego pamiętam.' })]),
         opt('Niech pani nie wchodzi w dyskusje.', [S('Nie wchodzę. Tylko głośniej suszę.')])
       ])
     ]),
@@ -300,7 +308,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     clock('2026-11-26T20:40'),
     Nt('wrzuciliśmy wczoraj na stronę tekst „pytania o most”. bez nagrania. ze jest „brakujący dokument” do którego dotarła redakcja'),
     Nt('naczelny nie chciał pisać jaki, bo nie mamy oryginału'),
-    Nt('i dzis kurek-bud odpisał na pytania. przekleję cały mail bo nie chce nic skracać, juz raz skrociłem'),
+    Nt('i dzis kurek-bud odpisał na pytania. przekleję cały mail bo nie chce nic skracać, juz raz skrociłem', { wording: 'dziś kurek-bud odpisał. wysyłam cały mail z godziną, nie sam cytat' }),
     pic('natan', 'natan', 'most_mail_kb', 'mail z 26.11, 14:02'),
     give('ev_m_janina_mail'),
     Nt('brzmi jak każdy mail od firmy. nie?'),
@@ -320,7 +328,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
       ], { set: { m_zal3Noticed: true } })
     ]),
     pause(2000),
-    Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.'),
+    Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.', { wording: 'Jutro mam wolne, jadę do mamy na urodziny ciotki. Już dzwoniła, żebym wyjechała o siódmej. Przy ósmej na pewno się spóźnię, ona wie lepiej.' }),
     Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.'),
     give('ev_m_terminy', { silent: true }),
     scene('xIda', [
@@ -425,7 +433,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     Nt('sama mi pokazała wiadomości. płakała przy tym'),
     Nt('20.11 napisał do niej znajomy z siłowni. paweł dudek. „masz dostęp do archiwum? jest tam takie stare nagranie z mostu, pokażesz kawałek?”'),
     Nt('wysłała mu całe 6 minut z okolicy 03:00. on odesłał „a da się samo to z siatką i moja wina?”'),
-    Nt('i ona to zrobiła. dwa kawałki, sklejone. myślała że to „dla jaj”. potem ja to wziąłem z jej folderu i opublikowałem bez sprawdzenia. za to ja odpowiadam'),
+    Nt('i ona to zrobiła. dwa kawałki, sklejone. myślała że to „dla jaj”. potem ja to wziąłem z jej folderu i opublikowałem bez sprawdzenia. za to ja odpowiadam', { wording: 'skleiła mu dwa kawałki, myślała że to „dla jaj”. a ja potem wziąłem ten plik z jej folderu. nie zapytałem nawet, skąd się wziął. po prostu wrzuciłem' }),
     pic('natan', 'natan', 'most_ida', 'zrzut, ida się zgodziła żeby ci pokazać. nazwisko dudka zostawiłem, resztę zasłoniłem'),
     give('ev_m_ida'),
     choose('natan', [
@@ -514,11 +522,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     pause(2000),
     Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.'),
     Ma('To ta sama strona 41, ten sam wpis z 13.09, ta sama „zał. nr 3”. Druga kopia, od innej osoby. Zgadza się z kserem z teczki.'),
-    Ma('Czyli możemy sprawdzić ksero bez ujawniania, że dostaliśmy je od pani Krystyny. Tak będzie lepiej dla wszystkich.'),
+    Ma('Czyli możemy sprawdzić ksero bez ujawniania, że dostaliśmy je od pani Krystyny. Tak będzie lepiej dla wszystkich.', { wording: 'Możemy powołać się na kopię pana Henryka. Nie trzeba wciągać pani Krystyny do tekstu, żeby sprawdzić tę stronę.' }),
     give('ev_m_second_source'),
     pause(2500),
     Ma('Natan zapytał mnie dziś, skąd Dudek wiedział o kasecie w archiwum.'),
-    Ma('Sprawdzam, kto w ogóle pytał o „H.W.” i „załącznik nr 3”. Mam dostęp do historii zamówień archiwum. To moja praca, nie hakowanie.'),
+    Ma('Sprawdzam, kto w ogóle pytał o „H.W.” i „załącznik nr 3”. Mam dostęp do historii zamówień archiwum. To moja praca, nie hakowanie.', { wording: 'Przeglądam zamówienia archiwum. Ktoś mógł wcześniej prosić o „H.W.” albo „załącznik nr 3”. Jeśli pytał mailem, będzie ślad.' }),
     scene('xTablet', [
       pause(2000),
       pic('marta', 'marta', 'm_tablet_kuchnia', 'Mój gabinet na dziś. Mama ogląda serial w drugim pokoju. Mandarynki są jej, okulary też.'),
@@ -534,11 +542,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     Ma('ale'),
     Ma('mamy w domu wspólny tablet. stary. mama go używa do maili'),
     Ma('20.11 o 22:10 jest wiadomość do dudka. „Marta mówi, że w redakcji szukają zał. nr 3 do mostu. Jest kaseta H.W., zgrana. Zajmij się tym.”'),
-    Ma('to byłam ja. znaczy nie ja. ja jej powiedziałam'),
-    Ma('przy kolacji. opowiadałam o pracy. o kasecie. o tym ksero. normalnie. jak się mamie opowiada'),
+    Ma('to byłam ja. znaczy nie ja. ja jej powiedziałam', { wording: 'ona miała to ode mnie' }),
+    Ma('przy kolacji. opowiadałam o pracy. o kasecie. o tym ksero. normalnie. jak się mamie opowiada', { wording: 'przy kolacji powiedziałam jej o kasecie i ksero. nawet nie pamiętam, od czego zaczęłam. zapytała jak w pracy' }),
     pause(2000),
     Ma('moja mama to Janina Kurek'),
-    Ma('mam nazwisko po tacie. nie mówiłam, bo to nie miało znaczenia. tak myślałam'),
+    Ma('mam nazwisko po tacie. nie mówiłam, bo to nie miało znaczenia. tak myślałam', { wording: 'nazwisko mam po tacie. nie powiedziałam wam. powinnam była, wiem' }),
     scene('m3kier', [iff('flag:m_askedKierownik', [Ma('pytał{|a} {Pan|Pani} wtedy, kto kierował kontraktem. ja już wiedziałam. przepraszam')])]),
     give('ev_m_zwrot'),
     set('m_twist'),
@@ -546,14 +554,28 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       opt('Marta, nie wiedziałaś, co ona z tym zrobi. Ale teraz musisz to powiedzieć w redakcji.', [
         Ma('wiem'),
         Ma('w poniedziałek rano. do naczelnego. zanim zdążę to sobie wytłumaczyć')
-      ], { set: { m_martaTells: true }, trust: { marta: 1 } }),
+      ], { wording: 'Nie wiedziałaś, że wyśle to Dudkowi. Ale w redakcji musisz im powiedzieć.', set: { m_martaTells: true }, trust: { marta: 1 } }),
       opt('Dlaczego nie powiedziałaś wcześniej?', [
         Ma('bo myślałam, że to moja prywatna sprawa i nie ma związku ze śledztwem'),
-        Ma('pomyliłam się. jutro mówię naczelnemu')
+        Ma('pomyliłam się. jutro mówię naczelnemu', { wording: 'nie będę już czekać. powiem naczelnemu' })
       ], { set: { m_martaTells: true } })
     ]),
     Ma('ona jest w kuchni. słyszę jak zmywa'),
     Ma('nie wiem, jak mam teraz tam wejść'),
+    /* P6 / S2: konflikt Marty z matką. Bez wielkiej konfrontacji, w kuchni. */
+    scene('xMartaKuchnia', [
+      choose('marta', [
+        opt('Nie musisz dziś nic mówić. Możesz po prostu wejść i pomóc wycierać.', [
+          Ma('weszłam. wycieram. ona nuci coś z radia'),
+          Ma('a ja nie umiem spojrzeć jej w oczy')
+        ], { trust: { marta: 1 } }),
+        opt('Zapytaj ją wprost, komu dała to ksero.', [
+          Ma('zapytałam'),
+          Ma('powiedziała „to nie twoja sprawa, córcia” i dalej zmywała'),
+          Ma('pierwszy raz w życiu tak do mnie powiedziała')
+        ], { set: { m_martaAsked: true } })
+      ])
+    ]),
     set('m_act3'),
     end('m4')
   ];

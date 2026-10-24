@@ -2,6 +2,10 @@
 /* Postacie, rozmowy, kontakty, pogoda, zakończenia. */
 
 const DATA = window.DATA = {};
+DATA.storyTexts = {
+  firstMajaSMS: 'Dzień dobry, panie Adamie. Tu Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Mam zdjęcia, które mogą mieć z tym związek. Mogę zadzwonić? Chciałabym z Panem porozmawiać, zanim komuś je pokażę.',
+  legacyFirstMajaSMS: 'Dzień dobry, Panie Adamie. Nazywam się Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Chyba znalazłam coś, co wtedy przeoczono. Nie wiem, komu tu mogę zaufać. Proszę o kontakt. M.W.'
+};
 
 DATA.chars = {
   kuba: { name: 'Kuba Wrona', short: 'Kuba', color: '#f2994a', number: '604 228 961', trust: true, voicemail: '„Siema, tu Kuba. Nie odbieram, bo… no, nie odbieram. Pisz.”' },

@@ -16,11 +16,20 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     set('m_case'),
     iff('flag:m_lateRescue', [
       M('hej. to ja'),
-      M('nie odpisałam ci wcześniej. nie umiałam. lekarka mówi, że to normalne, że nie umiem'),
+    M('nie odpisałam ci wcześniej. nie umiałam. lekarka mówi, że to normalne, że nie umiem', { wording: 'widziałam twoje wiadomości. kilka razy otwierałam czat i nic. nie umiałam odpisać' }),
       M('dziękuję. za rzeczkę. kuba mi pokazał, co {pisales|pisalas} z niną. więcej nie dam rady o tym teraz')
     ], [M('hej. nie śpisz?')]),
-    M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem'),
+    M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem', { wording: 'jestem u pani Weroniki. spisuje rzeczy z pudła pana Adama, a ja je fotografuję. wolę to niż siedzenie w domu' }),
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
+    // P7: wejście do S2 po „Odłamkach”, gdy Gajdy nie zatrzymano.
+    scene('xBezGajdy', [iff(s => s.vars.s1Ending === 'odlamki' && !G.flag('gajdaCaught'), [
+      M('radiowóz dalej przejeżdża pod naszym blokiem. dwa razy dziennie, rano i koło dziesiątej'),
+      M('mama mówi, że to dobrze. ja i tak śpię przy zapalonej lampce'),
+      choose('maja2', [
+        opt('To nic dziwnego. Ja też bym nie gasił{|a}.', [M('dzięki. kuba się śmieje, ale sam sprawdza zamek dwa razy')], { trust: { maja: 1 } }),
+        opt('Policja coś mówi o jego aucie z tamy?', [M('że „sprawa w toku”. tyle mówią wszystkim. pani Weronice też')])
+      ])
+    ])]),
     scene('xKot', [
       pic('maja2', 'maja', 'm_kot_wycinki', 'poznaj Panią Ziutę. kotka pani Weroniki. uznała, że wycinki o powodzi to jej łóżko'),
       choose('maja2', [
@@ -34,7 +43,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     M('„nie publikować bez K.” i nie mamy pojęcia, kto to jest K.'),
     choose('maja2', [
       opt('Rodzina pana Adama wie, że to otwieracie?', [
-        M('tak. jego brat podpisał zgodę na spisanie zawartości. tylko na to, nie na publikację. pani Weronika ma to na kartce i trzyma przy pudle jak paragon')
+        M('tak. jego brat podpisał zgodę na spisanie zawartości. tylko na to, nie na publikację. pani Weronika ma to na kartce i trzyma przy pudle jak paragon', { wording: 'tak, jego brat się zgodził. mamy to na piśmie. możemy spisać i sfotografować, publikować już nie' })
       ]),
       opt('Jak ci się przegląda te rzeczy?', [
         M('dziwnie. jakbym czytała cudzy pamiętnik, ale za pozwoleniem'),
@@ -65,13 +74,13 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       M('ruszyłyśmy. jest obrażona'),
       choose('maja2', [
         opt('Przeproście ją. Najlepiej szynką.', [M('pani Weronika już kroi. kotka ma tu lepiej niż my')]),
-        opt('Sprawdza, czy wszystko jest na swoim miejscu. Jak dobry archiwista.', [M('xD pani Weronika mówi, że to jej najlepsza pracownica. i jedyna')])
+        opt('Sprawdza, czy wszystko jest na swoim miejscu. Jak dobry archiwista.', [M('xD pani Weronika mówi, że to jej najlepsza pracownica. i jedyna', { wording: 'pani Weronika odsunęła jej krzesło, żeby mogła usiąść obok. oczywiście nie usiadła' })], { wording: 'Ma tu swoje miejsce przy stole?' })
       ])
     ]),
     scene('xBrygada', [
       pause(1500),
       M('jeszcze to. leżało luzem w notesie, między kartkami z września'),
-      pic('maja2', 'maja', 'm_brygada', 'zdjęcie z 2011. most w remoncie. przypomina ci to coś?'),
+      pic('maja2', 'maja', 'm_brygada', 'zdjęcie z 2011. most w remoncie. przypomina ci to coś?', { wording: 'to wypadło z wrześniowych kartek. most podczas remontu, 2011. co ci się tu rzuca w oczy?' }),
       choose('maja2', [
         opt('Butelka mleka na desce. Jak „dziękuję za mleko” z pocztówki.', [
           M('o kurczę. faktycznie'),
@@ -94,7 +103,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     choose('weronika', [
       opt('To ta sama wersja. Darek pracował przy remoncie mostu, wycinek wymienia wykonawcę.', [
         W('Ma {Pan|Pani} rację. „Wykonawca prac, firma Kurek-Bud.” Czyli zginął w pracy, na moście.'),
-        W('Przepraszam. Po tym wszystkim w każdej różnicy szukam kłamstwa.')
+        W('Przepraszam. Po tym wszystkim w każdej różnicy szukam kłamstwa.', { wording: 'Rzeczywiście. Przeczytałam ten wycinek i ominęłam najważniejsze zdanie.' })
       ], { set: { m_sameEvent: true } }),
       opt('Ktoś tu kłamie. Albo babcia, albo notatka.', [
         W('Proszę spojrzeć na wycinek. „Spadł z przęsła remontowanego mostu… Wykonawca prac, firma Kurek-Bud.”'),
@@ -114,10 +123,10 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     pause(1500),
     M('ok, pani Weronika kazała mi iść do domu, bo „masz jutro pracę”. skąd ona wie'),
     M('jeszcze jedno. dzwoniła dziś do mnie jakaś Marta z Gazety Sudeckiej, z archiwum. pyta o kasetę H.W.'),
-    M('dałam jej twój numer. sorry. nie mam dzisiaj siły na kolejną obcą osobę'),
+    M('dałam jej twój numer. sorry. nie mam dzisiaj siły na kolejną obcą osobę', { wording: 'dałam jej twój numer. dopiero potem pomyślałam, że powinnam zapytać. sorry, chciałam już skończyć tę rozmowę' }),
     choose('maja2', [
       opt('Spoko. Ogarnę.', [M('dzięki. idę spać jak normalny człowiek. o 20:40 🫠')]),
-      opt('Następnym razem zapytaj, zanim dasz komuś mój numer.', [M('masz rację. przepraszam. ja tylko… dobra. następnym razem zapytam')], { trust: { maja: -1 } })
+      opt('Następnym razem zapytaj, zanim dasz komuś mój numer.', [M('masz rację. przepraszam. ja tylko… dobra. następnym razem zapytam', { wording: 'ok. masz rację. już więcej nie podaję bez pytania' })], { trust: { maja: -1 } })
     ]),
     scene('xGrupa', [
       pause(2500),
@@ -137,16 +146,25 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       pause(3000),
       V('kuba', 'kuba', '0:14', 'Maja zasnęła na kanapie w kurtce. Mama mówi, żeby jej nie budzić, ale mam jej zdjąć buty. Czemu zawsze ja?', 'Kuba'),
       choose('kuba', [
-        opt('Zdejmij. Będzie ci wdzięczna.', [say('kuba', 'kuba', 'zdjąłem. powiedziała przez sen „nie publikować”. serio')]),
+        opt('Zdejmij. Będzie ci wdzięczna.', [say('kuba', 'kuba', 'zdjąłem. powiedziała przez sen „nie publikować”. serio', { wording: 'zdjąłem jednego i się obudziła. pyta czemu ma jednego buta. no nie wiem maja' })]),
         opt('Zrób jej zdjęcie na pamiątkę.', [say('kuba', 'kuba', 'zrobiłem. ale nie wyślę, bo mnie zabije'), say('kuba', 'kuba', 'dam jej na urodziny')])
       ])
     ]),
     pause(4000),
-    clock('2026-11-20T21:07'),
+    clock('2026-11-20T21:07', { rest: 's2_archive' }),
+    /* P3: spokojny powrót po przerwie. Nic się nie stało i to też jest odpowiedź. */
+    scene('xPoTreningu', [
+      say('kuba', 'kuba', 'wróciłem z treningu. zjadłem pół lodówki'),
+      say('kuba', 'kuba', 'coś się działo jak mnie nie było?'),
+      choose('kuba', [
+        opt('Cisza. Nic nowego.', [say('kuba', 'kuba', 'i dobrze. pierwszy piątek od miesiąca bez afery')]),
+        opt('Nic. Odpocznij, jutro pogadamy.', [say('kuba', 'kuba', 'tak jest. mama i tak każe mi wynieść śmieci')])
+      ])
+    ]),
     unlock('chat:marta'),
     Ma('Dobry wieczór. Nazywam się Marta Jasińska, pracuję w archiwum Gazety Sudeckiej. Numer dostałam od Mai Wrony.'),
     Ma('Piszę w sprawie kasety mini-DV opisanej „H.W. 2/2” z materiałów śp. Adama Rybickiego.'),
-    Ma('W 2019 roku pan Adam zgrał ją w redakcji. Mamy plik HW_2z2.mov, 41 minut 12 sekund. Chciałabym porównać go z oryginałem z pudła.'),
+    Ma('W 2019 roku pan Adam zgrał ją w redakcji. Mamy plik HW_2z2.mov, 41 minut 12 sekund. Chciałabym porównać go z oryginałem z pudła.', { wording: 'Pan Adam zgrał tę kasetę u nas w 2019. Plik nazywa się HW_2z2.mov, trwa 41 minut 12 sekund. Nie jestem pewna, czy zgrał wszystko. Mogłabym porównać z oryginałem?' }),
     Ma('Piszę z prywatnego numeru, bo jest piątek i jestem już w domu. Rozumiem, jeśli woli {Pan|Pani} to sprawdzić.'),
     choose('marta', [
       opt('Sprawdzę. Zadzwonię na numer redakcji.', [Ma('Dobrze. Sekretariat jest do 18, ale po godzinach przełączają na dyżur wydania.')], { set: { m_checkFirst: true } }),
@@ -191,10 +209,10 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       ], { set: { m_askFamily: true } })
     ]),
     scene('xNatanZapowiedz', [
-      Ma('Przy okazji: nasz Natan z działu wideo pyta, czy może się kiedyś do {Pana|Pani} odezwać. Uprzedzam: jak się spieszy, pisze bez polskich znaków.'),
+      Ma('Przy okazji: nasz Natan z działu wideo pyta, czy może się kiedyś do {Pana|Pani} odezwać. Uprzedzam: jak się spieszy, pisze bez polskich znaków.', { wording: 'O materiałach z archiwum pewnie odezwie się też Natan z naszego działu wideo. Szykuje cykl o panu Adamie.' }),
       choose('marta', [
-        opt('Może. Jak będzie miał konkretną sprawę.', [Ma('Przekażę. On zawsze ma konkretną sprawę. Zwykle o drugiej w nocy.')]),
-        opt('Wolę na razie tylko z panią.', [Ma('Rozumiem. Ja też wolę mniej ludzi naraz.')])
+        opt('Może. Jak będzie miał konkretną sprawę.', [Ma('Przekażę. On zawsze ma konkretną sprawę. Zwykle o drugiej w nocy.', { wording: 'Wie, że jest oryginał kasety. Szczegółów jeszcze nie zna, najpierw musimy ją sprawdzić.' })], { wording: 'Co on już wie o tej kasecie?' }),
+        opt('Wolę na razie tylko z panią.', [Ma('Rozumiem. Ja też wolę mniej ludzi naraz.', { wording: 'Montuje nasze materiały wideo. Zwykle sam nagrywa, montuje i jeszcze odpisuje pod publikacją. Teraz dostał ten cykl o archiwum.' })], { wording: 'Czym on się zajmuje w redakcji?' })
       ])
     ]),
     Ma('Dobranoc.'),
@@ -239,7 +257,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     S('Przepraszam, że tak rano. Widział{|a} {Pan|Pani} to nagranie z mostu?'),
     S('Od wczoraj wieczorem mam w grupie dwadzieścia zgłoszeń. Każdy wrzuca to samo: pan Henryk z Wodnej, sprzed lat, mówi „moja wina”.'),
     S('Pod spodem już piszą, że on zabił Darka Kruka. Komentarze kasuję, ale nie nadążam.'),
-    S('Gazeta Sudecka to wrzuciła. Gazeta! Myślałam, że jak oni, to sprawdzone.'),
+    S('Gazeta Sudecka to wrzuciła. Gazeta! Myślałam, że jak oni, to sprawdzone.', { wording: 'Sama to udostępniłam. Zobaczyłam logo Gazety Sudeckiej i nawet nie sprawdziłam.' }),
     choose('sylwia', [
       opt('Na razie nie przypinaj niczego. Sprawdzę, skąd jest nagranie.', [S('Dobrze. Zostawiam tylko swój komentarz: „Prosimy nie oskarżać nikogo z imienia i nazwiska”.')], { set: { m_sylwiaWaits: true } }),
       opt('Skasuj wszystkie wpisy z tym nagraniem.', [
@@ -248,7 +266,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       ])
     ]),
     scene('xSylwiaFotel', [
-      S('Klientka na fotelu mówi, że jej szwagier „zawsze wiedział”. Nic nie wiedział. Siedzi z farbą na odrostach i ogląda to piąty raz.'),
+      S('Klientka na fotelu mówi, że jej szwagier „zawsze wiedział”. Nic nie wiedział. Siedzi z farbą na odrostach i ogląda to piąty raz.', { wording: 'A klientka właśnie mówi mi, że jej szwagier „zawsze wiedział”. Piąty raz puszcza nagranie na głośniku. Mam cały salon.' }),
       choose('sylwia', [
         opt('Niech pani nie wchodzi z nią w dyskusję. Szkoda nerwów.', [S('Nie wchodzę. Podgłośniłam suszarkę.')]),
         opt('Może jej pani powiedzieć, że to fragment z dłuższego nagrania.', [S('Powiedziałam. Odpowiedziała, że „fragment też jest prawdziwy”. No i jest. Tylko nie cały.')])
@@ -316,24 +334,24 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     ]),
     pause(2500),
     unlock('chat:natan'),
-    N('czesc, natan, gs wideo. marta mowila ze mozna do ciebie pisac'),
+    N('czesc, natan, gs wideo. marta mowila ze mozna do ciebie pisac', { wording: 'czesc, natan, gs wideo. marta mowila ze rozmawialiscie o kasecie rybickiego' }),
     N('sorry ze tak z buta. to ja wrzucilem ten material z mostem'),
     N('plik byl w folderze rybickiego w archiwum, opis „HW 2/2”. dostalem go od stazystki, ona szykowala zajawki do cyklu o archiwum'),
     N('wiem ze sie zrobil syf. ale technicznie to jest autentyczne nagranie, nikt nic nie dogrywal'),
     pic('natan', 'natan', 'most_hw', 'pierwsza klatka. czas z kamery'),
     scene('xKadrHW', [
-      N('patrzę na tę klatkę od wczoraj. przypomina ci to coś?'),
+      N('patrzę na tę klatkę od wczoraj. przypomina ci to coś?', { wording: 'ciągle patrzę na tę klatkę. co ty na niej widzisz?' }),
       choose('natan', [
         opt('To jego kuchnia. Rybicki nagrywał go w domu, przy stole.', [
-          N('czyli to nie był wywiad dla gazety. tylko rozmowa w kuchni'),
-          N('on nawet nie wiedział, że kiedyś ktoś to puści w sieci')
+          N('czyli to nie był wywiad dla gazety. tylko rozmowa w kuchni', { wording: 'no. siedział u siebie w kuchni, a ja dałem to jako „wyznanie z archiwum”' }),
+          N('on nawet nie wiedział, że kiedyś ktoś to puści w sieci', { wording: 'nawet nie sprawdziłem, czy zgodził się na publikację' })
         ], { set: { m_kitchenLink: true } }),
         opt('Ma złożone ręce i patrzy w stół. Nie wygląda, jakby się przyznawał.', [
           N('raczej jakby czekał na następne pytanie'),
           N('kurde. ja widziałem w tym tylko „moja wina”')
         ], { set: { m_handsSeen: true } }),
         opt('Firanka i lampa jak u mojej babci.', [
-          N('u mojej też. może dlatego tak się to klika. każdy zna taką kuchnię')
+          N('u mojej też. może dlatego tak się to klika. każdy zna taką kuchnię', { wording: 'u mojej też. i za chwilę ktoś rozpozna tę kuchnię, jeśli już nie rozpoznał' })
         ])
       ])
     ]),
@@ -378,7 +396,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     Ma('Mam do {Pana|Pani} prośbę. Nagranie wisi w trzech miejscach: u nas, na Klipo i w „Tygodniu w Sudetach”. Sprawdźmy, czy to jeden plik, czy trzy różne.'),
     goal('Znajdź trzy publikacje nagrania: Gazeta Sudecka, Klipo (@sudety.prawda), „Tydzień w Sudetach”. Porównaj pierwszą klatkę i długość.'),
     waitFor(s => G.has('ev_m_gs') && G.has('ev_m_klipo') && G.has('ev_m_tyg'), { goal: 'Znajdź trzy publikacje nagrania: Gazeta Sudecka, Klipo (@sudety.prawda), „Tydzień w Sudetach”. Porównaj pierwszą klatkę i długość.' }),
-    Ma('Ma {Pan|Pani} wszystkie trzy? Co je łączy?'),
+    Ma('Ma {Pan|Pani} wszystkie trzy? Co je łączy?', { wording: 'Udało się otworzyć wszystkie trzy? Proszę spojrzeć na czas w pierwszej klatce.' }),
     choose('marta', [
       opt('Na pierwszej klatce wszędzie jest ta sama godzina: 17:22:08. To jedno nagranie.', [
         Ma('Tak. I Klipo to zwykły zapis ekranu. W rogu widać jeszcze nasz pasek GS Wideo.'),
@@ -394,7 +412,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     Ma('Chwila.'),
     Ma('Tygodnik ma 0:42.'),
     Ma('Od nas wyszło 40 sekund. Liczyłam dwa razy, bo to ja ustawiam eksport w archiwum.'),
-    Ma('I nie ma naszego paska. Czyli nie ściągnęli tego od nas.'),
+    Ma('I nie ma naszego paska. Czyli nie ściągnęli tego od nas.', { wording: 'Naszego paska też nie ma. To wygląda na inny eksport, nie kopię naszej publikacji.' }),
     choose('marta', [
       opt('Ktoś im wysłał dłuższą wersję. Skąd ją miał?', [Ma('Nie wiem. Muszę sprawdzić, do czego stażystka miała dostęp poza tymi 40 sekundami.')]),
       opt('Może po prostu dodali dwie sekundy czerni na początku?', [Ma('Sprawdziłam klatka po klatce. Na końcu są dwie sekundy więcej. Słychać wdech, jakby zaczynał następne zdanie.')])
