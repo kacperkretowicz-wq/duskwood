@@ -703,3 +703,12 @@ Nadal bez pomiaru z ludźmi: odbiór finałów `odlamki`, `cudzy_podpis`, `zasie
 - Test `season-entries.browser.cjs` obejmuje też trasę `odlamki` z zatrzymanym Gajdą: flaga `gajdaCaught` przechodzi do S2, scena `xBezGajdy` się nie pojawia (PASS).
 - Przegląd otwartych pozycji (24.10): w kodzie nie zostało nic do zrobienia bez mediów lub ludzi. Motyw „cytat wraca z obcego numeru” istnieje (cytat Szklarza z faktycznie wysłanej wiadomości). Otwarte poza kodem: anonimowy materiał wideo (etap klipów), zdjęcia/klipy, pomiar z graczami, odsłuch straszaków i finałów, test na fizycznym telefonie.
 - Weryfikacja 24.10 (v71): `node --test` 53/53 PASS; przeglądarka PASS: `playthrough` (swit, odlamki, cisza, legacy), `e2e-player` iOS i Android, `rhythm`, `season-entries` (5 przypadków), `unsend`, `scares`, `prolog`, `case-glos`, `case-kopia`, `case-kronika`.
+
+### 17.7. Etap zdjęć — wymiana 21 odrzuconych (24.10.2026)
+
+Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
+- Wymieniono wszystkie 21 zdjęć ze statusem `replace_requested` (portrety 800×800 i ujęcia `_life1` 1200×900) w tych samych ścieżkach, więc runtime i zapisy nie wymagają zmian ani migracji.
+- Każde nowe zdjęcie to sytuacja z tabeli w `ZDJECIA-SYTUACJE.md` (autor, powód, czynność). Jako referencji twarzy użyto starego pliku danej postaci (Maja: `maja-river.jpg`), żeby twarze zgadzały się z pozostałymi zdjęciami fabularnymi, których nie wymieniano. Ujęcia `_life1` Oli, Igora, Bartka i Weroniki wyszły z nowych portretów.
+- Wzorce 01/06/08 pozostały bajtowo identyczne. Odstąpiono od reguły „próby poza assets/ do oceny” — stare wersje są w historii git (sprzed tego commita) i można je przywrócić jednym `git checkout`.
+- Nie wymieniano nieocenionych zdjęć (`*_life2`, `maja_life1`, `marta_life1` itd.) ani zdjęć dowodowych.
+- Service worker v72. Rejestr: `ASSETY-REALIZM-2026.json` (status `replaced_2026-10-24_awaiting_review`, nowe hashe).

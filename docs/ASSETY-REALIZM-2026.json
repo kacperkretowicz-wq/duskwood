@@ -21,29 +21,33 @@
       "number": 2,
       "person": "Maja",
       "source": "assets/people/maja.jpg",
-      "status": "replace_requested",
-      "sha256": "94444e61767746c2646c8f9339b2da52de97e46bc29472d3605ce7322301cd37"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "94444e61767746c2646c8f9339b2da52de97e46bc29472d3605ce7322301cd37",
+      "newSha256": "d6dcb2e612dd96a2837dcdd7ec97554298302df1e404a1aa9fdfa6dec22add19"
     },
     {
       "number": 3,
       "person": "Ola",
       "source": "assets/people/ola.jpg",
-      "status": "replace_requested",
-      "sha256": "f752786e14fd2877de79e900ae426e18b0aadbdc836db59bbe273a42ffdf106f"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "f752786e14fd2877de79e900ae426e18b0aadbdc836db59bbe273a42ffdf106f",
+      "newSha256": "aaf380a6abbf36b34bc0f256f676a2de31fbdc4578c07ca761b856625edd65ef"
     },
     {
       "number": 4,
       "person": "Igor",
       "source": "assets/people/igor.jpg",
-      "status": "replace_requested",
-      "sha256": "9236e8e870e14ce439320d9af8c8043dca8eb33490f3e790867127aede44faff"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "9236e8e870e14ce439320d9af8c8043dca8eb33490f3e790867127aede44faff",
+      "newSha256": "d5e2ec5f76a8d03c54a1190f6c2ed4b8610371950f42da5c12824a5518df94bf"
     },
     {
       "number": 5,
       "person": "Bartek",
       "source": "assets/people/bartek.jpg",
-      "status": "replace_requested",
-      "sha256": "ee80d3b7c77ccc920194c365a9a3d825280fc914616183ade50fda467b673ea5"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "ee80d3b7c77ccc920194c365a9a3d825280fc914616183ade50fda467b673ea5",
+      "newSha256": "e892bb1f58605ca34cce9649368d5f88a75412e30c51a7f2c96c64729b553f92"
     },
     {
       "number": 6,
@@ -56,8 +60,9 @@
       "number": 7,
       "person": "Weronika",
       "source": "assets/people/weronika.jpg",
-      "status": "replace_requested",
-      "sha256": "d3ea60b639cf8aac4a225e85a86221fc79cd0ab636b263ccfdf4b7721657a332"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "d3ea60b639cf8aac4a225e85a86221fc79cd0ab636b263ccfdf4b7721657a332",
+      "newSha256": "8eeaca7a84e0d8ceb316dfa5c8890ff50bbf0a2683650018c166bf0f6021532a"
     },
     {
       "number": 8,
@@ -70,113 +75,129 @@
       "number": 9,
       "person": "Ewa",
       "source": "assets/people/ewa.jpg",
-      "status": "replace_requested",
-      "sha256": "ac6b0372151eedc9347fc80101f9bd2c6d3e21fbcb7da33a50030c446c87b1c0"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "ac6b0372151eedc9347fc80101f9bd2c6d3e21fbcb7da33a50030c446c87b1c0",
+      "newSha256": "010b2c366d45c0959718e5105274ee7d64810fee267dc47e33bd7348cd4903dd"
     },
     {
       "number": 10,
       "person": "Sylwia",
       "source": "assets/people/sylwia.jpg",
-      "status": "replace_requested",
-      "sha256": "0e7c5491469c17a9015cdd58365f086cbf6e89d0813f13caf661ef28f89df7ac"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "0e7c5491469c17a9015cdd58365f086cbf6e89d0813f13caf661ef28f89df7ac",
+      "newSha256": "71ea664386359d52031b40091d9e1d0c8d258f6bd0be68570fd5af812d000e2f"
     },
     {
       "number": 11,
       "person": "Zuza",
       "source": "assets/people/zuza.jpg",
-      "status": "replace_requested",
-      "sha256": "0a1360314b5622019cc978af9e1f76d49bc984c51108236a9c51836a237e2d26"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "0a1360314b5622019cc978af9e1f76d49bc984c51108236a9c51836a237e2d26",
+      "newSha256": "841c7d8d90bfbbdad74ecf10fed1148709296ca0c03b2888878c8187008071c8"
     },
     {
       "number": 12,
       "person": "Nina",
       "source": "assets/people/nina.jpg",
-      "status": "replace_requested",
-      "sha256": "227c99b34f5ce8e3f261c83d15a86b5d2455d6f98eb8647c775aa9ca29764761"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "227c99b34f5ce8e3f261c83d15a86b5d2455d6f98eb8647c775aa9ca29764761",
+      "newSha256": "22c7477c3bd8fedbe0e9f38460c2e2a5f714ae4c439301efa41f60dc074ca5b6"
     },
     {
       "number": 13,
       "person": "Marta",
       "source": "assets/people/marta.jpg",
-      "status": "replace_requested",
-      "sha256": "bf79e3a6f358f3d6fd4ac90e9e3fae8b7e95ca121e46234a1a87c96c8e6aecd1"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "bf79e3a6f358f3d6fd4ac90e9e3fae8b7e95ca121e46234a1a87c96c8e6aecd1",
+      "newSha256": "d7affbed60b9d5fe911b4b35fc614d4583a5bfea5829319a0c68d917ea13db23"
     },
     {
       "number": 14,
       "person": "Natan",
       "source": "assets/people/natan.jpg",
-      "status": "replace_requested",
-      "sha256": "ddd2861c171a0c7408147c430fe917ee2d443a14ec8a6a4548dac45849d62ecc"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "ddd2861c171a0c7408147c430fe917ee2d443a14ec8a6a4548dac45849d62ecc",
+      "newSha256": "9fd03daea0a8a7a68503b723c6417200ee276c48728f211c5d513b8aad4171a5"
     },
     {
       "number": 15,
       "person": "Henryk",
       "source": "assets/people/henryk.jpg",
-      "status": "replace_requested",
-      "sha256": "d94b8134bda2c3354443a2ac2e9855a4537e9f22b223d8cc0d275a0aed46f051"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "d94b8134bda2c3354443a2ac2e9855a4537e9f22b223d8cc0d275a0aed46f051",
+      "newSha256": "6464045b38a286b6df2454ef1810c4294cd8dc00734a892e9a88fd92115b474d"
     },
     {
       "number": 16,
       "person": "Janina",
       "source": "assets/people/janina.jpg",
-      "status": "replace_requested",
-      "sha256": "9d4e4ea606a5eeb838b941a0fc34d51b0cbcafd49f51be5a3305548917341964"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "9d4e4ea606a5eeb838b941a0fc34d51b0cbcafd49f51be5a3305548917341964",
+      "newSha256": "c65f18f265ffae5285f7f28cc795a038ea09170a4d900c4e3b695a3444dbeea8"
     },
     {
       "number": 17,
       "person": "Ida",
       "source": "assets/people/ida.jpg",
-      "status": "replace_requested",
-      "sha256": "a74387b9d2a436dc9e920a83bb4a12b6a0dcc07b9fca64470fc283350db9081b"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "a74387b9d2a436dc9e920a83bb4a12b6a0dcc07b9fca64470fc283350db9081b",
+      "newSha256": "95a1e27a35d2bdd0e2b2d32691b7313899d7f7ed6b89115043abdaa529474161"
     },
     {
       "number": 18,
       "person": "Zenon",
       "source": "assets/people/zenon.jpg",
-      "status": "replace_requested",
-      "sha256": "1a68f3e0a37c7277bc881b272d8558e889150ed3a363076cf45d36323dfc56c9"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "1a68f3e0a37c7277bc881b272d8558e889150ed3a363076cf45d36323dfc56c9",
+      "newSha256": "0e957c1838e07cdc40fe26c5abcd48af68892462a4abcd38590e6408d189fe25"
     },
     {
       "number": 19,
       "person": "Oskar",
       "source": "assets/people/oskar.jpg",
-      "status": "replace_requested",
-      "sha256": "aa8f636be437c13b56d55155f0ccf5511d25923ed2208b59f0c73bc2b99443b9"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "aa8f636be437c13b56d55155f0ccf5511d25923ed2208b59f0c73bc2b99443b9",
+      "newSha256": "06d4b4600f67d819f975398852b9e57606534d0cebfcdd0f60a12f895f47dd4d"
     },
     {
       "number": 20,
       "person": "Kuba · zwykłe ujęcie",
       "source": "assets/people/kuba_life1.jpg",
-      "status": "replace_requested",
-      "sha256": "8b08323b7a41fa833ae2378bf8d1cd68007712f45e064d73a0e0199496a15ce8"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "8b08323b7a41fa833ae2378bf8d1cd68007712f45e064d73a0e0199496a15ce8",
+      "newSha256": "143554d13d28491ef79664be41284a56b798ff8e4a3783e6b037233b94b20cab"
     },
     {
       "number": 21,
       "person": "Ola · zwykłe ujęcie",
       "source": "assets/people/ola_life1.jpg",
-      "status": "replace_requested",
-      "sha256": "2b58a795378cd3defb31ec52fa1a4e6c0e518b19e64421fca6dc1835534f01dc"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "2b58a795378cd3defb31ec52fa1a4e6c0e518b19e64421fca6dc1835534f01dc",
+      "newSha256": "94a4644e8817e1001f66c74c91a94cb24dcbee4a03b824d118d0966a5f844a15"
     },
     {
       "number": 22,
       "person": "Igor · zwykłe ujęcie",
       "source": "assets/people/igor_life1.jpg",
-      "status": "replace_requested",
-      "sha256": "7bfe765e028b1cf16b298b3e907f1381528cddb451efa35b68487b558e3b1a0a"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "7bfe765e028b1cf16b298b3e907f1381528cddb451efa35b68487b558e3b1a0a",
+      "newSha256": "8e1289e4e1ffeff346fbbfd5b73e5e0f51bac296117fedd448827d27af42693b"
     },
     {
       "number": 23,
       "person": "Bartek · zwykłe ujęcie",
       "source": "assets/people/bartek_life1.jpg",
-      "status": "replace_requested",
-      "sha256": "1582d13992f641c3c2c30d205e93bcbba6e922db579a57e129fe75bc4f8d8ab6"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "1582d13992f641c3c2c30d205e93bcbba6e922db579a57e129fe75bc4f8d8ab6",
+      "newSha256": "85177e656377d6ea48235ff42828076cee7ba8de5133d28cfa6fa09c803c2370"
     },
     {
       "number": 24,
       "person": "Weronika · zwykłe ujęcie",
       "source": "assets/people/weronika_life1.jpg",
-      "status": "replace_requested",
-      "sha256": "6f056f915d4d41314ed8580db006ddd36133bf0ae38f49f743fc032393a77cb8"
+      "status": "replaced_2026-10-24_awaiting_review",
+      "sha256": "6f056f915d4d41314ed8580db006ddd36133bf0ae38f49f743fc032393a77cb8",
+      "newSha256": "9a7e335ab5f9a73f2fbe8f6bc7ef888e9f7700bce521d6b8bd26195b37ca7b9a"
     }
   ],
   "trials": [
@@ -198,5 +219,6 @@
       "userFeedback": "Najbliżej oczekiwań jest ujęcie z patrzeniem w telefon. Tekstura, włosy i materiały nadal wyglądają zbyt idealnie. Nie zatwierdzono do gry."
     }
   ],
-  "trialsInstalledInRuntime": false
+  "trialsInstalledInRuntime": false,
+  "replacement2026_10_24": "21 odrzuconych zdjęć zastąpiono sytuacjami z ZDJECIA-SYTUACJE.md; stary plik każdej postaci był referencją twarzy, by zachować spójność z resztą zdjęć fabularnych. Wzorce 01/06/08 nietknięte."
 }
