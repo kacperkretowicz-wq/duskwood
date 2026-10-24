@@ -899,3 +899,10 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 
 ### 2026-10-24 — pasek postępu filmu jednorazowego (SW v104)
 - Pasek liczony z `currentTime/duration` filmu (rAF) zamiast animacji CSS, która w teście dochodziła do końca od razu. `prolog.browser` sprawdza, że w 2,5 s pasek jest w trakcie (15–95%).
+
+### 2026-10-24 — S5 g5: dwa zdjęcia poranka zatrzymania (SW v105)
+- Przegląd: g5, m1, g1 i ch1 mają najmniej zdjęć na krok. W m1/g1/ch1 sceny z „widzeniem” mają już obrazy albo dotyczą klatek nagrań — bez zmian.
+- `g_zatrzymanie`: zdjęcie Natana z auta przez szybę — radiowóz i ciemny bus pod budynkiem z zamkniętą pizzerią, świt, kawa w uchwycie. Dopięte do „zatrzymali go. o 6:10, w kawalerce nad pizzeria”.
+- `g_platki`: płatki Mai na stole, w tle rozmazany Kuba w szarej bluzie w podskoku, twarz odwrócona. Dopięte do „kuba skacze po kuchni…”.
+- Tylko `img` na istniejących liniach, bez zmian kroków i bez migracji. Testy: npm test, case-glos, media.
+- Spójność: postacie Ada/Szymon są tylko w czacie „Ekipa”, `xSnapEcho` (23:41) nie koliduje z 23:44 (zdjęcie z aparatu), 23:47 (połączenie) ani 23:58 (ostatnia kopia).

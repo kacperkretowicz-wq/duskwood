@@ -65,7 +65,9 @@ Object.assign(DATA.evidence, {
     ['g_kuba_kostka', 'assets/glos/g_kuba_kostka.jpg', 'Kostka u sąsiada', 768, 1024],
     ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024],
     ['g_magnetowid', 'assets/glos/g_magnetowid.jpg', 'Pracownia · kaseta 12', 1024, 768],
-    ['g_pizza', 'assets/glos/g_pizza.jpg', 'Sobota u Oli', 1024, 768]
+    ['g_pizza', 'assets/glos/g_pizza.jpg', 'Sobota u Oli', 1024, 768],
+    ['g_zatrzymanie', 'assets/glos/g_zatrzymanie.jpg', 'Nad pizzerią · 19.03, rano', 1024, 768],
+    ['g_platki', 'assets/glos/g_platki.jpg', 'Kuchnia Wronów · 19.03', 768, 1024]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 

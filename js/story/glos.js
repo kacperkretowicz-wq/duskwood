@@ -777,7 +777,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     clock('2027-03-19T07:30'),
     ambient('calm'),
     title(),
-    Nt('zatrzymali go. o 6:10, w kawalerce nad pizzeria'),
+    Nt('zatrzymali go. o 6:10, w kawalerce nad pizzeria', { img: 'g_zatrzymanie' }),
     Nt('laptop, dwa telefony, mikrofon. i folder „glosy”. 60 osob z mgliska i okolic. ty tez'),
     Nt('policjant mowi, ze w zyciu czegos takiego nie widzial. a widzial duzo'),
     choose('natan', [
@@ -785,7 +785,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
       opt('Co mówi Dudek?', [Nt('nic. ma adwokata od razu. jakby czekal na to', { wording: "na razie odmawia odpowiedzi. jest juz z nim adwokat" }), Nt('adwokat jest z wroclawia. drogi. skad kierownik budowy ma na takiego', { wording: "kancelaria z wroclawia, znam ja z innych spraw. nie wiem, kto mu placi. samo to jeszcze niczego nie dowodzi" })], { set: { g_lawyer: true } })
     ]),
     M('ZŁAPALI GO??'),
-    M('kuba skacze po kuchni. mama płacze. ja jem płatki i nie wiem, co czuję'),
+    M('kuba skacze po kuchni. mama płacze. ja jem płatki i nie wiem, co czuję', { img: 'g_platki' }),
     M('hasło. dla zasady'),
     ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}. I tak, złapali go.`, [M('dobra. to dziś pierwszy raz od tygodnia idę na zajęcia bez strachu')])])]),
     scene('xGrupaUlga', [
