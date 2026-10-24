@@ -874,3 +874,6 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 
 ### 2026-10-24 — zdjęcie: kuchnia Zenona w zakończeniu „przewinięcie" (SW v99)
 - Nowe `assets/kronika/c_kuchnia.jpg` (768×1024, 129 KB), wysłane przy „Ida przyszła do kuchni… Siedzimy. Pies też.”. Amatorskie zdjęcie z telefonu Zenona: talerz z piekarnika, herbata w koszyczkach, śnieg za oknem; pies ten sam co w `c_ida_pies` (brązowy kundel, generowany z referencją), z Idy tylko rękaw beżowej kurtki — bez twarzy. `{img}` na istniejącym kroku, bez zmiany zapisu.
+
+### 2026-10-24 — S2: Natan pamięta ostrzeżenie (SW v100, zapis v13)
+- `scNocRano` (m-rozdział S2): jeśli gracz napisał do Natana wieczorem (`m_warnedNatan`), rano Natan dodaje, że gdy dzwonił nieznany numer, był już w domu, nie sam w redakcji. Pierwsza flaga z listy „bez echa” obsłużona. Migracja v12→v13; case-most (gałąź z ostrzeżeniem) przechodzi.

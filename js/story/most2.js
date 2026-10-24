@@ -421,6 +421,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
     clock('2026-11-28T10:02'),
     scene('scNocRano', [
       Nt('dzwonił do ciebie ktoś w nocy? do mnie o 23:50, nieznany numer. odebrałem i cisza'),
+      iff('flag:m_warnedNatan', [Nt('dobrze, że napisał{eś|aś} wieczorem. jak zadzwonił, byłem już w domu, nie sam w redakcji')]),
       Nt('ida mówi że dudek przeglądał jej telefon na siłowni. miała tam numery do wszystkich od mostu. twój też, bo ci go przekazywałem')
     ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),

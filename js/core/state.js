@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 12,
+      v: 13,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -41,7 +41,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12; // tabela V3 jest generowana wprost do bieżących kroków
+      saved.v = 13; // tabela V3 jest generowana wprost do bieżących kroków
     }
     if (saved.v < 4) {
       // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -49,7 +49,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12; // tabela V4 też mapuje wprost na bieżące kroki
+      saved.v = 13; // tabela V4 też mapuje wprost na bieżące kroki
     }
     if (saved.v < 5) {
       // v5: sceny S1 z planu wdrożenia. Wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -57,7 +57,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12; // tabela V5 też mapuje wprost na bieżące kroki
+      saved.v = 13; // tabela V5 też mapuje wprost na bieżące kroki
     }
     if (saved.v < 6) {
       // v6: rozdział 3 podzielony przerwą s1_plate (po numerze DDZ 6K19). Zapis przed nią zostaje,
@@ -66,7 +66,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = map.exact[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 7) {
       // v7: scena xAnonim w rozdziale 3 (anonimowy materiał z CAM-01). Krok za nią przesuwa się, wybór wraca do wyboru.
@@ -74,7 +74,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 8) {
       // v8: scena xJednaOsoba w c4 (Błysk: ostrzeż jedną osobę). Krok za nią przesuwa się, wybór wraca do wyboru.
@@ -82,7 +82,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 9) {
       // v9: reakcje Oli, Weroniki i Zenona na ostrzeżenie w zakończeniach c4. Każda tabela mapuje wprost na bieżące kroki.
@@ -90,7 +90,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 10) {
       // v10: brakujące reakcje na wybory w prologu, ch1 i ch4.
@@ -98,7 +98,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 11) {
       // v11: S5 pamięta, kogo gracz uprzedził w S4 (Ola, Weronika, Zenon).
@@ -106,7 +106,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
     }
     if (saved.v < 12) {
       // v12: reakcja Leny na bezpośrednie pytanie (S3, kopia2).
@@ -114,7 +114,15 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 12;
+      saved.v = 13;
+    }
+    if (saved.v < 13) {
+      // v13: Natan pamięta wieczorne ostrzeżenie (S2, scNocRano).
+      const map = typeof STORY_MIGRATIONS_V13 !== 'undefined' && STORY_MIGRATIONS_V13[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 13;
     }
     // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
     // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.

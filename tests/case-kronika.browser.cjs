@@ -42,7 +42,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
   const sc=['s4_cisza','s4_drzwi','s4_festyn','s4_noc','s4_okno',...(target==='transmisja'?['s4_transmisja']:[])].sort();
   assert.deepEqual(res.scares.filter(s=>/^s4_/.test(s)).sort(),sc);
   assert.deepEqual(res.missing,[]);
-  assert.equal(res.v,12);
+  assert.equal(res.v,13);
   const again=await page.evaluate(()=>{const n=JSON.stringify(G.s.scares);G.save(true);G.load();return [n,JSON.stringify(G.s.scares)];});
   assert.equal(again[0],again[1]);
   if(shots&&target==='przewiniecie'){
