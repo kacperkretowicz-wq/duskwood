@@ -827,3 +827,7 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - 18.7c: maja_life1 — rozmyty plakat i gazety (płytka głębia ostrości), zuza_life1 — kadr przycięty bez napisów (edycja generatora zmieniała twarze, odrzucona). SW v86.
 - 18.8: Haptyka — U.vibrate używa @capacitor/haptics 8.0.2 na natywnych platformach (impact/notification/vibrate wg wzorca, iOS wreszcie czuje wibracje), w przeglądarce navigator.vibrate; ustawienie 'Wibracje' wycisza oba. Testy: haptics.test.cjs, text-size.browser.cjs. SW v87.
 - 18.9: build mobilny pakuje 65 skryptów i 9 arkuszy w dist/js/app.bundle.js + dist/css/app.bundle.css (źródła bez zmian). Zimny start (CPU 4x, 4G 150 ms): 3,2 s -> 2,6 s. Test mobile-build pilnuje kolejności i kompletności paczki.
+
+### 2026-10-24 — rollout metody v3 na zdjęcia (SW v88)
+Zamienione (25): portrety bartek, ewa, henryk, ida, igor, kuba, maja, nina, oskar, sylwia, zenon, zuza, ola; life: henryk_life1, kuba_life1, kuba_life2, nina_life1, weronika_life1, weronika_life2, zuza_life1, zuza_most; sceny: e_czytelnia, k_rozwidlenie, s1_lumpeks, s1_mem_kot.
+Zostają stare: janina (zielona dominanta), marta/weronika (dodane okulary), natan (kręcone włosy) — dryf tożsamości; bartek_life1/2, maja_life1, igor_life1/2, ola_life1/2, sylwia_life1, marta_life1, natan_life1, janina_life1 — zmiana treści/tożsamości lub artefakty; g_slady (ślady niewidoczne), e_pudlo, s1_bagaznik (zgubione rekwizyty fabularne), mp_osrodek pominięty. Codex: limit wyczerpany do 31.10 — ocena tylko na oko. Arkusz: /workspace/probki/rollout.jpg.
