@@ -813,7 +813,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
 /* ---------- c4 · 20:58 ---------- */
 Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58', when: 'Piątek, 22 stycznia · 18:20', mood: 'dark' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, title, clock, notify, ambient, scene, scare, dial, callEnd, unlock, run, ending, credits, trust, camera } = D;
-  const { M, O, Id, c, Z, W, K, I, Nt, Gr, V } = KronikaCast(D);
+  const { M, O, Id, c, Z, W, K, I, Nt, Gr, V, B } = KronikaCast(D);
   return [
     clock('2027-01-22T18:20'),
     ambient('calm'),
@@ -883,6 +883,18 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         opt('Bartek, zostaw sobie chociaż SMS-y.', [Gr('bartek', 'ok. ale tylko dla was')])
       ])
     ]),
+    // SPRAWA-4 §8: dylemat społeczny — Błysk pozwala ostrzec tylko jedną osobę. Bez kary: zmienia jedno zdanie po 21.
+    scene('xJednaOsoba', [
+      clock('2027-01-22T20:40'),
+      B('dwadzieścia minut. możesz uprzedzić jedną osobę. tylko jedną'),
+      B('reszta dowie się razem z miastem'),
+      choose('blysk2', [
+        opt('Ola. To jej klip.', [O('Wiem. Ale dobrze, że napisałeś{|aś}. Siedzę przy mamie.')], { set: { c_warnedOla: true } }),
+        opt('Pan Zenon. Ida jest jego wnuczką.', [Z('Dziękuję. Nie będę spał. Posiedzę pod jej drzwiami z psem.')], { set: { c_warnedZenon: true } }),
+        opt('Weronika. Ona zna archiwum.', [W('Dobrze. Mam otwarty katalog kaset. Jak coś wyjdzie, będę wiedziała, z której jest taśmy.')], { set: { c_warnedWera: true } }),
+        opt('Nikogo. Nie gram w twoją grę.', [B('to też jest wybór')])
+      ])
+    ]),
     pause(5000),
     clock('2027-01-22T20:58'),
     ambient('dark'),
@@ -928,6 +940,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         M('konto zniknęło. 21:00 i nic'),
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
         Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.'),
+        iff('flag:c_warnedZenon', [Z('Dobrze, że {Pan|Pani} mi napisał{|a}. Byłem pod drzwiami, kiedy wyszła.')]),
         ending('przewiniecie')
       ])
     ]),

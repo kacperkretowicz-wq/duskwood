@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 7,
+      v: 8,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -75,6 +75,14 @@ const G = (() => {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
       saved.v = 7;
+    }
+    if (saved.v < 8) {
+      // v8: scena xJednaOsoba w c4 (Błysk: ostrzeż jedną osobę). Krok za nią przesuwa się, wybór wraca do wyboru.
+      const map = typeof STORY_MIGRATIONS_V8 !== 'undefined' && STORY_MIGRATIONS_V8[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 8;
     }
     // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
     // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.

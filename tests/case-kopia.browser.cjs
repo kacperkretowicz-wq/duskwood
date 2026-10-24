@@ -41,7 +41,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
   const sc=['s3_domowy','s3_glos','s3_kuba','s3_oddech','s3_okno','s3_petla',...(target==='kopia'?['s3_kopia']:[])].sort();
   assert.deepEqual(res.scares.filter(s=>/^s3_/.test(s)).sort(),sc);
   assert.deepEqual(res.missing,[]);
-  assert.equal(res.v,7);
+  assert.equal(res.v,8);
   const again=await page.evaluate(()=>{const n=JSON.stringify(G.s.scares);G.save(true);G.load();return [n,JSON.stringify(G.s.scares)];});
   assert.equal(again[0],again[1]);
   if(shots&&target==='wlasnym_glosem'&&s1==='swit'){

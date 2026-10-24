@@ -838,3 +838,8 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - mp_osrodek v4: pusty budynek gospodarczy ośrodka zimą przy lesie, bez ludzi. SW v91.
 - Test plakatów klipów (tests/posters.test.cjs): każdy mp4 ma plakat z tym samym kadrem (proporcje) i <60 KB; sprawdzone, że wszystkie 15 plakatów to pierwsza klatka (średnia różnica 1–4/255).
 - Ekran blokady po powrocie (SPRAWA-4 §8, mechanika 2): po ≥3 min poza grą nieprzeczytane rozmowy (max 3, z licznikiem) czekają na blokadzie; dotknięcie otwiera czat. Nie przerywa połączeń, straszaków, kurtyn ani ekranu tytułowego. Test tests/return-lock.browser.cjs. SW v92.
+
+### 2026-10-24 — S4: „uprzedź jedną osobę" (SW v93, save v8)
+- Nowa scena `xJednaOsoba` w c4 (20:40, Błysk: „możesz uprzedzić jedną osobę"): wybór Ola / Zenon / Weronika / nikt → flagi `c_warnedOla|Zenon|Wera`. Addytywnie, bez kar; Zenon dziękuje w zakończeniu „przewinięcie", jeśli był uprzedzony.
+- Migracja zapisów v7→v8 (`STORY_MIGRATIONS_V8`, mapa LCS z `tests/fixtures/story-v7-steps.json`); test jednostkowy v8 + testy przeglądarkowe kronika/kopia/głos zaktualizowane do v8.
+- „Błysk zauważa zrzuty ekranu" — już jest w kanonie (`c_shotBlysk`, kronika.js), nic do zrobienia.
