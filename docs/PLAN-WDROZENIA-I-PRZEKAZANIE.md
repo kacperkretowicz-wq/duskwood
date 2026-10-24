@@ -906,3 +906,11 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - `g_platki`: płatki Mai na stole, w tle rozmazany Kuba w szarej bluzie w podskoku, twarz odwrócona. Dopięte do „kuba skacze po kuchni…”.
 - Tylko `img` na istniejących liniach, bez zmian kroków i bez migracji. Testy: npm test, case-glos, media.
 - Spójność: postacie Ada/Szymon są tylko w czacie „Ekipa”, `xSnapEcho` (23:41) nie koliduje z 23:44 (zdjęcie z aparatu), 23:47 (połączenie) ani 23:58 (ostatnia kopia).
+
+## 2026-10-24 22:50 — otwarcie: film z huty, tempo, sprzeczności (save v16, SW v106)
+- Film jednorazowy nagrany od nowa: dojście do huty (zgodnie z ch1: Maja w hucie 22:57–23:58), czołówka, długie zatrzymanie, w półświetle „postać” przy ścianie (kufajka na słupku), szarpnięcie na bramę z podczerwienią CAM-01, urwane. Szum podbity, bez dźwięku, 8 s. Timeout nakładki 9→12 s.
+- Sprzeczności: film był „w lesie” i „23:41”, a ch1 lokuje ją w hucie → xSnapEcho: relacja z Kadru 22:56, kropki = CAM-01 (zdjęcie 22:57), postać = kufajka. Ada: nagranie krąży „po całym błysku” (wyjaśnia, czemu znajomi spoza Mgliska je mają; „relacja z kadru”, spójnie z xReupload). Ola: „Jutro na szóstą” vs „Mam nockę” → nowa scena xOlaGrafik (zamiana na nockę w aptece).
+- Tempo: Kuba pisze dopiero po domknięciu wątku Ekipy (+4,5 s ciszy); xEkipaFilm wchłonięty w xEkipa. Jeden wątek naraz.
+- Silnik: przed wyborem krótsza pauza/pisanie (gap ≤700 ms, typing ≤2,4 s, pause ≤800 ms), czytanie ≤1,8 s, typing ≤9 s — opcje pojawiają się zaraz po wiadomości.
+- Zegar 21:03 w transkrypcie to artefakt trybu natychmiastowego (zegar gry płynie w czasie rzeczywistym).
+- Narzędzie tools/transcript.browser.cjs (transkrypt rozgrywki). Testy: npm 97/97, prolog, playthrough PASS.

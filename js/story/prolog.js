@@ -29,27 +29,27 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       unlock('chat:ekipa'),
       say('ekipa', 'ada', 'widzieliście to?', { gap: 0 }),
       say('ekipa', 'ada', '', { vid: 'assets/video/v_snap.mp4', img: 'v_snap', snap: true }),
-      say('ekipa', 'ada', 'ktoś mi to wysłał na błysku. podobno ostatnia relacja tej dziewczyny, co zaginęła tydzień temu. było w wiadomościach'),
-      say('ekipa', 'szymon', 'ada, nie wrzucaj takich rzeczy na noc')
-    ]),
-    pause(2400),
-    K('hej, sory że tak późno', { gap: 0 }),
-    K('to numer, na który dzwoniła maja wrona?'),
-    waitFor('flag:unlockedPhone', { goal: 'Odblokuj telefon.' }),
-    scene('xEkipaFilm', [
+      say('ekipa', 'ada', 'krąży po całym błysku. ktoś nagrał ekranem relację z kadru tej dziewczyny, co zaginęła tydzień temu w jakimś mglisku. podobno ostatnią. było w wiadomościach'),
+      say('ekipa', 'szymon', 'ada, nie wrzucaj takich rzeczy na noc'),
+      waitFor('flag:unlockedPhone', { goal: 'Odblokuj telefon.' }),
       openChat('ekipa', { goal: 'Znajomi coś wrzucili na grupę. Zobacz, co.', hints: [] }),
       waitFor('flag:sawSnap', { goal: 'Otwórz film od Ady. Jest jednorazowy.', hints: [{ after: 40, chat: 'ekipa', who: 'ada', text: 'otwórz. tylko raz się da' }] }),
-      pause(900),
-      say('ekipa', 'szymon', 'nic nie widać. las i latarka'),
-      say('ekipa', 'ada', 'na końcu. te czerwone kropki między drzewami'),
+      pause(1400),
+      say('ekipa', 'szymon', 'czekaj. a to przy ścianie to co? stoi i się nie rusza'),
+      say('ekipa', 'ada', 'kurtka chyba. mam nadzieję, że kurtka'),
+      say('ekipa', 'ada', 'i na końcu te czerwone kropki przy bramie'),
       say('ekipa', 'szymon', 'drugi raz się nie obejrzy, jednorazowe. i dobrze'),
       choose('ekipa', [
         opt('Ktoś nagrał jej relację i puścił dalej. To nie jest dla nas.', [say('ekipa', 'ada', 'masz rację. sorry. nie wysyłam dalej')], { set: { p_snapNoShare: true } }),
         opt('Skąd wiesz, że to ona?', [say('ekipa', 'ada', 'nie wiem. tak napisał ten, kto mi wysłał. trzecia ręka')])
       ]),
       say('ekipa', 'szymon', 'idę spać. wy też idźcie'),
-      pause(1200)
+      pause(4500)
     ]),
+    pause(2400),
+    K('hej, sory że tak późno', { gap: 0 }),
+    K('to numer, na który dzwoniła maja wrona?'),
+    waitFor('flag:unlockedPhone', { goal: 'Odblokuj telefon.' }),
     openChat('kuba', { goal: 'Ktoś do ciebie napisał. Sprawdź, kto.', hints: [] }),
     pause(700),
     choose('kuba', [

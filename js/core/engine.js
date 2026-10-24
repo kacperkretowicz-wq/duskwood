@@ -22,11 +22,14 @@ const Engine = (() => {
     const profile = (DATA.chars[who] && DATA.chars[who].cadence) || {};
     const previous = G.chat(chat).msgs.at(-1);
     const sameBurst = previous && previous.from === who && lastTalk && lastTalk.chat === chat && lastTalk.who === who && Date.now() - lastTalk.at < 18000;
-    const reading = previous && previous.from !== who ? Math.min((previous.text || '').length * 24, 3200) : 0;
+    const reading = previous && previous.from !== who ? Math.min((previous.text || '').length * 20, 1800) : 0;
     const jitter = .85 + Math.random() * .3;
     const gap = extra.gap ?? ((sameBurst ? 450 : (profile.think || 1500) + reading) * jitter);
-    const duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 14000));
-    return { gap, duration, hesitate: !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
+    let duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 9000));
+    let g2 = gap;
+    // Ostatnia wiadomość przed wyborem gracza: krótsze czekanie, żeby odpowiedzi pojawiały się zaraz po niej.
+    if (extra.beforeChoice && extra.gap == null) { g2 = Math.min(gap, 700); if (extra.typing == null) duration = Math.min(duration, 2400); }
+    return { gap: g2, duration, hesitate: !extra.beforeChoice && !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
   }
 
   /* ---------- DSL ---------- */
@@ -284,6 +287,17 @@ const Engine = (() => {
   }
 
   /* ---------- Wykonanie kroków ---------- */
+  // Czy zaraz po bieżącym kroku (pomijając krótkie pauzy) gracz dostaje wybór?
+  function leadsToChoice(ch) {
+    if (!ch || !ch.steps) return false;
+    for (let i = G.s.pc + 1; i < Math.min(ch.steps.length, G.s.pc + 3); i++) {
+      const n = ch.steps[i];
+      if (!n) return false;
+      if (n.t === 'choose' || n.t === 'ask') return true;
+      if (n.t !== 'pause') return false;
+    }
+    return false;
+  }
   async function exec(st, ch) {
     const my = gen;
     const s = G.s;
@@ -291,14 +305,14 @@ const Engine = (() => {
       case 'label': return;
       case 'go': return st.to;
       case 'ifnot': return G.test(st.cond) ? undefined : st.to;
-      case 'pause': await sleep(st.ms); guard(my); return;
+      case 'pause': await sleep(leadsToChoice(ch) ? Math.min(st.ms, 800) : st.ms); guard(my); return;
       case 'title': await UI.chapterTitle(ch); guard(my); return;
 
       case 'say': {
         const msg = {};
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
-        await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing });
+        await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing, beforeChoice: leadsToChoice(ch) });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;

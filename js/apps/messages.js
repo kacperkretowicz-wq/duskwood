@@ -215,7 +215,7 @@
       requestAnimationFrame(tick);
       v.addEventListener('ended', done);
       v.addEventListener('error', () => setTimeout(done, 1500));
-      setTimeout(done, 9000);
+      setTimeout(done, 12000);
       document.body.appendChild(ov);
       const p = v.play(); if (p && p.catch) p.catch(() => {});
     }
