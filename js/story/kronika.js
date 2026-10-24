@@ -934,13 +934,18 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       scene('scTransmisja', [scare('s4_transmisja', 'glitch')]),
       O('Wyszło.'),
       O('Mama trzyma mnie za rękę. Telefon leży ekranem w dół.'),
+      iff('flag:c_warnedOla', [O('Dzięki, że napisałeś{|aś} wcześniej. Zdążyłam powiedzieć mamie sama, zanim zobaczyła to u sąsiadki.')]),
+      iff('flag:c_warnedWera', [W('Zapisałam, z której taśmy jest ten fragment. Jak ktoś zapyta, będzie wiadomo, że to stare nagranie, nie nowe.')]),
+      iff('flag:c_warnedZenon', [Z('Ida siedzi w kuchni. Nie wyszła. Pies od niej nie odchodzi.')]),
       ending('transmisja')
     ], [
-      iff(s => s.vars.s4Ending === 'kopia2', [M('konto zniknęło. 21:00 i nic'), M('skąd wiedział{eś|aś}, że zniknie?'), ending('kopia2')], [
+      iff(s => s.vars.s4Ending === 'kopia2', [M('konto zniknęło. 21:00 i nic'), M('skąd wiedział{eś|aś}, że zniknie?'), iff('flag:c_warnedOla', [O('Napisałeś{|aś} mi wcześniej, że coś się szykuje. Teraz piszesz, że nic. To co masz?')]), ending('kopia2')], [
         M('konto zniknęło. 21:00 i nic'),
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
         Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.'),
         iff('flag:c_warnedZenon', [Z('Dobrze, że {Pan|Pani} mi napisał{|a}. Byłem pod drzwiami, kiedy wyszła.')]),
+        iff('flag:c_warnedOla', [O('Przesiedziałam cały wieczór z telefonem w ręce. Nic. Dzięki, że nie musiałam czekać sama.')]),
+        iff('flag:c_warnedWera', [W('Katalog zostawiam otwarty jeszcze na tydzień. Na wszelki wypadek.')]),
         ending('przewiniecie')
       ])
     ]),

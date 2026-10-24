@@ -16,7 +16,7 @@ const G = (() => {
 
   function fresh(player) {
     return {
-      v: 8,
+      v: 9,
       seasonId: 's1', seasons: {}, seasonArchive: {},
       player: player || { name: 'Ty', gender: 'm' },
       chapter: 'prolog', pc: 0,
@@ -41,7 +41,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 7; // tabela V3 jest generowana wprost do bieżących kroków
+      saved.v = 9; // tabela V3 jest generowana wprost do bieżących kroków
     }
     if (saved.v < 4) {
       // v4: przegląd jakości. Te same zasady co w v3: wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -49,7 +49,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 7; // tabela V4 też mapuje wprost na bieżące kroki
+      saved.v = 9; // tabela V4 też mapuje wprost na bieżące kroki
     }
     if (saved.v < 5) {
       // v5: sceny S1 z planu wdrożenia. Wybór wraca do wyboru, krok — do początku nowej sceny.
@@ -57,7 +57,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 7; // tabela V5 też mapuje wprost na bieżące kroki
+      saved.v = 9; // tabela V5 też mapuje wprost na bieżące kroki
     }
     if (saved.v < 6) {
       // v6: rozdział 3 podzielony przerwą s1_plate (po numerze DDZ 6K19). Zapis przed nią zostaje,
@@ -66,7 +66,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = map.exact[saved.pc];
       }
-      saved.v = 7;
+      saved.v = 9;
     }
     if (saved.v < 7) {
       // v7: scena xAnonim w rozdziale 3 (anonimowy materiał z CAM-01). Krok za nią przesuwa się, wybór wraca do wyboru.
@@ -74,7 +74,7 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 7;
+      saved.v = 9;
     }
     if (saved.v < 8) {
       // v8: scena xJednaOsoba w c4 (Błysk: ostrzeż jedną osobę). Krok za nią przesuwa się, wybór wraca do wyboru.
@@ -82,7 +82,15 @@ const G = (() => {
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
       }
-      saved.v = 8;
+      saved.v = 9;
+    }
+    if (saved.v < 9) {
+      // v9: reakcje Oli, Weroniki i Zenona na ostrzeżenie w zakończeniach c4. Każda tabela mapuje wprost na bieżące kroki.
+      const map = typeof STORY_MIGRATIONS_V9 !== 'undefined' && STORY_MIGRATIONS_V9[saved.chapter];
+      if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
+        saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];
+      }
+      saved.v = 9;
     }
     // Jeden zredagowany SMS jest jednocześnie dowodem i częścią kopii Mai.
     // Odświeżamy wyłącznie znany tekst startowy, bez zmiany id, czasu i postępu.

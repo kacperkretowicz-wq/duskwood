@@ -6,8 +6,9 @@ const {chapters,sig}=require('./dump-steps.cjs');
 const old=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const out={};
 for(const [ch,c] of Object.entries(chapters)){
-  const o=old[ch];if(!o)continue;
-  const n=c.steps.map(sig);
+  const nl=x=>x.replace(/"([a-z]{1,2})\d+"/g,'"$1#"'); // numery etykiet przesuwają się po dopisaniu iff
+  const o=old[ch]&&old[ch].map(nl);if(!o)continue;
+  const n=c.steps.map(s=>nl(sig(s)));
   if(o.length===n.length&&o.every((x,i)=>x===n[i]))continue;
   const A=o.length,B=n.length,L=Array.from({length:A+1},()=>new Int32Array(B+1));
   for(let i=A-1;i>=0;i--)for(let j=B-1;j>=0;j--)L[i][j]=o[i]===n[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);

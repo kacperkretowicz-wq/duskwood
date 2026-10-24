@@ -245,7 +245,7 @@ Odbiór P3: termin nie resetuje się po zamknięciu, zmiana tempa działa, przek
 - [ ] Dodać scenę, w której data zaległego pliku wyjaśnia pozornie świeżą aktywność. Powiadomienie samo nie dowodzi czasu zdarzenia.
 - [x] Rozwinąć relację → screen → reupload → komentarze → reakcję osoby, której to dotyczy. Usunięcie oryginału nie usuwa cudzych kopii.
 - [ ] Pokazać prywatny profil, prośby o wiadomość, wyciszoną grupę i źle zrozumiane „wyświetlono” jako zachowania ludzi, nie automatyczne dowody winy.
-- [ ] Rozwinąć anonimowy materiał jako trop. Na razie można rozpisać scenę i użyć neutralnego oznaczenia materiału roboczego; produkcja nowego klipu czeka na rozdział 12.
+- [x] Rozwinąć anonimowy materiał jako trop. Na razie można rozpisać scenę i użyć neutralnego oznaczenia materiału roboczego; produkcja nowego klipu czeka na rozdział 12.
 
 Odbiór P4: każde zdarzenie ma konkretnego nadawcę, źródło danych i warunki dostępu. Obowiązkowy trop pozostaje osiągalny również po odmowie przyjęcia pliku lub bez powrotu do gry w konkretnym momencie. Alternatywna droga ma sens fabularny, nie odtwarza magicznie usuniętej wiadomości.
 
@@ -847,3 +847,8 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 ### 2026-10-24 — przegląd listy S1 (odhaczone tylko to, co ma dowód)
 - Odhaczone: P0 (checkout/mapa/odstępy/miejsca — `MAPA-S1.md` §1–3), sceny P2 (`xCel`, `xSerwis`, `xOla`, `xBartek`, `xAutobus`, `igor_sunday`; dzień po wyznaniach), P3 (opisy przerw, `xNieSpisz`, `rano_*`, brak kary, `xPojechali`), P4 (edycja, `xWycofana`, reupload), P5 (`scMajaNumer`, `s1_hand`/głosówka Szklarza: jednorazowe `s.scares`, tryb łagodny, odstępy).
 - Zostawione otwarte: rzeczy wymagające czytania/oceny przez człowieka (zrozumiałość pierwszej sesji, komplet reakcji, różnorodność „zwykłych” zakończeń), anonimowy materiał (czeka na klipy), P1 z nowymi graczami, macierz wydania, test fizycznego urządzenia.
+
+### 2026-10-24 — reakcje na „uprzedź jedną osobę" (SW v94, zapis v9)
+- Lista S1: odhaczony anonimowy materiał (`xAnonim` + `v_anonim`, commit 87a0ab0).
+- c4: krótkie reakcje uprzedzonej osoby w każdym zakończeniu — Ola (transmisja: zdążyła powiedzieć mamie sama; kopia2: pyta, co masz; przewinięcie: nie czekała sama), Weronika (zapisuje, z której taśmy jest fragment / zostawia katalog otwarty), Zenon (Ida w kuchni / pod drzwiami). Bez nowych faktów kanonu i bez kar.
+- Naprawa: bloki migracji v<3…v<8 ustawiały wersję pośrednią, przez co zapis v≤6 w c4 dostawał drugi raz przesunięcie V8. Teraz każda tabela mapuje wprost na bieżące kroki i ustawia v9. Generatory porównują kroki bez numerów etykiet (ie15→ie21 po dopisaniu iff). Test v9 obejmuje zapisy v8 i v6.
