@@ -790,3 +790,7 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - Testy: `tests/browser.cjs` miał nieaktualną asercję wersji zapisu (4 → 7) i nie przechodził od dawna; poprawione, 7/7 PASS (w tym offline reload z nowym SW).
 - Epilog S1 (24.10): dwa nowe zdjęcia przy istniejących wiadomościach (bez nowych kroków, bez migracji): `e_pudlo` — Maja fotografuje lewą ręką (gips w kadrze) pudło notatek Rybickiego pod biurkiem z Bandziorem (referencja `m_bandzior.jpg`); `e_czytelnia` — Kuba z dyżuru w czytelni (scena `f3lib`), otwarta obudowa komputera. SW v77. Do oceny Kacpra.
 - Test `art-keys.test.cjs`: każdy klucz obrazu z historii ma definicję. Przegląd ręczny (375 px): ekran tytułowy, wybór formy On/Ona, ekran blokady, pierwsza rozmowa — bez usterek; skan form rodzajowych {a|b} i 2. os. czasu przeszłego — wszystkie wypowiedzi do gracza mają warianty.
+
+### 18.3 Zdjęcie do ch4 (decyzja własna)
+- Nowe `assets/s1x/s1_bagaznik.jpg`: bagażnik Astry w warsztacie Sowów, z nożycami do kłódek, latarkami, liną, kocem i rękawicami. Podpięte jako `{img:'s1_bagaznik'}` pod wiadomość Bartka „nozyce do klodek mam. latarki tez”. Kroki fabuły się nie zmieniły, więc migracja nie jest potrzebna. SW v78.
+- Przeszły testy: unit 60/60, browser, playthrough, e2e-player i media.
