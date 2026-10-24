@@ -862,3 +862,7 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 ### 2026-10-24 — P6/S5: pamięć o „uprzedź jedną osobę" (SW v96, zapis v11)
 - S5 g0/g2: uprzedzona w S4 osoba pamięta to w zwykłej rozmowie — Ola przy umowie w świetlicy, Weronika przy katalogu kaset (`xKatalogWery`), Zenon w `xZenon`. Jedna linia, bez nowych faktów, bez wpływu na dowody i finały S5.
 - Migracja v10→v11. Normalizacja numerów etykiet w generatorach obejmuje też etykiety w przestrzeni sceny (`xZenon.c2`).
+
+### 2026-10-24 — test łańcucha migracji (SW v97)
+- `tests/migration-chain.test.cjs`: dla każdej historycznej wersji zapisu (fixture `story-v2…v10-steps.json`) i każdego rozdziału — 7 punktów (początek, ćwiartki, koniec), zapis zwykły i w wyborze. Sprawdza: wersja = bieżąca, flagi zachowane, kolejność zachowana, ten sam krok (albo dopisana scena tuż przed nim), wybór wraca dokładnie do wyboru, drugie wczytanie nic nie przesuwa. Kroki przepisane w redakcji 2c5f807 sprawdzane tylko co do kolejności.
+- Test wymaga fixture dla każdej wersji < bieżącej — przypomina, żeby zrzucić kroki przed zmianą historii. Zweryfikowany na celowo zepsutym bloku migracji (wykrywa podwójne przesunięcie).
