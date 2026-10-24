@@ -112,7 +112,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     unlock('chat:ewa'),
     E('dzien dobry. tu ewa rybicka. pani weronika dala mi numer'),
     iff('flag:k_pickedDom', [E('przepraszam za noc. to ja dzwonilam z domowego. {pan odebral|pani odebrala} a ja nie umialam nic powiedziec')], [E('przepraszam za noc. to ja dzwonilam z domowego. {pan nie odebral|pani nie odebrala}. i dobrze')]),
-    E('pani weronika dala mi numer jeszcze wieczorem. w nocy zobaczylam drugi klip i nie wytrzymalam'),
+    E('pani weronika dala mi numer jeszcze wieczorem. w nocy zobaczylam drugi klip i nie wytrzymalam', { wording: 'w nocy zobaczylam drugi klip i nie wytrzymalam' }),
     E('kto to robi'),
     choose('ewa', [
       opt('Jeszcze nie wiem. Ale to nie są kasety z pudła. To nagrania z jego telefonu.', [

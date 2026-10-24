@@ -261,7 +261,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     choose('natan', [
       opt('Faktura potwierdza wymianę klocków w furgonetce. Nie potwierdza, że ktoś z warsztatu był na moście.', [
         Nt('no tak. ale ludzie czytają co chcą'),
-        Nt('dobra. zapytam bartka o fakture, nie o wypadek')
+        Nt('dobra. zapytam bartka o fakture, nie o wypadek', { wording: 'dobra. ty go znasz. zapytaj bartka o fakture, nie o wypadek' })
       ], { wording: 'To faktura za klocki, nie dowód, że Sowa był na moście. Sprawdźmy najpierw tę usługę.', set: { m_invoiceRead: true } }),
       opt('Zapytam Bartka. Może coś wie.', [
         Nt('ok. tylko tak żeby nie brzmialo jak przesłuchanie, bo on i tak ma już dość')
@@ -427,7 +427,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       Nt('ida mówi że dudek przeglądał jej telefon na siłowni. miała tam numery do wszystkich od mostu. twój też, bo ci go przekazywałem')
     ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),
-    Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund'),
+    Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund', { wording: 'rozmawiałem z nią w cztery oczy. ida to ta stażystka, co robiła eksport 40 sekund' }),
     scene('xIdaPo', [
       iff('flag:m_toldNatan', [Nt('i sorry za tamto. miał{eś|aś} rację z tym błyskiem, a ja cię zbyłem')]),
       iff('flag:m_shotIda', [Nt('powiedziała że ktoś jej zrobił zrzut i się przestraszyła. dlatego tak długo nie chciała gadać')]),

@@ -936,3 +936,11 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Ikony bez skojarzeń z prawdziwymi markami (Gadka: turkus→petrol, Kadr: koral→malina); Błysk w ciemnym motywie.
 - Ekran główny: 2 strony (scroll-snap + kropki + przeciąganie myszą), gest krawędzi = wstecz; klik blokowany tylko w trakcie przewijania między stronami.
 - Testy dostosowane: conversations (Na osobności w Gadce), seasons (ikona Notatki na stronie 2), unsend (deterministyczne wiadomości Kuby — wcześniejszy timeout istniał już na v109), e2e (wymuszanie warunku obejmuje odblokowane czaty bez historii). Pełne e2e iOS + Android: PASS.
+
+### v111 (25.10.2026) — przegląd transkryptów S1–S5
+- Natan/Bartek/Zuza/Szklarz piszą bez polskich znaków globalnie (`plainTyper` w engine, poza głosówkami).
+- S2: Marta — chronologia kasety (czwartek w archiwum, kaseta na dwie noce); Henryk — „wnuczka mi przeczytała”; Zuza — głosówka „z korków” (19:10), „a jeszcze” zamiast drugiego „hej”, zdjęcie z mostu przez przesyłanie; Natan — Ida nie przedstawiana drugi raz; Natan „zapytaj bartka o fakturę”.
+- S3: Ewa bez powtórzonego „dała mi numer”; Kuba „a zdjęcie okna to już ja”.
+- S4: Maja — „światło po śniegu” (scena o 10:15), Ida „jest u niego na ferie”; Ida — kasety na półkach w pokoju po babci (zgodnie ze zdjęciem).
+- S5: bez zmian treści; transkrypt spójny (hasło, Oskar→Dudek→Marta, nagranie rozmowy).
+- Wszystkie transkrypty S1–S5 dochodzą do końca sezonu bez STUCK.

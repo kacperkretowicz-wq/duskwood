@@ -439,7 +439,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     K('pan adam miał „pierwsza redakcja”. jest w nekrologu. „ulica dzieciństwa” była na fiszce. pani weronika mi ją sama pokazała', { wording: 'u pana adama było „pierwsza redakcja”, znalazłem w nekrologu. ulicę dzieciństwa miał na fiszce. pani weronika pokazała mi kartki, a ja zapamiętałem odpowiedź' }),
     K('weszło za drugim razem'),
     iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej'), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
-    K('zdjęcie okna też ja. szedłem z dyżuru'),
+    K('zdjęcie okna też ja. szedłem z dyżuru', { wording: 'a zdjęcie okna to już ja. szedłem z dyżuru' }),
     K('chciałem żebyście przestali szukać w pudle. pani weronika się przestraszyła. usunąłem po sześciu minutach', { wording: 'chciałem was odciągnąć od pudła. potem zobaczyłem, że zgasiła światło i nie wychodzi. usunąłem po sześciu minutach' }),
     scene('xKubaPrzerwa', [
       choose('kuba', [

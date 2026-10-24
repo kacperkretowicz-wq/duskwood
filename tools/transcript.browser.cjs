@@ -23,7 +23,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
    const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
    const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===lastKey?same+1:0;lastKey=key;
    if(p){
-    if(p.type==='choose'){log.push(`   ?? WYBÓR (${p.chat}): `+p.options.map(x=>x.text).join(' | '));Engine.answer(p.options[0].i);}
+    if(p.type==='choose'){const ak=G.s.chapter+':'+G.s.pc;const n=(window.__att||={})[ak]=(window.__att[ak]||0)+1;log.push(`   ?? WYBÓR (${p.chat}): `+p.options.map(x=>x.text).join(' | ')+(n>1?'  [próba '+n+']':''));Engine.answer(p.options[(n-1)%p.options.length].i);}
     else if(p.type==='ask'){const a=st.answers.find(a=>a.match)?.match[0]||'tak';log.push(`   ?? PYTANIE → ${a}`);Engine.answer(a);}
     else if(p.type==='show'){const ev=st.accept[0].ev[0];G.addEv(ev,true);log.push(`   ?? POKAŻ → ${ev}`);Engine.answer(ev);}
     else if(p.type==='place')Engine.answer(st.accept[0].place[0]);

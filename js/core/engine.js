@@ -17,6 +17,13 @@ const Engine = (() => {
   const typingMap = {};
   let lastTalk = null;
 
+  // Natan, Bartek, Zuza i Szklarz piszą bez polskich znaków — styl postaci, pilnowany w jednym miejscu.
+  const PLAIN_TYPERS = new Set(['natan', 'bartek', 'zuza', 'szklarz']);
+  function plainTyper(who, text) {
+    if (!PLAIN_TYPERS.has(who) || typeof text !== 'string' || text.startsWith('voice:')) return text;
+    const m = { ą: 'a', ć: 'c', ę: 'e', ł: 'l', ń: 'n', ó: 'o', ś: 's', ź: 'z', ż: 'z', Ą: 'A', Ć: 'C', Ę: 'E', Ł: 'L', Ń: 'N', Ó: 'O', Ś: 'S', Ź: 'Z', Ż: 'Z' };
+    return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, c => m[c]);
+  }
   // Tempo konkretnej osoby: najpierw czyta, potem pisze; kolejne dymki idą seriami.
   function cadence(chat, who, text, extra) {
     const profile = (DATA.chars[who] && DATA.chars[who].cadence) || {};
@@ -312,7 +319,7 @@ const Engine = (() => {
         const msg = {};
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
-        await talk(st.chat, st.who, st.wording ?? st.text, { msg, gap: st.gap, typing: st.typing, beforeChoice: leadsToChoice(ch) });
+        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: leadsToChoice(ch) });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;

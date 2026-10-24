@@ -5,7 +5,7 @@
 Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona 41', when: 'Poniedziałek, 30 listopada · 8:20', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd, scene, notify, vanish } = D;
   const IK = t => say('blyskm', 'blyskm', t, { vanish: true });
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -33,8 +33,8 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xLicznik', [
       pause(2500),
-      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.'),
-      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.'),
+      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'Jeszcze jedno. Nagrałam to w czwartek w nocy w archiwum, jak pierwszy raz odsłuchiwałam zaniki. Nikomu tego nie pokazywałam.' }),
+      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.', { wording: 'Pani Weronika pożyczyła mi kasetę na dwie noce, żebym mogła przesłuchać zaniki w spokoju. W sobotę rano już ją miała z powrotem.' }),
       say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
       Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
       choose('marta', [
@@ -129,14 +129,14 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     pause(2500),
     clock('2026-12-01T19:10'),
     scene('xZuzaGlos', [
-      V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza'),
+      V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza', { wording: 'sorry, że głosówka, wracam z korków i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza' }),
       choose('zuza', [
         opt('Niech ogląda teleturnieje. Też trzeba odpocząć.', [Z('ona mówi, że przynajmniej tam wiadomo, kto wygrał')]),
         opt('Załóż rękawiczki, zanim odpiszesz.', [Z('nie mam. zgubiłam w autobusie. trzecie w tym roku')])
       ]),
       pause(2000)
     ]),
-    Z('hej'),
+    Z('hej', { wording: 'a jeszcze' }),
     Z('widziałam artykuł że jest jakaś przepisana strona'),
     Z('powiedz mi jedno. czy ktoś wujka zabił'),
     choose('zuza', [
@@ -204,7 +204,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callIn, callEnd, notify, ending, credits, run, scene, camera, nearby } = D;
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
@@ -294,7 +294,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       clock('2026-12-05T16:20'),
       nearby('m_znicz', { device: 'Telefon', img: 'm_znicz_most', note: 'Nieznane urządzenie w pobliżu', flag: 'm_zniczOk', declineFlag: 'm_zniczNo' }),
       iff('flag:m_zniczOk', [
-        Z('to ja. widzę cię z drugiej strony mostu')
+        Z('to ja. widzę cię z drugiej strony mostu', { wording: 'to ja. zdjecie z drugiej strony mostu, puscilam ci przez przesylanie' })
       ], [
         Z('to byłam ja, z drugiej strony mostu. sorry, że wysłałam przez przesyłanie'),
         pic('zuza', 'zuza', 'm_znicz_most', '')
@@ -385,7 +385,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       W('Pani Ziuta wróciła na swój karton. Pusty, ale jej to nie przeszkadza.'),
       pause(2500),
       callIn('henryk'),
-      c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.'),
+      c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.', { wording: 'Wiśniewski. Przeczytałem. To znaczy wnuczka mi przeczytała. Dwa razy.' }),
       c('henryk', 'Ja tam nikogo nie oskarżam. Ale teraz ludzie wiedzą, że to nie ja kazałem zostawić tę siatkę zdjętą.'),
       choose('call', [
         opt('Dziękuję, że mi pan zaufał.', [c('henryk', 'To ja dziękuję. Że ktoś w końcu sprawdził.')], { trust: { henryk: 1 } }),

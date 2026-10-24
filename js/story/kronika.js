@@ -386,7 +386,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     pause(4000),
     scene('xSnieg', [
       M('wreszcie porządny śnieg. wyszłam z psem sąsiadki, bo poprosiła'),
-      pic('maja2', 'maja', 'c_ida_pies', 'kocham to światło po zmroku'),
+      pic('maja2', 'maja', 'c_ida_pies', 'kocham to światło po zmroku', { wording: 'kocham to światło po śniegu, wszystko takie jasne' }),
       M('czekaj. ta dziewczyna z psem. kogoś ci przypomina?'),
       choose('maja2', [
         opt('To pies pana Zenona. Ten, który piszczał w telefonie.', [
@@ -757,7 +757,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       choose('maja2', [
         opt('i.k_00. W listopadzie, na Błysku, przyznała się do wycięcia 40 sekund nagrania z mostu. Napisała „wogóle”. To Ida.', [
           M('Ida. wnuczka pana Zenona'),
-          M('ona ma klucz do jego pokoju, wychodzi z psem po nocach i wie, gdzie mieszkasz', { wording: "mieszka z nim, wychodzi z tym psem. i była pod blokiem. to zaczyna pasować, nie tylko to jedno słowo" }),
+          M('ona ma klucz do jego pokoju, wychodzi z psem po nocach i wie, gdzie mieszkasz', { wording: "jest u niego na ferie, wychodzi z tym psem. i była pod blokiem. to zaczyna pasować, nie tylko to jedno słowo" }),
           M('i miała kiedyś w telefonie numery wszystkich od mostu')
         ], { set: { c_twist: true } }),
         opt('Pan Zenon. Starsi ludzie piszą z błędami.', [
@@ -801,7 +801,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
     scene('xIdaDziadek', [
       pause(2500),
       Id('dziadek myśli że wieczorami siedzę na rozmowach o pracę. online. od stażu w gazecie to nawet się zgadza'),
-      Id('te kasety trzymał w szafie po babci. nie wie ile z nich widziało już pół miasta'),
+      Id('te kasety trzymał w szafie po babci. nie wie ile z nich widziało już pół miasta', { wording: 'te kasety trzymał na półkach w pokoju po babci. nie wie ile z nich widziało już pół miasta' }),
       choose('ida', [
         opt('Powiedz mu sama, zanim zobaczy w internecie.', [Id('wiem. jutro. przy śniadaniu. jak pies nie będzie szczekał')], { set: { c_idaTellZenon: true } }),
         opt('Czemu go nie zapytałaś o zgodę?', [Id('bo by powiedział nie. i miałby rację. dlatego nie zapytałam')])
