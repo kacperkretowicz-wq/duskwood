@@ -15,8 +15,14 @@ test('mobile payload includes every local script/style and no remote fonts or de
  assert.equal(/fonts\.googleapis|https:\/\//.test(html),false);
  for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
   assert.ok(fs.existsSync(path.join(root,'dist',match[1])),match[1]);
+  if(/app\.bundle\./.test(match[1]))continue;
   assert.deepEqual(fs.readFileSync(path.join(root,match[1])),fs.readFileSync(path.join(root,'dist',match[1])));
  }
+ // one bundled script + one stylesheet, containing every source file in index.html order
+ const src=read('index.html'),bundle=read('dist/js/app.bundle.js'),cssb=read('dist/css/app.bundle.css');
+ assert.equal((html.match(/<script src=/g)||[]).length,1);assert.equal((html.match(/rel="stylesheet"/g)||[]).length,1);
+ let at=-1;for(const m of src.matchAll(/<script src="(js\/[^"]+)">/g)){const i=bundle.indexOf('// '+m[1]+'\n');assert.ok(i>at,m[1]);at=i;assert.ok(bundle.includes(read(m[1])),m[1]+' content');}
+ for(const m of src.matchAll(/rel="stylesheet" href="(css\/[^"]+)"/g))assert.ok(cssb.includes(read(m[1])),m[1]);
  for(const forbidden of ['.git','node_modules','tests','docs','package-lock.json'])assert.equal(fs.existsSync(path.join(root,'dist',forbidden)),false);
 });
 test('native projects agree on identity, use local game files, and restrict phone orientation',()=>{
