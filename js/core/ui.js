@@ -516,7 +516,7 @@ const UI = (() => {
   function addLockNotif(o) {
     if (!lockEl) return;
     const el = bannerEl(Object.assign({}, o, { when: U.time(G.now()) }));
-    el.addEventListener('click', unlockScreen);
+    el.addEventListener('click', e => { e.stopPropagation(); unlockScreen(); if (o.open && o.open.chat) UI.openApp('messages', { chat: o.open.chat }); });
     $('.lk-n', lockEl).prepend(el);
   }
   function unlockScreen() {
@@ -529,6 +529,29 @@ const UI = (() => {
     homebar.classList.remove('hide');
     G.setFlag('unlockedPhone');
   }
+
+  /* Powrót do gry po dłuższej przerwie: nieprzeczytane czekają na ekranie blokady jak w prawdziwym telefonie (najwyżej trzy rozmowy, najnowsze na górze). */
+  let hiddenAt = 0;
+  const RETURN_LOCK_MS = 3 * 60 * 1000;
+  function returnLock() {
+    if (lockEl || !G.s || G.s.finished || overlays.length || callEl || document.querySelector('.curtain,.scare-ov,.scare-call,.title-scr')) return false;
+    const ids = Object.keys(G.s.chats || {}).filter(id => id !== 'call' && G.isUnlocked('chat:' + id) && G.s.chats[id].unread > 0);
+    if (!ids.length) return false;
+    lock();
+    for (const id of ids.slice(-3)) {
+      const c = G.s.chats[id], msg = [...c.msgs].reverse().find(m => m.from !== 'me' && m.from !== 'sys');
+      if (!msg) continue;
+      const cd = DATA.chats[id] || {}, who = DATA.chars[msg.from] || {}, name = U.tpl(c.name || cd.name || who.name || '');
+      addLockNotif({ app: 'messages', open: { chat: id }, who: cd.group ? msg.from : (c.avatar || cd.avatar || msg.from),
+        title: (cd.group ? `${who.short || who.name} · ${name}` : name) + (c.unread > 1 ? ` (${c.unread})` : ''), text: preview(msg) });
+    }
+    return true;
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { hiddenAt = Date.now(); return; }
+    if (hiddenAt && Date.now() - hiddenAt >= RETURN_LOCK_MS) returnLock();
+    hiddenAt = 0;
+  });
 
   /* ---------- połączenia ---------- */
   let callEl = null;
@@ -830,7 +853,7 @@ const UI = (() => {
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
-    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
+    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, returnLock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
     fx, scare, nearby, camera, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };

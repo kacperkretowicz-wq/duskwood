@@ -837,3 +837,4 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - e2e-player: reload po przejściu czeka na domcontentloaded (60 s) zamiast load — wcześniej TimeoutError przy przeładowaniu z aktywnym SW. iOS S1–S5 PASS, offline OK, 0 błędów. ola_life1 v4 (bez dłoni, ta sama klasa). SW v90.
 - mp_osrodek v4: pusty budynek gospodarczy ośrodka zimą przy lesie, bez ludzi. SW v91.
 - Test plakatów klipów (tests/posters.test.cjs): każdy mp4 ma plakat z tym samym kadrem (proporcje) i <60 KB; sprawdzone, że wszystkie 15 plakatów to pierwsza klatka (średnia różnica 1–4/255).
+- Ekran blokady po powrocie (SPRAWA-4 §8, mechanika 2): po ≥3 min poza grą nieprzeczytane rozmowy (max 3, z licznikiem) czekają na blokadzie; dotknięcie otwiera czat. Nie przerywa połączeń, straszaków, kurtyn ani ekranu tytułowego. Test tests/return-lock.browser.cjs. SW v92.
