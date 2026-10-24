@@ -784,3 +784,7 @@ Długość, orientacja i dźwięk: 8 s, pion, bez dźwięku; napis „stodoła, 
 ```
 
 Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fabuły, bez migracji). SW v75.
+
+### 18.2. Kolejne poprawki (24.10.2026)
+- UX mobilny: pinezki mapy miały obszar dotyku 18–26 px — dodano niewidoczne powiększenie (`.mp-pin::after`); przełącznik „Wszystkie/Nieprzeczytane” 32 px (jak systemowy). SW v76.
+- Testy: `tests/browser.cjs` miał nieaktualną asercję wersji zapisu (4 → 7) i nie przechodził od dawna; poprawione, 7/7 PASS (w tym offline reload z nowym SW).
