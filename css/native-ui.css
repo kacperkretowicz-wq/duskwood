@@ -294,7 +294,7 @@ html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msg
 .app.edge-drag { transition:none !important; }
 /* Awatar grupy z dwóch osób (Gadka) */
 .av.av-duo { position:relative; overflow:visible; background:none; }
-.av.av-duo > .av { position:absolute; width:68%; height:68%; margin:0; box-shadow:0 0 0 2px var(--bg,#fff); }
+.av.av-duo > .av.av { position:absolute; width:68%; height:68%; margin:0; border:0; box-shadow:0 0 0 2px #fff; }
 .av.av-duo > .av:first-child { left:0; top:0; }
 .av.av-duo > .av:last-child { right:0; bottom:0; }
 /* Potwierdzenia: główki „wyświetlono” w Gadce, „Otwarto” w Błysku */
