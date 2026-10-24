@@ -486,7 +486,7 @@
         chList.appendChild(h('button', { class: 'row' + (ok ? '' : ' dis'), onclick: async () => {
           if (!ok) return;
           const r = await UI.modal({ title: `Zagrać od: ${ch.title}?`, text: 'Obecny postęp zostanie zastąpiony stanem z początku tego rozdziału. Odblokowane zakończenia zostaną zachowane.', buttons: [{ label: 'Anuluj', value: 0 }, { label: 'Wczytaj', value: 1, pri: true }] });
-          if (r === 1) { G.loadCheckpoint(id); location.reload(); }
+          if (r === 1) { if (G.loadCheckpoint(id)) location.reload(); else UI.toast('Nie udało się wczytać tego rozdziału — zapis był uszkodzony.', { kind: 'error' }); }
         } }, h('span', { class: 'ri', html: U.icon(ok ? 'refresh' : 'lock', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)), h('span', {}, ch.title))));
       });
       const endings = h('div', { class: 'list plain' }, Object.entries(DATA.endings).map(([id, e]) => h('div', { class: 'row' + (G.s.endings.includes(id) ? '' : ' dis') }, h('div', { class: 'rm' }, h('b', {}, G.s.endings.includes(id) ? e.title : '???'), h('span', {}, G.s.endings.includes(id) ? e.tag : 'Zakończenie nieodkryte')))));

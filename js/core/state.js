@@ -99,7 +99,7 @@ const G = (() => {
       const raw = store.get(KEY);
       if (!raw) return false;
       try { api.s = Object.assign(fresh(), migrate(JSON.parse(raw))); api.s.clock.at = Date.now(); api.s.clock.paused = document.hidden; return true; }
-      catch (e) { console.warn('Zapis uszkodzony', e); return false; }
+      catch (e) { console.warn('Zapis uszkodzony', e); store.set(KEY + '.corrupt', raw); return false; }
     },
     wipe() { store.del(KEY); store.keys().filter(k => k.startsWith(CP)).forEach(store.del); api.s = null; BUS.emit('game-reset'); },
 
@@ -110,7 +110,12 @@ const G = (() => {
       const doSave = () => {
         const s = api.s; if (!s) return;
         s.clock.t = api.now(); s.clock.at = Date.now();
-        store.set(KEY, JSON.stringify(s));
+        const json = JSON.stringify(s);
+        if (store.set(KEY, json)) return;
+        // Brak miejsca: usuń najstarsze punkty kontrolne (zapis bieżący jest ważniejszy) i spróbuj ponownie.
+        for (const k of store.keys().filter(k => k.startsWith(CP)).sort()) { store.del(k); if (store.set(KEY, json)) return; }
+        store.del(KEY + '.corrupt');
+        if (!store.set(KEY, json)) console.warn('Nie udało się zapisać gry (brak miejsca)');
       };
       if (now) doSave(); else api._t = setTimeout(doSave, 250);
     },
@@ -126,10 +131,11 @@ const G = (() => {
     },
     loadCheckpoint(ch) {
       const raw = store.get(CP + ch); if (!raw) return false;
+      let cp; try { cp = migrate(JSON.parse(raw)); } catch (e) { console.warn('Punkt kontrolny uszkodzony', e); store.del(CP + ch); return false; }
       const keepEndings = api.s ? api.s.endings : [];
       const keepArchive = api.s ? U.clone(api.s.seasonArchive || {}) : {};
       const keepPacing = api.s?.pacing ? U.clone(api.s.pacing) : null;
-      api.s = Object.assign(fresh(), migrate(JSON.parse(raw)));
+      api.s = Object.assign(fresh(), cp);
       api.s.endings = [...new Set([...(api.s.endings || []), ...keepEndings])];
       api.s.seasonArchive = Object.assign({}, api.s.seasonArchive, keepArchive);
       if (keepPacing) { delete keepPacing.waiting; api.s.pacing = keepPacing; }
