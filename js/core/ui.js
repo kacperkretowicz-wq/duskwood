@@ -529,6 +529,9 @@ const UI = (() => {
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
     if (who === 'szklarz') who = 'unknown';
+    /* Grupa bez własnego zdjęcia: dwa nachodzące na siebie awatary członków, jak w komunikatorach. */
+    const gc = DATA.chats && DATA.chats[who];
+    if (gc && gc.group && gc.duo) return h('span', { class: 'av av-duo ' + cls, role: 'img', 'aria-label': U.tpl(gc.name) }, avatar(gc.duo[0]), avatar(gc.duo[1]));
     const photo = DATA.chars[who]?.photo;
     if (photo && !/^assets\/people\//.test(photo)) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
     if (photo) {

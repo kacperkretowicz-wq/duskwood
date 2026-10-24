@@ -217,7 +217,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     g('bartek', 'bo to ruina. bo sie pozabijacie. bo nie'),
     g('bartek', 'ja nie ide. mam robote'),
     scene('xOlaGrafik', [g('ola', 'Zamieniłam się z Moniką. Jutro zamiast szóstej rano biorę nockę na dyżurze w aptece, żeby w dzień móc z wami jeździć.')]),
-    g('ola', 'Mam nockę. Piszcie, telefon zostawiam obok. I powerbank, bo Kuba ma zawsze 8%.', { wording: 'Mam nockę. Jak nie odpiszę, zadzwońcie. Kuba, weź powerbank, zanim znowu będziesz prosił o ładowarkę w aucie.' }),
+    g('ola', 'Mam nockę. Piszcie, telefon zostawiam obok. I powerbank, bo Kuba ma zawsze 8%.', { wording: 'Jak jutro w nocy nie odpiszę, dzwońcie. Kuba, weź powerbank, zanim znowu będziesz prosił o ładowarkę w aucie.' }),
     g('kuba', 'dobranoc %name%. jak coś przyjdzie, mam dźwięk na maksa'),
     pause(2000),
     interlude('Kilka godzin później', 'Mglisko śpi. Prawie wszyscy.', 3600, { rest: 's1_night' }),

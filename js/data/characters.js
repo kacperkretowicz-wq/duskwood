@@ -22,14 +22,14 @@ DATA.chars = {
   dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
   duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
   prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
-  ada: { name: 'Ada Kurek', short: 'Ada', color: '#c86dd7' },
-  szymon: { name: 'Szymon Bielak', short: 'Szymon', color: '#5aa0e8' },
+  ada: { name: 'Ada Kurek', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
+  szymon: { name: 'Szymon Bielak', short: 'Szymon', color: '#5aa0e8', photo: 'assets/people/szymon.jpg' },
   unknown: { name: 'Nieznany numer', short: '?' },
   me: { name: 'Ty', short: 'Ty' }
 };
 
 DATA.chats = {
-  ekipa: { name: 'Ekipa 🍕', avatar: 'group', group: true, members: ['ada', 'szymon'], skin: 'gadka' },
+  ekipa: { name: 'Ekipa 🍕', avatar: 'ekipa', duo: ['ada', 'szymon'], group: true, members: ['ada', 'szymon'], skin: 'gadka' },
   maja: { name: '+48 731 402 118', avatar: 'unknown', sub: 'SMS', readonly: true },
   kuba: { name: '+48 604 228 961', avatar: 'unknown' },
   group: { name: 'Szukamy Mai 🕯️', avatar: 'group', group: true, members: ['kuba', 'ola', 'bartek', 'igor'] },

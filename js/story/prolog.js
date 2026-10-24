@@ -37,7 +37,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       pause(1400),
       say('ekipa', 'szymon', 'czekaj. ona się odwraca, bo coś usłyszała. a na końcu ścieżki to co? stoi i się nie rusza'),
       say('ekipa', 'ada', 'kurtka chyba. mam nadzieję, że kurtka'),
-      say('ekipa', 'ada', 'słychać, jak ciężko oddycha. ona się bała, serio'),
+      say('ekipa', 'ada', 'telefon jej lata w ręce. ona się bała, serio'),
       say('ekipa', 'szymon', 'drugi raz się nie obejrzy, jednorazowe. i dobrze'),
       choose('ekipa', [
         opt('Ktoś nagrał jej relację i puścił dalej. To nie jest dla nas.', [say('ekipa', 'ada', 'masz rację. sorry. nie wysyłam dalej')], { set: { p_snapNoShare: true } }),

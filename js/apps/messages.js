@@ -158,6 +158,31 @@
       }
     }
 
+    /* Potwierdzenia jak w danej aplikacji: SMS „Dostarczono”; Gadka i Klipo „Wysłano”, potem główki/„Wyświetlono”; Błysk „Wysłano” → „Otwarto”. */
+    const appId = DATA.chatApp(id);
+    function receipt() {
+      const t = appId === 'messages' ? 'Dostarczono' : 'Wysłano';
+      return h('span', { class: 'delivery', title: t, 'aria-label': t }, t);
+    }
+    let seenTimer = null;
+    function updateSeen() {
+      clearTimeout(seenTimer);
+      if (appId === 'messages' || cd.readonly) return;
+      const last = G.chat(id).msgs.at(-1), d = msgs.querySelector('.delivery');
+      if (!last || last.from !== 'me' || !d || d.classList.contains('seen')) return;
+      const wait = 2200 - (G.now() - last.t);
+      if (!Engine.typing(id) && wait > 0) { seenTimer = setTimeout(updateSeen, Math.min(wait, 2200)); return; }
+      d.classList.add('seen'); d.innerHTML = '';
+      if (appId === 'gadka') {
+        const who = cd.group ? ((G.s.chats[id] && G.s.chats[id].members) || cd.members || []).slice(0, 4) : [chatAv(id)];
+        d.setAttribute('aria-label', 'Wyświetlono'); d.title = 'Wyświetlono';
+        who.forEach(w => d.appendChild(UI.avatar(w, 'seen-av')));
+      } else {
+        const t = appId === 'blysk' ? 'Otwarto' : 'Wyświetlono';
+        d.textContent = t; d.setAttribute('aria-label', t); d.title = t;
+      }
+    }
+
     function sepNeeded(prev, m) {
       if (!prev) return true;
       return !U.sameDay(prev.t, m.t) || m.t - prev.t > 40 * 60000;
@@ -187,7 +212,7 @@
       if (m.deleted) b.appendChild(h('div', { class: 'tx' }, h('i', {}, 'Wiadomość została usunięta')));
       else if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
       else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
+      b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t), mine ? receipt() : null));
       if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
       const reaction = PhoneTools.reaction(id, m.id);
       if (reaction) b.append(h('button', { class: 'message-reaction', 'aria-label': 'Twoja reakcja ' + reaction, onclick: e => { e.stopPropagation(); UI.messageActions(id, m); } }, reaction));
@@ -247,9 +272,10 @@
       list.forEach(m => append(m, false));
       showTyping();
       requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
+      updateSeen();
     }
     function append(m, animate = true) {
-      if (m.from === 'me') msgs.querySelectorAll('.delivery').forEach(el => el.remove());
+      if (m.from === 'me' || (appId === 'gadka' && m.from !== 'sys')) msgs.querySelectorAll('.delivery').forEach(el => el.remove());
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');
@@ -313,10 +339,11 @@
       BUS.on('msg', ({ chat, msg }) => {
         if (chat !== id) return;
         append(msg);
+        updateSeen();
         G.markRead(id);
         scrollEnd(msg.from === 'me');
       }),
-      BUS.on('typing', ({ chat }) => { if (chat === id) showTyping(); }),
+      BUS.on('typing', ({ chat }) => { if (chat === id) { updateSeen(); showTyping(); } }),
       BUS.on('pending', () => renderComposer()),
       BUS.on('msg-edit', ({ chat }) => { if (chat !== id) return; const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
       BUS.on('phone-tools', () => { const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
@@ -330,7 +357,7 @@
       el, chat: id,
       onShow: activate,
       onHide: () => { if (G.viewing === id) G.viewing = null; },
-      destroy: () => { offs.forEach(f => f()); if (G.viewing === id) G.viewing = null; G.change(); }
+      destroy: () => { clearTimeout(seenTimer); offs.forEach(f => f()); if (G.viewing === id) G.viewing = null; G.change(); }
     };
   }
 

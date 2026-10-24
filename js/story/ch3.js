@@ -24,7 +24,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         opt('Kot ma rację. Ręczniki są ciepłe.', [K('xD babcia mówi dokładnie to samo')])
       ]),
       pause(2500),
-      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.'),
+      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.', { wording: 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Odespałam nockę i jadę do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.' }),
       pause(5000),
       pic('group', 'ola', 's1_lumpeks', 'Wisiało między kurtkami. Przypomina wam to coś?', { wording: 'Zobaczyłam ten żółty kaptur i aż się zatrzymałam.' }),
       choose('group', [

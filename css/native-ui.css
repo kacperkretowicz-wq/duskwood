@@ -292,3 +292,14 @@ html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msg
 .kd-sx { position:absolute; top:calc(18px + var(--safe-t,0px)); right:10px; z-index:3; background:none; border:0; color:#fff; font-size:28px; }
 /* Gest wstecz od lewej krawędzi */
 .app.edge-drag { transition:none !important; }
+/* Awatar grupy z dwóch osób (Gadka) */
+.av.av-duo { position:relative; overflow:visible; background:none; }
+.av.av-duo > .av { position:absolute; width:68%; height:68%; margin:0; box-shadow:0 0 0 2px var(--bg,#fff); }
+.av.av-duo > .av:first-child { left:0; top:0; }
+.av.av-duo > .av:last-child { right:0; bottom:0; }
+/* Potwierdzenia: główki „wyświetlono” w Gadce, „Otwarto” w Błysku */
+.delivery.seen { display:inline-flex; gap:2px; align-items:center; }
+.delivery .av.seen-av { width:14px; height:14px; margin:0; }
+body.os-android .delivery.seen::before { content:''; }
+.skin-blysk .delivery.seen { color:#ffd84d; font-weight:600; }
+.skin-gadka .delivery:not(.seen) { color:var(--tx2); }
