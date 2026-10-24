@@ -824,3 +824,4 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - Wszystkie przeszły `tools/realism-post.py` (Codex, gpt-6.1-sol, medium): szum, aberracja, dystorsja, desaturacja, kadr telefonu, JPEG q78; nocne z `--night`. Plakaty klipów (`assets/video/*.jpg`) tylko łagodnie (`--strength 0.4`), same wideo bez zmian (propozycja: ffmpeg noise na klipach).
 - Wymiary plików bez zmian (Art.def w/h aktualne). SW v84.
 - 18.7b: klipy przekodowane ffmpeg (desaturacja 0.88, ziarno czasowe, CRF 29; v_stodola CRF 33 ze względu na limit 450 KB), plakaty = pierwsza klatka przetworzonego klipu (idealnie pasują); `materialy/klatki` przez realism-post (0.4). SW v85.
+- 18.7c: maja_life1 — rozmyty plakat i gazety (płytka głębia ostrości), zuza_life1 — kadr przycięty bez napisów (edycja generatora zmieniała twarze, odrzucona). SW v86.
