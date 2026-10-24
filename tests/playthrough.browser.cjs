@@ -8,7 +8,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  try{
   for(const target of ['swit','odlamki','cisza','legacy']){
-   const ctx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
+   const ctx=await browser.newContext({viewport:{width:+(process.env.E2E_WIDTH||390),height:+(process.env.E2E_HEIGHT||844)},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    await page.goto(base+'/?debug');
@@ -78,6 +78,12 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
    if(want==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
    if(want==='swit')assert.equal(result.caught,true);
    assert.deepEqual(errors.filter(e=>!/favicon/.test(e)),[]);
+   // Każdy czat tej ścieżki (także gorsze zakończenia) mieści się w szerokości telefonu.
+   const over=await page.evaluate(async()=>{const W=innerWidth,out=[];document.querySelectorAll('.curtain').forEach(e=>e.remove());
+    for(const id of Object.keys(G.s.chats||{})){if(!G.s.chats[id].msgs?.length)continue;UI.openApp('messages',{chat:id});await new Promise(r=>setTimeout(r,30));
+     const bad=[...document.querySelectorAll('.screen *')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.right>W+2&&getComputedStyle(e).position!=='fixed';});
+     if(bad.length||document.documentElement.scrollWidth>W)out.push(id+':'+(bad[0]?.className||'doc'));}return out;});
+   assert.deepEqual(over,[],'przepełnienie układu w czatach '+target);
    await ctx.close();
    console.log('PASS full playthrough →',target);
   }

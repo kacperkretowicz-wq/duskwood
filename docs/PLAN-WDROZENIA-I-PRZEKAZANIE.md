@@ -800,3 +800,6 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - Nowe `assets/s1x/mp_osrodek.jpg`: wyblakłe zdjęcie ośrodka kolonijnego huty z lat 80. Weronika wysyła je razem z „Rzeczka 17 to dawny ośrodek kolonijny huty”. Migracja nie jest potrzebna. SW v79.
 - Nowe `assets/s1x/k_rozwidlenie.jpg`: nocne zdjęcie rozwidlenia przy latarce, wysłane przy „idziemy drogą. jest rozwidlenie” (ch5). Zdjęcie jest neutralne i nie podpowiada kierunku, więc zagadka z mapą zostaje. SW v80.
 - Test `art-keys`: każdy `src:` obrazu istnieje na dysku i jest w FILES service workera.
+
+### 18.5 Gorsze ścieżki na małych ekranach
+- `playthrough.browser.cjs` przyjmuje teraz `E2E_WIDTH`/`E2E_HEIGHT`. Po każdej ścieżce (świt, odłamki, cisza, legacy) test otwiera każdy czat i sprawdza, czy nic nie wychodzi poza szerokość ekranu. Przy 375×667 i 360×740 wszystkie ścieżki przechodzą, bez przepełnień.
