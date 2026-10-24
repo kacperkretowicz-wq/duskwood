@@ -199,10 +199,10 @@ Realizować pakietami. Każdy pakiet kończy się działającą zmianą, właśc
 
 ### P0 — przygotowanie bez resetowania postępu
 
-- [ ] Potwierdzić właściwy checkout, remote, branch i obecność `2c5f807`; zachować cudze zmiany.
-- [ ] Zrobić mapę scen S1: wejście, wiedza gracza i każdej osoby, źródła, wybór, konsekwencja, wyjście, planowana przerwa.
-- [ ] Spisać aktualne odstępy istniejących straszaków. Uwzględnić materiał i rozmowę tuż przed oraz po zdarzeniu.
-- [ ] Wybrać miejsca nowych scen bez nadpisywania trwających wyborów i bez rozcinania ratunku.
+- [x] Potwierdzić właściwy checkout, remote, branch i obecność `2c5f807`; zachować cudze zmiany.
+- [x] Zrobić mapę scen S1: wejście, wiedza gracza i każdej osoby, źródła, wybór, konsekwencja, wyjście, planowana przerwa.
+- [x] Spisać aktualne odstępy istniejących straszaków. Uwzględnić materiał i rozmowę tuż przed oraz po zdarzeniu.
+- [x] Wybrać miejsca nowych scen bez nadpisywania trwających wyborów i bez rozcinania ratunku.
 
 Odbiór P0: konkretna rozpiska nowych scen z identyfikatorami i wpływem na zapis. Samo utworzenie mapy nie jest jeszcze wdrożeniem tych scen.
 
@@ -218,32 +218,32 @@ Odbiór P1: nowa osoba potrafi własnymi słowami opisać problem i następny ce
 
 ### P2 — zwykłe życie w głównej historii S1
 
-- [ ] Dopisać około 3–4 krótkich scen w odpowiednich przerwach między odkryciami. To zakres najbliższego pakietu, nie obowiązkowa liczba na każdy rozdział.
-- [ ] Użyć różnych sytuacji: rozpakowanie zakupów, chwila po zmianie, klient opóźniający zamknięcie serwisu, nieoddany pojemnik, odwołane zajęcia lub ostatni autobus.
+- [x] Dopisać około 3–4 krótkich scen w odpowiednich przerwach między odkryciami. To zakres najbliższego pakietu, nie obowiązkowa liczba na każdy rozdział.
+- [x] Użyć różnych sytuacji: rozpakowanie zakupów, chwila po zmianie, klient opóźniający zamknięcie serwisu, nieoddany pojemnik, odwołane zajęcia lub ostatni autobus.
 - [ ] Przynajmniej część scen kończy się zwyczajnie i nie daje dowodu. Nie zamieniać każdego kubka, zamówienia i paczki w wskazówkę.
 - [ ] Opcje gracza zmieniają zakres zwierzenia, konkretną pomoc lub późniejsze odniesienie. Sam punkt sympatii nie zastępuje odczuwalnej reakcji.
 - [ ] Uwzględnić już odbyte rozmowy opcjonalne; nie odgrywać ponownie tej samej dostawy czy tej samej kawiarni.
-- [ ] Po wyznaniach Oli, Bartka i Igora pokazać zachowanie następnego dnia, nie tylko jedno podsumowanie winy.
+- [x] Po wyznaniach Oli, Bartka i Igora pokazać zachowanie następnego dnia, nie tylko jedno podsumowanie winy.
 
 Odbiór P2: każda scena ma powód i spójne zakończenie; postacie zachowują własne obowiązki. Scen z Mają nie uruchamiać w okresie, kiedy w danej gałęzi jest jeszcze uprowadzona.
 
 ### P3 — przerwy, zapowiedzi i powroty
 
-- [ ] Rozwinąć tekst przed i po istniejących siedmiu przerwach: kto wychodzi, dlaczego, czego można się spodziewać po powrocie.
-- [ ] Dopisać spokojne powroty, niedokończone zwykłe rozmowy i pojedyncze nocne „nie śpisz?”. Nie każda przerwa prowadzi do alarmu.
-- [ ] Rozdzielić realny termin dostępności od godziny wydarzeń zapisanej w materiale. Zaległy nocny wątek można przeczytać rano.
-- [ ] Zachować brak kary za nieobecność. Pilne śledztwo nie przegrywa dlatego, że gracz był w pracy lub spał.
-- [ ] Po dłuższej nieobecności zachować krótki kontekst ostatniego celu i ciągłość rozmowy.
+- [x] Rozwinąć tekst przed i po istniejących siedmiu przerwach: kto wychodzi, dlaczego, czego można się spodziewać po powrocie.
+- [x] Dopisać spokojne powroty, niedokończone zwykłe rozmowy i pojedyncze nocne „nie śpisz?”. Nie każda przerwa prowadzi do alarmu.
+- [x] Rozdzielić realny termin dostępności od godziny wydarzeń zapisanej w materiale. Zaległy nocny wątek można przeczytać rano.
+- [x] Zachować brak kary za nieobecność. Pilne śledztwo nie przegrywa dlatego, że gracz był w pracy lub spał.
+- [x] Po dłuższej nieobecności zachować krótki kontekst ostatniego celu i ciągłość rozmowy.
 
 Odbiór P3: termin nie resetuje się po zamknięciu, zmiana tempa działa, przekroczenie północy i zmiana czasu nie psują kolejności, po powrocie nie ma lawiny zdublowanych zdarzeń. Nie wymuszać obecności o dokładnej minucie.
 
 ### P4 — dodatkowe użycia telefonu i social mediów
 
 - [ ] Napisać powiązany łańcuch: zwykła aktywność → niepokojący szczegół → działanie gracza → późniejsze wyjaśnienie/konsekwencja.
-- [ ] Rozwinąć sceny z edycją lub wycofaniem wiadomości oraz różnicą pomiędzy zachowanym podglądem a otwartym czatem.
+- [x] Rozwinąć sceny z edycją lub wycofaniem wiadomości oraz różnicą pomiędzy zachowanym podglądem a otwartym czatem.
 - [ ] Wykorzystać istniejącą historię wersji zamiast ogłaszać drugi raz ten sam system jako nowość.
 - [ ] Dodać scenę, w której data zaległego pliku wyjaśnia pozornie świeżą aktywność. Powiadomienie samo nie dowodzi czasu zdarzenia.
-- [ ] Rozwinąć relację → screen → reupload → komentarze → reakcję osoby, której to dotyczy. Usunięcie oryginału nie usuwa cudzych kopii.
+- [x] Rozwinąć relację → screen → reupload → komentarze → reakcję osoby, której to dotyczy. Usunięcie oryginału nie usuwa cudzych kopii.
 - [ ] Pokazać prywatny profil, prośby o wiadomość, wyciszoną grupę i źle zrozumiane „wyświetlono” jako zachowania ludzi, nie automatyczne dowody winy.
 - [ ] Rozwinąć anonimowy materiał jako trop. Na razie można rozpisać scenę i użyć neutralnego oznaczenia materiału roboczego; produkcja nowego klipu czeka na rozdział 12.
 
@@ -251,11 +251,11 @@ Odbiór P4: każde zdarzenie ma konkretnego nadawcę, źródło danych i warunki
 
 ### P5 — dwa dodatkowe momenty grozy
 
-- [ ] Rozpisać i wdrożyć dwa odrębne zdarzenia z zaskoczeniem, a nie tylko dwie groźne wiadomości.
-- [ ] Użyć istniejących ekranów telefonu. Wywołanie nie przeprojektowuje całej aplikacji.
+- [x] Rozpisać i wdrożyć dwa odrębne zdarzenia z zaskoczeniem, a nie tylko dwie groźne wiadomości.
+- [x] Użyć istniejących ekranów telefonu. Wywołanie nie przeprojektowuje całej aplikacji.
 - [ ] Najpierw ustalić przyczynę, źródło dźwięku/obrazu, moment wywołania i późniejszy ślad; potem dobierać efekt.
-- [ ] Zachować odstęp od obecnych straszaków i dać postaciom reakcję po zdarzeniu.
-- [ ] Zapewnić jednorazowość, zachowanie po zapisie i checkpointach oraz istniejący tryb łagodniejszych straszaków. Nie opierać efektu wyłącznie na skoku głośności.
+- [x] Zachować odstęp od obecnych straszaków i dać postaciom reakcję po zdarzeniu.
+- [x] Zapewnić jednorazowość, zachowanie po zapisie i checkpointach oraz istniejący tryb łagodniejszych straszaków. Nie opierać efektu wyłącznie na skoku głośności.
 
 Odbiór P5: dwa faktycznie działające, różne zaskoczenia, sprawdzone również po reloadzie. Napięcie ocenia człowiek; test techniczny potwierdza wykonanie i zapis, nie poziom strachu.
 
@@ -843,3 +843,7 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Nowa scena `xJednaOsoba` w c4 (20:40, Błysk: „możesz uprzedzić jedną osobę"): wybór Ola / Zenon / Weronika / nikt → flagi `c_warnedOla|Zenon|Wera`. Addytywnie, bez kar; Zenon dziękuje w zakończeniu „przewinięcie", jeśli był uprzedzony.
 - Migracja zapisów v7→v8 (`STORY_MIGRATIONS_V8`, mapa LCS z `tests/fixtures/story-v7-steps.json`); test jednostkowy v8 + testy przeglądarkowe kronika/kopia/głos zaktualizowane do v8.
 - „Błysk zauważa zrzuty ekranu" — już jest w kanonie (`c_shotBlysk`, kronika.js), nic do zrobienia.
+
+### 2026-10-24 — przegląd listy S1 (odhaczone tylko to, co ma dowód)
+- Odhaczone: P0 (checkout/mapa/odstępy/miejsca — `MAPA-S1.md` §1–3), sceny P2 (`xCel`, `xSerwis`, `xOla`, `xBartek`, `xAutobus`, `igor_sunday`; dzień po wyznaniach), P3 (opisy przerw, `xNieSpisz`, `rano_*`, brak kary, `xPojechali`), P4 (edycja, `xWycofana`, reupload), P5 (`scMajaNumer`, `s1_hand`/głosówka Szklarza: jednorazowe `s.scares`, tryb łagodny, odstępy).
+- Zostawione otwarte: rzeczy wymagające czytania/oceny przez człowieka (zrozumiałość pierwszej sesji, komplet reakcji, różnorodność „zwykłych” zakończeń), anonimowy materiał (czeka na klipy), P1 z nowymi graczami, macierz wydania, test fizycznego urządzenia.
