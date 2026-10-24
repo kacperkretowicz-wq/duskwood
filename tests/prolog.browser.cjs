@@ -27,7 +27,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
   await input.fill(query);await input.press('Enter');await page.locator('.res').filter({hasText:result}).click();
  };
  await open('messages',{chat:'ekipa'});await page.locator('.chat.skin-gadka').waitFor();
- await page.locator('.snap-tile:not(.opened)').click();await page.locator('.snap-ov video').waitFor();await page.waitForTimeout(2500);await page.screenshot({path:'/tmp/opening-snap.png'});
+ await page.locator('.snap-tile:not(.opened)').click();await page.locator('.snap-ov video').waitFor();await page.waitForTimeout(2500);const bw=await page.evaluate(()=>{const i=document.querySelector('.snap-bar i');return i.getBoundingClientRect().width/i.parentElement.getBoundingClientRect().width;});assert.ok(bw>0.15&&bw<0.95,'pasek w trakcie: '+bw);await page.screenshot({path:'/tmp/opening-snap.png'});
  await page.waitForFunction(()=>G.flag('sawSnap'),null,{timeout:15000});
  assert.equal(await page.locator('.snap-ov').count(),0,'film znika po jednym obejrzeniu');
  await page.locator('.snap-tile.opened').waitFor();await page.screenshot({path:'/tmp/opening-ekipa.png'});

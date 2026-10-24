@@ -206,9 +206,13 @@
       if (m.opened) return;
       const done = () => { if (m.opened) return; m.opened = true; G.setFlag('sawSnap'); G.save(true); ov.remove(); renderAll(); };
       const v = h('video', { class: 'snap-video', src: m.vid, playsinline: '', muted: '', autoplay: '', preload: 'auto' });
+      const bar = h('i', {});
       const ov = h('div', { class: 'snap-ov', role: 'dialog', 'aria-label': 'Film jednorazowy', onclick: done },
-        h('div', { class: 'snap-bar' }, h('i', {})), v, h('div', { class: 'snap-meta' }, (DATA.chars[m.from] || {}).short || '', ' · Błysk'));
+        h('div', { class: 'snap-bar' }, bar), v, h('div', { class: 'snap-meta' }, (DATA.chars[m.from] || {}).short || '', ' · Błysk'));
       v.muted = true;
+      // Pasek postępu liczony z czasu filmu (animacja CSS bywa wyłączana przez ograniczenie ruchu).
+      const tick = () => { if (m.opened) return; const d = v.duration || 5; bar.style.transform = 'scaleX(' + Math.min(1, v.currentTime / d) + ')'; requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
       v.addEventListener('ended', done);
       v.addEventListener('error', () => setTimeout(done, 1500));
       setTimeout(done, 9000);

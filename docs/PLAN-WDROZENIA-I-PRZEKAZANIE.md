@@ -896,3 +896,6 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Racjonalne wyjaśnienie (ch3, `xSnapEcho` za `xReupload`, tylko gdy `sawSnap`): to prawdziwa relacja Mai „dla bliskich” z 14.10, 23:41, nagrana ekranem i puszczona dalej (wątek reuploadu / `maja_closefriends`); czerwone kropki to podczerwień fotopułapki, z której grupa ma zdjęcia. Nic nadprzyrodzonego.
 - Kolejność kroków prologu nie zmieniona (generator v3 przyjmuje tylko nowe sceny): `xEkipa` po `fx('lock')`, `xEkipaFilm` po odblokowaniu, przed `openChat('kuba')`. Migracja v15 narzędziem, zrzut `story-v14-steps.json`; testy v6/v7 uwzględniają nową scenę w ch3. `prolog.browser` ogląda film przez UI i sprawdza, że znika po jednym odtworzeniu.
 - E2E iOS+Android na tym buildzie: oba PASS, errors:[], layout:[]. Wcześniej E2E na v14 (873f4c9/278316e) też PASS na obu.
+
+### 2026-10-24 — pasek postępu filmu jednorazowego (SW v104)
+- Pasek liczony z `currentTime/duration` filmu (rAF) zamiast animacji CSS, która w teście dochodziła do końca od razu. `prolog.browser` sprawdza, że w 2,5 s pasek jest w trakcie (15–95%).
