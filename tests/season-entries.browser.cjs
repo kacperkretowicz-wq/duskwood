@@ -1,9 +1,10 @@
-// P7: wejścia do S2 po „Odłamkach” (Gajda niezatrzymany) i do S3 po „Cudzym podpisie” pokazują własne sceny.
+// P7: wejścia do S2 po „Odłamkach” (Gajda niezatrzymany i zatrzymany) i do S3 po „Cudzym podpisie” pokazują własne sceny.
 const assert=require('node:assert/strict');
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE));}
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
 const CASES=[
  {name:'S2 po odlamki',setup:'s1',ending:'odlamki',chat:'maja2',until:'m1',want:'radiowóz dalej przejeżdża',chapter:'m0'},
+ {name:'S2 po odlamki z zatrzymanym Gajdą',setup:'s1',ending:'odlamki',caught:true,chat:'maja2',until:'m1',not:'radiowóz dalej przejeżdża',chapter:'m0'},
  {name:'S2 po swit',setup:'s1',ending:'swit',chat:'maja2',until:'m1',not:'radiowóz dalej przejeżdża',chapter:'m0'},
  {name:'S3 po cudzy_podpis',setup:'s2',ending:'cudzy_podpis',chat:'weronika',until:'k1',want:'Pani Krystyna dalej nie otwiera',chapter:'k0'},
  {name:'S3 po pelny_kadr',setup:'s2',ending:'pelny_kadr',chat:'weronika',until:'k1',not:'Pani Krystyna dalej nie otwiera',chapter:'k0'}
@@ -16,7 +17,7 @@ const CASES=[
   await page.goto(base+'/?debug');
   const res=await page.evaluate(async c=>{
    G.newGame({name:'Alex',gender:'m'});Object.assign(G.settings,{speed:'instant',sfx:false,ambient:false,autoHints:false});document.querySelector('.title-scr')?.remove();
-   G.s.finished=true;G.s.chapter='epilog';G.s.vars.endingId=c.setup==='s1'?c.ending:'swit';G.setFlag('majaFound');G.unlock('app:notes');
+   G.s.finished=true;G.s.chapter='epilog';G.s.vars.endingId=c.setup==='s1'?c.ending:'swit';G.setFlag('majaFound');if(c.caught)G.setFlag('gajdaCaught');G.unlock('app:notes');
    if(!Seasons.startNext())return{err:'s1 start'};
    if(c.setup==='s2'){G.s.finished=true;G.s.chapter='m5';G.s.vars.s2Ending=c.ending;if(!Seasons.startNext())return{err:'s2 start'};}
    const first=G.s.chapter;
@@ -32,10 +33,10 @@ const CASES=[
     if(same>400)return{stuck:key};
    }
    const texts=(G.s.chats[c.chat]?.msgs||[]).map(m=>String(m.text||''));
-   return{first,reached:G.s.chapter,has:c.want?texts.some(t=>t.includes(c.want)):null,hasNot:c.not?texts.some(t=>t.includes(c.not)):null};
+   return{first,caught:!!G.flag('gajdaCaught'),reached:G.s.chapter,has:c.want?texts.some(t=>t.includes(c.want)):null,hasNot:c.not?texts.some(t=>t.includes(c.not)):null};
   },c);
   assert.equal(res.first,c.chapter,JSON.stringify(res));assert.equal(res.reached,c.until,JSON.stringify(res));
-  if(c.want)assert.equal(res.has,true,c.name);if(c.not)assert.equal(res.hasNot,false,c.name);
+  if(c.caught)assert.equal(res.caught,true,'gajdaCaught przechodzi do S2');if(c.want)assert.equal(res.has,true,c.name);if(c.not)assert.equal(res.hasNot,false,c.name);
   assert.deepEqual(errors,[]);await ctx.close();console.log('PASS',c.name);
  }}finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
