@@ -1,7 +1,7 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v73';
+const VERSION = 'quiet-is-safer-v74';
 const FILES = [
-  './', './index.html', './manifest.webmanifest', './icon.svg',
+  './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
   './css/conversations.css', './js/data/conversations.js', './js/core/conversations.js', './js/apps/conversations.js',
   './css/native-ui.css', './js/core/native.js',
@@ -47,13 +47,38 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
+// Odpowiedź częściowa (Range) z pełnego pliku w pamięci — iOS Safari nie odtworzy wideo offline bez 206.
+async function rangeFrom(cached, range) {
+  const buf = await cached.arrayBuffer();
+  const m = /bytes=(\d*)-(\d*)/.exec(range || '');
+  let start = m && m[1] ? +m[1] : 0, end = m && m[2] ? +m[2] : buf.byteLength - 1;
+  if (m && !m[1] && m[2]) { start = Math.max(0, buf.byteLength - +m[2]); end = buf.byteLength - 1; }
+  end = Math.min(end, buf.byteLength - 1);
+  if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${buf.byteLength}` } });
+  return new Response(buf.slice(start, end + 1), { status: 206, headers: {
+    'Content-Type': cached.headers.get('Content-Type') || 'video/mp4',
+    'Content-Range': `bytes ${start}-${end}/${buf.byteLength}`, 'Content-Length': String(end - start + 1), 'Accept-Ranges': 'bytes' } });
+}
+async function fromCache(req) {
+  const hit = await caches.match(req, { ignoreSearch: true });
+  if (hit) {
+    const range = req.headers.get('range');
+    return range && hit.status === 200 ? rangeFrom(hit, range) : hit;
+  }
+  if (req.mode === 'navigate') return caches.match('./index.html');
+  return Response.error();
+}
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
   // Sieć najpierw (świeże pliki), pamięć podręczna jako zapas offline.
+  // Do pamięci trafiają tylko pełne odpowiedzi 200 (206 z Range rzuca w cache.put, 404 nadpisałby dobrą kopię).
   e.respondWith(fetch(e.request).then(r => {
-    const copy = r.clone();
-    caches.open(VERSION).then(c => c.put(e.request, copy));
+    if (r.status === 200 && r.type === 'basic' && !e.request.headers.get('range')) {
+      const copy = r.clone();
+      e.waitUntil(caches.open(VERSION).then(c => c.put(e.request, copy)).catch(() => {}));
+    }
     return r;
-  }).catch(() => caches.match(e.request)));
+  }).catch(() => fromCache(e.request)));
 });
