@@ -129,7 +129,7 @@ const NativeNotifications = (() => {
   function disable() { if (G.s?.pacing) { G.s.pacing.notify = false; G.save(true); } return sync(); }
   function navigate() {
     if (!G.s || document.querySelector('.title-scr:not(.out)')) { openRequested = true; return; }
-    openRequested = false; SeasonPacing.wake(); UI.openApp('messages');
+    openRequested = false; SeasonPacing.wake(); const p = Engine.pending(); UI.openApp('messages', p && p.chat && p.chat !== 'call' ? { chat: p.chat } : {});
   }
   if (plugin) plugin.addListener('localNotificationActionPerformed', event => {
     if (event.notification.id === id) navigate();

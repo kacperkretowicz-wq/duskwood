@@ -58,8 +58,8 @@
 .cam-shutter { width: 70px; height: 70px; border-radius: 50%; border: 5px solid #fff; background: #fff; box-shadow: inset 0 0 0 3px #000; }
 
 /* Skórka „Gadka” — czat znajomych w stylu popularnego komunikatora (bez logotypów). */
-.chat.skin-gadka { --me: #3478f6; --me2: #a24bf0; }
-.chat.skin-gadka .msg.me .bub { background: linear-gradient(160deg, #a24bf0, #3478f6 70%); color: #fff; }
+.chat.skin-gadka { --me: #27957c; --me2: #1f6f8b; }
+.chat.skin-gadka .msg.me .bub { background: linear-gradient(160deg, #3bb38f, #1f6f8b 80%); color: #fff; }
 .chat.skin-gadka .msg.them .bub { background: var(--them); border-radius: 18px; }
 .chat.skin-gadka .chat-hdr h1 { font-weight: 700; }
 .snap-bub { padding: 3px !important; }

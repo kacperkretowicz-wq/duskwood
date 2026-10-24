@@ -92,7 +92,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
        if(t==='ev')G.addEv(id,true);else if(t==='solved')G.solve(id);else if(t==='flag')G.setFlag(id);else if(t==='seen')G.markSeen(id);else if(t==='unlocked')G.unlock(id);}};
       if(typeof step.cond==='function'){G.setFlag('sawCalls');if(G.s.chapter==='ch1'&&!G.has('ev_ola_sorry'))G.addEv('ev_ola_fight',true);
        for(const w of ['gs_most','tt_most','tyg_most','tt_archiwum','tt_kronika'])if(DATA.web[w]&&G.test(DATA.web[w].avail||[])){UI.openApp('browser',{page:w});}
-       for(const c of Object.keys(G.s.chats||{})){G.viewing=c;G.change();if(G.test(step.cond))break;}}else sat(step.cond);G.change();});
+       for(const c of new Set([...Object.keys(G.s.chats||{}),...Object.keys(G.s.unlocked||{}).filter(k=>k.startsWith('chat:')).map(k=>k.slice(5))])){G.viewing=c;G.change();if(G.test(step.cond))break;}}else sat(step.cond);G.change();});
     }
     if(same>2500)throw new Error('utknięcie '+key+' '+JSON.stringify(st));
     await page.waitForTimeout(25);

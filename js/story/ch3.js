@@ -260,7 +260,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),
     unlock('chat:bartek'),
-    goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka w *Wiadomościach*.']),
+    goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka na *Gadce*.']),
     openChat('bartek'),
     choose('bartek', [
       opt('Bartek, potrzebuję twojej pomocy. Chodzi o samochód spod huty.', [], { trust: { bartek: 1 } }),

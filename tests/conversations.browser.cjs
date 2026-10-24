@@ -19,7 +19,7 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
     G.s.chapter='ch1';G.s.pc=Engine.chapters.ch1.steps.length;
     document.querySelector('.title-scr').remove();UI.renderHome();
     G.unlock('chat:group');G.unlock('app:notes');G.setFlag('knowKuba');G.setFlag('knowMaja');
-    G.addEv('ev_dam_news',true);UI.openApp('messages');
+    G.addEv('ev_dam_news',true);UI.openApp('gadka');
    });
    await page.getByRole('button',{name:/Na osobności · 3/}).click();
    await page.locator('.toast').last().waitFor({state:'detached'});

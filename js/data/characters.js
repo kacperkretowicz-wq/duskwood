@@ -147,3 +147,21 @@ DATA.endings = {
     });
   });
 })();
+
+/* Komunikatory: każda rozmowa żyje w jednej aplikacji przez całą grę.
+   SMS — numery spoza kontaktów, starsi rozmówcy, urzędowe; Gadka — znajomi i grupy;
+   Błysk — znikające wiadomości; Klipo — prywatne wiadomości z kont wideo. */
+DATA.chatApps = {
+  sms: ['maja', 'maja2', 'kuba', 'weronika', 'gajda', 'szklarz', 'ewa', 'marta', 'henryk_sms', 'dudek', 'zenon'],
+  gadka: ['ekipa', 'group', 'ola', 'bartek', 'igor', 'natan', 'nina', 'sylwia', 'zuza', 'oskar', 'ida', 'lena'],
+  klipo: ['archiwum', 'cicho']
+};
+DATA.chatApp = id => {
+  const cd = DATA.chats[id] || {};
+  if (cd.app) return cd.app === 'sms' ? 'messages' : cd.app;
+  if (cd.ephemeral || /^blysk/.test(id)) return 'blysk';
+  for (const [app, ids] of Object.entries(DATA.chatApps)) if (ids.includes(id)) return app === 'sms' ? 'messages' : app;
+  if (/^\+|^\d/.test(cd.name || '') || cd.sub === 'SMS') return 'messages';
+  return 'gadka';
+};
+DATA.MSG_APPS = ['messages', 'gadka', 'blysk', 'klipo'];

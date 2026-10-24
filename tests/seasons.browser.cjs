@@ -66,7 +66,7 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
   await page.mouse.move(blank.x,blank.y);await page.mouse.down();await page.waitForTimeout(720);await page.mouse.up();await page.locator('.wallpaper-picker').waitFor();
   await page.keyboard.press('Escape');await page.locator('.wallpaper-picker').waitFor({state:'detached'});
   // App icon is never treated as wallpaper.
-  const icon=page.getByRole('button',{name:'Notatki',exact:true}).first(),box=await icon.boundingBox();
+  const icon=page.getByRole('button',{name:'Notatki',exact:true}).first(),box=(await icon.scrollIntoViewIfNeeded(),await page.waitForTimeout(400),await icon.boundingBox());
   await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.waitForTimeout(720);await page.mouse.up();
   assert.equal(await page.locator('.wallpaper-picker').count(),0);assert.equal(await page.evaluate(()=>UI.currentApp()),'notes');
   await page.evaluate(()=>{UI.goHome();UI.lock();});

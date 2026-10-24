@@ -929,3 +929,10 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 ### 2026-10-24 · v109 — snap „prawdziwy telefon”
 - Nowe klatki first/last w estetyce taniej kamery telefonu (przepalona plama latarki, zgniecione czernie, szum chroma, blokowanie). Jedno ujęcie first/last frame; kandydat R2 odrzucony (obrót przez ścianę wygląda sztucznie), R1: obrót w czerń, na końcu ledwie widoczny kształt przy słupku.
 - Postprodukcja ffmpeg: downscale/upscale, drgania (crop z sin), pompowanie ekspozycji, szum czasowy, chłodno-pomarańczowy odcień, crf 36. Brak cięć (scene>0.3: 0). Wyjaśnienie ch3 (kufajka na słupku) bez zmian.
+
+### v110 — Gadka / Błysk / Kadr + SMS, wielostronicowy ekran główny
+- Decyzja: każda rozmowa żyje w jednej aplikacji przez całą grę (`DATA.chatApp`): starsi, nieznane numery, urzędy → SMS (Wiadomości); znajomi i grupy → Gadka; znikające → Błysk; Klipo DM → Klipo. Banery i powiadomienia z ekranu blokady otwierają właściwą aplikację (także dawne `notify({app:'messages'})` z czatem Błysk).
+- Kadr: tylko odnalezione profile (bez spoilerów zagadek wyszukiwania), relacje pełnoekranowe, kropka nieobejrzanych.
+- Ikony bez skojarzeń z prawdziwymi markami (Gadka: turkus→petrol, Kadr: koral→malina); Błysk w ciemnym motywie.
+- Ekran główny: 2 strony (scroll-snap + kropki + przeciąganie myszą), gest krawędzi = wstecz; klik blokowany tylko w trakcie przewijania między stronami.
+- Testy dostosowane: conversations (Na osobności w Gadce), seasons (ikona Notatki na stronie 2), unsend (deterministyczne wiadomości Kuby — wcześniejszy timeout istniał już na v109), e2e (wymuszanie warunku obejmuje odblokowane czaty bez historii). Pełne e2e iOS + Android: PASS.

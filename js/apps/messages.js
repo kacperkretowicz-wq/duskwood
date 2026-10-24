@@ -39,16 +39,25 @@
     return U.dateNum(t).slice(0, 5);
   }
 
-  UI.def('messages', {
-    name: 'Wiadomości',
+  const META = {
+    messages: { name: 'Wiadomości', title: 'Wiadomości', empty: 'Jeszcze cisza. Ktoś zaraz się odezwie.' },
+    gadka: { name: 'Gadka', title: 'Czaty', empty: 'Nikt jeszcze nie pisał na Gadce.' },
+    blysk: { name: 'Błysk', title: 'Błysk', empty: 'Brak błysków. Znikają po przeczytaniu.' },
+    klipo: { name: 'Klipo', title: 'Wiadomości Klipo', empty: 'Brak wiadomości prywatnych.' }
+  };
+  const inApp = (app, id) => DATA.chatApp(id) === app;
+  DATA.MSG_APPS.forEach(app => UI.def(app, {
+    name: META[app].name,
+    visible: app === 'messages' ? null : () => Object.keys(DATA.chats).some(id => inApp(app, id) && G.isUnlocked('chat:' + id)),
     badge: () => {
-      const n = G.unreadTotal();
+      const n = Object.keys(DATA.chats).filter(id => inApp(app, id)).reduce((a, id) => a + ((G.s.chats[id] && G.s.chats[id].unread) || 0), 0);
       const p = Engine.pending();
-      return n || (p && p.chat && p.chat !== 'call' ? 'dot' : 0);
+      return n || (p && p.chat && p.chat !== 'call' && inApp(app, p.chat) ? 'dot' : 0);
     },
     mount(host, params) {
+      host.classList.add('msgapp', 'msgapp-' + app);
       const stack = new UI.Stack(host);
-      stack.push(listPage(stack));
+      stack.push(listPage(stack, app));
       if (params.chat) stack.push(chatPage(stack, params.chat));
       return {
         back: () => stack.pop(),
@@ -62,11 +71,11 @@
         destroy: () => { stack.destroy(); G.viewing = null; }
       };
     }
-  });
+  }));
 
   /* ---------- lista rozmów ---------- */
-  function listPage(stack) {
-    const pg = UI.page({ title: 'Wiadomości', big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
+  function listPage(stack, app = 'messages') {
+    const pg = UI.page({ title: META[app].title, big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
     pg.el.classList.add('conversation-list');
     let filter = 'all';
     const search = h('input', { type: 'search', placeholder: 'Szukaj rozmowy', 'aria-label': 'Szukaj rozmowy', class: 'chat-search' });
@@ -86,15 +95,15 @@
     search.addEventListener('input', render);
     pg.body.append(caseCard, sideEntry, search, tabs, list);
     function render() {
-      caseCard.hidden = !G.isUnlocked('chat:maja');
+      caseCard.hidden = app !== 'messages' || !G.isUnlocked('chat:maja');
       const sideCount = Conversations.available().length;
-      sideEntry.hidden = !G.isUnlocked('chat:group');
+      sideEntry.hidden = app !== 'gadka' || !G.isUnlocked('chat:group');
       sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';
-      const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
+      const ids = Object.keys(DATA.chats).filter(id => inApp(app, id) && G.isUnlocked('chat:' + id))
         .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
         .sort((a, b) => Number(PhoneTools.pinned(b)) - Number(PhoneTools.pinned(a)) || ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
       list.innerHTML = '';
-      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : 'Jeszcze cisza. Ktoś zaraz się odezwie.') })); return; }
+      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : META[app].empty) })); return; }
       ids.forEach(id => {
         const c = G.chat(id);
         const last = c.msgs[c.msgs.length - 1];
@@ -121,7 +130,7 @@
   /* ---------- czat ---------- */
   function chatPage(stack, id) {
     const cd = DATA.chats[id] || {};
-    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') + (cd.skin ? ' skin-' + cd.skin : '') });
+    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') + (' skin-' + (cd.skin || { gadka: 'gadka', blysk: 'blysk', klipo: 'klipo', messages: 'sms' }[DATA.chatApp(id)])) });
     const sub = h('small', {});
     const ffBtn = h('button', { class: 'ff', title: 'Przewiń', 'aria-label': 'Przewiń', onclick: () => { Engine.skip(); }, html: U.icon('ff', 18) });
     const hdr = h('div', { class: 'hdr chat-hdr' },
