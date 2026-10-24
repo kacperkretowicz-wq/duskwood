@@ -35,9 +35,9 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       openChat('ekipa', { goal: 'Znajomi coś wrzucili na grupę. Zobacz, co.', hints: [] }),
       waitFor('flag:sawSnap', { goal: 'Otwórz film od Ady. Jest jednorazowy.', hints: [{ after: 40, chat: 'ekipa', who: 'ada', text: 'otwórz. tylko raz się da' }] }),
       pause(1400),
-      say('ekipa', 'szymon', 'czekaj. a to przy ścianie to co? stoi i się nie rusza'),
+      say('ekipa', 'szymon', 'czekaj. ona się odwraca, bo coś usłyszała. a na końcu ścieżki to co? stoi i się nie rusza'),
       say('ekipa', 'ada', 'kurtka chyba. mam nadzieję, że kurtka'),
-      say('ekipa', 'ada', 'i na końcu te czerwone kropki przy bramie'),
+      say('ekipa', 'ada', 'słychać, jak ciężko oddycha. ona się bała, serio'),
       say('ekipa', 'szymon', 'drugi raz się nie obejrzy, jednorazowe. i dobrze'),
       choose('ekipa', [
         opt('Ktoś nagrał jej relację i puścił dalej. To nie jest dla nas.', [say('ekipa', 'ada', 'masz rację. sorry. nie wysyłam dalej')], { set: { p_snapNoShare: true } }),

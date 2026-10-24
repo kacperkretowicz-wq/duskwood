@@ -323,8 +323,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     scene('xSnapEcho', [
       iff('flag:sawSnap', [
         g('kuba', 'ten film z czołówką, co krążył po błysku jako „ostatnia relacja”. to naprawdę jej relacja z kadru. 14.10, 22:56, tylko dla bliskich. ktoś nagrał ją ekranem i puścił dalej'),
-        g('ola', 'Igor pisze mi na priv: czerwone kropki na końcu to podczerwień CAM-01 przy bramie. Minutę później zrobiła jej zdjęcie, 22:57.'),
-        g('ola', 'A ta „postać” przy ścianie to stara kufajka na słupku. Wisi tam od lat, widział ją, jak wieszał kamery.')
+        g('ola', 'Igor pisze mi na priv: to ścieżka wzdłuż ściany walcowni, 30 metrów od bramy. Odwróciła się, bo trzasnęła blacha na bramie, wiatr. Minutę później CAM-01 zrobiła jej zdjęcie, 22:57.'),
+        g('ola', 'A ta „postać” na końcu ścieżki to stara kufajka z kapturem na słupku od siatki. Wisi tam od lat, widział ją, jak wieszał kamery. W dzień wygląda śmiesznie.')
       ])
     ]),
     /* P4: prośby o wiadomość i prywatny profil. Zachowanie ludzi, nie automatyczny dowód. */

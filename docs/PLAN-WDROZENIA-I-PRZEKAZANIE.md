@@ -921,3 +921,7 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - S2 m4 xLicznik: wyjaśnienie, czemu Marta nagrywała w piątek w archiwum (wróciła oddać klucze, kaseta pożyczona na noc). Oryginalne kroki v4 nienaruszalne — tylko dopisania w scenach.
 - Inspekcja: usunięte powtórzone „siedzę pod inspekcją” w wariancie, wariant czytelni spójny ze zdjęciami.
 - transcript.browser.cjs: start od dowolnego rozdziału/sezonu, autospełnianie warunków funkcyjnych.
+
+### 2026-10-24 · v108 — nowy snap (jedno ujęcie)
+- v_snap.mp4: jedno ciągłe ujęcie z generacji first/last frame (bez sklejania). Koncept A „odwrócenie”: idzie ścieżką wzdłuż ściany walcowni, staje, obraca telefon, na końcu ścieżki ledwo widoczna postać. Kandydat A2 odrzucony (zgięcie narożnika ściany przy obrocie). Brak cięć (scene>0.25: 0).
+- Wyjaśnienie w ch3 xSnapEcho: trzask blachy na bramie (wiatr), postać = kufajka z kapturem na słupku od siatki; CAM-01 22:57 bez zmian. Reakcje w prologu bez „czerwonych kropek”.
