@@ -951,3 +951,8 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Spójność S1: Ada nie mówi o „słychać oddech” (film bez dźwięku), Ola w ch1 „Jak jutro w nocy nie odpiszę, dzwońcie” (nocka jest w czwartek), głosówka Oli w ch3 „Odespałam nockę…” (przez `wording`, bez zmiany podpisów kroków).
 - Ada i Szymon dostali portrety (amatorskie zdjęcia z telefonu, Codex image_gen + tools/realism-post.py 0.45) — wcześniej generowane sylwetki.
 - Pracowane w osobnym worktree (/workspace/dw-night), bo w /workspace/duskwood równolegle commitował inny worker (v111).
+
+### 2026-10-25 — v113: tapeta jak z rolki aparatu, toast nad dokiem
+- Domyślna tapeta (id `forest`, nazwa „Mglisko o zmroku”) to teraz `assets/wall-mglisko.jpg`: amatorskie zdjęcie z telefonu, widok ze ścieżki nad miasteczkiem o zmroku (Codex image_gen + realism-post --night 0.4). Stary kadr „Mgła” (koncept-art z fabryką) został tylko na ekranie tytułowym.
+- Toast „Zainstalowano: …” na ekranie głównym nie zasłania już doku ani przycisku „Szukaj”.
+- Awatar grupy: biała obwódka i poprawna specyficzność w nagłówku iOS (wcześniej oba kółka nakładały się w jedno).

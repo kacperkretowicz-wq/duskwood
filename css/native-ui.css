@@ -303,3 +303,5 @@ html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msg
 body.os-android .delivery.seen::before { content:''; }
 .skin-blysk .delivery.seen { color:#ffd84d; font-weight:600; }
 .skin-gadka .delivery:not(.seen) { color:var(--tx2); }
+/* Na ekranie głównym toast nie wchodzi na dok ani na „Szukaj”. */
+#screen:has(> #home:not(.behind)) > #toasts { bottom: calc(204px + var(--safe-b)); }

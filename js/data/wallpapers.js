@@ -1,7 +1,7 @@
 'use strict';
 /* Tapety właściciela telefonu i jawnie importowane ustawienia kopii Mai. */
 DATA.wallpapers = [
-  { id: 'forest', name: 'Mgła', src: 'assets/forest.jpg', position: '50% 50%' },
+  { id: 'forest', name: 'Mglisko o zmroku', src: 'assets/wall-mglisko.jpg', position: '50% 50%' },
   { id: 'graphite', name: 'Grafit', background: 'linear-gradient(145deg,#45505d,#14191f 70%)' },
   { id: 'maja_river', name: 'Nad wodą', src: 'assets/maja-river.jpg', position: '50% 50%', imported: true },
   { id: 'maja_river_crop', name: 'Nad wodą · zbliżenie', src: 'assets/maja-river.jpg', position: '30% 60%', size: 'auto 135%', imported: true }

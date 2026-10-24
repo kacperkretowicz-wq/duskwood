@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v112';
+const VERSION = 'quiet-is-safer-v113';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -29,7 +29,7 @@ const FILES = [
   './js/core/pacing.js', './js/data/rhythm.js', './js/data/today.js',
   './js/vendor/capacitor-runtime.js',
   './assets/lena-v2.jpg', './assets/bus-stop-v2.jpg',
-  './assets/people.jpg', './assets/forest.jpg', './assets/maja-river.jpg', './assets/gajda.jpg', './js/data/migrations.js',
+  './assets/people.jpg', './assets/forest.jpg', './assets/wall-mglisko.jpg', './assets/maja-river.jpg', './assets/gajda.jpg', './js/data/migrations.js',
   './js/core/util.js', './js/core/state.js', './js/core/audio.js', './js/core/engine.js', './js/core/ui.js',
   './js/art/kit.js', './js/art/avatars.js', './js/art/scenes.js', './js/art/film.js', './js/art/maps.js',
   './js/data/characters.js', './js/data/evidence.js', './js/data/maja.js', './js/data/web.js', './js/data/world.js',
