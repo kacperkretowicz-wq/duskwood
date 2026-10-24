@@ -10,3 +10,10 @@ test('klucze obrazów w historii są zdefiniowane',()=>{
   assert.ok(used.size>20,'za mało kluczy — regex nie działa');
   assert.deepEqual(missing,[]);
 });
+test('każde src obrazu istnieje i jest w cache SW',()=>{
+  const all=read('js/data')+read('js/art'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
+  const srcs=[...new Set([...all.matchAll(/src:\s*'(assets\/[^']+\.(?:jpg|png|webp))'/g)].map(m=>m[1]))];
+  assert.ok(srcs.length>20);
+  const missing=srcs.filter(s=>!fs.existsSync(path.join(root,s))),uncached=srcs.filter(s=>!sw.includes('./'+s));
+  assert.deepEqual(missing,[]);assert.deepEqual(uncached,[]);
+});
