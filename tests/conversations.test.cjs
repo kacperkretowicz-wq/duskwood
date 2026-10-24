@@ -67,7 +67,7 @@ test('Lena unlocks corroboration, gallery, and person facts without awarding a p
 test('old version 2 saves and checkpoints accept the additive conversation state',()=>{
  const {G,Conversations:C}=game();unlock(G);delete G.s.conversations;
  G.s.v=2;G.checkpoint('ch1');assert.ok(G.loadCheckpoint('ch1'));
- assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,11);
+ assert.ok(C.open('kuba_quiet'));assert.equal(G.s.v,12);
 });
 test('character ages, evidence references, and dialogue destinations are valid',()=>{
  const {DATA}=game();
@@ -165,7 +165,7 @@ test('v2 save inside chapter 2 resumes at the new Komendant scene; a pending cho
  assert.ok(i>0);assert.ok(M.ch2.resume[i]<M.ch2.exact[i]);
  for(const [pending,want] of [[null,M.ch2.resume[i]],[{chat:'group',type:'choose',options:[]},M.ch2.exact[i]]]){
   G.newGame({name:'Alex',gender:'f'});G.s.v=2;G.s.chapter='ch2';G.s.pc=i;G.s.pending=pending;G.s.flags.keep=true;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want);
+  assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'second load does not migrate again');
  }
 });
@@ -176,7 +176,7 @@ test('v3 save in chapter 4 (Igor confession) and m2 lands on the same step after
  for(const [ch,text] of [['ch4','ciągle sobie odtwarzam jak wchodzę do tej kuchni. mogłem nic nie mówić'],['m3','moja mama to Janina Kurek']]){
   const i=old[ch].findIndex(s=>JSON.parse(s)[4]===text);assert.ok(i>0,ch);
   G.newGame({name:'Alex',gender:'f'});G.s.v=3;G.s.chapter=ch;G.s.pc=i;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,11);
+  assert.equal(G.load(),true);assert.equal(G.s.v,12);
   const want=M4[ch]?M4[ch].resume[i]:i;assert.equal(G.s.pc,want,ch);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'no double migration');
  }
@@ -188,7 +188,7 @@ test('v4 save in chapter 3 after the Maja SMS keeps its step after the v5 scenes
  const old=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures/story-v4-steps.json'),'utf8'));
  const i=old.ch3.findIndex(s=>JSON.parse(s)[4]==='kluska nie żyje od 7 lat');assert.ok(i>0);
  G.newGame({name:'Alex',gender:'f'});G.s.v=4;G.s.chapter='ch3';G.s.pc=i;G.s.flags.keep=true;G.save(true);
- assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,M5.ch3.resume[i]);assert.ok(M5.ch3.exact[i]>i);
+ assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,M5.ch3.resume[i]);assert.ok(M5.ch3.exact[i]>i);
  G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,M5.ch3.resume[i],'no double migration');
 });
 function STORY_V5(){const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');return JSON.parse(src.split('STORY_MIGRATIONS_V5 = ')[1].split(';\n')[0]);}
@@ -202,7 +202,7 @@ test('v6: chapter 3 split by the s1_plate rest; v5 saves before, at and after th
  const cases=[[at-1,at-1],[at,at+1],[at+5,at+6],[old.ch3.length-1,old.ch3.length+anon]];
  for(const [pc,want] of cases){
   G.newGame({name:'Alex',gender:'f'});G.s.v=5;G.s.chapter='ch3';G.s.pc=pc;G.s.flags.keep=true;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want,'pc '+pc);
+  assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want,'pc '+pc);
   assert.equal(M6.ch3.exact[pc],want);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'no double migration');
  }
@@ -216,7 +216,7 @@ test('v7: scene xAnonim in chapter 3; v6 saves before and after it keep progress
  const added=M7.ch3.exact[at]-at;assert.ok(added>0);assert.equal(M7.ch3.resume[at],at,'zapis tuż za nową sceną wraca na jej początek');
  for(const [pc,want] of [[at-1,at-1],[at,at],[old.ch3.length-1,old.ch3.length-1+added]]){
   G.newGame({name:'Alex',gender:'f'});G.s.v=6;G.s.chapter='ch3';G.s.pc=pc;G.s.flags.keep=true;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want,'pc '+pc);
+  assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.ok(G.s.flags.keep);assert.equal(G.s.pc,want,'pc '+pc);
   G.save(true);assert.equal(G.load(),true);assert.equal(G.s.pc,want,'no double migration');
  }
 });
@@ -229,7 +229,7 @@ test('v8: scene xJednaOsoba in c4; v7 saves before and after it keep progress',(
  const added=M8.c4.exact[at]-at;assert.ok(added>0);
  for(const pc of [0,at,old.c4.length-1]){const want=M8.c4.exact[pc],from=M8.c4.resume[pc];
   G.newGame({name:'Alex',gender:'f'});G.s.v=7;G.s.chapter='c4';G.s.pc=pc;G.s.flags.keep=true;G.save(true);
-  assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.ok(G.s.flags.keep);assert.ok(G.s.pc<=want&&G.s.pc>=from,'pc '+pc+' → '+G.s.pc);
+  assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.ok(G.s.flags.keep);assert.ok(G.s.pc<=want&&G.s.pc>=from,'pc '+pc+' → '+G.s.pc);
   G.save(true);assert.equal(G.load(),true);assert.ok(G.s.pc<=want,'no double migration');
  }
 });
@@ -241,7 +241,7 @@ test('v9: payoffs in c4 endings; v8 and v6 saves map once to current steps (no c
   const M=tab(n),old=JSON.parse(fs.readFileSync(path.join(root,'tests/fixtures',fx),'utf8'));
   for(const pc of [0,Math.floor(old.c4.length/2),old.c4.length-1]){
    G.newGame({name:'Alex',gender:'m'});G.s.v=v;G.s.chapter='c4';G.s.pc=pc;G.save(true);
-   assert.equal(G.load(),true);assert.equal(G.s.v,11);assert.equal(G.s.pc,M.c4.resume[pc],'v'+v+' pc '+pc);
+   assert.equal(G.load(),true);assert.equal(G.s.v,12);assert.equal(G.s.pc,M.c4.resume[pc],'v'+v+' pc '+pc);
   }
  }
 });

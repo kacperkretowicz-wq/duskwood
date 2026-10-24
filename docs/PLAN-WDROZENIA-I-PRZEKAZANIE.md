@@ -866,3 +866,8 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 ### 2026-10-24 — test łańcucha migracji (SW v97)
 - `tests/migration-chain.test.cjs`: dla każdej historycznej wersji zapisu (fixture `story-v2…v10-steps.json`) i każdego rozdziału — 7 punktów (początek, ćwiartki, koniec), zapis zwykły i w wyborze. Sprawdza: wersja = bieżąca, flagi zachowane, kolejność zachowana, ten sam krok (albo dopisana scena tuż przed nim), wybór wraca dokładnie do wyboru, drugie wczytanie nic nie przesuwa. Kroki przepisane w redakcji 2c5f807 sprawdzane tylko co do kolejności.
 - Test wymaga fixture dla każdej wersji < bieżącej — przypomina, żeby zrzucić kroki przed zmianą historii. Zweryfikowany na celowo zepsutym bloku migracji (wykrywa podwójne przesunięcie).
+
+### 2026-10-24 — reakcje w S2–S5 i flagi bez echa (SW v98, zapis v12)
+- Audyt pustych opcji w S2–S5: większość to rozmowy telefoniczne, w których odpowiada następna linia. Dopisana reakcja Leny na bezpośrednie pytanie o archiwum (`xReLena`, S3) — wcześniej obie opcje dostawały to samo „Uff.”.
+- Spójność: 304 flag ustawianych w opcjach, z czego 184 nigdy nie jest czytanych (stan 24.10). Reakcja jest zwykle w samej opcji, więc to nie błąd, ale gotowa lista miejsc na późniejsze echo. Kandydaci: `m_warnedNatan` (S2), `k_toldOla`, `k_zuzaHelped` (S3), `c_idaTellZenon`, `c_olaPosted` (S4), `g_oskarForgiven`, `g_kubaWarned` (S5).
+- Migracja v11→v12; test łańcucha migracji obejmuje v11.

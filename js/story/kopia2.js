@@ -559,6 +559,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       opt('Leno, czy @cicho.bylo to twoje konto? Nie piszę, żeby cię ujawnić.', [], { set: { k_lenaGentle: true } }),
       opt('To ty podajesz fragmenty osobie, która prowadzi archiwum?', [])
     ]),
+    scene('xReLena', [iff('!flag:k_lenaGentle', [L('Archiwum? Myślisz, że ja komuś coś podaję?'), L('Czekaj. Dojadę na pętlę, to odpiszę normalnie.')])]),
     pause(4000),
     L('Uff.'),
     L('Jestem na pętli, mam sześć minut. Potem ostatni kurs.'),
