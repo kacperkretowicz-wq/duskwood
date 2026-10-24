@@ -744,3 +744,43 @@ Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
 - Klip S2: 40-sekundowy plik z mostu (SPRAWA-2, akt I) występuje tylko jako opis i kadr — można dać krótki klip z „dwiema sekundami więcej” w wersji tygodnika jako zagadkę porównawczą.
 - Klip S3: pierwszy klip @archiwum.rybickiego (głos na tle stodoły) jako materiał wideo zamiast samego tekstu.
 - Przeniesienie `xAnonim` za przerwę `s1_sync` (A10).
+
+### 18.1. Klipy z propozycji 1 i 2 (24.10.2026)
+
+Klatki pierwsza/ostatnia każdego klipu leżą w `materialy/klatki/` do oceny (także wstecznie `v_anonim_first/last.jpg`).
+
+```text
+ID materiału: v_most40 / v_most42 (jedno źródło, dwa cięcia)
+Status: wdrożony, do oceny
+Sezon, rozdział, rozmowa i warunki wejścia: S2, m1/m2, strony gs_most i tyg_most (flaga m_clipOut)
+Autor i rzeczywiste położenie aparatu: Adam Rybicki, kamera mini-DV na statywie przy kuchennym stole Henryka
+Powód wykonania oraz odbiorca: rozmowa do archiwum Rybickiego, X 2011; nie do publikacji
+Data/godzina/miejsce wykonania: X 2011, znak czasu kasety od 17:22:08, kuchnia Henryka W.
+Oddzielnie: wysłanie, publikacja i synchronizacja: GS Wideo 22.11.2026 20:05 (eksport stażystki 0:40, pasek GS); Tydzień w Sudetach 23.11 (wersja 0:42 od Dudka, bez paska)
+Funkcja fabularna i widoczna wskazówka: porównanie — w tygodniku nagranie trwa dalej, Henryk podnosi głowę i bierze wdech jak przed następnym zdaniem; brak paska GS
+Czego materiał nie dowodzi: kto zdjął siatkę; tego, co Henryk mówi dalej
+Referencja tożsamości: assets/most/hw_kadr.jpg (pierwsza klatka = ten kadr)
+Pierwszy kadr: materialy/klatki/v_most_first.jpg — Henryk patrzy w stół
+Ostatni kadr: materialy/klatki/v_most_last.jpg — Henryk podnosi głowę, wdech
+Jedna główna czynność i ruch kamery: mówi cicho, podnosi głowę; kamera statyczna
+Długość, orientacja i dźwięk: w grze końcówki 8 s / 10 s, poziomo, bez dźwięku (wygenerowana mowa nie była po polsku — decyzja: wyciszyć; wdech opisuje Marta)
+Elementy stałe: kuchnia, polar w paski, lampa; zabronione: napisy poza paskiem GS
+```
+
+```text
+ID materiału: v_stodola
+Status: wdrożony, do oceny
+Sezon, rozdział, rozmowa i warunki wejścia: S3, k0, strona tt_archiwum (flaga k_started), klip nr 1
+Autor i rzeczywiste położenie aparatu: prowadzący @archiwum.rybickiego, telefon w ręku z drogi polnej
+Powód wykonania oraz odbiorca: obraz pod nagranie głosu z 2019 r., publikacja na Klipo 18.12, 22:31
+Data/godzina/miejsce wykonania: grudzień 2026, dzień, pochmurno, śnieg; fundamenty spalonej stodoły
+Funkcja fabularna i widoczna wskazówka: klip jest „prawdziwy” — obraz współczesny, głos archiwalny (zgodne z ev_k_zrodlo: telefon, nie kaseta)
+Czego materiał nie dowodzi: kto podpalił; nie pokazuje bramy Pawlaków ani domu
+Referencja tożsamości: brak osób
+Pierwszy kadr: materialy/klatki/v_stodola_first.jpg — ruiny z lewej, droga
+Ostatni kadr: materialy/klatki/v_stodola_last.jpg — ruiny w centrum, drzewo
+Jedna główna czynność i ruch kamery: powolna panorama w prawo, drżenie ręki
+Długość, orientacja i dźwięk: 8 s, pion, bez dźwięku; napis „stodoła, 2009” i cytat z opisu
+```
+
+Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fabuły, bez migracji). SW v75.
