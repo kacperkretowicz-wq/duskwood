@@ -794,3 +794,7 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 ### 18.3 Zdjęcie do ch4 (decyzja własna)
 - Nowe `assets/s1x/s1_bagaznik.jpg`: bagażnik Astry w warsztacie Sowów, z nożycami do kłódek, latarkami, liną, kocem i rękawicami. Podpięte jako `{img:'s1_bagaznik'}` pod wiadomość Bartka „nozyce do klodek mam. latarki tez”. Kroki fabuły się nie zmieniły, więc migracja nie jest potrzebna. SW v78.
 - Przeszły testy: unit 60/60, browser, playthrough, e2e-player i media.
+
+### 18.4 Przejście 375×667 S1–S5 i zdjęcie S2
+- Do `tests/e2e-player.browser.cjs` doszły zmienne `E2E_WIDTH`/`E2E_HEIGHT` oraz zrzut ekranu przy każdej zmianie rozdziału. Przejście iOS 375×667 od prologu do g6: wszystkie zakończenia osiągnięte, bez przepełnień układu, bez błędów i z działającym startem offline. Zrzuty łapią kurtynę tytułu rozdziału, więc służą tylko poglądowo.
+- Nowe `assets/s1x/mp_osrodek.jpg`: wyblakłe zdjęcie ośrodka kolonijnego huty z lat 80. Weronika wysyła je razem z „Rzeczka 17 to dawny ośrodek kolonijny huty”. Migracja nie jest potrzebna. SW v79.

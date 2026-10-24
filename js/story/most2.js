@@ -63,7 +63,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     ]),
     pause(1500),
     W('Dzień dobry. Kuba przesłał mi rozmowę z panią Niną. Proszę mi wybaczyć, że się wtrącam.'),
-    W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.'),
+    W('Rzeczka 17 to dawny ośrodek kolonijny huty. Budynek gospodarczy od strony lasu. Zimą nikt tam nie mieszka.', { img: 'mp_osrodek' }),
     W('Ale „woda, konserwy, olej opałowy” na zimę do pustego zaplecza? To ktoś tam jest. Albo ma być.'),
     N('byłam tam dziś rano swoim autem, mieszkam dwie wsie dalej. nie wysiadałam. zrobiłam zdjęcie przez szybę, bo numer jest przy drzwiach'),
     pic('nina', 'nina', 'mp_wejscie', 'dziś 9:58. kanistry stoją. tamtego dnia ich nie było'),
