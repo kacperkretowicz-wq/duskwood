@@ -805,3 +805,10 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - `playthrough.browser.cjs` przyjmuje teraz `E2E_WIDTH`/`E2E_HEIGHT`. Po każdej ścieżce (świt, odłamki, cisza, legacy) test otwiera każdy czat i sprawdza, czy nic nie wychodzi poza szerokość ekranu. Przy 375×667 i 360×740 wszystkie ścieżki przechodzą, bez przepełnień.
 - Igor w ch4, „12-go go zapytałem”: próbowałem zmienić na „12-go zapytałem go wprost. pokazałem mu skan.” Zmiana tekstu kroku wywraca trzy tabele migracji (v3, v4→v5), bo kroki są porównywane po treści. Zamiast tego poprawka idzie przez `wording`: podpis kroku zostaje ten sam, więc migracja nie jest potrzebna, a gracz widzi nowy tekst.
 - Nowe `assets/s1x/g_slady.jpg`: świeże ślady w błocie pod hutą we mgle, wysłane przy „błoto po kostki… świeże ślady” (S5, g-rozdział nocny). SW v82.
+- Wydajność (`tools/perf-mobile.cjs`, emulacja 360×740, CPU ×4, 4G 9 Mb/s, RTT 150 ms):
+  - zimny start do ekranu tytułowego: 3,2 s;
+  - ciepły start z SW: 41 ms;
+  - sterta JS: 6 MB po starcie, 7 MB po trzech klipach, 3 MB po GC;
+  - węzły DOM po zamknięciu klipów wracają do ~350.
+  
+  Wycieków nie widać, więc nie wprowadzam zmian.
