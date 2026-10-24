@@ -9,7 +9,7 @@ Dokument roboczy do `PLAN-WDROZENIA-I-PRZEKAZANIE.md` (P0). Zawiera spoilery S1.
 | prolog | 21.10, 21:03, SMS Mai sprzed tygodnia | Maja zaginęła; dzwoniła pod numer zmarłego Rybickiego; Tomek Lis 1997 | Telefon (Ostatnie), SMS, artykuł 2007, nekrolog | zaufanie Kuby/Oli, `kubaGajda` | grupa → **xCel** (nowe) → Szklarz |
 | ch1 Chmura | noc 21/22.10 | Nimbus, lokalizacja 14.10 = huta, fotopułapki, kłamstwa Bartka/Oli | Nimbus, kopia, CAM-01/02 | `kubaWaits`/`kubaToldGajda` (leaks) | przerwa `s1_night` → sync 02:13 |
 | ch2 Huta | 22.10, 19:40 | Bartek w hucie, klisza, notatka „Pytania”, wejście do huty | CAM 0057, Ciemnia, plany | prywatnie/grupa z Bartkiem | **xSerwis** (nowe) na starcie; `s1_departure`; straszak `s1_cam58` |
-| ch3 Peleryna | 23.10, 17:30 | Weronika, tamagotchi, Gajda, auto spod huty | lumpeks, nagranie, rejestracja | `x_peleryna*` | **xBartek** (nowe); `s1_sync`; 03:05 SMS + **scMajaNumer** (nowe) |
+| ch3 Peleryna | 23.10, 17:30 | Weronika, tamagotchi, Gajda, auto spod huty | lumpeks, nagranie, rejestracja | `x_peleryna*` | **xBartek** (nowe); `s1_plate` (nowa przerwa po DDZ 6K19, przed `s18`, migracja v6); `s1_sync`; 03:05 SMS + **scMajaNumer** (nowe) |
 | ch4 Sztolnia | 24.10, 09:20 | Znajdź urządzenie, sztolnie, Szklarz = Igor | Nimbus, kadr 23, notatka | wyznanie Igora (`igorMid`) | 22:40 szlaban (bez przerwy — ratunek) |
 | ch5 Światło | 24.10 noc | ratunek, 112 vs Gajda | kamera, mapy | finały S1 | `s28`, `s29` |
 | epilog | 14.11 | skutki, finał Cisza | — | `epBartek/Igor/Ola` | `scCisza` |

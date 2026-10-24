@@ -254,6 +254,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       give('ev_plate'),
       g('kuba', 'DDZ 6K19. czyje to?')
     ]),
+    /* Podział rozdziału 3 (v6): przerwa po złożeniu tablicy DDZ 6K19, przed ustalaniem właściciela. */
+    scene('xPrzerwaTablica', [interlude('Wieczór', 'Numer auta jest w notatkach. Właściciela jeszcze nikt nie zna.', 3000, { rest: 's1_plate' })]),
     scene('s18', SC.s18),
     g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),

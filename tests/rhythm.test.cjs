@@ -100,3 +100,13 @@ test('waiting for the next chapter keeps a short note of the last goal',()=>{
  assert.equal(P.hold('ch3'),true);{assert.ok(G.s.objective.text.includes('Ostatni cel: Napisz do Bartka.'));
   G.save(true);G.load();assert.equal(P.hold('ch3'),true);assert.ok(G.s.objective.text.includes('Ostatni cel: Napisz do Bartka.'));}
 });
+test('chapter 3 has the s1_plate rest between the plate and its owner',()=>{
+ const fs=require('fs'),vm=require('vm'),path=require('path');
+ const ctx=vm.createContext({console,window:{}});const root=path.join(__dirname,'..');
+ for(const f of ['js/core/engine.js',...fs.readdirSync(path.join(root,'js/story')).sort().map(f=>'js/story/'+f)])vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx);
+ const st=vm.runInContext('Engine.chapters.ch3.steps',ctx);
+ const i=st.findIndex(s=>s.rest==='s1_plate');const j=st.findIndex(s=>s.rest==='s1_sync');
+ const plate=st.findIndex(s=>s.t==='give'&&s.ev==='ev_plate');
+ require('node:assert').ok(plate>0&&plate<i&&i<j,'plate < s1_plate < s1_sync');
+ const r=fs.readFileSync(path.join(root,'js/data/rhythm.js'),'utf8');require('node:assert').ok(r.includes('s1_plate:'));
+});

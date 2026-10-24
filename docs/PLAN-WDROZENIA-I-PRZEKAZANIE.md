@@ -693,3 +693,10 @@ Uwaga: ch3 (~22 min czytania) jest wyraźnie najdłuższy w S1 po dopisaniu scen
 
 Kontakty jako same numery są zamierzone: SMS-y Mai w prologu przychodzą z nieznanego numeru (rejestr i dowód `+48 731 402 118`), a numer Dudka w S5 według BIBLIA-SEZONOW.md „pokazywany jako nieznany numer”.
 Nadal bez pomiaru z ludźmi: odbiór finałów `odlamki`, `cudzy_podpis`, `zasiegi`, `echo`, `cisza2`.
+
+### 17.6 P7 — podział rozdziału 3 (24.10, decyzja Kacpra: „Tak, podziel”)
+
+- Nowa przerwa `s1_plate` (2 h, okno 19–24) w scenie `xPrzerwaTablica`: tuż po złożeniu tablicy **DDZ 6K19** („DDZ 6K19. czyje to?”), przed `s18` (szukanie właściciela przez Bartka). Naturalny cliffhanger, bliżej środka niż wcześniej proponowane miejsce przed `s19`.
+- Proporcje ch3 (wypowiedzi): ~139 przed `s1_plate` · ~62 między `s1_plate` a `s1_sync` · ~44 po nocy.
+- Migracja zapisów **v6** (`STORY_MIGRATIONS_V6`, generator `tools/gen-migration-v6.cjs`, zrzut `tests/fixtures/story-v5-steps.json`). Zapis przed przerwą zostaje na tym samym kroku; zapis na początku `s18` lub dalej przesuwa się o jeden krok (mapa `exact`) — gracz, który już był za tablicą, nie dostaje przerwy wstecz i nie traci postępu. Tabele V3–V5 mapują wprost na bieżące kroki i ustawiają v6. Decyzja własna: dla zapisu „w punkcie podziału” wybrano kontynuację (`exact`), nie przerwę.
+- Service worker v71. Testy: `conversations.test.cjs` (v5 → v6 przed/na/za podziałem, bez podwójnej migracji), `rhythm.test.cjs` (kolejność tablica < `s1_plate` < `s1_sync`). Testy przeglądarkowe spraw 3–5 i `playthrough` oczekują wersji zapisu 6 (w `playthrough` asercja `startV` była nieaktualna od v5).
