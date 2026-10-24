@@ -718,3 +718,9 @@ Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
 - Karta z `MAPA-S1.md` zrealizowana jako scena `xAnonim` w ch3 (po `xDataPliku`): Igor ściąga z Klipo plik MATERIAŁ_ROBOCZY_01 z pustego konta i wrzuca do grupy, więc trop nie zależy od wygasającego linku. Wideo z CAM-01 (ta sama brama) ma w pasku 15.10.2026 01:47, a zdjęcie z kurtką 22.10 02:13 — gracz może wskazać, że to inna noc (flaga `x_anonimData`). Na nagraniu nie widać twarzy ani napisu na kurtce.
 - Proces z punktu 12: pierwsza klatka (pusta brama) i ostatnia (osoba przy bramie) wygenerowane z referencji `c1_0057.jpg`, potem klip 6 s z obu klatek. **Decyzja:** Omni Flash nie jest dostępny w tym środowisku, użyto narzędzia GenerateVideo w trybie pierwsza+ostatnia klatka (ta sama metoda, inne narzędzie). Pasek OSD fotopułapki nałożono ffmpeg. Pliki: `assets/video/v_anonim.mp4`, `assets/video/v_anonim.jpg`.
 - Migracja zapisów v7 (`STORY_MIGRATIONS_V7`, fixture `story-v6-steps.json`, `tools/gen-migration-v7.cjs`); zapis tuż za nową sceną wraca na jej początek, wybór — do wyboru. SW v73.
+
+### 17.9. Przegląd po etapie klipów (24.10.2026, 15:45)
+
+- Jedyną kartą sceny klipu w dokumentach (MAPA-S1, plan, SPRAWA-2…4) był anonimowy materiał P4 — zrealizowany w 17.8. Pozostałe istniejące klipy (`assets/video/v_*`) według rozdziału 12 wymagają osobnej oceny człowieka; **decyzja:** nie regenerować ich bez karty sceny i bez oceny, bo zmiana bez podstaw grozi rozjazdem z fabułą (zgodnie z zakazem automatycznego zastępowania).
+- Etapy P0–P7 nie mają już pozycji wykonalnych w kodzie (patrz 17.6). Otwarte poza kodem: ocena nowych zdjęć i klipu `v_anonim` przez Kacpra, ocena istniejących klipów, pomiar z graczami, odsłuch straszaków i finałów, test na fizycznym telefonie.
+- Weryfikacja v73: `node --test` 54/54 PASS; przeglądarka PASS: season-entries, rhythm, media, playthrough, case-glos/kopia/kronika/most, unsend, e2e-player (iOS+Android).
