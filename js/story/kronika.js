@@ -139,6 +139,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       say('zuza', 'zuza', 'hej. widział{eś|aś} tę studniówkę?'),
       say('zuza', 'zuza', 'babcia mówi że ten sam pan z kablówki kręcił mój chrzest. ma tę kasetę do dziś'),
       say('zuza', 'zuza', 'i powiedziała jeszcze „on wszystkich nagrywał, a jego nikt”'),
+      iff('flag:k_zuzaHelped', [say('zuza', 'zuza', 'btw od grudnia nikt już nie stoi pod domem. dzięki, że wtedy zgłosił{eś|aś} ten komentarz. nie zapomniałam')]),
       choose('zuza', [
         opt('Ciekawe, ile takich kaset leży po domach.', [say('zuza', 'zuza', 'u nas trzy. komunia, chrzest i wesele cioci. nikt nie ma już magnetowidu')]),
         opt('Pozdrów babcię.', [say('zuza', 'zuza', 'pozdrowiła. i kazała ci się ciepło ubrać. nie wiem skąd wie że się za lekko ubieram')])
@@ -641,7 +642,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       I('laptop złożony. idę spać. ty też idź'),
       O('Mama zasnęła na fotelu. Przykryłam ją kocem. Zwykle jest odwrotnie.'),
       pause(2000),
-      M('Kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty'),
+      M('Kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty', { img: 'c_parking_noc' }),
       choose('maja2', [
         opt('Idź spać. Rano pogadamy.', [M('dobra. jeszcze jeden odcinek. żartuję')]),
         opt('Napisz, jak coś zobaczysz.', [M('napiszę. ale chyba nic już nie zobaczę. śnieg zasypał ślady')])
@@ -819,7 +820,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
     ambient('calm'),
     title(),
     scene('xPiatek', [
-      M('mama robi pierogi z kapustą, bo „w stresie trzeba jeść”'),
+      M('mama robi pierogi z kapustą, bo „w stresie trzeba jeść”', { img: 'c_pierogi' }),
       M('Kuba zjadł dwanaście i mówi że nie jest zestresowany'),
       choose('maja2', [opt('Zostaw mi pięć.', [M('cztery. Kuba już patrzy')]), opt('Nie mam teraz głowy do pierogów.', [M('wiem. ja też nie. ale zjadłam')])])
     ]),
@@ -934,6 +935,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       scene('scTransmisja', [scare('s4_transmisja', 'glitch')]),
       O('Wyszło.'),
       O('Mama trzyma mnie za rękę. Telefon leży ekranem w dół.'),
+      iff('flag:c_olaPosted', [O('Pod moim wpisem z rana ludzie piszą „wiemy, dzięki, że napisałaś pierwsza”. Pod klipem jest ciszej, niż myślałam.')]),
       iff('flag:c_warnedOla', [O('Dzięki, że napisałeś{|aś} wcześniej. Zdążyłam powiedzieć mamie sama, zanim zobaczyła to u sąsiadki.')]),
       iff('flag:c_warnedWera', [W('Zapisałam, z której taśmy jest ten fragment. Jak ktoś zapyta, będzie wiadomo, że to stare nagranie, nie nowe.')]),
       iff('flag:c_warnedZenon', [Z('Ida siedzi w kuchni. Nie wyszła. Pies od niej nie odchodzi.')]),
@@ -944,6 +946,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
         Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.', { img: 'c_kuchnia' }),
         iff('flag:c_warnedZenon', [Z('Dobrze, że {Pan|Pani} mi napisał{|a}. Byłem pod drzwiami, kiedy wyszła.')]),
+        iff('flag:c_idaTellZenon', [Z('Powiedziała mi wszystko sama, przy śniadaniu. Wolałem od niej niż z internetu.')]),
         iff('flag:c_warnedOla', [O('Przesiedziałam cały wieczór z telefonem w ręce. Nic. Dzięki, że nie musiałam czekać sama.')]),
         iff('flag:c_warnedWera', [W('Katalog zostawiam otwarty jeszcze na tydzień. Na wszelki wypadek.')]),
         ending('przewiniecie')

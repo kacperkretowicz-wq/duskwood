@@ -880,3 +880,9 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 
 ### 2026-10-24 — pełne E2E S1→S5 na iOS i Android (wieczór)
 - `tests/e2e-player.browser.cjs`, obie platformy: PASS. Ścieżka swit → pelny_kadr → wlasnym_glosem → przewiniecie → haslo, 21 straszaków zapisanych jednorazowo, 0 błędów konsoli, 0 problemów układu, offline OK. Numery zamiast nazw tylko tam, gdzie to zamierzone (SMS Mai w prologu, Dudek w S5).
+
+### 2026-10-24 — echo trzech flag w S4 + 2 zdjęcia (SW v101, zapis v14)
+- Decyzja: z 6 pozostałych nieczytanych flag wybrane te, których echo ma sens w S4 bez nowego kanonu: `k_zuzaHelped` (S3 → `xZuza`: Zuza dziękuje, że od grudnia nikt nie stoi pod domem), `c_olaPosted` (zakończenie transmisja: ludzie pod wpisem Oli „dzięki, że napisałaś pierwsza”), `c_idaTellZenon` (przewiniecie: Zenon wolał usłyszeć od Idy przy śniadaniu). `k_toldOla`, `g_oskarForgiven`, `g_kubaWarned` zostają — brak naturalnego miejsca bez dopisywania scen.
+- Migracja v14 wygenerowana narzędziem (`tools/gen-migration-v14.cjs`, zrzut `tests/fixtures/story-v13-steps.json` zrobiony przed edycją), test łańcucha migracji obejmuje v2…v13 → v14.
+- Zdjęcia (metoda realizmu, tani telefon, bez twarzy): `c_pierogi` (piątek u Mai, ręka Kuby w szarej bluzie) i `c_parking_noc` (pusty zaśnieżony parking z okna, herbata na parapecie) — dopięte do istniejących linii Mai (`img`, bez zmiany kroków).
+- Prace w osobnym worktree, żeby nie mieszać plików z trwającym E2E.
