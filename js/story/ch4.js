@@ -109,7 +109,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     I('10 października skanowałem mai negatywy. na 23 był mój ojciec. młody, ale to on. mam te same zdjęcia w albumie u babci'),
     I('i gajda. w policyjnej czapce swojego starego'),
     I('powiedziałem mai że klatka prześwietlona. chciałem najpierw pogadać z ojcem. sam'),
-    I('12-go go zapytałem. po prostu pokazałem skan. wyszedł do kuchni i zadzwonił do gajdy'),
+    I('12-go go zapytałem. po prostu pokazałem skan. wyszedł do kuchni i zadzwonił do gajdy', { wording: '12-go zapytałem go wprost. po prostu pokazałem mu skan. wyszedł do kuchni i zadzwonił do gajdy' }),
     I('dwa dni później mai już nie było'),
     /* Reakcja gracza w środku wyznania, zanim Igor dokończy. */
     scene('igorMid', [
