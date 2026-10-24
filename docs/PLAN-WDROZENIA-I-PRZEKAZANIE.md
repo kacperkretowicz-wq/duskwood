@@ -817,3 +817,9 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 
 ### 18.6 Rozmiar tekstu
 - Ustawienia → „Rozmiar tekstu”: Zwykły / Duży / Bardzo duży (`textSize`, klasy `ts-l`/`ts-xl`). Powiększa dymki, odpowiedzi i banery. To ustawienie urządzenia, więc migracja zapisu nie jest potrzebna. SW v83.
+
+### 18.7 Realizm zdjęć (decyzja: Kacper — „wyglądają jak AI”)
+- Przegenerowano 17 portretów + 2 (Zenon, Zuza), 19 zdjęć z życia (`assets/people/*_life*`, `zuza_most`) oraz s1_bagaznik, e_pudlo, e_czytelnia, k_rozwidlenie, g_slady — prompty „amatorskie zdjęcie z taniego telefonu”, referencja twarzy = poprzedni portret.
+- mp_osrodek: nowa wersja odrzucona (dziwny rząd dzieci) — zostawiono starą kompozycję, tylko post-processing.
+- Wszystkie przeszły `tools/realism-post.py` (Codex, gpt-6.1-sol, medium): szum, aberracja, dystorsja, desaturacja, kadr telefonu, JPEG q78; nocne z `--night`. Plakaty klipów (`assets/video/*.jpg`) tylko łagodnie (`--strength 0.4`), same wideo bez zmian (propozycja: ffmpeg noise na klipach).
+- Wymiary plików bez zmian (Art.def w/h aktualne). SW v84.
