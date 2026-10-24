@@ -247,6 +247,8 @@ Object.assign(DATA.evidence, {
   Art.def('v_kotka', { src: 'assets/video/v_kotka.jpg', title: 'Pani Ziuta', w: 360, h: 480, draw: () => '' });
   Art.def('v_szyba', { src: 'assets/video/v_szyba.jpg', title: 'Pod inspekcją', w: 360, h: 480, draw: () => '' });
   Art.def('s1_mem_kot', { src: 'assets/s1x/s1_mem_kot.jpg', title: 'Kot w praniu', w: 768, h: 1024, draw: () => '' });
+  Art.def('e_pudlo', { src: 'assets/s1x/e_pudlo.jpg', title: 'Pudło pana Adama · pod biurkiem', w: 1024, h: 768, draw: () => '' });
+  Art.def('e_czytelnia', { src: 'assets/s1x/e_czytelnia.jpg', title: 'Czytelnia · dyżur', w: 1024, h: 768, draw: () => '' });
   Art.def('s1_lumpeks', { src: 'assets/s1x/s1_lumpeks.jpg', title: 'Lumpeks na Kolejowej', w: 768, h: 1024, draw: () => '' });
   Art.def('life_zuza_most', { src: 'assets/people/zuza_most.jpg', title: 'Pod mostem', w: 1200, h: 900, draw: () => '' });
   P('most_hw', 'hw_kadr.jpg', 'H.W. 2/2 · kadr', 1280, 720, { date: '10.2011', time: '17:22:08', device: 'mini-DV · zgrane w 2019', file: 'HW_2z2.mov' });

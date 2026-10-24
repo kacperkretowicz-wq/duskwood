@@ -53,7 +53,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('A ty jak się trzymasz?', [K('trochę lepiej. wczoraj przespałem noc bez sprawdzania telefonu. pierwszy raz'), K('mama się trzyma. gorzej z tym, że gajda był u nas na każdej wigilii')], {}),
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
-      scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀')]),
+      scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀', { img: 'e_czytelnia' })]),
       notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [
@@ -125,7 +125,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.', { wording: 'teraz? marzną mi stopy, mama trzeci raz pyta czy herbaty, a ja chcę posiedzieć sama. ale jem już normalnie' })]),
         opt('Pan Adam byłby z ciebie dumny.', [M('Jego brat powiedział to samo. Prawie się rozpłakałam przy obcym facecie.', { wording: 'to prawda. nawet jak nic nie mówię, on siedzi obok. dzisiaj wysłałam go w końcu na spacer' })], { wording: 'Dobrze mieć Kubę obok. Bardzo na ciebie czekał.' })
       ]),
-      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.'),
+      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.', { img: 'e_pudlo' }),
       M('Tomek był tylko jedną z jego spraw. Tam są inne.', { wording: 'na razie zajrzałam tylko na wierzch. kasety, zeszyty, jakieś wycinki o moście' }),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.', { wording: 'pani Weronika mówi, że pomoże to poukładać. u mnie pudło stoi pod biurkiem i przeszkadza bandziorowi' }),
       M('Kiedyś ci pokażę, jak je znaleźć.', { wording: 'jak do tego usiądę, napiszę. dzisiaj tylko chciałam się odezwać' }),
