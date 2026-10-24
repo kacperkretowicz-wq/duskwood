@@ -417,6 +417,18 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         opt('Ale SMS do mamy jest z dzisiaj.', [g('igor', 'sms tak. zdjęcia nie. dwie różne rzeczy, nie mieszajmy ich'), g('ola', 'Czyli ktoś miał dziś jej telefon w ręku. To akurat jest pewne.')])
       ])
     ]),
+    /* P4: anonimowy materiał z kopii karty CAM-01. Prawdziwy, ale z innej nocy (data w pliku). Igor wrzuca go od razu do grupy, więc trop nie zależy od otwarcia wygasającego linku. */
+    scene('xAnonim', [
+      g('igor', 'ktoś wrzucił na klipo z pustego konta. bez zdjęcia, plik MATERIAŁ_ROBOCZY_01. link wygasa za 24h, więc ściągnąłem'),
+      g('igor', '', { vid: 'assets/video/v_anonim.mp4', img: 'v_anonim' }),
+      g('bartek', 'to brama huty. ta sama kamera co u mai'),
+      choose('group', [
+        opt('Na dole: 15.10, 01:47. Zdjęcie z kurtką jest z 22.10, 02:13. To inna noc.', [set('x_anonimData'), g('igor', 'no właśnie. ktoś chce, żebyśmy to wzięli za tamtą noc'), g('ola', 'Albo chce pokazać, że ktoś tam chodził już tydzień wcześniej. Jedno i drugie coś znaczy.')]),
+        opt('To ten sam człowiek co na zdjęciu z kurtką.', [g('igor', 'nie wiem. spójrz na datę na dole: 15.10. kurtka była 22.10'), g('kuba', 'czyli tydzień wcześniej ktoś już tam łaził')])
+      ]),
+      g('kuba', 'skąd ktoś to ma? kartę z fotopułapki zabrała policja'),
+      g('igor', 'ktoś ją skopiował, zanim zabrali. i chce, żebyśmy wiedzieli, że ma kopię')
+    ]),
     g('kuba', 'jest coś jeszcze?'),
     show('group', { prompt: 'Pokaż zdjęcie z 23:53', accept: [{ ev: ['ev_sync_door', 'ev_sms_kluska'] }], wrong: [['kuba', 'jeszcze coś z tej nocy?']] }),
     iff('ev:ev_sync_door', [

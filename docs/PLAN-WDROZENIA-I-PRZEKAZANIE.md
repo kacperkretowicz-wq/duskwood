@@ -712,3 +712,9 @@ Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
 - Wzorce 01/06/08 pozostały bajtowo identyczne. Odstąpiono od reguły „próby poza assets/ do oceny” — stare wersje są w historii git (sprzed tego commita) i można je przywrócić jednym `git checkout`.
 - Nie wymieniano nieocenionych zdjęć (`*_life2`, `maja_life1`, `marta_life1` itd.) ani zdjęć dowodowych.
 - Service worker v72. Rejestr: `ASSETY-REALIZM-2026.json` (status `replaced_2026-10-24_awaiting_review`, nowe hashe).
+
+### 17.8. Etap klipów — anonimowy materiał P4 (24.10.2026)
+
+- Karta z `MAPA-S1.md` zrealizowana jako scena `xAnonim` w ch3 (po `xDataPliku`): Igor ściąga z Klipo plik MATERIAŁ_ROBOCZY_01 z pustego konta i wrzuca do grupy, więc trop nie zależy od wygasającego linku. Wideo z CAM-01 (ta sama brama) ma w pasku 15.10.2026 01:47, a zdjęcie z kurtką 22.10 02:13 — gracz może wskazać, że to inna noc (flaga `x_anonimData`). Na nagraniu nie widać twarzy ani napisu na kurtce.
+- Proces z punktu 12: pierwsza klatka (pusta brama) i ostatnia (osoba przy bramie) wygenerowane z referencji `c1_0057.jpg`, potem klip 6 s z obu klatek. **Decyzja:** Omni Flash nie jest dostępny w tym środowisku, użyto narzędzia GenerateVideo w trybie pierwsza+ostatnia klatka (ta sama metoda, inne narzędzie). Pasek OSD fotopułapki nałożono ffmpeg. Pliki: `assets/video/v_anonim.mp4`, `assets/video/v_anonim.jpg`.
+- Migracja zapisów v7 (`STORY_MIGRATIONS_V7`, fixture `story-v6-steps.json`, `tools/gen-migration-v7.cjs`); zapis tuż za nową sceną wraca na jej początek, wybór — do wyboru. SW v73.

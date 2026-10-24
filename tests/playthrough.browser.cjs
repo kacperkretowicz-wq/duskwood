@@ -73,7 +73,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
    assert.equal(result.ending,want);assert.deepEqual(result.endings,[want]);
    const sceneBase=['f3reset','igorMid','s12','s13','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
    const scenesWant=(want==='cisza'?sceneBase:['epBartek','epIgor','epOla','f3lib',...sceneBase]).filter(x=>target!=='legacy'||x!=='f3reset').sort();
-   if(target==='legacy')assert.equal(result.startV,6);
+   if(target==='legacy')assert.equal(result.startV,7);
    assert.deepEqual(result.scenes.filter(x=>!/^(sc|x)[A-Z]/.test(x)),scenesWant);
    if(want==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
    if(want==='swit')assert.equal(result.caught,true);
