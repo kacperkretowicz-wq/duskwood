@@ -6,7 +6,7 @@ const {chapters,sig}=require('./dump-steps.cjs');
 const old=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const out={};
 for(const [ch,c] of Object.entries(chapters)){
-  const nl=x=>x.replace(/"([a-z]{1,2})\d+"/g,'"$1#"'); // numery etykiet przesuwają się po dopisaniu iff
+  const nl=x=>x.replace(/"((?:[A-Za-z0-9]+\.)?[a-z]{1,2})\d+"/g,'"$1#"'); // numery etykiet przesuwają się po dopisaniu iff
   const o=old[ch]&&old[ch].map(nl);if(!o)continue;
   const n=c.steps.map(s=>nl(sig(s)));
   if(o.length===n.length&&o.every((x,i)=>x===n[i]))continue;

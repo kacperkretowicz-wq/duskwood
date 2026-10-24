@@ -77,6 +77,7 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
         opt('Zasłużyłaś. Bardziej niż ktokolwiek.', [O('Dziękuję. Bez was bym tam w styczniu nie wróciła.')], { trust: { ola: 1 } }),
         opt('To trzeba uczcić. Ciasto na zdjęciu jest dla mnie?', [O('Było. Dzieci zjadły w trzy minuty. Upiekę drugie 😄')])
       ])
+      ,iff('flag:c_warnedOla', [O('I wiesz, co jeszcze pamiętam ze stycznia? Że napisał{eś|aś} do mnie przed dziewiątą. Mama też to pamięta.')])
     ]),
     scene('xGrupaNiedziela', [
       pause(2500),
@@ -427,6 +428,7 @@ Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera',
       opt('To ta sama czapka co na bramie huty?', [W('To nie może być ta sama. Tomek miał ją na sobie… wtedy.'), W('Przepraszam. Muszę chwilę odejść od telefonu.'), pause(4000), W('Już. Wróciłam.')])
     ]),
     iff('flag:g_capNew', [W('Pan Zenon na pewno wie, co jest na tej kasecie. Zapytam go.')]),
+    scene('xKatalogWery', [iff('flag:c_warnedWera', [W('Ten katalog kaset mam otwarty od stycznia. Od tamtego wieczoru przed dziewiątą. Wtedy się nie przydał, teraz się przyda.')])]),
     scene('xZenon', [
       pause(3000),
       unlock('chat:zenon'),
@@ -434,6 +436,7 @@ Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera',
       Z('Kręciłem go nową kamerą, pierwszy raz. Pamiętam, bo chłopiec w czerwonej czapce cały dzień chciał nią nagrywać.'),
       iff(s => s.vars.s4Ending === 'przewiniecie', [Z('Kaseta jest w archiwum gminy, razem z innymi. Oddaliśmy je z Idą w lutym.')], [Z('Po styczniu oddałem wszystkie kasety do archiwum gminy. Nie chciałem ich już mieć w domu.')]),
       Z('Tam ich pilnuje pani Jasińska. Bardzo porządna osoba.'),
+      iff('flag:c_warnedZenon', [Z('Pamiętam, że w styczniu napisał{|a} {Pan|Pani} do mnie przed dziewiątą. Proszę pytać, o co trzeba.')]),
       choose('zenon', [
         opt('Czy ktoś jeszcze ma kopię tego festynu?', [Z('Nigdy go nie wydawałem. Nie był ciekawy dla nikogo oprócz rodzin. Kopii nie robiłem.')], { set: { g_noCopy96: true } }),
         opt('Dziękuję, panie Zenonie. Jak pan się czuje?', [Z('Dziękuję, dobrze. Pies przybrał na wadze. Weterynarz mnie skrzyczał.')])

@@ -112,7 +112,7 @@ test('v5 migration table is up to date; v4 saves map monotonically and keep choi
     m.exact.forEach((x,i)=>{assert.ok(x>=0&&x<=chapters[ch].steps.length);if(i)assert.ok(x>=m.exact[i-1],ch+':'+i);assert.ok(m.resume[i]<=x);});
     // każdy krok v4 nadal istnieje i trafia dokładnie na siebie (pakiet tylko dopisuje sceny)
     // nazwy etykiet (ie15 itd.) są numerowane automatycznie i mogą się przesunąć po dopisaniu iff — porównujemy bez numerów
-    const nl=x=>x.replace(/"([a-z]{1,2})\d+"/g,'"$1#"');
+    const nl=x=>x.replace(/"((?:[A-Za-z0-9]+\.)?[a-z]{1,2})\d+"/g,'"$1#"');
     old[ch].forEach((o,i)=>assert.equal(nl(sig(chapters[ch].steps[m.exact[i]])),nl(o),ch+':'+i));
     for(let i=0;i<old[ch].length;i++)for(let j=m.resume[i];j<m.exact[i];j++)assert.ok(chapters[ch].steps[j].scene,ch+':'+i+' resume skips only new scenes');
   }

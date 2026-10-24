@@ -858,3 +858,7 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Dopisane krótkie reakcje tam, gdzie odpowiedź gracza ginęła: Kuba na „Mam na imię…”, „Nie wiem, kim jest pan Adam”, „pisała do dziennikarza” (bez zdradzania śmierci Rybickiego przed nekrologiem), „Jestem w środku” (ch1); Igor na „Dlaczego nas okłamywałeś?” (ch4).
 - Technika: reakcje jako nowe sceny `xRe*` za wyborem z flagą opcji (`r_*`), żeby nie zmieniać struktury starych kroków (wymóg migracji v3). Migracja v9→v10; test przeglądarkowy playthrough poprawiony na bieżącą wersję zapisu (wcześniej sprawdzał 7).
 - Ocena zrozumiałości pierwszej sesji (kto zaginął / czemu Kuba / następny krok): prolog daje to wprost przez cele i xCel; pozycja zostaje otwarta do testu z nowym graczem.
+
+### 2026-10-24 — P6/S5: pamięć o „uprzedź jedną osobę" (SW v96, zapis v11)
+- S5 g0/g2: uprzedzona w S4 osoba pamięta to w zwykłej rozmowie — Ola przy umowie w świetlicy, Weronika przy katalogu kaset (`xKatalogWery`), Zenon w `xZenon`. Jedna linia, bez nowych faktów, bez wpływu na dowody i finały S5.
+- Migracja v10→v11. Normalizacja numerów etykiet w generatorach obejmuje też etykiety w przestrzeni sceny (`xZenon.c2`).
