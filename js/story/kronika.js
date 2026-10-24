@@ -942,7 +942,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       iff(s => s.vars.s4Ending === 'kopia2', [M('konto zniknęło. 21:00 i nic'), M('skąd wiedział{eś|aś}, że zniknie?'), iff('flag:c_warnedOla', [O('Napisałeś{|aś} mi wcześniej, że coś się szykuje. Teraz piszesz, że nic. To co masz?')]), ending('kopia2')], [
         M('konto zniknęło. 21:00 i nic'),
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
-        Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.'),
+        Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.', { img: 'c_kuchnia' }),
         iff('flag:c_warnedZenon', [Z('Dobrze, że {Pan|Pani} mi napisał{|a}. Byłem pod drzwiami, kiedy wyszła.')]),
         iff('flag:c_warnedOla', [O('Przesiedziałam cały wieczór z telefonem w ręce. Nic. Dzięki, że nie musiałam czekać sama.')]),
         iff('flag:c_warnedWera', [W('Katalog zostawiam otwarty jeszcze na tydzień. Na wszelki wypadek.')]),

@@ -871,3 +871,6 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Audyt pustych opcji w S2–S5: większość to rozmowy telefoniczne, w których odpowiada następna linia. Dopisana reakcja Leny na bezpośrednie pytanie o archiwum (`xReLena`, S3) — wcześniej obie opcje dostawały to samo „Uff.”.
 - Spójność: 304 flag ustawianych w opcjach, z czego 184 nigdy nie jest czytanych (stan 24.10). Reakcja jest zwykle w samej opcji, więc to nie błąd, ale gotowa lista miejsc na późniejsze echo. Kandydaci: `m_warnedNatan` (S2), `k_toldOla`, `k_zuzaHelped` (S3), `c_idaTellZenon`, `c_olaPosted` (S4), `g_oskarForgiven`, `g_kubaWarned` (S5).
 - Migracja v11→v12; test łańcucha migracji obejmuje v11.
+
+### 2026-10-24 — zdjęcie: kuchnia Zenona w zakończeniu „przewinięcie" (SW v99)
+- Nowe `assets/kronika/c_kuchnia.jpg` (768×1024, 129 KB), wysłane przy „Ida przyszła do kuchni… Siedzimy. Pies też.”. Amatorskie zdjęcie z telefonu Zenona: talerz z piekarnika, herbata w koszyczkach, śnieg za oknem; pies ten sam co w `c_ida_pies` (brązowy kundel, generowany z referencją), z Idy tylko rękaw beżowej kurtki — bez twarzy. `{img}` na istniejącym kroku, bez zmiany zapisu.

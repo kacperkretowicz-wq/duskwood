@@ -76,6 +76,7 @@ DATA.web.tt_kronika = {
     ['c_pokoj_kaset', 'assets/kronika/c_pokoj_kaset.jpg', 'Pokój pana Zenona', 1024, 768],
     ['c_blok_noc', 'assets/kronika/c_blok_noc.jpg', 'Parking · 23:41', 768, 1024],
     ['c_ida_pies', 'assets/kronika/c_ida_pies.jpg', 'Pierwszy śnieg', 768, 1024],
+    ['c_kuchnia', 'assets/kronika/c_kuchnia.jpg', 'Kuchnia · 21:04 · pan Zenon', 768, 1024],
     ['c_lodowisko', 'assets/kronika/c_lodowisko.jpg', 'Lodowisko', 768, 1024],
     ['c_festyn', 'assets/kronika/c_festyn.jpg', 'TV Dolina · festyn 2018', 1024, 768],
     ['c_ryz', 'assets/kronika/c_ryz.jpg', 'Serwis Igora', 768, 1024],
