@@ -163,7 +163,7 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
     typing('kuba', 'kuba', 4000),
     K('jestem na moście. mgła jak mleko'),
     pause(3000),
-    K('błoto po kostki. ktoś tu był przede mną. świeże ślady'),
+    K('błoto po kostki. ktoś tu był przede mną. świeże ślady', { img: 'g_slady' }),
     pause(3500),
     clock('2027-03-15T02:51'),
     pic('kuba', 'kuba', 'g_huta_czapka', 'na bramie wisi to'),
