@@ -825,3 +825,4 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
 - Wymiary plików bez zmian (Art.def w/h aktualne). SW v84.
 - 18.7b: klipy przekodowane ffmpeg (desaturacja 0.88, ziarno czasowe, CRF 29; v_stodola CRF 33 ze względu na limit 450 KB), plakaty = pierwsza klatka przetworzonego klipu (idealnie pasują); `materialy/klatki` przez realism-post (0.4). SW v85.
 - 18.7c: maja_life1 — rozmyty plakat i gazety (płytka głębia ostrości), zuza_life1 — kadr przycięty bez napisów (edycja generatora zmieniała twarze, odrzucona). SW v86.
+- 18.8: Haptyka — U.vibrate używa @capacitor/haptics 8.0.2 na natywnych platformach (impact/notification/vibrate wg wzorca, iOS wreszcie czuje wibracje), w przeglądarce navigator.vibrate; ustawienie 'Wibracje' wycisza oba. Testy: haptics.test.cjs, text-size.browser.cjs. SW v87.

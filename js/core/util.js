@@ -165,12 +165,36 @@ const U = (() => {
   }
   const ico = (name, size, extra) => { const s = document.createElement('span'); s.className = 'icw'; s.innerHTML = icon(name, size, extra); return s; };
 
-  function vibrate(p) { try { if (typeof G !== 'undefined' && G.settings.vibrate && typeof navigator !== 'undefined') navigator.vibrate?.(p); } catch (e) { /* brak wsparcia */ } }
+  // Wzorzec wibracji -> wywołanie Capacitor Haptics (iOS nie ma navigator.vibrate).
+  function hapticPlan(p) {
+    const arr = Array.isArray(p) ? p : [p];
+    const on = arr.filter((_, i) => i % 2 === 0).map(n => Math.max(0, +n || 0));
+    const total = on.reduce((a, b) => a + b, 0);
+    if (!total) return null;
+    if (on.length === 1 && total <= 60) return { kind: 'impact', style: total <= 30 ? 'LIGHT' : 'MEDIUM' };
+    if (on.length > 1 && total <= 200) return { kind: 'notify', type: on.length >= 3 ? 'WARNING' : 'SUCCESS' };
+    return { kind: 'vibrate', duration: Math.min(total, 1000) };
+  }
+  function vibrate(p) {
+    try {
+      if (typeof G === 'undefined' || !G.settings.vibrate) return;
+      const cap = typeof window !== 'undefined' && window.Capacitor;
+      const H = cap && cap.isNativePlatform?.() && cap.Plugins?.Haptics;
+      if (H) {
+        const plan = hapticPlan(p); if (!plan) return;
+        if (plan.kind === 'impact') H.impact({ style: plan.style });
+        else if (plan.kind === 'notify') H.notification({ type: plan.type });
+        else H.vibrate({ duration: plan.duration });
+        return;
+      }
+      if (typeof navigator !== 'undefined') navigator.vibrate?.(p);
+    } catch (e) { /* brak wsparcia */ }
+  }
   const clone = o => JSON.parse(JSON.stringify(o));
   const uid = () => Math.random().toString(36).slice(2, 10);
 
   const put = (el, ...kids) => { append(el, kids); return el; };
-  return { h, put, $, $$, clamp, lerp, sleep, rng, hash, esc, norm, squash, tpl, rich, time, dayLong, dayShort, dateNum, sameDay, parseLocal, dur, pad, Bus, icon, ico, vibrate, clone, uid, MONTHS_GEN, DAYS };
+  return { h, put, $, $$, clamp, lerp, sleep, rng, hash, esc, norm, squash, tpl, rich, time, dayLong, dayShort, dateNum, sameDay, parseLocal, dur, pad, Bus, icon, ico, vibrate, hapticPlan, clone, uid, MONTHS_GEN, DAYS };
 })();
 
 const BUS = U.Bus();
