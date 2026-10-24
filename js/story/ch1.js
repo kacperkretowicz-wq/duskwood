@@ -39,9 +39,10 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     }),
     K('udało się??'),
     choose('kuba', [
-      opt('Jestem w środku.', []),
+      opt('Jestem w środku.', [], { set: { r_wsrodku: true } }),
       opt('Kluska i Kometa. Mam dostęp.', [K('KLUSKA. no jasne'), K('jamniczka. umarła, jak miałem 12 lat. maja płakała tydzień')], { trust: { kuba: 1 } })
     ]),
+    scene('xReWSrodku', [iff('flag:r_wsrodku', [K('serio?? nie pytam jak')])]),
     /* Zapowiedź sprawy 3: Kuba widzi, jak działa reset konta. */
     scene('f3reset', [
       K('ej. czyli jak ktoś zna odpowiedzi, to po prostu wchodzi na czyjeś konto i tyle?'),

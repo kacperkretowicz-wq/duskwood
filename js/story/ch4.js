@@ -100,8 +100,9 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     choose('igor', [
       opt('Wiem, że to ty jesteś Szklarzem.', []),
       opt('Technicznie rzecz biorąc, Igor… to ty.', [], { trust: { igor: 1 } }),
-      opt('Dlaczego nas okłamywałeś?', [], { trust: { igor: -1 } })
+      opt('Dlaczego nas okłamywałeś?', [], { trust: { igor: -1 }, set: { r_oklamal: true } })
     ]),
+    scene('xReOklamywal', [iff('flag:r_oklamal', [I('masz prawo tak pytać')])]),
     typing('igor', 'igor', 8000),
     typing('igor', 'igor', 4000),
     I('tak. to ja'),

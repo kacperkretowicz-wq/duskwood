@@ -45,7 +45,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
   assert.ok(res.finished,'sezon zakończony');assert.equal(res.ending,target);assert.equal(res.archived,target);
   assert.deepEqual(res.scares.filter(x=>/^s5_/.test(x)).sort(),['s5_przewijanie','s5_serwis','s5_smiech','s5_ty','s5_wera',...(target==='echo'?['s5_echo']:[])].sort());
   assert.deepEqual(res.missing,[]);
-  assert.equal(res.v,9);
+  assert.equal(res.v,10);
   const again=await page.evaluate(()=>{const n=JSON.stringify(G.s.scares);G.save(true);G.load();return [n,JSON.stringify(G.s.scares)];});
   assert.equal(again[0],again[1]);
   assert.deepEqual(errors,[]);await ctx.close();console.log('PASS case-glos',s4,target);

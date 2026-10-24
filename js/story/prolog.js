@@ -73,10 +73,11 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     K('i tomek lis… skądś znam to nazwisko'),
     K('czekaj. ty masz na imię Adam?'),
     choose('kuba', [
-      opt('Nie. Mam na imię %name%.', []),
-      opt('Nie mam pojęcia, kim jest pan Adam.', []),
+      opt('Nie. Mam na imię %name%.', [], { set: { r_imie: true } }),
+      opt('Nie mam pojęcia, kim jest pan Adam.', [], { set: { r_adam: true } }),
       opt('Mój numer mam od zeszłego roku. Może wcześniej należał do kogoś innego?', [K('…to by miało sens'), set('guessedNumber')], { trust: { kuba: 1 } })
     ]),
+    scene('xReImie', [iff('flag:r_imie', [K('sorry. %name%. zapamiętam')]), iff('flag:r_adam', [K('no to jest nas dwoje')])]),
     K('możesz poszukać w necie? tego tomka lisa i tego artykułu'),
     K('ja tego teraz nie przeczytam. siedzę w jej pokoju i co chwilę się rozglądam jak debil'),
     goal('Dowiedz się, kim był *Tomek Lis* i o jakim artykule pisała Maja.', [
@@ -106,8 +107,9 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     choose('kuba', [
       opt('Ten numer mam od roku. Wcześniej musiał należeć do niego.', []),
       opt('Co?! To niemożliwe.', [K('sprawdź {sam|sama}. stopka artykułu')]),
-      opt('Czyli ona myślała, że pisze do dziennikarza.', [], { trust: { kuba: 1 } })
+      opt('Czyli ona myślała, że pisze do dziennikarza.', [], { trust: { kuba: 1 }, set: { r_dzien: true } })
     ]),
+    scene('xReDziennikarz', [iff('flag:r_dzien', [K('no. tylko czemu trafiło do ciebie')])]),
     K('adam rybicki. maja myślała, że pisze do niego'),
     K('możesz sprawdzić, co się z nim stało? czemu ktoś inny ma jego numer?'),
     goal('Sprawdź, co stało się z *Adamem Rybickim*.', ['Wyszukaj „Adam Rybicki” w Szukajce.', 'Na stronie Gazety Sudeckiej jest dział „Wspomnienia”.']),

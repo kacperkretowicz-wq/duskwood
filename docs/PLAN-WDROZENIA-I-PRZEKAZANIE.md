@@ -852,3 +852,9 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Lista S1: odhaczony anonimowy materiał (`xAnonim` + `v_anonim`, commit 87a0ab0).
 - c4: krótkie reakcje uprzedzonej osoby w każdym zakończeniu — Ola (transmisja: zdążyła powiedzieć mamie sama; kopia2: pyta, co masz; przewinięcie: nie czekała sama), Weronika (zapisuje, z której taśmy jest fragment / zostawia katalog otwarty), Zenon (Ida w kuchni / pod drzwiami). Bez nowych faktów kanonu i bez kar.
 - Naprawa: bloki migracji v<3…v<8 ustawiały wersję pośrednią, przez co zapis v≤6 w c4 dostawał drugi raz przesunięcie V8. Teraz każda tabela mapuje wprost na bieżące kroki i ustawia v9. Generatory porównują kroki bez numerów etykiet (ie15→ie21 po dopisaniu iff). Test v9 obejmuje zapisy v8 i v6.
+
+### 2026-10-24 — przegląd pierwszej sesji: brakujące reakcje (SW v95, zapis v10)
+- Przejrzane wszystkie wybory S1 z pustą reakcją (audyt `opt(…, [])` + przejście w przeglądarce: prolog, playthrough 3 finały + legacy, conversations, rhythm). Większość pustych opcji ma wspólną odpowiedź zaraz po wyborze — zostają.
+- Dopisane krótkie reakcje tam, gdzie odpowiedź gracza ginęła: Kuba na „Mam na imię…”, „Nie wiem, kim jest pan Adam”, „pisała do dziennikarza” (bez zdradzania śmierci Rybickiego przed nekrologiem), „Jestem w środku” (ch1); Igor na „Dlaczego nas okłamywałeś?” (ch4).
+- Technika: reakcje jako nowe sceny `xRe*` za wyborem z flagą opcji (`r_*`), żeby nie zmieniać struktury starych kroków (wymóg migracji v3). Migracja v9→v10; test przeglądarkowy playthrough poprawiony na bieżącą wersję zapisu (wcześniej sprawdzał 7).
+- Ocena zrozumiałości pierwszej sesji (kto zaginął / czemu Kuba / następny krok): prolog daje to wprost przez cele i xCel; pozycja zostaje otwarta do testu z nowym graczem.
