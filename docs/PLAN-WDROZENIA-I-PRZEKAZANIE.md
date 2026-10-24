@@ -925,3 +925,7 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 ### 2026-10-24 · v108 — nowy snap (jedno ujęcie)
 - v_snap.mp4: jedno ciągłe ujęcie z generacji first/last frame (bez sklejania). Koncept A „odwrócenie”: idzie ścieżką wzdłuż ściany walcowni, staje, obraca telefon, na końcu ścieżki ledwo widoczna postać. Kandydat A2 odrzucony (zgięcie narożnika ściany przy obrocie). Brak cięć (scene>0.25: 0).
 - Wyjaśnienie w ch3 xSnapEcho: trzask blachy na bramie (wiatr), postać = kufajka z kapturem na słupku od siatki; CAM-01 22:57 bez zmian. Reakcje w prologu bez „czerwonych kropek”.
+
+### 2026-10-24 · v109 — snap „prawdziwy telefon”
+- Nowe klatki first/last w estetyce taniej kamery telefonu (przepalona plama latarki, zgniecione czernie, szum chroma, blokowanie). Jedno ujęcie first/last frame; kandydat R2 odrzucony (obrót przez ścianę wygląda sztucznie), R1: obrót w czerń, na końcu ledwie widoczny kształt przy słupku.
+- Postprodukcja ffmpeg: downscale/upscale, drgania (crop z sin), pompowanie ekspozycji, szum czasowy, chłodno-pomarańczowy odcień, crf 36. Brak cięć (scene>0.3: 0). Wyjaśnienie ch3 (kufajka na słupku) bez zmian.
