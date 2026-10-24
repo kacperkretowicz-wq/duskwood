@@ -497,6 +497,12 @@
           if (r === 1) { S.os = k; G.saveSettings(); G.save(true); location.reload(); }
         }
       }, l)));
+      const textSize = h('div', { class: 'seg', style: 'margin:0' }, [['m', 'Zwykły'], ['l', 'Duży'], ['xl', 'Bardzo duży']].map(([key, text]) => h('button', {
+        class: (S.textSize || 'm') === key ? 'on' : '', 'aria-pressed': String((S.textSize || 'm') === key), onclick: e => {
+          S.textSize = key; G.saveSettings();
+          [...textSize.children].forEach(b => { b.classList.toggle('on', b === e.currentTarget); b.setAttribute('aria-pressed', String(b === e.currentTarget)); });
+        }
+      }, text)));
       const appearance = h('div', { class: 'seg', style: 'margin:0' }, [['light', 'Jasny'], ['dark', 'Ciemny'], ['auto', 'Systemowy']].map(([key, text]) => h('button', {
         class: (S.appearance || 'light') === key ? 'on' : '', 'aria-pressed': String((S.appearance || 'light') === key), onclick: e => {
           S.appearance = key; G.saveSettings();
@@ -508,6 +514,8 @@
         h('div', { class: 'pad' }, osSeg),
         h('div', { class: 'sec-t' }, 'Wygląd'),
         h('div', { class: 'pad' }, appearance),
+        h('div', { class: 'sec-t' }, 'Rozmiar tekstu'),
+        h('div', { class: 'pad' }, textSize),
         h('div', { class: 'list plain' },
           h('button', { class: 'row', onclick: () => UI.openWallpapers() }, h('div', { class: 'rm' }, h('b', {}, 'Tapeta'), h('span', {}, Wallpapers.selected().name)), U.ico('back', 16)),
           h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, Seasons.current().title + ' · twój postęp')), U.ico('back', 16))),

@@ -814,3 +814,6 @@ Decyzje: klipy podpięte w odtwarzaczach na stronach www (bez nowych kroków fab
   Wycieków nie widać, więc nie wprowadzam zmian.
 - Nowy test `text-lint`: dialogi bez podwójnych spacji, spacji przed przecinkiem i podwójnej kropki.
 - e2e-player Android 360×740, S5 = echo (alternatywne zakończenie): wszystkie sezony do napisów, `s5_echo` zapisany, start offline OK, bez przepełnień i błędów.
+
+### 18.6 Rozmiar tekstu
+- Ustawienia → „Rozmiar tekstu”: Zwykły / Duży / Bardzo duży (`textSize`, klasy `ts-l`/`ts-xl`). Powiększa dymki, odpowiedzi i banery. To ustawienie urządzenia, więc migracja zapisu nie jest potrzebna. SW v83.

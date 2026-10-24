@@ -166,6 +166,9 @@ const UI = (() => {
   function applyAppearance() {
     const pref = G.settings.appearance || 'light';
     document.body.classList.toggle('dark-ui', pref === 'dark' || pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const ts = G.settings.textSize || 'm';
+    document.body.classList.toggle('ts-l', ts === 'l');
+    document.body.classList.toggle('ts-xl', ts === 'xl');
   }
 
   /* ---------- ekran główny ---------- */
