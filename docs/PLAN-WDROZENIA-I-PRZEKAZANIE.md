@@ -997,10 +997,15 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 ### 2026-10-25 — v119: zdjęcia zgodne z tekstem i bardziej „z telefonu”
 - `maja-river` (tapeta/zdjęcie Mai od Kuby): zamiast pozowanego portretu z aparatem przy oku — Maja odwraca się w pół zdania, kadr krzywy, kciuk Kuby w rogu; zbliżenie na tapecie ustawione na twarz (64% 35%).
 - `factory-day-v1` (post Mai w Kadrze 03.10 „mgła 8 dni na 10”): wcześniej czyste HDR bez mgły — teraz ta sama huta (wieża, komin, przenośnik) w gęstej mgle, przez dziurę w siatce, płaskie światło telefonu.
-- `c_studniowka` (zrzut Mai z klipu „studniówka, 1999” i straszak s4_drzwi): wcześniej współczesne zdjęcie z balu, niezgodne z filmem — teraz ostatnia klatka `v_studniowka.mp4` (kamera zatrzymana na drzwiach, ktoś w nich stoi). Maja nie mówi już o „żółtym pasku u dołu” (klip go nie ma; u Natana był pasek GS Wideo w rogu) — przez `wording`.
+- `c_studniowka` (zrzut Mai z klipu „studniówka, 1999” i straszak s4_drzwi): wcześniej współczesne zdjęcie z balu, niezgodne z filmem — teraz ostatnia klatka `v_studniowka.mp4` (kamera zatrzymana na drzwiach, ktoś w nich stoi). (Opis paska poprawiony w v121.)
 - `m_kamera_kotka` i `m_kot_wycinki`: ta sama kotka Ziuta i ta sama cerata w kuchni pani Weroniki (wcześniej dwa różne koty, wygładzone), zdjęcia z fleszem/dziennym światłem z taniego telefonu.
 - `g_ola_umowa` (selfie Oli z umową w świetlicy) i `g_kuba_kostka` (Kuba przy kostce u sąsiada): zamiast pozowanych, „AI-owych” kadrów — selfie z przedniej kamery i szybkie zdjęcie od Bartka, krzywy kadr, błoto, zwykłe światło.
 - Klip snap: nadal wstrzymany (Krea 402, brak środków).
 
 ### 2026-10-25 — v120: kotka Ziuta zgodna z filmem
 - `m_kamera_kotka` i `m_kot_wycinki` zrobione na nowo z klatki filmu `v_kotka.mp4` jako wzoru: ta sama kuchnia (białe kafle, drewniane szafki), ta sama ciemna cerata w kwiaty, karton z teczkami i herbata z cytryną — wcześniej (v119) kuchnia i cerata różniły się od filmu, który gracz ogląda chwilę wcześniej.
+
+### 2026-10-25 — v121: kadry z kroniki TV Dolina zgodne z tropami
+- Tropy w rozmowach mówią o rzeczach, których nie było na obrazach: odbicie lampki u góry ekranu (studniówka, boisko — dowód, że ktoś filmuje telewizor telefonem), zielone cyferki 23:47 w rogu przy samochodzie (boisko — zegar magnetowidu z pokoju pana Zenona) i pasek „TV Dolina” (festyn, studniówka).
+- `c_studniowka`, `c_boisko`, `c_festyn` i filmy `v_studniowka`, `v_festyn` (+ plakaty): żółty pasek „TV DOLINA” w lewym dolnym rogu; na studniówce i boisku ciepłe odbicie lampki w prawym górnym rogu (lampka stoi w pokoju po prawej od telewizora), lekkie linie i winieta jak przy filmowaniu ekranu; na boisku zegar 23:47 w prawym dolnym rogu. W filmie studniówki odbicie pojawia się pod koniec (≈ 0:27 klipu).
+- Maja przy porównaniu z kadrem Natana (pasek GS Wideo w rogu): „ta sama jakość z kasety. tylko pasek u dołu inny, żółty” (przez `wording`).
