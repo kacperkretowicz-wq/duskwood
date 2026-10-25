@@ -122,7 +122,7 @@ test('versioned note has consistent dates and is not a shortcut into the finale'
  const {G,DATA}=game();unlock(G);const note=DATA.maja.notes.find(n=>n.id==='pojemnik');
  assert.equal(G.isUnlocked(note.unlock),false);G.unlock('maja:sync1');assert.ok(G.isUnlocked(note.unlock));
  assert.equal(note.versions.length,2);assert.equal(note.t,note.versions[1].t);
- assert.ok(note.versions[0].t<'2026-10-14T23:44');assert.ok(note.t<note.synced);
+ assert.ok(note.versions[0].t<'2026-10-14T23:44');assert.ok(note.t<(note.syncStarted||note.synced));
  const d=DATA.deductions[note.deduction];
  assert.deepEqual(Array.from(d.support.from),Array.from(note.versions,v=>v.ev));
  for(const v of note.versions)assert.ok(DATA.evidence[v.ev]);

@@ -153,7 +153,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
     set('m_lateRescue', true, 'gajdaCaught'),
     notify({ app: 'browser', title: 'Mglisko24', text: 'Zaginiona 22-latka odnaleziona w Rzeczce. Zatrzymano byłego komendanta posterunku.', sound: 'notif' }),
     pause(3000),
-    W('Dziękuję. Nie umiem tego lepiej napisać.'),
+    W('Dziękuję. Nie umiem tego lepiej napisać.', { wording: 'Maja jest bezpieczna. A Tomek też jest już odnaleziony: służby skończyły zabezpieczać dojście w hucie. Możemy go pochować. Dziękuję.' }),
     W('Pani Nina mówi, że po dzisiejszym poranku nie chce już jeździć przez Rzeczkę. Rozumiem ją.'),
     pause(4000),
     clock('2026-11-20T19:20'),

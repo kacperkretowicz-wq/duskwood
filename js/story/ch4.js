@@ -158,7 +158,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     /* --- Marek Sowa --- */
     B('stary gadal ze mna cala noc'),
     B('pisze, bo nie umiem tego powiedziec na glos'),
-    B('7 lipca 97. byli w hucie we czterech. robert, leszek, darek i on. pili. darek robil zdjecia', { wording: '7 lipca 97. byli w hucie we czterech. robert, leszek, darek i on. pili. darek oparl aparat o belke i wszedl w kadr. ten blizej obiektywu to on' }),
+    B('7 lipca 97. byli w hucie we czterech. robert, leszek, darek i on. pili. darek robil zdjecia', { wording: '7 lipca 97. robert, leszek, darek i stary. darek robil zdjecia jednorazowka. dwa grupowe pstryknela im halina mroz. przyszla od drogi zawolac ich do pomocy przy workach. oddala aparat i poszla, zanim tomek wpadl do kanalu' }),
     B('tomek lazil za darkiem jak zawsze. przegonili go. wrocil'),
     B('kolo polnocy wszedl na deski nad kanalem pieca. zarwaly sie. kanal byl zalany po deszczu'),
     B('wyciagneli go. nie oddychal. stary mowi ze probowali. darek probowal najdluzej'),

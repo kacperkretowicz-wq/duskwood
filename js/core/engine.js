@@ -360,7 +360,7 @@ const Engine = (() => {
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
         const before = leadsToChoice(ch);
-        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
+        await talk(st.chat, st.who, plainTyper(st.who, typeof st.wording === 'function' ? st.wording(s) : (st.wording ?? st.text)), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;

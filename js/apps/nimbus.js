@@ -298,7 +298,7 @@
     const pg = UI.page({ title: n.title, sub: fmtT(n.t) });
     pg.body.appendChild(h('div', { class: 'paper', html: U.rich(n.body) }));
     if (n.versions) {
-      pg.body.append(h('p', { class: 'nb-hint' }, `Kopia odebrana: ${fmtT(n.synced)}. Historia zawiera wcześniejsze zapisy z tego urządzenia.`),
+      pg.body.append(h('p', { class: 'nb-hint' }, `Kopia odebrana: ${n.syncStarted ? "po zakończeniu synchronizacji rozpoczętej " + fmtT(n.syncStarted) : fmtT(n.synced)}. Historia zawiera wcześniejsze zapisy z tego urządzenia.`),
         h('div', { class: 'pad' }, h('button', { class: 'btn wide', onclick: () => {
           const body = h('div', { class: 'note-history' }, h('p', { class: 'nb-hint' }, 'Godziny zapisu pochodzą z urządzenia. Synchronizacja nie ustala, kto pisał tekst. Wersje są tylko do odczytu.'));
           n.versions.slice().reverse().forEach(v => body.append(h('article', { class: 'note-version' },

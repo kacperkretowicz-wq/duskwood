@@ -483,11 +483,11 @@
 
   /* ================= ZALEGŁE ZDJĘCIA MAI (14.10) ================= */
   D('s_wall', { src: 'assets/maja/s_wall.jpg',
-    title: '14.10, 23:44', exif: phone('14.10.2026', '23:44', { place: 'Huta „Jutrzenka”, odprężarka', note: 'Zsynchronizowano 24.10, 03:06' }), style: 'flash', onView: 'ev_sync_wall',
+    title: '14.10, 23:44', exif: phone('14.10.2026', '23:44', { place: 'Huta „Jutrzenka”, odprężarka', note: 'Kopia rozpoczęta 24.10, 03:05' }), style: 'flash', onView: 'ev_sync_wall',
     draw: k => lehrWall(k, { hole: true }) + k.rect(0, 0, k.W, k.H, k.rad([[0, '#fff', 0.0], [0.3, '#000', 0.1], [1, '#000', 0.85]], 0.5, 0.62, 0.6))
   });
   D('s_door', { src: 'assets/maja/s_door.jpg',
-    title: '14.10, 23:53', exif: phone('14.10.2026', '23:53', { place: 'Huta „Jutrzenka”, hala A', note: 'Poruszone · zsynchronizowano 24.10, 03:06' }), style: 'night', fx: { soft: 2.5, grain: 0.4 }, onView: 'ev_sync_door',
+    title: '14.10, 23:53', exif: phone('14.10.2026', '23:53', { place: 'Huta „Jutrzenka”, hala A', note: 'Poruszone · kopia rozpoczęta 24.10, 03:05' }), style: 'night', fx: { soft: 2.5, grain: 0.4 }, onView: 'ev_sync_door',
     draw: k => {
       const { W, H } = k;
       let s = hall(k, { light: 'night', cols: 2 });
@@ -500,7 +500,7 @@
     }
   });
   D('s_blur', { src: 'assets/maja/s_blur.jpg',
-    title: '14.10, 23:54', exif: phone('14.10.2026', '23:54', { place: 'Huta „Jutrzenka”, hala A', note: 'Zsynchronizowano 24.10, 03:06' }), style: 'night', fx: { soft: 6, grain: 0.5 },
+    title: '14.10, 23:54', exif: phone('14.10.2026', '23:54', { place: 'Huta „Jutrzenka”, hala A', note: 'Kopia rozpoczęta 24.10, 03:05' }), style: 'night', fx: { soft: 6, grain: 0.5 },
     draw: k => {
       const { W, H } = k;
       let s = k.full('#050404') + k.rect(0, H * 0.5, W, H * 0.5, '#151210');

@@ -240,7 +240,7 @@ DATA.maja = {
         { from: '22:58', to: '23:58', place: 'huta', text: 'Ostatni sygnał: *23:58* · dokładność 12 m', last: true }
       ]
     },
-    { day: '2026-10-24', unlock: 'maja:sync1', items: [{ from: '03:05', to: '03:07', place: 'las', text: 'Telefon online przez 2 minuty · dokładność ±800 m', last: true }] }
+    { day: '2026-10-24', unlock: 'maja:sync1', items: [{ from: '03:05', to: 'chwilę później', place: 'las', text: 'Krótki kontakt z siecią · kopia dostępna po zakończeniu · dokładność ±800 m', last: true }] }
   ],
 
   mail: [

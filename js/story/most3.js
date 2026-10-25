@@ -33,13 +33,13 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xLicznik', [
       pause(2500),
-      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'Jeszcze jedno. Nagrałam to w czwartek późnym wieczorem w archiwum, jak przewijałam taśmę do zaników przed wyjazdem na urodziny ciotki. Nikomu tego nie pokazywałam.' }),
-      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.', { wording: 'Pani Weronika pożyczyła mi kasetę na dwie noce, żebym mogła przesłuchać zaniki w spokoju. W sobotę rano już ją miała z powrotem.' }),
+      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'W czwartek w archiwum zapamiętałam na stanowisku punkt odpowiadający 03:51 nagrania H.W. To koniec opublikowanego cięcia. Ten film pokazuje tylko przewijanie sprzętu taśmowego w archiwum, nie odczyt czasu mini-DV.' }),
+      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.', { wording: 'Kasetę H.W. pożyczyłam od pani Weroniki na dwie noce. Jej oryginał odtwarzałam na kamerze. Cyfry szpulowego urządzenia z filmu to licznik przesuwu, nie minuty tej kasety.' }),
       say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
-      Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
+      Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.', { wording: 'Stanowisko zatrzymuje przewijanie na zapamiętanym punkcie. Dioda potwierdza dojście do znacznika. Co z tego wynika, skoro w pełnym odsłuchu po 03:51 Henryk mówi dalej?' }),
       choose('marta', [
-        opt('Stare kamery same się wyłączają na końcu taśmy.', [Ma('Wiem. Tylko że to nie był koniec taśmy. Licznik stanął na 03:51, dokładnie tam, gdzie urywa się fragment z publikacji.')]),
-        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { wording: 'Niech pani tam nie siedzi sama po nocach.', trust: { marta: 1 } })
+        opt('Stare kamery same się wyłączają na końcu taśmy.', [Ma('Wiem. Tylko że to nie był koniec taśmy. Licznik stanął na 03:51, dokładnie tam, gdzie urywa się fragment z publikacji.', { wording: 'Tak. Sama zapamiętałam ten punkt do porównań. Po wyłączeniu pamięci można przewijać dalej. Zatrzymanie sprzętu nie oznacza końca ani uszkodzenia nagrania.' })], { wording: 'To twój znacznik miejsca cięcia. Nagranie dalej działa.' }),
+        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.', { wording: 'Nie: w pełnym odsłuchu Henryk mówi dalej i nadal słychać lodówkę. To zapamiętany przeze mnie punkt do porównania z publikacją. Można go wyłączyć.' })], { wording: 'Może to koniec albo uszkodzenie taśmy?', trust: { marta: 1 } })
       ]),
       pause(4000),
       callIn('natan'),

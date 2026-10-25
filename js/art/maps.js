@@ -88,7 +88,7 @@
     }
   }));
   D('map_circle', Object.assign({}, M, {
-    draw: k => k.circle(800, 290, 125, '#e88aa2', 'opacity=".16"') + k.circle(800, 290, 125, 'none', 'stroke="#e88aa2" stroke-width="4"') + k.circle(800, 290, 6, '#e88aa2') + label(k, 800, 438, '24.10, 03:07 · ±800 m', 13, '#ff9aa8')
+    draw: k => k.circle(800, 290, 125, '#e88aa2', 'opacity=".16"') + k.circle(800, 290, 125, 'none', 'stroke="#e88aa2" stroke-width="4"') + k.circle(800, 290, 6, '#e88aa2') + label(k, 800, 438, '24.10, od 03:05 · ±800 m', 13, '#ff9aa8')
   }));
 
   // Wycinek lasu: środek kadru = środek okręgu (800,290). Skala 2×.
