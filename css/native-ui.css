@@ -266,9 +266,9 @@ html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msg
 .msgapp-klipo .hdr h1 { color:#22d3c5; }
 .chat.skin-klipo .msg.me .bub { background:#0b8a9a; color:#fff; }
 /* Kadr */
-.kadr-app .kd-stories { display:flex; gap:12px; overflow-x:auto; padding:4px 2px 14px; scrollbar-width:none; }
+.kadr-app .kd-stories { display:flex; overflow-x:auto; padding:8px 14px 12px; gap:14px; border-bottom:1px solid var(--line); scrollbar-width:none; }
 .kd-sc { flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:0; color:var(--tx); }
-.kd-sc .av { outline:2.5px solid #ff7a59; outline-offset:2px; }
+.kd-sc .av { outline:2.5px solid #e1306c; outline-offset:2px; }
 .kd-sc.seen .av { outline-color:#9996; }
 .kd-sc small { font-size:11px; max-width:68px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .kd-post { margin:0 0 18px; }
@@ -305,3 +305,15 @@ body.os-android .delivery.seen::before { content:''; }
 .skin-gadka .delivery:not(.seen) { color:var(--tx2); }
 /* Na ekranie głównym toast nie wchodzi na dok ani na „Szukaj”. */
 #screen:has(> #home:not(.behind)) > #toasts { bottom: calc(204px + var(--safe-b)); }
+/* Kadr: post od krawędzi do krawędzi, nagłówek z lewej, pasek akcji jak w aplikacji ze zdjęciami. */
+.kadr-app .kd-ph { box-sizing:border-box; padding:10px 14px 8px; justify-content:flex-start; }
+.kadr-app .kd-ph b { font-size:14px; font-weight:600; }
+.kadr-app .kd-ph > .av { margin-left:0; width:32px; height:32px; }
+.kadr-app .kd-ph > span:last-child { margin-left:auto; }
+.kadr-app .kd-pimg { border-radius:0; background:#000; }
+.kadr-app .kd-pimg img { aspect-ratio:4/5; }
+.kadr-app .kd-act { display:flex; align-items:center; gap:14px; padding:8px 12px 2px; }
+.kadr-app .kd-act button,.kadr-app .kd-act .kd-ic { background:none; border:0; padding:2px; color:var(--tx); display:flex; }
+.kadr-app .kd-like.on { color:#ff3040; }
+.kadr-app .kd-like.on svg { fill:currentColor; }
+.kadr-app .kd-post p { padding:0 14px; margin:4px 0; }

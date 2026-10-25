@@ -56,7 +56,11 @@
         pg.body.append(h('div', { class: 'kd-feed' }, posts.map(({ k, f }) => h('article', { class: 'kd-post' },
           h('button', { class: 'kd-ph', onclick: () => UI.openApp('browser', { page: 'kadr:' + k }) }, UI.avatar(DATA.kadr[k].av, 'sm'), h('b', {}, k), h('span', {}, f.date)),
           h('button', { class: 'kd-pimg', 'aria-label': 'Zdjęcie', onclick: () => UI.viewImage(f.art, { title: k }) }, h('img', { src: Art.url(f.art), alt: '', loading: 'lazy' })),
-          h('p', {}, h('b', {}, f.likes + ' polubień'), ' ', U.tpl(f.text || ''))))));
+          h('div', { class: 'kd-act' },
+            h('button', { class: 'kd-like', 'aria-label': 'Polub', 'aria-pressed': 'false', html: U.icon('heart', 25), onclick: e => { const b = e.currentTarget, on = b.classList.toggle('on'); b.setAttribute('aria-pressed', String(on)); const n = b.closest('.kd-post').querySelector('.kd-likes b'); if (n) n.textContent = (f.likes + (on ? 1 : 0)) + ' polubień'; } }),
+            h('button', { 'aria-label': 'Komentarze', html: U.icon('chat', 24), onclick: () => UI.openApp('browser', { page: 'kadr:' + k }) }),
+            h('span', { class: 'kd-ic', 'aria-hidden': 'true', html: U.icon('send', 23) })),
+          h('p', { class: 'kd-likes' }, h('b', {}, f.likes + ' polubień')), h('p', {}, h('b', {}, k), ' ', U.tpl(f.text || ''))))));
       }
       render();
       stack.push({ el: pg.el, onShow: render });

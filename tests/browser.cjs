@@ -17,7 +17,11 @@ try {
   await page.getByPlaceholder('Twoje imię').fill('Alex');
   await page.locator('.su-o').first().click();await page.getByRole('button',{name:'Gotowe',exact:true}).click();
   await page.locator('.lk-u').waitFor({state:'visible'});await page.locator('.lk-u').click({force:true});
-  await page.waitForFunction(()=>G.s.chats.kuba?.msgs.length>=2);
+  // Otwarcie: najpierw grupa Ekipa i film jednorazowy, dopiero potem pisze Kuba.
+  await page.evaluate(()=>UI.openApp('messages',{chat:'ekipa'}));
+  await page.locator('.snap-tile:not(.opened)').click();await page.waitForFunction(()=>G.flag('sawSnap'),null,{timeout:20000});
+  await page.locator('.composer .opt').first().click();
+  await page.waitForFunction(()=>G.s.chats.kuba?.msgs.length>=2,null,{timeout:45000});
   await page.evaluate(()=>UI.openApp('messages',{chat:'kuba'}));
   await page.locator('.composer .opt').first().waitFor();
   await page.locator('.composer .opt').first().click();
@@ -43,7 +47,7 @@ try {
   G.viewing='ola';G.post('ola',{from:'ola',text:'Daj znać, jak coś znajdziesz.'});
   G.markRead('ola');G.chat('kuba').unread=1;G.viewing=null;UI.openApp('messages');
  });
- const rows=page.locator('.conversation-list .crow');assert.equal(await rows.count(),4);
+ const rows=page.locator('.conversation-list .crow');assert.equal(await rows.count(),2); // SMS: Kuba i Maja; Ola i grupa są w Gadce
  await page.getByRole('searchbox',{name:'Szukaj rozmowy'}).fill('KUBA');assert.equal(await rows.count(),1);
  await page.getByRole('searchbox',{name:'Szukaj rozmowy'}).fill('nieistniejąca');assert.equal(await rows.count(),0);
  await page.getByRole('searchbox',{name:'Szukaj rozmowy'}).fill('');
@@ -68,7 +72,7 @@ assert.ok(await page.locator('.photo-av, .av img[src*="assets/people/"]').count(
  });
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  await page.evaluate(()=>G.loadCheckpoint('prolog'));
- assert.equal(await page.evaluate(()=>G.s.v),7);
+ assert.equal(await page.evaluate(()=>G.s.v),16); // aktualna wersja zapisu (state.js)
  assert.equal(await page.evaluate(()=>Engine.chapters.prolog.steps[G.s.pc].self),'c36');
  console.log('PASS legacy save and checkpoint migration');passed++;
  const timing=await page.evaluate(async()=>{

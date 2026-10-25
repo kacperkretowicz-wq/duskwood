@@ -956,3 +956,8 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Domyślna tapeta (id `forest`, nazwa „Mglisko o zmroku”) to teraz `assets/wall-mglisko.jpg`: amatorskie zdjęcie z telefonu, widok ze ścieżki nad miasteczkiem o zmroku (Codex image_gen + realism-post --night 0.4). Stary kadr „Mgła” (koncept-art z fabryką) został tylko na ekranie tytułowym.
 - Toast „Zainstalowano: …” na ekranie głównym nie zasłania już doku ani przycisku „Szukaj”.
 - Awatar grupy: biała obwódka i poprawna specyficzność w nagłówku iOS (wcześniej oba kółka nakładały się w jedno).
+
+### 2026-10-25 — v114: Kadr jak natywna aplikacja ze zdjęciami, testy
+- Kadr: post od krawędzi do krawędzi (4:5), nagłówek z lewej, pasek akcji (serce z licznikiem polubień, komentarze → profil, wyślij), podpis „login treść”, relacje z obwódką i separatorem.
+- tests/browser.cjs dostosowany do otwarcia z Ekipą (film jednorazowy przed Kubą), podziału SMS/Gadka i zapisu v16.
+- Pełne e2e iOS + Android (31 rozdziałów, S1–S5, pięć finałów, offline) PASS; wszystkie testy przeglądarkowe i npm 97/97 PASS.
