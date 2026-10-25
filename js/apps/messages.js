@@ -88,8 +88,19 @@
       } }, label);
       tabs.appendChild(button);
     });
-    const caseCard = h('button', { class: 'case-card', onclick: () => stack.push(chatPage(stack, 'maja')) },
-      UI.avatar('maja'), h('div', {}, h('small', {}, 'ZAGINIONA / 14 PAŹDZIERNIKA'), h('b', {}, 'Maja Wrona'), h('span', {}, 'Ostatnie połączenie było do ciebie.')), U.ico('back', 16));
+    const caseCard = h('button', { class: 'case-card', onclick: () => stack.push(chatPage(stack, 'maja')) });
+    // Nazwisko i karta „zaginiona” dopiero po zdarzeniu fabularnym (rename / knowMaja). Wcześniej widać numer.
+    const majaKnown = () => G.flag('knowMaja') || !!((G.s.chats.maja || {}).avatar === 'maja');
+    function fillCaseCard() {
+      const known = majaKnown();
+      caseCard.replaceChildren(
+        UI.avatar(known ? 'maja' : 'unknown'),
+        h('div', {},
+          h('small', {}, known ? 'ZAGINIONA / 14 PAŹDZIERNIKA' : 'NUMER'),
+          h('b', {}, known ? 'Maja Wrona' : '+48 731 402 118'),
+          h('span', {}, known ? 'Ostatnie połączenie było do ciebie.' : 'Nie ma w kontaktach.')),
+        U.ico('back', 16));
+    }
     const list = h('div', { class: 'chatlist' });
     const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
@@ -113,6 +124,7 @@
     function render() {
       renderPeople();
       caseCard.hidden = app !== 'messages' || !G.isUnlocked('chat:maja');
+      if (!caseCard.hidden) fillCaseCard();
       const sideCount = Conversations.available().length;
       sideEntry.hidden = app !== 'gadka' || !G.isUnlocked('chat:group');
       sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';

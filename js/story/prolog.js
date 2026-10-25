@@ -2,7 +2,7 @@
 /* PROLOG — Nieodebrane */
 
 Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 października · 21:03', mood: 'calm' }, D => {
-  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title, scene } = D;
+  const { say, pic, sys, pause, choose, opt, show, waitFor, openChat, goal, give, unlock, set, iff, rename, run, fx, typing, end, title, scene, notify } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const g = (who, t, o) => say('group', who, t, o);
   const sz = (t, o) => say('szklarz', 'szklarz', t, o);
@@ -83,6 +83,12 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       hints: [{ after: 45, chat: 'kuba', who: 'kuba', text: 'i co? jest coś jeszcze?' }]
     }),
     iff('ev:ev_missed', [give('ev_sms_maja')], [give('ev_missed')]),
+    /* Telefon sam próbuje wczytać podgląd zdjęć z SMS-a. Widać tylko urwaną kopię, bez huty i bez logowania. */
+    scene('xPodglad', [
+      sys('maja', 'Podgląd zdjęć niedostępny. Nimbus urwał kopię urządzenia 14.10.2026 o 23:58.'),
+      give('ev_backup_cut'),
+      notify({ app: 'messages', title: '+48 731 402 118', text: 'Podgląd zdjęć niedostępny. Nimbus urwał kopię 14.10.2026 o 23:58.', sound: 'notif', open: { chat: 'maja' } })
+    ]),
     K('i co? masz coś?'),
     show('kuba', {
       prompt: 'Pokaż Kubie, co {znalazłeś|znalazłaś}',
@@ -127,6 +133,11 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     K('ej. to jest TWÓJ numer', { gap: 200, typing: 600 }),
     fx('heartbeat'),
     set('knowNumber'),
+    /* Telefon sam zestawia stopkę artykułu z kartą SIM. Bez nowego wyboru i bez proszenia, żeby pokazać to Kubie. */
+    scene('xKartaSim', [
+      notify({ app: 'phone', title: 'Telefon', text: 'Numer ze stopki artykułu jest numerem tej karty SIM.', sound: 'notif' }),
+      give('ev_sim_footer')
+    ]),
     choose('kuba', [
       opt('Ten numer mam od roku. Wcześniej musiał należeć do niego.', []),
       opt('Co?! To niemożliwe.', [K('sprawdź {sam|sama}. stopka artykułu')]),
@@ -168,7 +179,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     unlock('chat:group'),
     sys('group', 'Kuba utworzył grupę „Szukamy Mai 🕯️”'),
     sys('group', 'Kuba dodał: Ola, Bartek, Igor, %name%'),
-    g('kuba', 'dodałem %name%. to ta osoba, do której maja dzwoniła ostatnia'),
+    g('kuba', 'dodałem %name%. to ta osoba, do której maja dzwoniła ostatnia', { wording: 'to %name%. dodałem {go|ją}. maja dzwoniła do {niego|niej} ostatnia' }),
     g('ola', 'Kuba, serio? Nawet nie napisałeś, że kogoś dodajesz.'),
     g('bartek', 'kto to w ogole jest'),
     g('igor', 'hej %name%. igor, serwis przy rynku. trochę nerwowo tu jest, jak widać', { wording: 'hej, igor. pomagam mai ze sprzętem. kuba mówił o tym numerze' }),
