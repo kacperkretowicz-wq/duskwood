@@ -486,7 +486,7 @@ const Engine = (() => {
       case 'set': G.setFlag(st.k, st.v); return;
       case 'inc': G.inc(st.k, st.n); return;
       case 'trust': doTrust(st.who, st.n); return;
-      case 'notify': UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...st, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...st, app: DATA.chatApp(st.who) } : st); return;
+      case 'notify': if (st.wording) st = { ...st, text: st.wording }; UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...st, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...st, app: DATA.chatApp(st.who) } : st); return;
       case 'sync': {
         G.unlock(st.key);
         s.vars.nimbusNew = (s.vars.nimbusNew || 0) + (st.count || 1);

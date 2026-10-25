@@ -394,7 +394,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       pause(6000),
       clock('2026-11-27T23:44'),
       unlock('chat:blyskm2'),
-      notify({ app: 'messages', title: 'Błysk', text: 'Nowy kontakt wysyła ci zdjęcie. Zniknie po obejrzeniu.', sound: 'notif', open: { chat: 'blyskm2' } }),
+      notify({ app: 'messages', title: 'Błysk', text: 'Nowy kontakt wysyła ci zdjęcie. Zniknie po obejrzeniu.', wording: 'nowy kontakt wysyła ci zdjęcie. Zniknie po obejrzeniu.', sound: 'notif', open: { chat: 'blyskm2' } }),
       say('blyskm2', 'blyskm2', 'długo dziś siedzą w gazecie', { img: 'm_okno_redakcji', vanish: true }),
       pause(4500),
       vanish('blyskm2', 'Zdjęcie zniknęło po obejrzeniu.'),
