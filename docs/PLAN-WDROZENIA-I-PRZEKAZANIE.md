@@ -1174,3 +1174,8 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - S4: Weronika i Ola piszą wielokropek „…” jak w reszcie swoich wiadomości.
 - Narzędzie transkryptu wypisuje błędy strony (`# BŁĄD STRONY: …`), żeby wyjątki połknięte przez BUS nie umykały.
 - SW v143.
+
+### v144 — głos Mai w S3, okno w S5
+- S3: Maja kończyła 11 z 63 wiadomości kropką, w S2/S4/S5 nigdy. Kropki zdjęte w `wording` (bez listy godzin, która jest wyliczanką).
+- S5 g3: „kuba mówi, że coś się stało” — Kuba nie mógł wiedzieć o telefonie. Teraz Maja widzi z kuchni okno gracza (kawalerka naprzeciwko z S4): „widzę z kuchni twoje okno. chodzisz w kółko z telefonem. co się dzieje”.
+- SW v144.

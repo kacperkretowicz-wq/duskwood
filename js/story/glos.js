@@ -607,7 +607,7 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
     scene('scSmiech', [scare('s5_smiech', 'glitch')]),
     give('ev_g_telefon'),
     pause(2500),
-    M('kuba mówi, że coś się stało. dlaczego nie piszesz'),
+    M('kuba mówi, że coś się stało. dlaczego nie piszesz', { wording: 'widzę z kuchni twoje okno. chodzisz w kółko z telefonem. co się dzieje' }),
     M('jakie hasło?'),
     choose('maja2', [
       opt('Pachołek. Dzwonił do mnie ktoś moim głosem.', [M('kurde. ok. to ty')], { cond: 'flag:g_hasloP' }),
