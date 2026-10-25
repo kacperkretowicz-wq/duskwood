@@ -158,7 +158,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
         opt('Zrób zrzut ekranu', [
           Bl('zrobił{eś|aś} zrzut'),
           Bl('myślałam że jesteś inn{y|a}'),
-          vanish('blysk', 'Wiadomości zniknęły. mgla_24 cię zablokował(a).')
+          vanish('blysk', 'Wiadomości zniknęły. mgla_24 cię zablokował(a).', { wording: 'Wiadomości zniknęły. Konto mgla_24 cię zablokowało.' })
         ], { shot: true, set: { k_shotBlysk: true } }),
         opt('Dlaczego mówisz to mnie?', [
           Bl('bo ty pytasz zanim wrzucisz'),

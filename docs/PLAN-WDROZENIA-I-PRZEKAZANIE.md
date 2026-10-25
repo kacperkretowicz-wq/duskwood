@@ -1198,3 +1198,10 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - ch4: Bartek „a ja miałem kazać Mai zostawić go w spokoju” (niejasne; naprawdę jej to napisał 14.10) → „a ja jej napisałem żeby zostawiła starego w spokoju”.
 - Baner powiadomienia chowa się, gdy gracz sam wejdzie do tej rozmowy (wcześniej wisiał nad otwartym czatem Ekipy jeszcze kilka sekund).
 - SW v147.
+
+### v148 — czytanie S4 i S5 (tr146), komunikaty Błysku
+- Przeczytane całe S4 i S5 na v146: daty, dni tygodnia (pierniki w środę 20.01, pizza w sobotę 20.03, „w środę w pracowni” = 17.03), wiek (Tomek 38, Marta 24, jej mama 49, Oskar 17) i to, kto co wie (Marta, Kurek-Bud, Dudek, Ida Gil) zgodne.
+- S4: Ola 18.01 mówiła „jutro robimy pierniki”, a piecze je dopiero 20.01 → „w środę robimy pierniki” (wording).
+- Błysk: „X cię zablokował(a)” z nawiasem → „Konto X cię zablokowało.” / „To konto cię zablokowało.” (S2, S3, S4). `vanish()` przyjmuje teraz `{ wording }`, poza podpisem kroku, więc stare zapisy zostają.
+- S5: Maja o domowym telefonie „został tylko sygnał w naszych komórkach” (niejasne) → „teraz dzwonią już tylko komórki. ten stary w przedpokoju wreszcie milczy”.
+- SW v148.

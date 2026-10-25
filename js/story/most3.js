@@ -117,7 +117,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
         opt('Zrób zrzut ekranu', [
           IK('serio? teraz?'),
           IK('ok. to już nic nie piszę'),
-          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
+          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).', { wording: 'Wiadomości zniknęły. Konto i.k_00 cię zablokowało.' })
         ], { shot: true, set: { m_shotIda2: true } }),
         opt('Dobrze, że sama do niego idziesz.', [
           IK('nie czuję się dobrze. ale jest mi trochę lżej'),

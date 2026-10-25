@@ -344,7 +344,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
         opt('Zrób zrzut ekranu', [
           IK('zrobił{eś|aś} zrzut'),
           IK('super. czyli jednak jesteś jak oni'),
-          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
+          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).', { wording: 'Wiadomości zniknęły. Konto i.k_00 cię zablokowało.' })
         ], { shot: true, set: { m_shotIda: true } }),
         opt('Kto cię poprosił?', [
           IK('znajomy. przez telefon nie powiem'),

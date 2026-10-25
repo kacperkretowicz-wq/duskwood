@@ -97,7 +97,7 @@ const Engine = (() => {
     // Straszak: odpala się raz na zapis (s.scares), nigdy przy przewijaniu ani po wczytaniu.
     scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o }),
     nearby: (id, o = {}) => ({ t: 'nearby', id, ...o }),
-    vanish: (chat, text) => ({ t: 'vanish', chat, text }),
+    vanish: (chat, text, o = {}) => ({ t: 'vanish', chat, text, wording: o.wording }),
     camera: (chat, options, o = {}) => ({ t: 'choose', chat, options, camera: true, ...o })
   };
 
@@ -524,7 +524,7 @@ const Engine = (() => {
       case 'vanish': {
         // Znikające wiadomości: po przeczytaniu zostaje tylko informacja, że były.
         const c = s.chats[st.chat];
-        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
+        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.wording || st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
         G.change(); return;
       }
       case 'unsend': {

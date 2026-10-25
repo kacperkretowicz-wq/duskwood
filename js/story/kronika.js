@@ -64,7 +64,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       O('Hej! Pierwszy dzień ferii w świetlicy. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.', { wording: 'Hej! Pierwszy dzień w świetlicy. Na ferie biorę tam zastępstwo, apteka puściła mnie na dwa tygodnie. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.' }),
       pic('ola', 'ola', 'c_rysunek', 'Ale dostałam to. Podobno ja w zielonym swetrze 💚'),
       choose('ola', [
-        opt('Wyglądasz na szczęśliwą. I wysoką.', [O('Bo dla nich jestem wysoka 😄 Jutro robimy pierniki.')], { trust: { ola: 1 } }),
+        opt('Wyglądasz na szczęśliwą. I wysoką.', [O('Bo dla nich jestem wysoka 😄 Jutro robimy pierniki.', { wording: 'Bo dla nich jestem wysoka 😄 W środę robimy pierniki.' })], { trust: { ola: 1 } }),
         opt('A gdzie kostka?', [O('Podobno zjadł ją pies Kacpra. W co nikt nie wierzy, bo Kacper nie ma psa.')])
       ])
     ]),
@@ -475,7 +475,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
           opt('Zrób zrzut ekranu', [
             B('zrzut. serio?'),
             B('dobra. to jutro będzie dłuższy klip'),
-            vanish('blysk2', 'Wiadomości zniknęły. Nowy kontakt cię zablokował(a).')
+            vanish('blysk2', 'Wiadomości zniknęły. Nowy kontakt cię zablokował(a).', { wording: 'Wiadomości zniknęły. To konto cię zablokowało.' })
           ], { shot: true, set: { c_shotBlysk: true } }),
           opt('Czego chcesz?', [
             B('żeby ktoś w końcu zobaczył całe miasto. nie tylko mnie'),

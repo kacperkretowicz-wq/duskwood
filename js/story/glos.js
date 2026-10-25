@@ -522,7 +522,7 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
       M('rano. hasło. wiem, wiem. przyzwyczajam się'),
       ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('dzięki. dziś mam zajęcia do 15. potem pomagam mamie z oknami')])])]),
       M('kuba mówi, że w nocy ktoś dzwonił na domowy. nikt nie odebrał. mama wyciągnęła kabel'),
-      M('jak w latach 90. domowy bez kabla', { wording: "został tylko sygnał w naszych komórkach. ten w przedpokoju wreszcie milczy" }),
+      M('jak w latach 90. domowy bez kabla', { wording: 'teraz dzwonią już tylko komórki. ten stary w przedpokoju wreszcie milczy' }),
       choose('maja2', [
         opt('Dobrze zrobiła. Nikt ważny nie dzwoni na domowy w nocy.', [M('nikt w ogóle nie dzwoni na domowy. tylko ankiety i babcia')]),
         opt('Ktoś dzwonił na domowy? Czyli ma też wasz stary numer.', [M('jest w książce telefonicznej od zawsze. wrona, mglisko. każdy go ma')])
