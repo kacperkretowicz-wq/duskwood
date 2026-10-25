@@ -311,8 +311,9 @@ html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msg
 .av.av-duo > .av:first-child { left:0; top:0; }
 .av.av-duo > .av:last-child { right:0; bottom:0; }
 /* Potwierdzenia: główki „wyświetlono” w Gadce, „Otwarto” w Błysku */
-.delivery.seen { display:inline-flex; gap:2px; align-items:center; }
-.delivery .av.seen-av { width:14px; height:14px; margin:0; }
+.delivery { height:14px; line-height:14px; }
+.delivery.seen { display:inline-flex; gap:2px; align-items:center; height:14px; }
+.delivery .av.seen-av { width:14px; height:14px; margin:0; flex:none; }
 body.os-android .delivery.seen::before { content:''; }
 .skin-blysk .delivery.seen { color:#ffd84d; font-weight:600; }
 .skin-gadka .delivery:not(.seen) { color:var(--tx2); }
