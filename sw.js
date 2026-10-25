@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v154';
+const VERSION = 'quiet-is-safer-v155';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -51,7 +51,15 @@ self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 // Odpowiedź częściowa (Range) z pełnego pliku w pamięci — iOS Safari nie odtworzy wideo offline bez 206.
-async function rangeFrom(cached, range) {
+function videoType(cached, url) {
+  const got = cached.headers.get('Content-Type') || '';
+  if (got.startsWith('video/')) return got.split(';')[0];
+  const path = url || cached.url || '';
+  if (/\.webm($|\?)/i.test(path)) return 'video/webm';
+  if (/\.mp4($|\?)/i.test(path)) return 'video/mp4';
+  return got || 'application/octet-stream';
+}
+async function rangeFrom(cached, range, url) {
   const buf = await cached.arrayBuffer();
   const m = /bytes=(\d*)-(\d*)/.exec(range || '');
   let start = m && m[1] ? +m[1] : 0, end = m && m[2] ? +m[2] : buf.byteLength - 1;
@@ -59,14 +67,14 @@ async function rangeFrom(cached, range) {
   end = Math.min(end, buf.byteLength - 1);
   if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${buf.byteLength}` } });
   return new Response(buf.slice(start, end + 1), { status: 206, headers: {
-    'Content-Type': cached.headers.get('Content-Type') || 'video/mp4',
+    'Content-Type': videoType(cached, url),
     'Content-Range': `bytes ${start}-${end}/${buf.byteLength}`, 'Content-Length': String(end - start + 1), 'Accept-Ranges': 'bytes' } });
 }
 async function fromCache(req) {
   const hit = await caches.match(req, { ignoreSearch: true });
   if (hit) {
     const range = req.headers.get('range');
-    return range && hit.status === 200 ? rangeFrom(hit, range) : hit;
+    return range && hit.status === 200 ? rangeFrom(hit, range, req.url) : hit;
   }
   if (req.mode === 'navigate') return caches.match('./index.html');
   return Response.error();

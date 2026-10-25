@@ -57,11 +57,25 @@
         });
         content.appendChild(list);
       }
+      function stampDay(t) { return U.dateNum(t).slice(0, 5).replace(/^0/, ''); }
+      // Zanim gracz pozna Maję, telefon sam zestawia nieodebrane z SMS-em. Bez nazwiska i bez „zaginiona”.
+      function majaTrace(entry) {
+        if (!entry || entry.who !== 'maja' || G.flag('knowMaja')) return '';
+        const calls = G.s.calls.filter(c => c.who === 'maja' && c.dir === 'missed').sort((a, b) => a.t - b.t);
+        if (!calls.length) return '';
+        const sms = ((G.s.chats.maja || {}).msgs || []).find(m => m.from === 'maja' && m.text);
+        const times = calls.map(c => `${stampDay(c.t)} · ${U.time(c.t)}`).join(' i ');
+        const smsBit = sms ? ` W Wiadomościach jest od tego numeru SMS z ${stampDay(sms.t)}, ${U.time(sms.t)}.` : '';
+        return `Ten numer dzwonił ${calls.length === 1 ? 'raz' : calls.length + ' razy'}: ${times}.${smsBit}`;
+      }
       function detail(c) {
+        const face = c.who === 'maja' && !G.flag('knowMaja') ? 'unknown' : (c.who || 'unknown');
+        const trace = majaTrace(c);
         const body = h('div', {},
           h('div', { style: 'display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 18px' },
-            UI.avatar(c.who || 'unknown', 'lg'), h('b', { style: 'font-size:20px' }, nameFor(c)),
+            UI.avatar(face, 'lg'), h('b', { style: 'font-size:20px' }, nameFor(c)),
             h('span', { style: 'color:var(--tx3);font-size:13px' }, `${U.dateNum(c.t)}, ${U.time(c.t)}${c.dur ? ' · ' + U.dur(c.dur) : ''}`)),
+          trace ? h('p', { style: 'color:var(--tx2);font-size:14px;line-height:1.45;margin:0 4px 8px' }, trace) : null,
           c.lines && c.lines.length ? h('div', { class: 'transcript' }, h('div', { class: 'sec-t' }, 'Zapis rozmowy'), c.lines.map(l => h('p', { html: `<b>${l.from === 'me' ? 'Ty' : U.esc((DATA.chars[l.from] || {}).short || l.from)}:</b> ${U.rich(l.text || '')}` }))) : null,
           h('div', { class: 'pad', style: 'margin-top:14px' }, h('button', { class: 'btn pri wide', onclick: () => { sh.close(); call(c.number || (DATA.chars[c.who] || {}).number); } }, U.ico('phone', 18), 'Zadzwoń')));
         const sh = UI.sheet({ title: 'Połączenie', body });

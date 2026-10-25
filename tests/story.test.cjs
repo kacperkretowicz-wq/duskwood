@@ -129,6 +129,15 @@ test('every wording written in story sources reaches a compiled step or option',
   assert.deepEqual(miss,[]);
 });
 
+test('w grupie imię gracza nie stoi w mianowniku po „dodałem” ani „głosem”',()=>{
+  const {chapters}=stories();
+  const added=chapters.prolog.steps.find(s=>s.chat==='group'&&s.who==='kuba'&&/dodałem/.test(s.wording||''));
+  assert.ok(added);assert.match(added.wording,/\{go\|ją\}/);assert.doesNotMatch(added.wording,/dodałem %name%/);
+  const voice=chapters.g1.steps.find(s=>/brzmi jak %name%/.test(s.wording||''));
+  assert.ok(voice);assert.doesNotMatch(voice.text,/brzmi jak/);
+  const toast=chapters.g6.steps.find(s=>s.wording==='%name%. za normalną sobotę');
+  assert.ok(toast);
+});
 test('godzina na karcie rozdziału zgadza się z pierwszym zegarem rozdziału', ()=>{
   const {chapters} = stories(); const bad = [];
   for (const [id, c] of Object.entries(chapters)) {
