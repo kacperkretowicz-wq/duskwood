@@ -986,3 +986,10 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 - Cel z `waitFor` po spełnieniu znika z „Co teraz?” (widżet i Notatki mówią „Sprawdź wiadomości”), np. po obejrzeniu filmu od Ady widżet nie każe go już otwierać.
 - Klip snap (nowa wersja z wyraźniejszą postacią na końcu ścieżki): wstrzymany — Krea zwraca 402 INSUFFICIENT_BALANCE (brak środków na generację obrazów i wideo). Obecny v_snap (v109) zostaje.
 - Test return-lock rozszerzony o stos powiadomień i datę na blokadzie.
+
+### 2026-10-25 — v118: listy Gadki i Błysku jak natywne + dwa zdjęcia na nowo
+- Gadka: nad listą rozmów pasek osób (jak w popularnym komunikatorze) — ostatnie rozmowy 1:1, zielona kropka tylko gdy ktoś właśnie pisze albo pisał w ostatnich 10 minutach gry. Dotknięcie otwiera rozmowę. Grupy nie wchodzą do paska.
+- Błysk: lista nie pokazuje treści (jak w aplikacji ze znikającymi wiadomościami), tylko status z kwadratem: „Nowa wiadomość” (pełny), „Otwarto” (pusty), „Wysłano” (strzałka) + czas.
+- Zdjęcia (Codex image_gen + realism-post): `m_ola_lake` — wcześniej wygładzone, „AI-owe” selfie; teraz zwykłe selfie z przedniej kamery pod słońce (Ola z niekorzystnej strony, zgodnie z podpisem „wyszła jak ziemniak”), pion 4:5 pasuje do postu w Kadrze. `c_zenon_kamera` („Festyn, 2005”) — wcześniej współczesna kamera kinowa, rozmyta plama na szyldzie i angielskie „…ADE”, Zenon nie na scenie; teraz zdjęcie z kompaktu z 2005 (data w rogu, flesz w dzień), Zenon ~50 lat na scenie z kamerą, zgodnie z „stawał na scenie, bo stamtąd widać wszystkich”.
+- `m_mem_radio` („pies naczelnego… dział dźwięku po 22”, od Natana): wcześniej pies na radiu w pokoju babci z serwetkami — sprzeczne z redakcją; teraz zdjęcie z fleszem w nocnej redakcji (pies na radiu obok miksera i słuchawek).
+- Nowy test: tests/chat-apps.browser.cjs (320 i 390 px, brak przepełnień).

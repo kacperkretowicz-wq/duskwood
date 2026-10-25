@@ -256,9 +256,22 @@ body.ts-xl .bub,body.ts-xl .msg.them .bub{font-size:21.5px}body.ts-xl .composer 
 /* Gadka */
 .msgapp-gadka .hdr h1 { color:#2fa58a; }
 .msgapp-gadka .crow.unread b { color:#2fa58a; }
+.gd-people { display:flex; gap:14px; overflow-x:auto; padding:2px 16px 12px; scrollbar-width:none; }
+.gd-people::-webkit-scrollbar { display:none; }
+.gd-p { flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:0; padding:0; color:var(--tx); width:60px; position:relative; }
+.gd-p .av { width:56px; height:56px; }
+.gd-p small { font-size:12px; color:var(--tx2); max-width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.gd-p.on::after { content:""; position:absolute; top:41px; right:3px; width:14px; height:14px; border-radius:50%; background:#31a24c; border:2.5px solid var(--bg, #fff); box-sizing:border-box; }
 /* Błysk: ciemny, żółty akcent */
 html body .app.msgapp-blysk, html body .app.msgapp-blysk .pg, html body .app.msgapp-blysk .hdr, html body .app.msgapp-blysk .body { --bg:#0f0f13; --scr:#0f0f13; --s1:#18181e; --s2:#202028; --s3:#2a2a33; --s4:#33333d; --line:#ffffff12; --line2:#ffffff1f; --tx:#f2f2f5; --tx2:#9a9aa6; --tx3:#6c6c78; --acc:#ffd84d; --them:#24242c; background-color:#0f0f13; color:#f2f2f5; }
 .msgapp-blysk .hdr h1 { color:#ffd84d; }
+.bl-st { display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--tx2); }
+.bl-st i { width:11px; height:11px; border-radius:2.5px; border:2px solid #4fa3ff; box-sizing:border-box; flex:none; }
+.bl-st.bl-new { color:#4fa3ff; font-weight:600; }
+.bl-st.bl-new i { background:#4fa3ff; }
+.bl-st.bl-sent i { border:0; border-radius:0; width:0; height:0; border-left:10px solid #4fa3ff; border-top:6px solid transparent; border-bottom:6px solid transparent; }
+.msgapp-blysk .crow .ct > span { display:none; }
+.msgapp-blysk .crow .av { border-radius:50%; outline:2px solid #ffd84d55; outline-offset:2px; }
 .chat.skin-blysk { --me:#ffd84d; }
 .chat.skin-blysk .msg.me .bub { background:#ffd84d; color:#1a1a1f; }
 .chat.skin-blysk .msg.them .bub { background:#24242c; color:#f2f2f5; }

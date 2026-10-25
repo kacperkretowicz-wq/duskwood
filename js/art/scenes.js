@@ -323,7 +323,7 @@
   });
 
   /* ================= NAD ZALEWEM / PIES ================= */
-  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg',
+  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg', w: 760, h: 953,
     title: 'Z Olą nad zalewem', exif: phone('21.09.2026', '18:42', { place: 'Zalew Mgliski, tama' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;

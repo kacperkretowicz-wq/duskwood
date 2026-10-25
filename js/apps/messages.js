@@ -93,8 +93,25 @@
     const list = h('div', { class: 'chatlist' });
     const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
-    pg.body.append(caseCard, sideEntry, search, tabs, list);
+    // Gadka jak natywny komunikator: pasek osób z rozmów; zielona kropka, gdy ktoś właśnie pisze albo pisał przed chwilą.
+    const people = h('div', { class: 'gd-people', role: 'list', 'aria-label': 'Osoby' });
+    pg.body.append(caseCard, sideEntry, search, people, tabs, list);
+    function renderPeople() {
+      people.hidden = app !== 'gadka';
+      if (people.hidden) return;
+      const ids = Object.keys(DATA.chats).filter(id => inApp('gadka', id) && !DATA.chats[id].group && G.isUnlocked('chat:' + id) && DATA.chars[id] && G.chat(id).msgs.length)
+        .sort((a, b) => (G.chat(b).last || 0) - (G.chat(a).last || 0)).slice(0, 8);
+      people.hidden = ids.length < 2;
+      people.innerHTML = '';
+      ids.forEach(id => {
+        const last = [...G.chat(id).msgs].reverse().find(m => m.from === id);
+        const on = Engine.typing(id) || (last && G.now() - last.t < 10 * 6e4);
+        people.appendChild(h('button', { class: 'gd-p' + (on ? ' on' : ''), role: 'listitem', onclick: () => stack.push(chatPage(stack, id)) },
+          UI.avatar(chatAv(id)), h('small', {}, charName(id).split(' ')[0])));
+      });
+    }
     function render() {
+      renderPeople();
       caseCard.hidden = app !== 'messages' || !G.isUnlocked('chat:maja');
       const sideCount = Conversations.available().length;
       sideEntry.hidden = app !== 'gadka' || !G.isUnlocked('chat:group');
@@ -111,7 +128,11 @@
         const p = pendingFor(id);
         let prev = '';
         if (typing) prev = h('span', { class: 'typ' }, DATA.chats[id].group ? `${charName(typing)} pisze…` : 'pisze…');
-        else if (last) {
+        else if (app === 'blysk' && last) {
+          // Błysk jak natywna aplikacja: zamiast treści status (nowa / otwarta / wysłana) z kolorowym kwadratem.
+          const st = c.unread ? ['new', 'Nowa wiadomość'] : last.from === 'me' ? ['sent', 'Wysłano'] : ['open', 'Otwarto'];
+          prev = h('span', { class: 'bl-st bl-' + st[0] }, h('i', { 'aria-hidden': 'true' }), st[1] + ' · ' + stamp(last.t));
+        } else if (last) {
           const who = last.from === 'me' ? 'Ty: ' : (DATA.chats[id].group && last.from !== 'sys' ? charName(last.from) + ': ' : '');
           prev = who + UI.preview(last);
         }
