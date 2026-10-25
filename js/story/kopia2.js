@@ -81,7 +81,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     ]),
     pause(2500),
     unlock('chat:ola'),
-    O('Bartek pisał do Ciebie? Wczoraj prawie napisał na grupie o Igorze.'),
+    O('Bartek pisał do Ciebie? Wczoraj prawie napisał na grupie o Igorze.', { wording: 'Bartek pisał do Ciebie? Znowu chciał pisać na grupie o Igorze. Ledwo go powstrzymałam.' }),
     O('Tata Bartka mówi, że w 2016 to on nie dostał pieniędzy, nie odwrotnie. Ale klip jest ucięty w takim miejscu, że brzmi, jakby to on oszukał.'),
     O('Znowu ucięty. Jak z Henrykiem.'),
     pause(3000),
@@ -438,7 +438,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     K('w październiku. imię psa, pierwszy aparat. pisał{eś|aś} mi na bieżąco, a ja patrzyłem', { wording: 'w październiku sam ci wysyłałem pytania. imię psa, pierwszy aparat. pomyślałem, że u pana adama też mogą być odpowiedzi do znalezienia' }),
     K('pan adam miał „pierwsza redakcja”. jest w nekrologu. „ulica dzieciństwa” była na fiszce. pani weronika mi ją sama pokazała', { wording: 'u pana adama było „pierwsza redakcja”, znalazłem w nekrologu. ulicę dzieciństwa miał na fiszce. pani weronika pokazała mi kartki, a ja zapamiętałem odpowiedź' }),
     K('weszło za drugim razem'),
-    iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej'), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
+    iff(s => G.flag('k_peronOk') || G.flag('k_veraCall') || G.flag('k_peronTold'), [K('ale zdjęcie z peronu to nie ja. byłem w magazynie do szóstej', { wording: 'ale zdjęcie z peronu to nie ja. po nocce zostałem na inwentaryzacji do dziewiątej. kierownik ma mnie na liście' }), K('i ta lampa w czytelni, o której mówiła pani weronika, też nie. wyszedłem o siódmej')]),
     K('zdjęcie okna też ja. szedłem z dyżuru', { wording: 'a zdjęcie okna to już ja. szedłem z dyżuru' }),
     K('chciałem żebyście przestali szukać w pudle. pani weronika się przestraszyła. usunąłem po sześciu minutach', { wording: 'chciałem was odciągnąć od pudła. potem zobaczyłem, że zgasiła światło i nie wychodzi. usunąłem po sześciu minutach' }),
     scene('xKubaPrzerwa', [
@@ -506,7 +506,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       O('Hej. Jak się trzymasz po dzisiejszym dniu?'),
       O('Ja właśnie wróciłam z pracy. Na jutro mam do zrobienia jeszcze sałatkę i choinkę, a lampki znowu nie działają. Co roku to samo.'),
       choose('ola', [
-        opt('Przedłużacz. Zawsze winny jest przedłużacz.', [O('Sprawdziłam. Był przedłużacz.'), O('Jesteś lepsz{y|a} niż serwis Igora 😄')]),
+        opt('Przedłużacz. Zawsze winny jest przedłużacz.', [O('Sprawdziłam. Był przedłużacz.'), O('Jesteś lepsz{y|a} niż serwis Igora 😄', { wording: 'Tata szukał w bezpiecznikach od obiadu 😄' })]),
         opt('Nie najlepiej. Ale dzięki, że pytasz.', [O('Nie musisz mówić. Jutro będzie spokojniej. Mam nadzieję.')])
       ])
     ]),

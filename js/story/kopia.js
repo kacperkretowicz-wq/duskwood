@@ -192,7 +192,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     I('i zanim ktoś zapyta: nie. ja tego nie robię'),
     I('wiem, jak to brzmi po szklarzu'),
     choose('igor', [
-      opt('Nie {pytałem|pytałam}. Ale dzięki, że mówisz wprost.', [I('bartek zapytał. na grupie. dwa razy')], { trust: { igor: 1 } }),
+      opt('Nie {pytałem|pytałam}. Ale dzięki, że mówisz wprost.', [I('bartek zapytał. na grupie. dwa razy', { wording: 'bartek już wrzucił na grupę, co ludzie o mnie piszą. a potem zapytał prywatnie. dwa razy' })], { trust: { igor: 1 } }),
       opt('Gdzie byłeś wczoraj wieczorem?', [I('w serwisie do 22. mam kasę fiskalną i dwóch klientów. możesz sprawdzić'), I('rozumiem, że pytasz')], { set: { k_askedIgorAlibi: true } })
     ]),
     I('jeśli nagrywał telefonem, mógł mieć kopię w nimbusie. telefony robią to same, w nocy, na ładowarce. jak ktoś tego nie wyłączył', { wording: 'sprawdziłbym nimbusa. jeśli miał włączone kopie nagrań, mogły tam pójść automatycznie, kiedy podłączał telefon na noc' }),

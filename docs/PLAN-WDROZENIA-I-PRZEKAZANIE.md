@@ -1050,3 +1050,10 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 - Epizod z panem Henrykiem: gracz mówił do Sylwii na „ty” → „Proszę mu przekazać…”, „Proszę mu niczego nie obiecywać…” (spójnie z v126).
 - Epilog: Weronika pisze w sobotę 14.11 „pochowaliśmy w sobotę” → „w zeszłą sobotę”; wiadomość Mai o pudle w jej stylu (małe litery).
 - Wszystko przez `wording`. SW v128.
+
+### v129 — ciągłość S3 (Kopia)
+- Igor: „bartek zapytał. na grupie. dwa razy” kłóciło się z grupą (Bartek tylko przytoczył plotkę) → „bartek już wrzucił na grupę, co ludzie o mnie piszą. a potem zapytał prywatnie. dwa razy”.
+- Ola (k2): „Wczoraj prawie napisał na grupie o Igorze” — już napisał dzień wcześniej → „Znowu chciał pisać na grupie o Igorze. Ledwo go powstrzymałam.”
+- Kuba: alibi na zdjęcie z peronu (8:46) „w magazynie do szóstej” niczego nie wykluczało → inwentaryzacja po nocce do dziewiątej.
+- Ola (k4) powtarzała żart Kuby o „serwisie Igora” → własna kwestia o tacie i bezpiecznikach.
+- Wszystko przez `wording`. SW v129.
