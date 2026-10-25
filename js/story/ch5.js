@@ -38,7 +38,7 @@ Engine.chapter('ch5', { num: 5, title: 'Światło', when: 'Sobota, 24 październ
         pause(2500),
         scare('s1_hand', 'face', { img: 'c1_0061', caption: 'CAM-01 · NA ŻYWO · sygnał utracony' }),
         igorSays('ktoś zasłonił kamerę ręką. sygnał padł'),
-        igorSays('on wie, że patrzymy', { wording: 'znalazł ją. ostatni plik jest zapisany, nie usuwaj go' })
+        igorSays('on wie, że patrzymy', { wording: 'znalazł kamerę. ostatni plik zdążył się zapisać, nie usuwaj go' })
       ]),
       show('group', { prompt: 'Pokaż zdjęcie z kamery', accept: [{ ev: ['ev_jerrycans'] }], wrong: [['ola', 'Co pokazuje kamera przy hucie?']] })
     ]),

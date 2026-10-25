@@ -230,7 +230,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
         opt('Prawie. Ty też powinieneś.', [say('kuba', 'kuba', 'wiem. jeszcze chwila')])
       ]),
       pause(2500),
-      say('kuba', 'kuba', 'dobra. jakby co, mam dźwięk na maksa. serio')
+      say('kuba', 'kuba', 'dobra. jakby co, mam dźwięk na maksa. serio', { wording: 'dobra. spróbuję zamknąć oczy. telefon mam pod poduszką' })
     ]),
     clock('2026-10-22T02:13'),
     ambient('tense'),

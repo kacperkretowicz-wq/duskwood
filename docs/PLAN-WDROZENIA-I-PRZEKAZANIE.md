@@ -1062,3 +1062,12 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 - g1: Maja „Ktoś mi właśnie przesłał przez przesyłanie w pobliżu” (tautologia) → „Jakiś telefon obok wysłał mi przed chwilą zdjęcie. Przez przesyłanie w pobliżu.” (ta sama nazwa co w UI i dowodach).
 - g3: Igor „pierwszy raz od lutego” sugerowało, że Oskar zaczął w lutym (luty to data telefonu Idy) → „pierwszy raz, odkąd u mnie jest”.
 - Wszystko przez `wording`. SW v130.
+
+### v131 — świeży przegląd ciągłości S1 (transkrypty na b2d9b50, v130)
+- Transkrypty S1–S5 odświeżone na v130: wszystkie sezony dochodzą do końca, bez STUCK.
+- ch1: Kuba dwa razy pisał „mam dźwięk na maksa” (przed północą i o 1:48) → druga kwestia: „spróbuję zamknąć oczy. telefon mam pod poduszką”.
+- ch3: Weronika mówiła „Jeśli to nagranie jest w jej telefonie…”, choć grupa właśnie ustaliła, że jest w dyktafonie → „Proszę go posłuchać. Ja nie dam rady drugi raz.”; „Maja nagrywała naszą rozmowę” powtarzało jej poprzednią kwestię → „Na tamtym nagraniu są imiona…”; opcja gracza „Czy możemy jej odsłuchać?” → „posłuchać”.
+- ch4: „Ja zostaję z panią Ewą” zaraz po sztolni „Ewa” było mylące → „Ja zostaję u Wronów. Ktoś musi być przy mamie Kuby.”
+- ch5: Igor „znalazł ją” (dwuznaczne: kamera czy Maja?) → „znalazł kamerę. ostatni plik zdążył się zapisać”.
+- P7 / długość ch3: rozdział ma już dwie przerwy rytmu (`s1_plate` po tablicy, `s1_sync` przed nocnym SMS-em), więc w trybie dziennym to trzy sesje po ~7 min. Nie dzielę go dalej; skracanie treści wymagałoby migracji zapisu, a przegląd transkryptu nie wykazał zbędnych wątków.
+- Wszystko przez `wording`. SW v131.

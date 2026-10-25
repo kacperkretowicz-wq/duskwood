@@ -100,7 +100,7 @@ const StoryScenes = D => {
       W('Proszę mi wybaczyć, że piszę tak nieskładnie.'),
       W('Pamiętam z tamtego wieczoru mało. Kaptur. Mleko, które miał kupić i nie kupił. Mama krzyczała o to mleko, a potem już nigdy o nic nie krzyczała.'),
       choose('weronika', [
-        opt('Maja nagrała z panią rozmowę 11.10. Czy możemy jej odsłuchać?', [W('Tak. Zgodziłam się wtedy, żeby Maja mnie nagrała. {Pan|Pani} też może tego posłuchać.'), W('Tylko proszę nie wrzucać tego do internetu. Mój głos w telefonach obcych ludzi… nie.')], { set: { weronikaConsent: true }, trust: { weronika: 1 } }),
+        opt('Maja nagrała z panią rozmowę 11.10. Czy możemy jej odsłuchać?', [W('Tak. Zgodziłam się wtedy, żeby Maja mnie nagrała. {Pan|Pani} też może tego posłuchać.'), W('Tylko proszę nie wrzucać tego do internetu. Mój głos w telefonach obcych ludzi… nie.')], { wording: 'Maja nagrała z panią rozmowę 11.10. Czy możemy jej posłuchać?', set: { weronikaConsent: true }, trust: { weronika: 1 } }),
         opt('Nie musi pani teraz nic więcej pisać.', [W('Dziękuję.'), W('Nagranie z Mają może {Pan|Pani} odsłuchać. Byle nie w internecie.')], { set: { weronikaConsent: true } })
       ]),
       W('Miałam wtedy dwanaście lat. Czasem już nie wiem, co sama pamiętam, a co znam z opowieści mamy.')

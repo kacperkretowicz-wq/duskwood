@@ -152,9 +152,9 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Tak. Bardzo mi przykro, pani Weroniko.', [W('Dziękuję, że {Pan|Pani} mi to mówi. Lepiej wiedzieć.')], { trust: { weronika: 1 } }),
       opt('Myślę, że on wciąż tam jest. Za tym murem.', [W('…'), W('Tak. Ja też tak myślę.')])
     ]),
-    W('Maja nagrywała naszą rozmowę. Powiedziałam jej wtedy imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.'),
+    W('Maja nagrywała naszą rozmowę. Powiedziałam jej wtedy imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.', { wording: 'Na tamtym nagraniu są imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.' }),
     W('Teraz mi się wszystko plącze. Nie chcę nikogo oskarżać na podstawie pamięci dwunastolatki.', { wording: 'Maja zapisywała nazwiska. Proszę sprawdzić, co jej wtedy powiedziałam. Teraz boję się coś pomylić.' }),
-    W('Jeśli to nagranie jest w jej telefonie…'),
+    W('Jeśli to nagranie jest w jej telefonie…', { wording: 'Proszę go posłuchać. Ja nie dam rady drugi raz.' }),
     g('kuba', 'i co? pani weronika odpisała?'),
     g('kuba', '%name%??'),
     pause(2000),
