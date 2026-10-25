@@ -27,7 +27,7 @@ const G = (() => {
     };
   }
 
-  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, volume: 0.8, os: 'auto', appearance: 'light', textSize: 'm' };
+  const defaults = { speed: 'normal', sfx: true, ambient: true, vibrate: true, autoHints: true, softScares: false, captions: true, volume: 0.8, os: 'auto', appearance: 'light', textSize: 'm' };
   function migrate(saved) {
     if ((saved.v || 1) < 2) {
       const map = STORY_MIGRATIONS[saved.chapter];

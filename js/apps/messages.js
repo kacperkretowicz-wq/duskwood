@@ -226,12 +226,16 @@
         b.appendChild(im);
       }
       if (m.snap) { b.classList.add('snap-bub'); b.appendChild(snapTile(m)); }
-      else if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
+      else if (m.vid) {
+        const v = h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' });
+        if (typeof Voices !== 'undefined') Voices.attach(v);
+        b.appendChild(v);
+      }
       if (m.vanish) { b.classList.add('vanish'); b.appendChild(h('span', { class: 'vanish-tag' }, '👁 zniknie po przeczytaniu')); }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
       if (m.deleted) b.appendChild(h('div', { class: 'tx' }, h('i', {}, 'Wiadomość została usunięta')));
-      else if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
+      else if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text, m.from)));
       else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
       b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t), mine ? receipt() : null));
       if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
@@ -265,6 +269,7 @@
       const ov = h('div', { class: 'snap-ov', role: 'dialog', 'aria-label': 'Film jednorazowy', onclick: done },
         h('div', { class: 'snap-bar' }, bar), v, h('div', { class: 'snap-meta' }, (DATA.chars[m.from] || {}).short || '', ' · Błysk'));
       v.muted = true;
+      if (typeof Voices !== 'undefined') Voices.attach(v);
       // Pasek postępu liczony z czasu filmu (animacja CSS bywa wyłączana przez ograniczenie ruchu).
       const tick = () => { if (m.opened) return; const d = v.duration || 5; bar.style.transform = 'scaleX(' + Math.min(1, v.currentTime / d) + ')'; requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
