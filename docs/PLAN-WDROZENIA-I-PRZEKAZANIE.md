@@ -1148,3 +1148,8 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Losowe gałęzie na v138 (`logs/night/br138`, 5 przebiegów na segment S1a/S1b/S1c/S2–S5): bez zawieszeń, wszystkie dochodzą do końca.
 - Krea: saldo dalej 0 (plan Free) — nowy klip snapa zablokowany.
 - SW v139.
+
+### v140
+- Ekran blokady: podpowiedź zgodna z systemem („Przesuń w górę, aby otworzyć” na iOS, „Przesuń w górę, aby odblokować” na Androidzie); przesunięcie w górę i dotknięcie nadal odblokowują.
+- tools/transcript.browser.cjs: opcja `RANDOM_CHOICES=1` (losowa odpowiedź przy pierwszej próbie każdego wyboru) do przejść losowymi gałęziami; usunięty roboczy tools/.tr-rand.cjs.
+- Przegląd świeżego transkryptu S5 (g0–g4): bez niespójności dat, wieku Tomka (38 lat w 2027) ani ról (Marta w archiwum gminy po odejściu z redakcji).

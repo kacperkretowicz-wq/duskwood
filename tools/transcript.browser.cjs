@@ -1,11 +1,12 @@
-// Zapis kolejności wiadomości jak u gracza: node tools/transcript.browser.cjs [doRozdziału=ch2] > transkrypt.txt
+// Zapis kolejności wiadomości jak u gracza: node tools/transcript.browser.cjs [doRozdziału=ch2] [odRozdziału] [sezon] > transkrypt.txt
+// RANDOM_CHOICES=1 — losowe opcje przy pierwszym podejściu do wyboru (szukanie ślepych zaułków w gałęziach).
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require(process.env.PLAYWRIGHT_MODULE));}
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=process.argv[2]||'ch2';
 (async()=>{
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  const page=await (await browser.newContext({viewport:{width:390,height:844}})).newPage();
  await page.goto(base+'/?debug');
- const out=await page.evaluate(async ([stopAt,START,START_SEASON])=>{
+ const out=await page.evaluate(async ([stopAt,START,START_SEASON,RND])=>{
   const log=[];const done=async()=>{};
   Object.assign(UI,{chapterTitle:async ch=>{log.push(`\n===== ${ch.id} · ${ch.title} · ${ch.when||''}`);},chapterEnd:done,interlude:done,fx:done,endingScreen:done,credits:done,endCall:done,incomingCall:async()=>'accept',outgoingCall:done,callScreen(){},packageSheet:async()=>6});
   G.newGame({name:'Alex',gender:'f'});G.settings.speed='instant';G.settings.sfx=false;G.settings.ambient=false;G.settings.autoHints=false;
@@ -23,7 +24,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
    const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
    const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===lastKey?same+1:0;lastKey=key;
    if(p){
-    if(p.type==='choose'){const ak=G.s.chapter+':'+G.s.pc;const n=(window.__att||={})[ak]=(window.__att[ak]||0)+1;log.push(`   ?? WYBÓR (${p.chat}): `+p.options.map(x=>x.text).join(' | ')+(n>1?'  [próba '+n+']':''));Engine.answer(p.options[(n-1)%p.options.length].i);}
+    if(p.type==='choose'){const ak=G.s.chapter+':'+G.s.pc;const n=(window.__att||={})[ak]=(window.__att[ak]||0)+1;log.push(`   ?? WYBÓR (${p.chat}): `+p.options.map(x=>x.text).join(' | ')+(n>1?'  [próba '+n+']':''));Engine.answer(p.options[n===1&&RND?Math.floor(Math.random()*p.options.length):(n-1)%p.options.length].i);}
     else if(p.type==='ask'){const a=st.answers.find(a=>a.match)?.match[0]||'tak';log.push(`   ?? PYTANIE → ${a}`);Engine.answer(a);}
     else if(p.type==='show'){const ev=st.accept[0].ev[0];G.addEv(ev,true);log.push(`   ?? POKAŻ → ${ev}`);Engine.answer(ev);}
     else if(p.type==='place')Engine.answer(st.accept[0].place[0]);
@@ -35,6 +36,6 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
    if(same>400){log.push('STUCK '+key);break;}
   }
   return log.join('\n');
- },[stopAt,process.argv[3]||"",process.argv[4]||"s1"]);
+ },[stopAt,process.argv[3]||"",process.argv[4]||"s1",!!process.env.RANDOM_CHOICES]);
  console.log(out);await browser.close();
 })();

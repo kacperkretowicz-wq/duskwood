@@ -559,7 +559,7 @@ const UI = (() => {
       h('div', { class: 'lk-d' }, cap(U.dayLong(G.now()))),
       h('div', { class: 'lk-t' }, U.time(G.now())),
       h('div', { class: 'lk-n' }),
-      h('div', { class: 'lk-u', onclick: unlockScreen }, 'Dotknij, aby odblokować'));
+      h('div', { class: 'lk-u', onclick: unlockScreen }, OS === 'android' ? 'Przesuń w górę, aby odblokować' : 'Przesuń w górę, aby otworzyć'));
     lockWallpaperCleanup = Wallpapers.bind(lockEl, () => UI.openWallpapers());
     let sy = null;
     lockEl.addEventListener('pointerdown', e => { sy = e.clientY; });
