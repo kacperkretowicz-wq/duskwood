@@ -15,7 +15,7 @@ const KronikaCast = D => {
     Gr: (who, t, o) => say('group', who, t, o),
     Z: (t, o) => say('zenon', 'zenon', t, o),
     Id: (t, o) => say('ida', 'ida', t, o),
-    B: t => say('blysk2', 'blysk2', t, { vanish: true }),
+    B: (t, o) => say('blysk2', 'blysk2', t, Object.assign({ vanish: true }, o)),
     c: (who, t, o) => say('call', who, t, o),
     V: (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`)
   };
@@ -224,7 +224,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     pause(2000),
     callIn('weronika'),
     c('weronika', 'Kronikę „TV Dolina” kręcił jeden człowiek. Pan Zenon Gil.'),
-    c('weronika', 'Osiemnaście lat z kamerą na ramieniu. Każdy festyn, każde zebranie, każdy pogrzeb.'),
+    c('weronika', 'Osiemnaście lat z kamerą na ramieniu. Każdy festyn, każde zebranie, każdy pogrzeb.', { wording: 'Ponad dwadzieścia lat z kamerą na ramieniu, od dziewięćdziesiątego szóstego. Każdy festyn, każde zebranie, każdy pogrzeb.' }),
     c('weronika', 'Jak kablówka upadła w 2018, kasety zabrał do domu. Mówił, że „szkoda wyrzucić ludzi”.'),
     c('weronika', 'To porządny człowiek. Nie wierzę, żeby to robił. Ale kasety są u niego. Wszyscy to wiedzą.'),
     callEnd(),
@@ -433,7 +433,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     clock('2027-01-20T21:00'),
     set('c_day3'),
     notify({ app: 'browser', title: 'Klipo', text: '@kronika.mglisko · „festyn, 2018. jutro: O.N.”', sound: 'notif', open: { page: 'tt_kronika' } }),
-    O('Wrzucili zapowiedź. Sam napis i plac festynowy. Jutro ja.'),
+    O('Wrzucili zapowiedź. Sam napis i plac festynowy. Jutro ja.', { wording: 'Wrzucili zapowiedź. Plac festynowy i napis „piątek, 21:00”. To ja.' }),
     iff('flag:c_olaFirst', [O('Piszę ten tekst. Na razie mam dwa zdania i pięć razy je skasowałam.')]),
     scene('xGrupaFestyn', [
       pause(2000),
@@ -519,7 +519,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     unlock('chat:blysk2'),
     notify({ app: 'messages', title: 'Błysk', text: 'nowy kontakt wysyła ci wideo. Zniknie po obejrzeniu.', sound: 'notif', open: { chat: 'blysk2' } }),
     say('blysk2', 'blysk2', '', { vid: 'assets/video/v_festyn.mp4', img: 'v_festyn', vanish: true }),
-    B('zapowiedź. pełna wersja jutro o 21'),
+    B('zapowiedź. pełna wersja jutro o 21', { wording: 'zapowiedź. pełna wersja w piątek o 21' }),
     choose('blysk2', [
       opt('Zrób zrzut ekranu', [
         B('znowu zrzut'),
@@ -618,8 +618,8 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       clock('2027-01-21T00:41'),
       Gr('bartek', 'kto nie spi'),
       Gr('ola', 'Ja.'),
-      Gr('bartek', 'o 21 cala gmina bedzie siedziec przed telefonem jak na skoki'),
-      Gr('ola', 'A ja o 21 wyłączam telefon i idę do mamy.'),
+      Gr('bartek', 'o 21 cala gmina bedzie siedziec przed telefonem jak na skoki', { wording: 'w piatek o 21 cala gmina bedzie siedziec przed telefonem jak na skoki' }),
+      Gr('ola', 'A ja o 21 wyłączam telefon i idę do mamy.', { wording: 'A ja w piątek o 21 wyłączam telefon i idę do mamy.' }),
       choose('group', [
         opt('Dobry plan. Ja będę miał{|a} oko na wszystko.', [Gr('ola', 'Dziękuję. Naprawdę.')]),
         opt('Bartek, idź spać.', [Gr('bartek', 'ide. dobranoc wam')])
@@ -946,7 +946,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
         O('Nie ma klipu. Nie ma konta. Co się stało?'),
         Z('Ida przyszła do kuchni. Zjadła obiad z piekarnika. Siedzimy. Pies też.', { img: 'c_kuchnia' }),
         iff('flag:c_warnedZenon', [Z('Dobrze, że {Pan|Pani} mi napisał{|a}. Byłem pod drzwiami, kiedy wyszła.')]),
-        iff('flag:c_idaTellZenon', [Z('Powiedziała mi wszystko sama, przy śniadaniu. Wolałem od niej niż z internetu.')]),
+        iff('flag:c_idaTellZenon', [Z('Powiedziała mi wszystko sama, przy śniadaniu. Wolałem od niej niż z internetu.', { wording: 'Powiedziała mi wszystko sama, przy stole. Wolałem od niej niż z internetu.' })]),
         iff('flag:c_warnedOla', [O('Przesiedziałam cały wieczór z telefonem w ręce. Nic. Dzięki, że nie musiałam czekać sama.')]),
         iff('flag:c_warnedWera', [W('Katalog zostawiam otwarty jeszcze na tydzień. Na wszelki wypadek.')]),
         ending('przewiniecie')

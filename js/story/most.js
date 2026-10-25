@@ -324,7 +324,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     ]),
     scene('xGrupaMost', [
       pause(2000),
-      say('group', 'bartek', 'widzieliscie to z mostem? stary mowi ze henryk to najuczciwszy facet w mglisku. pozyczyl mu kiedys warsztat na caly weekend i nawet nie chcial piwa'),
+      say('group', 'bartek', 'widzieliscie to z mostem? stary mowi ze henryk to najuczciwszy facet w mglisku. pozyczyl mu kiedys warsztat na caly weekend i nawet nie chcial piwa', { wording: 'widzieliscie to z mostem? stary od tygodnia w domu, sad zamienil mu areszt na dozor do procesu. mowi ze henryk to najuczciwszy facet w mglisku. pozyczyl mu kiedys warsztat na caly weekend i nawet nie chcial piwa' }),
       say('group', 'ola', 'Proszę, nie wrzucajcie tego nigdzie dalej. Mama dostała to już od dwóch ciotek.'),
       say('group', 'kuba', 'nie wrzucam. ale czytam komentarze i mi niedobrze'),
       choose('group', [

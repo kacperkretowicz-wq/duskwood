@@ -95,7 +95,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         I('dzięki że nie {odpuściłeś|odpuściłaś}. ja wiem że sam strasznie dużo spieprzyłem')
       ]),
       scene('epIgor', [choose('igor', [
-        opt('Napisz, jak dojedziesz.', [I('napiszę. to akurat umiem')]),
+        opt('Napisz, jak dojedziesz.', [I('napiszę. to akurat umiem')], { wording: 'Odzywaj się czasem. Do mnie i do Kuby.' }),
         opt('Dobrze, że w końcu mówisz wprost.', [I('za późno. ale tak')])
       ])]),
       pause(2500),

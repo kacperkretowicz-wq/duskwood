@@ -968,3 +968,14 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Spokojniejsze tempo: gdy opcje są widoczne w trakcie pisania, pisanie trwa naturalnie (bez limitu 2,4 s), bo gracz i tak może odpowiedzieć od razu.
 - Opcje, które były już widoczne, nie animują się drugi raz przy przejściu do kroku wyboru.
 - Nowy test: tests/early-reply.browser.cjs.
+
+### 2026-10-25 — v116: spójność informacji (przegląd transkryptów S1–S5)
+Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser.cjs). Wszystkie poprawki przez `wording`, więc stare zapisy działają.
+- S1: auto pod hutą 15.10 o 1:20 to ta sama noc co zniknięcie (telefon zamilkł 14.10 o 23:58) — Bartek i Ola nie mówią już „noc po”/„dzień po”/„w czwartek o pierwszej”.
+- Epilog: opcja do Igora „Napisz, jak dojedziesz” pasowała tylko do wariantu z wyjazdem do Wrocławia → „Odzywaj się czasem. Do mnie i do Kuby.”
+- S2: ojciec Bartka siedział w areszcie (epilog), a od S2 jest w domu — Bartek mówi teraz w m1, że sąd zamienił areszt na dozór do procesu. Marta: nagranie z licznikiem jest z czwartku późnym wieczorem, przed wyjazdem do mamy (wcześniej kolidowało z „posłucham jutro wieczorem”).
+- S3: Maja — Kuba pożyczył kabel w sobotę przed nocką (klip z „4% baterii” wyszedł w nocy z soboty na niedzielę, kiedy był w magazynie).
+- S4: klip z Olą od początku zapowiadany na piątek 21:00 (zapowiedź, Błysk, grupa) — wcześniej „jutro” wskazywało czwartek. Zenon w finale: „przy stole”, nie „przy śniadaniu” (Ida nie powiedziała mu rano). Pan Zenon kręcił od 1996 („ponad dwadzieścia lat”), zgodnie z festynem z Tomkiem w S5.
+- S5: „maja jutro jechac do dudka” (Natan bez polskich znaków czytało się jak imię Mai) → „policja jutro rano jedzie do dudka”. Kuba o Marcie: „siedziała z tobą nad kasetą z mostu” (nie dawała pliku).
+- Szklarz celowo pisze „ . ” ze spacją (maskowanie stylu Igora) — zostawione.
+- Weryfikacja: npm 97/97, pełne e2e iOS i Android (S1–S5, wszystkie finały, offline) PASS, wszystkie testy przeglądarkowe PASS. Wcześniejsze czerwone wyniki (e2e „przekroczony czas w k3”, dark-threads `.side-dialogue`) były skutkiem równoległego uruchomienia dwóch e2e i testów przeglądarkowych na jednej maszynie — uruchomione osobno przechodzą; skrypt nocny puszcza teraz wszystko sekwencyjnie.

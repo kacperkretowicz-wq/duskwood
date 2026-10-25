@@ -406,7 +406,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     pause(2500),
     M('nie'),
     pause(3000),
-    M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.'),
+    M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.', { wording: 'W sobotę przed nocką pożyczył ode mnie kabel. Mówił, że ma 4% i w nocy musi coś wrzucić. Myślałam, że zdjęcie z magazynu.' }),
     scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.')])]),
     M('Zadzwoń do niego. Ja nie umiem. Ja na niego nakrzyczę i on się zamknie na tydzień.', { wording: 'możesz do niego zadzwonić? ja teraz nie dam rady. już mam otwarty czat i nie chcę wysłać tego, co napisałam' }),
     set('k_majaKnows'),

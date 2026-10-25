@@ -733,7 +733,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     ]),
     pause(3500),
     clock('2027-03-18T18:30'),
-    iff('flag:g_police', [Nt('zlozylismy zawiadomienie. oskar opowiedzial wszystko. policjant zapisal i powiedzial „glosy, no tak, teraz wszystko jest mozliwe”'), Nt('maja jutro jechac do dudka')], [Nt('oskar z mama zlozyli zawiadomienie. policja jutro jedzie do dudka')]),
+    iff('flag:g_police', [Nt('zlozylismy zawiadomienie. oskar opowiedzial wszystko. policjant zapisal i powiedzial „glosy, no tak, teraz wszystko jest mozliwe”'), Nt('maja jutro jechac do dudka', { wording: 'policja jutro rano jedzie do dudka' })], [Nt('oskar z mama zlozyli zawiadomienie. policja jutro jedzie do dudka')]),
     M('jutro mają go zatrzymać? serio?'),
     M('kuba mówi, że się cieszy. a ja się boję jeszcze bardziej. jak ktoś się boi, że go złapią, to robi głupie rzeczy'),
     choose('maja2', [
@@ -921,7 +921,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     pause(3000),
     M('hasło'),
     ...GlosHaslo(D, w => [choose('maja2', [opt(`${w[0].toUpperCase()}${w.slice(1)}.`, [M('ok. natan napisał nam rano o marcie. kuba siedzi obok i milczy. to u niego najgorszy znak')])])]),
-    K('marta. ta z archiwum. która w listopadzie dała ci plik z mostu'),
+    K('marta. ta z archiwum. która w listopadzie dała ci plik z mostu', { wording: 'marta. ta z archiwum. która w listopadzie siedziała z tobą nad kasetą z mostu' }),
     K('jak mogę pomóc. serio. powiedz co mam robić'),
     choose('kuba', [
       opt('Bądź z Mają i z mamą. I idźcie wieczorem na pizzę. Normalnie.', [K('ok. normalnie. umiem to. chyba')]),

@@ -116,11 +116,11 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
       accept: [
         {
           ev: ['ev_cam1_car'], then: [
-            g('bartek', '1:20. noc po tym, jak zniknęła'),
+            g('bartek', '1:20. noc po tym, jak zniknęła', { wording: '1:20. ta sama noc. niecałe półtorej godziny po tym, jak jej telefon padł' }),
             g('igor', 'Światła prosto w obiektyw. Tablicy nie widać.'),
             g('ola', 'Gajda mówił mamie Kuby, że sprawdzili hutę w piątek. W dzień.'),
             g('kuba', 'jest zdjęcie z piątku. 11:12. dwóch policjantów'),
-            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?'),
+            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?', { wording: 'To kto tam przyjechał w nocy ze środy na czwartek?' }),
             g('igor', 'A druga kamera? Ta w hali?'),
             show('group', { prompt: 'Pokaż zdjęcie z kamery w hali', accept: [{ ev: ['ev_cam2_0019'] }], wrong: [['igor', 'Szukaj CAM-02. Hala A.']] }),
             g('ola', 'A to kto?'),
@@ -136,9 +136,9 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
             g('kuba', 'czyli ktoś wiedział, czego ona szuka'),
             g('bartek', 'a brama? tam tez byla kamera'),
             show('group', { prompt: 'Pokaż zdjęcie spod bramy', accept: [{ ev: ['ev_cam1_car'] }], wrong: [['bartek', 'cos z bramy. cam-01']] }),
-            g('bartek', '1:20. noc po tym, jak zniknęła'),
+            g('bartek', '1:20. noc po tym, jak zniknęła', { wording: '1:20. ta sama noc. niecałe półtorej godziny po tym, jak jej telefon padł' }),
             g('ola', 'Gajda mówił, że sprawdzili hutę w piątek. W dzień.'),
-            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?')
+            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?', { wording: 'To kto tam przyjechał w nocy ze środy na czwartek?' })
           ]
         }
       ],

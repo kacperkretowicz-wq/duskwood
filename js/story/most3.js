@@ -33,7 +33,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xLicznik', [
       pause(2500),
-      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'Jeszcze jedno. Nagrałam to w czwartek w nocy w archiwum, jak pierwszy raz odsłuchiwałam zaniki. Nikomu tego nie pokazywałam.' }),
+      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'Jeszcze jedno. Nagrałam to w czwartek późnym wieczorem w archiwum, jak przewijałam taśmę do zaników przed wyjazdem do mamy. Nikomu tego nie pokazywałam.' }),
       Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.', { wording: 'Pani Weronika pożyczyła mi kasetę na dwie noce, żebym mogła przesłuchać zaniki w spokoju. W sobotę rano już ją miała z powrotem.' }),
       say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
       Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
