@@ -463,6 +463,8 @@ const Engine = (() => {
           check();
         });
         guard(my);
+        // Spełniony cel nie wisi dalej w „Co teraz?” — do następnego celu widżet mówi „Sprawdź wiadomości.”
+        if (st.goal && s.objective && s.objective.text === st.goal) { s.objective = null; G.change(); }
         return;
       }
 

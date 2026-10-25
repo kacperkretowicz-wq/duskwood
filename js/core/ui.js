@@ -191,7 +191,7 @@ const UI = (() => {
     const t = U.time(G.now());
     const st = $('.st-t', statusEl); if (st && st.textContent !== t) renderStatus();
     const wt = $('.w-time', home); if (wt && wt.textContent !== t) { wt.textContent = t; $('.w-date', home).textContent = cap(U.dayLong(G.now())); }
-    if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; }
+    if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; const ld = $('.lk-d', lockEl), d = cap(U.dayLong(G.now())); if (ld && ld.textContent !== d) ld.textContent = d; }
     if (G.s && !document.hidden && !G.s.clock.paused) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -570,7 +570,18 @@ const UI = (() => {
     if (!lockEl) return;
     const el = bannerEl(Object.assign({}, o, { when: U.time(G.now()) }));
     el.addEventListener('click', e => { e.stopPropagation(); unlockScreen(); if (o.open && o.open.chat) UI.openApp(o.app || 'messages', { chat: o.open.chat }); });
-    $('.lk-n', lockEl).prepend(el);
+    const box = $('.lk-n', lockEl);
+    box.prepend(el);
+    // Jak w prawdziwym telefonie: kilka najnowszych na wierzchu, starsze zwinięte w stos zamiast uciętej listy.
+    const all = [...box.querySelectorAll(':scope > .banner')], keep = 4;
+    all.forEach((b, i) => b.classList.toggle('lk-hidden', i >= keep));
+    let more = $('.lk-more', box);
+    if (all.length > keep) {
+      if (!more) { more = h('button', { class: 'lk-more', onclick: e => { e.stopPropagation(); unlockScreen(); } }); box.appendChild(more); }
+      const n = all.length - keep;
+      more.textContent = `jeszcze ${n} ${n === 1 ? 'powiadomienie' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'powiadomienia' : 'powiadomień'}`;
+      box.appendChild(more);
+    } else if (more) more.remove();
   }
   function unlockScreen() {
     if (!lockEl) return;

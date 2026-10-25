@@ -21,6 +21,16 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
   const t=await n.innerText();assert.match(t,/Kuba Wrona \(2\)/);assert.match(t,/odezwij się jak wrócisz/);
   await n.click();await page.waitForTimeout(700);
   assert.ok(!(await page.evaluate(()=>UI.locked)));assert.equal(await page.evaluate(()=>G.viewing),'kuba');
+  // Wiele powiadomień: najnowsze cztery na wierzchu, reszta zwinięta w stos; data na blokadzie idzie za zegarem gry.
+  await page.evaluate(()=>{G.post('kuba',{from:'kuba',text:'halo'});G.chat('kuba').unread=1;});await page.waitForTimeout(200);
+  assert.equal(await page.evaluate(()=>UI.returnLock()),true);
+  await page.evaluate(()=>{for(let i=1;i<=6;i++)UI.banner({app:'messages',who:'kuba',title:'Kuba Wrona',text:'wiadomość '+i,open:{chat:'kuba'}});});
+  await page.waitForTimeout(300);
+  assert.equal(await page.locator('#lock .lk-n .banner:not(.lk-hidden)').count(),4);
+  assert.match(await page.locator('#lock .lk-more').innerText(),/jeszcze 3 powiadomienia/);
+  await page.evaluate(()=>G.setClock(U.parseLocal('2026-10-23T17:30')));await page.waitForTimeout(1300);
+  assert.match(await page.locator('#lock .lk-d').innerText(),/Piątek, 23 października/);
+  await page.locator('#lock .lk-more').click();await page.waitForTimeout(700);assert.ok(!(await page.evaluate(()=>UI.locked)));
   assert.deepEqual(errors,[]);console.log('PASS return-lock');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

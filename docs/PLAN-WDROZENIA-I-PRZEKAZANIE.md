@@ -979,3 +979,10 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 - S5: „maja jutro jechac do dudka” (Natan bez polskich znaków czytało się jak imię Mai) → „policja jutro rano jedzie do dudka”. Kuba o Marcie: „siedziała z tobą nad kasetą z mostu” (nie dawała pliku).
 - Szklarz celowo pisze „ . ” ze spacją (maskowanie stylu Igora) — zostawione.
 - Weryfikacja: npm 97/97, pełne e2e iOS i Android (S1–S5, wszystkie finały, offline) PASS, wszystkie testy przeglądarkowe PASS. Wcześniejsze czerwone wyniki (e2e „przekroczony czas w k3”, dark-threads `.side-dialogue`) były skutkiem równoległego uruchomienia dwóch e2e i testów przeglądarkowych na jednej maszynie — uruchomione osobno przechodzą; skrypt nocny puszcza teraz wszystko sekwencyjnie.
+
+### 2026-10-25 — v117: ekran blokady i „Co teraz?” po spełnionym celu
+- Ekran blokady: data pod zegarem odświeża się razem z zegarem gry (wcześniej po skoku na nowy dzień zostawała „Środa, 21 października” przy godzinie z piątku).
+- Wiele powiadomień na blokadzie: cztery najnowsze na wierzchu, starsze zwinięte w stos „jeszcze N powiadomień” (dotknięcie odblokowuje) zamiast listy uciętej u dołu ekranu.
+- Cel z `waitFor` po spełnieniu znika z „Co teraz?” (widżet i Notatki mówią „Sprawdź wiadomości”), np. po obejrzeniu filmu od Ady widżet nie każe go już otwierać.
+- Klip snap (nowa wersja z wyraźniejszą postacią na końcu ścieżki): wstrzymany — Krea zwraca 402 INSUFFICIENT_BALANCE (brak środków na generację obrazów i wideo). Obecny v_snap (v109) zostaje.
+- Test return-lock rozszerzony o stos powiadomień i datę na blokadzie.
