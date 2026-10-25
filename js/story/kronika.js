@@ -95,7 +95,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       pic('maja2', 'maja', 'c_studniowka', 'zrobiłam zrzut. przypomina ci to coś?'),
       choose('maja2', [
         opt('Wygląda jak stara kronika z kablówki. Natan miał podobny kadr z mostu.', [
-          M('o. masz rację. ten sam żółty pasek u dołu, ta sama jakość'),
+          M('o. masz rację. ten sam żółty pasek u dołu, ta sama jakość', { wording: 'o. masz rację. ta sama jakość, ten sam szum z kasety. tylko tu nie ma paska w rogu' }),
           M('to „TV Dolina”. kablówka. puszczali to w każdą sobotę przed pogodą')
         ], { set: { c_linkTV: true } }),
         opt('To sala gimnastyczna w naszej szkole?', [

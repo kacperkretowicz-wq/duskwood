@@ -993,3 +993,11 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 - Zdjęcia (Codex image_gen + realism-post): `m_ola_lake` — wcześniej wygładzone, „AI-owe” selfie; teraz zwykłe selfie z przedniej kamery pod słońce (Ola z niekorzystnej strony, zgodnie z podpisem „wyszła jak ziemniak”), pion 4:5 pasuje do postu w Kadrze. `c_zenon_kamera` („Festyn, 2005”) — wcześniej współczesna kamera kinowa, rozmyta plama na szyldzie i angielskie „…ADE”, Zenon nie na scenie; teraz zdjęcie z kompaktu z 2005 (data w rogu, flesz w dzień), Zenon ~50 lat na scenie z kamerą, zgodnie z „stawał na scenie, bo stamtąd widać wszystkich”.
 - `m_mem_radio` („pies naczelnego… dział dźwięku po 22”, od Natana): wcześniej pies na radiu w pokoju babci z serwetkami — sprzeczne z redakcją; teraz zdjęcie z fleszem w nocnej redakcji (pies na radiu obok miksera i słuchawek).
 - Nowy test: tests/chat-apps.browser.cjs (320 i 390 px, brak przepełnień).
+
+### 2026-10-25 — v119: zdjęcia zgodne z tekstem i bardziej „z telefonu”
+- `maja-river` (tapeta/zdjęcie Mai od Kuby): zamiast pozowanego portretu z aparatem przy oku — Maja odwraca się w pół zdania, kadr krzywy, kciuk Kuby w rogu; zbliżenie na tapecie ustawione na twarz (64% 35%).
+- `factory-day-v1` (post Mai w Kadrze 03.10 „mgła 8 dni na 10”): wcześniej czyste HDR bez mgły — teraz ta sama huta (wieża, komin, przenośnik) w gęstej mgle, przez dziurę w siatce, płaskie światło telefonu.
+- `c_studniowka` (zrzut Mai z klipu „studniówka, 1999” i straszak s4_drzwi): wcześniej współczesne zdjęcie z balu, niezgodne z filmem — teraz ostatnia klatka `v_studniowka.mp4` (kamera zatrzymana na drzwiach, ktoś w nich stoi). Maja nie mówi już o „żółtym pasku u dołu” (klip go nie ma; u Natana był pasek GS Wideo w rogu) — przez `wording`.
+- `m_kamera_kotka` i `m_kot_wycinki`: ta sama kotka Ziuta i ta sama cerata w kuchni pani Weroniki (wcześniej dwa różne koty, wygładzone), zdjęcia z fleszem/dziennym światłem z taniego telefonu.
+- `g_ola_umowa` (selfie Oli z umową w świetlicy) i `g_kuba_kostka` (Kuba przy kostce u sąsiada): zamiast pozowanych, „AI-owych” kadrów — selfie z przedniej kamery i szybkie zdjęcie od Bartka, krzywy kadr, błoto, zwykłe światło.
+- Klip snap: nadal wstrzymany (Krea 402, brak środków).
