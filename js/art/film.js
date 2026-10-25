@@ -278,7 +278,7 @@
 
   /* ================= ZRZUTY EKRANU ================= */
   D('z_article', {
-    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('07.10.2026', '22:46', { device: 'Tellio A54 · zrzut ekranu' }),
+    src: 'assets/web/z_article.jpg', title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('07.10.2026', '22:46', { device: 'Tellio A54 · zrzut ekranu' }),
     draw: k => {
       let s = k.full('#f7f3ea') + k.rect(0, 0, 900, 120, '#1d1d1d') + k.text(40, 80, '22:46', 30, '#fff') + k.rect(0, 120, 900, 90, '#ece8de') + k.rect(30, 140, 840, 50, '#fff', 'rx="25"') + k.text(60, 174, 'gazetasudecka.pl/archiwum/2007/07/…', 22, '#666');
       s += k.text(450, 290, 'Gazeta Sudecka', 54, '#1a1512', 'text-anchor="middle" font-family="Georgia, serif" font-weight="700"');
@@ -293,7 +293,7 @@
     }
   });
   D('z_kruk', {
-    title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('12.10.2026', '21:42', { device: 'Tellio A54 · zrzut ekranu' }),
+    src: 'assets/web/z_kruk.jpg', title: 'Zrzut ekranu', w: 900, h: 1600, style: 'screen', exif: ph('12.10.2026', '21:42', { device: 'Tellio A54 · zrzut ekranu' }),
     draw: k => {
       let s = k.full('#f2f3f5') + k.rect(0, 0, 900, 120, '#1d1d1d') + k.text(40, 80, '21:42', 30, '#fff') + k.rect(0, 120, 900, 110, '#c43d2f') + k.text(40, 196, 'Mglisko24.pl', 44, '#fff', 'font-weight="800"');
       s += k.text(40, 330, 'Tragiczny wypadek', 56, '#1d1f22', 'font-weight="800"') + k.text(40, 400, 'na moście kolejowym', 56, '#1d1f22', 'font-weight="800"') + k.text(40, 450, '14.09.2011', 26, '#888');

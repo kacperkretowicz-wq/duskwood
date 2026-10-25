@@ -1130,3 +1130,7 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - `sz_window` (koniec prologu, Szklarz): ciemne łukowe okno huty z wybitymi szybami, za nim nieruchoma sylwetka; podpis „kazde szklo ma dwie strony” zostaje jako nadruk.
 - `m_plan` (dowód `ev_plan`): zdjęcie wyblakłej tablicy ewakuacyjnej na ceglanej ścianie. Czytelne napisy zgodne z opisem dowodu: HALA A, piec wannowy, odprężarka (poziom −1), HALA B, szatnia (piętro 1), magazyn.
 - SW v136.
+
+### v137 — prawdziwe zrzuty ekranu w galerii Mai
+- `z_article` i `z_kruk` (album „zrzuty” w telefonie Mai) to teraz faktyczne zrzuty stron z gry (Gazeta Sudecka 2007, Mglisko24 2011) w motywie Androida, 900×1600, z godzinami 22:46 / 21:42 zgodnymi z EXIF — zamiast rysowanych SVG, które nie zgadzały się już z prawdziwym zdjęciem w artykule.
+- SW v137.
