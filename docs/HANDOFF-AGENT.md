@@ -1,6 +1,9 @@
 # Przekazanie dla następnego agenta AI — Quiet Is Safer (Mglisko)
 
-Stan na 25.10.2026, 14:40 (Europe/Warsaw). Ostatnia wdrożona wersja: **v147** (commit `e4f0198`).
+Stan na 25.10.2026, 14:45 (Europe/Warsaw). Praca przerwana na polecenie Kacpra.
+- Pod linkiem wdrożona jest **v147** (`e4f0198`).
+- Na `feat/realizm-2026` jest już **v154** (`007450b`), przetestowane commit po commicie, ale **niewdrożone**.
+- Niedokończone, **nieprzetestowane** zmiany (migrations.js, most2.js) są na gałęzi `wip/v155-nieprzetestowane`. Przejrzyj diff, uruchom pełne testy (zwłaszcza `tests/migration-chain.test.cjs`), dopiero potem scal jako v155 albo odrzuć.
 
 ## Repozytorium i gałęzie
 - Repo: https://github.com/kacperkretowicz-wq/duskwood
@@ -37,7 +40,7 @@ Stan na 25.10.2026, 14:40 (Europe/Warsaw). Ostatnia wdrożona wersja: **v147** (
 - Praca nocna/dzienna w `/workspace/dw-night`, heartbeat `/workspace/logs/duskwood-executor.heartbeat`.
 
 ## Co dalej (kolejność)
-1. Dokończyć i przetestować niezacommitowane poprawki (engine.js, kopia2.js, kronika.js, most2.js, most3.js — v148).
+1. Zweryfikować gałąź `wip/v155-nieprzetestowane` (pełny zestaw testów), scalić lub odrzucić. Potem pełne przejście v154/v155 i wdrożenie dopiero, gdy Kacper o to poprosi.
 2. Kolejne przejście spójności S1–S5 na świeżych transkryptach.
 3. Tempo rozdziału 3 (~22 min) — skrócić/rozładować.
 4. Nowy klip snapa (ciągłe ujęcie, found-footage) — zablokowane: Krea bez kredytów (402).
@@ -50,3 +53,9 @@ Stan na 25.10.2026, 14:40 (Europe/Warsaw). Ostatnia wdrożona wersja: **v147** (
 - Odpowiadanie podczas pisania działa; czat nie znika po filmie jednorazowym; banery nie zasłaniają rozmowy.
 - Zdjęcia i klipy nie wyglądają na AI.
 - Wersja w `sw.js` podbita i zgodna z commitem.
+
+## Pierwsze kroki nowego agenta
+1. `git fetch && git checkout feat/realizm-2026`, `npm ci`, uruchomić wszystkie testy.
+2. Przeczytać ten plik i `docs/PLAN-WDROZENIA-I-PRZEKAZANIE.md`.
+3. Wykonać listę „Co dalej” po kolei; każdą wersję commitować jako `vNNN` z podbiciem SW.
+4. Nie wdrażać pod link bez zgody Kacpra.
