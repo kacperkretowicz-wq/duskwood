@@ -26,7 +26,7 @@ Object.assign(DATA.persons, {
     name: 'Sylwia Pietrzak', role: '35 lat · adminka lokalnej grupy', cond: 'flag:metSylwia',
     facts: [
       { text: 'Moderuje grupę „Mglisko — co się dzieje”. Usuwa wpisy z adresem Wronów i zdjęciami Oli.' },
-      { text: 'Zachowała zrzut skasowanego komentarza pana Henryka o pandzie na Szklarskiej.' }
+      { text: 'Zachowała zrzut skasowanego komentarza pana Henryka o czerwonej iskrze na Szklarskiej.' }
     ]
   },
   zuza: {
@@ -45,7 +45,7 @@ Object.assign(DATA.evidence, {
     desc: 'Trzy nagrania z 3.10. Maja mówi z huty, że w szafce *17* znalazła starą jednorazówkę, przewiniętą do końca i niewywołaną. Prosi, żeby na razie nikomu nie mówić. Nagrania pokazują początek projektu, nie mają związku z nocą 14.10.'
   },
   ev_fb_henryk: {
-    title: 'Komentarz o pandzie na Szklarskiej', cat: 'testimony', source: 'Sylwia · zrzut skasowanego komentarza',
+    title: 'Komentarz o iskrze na Szklarskiej', cat: 'testimony', source: 'Sylwia · zrzut skasowanego komentarza',
     desc: 'Pan Henryk, 74 lata, mieszkaniec Szklarskiej, napisał w grupie, że w środę „koło jedenastej” widział zaparkowaną czerwoną iskrę przy przystanku. Nie podał numeru, nie widział kierowcy. Po krytyce skasował wpis. To niezweryfikowana relacja; nie przeczy temu, że rano auto było na tamie.'
   },
   ev_gajda_fb: {

@@ -414,7 +414,12 @@ const UI = (() => {
 
   /* ---------- powiadomienia ---------- */
   const bq = [];
-  let bShowing = false;
+  let bShowing = false, shownBanner = null;
+  /* Jak w systemie: baner rozmowy chowa się, gdy gracz sam wejdzie do tej rozmowy. */
+  function dismissBannerFor(chat) {
+    if (shownBanner && chat && shownBanner.chat === chat) shownBanner.close();
+    for (let i = bq.length - 1; i >= 0; i--) if (bq[i].open && bq[i].open.chat === chat) bq.splice(i, 1);
+  }
   function banner(o) {
     if (locked && lockEl) { addLockNotif(o); playBannerSound(o); return; }
     /* Kolejka nie może zostawać w tyle za rozmową: z jednego czatu zostaje tylko najnowszy baner, a w kolejce najwyżej dwa. */
@@ -450,7 +455,8 @@ const UI = (() => {
     bShowing = true;
     const el = bannerEl(o);
     let done = false;
-    const close = () => { if (done) return; done = true; el.classList.add('out'); setTimeout(() => { el.remove(); nextBanner(); }, 280); };
+    const close = () => { if (done) return; done = true; if (shownBanner && shownBanner.el === el) shownBanner = null; el.classList.add('out'); setTimeout(() => { el.remove(); nextBanner(); }, 280); };
+    shownBanner = { el, chat: o.open && o.open.chat, close };
     el.addEventListener('click', () => { close(); if (o.onclick) o.onclick(); else if (o.app) openApp(o.app, o.open || {}); });
     let sy = null;
     el.addEventListener('pointerdown', e => { sy = e.clientY; });
@@ -918,7 +924,7 @@ const UI = (() => {
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
-    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, returnLock, unlockScreen, get locked() { return locked; },
+    banner, dismissBannerFor, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, returnLock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
     fx, scare, nearby, camera, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };

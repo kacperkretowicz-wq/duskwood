@@ -374,7 +374,7 @@
     ];
     renderAll();
     renderComposer();
-    const activate = () => { G.viewing = id; G.markRead(id); G.change(); };
+    const activate = () => { G.viewing = id; G.markRead(id); if (UI.dismissBannerFor) UI.dismissBannerFor(id); G.change(); };
     activate();
     return {
       el, chat: id,

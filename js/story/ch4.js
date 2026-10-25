@@ -165,7 +165,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     typing('bartek', 'bartek', 6000),
     B('robert powiedzial ze nikt sie nie dowie. ze jego ojciec straci prace a oni pojda siedziec'),
     B('zaniesli go do odprezarki. stary zamurowal wejscie. umial, bo latem pomagal dziadkowi na budowach'),
-    B('29 lat. a ja mialem kazac mai zostawic go w spokoju'),
+    B('29 lat. a ja mialem kazac mai zostawic go w spokoju', { wording: '29 lat. a ja jej napisalem zeby zostawila starego w spokoju' }),
     give('ev_marek'),
     B('i jeszcze jedno. robert ma klucz do kraty w ewie. kolo trzyma tam sol dla zwierzyny. 16 pazdziernika wymienil klodke'),
     B('stary chce jechac z nami. mowi ze 29 lat czekal, az ktos go zlapie', { wording: 'stary polozyl kluczyki na stole. mowi ze pokaze wejscie i potem powie policji to samo. pierwszy raz nie wyszedl jak zapytalem' }),

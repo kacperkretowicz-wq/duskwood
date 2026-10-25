@@ -194,7 +194,7 @@ const StoryScenes = D => {
       clock('2026-11-02T18:20'),
       iff('flag:zuzaCorrected',
         [Z('przypielam sprostowanie na gorze profilu. dalej ktos co tydzien pisze „a jednak uciekla”')],
-        [Z('usunelam tamten film. ludzie dalej wrzucaja screeny. nie umiem tego cofnac')]),
+        [Z('usunelam tamten film. ludzie dalej wrzucaja screeny. nie umiem tego cofnac', { wording: 'usunelam ten moj filmik z „nowym nagraniem mai”. to bylo jej stare zdjecie z kadru. ludzie dalej wrzucaja screeny. nie umiem tego cofnac' })]),
       Z('i jeszcze… bylam u babci. z ciastkami'),
       Z('powiedzialam jej ze wiem o hucie. ze wujek tam byl w 97'),
       V('zuza', 'zuza', '0:34', 'ona dlugo nic nie mowila. a potem powiedziala tylko „Darek przez to nie mógł spać przez całe życie”. i ze o jego smierci to „nie, to inna sprawa, Zuziu”. i ze jest jakis pan, ktory to wszystko pisal, ale umarl. dziennikarz. i ze ona mu kiedys cos dala i obiecala nikomu nie mowic'),
@@ -203,7 +203,7 @@ const StoryScenes = D => {
         opt('Nie musisz teraz nic z tym robić. Babcia też nie.', [Z('wiem'), Z('ale ona pierwszy raz powiedziala o nim wiecej niz dwa zdania. to juz cos')])
       ]),
       pause(2500),
-      S('Przypięłam w grupie przeprosiny dla pana Henryka. Miał rację z tą iskrą na Szklarskiej, a ludzie go zjechali.'),
+      S('Przypięłam w grupie przeprosiny dla pana Henryka. Miał rację z tą iskrą na Szklarskiej, a ludzie go zjechali.', { wording: 'Przypięłam w grupie przeprosiny dla pana Henryka ze Szklarskiej. Pisał, że w tamtą środę koło jedenastej stała tam czerwona iskra. Ludzie go zjechali, a miał rację.' }),
       S('Przyszedł do salonu z pierniczkami. Nic nie powiedział, tylko je postawił i wyszedł 🥲'),
       S('A, i pyta, czy ktoś kiedyś zapyta go o most. Nie wiem, o jaki most. Mówi, że „wy wiecie”.'),
       choose('sylwia', [

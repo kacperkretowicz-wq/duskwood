@@ -1190,3 +1190,11 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Przeczytany S2 do końca (m3–m5): zaniki, tablet Janiny, obiad pod drzwiami, gozdziki, 7.12 — spójne.
 - Most: „poznaj panią Ziutę” (małe „pani” w ustach Mai, wording).
 - Widżet i aplikacja Pogoda: w prologu, zanim Kuba napisze, pokazują „Moja lokalizacja” zamiast „Mglisko” — gracz jeszcze nie zna miasteczka (Ada pisze „w jakimś mglisku”).
+
+### v147 — świeże czytanie S1 (tr146), baner rozmowy
+- Przeczytany cały S1 na v146 (prolog–epilog, `logs/night/tr146`): daty, godziny (23:31 / 23:44 / 23:47 / 23:53 / 23:58, 1:20, 1:47, 2:05), wiek chłopców z 1997 (Kruk i Malicki 16, Gajda i Sowa 17) i dni tygodnia zgodne.
+- Dowód i profil Sylwii mówiły o „pandzie na Szklarskiej”, a w głosówce, artykule i epilogu to czerwona iskra Mai → „iskra”.
+- s29: Zuza „usunęłam tamten film” i Sylwia „miał rację z tą iskrą” zakładały, że gracz przeszedł opcjonalne wątki Klipo i Sylwii. Teraz obie wiadomości same mówią, o jaki filmik i o jaki komentarz chodzi (wording).
+- ch4: Bartek „a ja miałem kazać Mai zostawić go w spokoju” (niejasne; naprawdę jej to napisał 14.10) → „a ja jej napisałem żeby zostawiła starego w spokoju”.
+- Baner powiadomienia chowa się, gdy gracz sam wejdzie do tej rozmowy (wcześniej wisiał nad otwartym czatem Ekipy jeszcze kilka sekund).
+- SW v147.
