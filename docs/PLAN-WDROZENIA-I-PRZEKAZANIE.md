@@ -1120,3 +1120,13 @@ Przegląd zrzutów wszystkich 40 stron przeglądarki (`logs/night/web133`): czę
 - sowiakopa.pl: Sztolnia Anna z kasą i zielonym szyldem (`web_anna`), zawalona i zalana Waltraud (`web_waltraud`), Ewa nr 3 z kratą i paśnikiem (`web_ewa`, także dowód `ev_sztolnie`).
 - Wolnopedia „Powódź tysiąclecia”: usunięte zdanie „W grze Mglisko… są fikcyjne” (łamało immersję; zastrzeżenie jest na ekranie startowym i w napisach) → zwykła wolnopedyczna stopka o zalążku.
 - SW v135.
+
+### v136 — ostatnie rysunki w fabule zastąpione zdjęciami
+
+Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`).
+
+- `w_tomek` (ch3, dowód `ev_tomek`): skan odbitki 10×15 z 1997, dziewięcioletni Tomek w żółtej pelerynie i gumowcach, na szyi tamagotchi, w rogu pomarańczowa data '97 6 14. Wcześniej była to rysowana postać.
+- `i_car` (ch2, dowód `ev_car_igor`): nocne zdjęcie z zoomem 8× zza siatki, ciemne auto przy bramie i jedna sodowa lampa.
+- `sz_window` (koniec prologu, Szklarz): ciemne łukowe okno huty z wybitymi szybami, za nim nieruchoma sylwetka; podpis „kazde szklo ma dwie strony” zostaje jako nadruk.
+- `m_plan` (dowód `ev_plan`): zdjęcie wyblakłej tablicy ewakuacyjnej na ceglanej ścianie. Czytelne napisy zgodne z opisem dowodu: HALA A, piec wannowy, odprężarka (poziom −1), HALA B, szatnia (piętro 1), magazyn.
+- SW v136.

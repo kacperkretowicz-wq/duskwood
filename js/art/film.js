@@ -108,7 +108,7 @@
   D('p_23d', { src: 'assets/film/p_23d.jpg', title: 'Kadr 23 · skan 2400 dpi', style: 'film', exif: { date: '08.07.1997', time: '~00:15', device: 'Skan: IGOR-SERWIS-PC · 2400 dpi', note: 'Plik otrzymany od nieznanego nadawcy' }, onView: 'ev_frame23', hotspots: [{ x: 610, y: 94, r: 95, label: 'Za duża czapka. Policyjna, z orzełkiem. Jak u syna komendanta.' }, { x: 902, y: 686, r: 120, label: 'W kanale pieca, w czarnej wodzie — żółta peleryna.' }], draw: k => frame23(k) });
 
   /* ================= TOMEK, 1997 ================= */
-  D('w_tomek', {
+  D('w_tomek', { src: 'assets/web/w_tomek.jpg',
     title: 'Tomek, czerwiec 1997', style: 'film', exif: ph('14.06.1997', '', { device: 'Skan odbitki 10×15', note: 'Z albumu rodziny Lisów' }), stamp: { kind: 'film', text: "'97 6 14" },
     draw: k => {
       const { W, H } = k;

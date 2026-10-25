@@ -74,7 +74,7 @@
   });
 
   /* ================= PLAN EWAKUACJI ================= */
-  D('m_plan', {
+  D('m_plan', { src: 'assets/web/m_plan.jpg',
     title: 'Plan ewakuacji — hala A', exif: phone('03.10.2026', '15:31', { place: 'Huta „Jutrzenka”, hala A', note: 'Tablica przy wejściu do hali A' }),
     onView: 'ev_plan',
     draw: k => {
@@ -582,7 +582,7 @@
       return s;
     }
   });
-  D('i_car', {
+  D('i_car', { src: 'assets/web/i_car.jpg',
     title: 'Auto przy bramie', exif: phone('23.10.2026', '00:14', { device: 'Telefon Igora', place: 'Huta „Jutrzenka”, przy trafostacji', note: 'Zoom cyfrowy 8×' }), style: 'night', fx: { soft: 1.8, grain: 0.55 },
     onView: 'ev_car_igor',
     draw: k => {
@@ -599,7 +599,7 @@
   });
 
   /* ================= SZKLARZ ================= */
-  D('sz_window', {
+  D('sz_window', { src: 'assets/web/sz_window.jpg',
     title: '▒▒▒', w: 900, h: 1200, style: 'night', fx: { grain: 0.5 },
     draw: k => {
       const { W, H } = k;
