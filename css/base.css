@@ -274,6 +274,7 @@ body.mobile .hdr { padding-top: calc(36px + var(--safe-t)); min-height: calc(82p
 }
 #lock::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0, 0, 0, .25), rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .55)); pointer-events: none; }
 #lock > * { position: relative; }
+#lock.dragging { transition: none; touch-action: none; }
 #lock.gone { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 #lock .lk-ic { color: rgba(255, 255, 255, .8); margin-bottom: 10px; }
 #lock .lk-d { font-size: 17px; font-weight: 550; color: rgba(255, 255, 255, .85); }

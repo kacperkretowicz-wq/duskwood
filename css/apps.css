@@ -24,7 +24,7 @@
 .chat-hdr .tt h1 { font-size: 16.5px; }
 .ff { opacity: 0; pointer-events: none; transition: opacity .2s; color: var(--acc) !important; }
 .ff.on { opacity: 1; pointer-events: auto; }
-.chat-body { padding: 10px 12px 18px; background: radial-gradient(120% 60% at 50% 0%, rgba(143, 180, 196, .05), transparent 60%); }
+.chat-body { padding: 10px 12px 18px; background: radial-gradient(120% 60% at 50% 0%, rgba(143, 180, 196, .05), transparent 60%); overflow-anchor: none; scroll-behavior: auto; }
 .msgs { display: flex; flex-direction: column; gap: 2px; }
 .sep { align-self: center; font-size: 11.5px; color: var(--tx3); margin: 14px 0 8px; font-weight: 500; }
 .sysmsg { align-self: center; max-width: 86%; text-align: center; font-size: 12.5px; color: var(--tx3); margin: 10px 0; line-height: 1.45; padding: 6px 12px; border-radius: 12px; background: rgba(255, 255, 255, .03); }
@@ -44,9 +44,10 @@
 .msg.me.first .bub { border-top-right-radius: 6px; }
 .bub .tx { display: inline; }
 .bub .tm { float: right; font-size: 10.5px; opacity: .45; margin: 7px 0 -3px 10px; font-variant-numeric: tabular-nums; }
+.delivery { display: inline-flex; align-items: center; height: 14px; line-height: 14px; vertical-align: bottom; white-space: nowrap; flex: none; }
 .bub.media { padding: 3px; background: var(--them); }
 .bub.media .tm { position: absolute; right: 10px; bottom: 8px; margin: 0; opacity: .9; color: #fff; text-shadow: 0 1px 3px #000; }
-.mimg { display: block; width: 230px; max-width: 100%; border-radius: 15px; cursor: zoom-in; background: #000; aspect-ratio: auto; }
+.mimg { display: block; width: 230px; max-width: 100%; height: auto; border-radius: 15px; cursor: zoom-in; background: #000; aspect-ratio: 4 / 3; }
 .bub:not(.media) .mimg { margin: -2px -6px 6px; width: calc(100% + 12px); max-width: 236px; }
 .evc { display: flex; gap: 10px; align-items: center; padding: 6px 4px 4px; min-width: 200px; cursor: pointer; }
 .evc img, .evc .evi { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; flex: none; background: rgba(0, 0, 0, .25); display: flex; align-items: center; justify-content: center; }

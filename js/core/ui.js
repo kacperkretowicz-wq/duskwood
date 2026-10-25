@@ -156,7 +156,13 @@ const UI = (() => {
     BUS.on('msg', onMsg);
     BUS.on('evidence', () => scheduleHome());
     ['goal', 'clock', 'solved', 'conversations', 'wallpaper'].forEach(event => BUS.on(event, scheduleHome));
-    BUS.on('wallpaper', () => { if (lockEl) lockEl.style.cssText = Wallpapers.style(Wallpapers.selected()); });
+    BUS.on('wallpaper', () => {
+      if (!lockEl) return;
+      const dragT = lockEl.style.transform, dragTr = lockEl.style.transition;
+      lockEl.style.cssText = Wallpapers.style(Wallpapers.selected());
+      if (dragT) lockEl.style.transform = dragT;
+      if (dragTr) lockEl.style.transition = dragTr;
+    });
   }
 
   function fit() {
@@ -567,9 +573,30 @@ const UI = (() => {
       h('div', { class: 'lk-n' }),
       h('div', { class: 'lk-u', onclick: unlockScreen }, OS === 'android' ? 'Przesuń w górę, aby odblokować' : 'Przesuń w górę, aby otworzyć'));
     lockWallpaperCleanup = Wallpapers.bind(lockEl, () => UI.openWallpapers());
-    let sy = null;
-    lockEl.addEventListener('pointerdown', e => { sy = e.clientY; });
-    lockEl.addEventListener('pointerup', e => { if (sy != null && sy - e.clientY > 60 && !overlays.length) unlockScreen(); sy = null; });
+    let drag = null;
+    lockEl.addEventListener('pointerdown', e => {
+      if (e.button != null && e.button !== 0) return;
+      drag = { y: e.clientY, id: e.pointerId, dy: 0 };
+      lockEl.classList.add('dragging');
+    });
+    lockEl.addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.id || !lockEl) return;
+      const dy = Math.max(0, drag.y - e.clientY);
+      drag.dy = dy;
+      const max = lockEl.clientHeight || 1;
+      lockEl.style.transform = `translateY(${-Math.min(dy, max)}px)`;
+    });
+    const endDrag = e => {
+      if (!drag || (e.pointerId != null && e.pointerId !== drag.id) || !lockEl) return;
+      const dy = drag.dy;
+      drag = null;
+      lockEl.classList.remove('dragging');
+      if (dy > 8) lockEl.addEventListener('click', ev => { ev.preventDefault(); ev.stopPropagation(); }, { capture: true, once: true });
+      if (dy > 60 && !overlays.length) unlockScreen();
+      else snapLockBack();
+    };
+    lockEl.addEventListener('pointerup', endDrag);
+    lockEl.addEventListener('pointercancel', endDrag);
     screen.appendChild(lockEl);
     homebar.classList.add('hide');
   }
@@ -590,12 +617,38 @@ const UI = (() => {
       box.appendChild(more);
     } else if (more) more.remove();
   }
+  function snapLockBack() {
+    if (!lockEl) return;
+    const el = lockEl;
+    if (!el.style.transform || el.style.transform === 'translateY(0px)') { el.style.transform = ''; el.style.transition = ''; return; }
+    el.style.transition = 'transform .34s cubic-bezier(.5, 0, .2, 1)';
+    el.style.transform = 'translateY(0px)';
+    el.addEventListener('transitionend', () => {
+      el.style.transition = '';
+      if (el.style.transform === 'translateY(0px)') el.style.transform = '';
+    }, { once: true });
+  }
   function unlockScreen() {
     if (!lockEl) return;
     SFX.unlockAudio(); SFX.play.unlock();
     const el = lockEl; lockEl = null; locked = false;
     lockWallpaperCleanup?.(); lockWallpaperCleanup = null;
-    el.classList.add('gone');
+    const from = el.style.transform;
+    const dragged = !!(from && from !== 'translateY(0px)' && from !== 'none');
+    el.classList.remove('dragging');
+    if (dragged) {
+      el.style.transition = 'none';
+      el.style.transform = from;
+      requestAnimationFrame(() => {
+        el.classList.add('gone');
+        el.style.transition = '';
+        el.style.transform = '';
+      });
+    } else {
+      el.style.transform = '';
+      el.style.transition = '';
+      el.classList.add('gone');
+    }
     setTimeout(() => el.remove(), 550);
     homebar.classList.remove('hide');
     G.setFlag('unlockedPhone');

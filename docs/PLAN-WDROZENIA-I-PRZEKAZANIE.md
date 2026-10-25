@@ -1235,3 +1235,13 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 ### v154 — Sylwia zawsze pisze „Pan/Pani” wielką literą
 - S5: cztery wiadomości Sylwii w glos.js miały „{pan|pani}” małą literą, a w S2–S4 Sylwia konsekwentnie pisze „{Pan|Pani}”. Ujednolicone przez `wording` (rozmowy telefoniczne zostają małą literą — to mowa, nie SMS).
 - Losowe przebiegi tr152/tr153 (S1–S5) bez kolejnych niespójności.
+
+### v155 — stabilne dymki czatu i gest blokady
+- Zdjęcie w dymku rezerwuje proporcje (`width`/`height`/`aspect-ratio` z metadanych obrazu, inaczej 4:3), zanim plik się dociągnie. Po załadowaniu, jeśli prawdziwe proporcje się różnią, dymek poprawia się raz i zostaje przy dole.
+- Pole odpowiedzi dalej rośnie, gdy wchodzą opcje, ale przewinięcie jest dopinane do dołu jedną klatką — bez cofania.
+- „pisze…” to jeden węzeł na rozmowę: chowa się i wraca, bez budowania dymka od nowa przy każdym zdarzeniu.
+- Przewijanie czatu: najwyżej jedno ustawienie `scrollTop` na klatkę, bez `behavior: smooth`, więc nie goni animacji wejścia dymka. `overflow-anchor` wyłączone na liście wiadomości.
+- „Wysłano” / „Wyświetlono” to jeden element o stałej wysokości 14 px, przenoszony na najnowszą wiadomość albo aktualizowany w miejscu.
+- Ekran blokady podąża za palcem i myszą (przesunięcie w górę). Puszczenie poniżej 60 px wraca płynnie; powyżej odblokowuje jak dotąd. Ekran po odblokowaniu bez zmian.
+- Test: `tests/bubbles-ux.browser.cjs` (390×844). SW v155. Zapis gry bez zmian (nadal v16).
+- Numer v155 pokrywa się z nieprzetestowaną gałęzią `wip/v155-nieprzetestowane`. Ta gałąź, jeśli wejdzie później, potrzebuje kolejnego numeru.
