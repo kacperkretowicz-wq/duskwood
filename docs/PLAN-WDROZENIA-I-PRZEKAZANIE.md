@@ -1071,3 +1071,14 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 - ch5: Igor „znalazł ją” (dwuznaczne: kamera czy Maja?) → „znalazł kamerę. ostatni plik zdążył się zapisać”.
 - P7 / długość ch3: rozdział ma już dwie przerwy rytmu (`s1_plate` po tablicy, `s1_sync` przed nocnym SMS-em), więc w trybie dziennym to trzy sesje po ~7 min. Nie dzielę go dalej; skracanie treści wymagałoby migracji zapisu, a przegląd transkryptu nie wykazał zbędnych wątków.
 - Wszystko przez `wording`. SW v131.
+
+### v132 — ciągłość S4 (Kronika) i drobna poprawka S5
+
+Przegląd transkryptów S4/S5 z `tr130` (b2d9b50). Tylko `wording`, sygnatury kroków bez zmian, więc zapisy nie wymagają migracji.
+
+- S4 c0: Ola wyjaśnia przejście z apteki do świetlicy („na ferie biorę tam zastępstwo, apteka puściła mnie na dwa tygodnie”). To spina S1–S3 (technik farmacji) z S5 (umowa na stałe w świetlicy).
+- S4 c1: głosówka Oli o 21:00 nie jest już „ze świetlicy pełnej dzieci”, tylko z domu po kolacji.
+- S4: Ola mieszka z mamą, więc „idę do mamy” i „jestem u mamy” zastąpione przez „siedzę z mamą w kuchni”.
+- `kronika.js`: helper `V` przyjmuje teraz `wording` (tak samo jak w `most3.js`).
+- S5 g1: Natan, mama nie odebrała „wczoraj od przychodni” (wczoraj była niedziela) → „dziś rano nie odebrała nawet z przychodni”.
+- Sprawdzone bez zmian: dni tygodnia dat S4/S5, wątek Zenona (o 20:58 śpi, później w kuchni z Idą, co jest spójne z gałęzią `c_warnedZenon`), wątek Marty, Dudka i magnetowidu, rachunek Oskara (300 + 11×50 = 850 zł).

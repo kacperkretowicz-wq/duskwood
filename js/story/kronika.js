@@ -17,7 +17,7 @@ const KronikaCast = D => {
     Id: (t, o) => say('ida', 'ida', t, o),
     B: (t, o) => say('blysk2', 'blysk2', t, Object.assign({ vanish: true }, o)),
     c: (who, t, o) => say('call', who, t, o),
-    V: (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`)
+    V: (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o)
   };
 };
 
@@ -61,7 +61,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
         opt('Żyjesz?', [say('kuba', 'kuba', 'żyję. kurtka mniej. śnieg mam nawet w skarpetkach')])
       ]),
       pause(3000),
-      O('Hej! Pierwszy dzień ferii w świetlicy. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.'),
+      O('Hej! Pierwszy dzień ferii w świetlicy. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.', { wording: 'Hej! Pierwszy dzień w świetlicy. Na ferie biorę tam zastępstwo, apteka puściła mnie na dwa tygodnie. Dwadzieścioro dzieci, jedna gra planszowa bez kostki.' }),
       pic('ola', 'ola', 'c_rysunek', 'Ale dostałam to. Podobno ja w zielonym swetrze 💚'),
       choose('ola', [
         opt('Wyglądasz na szczęśliwą. I wysoką.', [O('Bo dla nich jestem wysoka 😄 Jutro robimy pierniki.')], { trust: { ola: 1 } }),
@@ -298,7 +298,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     ]),
     pause(3000),
     O('Pod klipem z boiskiem ktoś napisał „jutro: O.N.”.'),
-    O('O.N. To mogę być ja. Aleksandra Nowicka.', { wording: "O.N. Jak Ola Nowicka. Wiem, że to tylko inicjały, ale od razu pomyślałam o sobie." }),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola'),
+    O('O.N. To mogę być ja. Aleksandra Nowicka.', { wording: "O.N. Jak Ola Nowicka. Wiem, że to tylko inicjały, ale od razu pomyślałam o sobie." }),    V('ola', 'ola', '0:08', '(w tle dzieci krzyczą) Przepraszam, jestem jeszcze w świetlicy. Zobaczyłam to i musiałam wyjść na korytarz.', 'Ola', { wording: '(w tle szczęk naczyń i telewizor) Przepraszam, zmywam jeszcze po kolacji. Zobaczyłam to i musiałam wyjść do przedpokoju.' }),
 
     O('Wiem, co może być na tej kasecie. Festyn, 2018. Nie chcę o tym pisać.'),
     choose('ola', [
@@ -619,7 +619,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       Gr('bartek', 'kto nie spi'),
       Gr('ola', 'Ja.'),
       Gr('bartek', 'o 21 cala gmina bedzie siedziec przed telefonem jak na skoki', { wording: 'w piatek o 21 cala gmina bedzie siedziec przed telefonem jak na skoki' }),
-      Gr('ola', 'A ja o 21 wyłączam telefon i idę do mamy.', { wording: 'A ja w piątek o 21 wyłączam telefon i idę do mamy.' }),
+      Gr('ola', 'A ja o 21 wyłączam telefon i idę do mamy.', { wording: 'A ja w piątek o 21 wyłączam telefon i siedzę z mamą w kuchni.' }),
       choose('group', [
         opt('Dobry plan. Ja będę miał{|a} oko na wszystko.', [Gr('ola', 'Dziękuję. Naprawdę.')]),
         opt('Bartek, idź spać.', [Gr('bartek', 'ide. dobranoc wam')])
@@ -877,7 +877,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       pause(2500),
       clock('2027-01-22T20:31'),
       Gr('bartek', 'pol godziny. wylaczam neta i ide z ojcem odsniezac'),
-      Gr('ola', 'Jestem u mamy. Pieczemy szarlotkę, żeby mieć co robić z rękami.'),
+      Gr('ola', 'Jestem u mamy. Pieczemy szarlotkę, żeby mieć co robić z rękami.', { wording: 'Siedzę z mamą w kuchni. Pieczemy szarlotkę, żeby mieć co robić z rękami.' }),
       Gr('kuba', 'jestem'),
       choose('group', [
         opt('Jestem z wami. Do 21 i po 21.', [Gr('ola', '❤️')]),

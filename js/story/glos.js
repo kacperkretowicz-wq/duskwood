@@ -285,7 +285,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
     /* P6 / S5: skutek fałszywego telefonu w zwykłym życiu. */
     scene('xMamaNatana', [
       pause(2500),
-      Nt('i jeszcze. mama od piatku nie odbiera nieznanych numerow. wczoraj nie odebrala od przychodni'),
+      Nt('i jeszcze. mama od piatku nie odbiera nieznanych numerow. wczoraj nie odebrala od przychodni', { wording: 'i jeszcze. mama od piatku nie odbiera nieznanych numerow. dzis rano nie odebrala nawet z przychodni' }),
       choose('natan', [
         opt('Ustalcie hasło. Wtedy będzie mogła odbierać spokojnie.', [Nt('ustalilismy. mowi ze czuje sie jak w filmie szpiegowskim'), Nt('ale potem zapytala mnie o haslo, jak dzwonilem. pierwszy raz sie zasmialem od piatku')], { set: { g_natanHaslo: true } }),
         opt('Lepiej, że nie odbiera, niż że uwierzy.', [Nt('niby tak. tylko przychodnia przelozyla jej wizyte na maj')])
