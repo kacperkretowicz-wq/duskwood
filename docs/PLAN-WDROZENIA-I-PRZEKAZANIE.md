@@ -1057,3 +1057,8 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 - Kuba: alibi na zdjęcie z peronu (8:46) „w magazynie do szóstej” niczego nie wykluczało → inwentaryzacja po nocce do dziewiątej.
 - Ola (k4) powtarzała żart Kuby o „serwisie Igora” → własna kwestia o tacie i bezpiecznikach.
 - Wszystko przez `wording`. SW v129.
+
+### v130 — drobne poprawki S5 (Głos)
+- g1: Maja „Ktoś mi właśnie przesłał przez przesyłanie w pobliżu” (tautologia) → „Jakiś telefon obok wysłał mi przed chwilą zdjęcie. Przez przesyłanie w pobliżu.” (ta sama nazwa co w UI i dowodach).
+- g3: Igor „pierwszy raz od lutego” sugerowało, że Oskar zaczął w lutym (luty to data telefonu Idy) → „pierwszy raz, odkąd u mnie jest”.
+- Wszystko przez `wording`. SW v130.

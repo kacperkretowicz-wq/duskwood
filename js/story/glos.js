@@ -317,7 +317,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       pause(3500),
       nearby('g_przystanek', { device: 'Telefon', img: 'g_przystanek', note: 'Nieznane urządzenie w pobliżu', flag: 'g_przystOk', declineFlag: 'g_przystNo', ev: 'ev_g_przystanek' }),
       iff('flag:g_przystOk', [
-        me('maja2', 'Ktoś mi właśnie przesłał przez przesyłanie w pobliżu zdjęcie. Mnie. Na przystanku.'),
+        me('maja2', 'Ktoś mi właśnie przesłał przez przesyłanie w pobliżu zdjęcie. Mnie. Na przystanku.', { wording: 'Jakiś telefon obok wysłał mi przed chwilą zdjęcie. Przez przesyłanie w pobliżu. Mnie. Na przystanku.' }),
         M('czekaj. to ty? na przystanku przy szkole?'),
         M('ktoś stał po drugiej stronie ulicy i robił ci zdjęcie. kiedy?', { wording: "to jest z drugiej strony ulicy. kiedy tak stał{eś|aś}? bo nie chcę cię straszyć, jeśli to stare zdjęcie" }),
         choose('maja2', [
@@ -547,7 +547,7 @@ Engine.chapter('g3', { num: 3, kicker: 'Sprawa 5 · Rozdział 3', title: 'Twój 
     Mr('Gdyby {Pan|Pani} czegoś potrzebował{|a}, proszę pisać. Wolę wiedzieć więcej niż mniej.'),
     scene('xIgorOskar', [
       pause(3000),
-      I('oskar dziś nie przyszedł. pierwszy raz od lutego'),
+      I('oskar dziś nie przyszedł. pierwszy raz od lutego', { wording: 'oskar dziś nie przyszedł. pierwszy raz, odkąd u mnie jest' }),
       I('nie odbiera. napisał tylko „chory”. bez emotki. on zawsze daje emotki', { wording: "nie odbiera. odpisał tylko „chory”. zwykle przynajmniej pisze, co z telefonami, które zostawił rozkręcone" }),
       choose('igor', [
         opt('Ida mówiła, że w lutym oddała ci stary telefon. Oskar go czyścił.', [I('możliwe. przez serwis przechodzi 30 telefonów tygodniowo'), I('sprawdzę w zeszycie. zapisuję każdy')], { cond: 'flag:g_idaPhone', set: { g_igorCheck: true } }),
