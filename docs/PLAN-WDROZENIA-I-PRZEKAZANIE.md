@@ -1205,3 +1205,9 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Błysk: „X cię zablokował(a)” z nawiasem → „Konto X cię zablokowało.” / „To konto cię zablokowało.” (S2, S3, S4). `vanish()` przyjmuje teraz `{ wording }`, poza podpisem kroku, więc stare zapisy zostają.
 - S5: Maja o domowym telefonie „został tylko sygnał w naszych komórkach” (niejasne) → „teraz dzwonią już tylko komórki. ten stary w przedpokoju wreszcie milczy”.
 - SW v148.
+
+### v149 — godzina na karcie rozdziału = pierwsza wiadomość
+- Przeczytane całe S3 na v146 (kp–k4): daty, dni tygodnia, nocki Kuby, wiek Leny (7 lat w 2009, 17 w 2019) i wątek „kto pytał o 2019” (zapowiedziany w finale S2) zgodne.
+- Trzy karty rozdziałów pokazywały godzinę późniejszą niż pierwsza wiadomość w rozdziale: mp 10:40 → 10:38, m0 19:30 → 19:24, k3 2:40 → 2:31.
+- Nowy test jednostkowy: godzina w `when` każdego rozdziału musi się zgadzać z jego pierwszym `clock()`. Dni tygodnia i daty wszystkich 33 kart sprawdzone skryptem.
+- SW v149.

@@ -3,7 +3,7 @@
    oraz rozdziały 2 „Siatka” (Akt II) i 3 „K.” (Akt III, do zwrotu z sesji 18).
    Plan: docs/SPRAWA-2-PLAN.md. Każdy wniosek ma źródło widoczne przed wyborem. */
 
-Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Adres na paczce', when: 'Niedziela, 15 listopada · 10:40', mood: 'tense' }, D => {
+Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Adres na paczce', when: 'Niedziela, 15 listopada · 10:38', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, dial, callEnd, notify, ambient } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const N = (t, o) => say('nina', 'nina', t, o);

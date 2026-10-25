@@ -2,7 +2,7 @@
 /* SPRAWA 2 „MOST” — prolog „Teczka” i rozdział 1 „Trzy publikacje” (Akt I, sesje 1–3).
    Plan: docs/SPRAWA-2-PLAN.md. Startuje z zapisu po Świcie lub Odłamkach (Seasons.startNext). */
 
-Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', when: 'Piątek, 20 listopada · 19:30', mood: 'calm' }, D => {
+Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', when: 'Piątek, 20 listopada · 19:24', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, rename, end, title, clock, dial, callEnd, typing, scene, camera, sys } = D;
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);

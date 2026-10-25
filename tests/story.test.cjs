@@ -128,3 +128,14 @@ test('every wording written in story sources reaches a compiled step or option',
   while((m=re.exec(src))){const w=m[1].replace(/\\'/g,"'");if(!all.includes(w.slice(0,40)))miss.push(w.slice(0,80));}
   assert.deepEqual(miss,[]);
 });
+
+test('godzina na karcie rozdziału zgadza się z pierwszym zegarem rozdziału', ()=>{
+  const {chapters} = stories(); const bad = [];
+  for (const [id, c] of Object.entries(chapters)) {
+    const w = String(c.when || '').match(/(\d{1,2}):(\d\d)\s*$/); const st = c.steps.find(s => s.t === 'clock');
+    if (!w || !st || !st.iso) continue;
+    const t = w[1].padStart(2, '0') + ':' + w[2];
+    if (st.iso.slice(11, 16) !== t) bad.push(`${id}: ${c.when} ≠ ${st.iso}`);
+  }
+  assert.deepEqual(bad, []);
+});
