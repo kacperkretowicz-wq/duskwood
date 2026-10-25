@@ -171,7 +171,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'gajda'),
     g('kuba', 'GAJDA był z tymi chłopakami?'),
     g('ola', 'Robert Gajda. Leszek Malicki. Marek Sowa. Darek Kruk.'),
-    g('ola', 'Czterech chłopaków z kadru 21.', { wording: 'Mogą być na tym zdjęciu. Nie umiem ich rozpoznać po twarzach.' }),
+    g('ola', 'Czterech chłopaków z kadru 21.', { wording: 'Mogą być na tym zdjęciu. Przy piecu jest ich trzech, jeden stoi bliżej aparatu. Twarzy nie rozpoznaję.' }),
     typing('group', 'bartek', 6000),
     g('bartek', 'moj stary mial wtedy 17 lat. co z tego'),
     typing('group', 'igor', 7000),
@@ -380,14 +380,14 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         K('czekaj. dzwoniła do ciebie?? teraz?'),
         K('co było słychać'),
         choose('kuba', [
-          opt('Nic. Jakby ktoś przesuwał telefon po stole.', [K('to nie ona. ona by coś powiedziała. cokolwiek')]),
-          opt('Ktoś oddychał i się rozłączył.', [K('nie mów tego mamie. błagam')])
+          opt('Nic. Jakby ktoś przesuwał telefon po stole.', [K('to nie ona. ona by coś powiedziała. cokolwiek', { wording: 'to nie ona. ostatni numer w tym telefonie to twój. ktoś sprawdza, kto odbierze' })]),
+          opt('Ktoś oddychał i się rozłączył.', [K('nie mów tego mamie. błagam', { wording: 'nie mów tego mamie. błagam. ktoś ma jej telefon i oddzwania na ostatni numer' })])
         ])
       ], [
         K('masz coś od jej numeru? mama widzi że był online'),
         choose('kuba', [
-          opt('Nieodebrane połączenie. Kilka sekund.', [K('kurwa'), K('ktoś ma jej telefon. ona by napisała, nie dzwoniła o trzeciej')]),
-          opt('Nie {zdążyłem|zdążyłam} odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy')])
+          opt('Nieodebrane połączenie. Kilka sekund.', [K('kurwa'), K('ktoś ma jej telefon. ona by napisała, nie dzwoniła o trzeciej', { wording: 'ktoś ma jej telefon. ostatnie połączenie w historii to twój numer. sprawdza, kto odbierze' })]),
+          opt('Nie {zdążyłem|zdążyłam} odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy', { wording: 'ona nigdy nie dzwoni o tej porze. ktoś włączył telefon i wybrał ostatni numer' })])
         ])
       ])
     ]),
@@ -418,7 +418,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     pause(2000),
     /* P4: data pliku a czas powiadomienia. Synchronizacja nie dowodzi, kiedy zrobiono zdjęcie. */
     scene('xDataPliku', [
-      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.'),
+      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.', { wording: 'Igor mi pisze: telefon połączył się o 3:05, kopia doszła do 3:07. Zdjęcie jest z 14.10. To zaległy plik, nie zdjęcie z dzisiaj.' }),
       g('kuba', 'czyli to nie jest z dzisiaj'),
       choose('group', [
         opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('ola', 'Igor: „dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust”.')]),
@@ -427,7 +427,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     ]),
     /* P4: anonimowy materiał z kopii karty CAM-01. Prawdziwy, ale z innej nocy (data w pliku). Igor wrzuca go od razu do grupy, więc trop nie zależy od otwarcia wygasającego linku. */
     scene('xAnonim', [
-      g('ola', 'Igor przysłał mi to na priv. Ktoś wrzucił na Klipo z pustego konta, plik MATERIAŁ_ROBOCZY_01. Link wygasa za 24 h, więc ściągnął.'),
+      g('ola', 'Igor przysłał mi to na priv. Ktoś wrzucił na Klipo z pustego konta, plik MATERIAŁ_ROBOCZY_01. Link wygasa za 24 h, więc ściągnął.', { wording: 'Igor przysłał mi to na priv. Ktoś wrzucił na Klipo z pustego konta plik CAM-01_2026-10-15_0147.mp4. Link wygasa za 24 h, więc ściągnął.' }),
       g('ola', '', { vid: 'assets/video/v_anonim.mp4', img: 'v_anonim' }),
       g('bartek', 'to brama huty. ta sama kamera co u mai'),
       choose('group', [

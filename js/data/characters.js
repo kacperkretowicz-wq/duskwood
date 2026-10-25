@@ -22,7 +22,7 @@ DATA.chars = {
   dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
   duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
   prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
-  ada: { name: 'Ada Kurek', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
+  ada: { name: 'Ada Wolska', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
   szymon: { name: 'Szymon Bielak', short: 'Szymon', color: '#5aa0e8', photo: 'assets/people/szymon.jpg' },
   unknown: { name: 'Nieznany numer', short: '?' },
   me: { name: 'Ty', short: 'Ty' }
@@ -113,7 +113,7 @@ DATA.endings = {
       () => G.flag('gajdaCaught')
         ? 'Robert Gajda zostaje zatrzymany przy szlabanie. Zeznanie Mai i odnalezienie jej w sztolni pozostają ważne, nawet jeśli dokumentacja dawnych wydarzeń jest niepełna. On milczy. Część pytań wciąż pozostaje bez odpowiedzi.'
         : 'Robert Gajda nie wraca do domu. Jego sevrę znajdują dwa dni później na tamie — w tym samym miejscu, w którym on sam zostawił kiedyś auto Mai.',
-      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Odprężarka spłonęła, ale ogień nie przebił się przez cegły. ') + (G.flag('gajdaCaught') ? 'Ratunek się udał. Złożenie pełnego obrazu tego, co wydarzyło się w hucie, zajmie dłużej.' : 'Gajdy nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania trwają, podobnie jak sprawa Tomka.'),
+      () => (G.flag('reportBoth') ? 'Mur w odprężarce przetrwał. ' : 'Spłonęło drewno nad kanałem; dojście do ceglanego tunelu zabezpieczono przed wydobyciem szczątków. ') + (G.flag('gajdaCaught') ? 'Ratunek się udał. Złożenie pełnego obrazu tego, co wydarzyło się w hucie, zajmie dłużej.' : 'Gajdy nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania Gajdy trwają, a okoliczności śmierci Tomka nadal bada prokuratura.'),
       'Weronika dostaje szczątki brata i list z prokuratury. Pisze ci jedno zdanie: „Wiem, gdzie on jest. To dużo. To za mało.”'
     ]
   },

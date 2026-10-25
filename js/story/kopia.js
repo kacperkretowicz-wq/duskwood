@@ -162,7 +162,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
   ];
 });
 
-Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura', when: 'Sobota, 19 grudnia · 21:30', mood: 'tense' }, D => {
+Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Ładowarka', when: 'Sobota, 19 grudnia · 21:30', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, run, callIn, callEnd, sys } = D;
   const c = (who, t, o) => say('call', who, t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);

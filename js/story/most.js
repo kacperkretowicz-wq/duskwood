@@ -23,7 +23,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
     // P7: wejście do S2 po „Odłamkach”, gdy Gajdy nie zatrzymano.
     scene('xBezGajdy', [iff(s => s.vars.s1Ending === 'odlamki' && !G.flag('gajdaCaught'), [
-      M('radiowóz dalej przejeżdża pod naszym blokiem. dwa razy dziennie, rano i koło dziesiątej'),
+      M('radiowóz dalej przejeżdża pod naszym blokiem. dwa razy dziennie, rano i koło dziesiątej', { wording: 'radiowóz dalej przejeżdża pod naszym domem. dwa razy dziennie, rano i koło dziesiątej' }),
       M('mama mówi, że to dobrze. ja i tak śpię przy zapalonej lampce'),
       choose('maja2', [
         opt('To nic dziwnego. Ja też bym nie gasił{|a}.', [M('dzięki. kuba się śmieje, ale sam sprawdza zamek dwa razy')], { trust: { maja: 1 } }),

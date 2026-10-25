@@ -1,6 +1,8 @@
 .claude/
 .DS_Store
 node_modules/
+tools/voices/models/
+tools/voices/work/
 dist/
 android/.gradle/
 android/.idea/

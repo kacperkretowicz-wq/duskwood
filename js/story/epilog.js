@@ -26,8 +26,8 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       K('mama słyszy w nich ciągle kogoś, kogo znała. ja już nie mogę tego słuchać'),
       notify({ app: 'browser', title: 'Mglisko24 · archiwum', text: 'Tak Gajda mówił o poszukiwaniach. Dziś sam jest poszukiwany.', sound: 'notif', open: { page: 'm24_home' } }),
       pause(3000),
-      W('Pożar zniszczył odprężarkę i mur. Strażacy przyjechali za późno.'),
-      W('Dalej palę znicze nad rzeką. Teraz dwa.'),
+      W('Pożar zniszczył odprężarkę i mur. Strażacy przyjechali za późno.', { wording: () => G.flag('reportBoth') ? 'Straż zdążyła pod hutę dzięki zgłoszeniu obu miejsc. Palety i drewno nad kanałem się zajęły, ale zabezpieczyli strop. Ceglany tunel na poziomie −1 i mur przetrwały. Tomka już wydobyto.' : 'Spłonęły palety i drewno nad kanałem. Strop zasypał dojście do muru. Ceglany tunel nie spłonął, ale bez zabezpieczenia wejścia nie można tam pracować. Czekamy na rozbiórkę.' }),
+      W('Dalej palę znicze nad rzeką. Teraz dwa.', { wording: () => G.flag('reportBoth') ? 'Jeden znicz stawiam już przy Tomku. Drugi trzymam dla Mai. Jej dalej szukamy.' : 'Dalej palę znicze nad rzeką. Teraz dwa.' }),
       pause(3000),
       sz('nadal jej szukam'),
       sz('ty tez?'),
@@ -54,7 +54,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
       scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀', { img: 'e_czytelnia' })]),
-      notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
+      notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', wording: 'Przełom w sprawie sprzed 29 lat: Tomka odnaleziono w hucie', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [
         W('Pochowaliśmy Tomka w sobotę. Obok mamy.', { wording: 'Pochowaliśmy Tomka w zeszłą sobotę. Obok mamy.' }),
@@ -100,8 +100,8 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ])]),
       pause(2500),
       iff('var:trust_ola>=1', [
-        O('Odpisałam jej. Po trzech tygodniach.'),
-        O('Napisałam: „Ja też przepraszam za tamten wieczór”.')
+        O('Odpisałam jej. Po trzech tygodniach.', { wording: 'Maja odpisała na tamtą wiadomość. Tę, którą wysłałam, kiedy jeszcze jej szukaliśmy.' }),
+        O('Napisałam: „Ja też przepraszam za tamten wieczór”.', { wording: 'Napisała: „Wiem, Olka”. I zaraz pyta, co kupić na kolację.' })
       ], [
         O('Dziękuję za wszystko. Nawet za to, że {grzebałeś|grzebałaś} w moich wiadomościach.')
       ]),
@@ -129,7 +129,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('Tomek był tylko jedną z jego spraw. Tam są inne.', { wording: 'na razie zajrzałam tylko na wierzch. kasety, zeszyty, jakieś wycinki o moście' }),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.', { wording: 'pani Weronika mówi, że pomoże to poukładać. u mnie pudło stoi pod biurkiem i przeszkadza bandziorowi' }),
       M('Kiedyś ci pokażę, jak je znaleźć.', { wording: 'jak do tego usiądę, napiszę. dzisiaj tylko chciałam się odezwać' }),
-      M('tylko odbierz jak zadzwonię, ok? tym razem'),
+      M('tylko odbierz jak zadzwonię, ok? tym razem', { wording: 'tylko odbierz jak zadzwonię, ok? tym razem. tamtej nocy gajda włączył telefon, żeby wysłać mamie tamtego smsa. zobaczył ostatni numer i zadzwonił. nic nie powiedział. ja nawet nie wiedziałam' }),
       pause(3500),
       iff(E('swit'), [ending('swit')], [ending('odlamki')])
     ]),

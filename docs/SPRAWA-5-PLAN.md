@@ -67,19 +67,19 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 - `kopia2`: jeden z głosów pochodzi z twojego folderu (link od Idy był publiczny). Sylwia pisze w grupie „ktoś ma całą kronikę” i wszyscy patrzą na ciebie. Najmroczniejszy start.
 - Flagi: `c_igorClosed` (bez kopii u Igora), `c_gsTemplate` (Natan zna serwer gazety), `c_kubaHelps`, `c_zenonDefended`, `c_olaFirst`.
 
-## 8. Przebieg (7 dni, 15–21.03.2027)
+## 8. Przebieg (7 dni, 14–20.03.2027)
 1. **2:14** — głosówka do Mai twoim głosem. Kuba dzwoni o 2:20. Codzienność: kostka Bartka, wniosek o stypendium Kuby.
 2. **Hasło** — grupa Sylwii panikuje. Gracz ustala z Mają rodzinne hasło. Zagadka audio: trzy głosówki „Kuby”, jedna prawdziwa (oddech, tło, sposób mówienia). Wybór zmienia tempo ujawnienia, nie jest quizem.
 3. **Wera** — telefon od „Tomka”. Wieczór z panią Weroniką i albumem. Zenon rozpoznaje festyn 1996.
 4. **Twój głos** — Dudek dzwoni do ciebie twoim głosem. Straszak: na końcu rozmowy słyszysz własny śmiech.
 5. **Serwis** — Igor, Oskar i paczka na Błysku. Zatrzymanie Oskara, laptop Dudka. Fałszywe rozwiązanie.
 6. **Przewijanie** — szum magnetowidu w nagraniu Tomka, archiwum gminy, przecinki w scenariuszach. Zwrot.
-7. **Rozprawa** — dzień przed pierwszą rozprawą o most. Marta dzwoni o 23:47. Ostatni wybór.
+7. **Nagranie** — sobota 20 marca. Rozmowa z Martą jest nagrywana. Rozprawa o most jest dopiero w kwietniu.
 
 ## 9. Zakończenia (season 's5')
 - `haslo`: gracz nagrywa Martę i oddaje nagranie Natanowi i prokuraturze. Proces rusza. Maja wysyła głosówkę: „to ja. hasło: [hasło gracza]”.
 - `echo`: gracz nie zdąży. Świadek wycofuje zeznania po telefonie „od zmarłej żony”. Proces się sypie. Twój głos jeszcze miesiąc krąży po Mglisku.
-- `cisza2`: gracz kasuje wszystko, co ma (folder, nagrania), i prosi Idę, Igora i Zenona o to samo. Głosy znikają, dowody też. Spokój bez sprawiedliwości.
+- `cisza2`: gracz kasuje wszystko, co ma (folder, nagrania), i prosi Idę, Igora i Zenona o to samo. Usuwają własne kopie; nie oznacza to usunięcia materiałów zabezpieczonych przez policję u Dudka. Przestają dalej dokumentować udział Marty.
 
 ## 10. Mechaniki uzależniające
 - **Rodzinne hasło**: gracz wybiera słowo w rozdziale 2. Wraca w finale i w kolejnych sezonach. Postaci pytają o nie, kiedy coś jest nie tak.
@@ -102,5 +102,5 @@ Siedem dni z punktu 8 = siedem rozdziałów, każdy ok. 55–75 wiadomości:
 - **g3 „Twój głos”** (17.03): pracownia, wideo z kasety nr 12, zagadka (nowe zdania / trzy kubki / kaseta niepokazywana), zeszyt Igora, telefon twoim głosem do ciebie, straszak `s5_smiech`.
 - **g4 „Serwis”** (18.03): Oskar, trzy próbki twojego głosu (źródło: rozmowa z Idą o 20:58), pd_audio = Dudek, przesyłanie w pobliżu: serwis nocą, SMS od Dudka, straszak `s5_serwis`.
 - **g5 „Przewijanie”** (19.03): zatrzymanie Dudka (fałszywe rozwiązanie), scenariusz z laptopa (Pracownia_UG), pisk magnetowidu, kaseta z mostu 2011, Marta z domu Kurek, telefon o 23:47 (`s5_przewijanie`).
-- **g6 „Rozprawa”** (20.03): plan z prokuraturą, nagrywanie rozmów, zdjęcie-dowód z galerii, rozmowa z Martą, zakończenia `haslo` / `echo` / `cisza2`.
-Warunek `haslo`: gracz nagrywa rozmowę (`g_recOn`), mówi Marcie o nagraniu (`g_recordMarta`) i nie obiecał jej nagrań (`g_martaAsk`). `cisza2`: „skasuję wszystko”. Pozostałe przypadki: `echo`.
+- **g6 „Nagranie”** (20.03): plan z prokuraturą, nagrywanie rozmów, zdjęcie-dowód z galerii, rozmowa z Martą, zakończenia `haslo` / `echo` / `cisza2`. Rozprawa o most jest w kwietniu, w tekście zakończenia `haslo`, nie w tytule tego dnia.
+Warunek `haslo`: gracz nagrywa rozmowę (`g_recOn`), mówi Marcie o nagraniu (`g_recordMarta`) i albo słyszy wyraźne przyznanie (`g_confess`), albo nie wysłał jej wcześniej nagrań (`g_martaAsk`). Samo wysłanie plików bez przyznania zostawia `echo`. `cisza2`: „skasuję wszystko”.

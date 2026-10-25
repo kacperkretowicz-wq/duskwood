@@ -16,6 +16,11 @@ test('offline Range na wideo zwraca 206',async()=>{
   assert.equal(r.status,206);assert.equal(r.headers.get('Content-Range'),'bytes 10-19/100');assert.equal((await r.arrayBuffer()).byteLength,10);
   const t=await go(h,'/v.mp4',{range:'bytes=0-'});assert.equal(t.headers.get('Content-Range'),'bytes 0-99/100');
 });
+test('mp4 zapisany jako octet-stream i tak wraca jako video/mp4 przy Range',async()=>{
+  const {h}=load({'/v.mp4':new Response(new Uint8Array(20),{status:200,headers:{'Content-Type':'application/octet-stream'}})},off);
+  const r=await go(h,'/v.mp4',{range:'bytes=0-3'});
+  assert.equal(r.status,206);assert.equal(r.headers.get('Content-Type'),'video/mp4');
+});
 test('offline nawigacja wraca do index.html',async()=>{
   const {h}=load({'./index.html':new Response('idx')},off);
   assert.equal(await (await go(h,'/cokolwiek?x=1',{mode:'navigate'})).text(),'idx');

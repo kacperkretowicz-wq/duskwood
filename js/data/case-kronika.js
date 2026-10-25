@@ -58,9 +58,9 @@ DATA.web.tt_kronika = {
     const clips = [
       ['18.01 · 21:00', 'studniówka, 1999. „jutro kolejna osoba”', '34 tys.'],
       ['19.01 · 21:00', 'boisko, 2008. kto wygrał przetarg', '51 tys.'],
-      ['20.01 · 21:00', 'festyn, 2018. jutro: O.N.', '77 tys.'],
+      ['20.01 · 21:00', 'festyn, 2018. piątek, 21:00: O.N.', '77 tys.'],
       ['21.01 · 21:00', G.flag('c_zenonDefended') ? 'przerwa. „ktoś za bardzo się wtrąca”' : 'adres operatora? sami znajdźcie', '90 tys.']
-    ].slice(0, G.flag('c_day4') ? 4 : G.flag('c_day3') ? 3 : G.flag('c_day2') ? 2 : 1).reverse();
+    ].slice(0, G.now() >= U.parseLocal('2027-01-21T21:00') ? 4 : G.flag('c_day3') ? 3 : G.flag('c_day2') ? 2 : 1).reverse();
     return `<header class="tt-h"><b>klipo</b></header><main class="tt-m">
       <div class="tt-prof"><b>@kronika.mglisko</b><p>tv dolina 1996–2018. każdy ma swoje 30 sekund</p></div>
       ${clips.map(([t, d, v]) => `<article class="tt-v"><p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
@@ -102,7 +102,7 @@ DATA.web.tt_kronika = {
 /* Sezon 4: ten sam zapis. Identyfikatory odcinków są kontraktem zapisu. */
 DATA.seasons.push({
   id: 's4', revision: 1, title: 'Kronika', kicker: 'SPRAWA 4', released: true,
-  description: 'Ferie w Mglisku: wynajmujesz kawalerkę w bloku naprzeciwko Wronów. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
+  description: 'Ferie w Mglisku. Kuba załatwił ci kawalerkę u pani z parteru, w bloku naprzeciwko kuchni Wronów. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
   chapters: ['c0', 'c1', 'c2', 'cf', 'c3', 'c4'],
   credits: {
     kicker: 'Koniec sprawy 4', title: 'KRONIKA',
@@ -136,7 +136,7 @@ Object.assign(DATA.endings, {
       'Ida mówi dziadkowi o wszystkim w kuchni, przy herbacie. Pan Zenon długo milczy, potem pyta tylko, czy pies był wyprowadzony.',
       'W lutym kasety jadą do archiwum gminy. Na każdej jest nowa naklejka: „do pamięci, nie do Klipo”.',
       'W archiwum odbiera je pani Marta Jasińska. Podpisuje protokół i mówi panu Zenonowi, że wszystko będzie zapisane.',
-      () => G.flag('c_olaFirst') ? 'Ola sama opowiada o festynie w grupie. Pod jej wpisem są trzy serduszka i jeden komentarz: „też byłam głupia w liceum”.' : 'Ola nigdy się nie dowiaduje, jak blisko było.'
+      () => G.flag('c_olaPosted') ? 'Ola sama opowiada o festynie w grupie. Miała wtedy czternaście lat i złamała dziewczynie nos. Pod wpisem jest jeden komentarz: „też miałam czternaście lat”.' : 'Ola czeka na wynik rozmowy z Idą. Klip miał wyjść w piątek o 21:00. Nie wychodzi. Swojej wiadomości Ola też nie publikuje. W poniedziałek jest w świetlicy.'
     ]
   },
   transmisja: {

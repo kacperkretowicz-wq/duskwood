@@ -63,7 +63,7 @@ const Engine = (() => {
     evolve: (ev, patch) => ({ t: 'evolve', ev, patch }),
     unlock: (...keys) => ({ t: 'unlock', keys }),
     lock: (...keys) => ({ t: 'lock', keys }),
-    set: (k, v = true) => ({ t: 'set', k, v }),
+    set: (k, v = true, also) => ({ t: 'set', k, v, ...(also ? { also } : {}) }),
     inc: (k, n = 1) => ({ t: 'inc', k, n }),
     trust: (who, n) => ({ t: 'trust', who, n }),
     iff: (cond, then, els = []) => ({ t: 'if', cond, then, els }),
@@ -360,7 +360,7 @@ const Engine = (() => {
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
         const before = leadsToChoice(ch);
-        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
+        await talk(st.chat, st.who, plainTyper(st.who, typeof st.wording === 'function' ? st.wording(s) : (st.wording ?? st.text)), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;
@@ -443,7 +443,10 @@ const Engine = (() => {
       }
 
       case 'wait': {
-        if (G.test(st.cond)) return;
+        // goal() i waitFor często są osobnymi krokami. Cel gaśnie, gdy warunek czekania
+        // jest spełniony — także gdy sam krok wait nie niesie tego samego tekstu.
+        const clearGoal = () => { if (s.objective) { s.objective = null; G.change(); } };
+        if (G.test(st.cond)) { clearGoal(); return; }
         stopFF();
         if (st.goal) setGoal(st.goal, st.goalHints || []);
         await new Promise((res, rej) => {
@@ -464,7 +467,7 @@ const Engine = (() => {
         });
         guard(my);
         // Spełniony cel nie wisi dalej w „Co teraz?” — do następnego celu widżet mówi „Sprawdź wiadomości.”
-        if (st.goal && s.objective && s.objective.text === st.goal) { s.objective = null; G.change(); }
+        clearGoal();
         return;
       }
 
@@ -483,10 +486,14 @@ const Engine = (() => {
       case 'tl': s.tl[st.id] = true; G.change(); return;
       case 'unlock': st.keys.forEach(k => G.unlock(k)); return;
       case 'lock': st.keys.forEach(k => G.lock(k)); return;
-      case 'set': G.setFlag(st.k, st.v); return;
+      case 'set': G.setFlag(st.k, st.v); if (st.also) G.setFlag(st.also, true); return;
       case 'inc': G.inc(st.k, st.n); return;
       case 'trust': doTrust(st.who, st.n); return;
-      case 'notify': UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...st, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...st, app: DATA.chatApp(st.who) } : st); return;
+      case 'notify': {
+        const notice = { ...st, text: st.wording ?? st.text };
+        UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...notice, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...notice, app: DATA.chatApp(st.who) } : notice);
+        return;
+      }
       case 'sync': {
         G.unlock(st.key);
         s.vars.nimbusNew = (s.vars.nimbusNew || 0) + (st.count || 1);
@@ -503,6 +510,7 @@ const Engine = (() => {
       case 'scare': {
         s.scares = s.scares || {};
         if (s.scares[st.id]) return;
+        if (typeof VoiceLib !== 'undefined' && !VoiceLib.allowScare(st.id, s.flags)) return;
         s.scares[st.id] = G.now ? G.now() : Date.now();
         G.save();
         if (ff) return;

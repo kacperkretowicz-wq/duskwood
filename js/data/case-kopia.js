@@ -37,7 +37,7 @@ Object.assign(DATA.persons, {
     facts: [
       { text: 'Nie chciała wiedzieć, co jest w pudle. „On już wszystko nagrał, wystarczy.”' },
       { text: 'W nocy z 18 na 19.12 dzwoniła z domowego numeru. Nie umiała nic powiedzieć.', cond: 'flag:k_ewaCalled' },
-      { text: 'Nie zna hasła do jego konta Nimbus. Telefon męża leży w szufladzie, rozładowany od pogrzebu.', cond: 'flag:k_ewaCloud' }
+      { text: 'Nie zna hasła do jego konta Nimbus. Telefon męża leży rozładowany w szufladzie. Kopia nagrań mogła powstać dużo wcześniej.', cond: 'flag:k_ewaCloud' }
     ]
   },
   archiwum: {
@@ -175,7 +175,7 @@ DATA.web.tt_archiwum = {
     ].slice(0, n).reverse();
     return `<header class="tt-h"><b>klipo</b></header><main class="tt-m">
       <div class="tt-prof"><b>@archiwum.rybickiego</b><p>nie do druku. 2006–2021. on nagrywał wszystko</p></div>
-      ${clips.map(([t, d, v]) => `<article class="tt-v">${t.startsWith('18.12 · 22:31') ? '<video class="web-vid" src="assets/video/v_stodola.mp4" poster="assets/video/v_stodola.jpg" controls playsinline muted preload="none"></video>' : ''}<p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
+      ${clips.map(([t, d, v]) => `<article class="tt-v">${t.startsWith('18.12 · 22:31') ? '<video class="web-vid" src="assets/video/v_stodola.mp4" poster="assets/video/v_stodola.jpg" controls playsinline preload="none"></video>' : ''}<p><b>${t}</b> · ▶ ${v}</p><p>${d}</p></article>`).join('')}
       <div class="tt-com"><p><b>gosia_z_bielawy</b> to jest chore. ci ludzie żyją</p><p><b>m.kowal</b> w końcu ktoś mówi jak było</p><p><b>sylwia_salon</b> Proszę, nie wpisujcie nazwisk w komentarzach.</p></div></main>`;
   }
 };
@@ -212,7 +212,7 @@ DATA.seasons.push({
     note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 3 · Rozdział 4.'
   },
   episodes: [
-    ['s3.00a', 'Hasło', 'kp', 'flag:kp_passwords'],
+    ['s3.00a', 'Karteczka', 'kp', 'flag:kp_passwords'],
     ['s3.00b', 'Miesiąc od Rzeczki', 'kp', 'flag:kp_done'],
     ['s3.01', 'Pierwszy klip', 'k0', 'ev:ev_k_klip1'],
     ['s3.02', 'Nie z kasety', 'k0', 'ev:ev_k_zrodlo'],

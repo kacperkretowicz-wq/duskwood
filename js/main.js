@@ -9,6 +9,7 @@
   function boot() {
     if (params.has('art')) return artGallery();
     UI.build();
+    if (typeof Voices !== 'undefined') Voices.startListening();
     if (DEBUG) G.settings.speed = params.get('speed') || 'instant';
     title();
   }

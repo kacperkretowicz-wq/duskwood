@@ -28,6 +28,14 @@ DATA.evidence = {
     title: 'Nekrolog Adama Rybickiego', cat: 'msg', source: 'Gazeta Sudecka',
     desc: 'Adam Rybicki, dziennikarz Gazety Sudeckiej, zmarł w lutym 2021 roku. Jego numer komórkowy został po latach przydzielony nowemu abonentowi — tobie. Maja nie mogła o tym wiedzieć.'
   },
+  ev_backup_cut: {
+    title: 'Urwana kopia Nimbusa (14.10, 23:58)', cat: 'digital', source: 'Twój telefon · podgląd',
+    desc: 'Przy SMS-ie z 13.10 telefon próbował wczytać podgląd zdjęć. Z Nimbusa wróciła tylko data: *ostatnia kopia urządzenia 14.10.2026, 23:58*. Potem zapis się urywa. Bez hasła nie widać treści kopii ani miejsca.'
+  },
+  ev_sim_footer: {
+    title: 'Numer karty SIM', cat: 'digital', source: 'Twój telefon',
+    desc: 'Stopka artykułu z 2007 roku podaje *692 117 305*. Telefon rozpoznał w niej numer karty SIM, która jest w środku.'
+  },
 
   /* ---------- rozdział 1 ---------- */
   ev_kluska: { title: 'Kluska — pierwszy pies Mai', cat: 'photo', source: 'Kadr: @maja.wrona', img: 'k_kluska', desc: 'Jamniczka Kluska (2006–2019). Pierwsza psia miłość Mai — „zanim pojawił się Bandzior”.' },
@@ -37,7 +45,7 @@ DATA.evidence = {
     desc: 'Czerwoną iskrę Mai znalazł wędkarz *15.10 o 6:40* na koronie tamy Zalewu Mgliskiego. Na barierce wisiała jej kurtka. Komendant Gajda: „wszystko wskazuje na tragiczny wypadek lub targnięcie się na życie”. Nurkowie nic nie znaleźli.'
   },
   ev_loc_1410: {
-    title: 'Lokalizacja Mai: 14.10', cat: 'digital', source: 'Nimbus · historia lokalizacji', img: 'map_snip1410',
+    title: 'Pozycje telefonu Mai · 14.10', cat: 'digital', source: 'Nimbus · historia lokalizacji', img: 'map_snip1410',
     desc: 'Dom → stacja „Mglica” (17:05–17:40) → dom → *22:58 Huta Szkła „Jutrzenka”*. Ostatni zapis telefonu: *23:58, w hucie*, dokładność 12 m. W zachowanej historii nie ma pozycji na tamie, która leży 3 km dalej. Po utracie sygnału nie da się odtworzyć dalszej trasy z tych danych. Lokalizacja telefonu nie jest pewną lokalizacją właścicielki.',
     open: { app: 'nimbus', params: { section: 'loc', day: '2026-10-14' }, label: 'Otwórz historię lokalizacji' }
   },
@@ -46,7 +54,7 @@ DATA.evidence = {
   ev_project: { title: 'Notatka: „Szkło pamięta”', cat: 'msg', source: 'Nimbus · notatki', desc: 'Projekt dyplomowy Mai o opuszczonej hucie: hale A i B, szatnie, *odprężarka* (długi tunel do studzenia szkła), portrety dawnych hutników.' },
   ev_darkroom: { title: 'Dziennik ciemni (5.10)', cat: 'msg', source: 'Nimbus · notatki', desc: 'Maja wywołała kliszę z aparatu znalezionego w *szafce 17*. Klisza z ok. 1997 roku. „Na 21 coś żółtego?? Negatyw robi z żółtego niebieski.” Negatywy sfotografowała telefonem, żeby odwrócić je później.' },
   ev_cam2_0019: { title: 'Fotopułapka 2: mężczyzna z latarką (13.10)', cat: 'photo', source: 'Nimbus · Fotopułapki', img: 'c2_0019', desc: '13.10, 02:40. Ktoś ogląda mur w odprężarce i kieruje latarkę prosto w kamerę. Twarz zginęła w odblasku. Dzień później Maja zniknęła.' },
-  ev_cam1_maja: { title: 'Fotopułapka 1: Maja przy bramie (14.10)', cat: 'photo', source: 'Nimbus · Fotopułapki', img: 'c1_0021', desc: '14.10, 22:57. Ostatnie znane zdjęcie Mai: z czołówką, w kurtce, idzie przez dziedziniec huty.' },
+  ev_cam1_maja: { title: 'Fotopułapka 1: Maja przy bramie (14.10)', cat: 'photo', source: 'Nimbus · Fotopułapki', img: 'c1_0021', desc: '14.10, 22:57. Maja z czołówką, w kurtce, idzie przez dziedziniec huty. Zapis potwierdza jej wejście tej nocy.' },
   ev_cam1_car: { title: 'Fotopułapka 1: samochód przy bramie (15.10)', cat: 'photo', source: 'Nimbus · Fotopułapki', img: 'c1_0022', desc: '15.10, 01:20 — ciemny samochód z włączonymi światłami podjeżdża pod bramę huty. Kilka godzin później auto Mai „znajduje się” na tamie. Tablicy nie widać.' },
   ev_mom_gajda: { title: 'SMS: „Gajda tu był??”', cat: 'msg', source: 'Nimbus · SMS z mamą', desc: '13.10 mama pisze Mai, że odwiedził ich *komendant Robert Gajda*: pytał o projekt w hucie, mówił, że to niebezpieczne i że to teren prywatny. Maja: „Gajda tu był?? Czego chciał naprawdę?”' },
   ev_bartek_sms: { title: 'SMS do Bartka: „Chodzi o twojego tatę”', cat: 'msg', source: 'Nimbus · SMS', desc: '14.10, 16:38: „Możemy pogadać? To ważne. Chodzi o twojego tatę.” Wieczorem Bartek odpisuje: „zostaw mojego ojca w spokoju”.' },
@@ -61,7 +69,7 @@ DATA.evidence = {
   ev_fence_gap: { title: 'Dziura w płocie przy trafostacji', cat: 'place', source: 'Galeria Mai', img: 'm_fence', desc: 'Za starą stacją transformatorową siatka jest rozcięta i odgięta. Tędy da się wejść na teren huty, omijając bramę.' },
   ev_plan: { title: 'Plan ewakuacji huty', cat: 'place', source: 'Galeria Mai', img: 'm_plan', desc: 'Wyblakły plan z hali A. *Szatnia: hala B, piętro 1. Odprężarka: hala A, poziom −1, wejście za piecem wannowym.*' },
   ev_bricks: { title: 'Nowsze cegły w odprężarce', cat: 'place', source: 'Galeria Mai', img: 'm_lehr', desc: 'Fragment tunelu odprężarki zamurowano jaśniejszą *cegłą dziurawką*, inną niż przedwojenna cegła reszty hali. Zaprawa położona niechlujnie, „na szybko”.' },
-  ev_toy: { title: 'Mały plastikowy przedmiot pod murem', cat: 'object', source: 'Galeria Mai (8.10)', img: 'm_lehr', desc: 'Pod zamurowanym fragmentem, w pyle, leży coś małego, owalnego, z plastiku. Maja chyba tego nie zauważyła.' },
+  ev_toy: { title: 'Mały plastikowy przedmiot pod murem', cat: 'object', source: 'Galeria Mai (8.10)', img: 'm_lehr', desc: 'Pod zamurowanym fragmentem, w pyle, leży coś małego, owalnego, z plastiku. Maja wspomniała o tym w głosówce, ale nie rozpoznała przedmiotu.' },
   ev_car_window: { title: 'Ciemny samochód pod domem (13.10)', cat: 'photo', source: 'Galeria Mai', img: 'm_window', desc: '13.10, 23:10 — zdjęcie z okna pokoju Mai. Po drugiej stronie ulicy stoi ciemne auto ze zgaszonymi światłami. Ktoś w nim siedzi.' },
 
   /* ---------- rozdział 2 ---------- */
@@ -70,8 +78,8 @@ DATA.evidence = {
   ev_headlamp: { title: 'Czołówka Mai', cat: 'object', source: 'Znalezisko Kuby', img: 'k_headlamp', desc: 'Pod paletami przy murze odprężarki Kuba znalazł czołówkę z naklejką jamnika. To czołówka Mai. Szkiełko pęknięte.' },
   ev_patch: { title: 'Świeżo załatany mur', cat: 'place', source: 'Zdjęcie Kuby', img: 'k_wall', desc: 'W murze odprężarki ktoś niedawno wstawił kilka cegieł na świeżą zaprawę i zastawił miejsce paletami i plandeką. Zaprawa jeszcze jasna.' },
   ev_mount: { title: 'Urwany uchwyt fotopułapki 2', cat: 'object', source: 'Zdjęcie Igora', img: 'k_mount', desc: 'Na filarze w hali A zostały tylko opaski zaciskowe i kawałek plastiku. Fotopułapkę ktoś zerwał.' },
-  ev_frame08: { title: 'Kadr 8: chłopcy w hucie (1997)', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_08d', desc: 'Kilku nastolatków przy piwie, w świetle flesza. Lato, burza za oknami. Twarze prześwietlone.' },
-  ev_frame21: { title: 'Kadr 21: postać w żółtej pelerynie', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_21d', desc: 'Czterech chłopaków przy piecu. W drzwiach za nimi stoi *małe dziecko w żółtej pelerynie z kapturem*. Na szyi ma coś na sznurku.' },
+  ev_frame08: { title: 'Kadr 8: chłopcy w hucie (1997)', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_08d', desc: 'Czterej nastolatkowie przy piwie, w świetle flesza. Lato, burza za oknami. Aparat należy do Darka; według późniejszej relacji Marka te dwa grupowe kadry zrobiła przechodząca Halina Mróz, zanim odeszła. Nie była uczestniczką późniejszych wydarzeń.' },
+  ev_frame21: { title: 'Kadr 21: postać w żółtej pelerynie', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_21d', desc: 'Przy piecu stoi czterech starszych chłopców, w tym Darek. Według Marka migawkę nacisnęła Halina Mróz, która przyszła zawołać ich do pomocy przy workach i zaraz odeszła. W drzwiach za nimi stoi *małe dziecko w żółtej pelerynie z kapturem*. Na szyi ma coś na sznurku.' },
   ev_frame22: { title: 'Kadr 22: dziura w podłodze', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_22d', desc: 'Rozmazany, niemal czarny kadr. Snop latarki, połamane deski, czarna woda w dole, a w niej coś żółtego. Przy dolnej krawędzi rozmazana ręka — ktoś sięga w dół.' },
   ev_questions: { title: 'Notatka Mai: „Pytania”', cat: 'msg', source: 'Nimbus · notatki (PIN)', desc: 'Lista pytań Mai: kim są chłopcy z kadru 21, kto i po co zamurował odprężarkę, dlaczego szukano tylko w rzece, kto prowadził poszukiwania (*komendant Gajda — ojciec Roberta*). Na końcu: „Nie mówić nikomu. *Zwłaszcza R.G.*”' },
   ev_car_igor: { title: 'Zdjęcie auta przy bramie (Igor)', cat: 'photo', source: 'Zdjęcie Igora', img: 'i_car', desc: 'Rozmazane zdjęcie z daleka: ciemne auto przy bramie huty, światła zgaszone. Z tablicy da się odczytać tylko końcówkę: *…19*.' },
@@ -81,21 +89,21 @@ DATA.evidence = {
   ev_tomek: { title: 'Tomek Lis, czerwiec 1997', cat: 'photo', source: 'Weronika Lis', img: 'w_tomek', desc: 'Ostatnie zdjęcie Tomka: żółta peleryna, gumowce, na szyi *tamagotchi* na sznurku. Dostał je na komunię i nie rozstawał się z nim.' },
   ev_interview: { title: 'Wywiad z Weroniką: czterech chłopaków', cat: 'testimony', source: 'Dyktafon Mai (oczyszczone)', desc: 'Tomek chodził tamtego lata za starszymi chłopakami: *Darkiem Krukiem, Robertem Gajdą, Leszkiem Malickim i Markiem Sową*. Poszukiwania prowadził komendant Gajda — ojciec Roberta.' },
   ev_plate_cam: { title: 'Tablica z fotopułapki: DDZ 6K1?', cat: 'photo', source: 'Ciemnia · fotopułapka 1', img: 'c1_0023e', desc: 'Po rozjaśnieniu zdjęcia z 15.10, 02:05, widać tablicę odjeżdżającego auta: *DDZ 6K1…* — ostatni znak zasłania błoto.' },
-  ev_plate: { title: 'Tablica rejestracyjna: DDZ 6K19', cat: 'digital', source: 'Zestawienie dwóch zdjęć', desc: 'Fotopułapka (15.10): *DDZ 6K1?* + zdjęcie Igora (23.10): *…19*. Ten sam samochód był pod hutą noc po zniknięciu Mai i wczoraj w nocy.' },
+  ev_plate: { title: 'Tablica rejestracyjna: DDZ 6K19', cat: 'digital', source: 'Zestawienie dwóch zdjęć', desc: 'Fotopułapka (15.10, 02:05): *DDZ 6K1?* + zdjęcie Igora (23.10, 00:12): *…19*. Numer łączy auto z nocy 14/15.10 z autem widzianym podczas wyprawy Kuby i Igora. Nie identyfikuje kierowcy.' },
   ev_owner: { title: 'DDZ 6K19 należy do Roberta Gajdy', cat: 'testimony', source: 'Zeszyt napraw Auto-Sowa', img: 'b_ledger', desc: 'W zeszycie warsztatu Sowów: *DDZ 6K19 — Sevra Magna, gr. — R. Gajda*. Prywatne auto komendanta.' },
   ev_gajda_call: { title: 'Rozmowa z komendantem Gajdą', cat: 'testimony', source: 'Połączenie przychodzące', desc: 'Gajda zażądał kopii plików z chmury Mai i wiedział o tobie więcej, niż powinien.' },
-  ev_sms_kluska: { title: 'SMS do mamy: „Pozdrów Kluskę”', cat: 'msg', source: 'Telefon Mai · 24.10, 03:05', desc: '„Mamo, nic mi nie jest. Potrzebuję czasu. Nie szukajcie mnie. Pozdrów Kluskę.” Maja zawsze pisała „Mamuś”. A Kluska nie żyje od 2019 roku. *To wołanie o pomoc.*' },
+  ev_sms_kluska: { title: 'SMS do mamy: „Pozdrów Kluskę”', cat: 'msg', source: 'Telefon Mai · 24.10, 03:05', desc: '„Mamo, nic mi nie jest. Potrzebuję czasu. Nie szukajcie mnie. Pozdrów Kluskę.” Maja zwykle pisała „Mamuś”, a Kluska nie żyje od 2019 roku. Wiadomość może być wymuszona albo napisana przez kogoś innego. Nie potwierdza, że Maja jest bezpieczna.' },
   ev_sync_wall: { title: 'Zdjęcie Mai: otwór w murze (14.10, 23:44)', cat: 'photo', source: 'Nimbus · zaległa synchronizacja', img: 's_wall', desc: 'Maja wybiła kilka cegieł. W świetle czołówki, w głębi tunelu: strzęp żółtego materiału.' },
   ev_sync_door: { title: 'Zdjęcie Mai: postać w drzwiach (14.10, 23:53)', cat: 'photo', source: 'Nimbus · zaległa synchronizacja', img: 's_door', desc: 'Poruszone zdjęcie: w drzwiach hali stoi mężczyzna z latarką. Na ramieniu — jasna naszywka. Pięć minut potem telefon Mai traci sygnał.' },
 
   /* ---------- rozdział 4 ---------- */
-  ev_findphone: { title: 'Ostatnia pozycja telefonu Mai', cat: 'digital', source: 'Nimbus · Znajdź urządzenie', img: 'find_snip', desc: '24.10, 03:07. Telefon Mai był online przez dwie minuty. Pozycja z masztów: las na stoku *Sowiej Kopy*, dokładność ±800 m. W tym kręgu są trzy stare sztolnie.' },
+  ev_findphone: { title: 'Ostatnia pozycja telefonu Mai', cat: 'digital', source: 'Nimbus · Znajdź urządzenie', img: 'find_snip', desc: '24.10, od 03:05. Telefon Mai był krótko online. Pozycja trafiła do paczki po zakończeniu kopii. Pozycja z masztów: las na stoku *Sowiej Kopy*, dokładność ±800 m. W tym kręgu są trzy stare sztolnie.' },
   ev_sztolnie: { title: 'Przewodnik: podziemia Sowiej Kopy', cat: 'msg', source: 'sowiakopa.pl', img: 'web_adits', desc: '*Anna* — trasa turystyczna, czynna codziennie, monitoring. *Waltraud* — zalana od powodzi 1997, wejście zawalone. *Ewa (nr 3)* — zamknięta stalową kratą (nietoperze); klucze ma nadleśnictwo i *koło łowieckie*, które trzyma tam paśnik.' },
   ev_kolo: { title: 'Koło Łowieckie „Sokół”: łowczy R. Gajda', cat: 'msg', source: 'kl-sokol.pl', desc: 'Obwód łowiecki nr 117 obejmuje wschodni stok Sowiej Kopy ze sztolniami Ewa i Waltraud. *Łowczy koła: Robert Gajda.*' },
   ev_gajda_hunt: { title: 'Gajda przy paśniku „pod Ewą”', cat: 'photo', source: 'Kadr: @r.gajda', img: 'kadr_hunt', desc: 'Zdjęcie z profilu Gajdy: „Paśnik pod Ewą gotowy na zimę. Darz bór!”. W tle — stalowa krata wejścia do sztolni.' },
   ev_frame23: { title: 'Kadr 23 — pełna rozdzielczość', cat: 'photo', source: 'Od Szklarza', img: 'p_23d', desc: 'Klatka, która „była prześwietlona”. Flesz wydobywa z ciemności twarz siedemnastolatka z wyciągniętą ręką: „nie rób zdjęć”. To *Robert Gajda*. Za nim, w kanale pieca, coś żółtego.' },
   ev_szklarz_phrase: { title: 'Szklarz: „technicznie rzecz biorac”', cat: 'msg', source: 'Rozmowa ze Szklarzem', desc: 'Szklarz pisze bez polskich znaków i bez wielkich liter. Ale jedno zdanie brzmi znajomo: „technicznie rzecz biorac, ta klatka nigdy nie byla przeswietlona”.' },
-  ev_marek: { title: 'Wyznanie Marka Sowy', cat: 'testimony', source: 'Przez Bartka', desc: 'Ojciec Bartka opowiada noc z 1997: Tomek wpadł do zalanego kanału pieca. Wyciągnęli go martwego. *Robert zdecydował*, że nikt się nie dowie. Marek zamurował wejście. Robert ma klucz do kraty sztolni Ewa.' },
+  ev_marek: { title: 'Wyznanie Marka Sowy', cat: 'testimony', source: 'Przez Bartka', desc: 'Ojciec Bartka opowiada noc z 1997: Tomek wpadł do zalanego kanału pieca. Wyciągnęli go martwego. *Robert zdecydował*, że nikt się nie dowie. Marek zamurował wejście. Dwa grupowe zdjęcia jego jednorazówką zrobiła Halina Mróz. Przyszła zawołać chłopców do pomocy przy workach i odeszła przed wypadkiem. Pozostałe kadry robił Darek. Robert ma klucz do kraty sztolni Ewa.' },
   ev_igor_conf: { title: 'Wyznanie Igora', cat: 'testimony', source: 'Rozmowa z Igorem', desc: 'Igor rozpoznał ojca na kadrze 23 i 12.10 zapytał go o to wprost. Ojciec zadzwonił do Gajdy. Dwa dni później Maja zniknęła. Igor jest Szklarzem.' },
   ev_jerrycans: { title: 'BushView: kanistry przy hucie', cat: 'photo', source: 'Panel BushView · CAM-01', img: 'c1_live_gajda', desc: 'Ciemna sevra przy bramie huty, otwarty bagażnik, dwa kanistry. Ktoś chce spalić to, co jest za murem.' }
 };

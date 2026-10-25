@@ -3,7 +3,7 @@
 Plan roboczy z 22.10.2026. Zapowiedzi oznaczone ✅ są już w grze (S2/S3). Przed produkcją nie zmieniać ich bez aktualizacji tego planu.
 
 ## 1. Punkt wyjścia
-Styczeń 2027, ferie zimowe w Mglisku. Na Klipo pojawia się konto **@kronika.mglisko**. Codziennie o 21:00 wrzuca 30-sekundowy fragment starej kroniki lokalnej kablówki „TV Dolina” (1996–2014): studniówki, festyny, zebrania, wypadki. Każdy fragment pokazuje kogoś, kto dziś mieszka w Mglisku i ma coś do ukrycia (romans, pobicie przed dyskoteką, sfałszowany przetarg na boisko).
+Styczeń 2027, ferie zimowe w Mglisku. Na Klipo pojawia się konto **@kronika.mglisko**. Codziennie o 21:00 wrzuca 30-sekundowy fragment starej kroniki lokalnej kablówki „TV Dolina” (1996–2018): studniówki, festyny, zebrania, wypadki. Każdy fragment pokazuje kogoś, kto dziś mieszka w Mglisku i ma coś do ukrycia (romans, pobicie przed dyskoteką, sfałszowany przetarg na boisko).
 Pod każdym klipem jest odliczanie: „jutro kolejna osoba”. Miasto dzieli się na tych, którzy oglądają, i tych, którzy się boją.
 
 **Stawka dla gracza:** kolejny klip ma pokazać kogoś z naszej grupy (Ola, Igor albo Maja). Gracz ma 7 nocy, żeby dowiedzieć się, kto ma archiwum, i zdecydować, czy publikować prawdę, czy chronić ludzi.
@@ -15,7 +15,7 @@ Pod każdym klipem jest odliczanie: „jutro kolejna osoba”. Miasto dzieli si�
 | Kto wrzuca | **Ida Gil (22)**, wnuczka Zenona. To stażystka z „Gazety Sudeckiej” z S2 (i.k_00), która wycięła 40 sekund z mostu. |
 | Dlaczego | Po aferze z mostem straciła staż i została „tą od fejka”. Chce pokazać, że całe miasto ma swoje „40 sekund”, i że to nie ona jest problemem. |
 | Dziadek | Nie wie. Ida zgrywa kasety nocą, kiedy on śpi, a chodzenie z psem jest jej wymówką do nocnych wyjść. |
-| „Nowy kontakt” | Konto Idy na Błysku. To ona przysłała zdjęcie okna redakcji (S2) i zdjęcie z peronu (S3), i napisała „kuba skopiował 1412 plików. ja mam więcej”. |
+| „Nowy kontakt” | Konto Idy na Błysku. To ona przysłała zdjęcie okna redakcji (S2) i zdjęcie z peronu (S3), i zapowiedziała kasety, których Rybicki nigdy nie widział. |
 
 ## 3. Zwrot akcji
 W 5. rozdziale gracz jest pewny, że archiwum ma Zenon. Wszystko na niego wskazuje: kasety, nocne spacery, zeszyt w czytelni. Zenon dzwoni do gracza, spokojny i zmęczony: „Ja nie umiem nawet wrzucić zdjęcia na Kwartał”. Na jednym z klipów słychać w tle szczekanie jego psa z mieszkania. Ktoś nagrywał ekran telewizora w jego pokoju, kiedy on spał. Ostatni krok: wiadomość na Błysku zawiera literówkę, którą Ida robi zawsze („wogóle”). To samo słowo jest w jej wiadomości z S2.
@@ -44,7 +44,7 @@ W 5. rozdziale gracz jest pewny, że archiwum ma Zenon. Wszystko na niego wskazu
 - **Maja, Ola, Igor, Weronika**: z poprzednich spraw. Każde z nich może być „jutrzejszą osobą”.
 - **Sylwia** (grupa „Mglisko — co się dzieje”): moderuje panikę. Komentarze to presja społeczna.
 
-## 5. Przebieg (7 nocy, 18–24.01.2027)
+## 5. Przebieg (7 etapów; wdrożone daty 18–22.01.2027)
 1. **Studniówka**: pierwszy klip, małe miasto ogląda. Small talk o feriach, śnieg, zamknięte lodowisko.
 2. **Boisko**: klip o przetargu. Zagadka „przypomina ci to coś?” z trzech podobnych kadrów boiska decyduje, jak szybko wychodzi data.
 3. **Lista**: odliczanie pokazuje inicjały kogoś z grupy. Dylemat: ostrzec tę osobę czy szukać źródła.

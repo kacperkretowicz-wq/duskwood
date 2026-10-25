@@ -108,10 +108,10 @@ DATA.maja = {
     },
     {
       id: 'kuba', name: 'Młody', who: 'kuba', number: '604 228 961', msgs: [
-        { t: '2026-10-04T13:20', text: 'pożyczysz auto w sobotę' },
+        { t: '2026-10-04T13:20', text: 'podrzucisz mnie w sobotę z igorem' },
         { t: '2026-10-04T13:21', me: true, text: 'nie' },
         { t: '2026-10-04T13:21', text: '😭😭😭' },
-        { t: '2026-10-04T13:23', me: true, text: 'ostatnio było 6 km zasięgu i frytka pod siedzeniem' },
+        { t: '2026-10-04T13:23', me: true, text: 'ostatnio zrobiliście objazd pół miasta i została frytka pod siedzeniem' },
         { t: '2026-10-04T13:23', text: 'to była dobra frytka' },
         { t: '2026-10-12T00:14', me: true, text: 'ej. dzięki że odebrałeś mamie te zakupy. kocham cię czasem' },
         { t: '2026-10-12T00:16', text: 'co ty umierasz xd' },
@@ -216,7 +216,7 @@ DATA.maja = {
     },
     {
       id: 'pytania', title: 'Pytania', t: '2026-10-13T00:20', pin: '1797', hint: 'Notatka chroniona PIN-em.\nPodpowiedź właścicielki: *szafka + rok*', ev: 'ev_questions',
-      body: 'Pytania (nie dla nikogo)\n\n1. Chłopcy z kadru 21 — kim są? Mają po 16–17 lat. Jeden ma na kurtce naszywkę, nie widać jaką. Drugiego chyba znam. Te oczy. Skąd?\n\n2. Dlaczego ktoś zamurował kawałek odprężarki? *Cegła dziurawka*, inna niż w reszcie ściany. Widać prostą krawędź poprawki i inną zaprawę. Nie potrafię datować jej ze zdjęcia. Huta zamknięta w 1996. Kto muruje w zamkniętej hucie?\n\n3. Pani Halina Mróz widziała „żółtą postać” na drodze do huty. Dlaczego szukali tylko w rzece?\n\n4. Kto prowadził poszukiwania? → komendant Zbigniew Gajda. *Ojciec Roberta.*\n\n5. Szafka 17 — D.K.? Darek Kruk? Zginął w 2011, most kolejowy. P. Weronika mówi, że Tomek chodził za nim jak cień.\n\n6. Igor dziwnie pyta o film.\n\n*NIE MÓWIĆ NIKOMU, DOPÓKI NIE BĘDĘ PEWNA. ZWŁASZCZA R.G.*'
+      body: 'Pytania (nie dla nikogo)\n\n1. Chłopcy z kadru 21 — kim są? Przy piecu trzech, jeden bliżej aparatu. Mają po 16–17 lat. Jeden ma na kurtce naszywkę, nie widać jaką. Drugiego chyba znam. Te oczy. Skąd?\n\n2. Dlaczego ktoś zamurował kawałek odprężarki? *Cegła dziurawka*, inna niż w reszcie ściany. Widać prostą krawędź poprawki i inną zaprawę. Nie potrafię datować jej ze zdjęcia. Huta zamknięta w 1996. Kto muruje w zamkniętej hucie?\n\n3. Pani Halina Mróz widziała „żółtą postać” na drodze do huty. Dlaczego szukali tylko w rzece?\n\n4. Kto prowadził poszukiwania? → komendant Zbigniew Gajda. *Ojciec Roberta.*\n\n5. Szafka 17 — D.K.? Darek Kruk? Zginął w 2011, most kolejowy. P. Weronika mówi, że Tomek chodził za nim jak cień.\n\n6. Igor dziwnie pyta o film.\n\n*NIE MÓWIĆ NIKOMU, DOPÓKI NIE BĘDĘ PEWNA. ZWŁASZCZA R.G.*'
     },
     {
       id: 'rybicki', title: 'Do p. Rybickiego (szkic)', t: '2026-10-13T21:00',
@@ -236,11 +236,11 @@ DATA.maja = {
         { from: '17:00', move: true, text: 'Przejazd samochodem', sub: '1,4 km' },
         { from: '17:05', to: '17:40', place: 'stacja' },
         { from: '17:55', to: '22:41', place: 'dom' },
-        { from: '22:41', move: true, text: 'Przejazd samochodem', sub: '2,2 km · ul. Szklarska → droga do huty' },
+        { from: '22:41', move: true, text: 'Przejazd i dojście pieszo', sub: '2,2 km · ul. Szklarska → dojazd do huty → brama. Zapis nie wyznacza chwili zaparkowania.' },
         { from: '22:58', to: '23:58', place: 'huta', text: 'Ostatni sygnał: *23:58* · dokładność 12 m', last: true }
       ]
     },
-    { day: '2026-10-24', unlock: 'maja:sync1', items: [{ from: '03:05', to: '03:07', place: 'las', text: 'Telefon online przez 2 minuty · dokładność ±800 m', last: true }] }
+    { day: '2026-10-24', unlock: 'maja:sync1', items: [{ from: '03:05', to: 'chwilę później', place: 'las', text: 'Krótki kontakt z siecią · kopia dostępna po zakończeniu · dokładność ±800 m', last: true }] }
   ],
 
   mail: [

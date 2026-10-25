@@ -5,7 +5,7 @@
   const original = 'Olka,\n\njak wrócę, opowiem ci wszystko. Bez zdjęć na początek.\n\nTu pod ścianą leży taki mały plastikowy brelok. Muszę zrobić zbliżenie, zanim go ruszę.\n\nI oddam ci ten pojemnik. Tak, ten z września. Umyty.';
   const revised = 'Olka,\n\npotrzebuję czasu. Nie szukajcie mnie.\n\nNie chcę wracać do tamtej rozmowy. Usuńcie moje zdjęcia z huty. To moja decyzja.';
   DATA.maja.notes.push({
-    id: 'pojemnik', title: 'Do Oli', t: '2026-10-24T03:04', synced: '2026-10-24T03:07',
+    id: 'pojemnik', title: 'Do Oli', t: '2026-10-24T03:04', syncStarted: '2026-10-24T03:05',
     unlock: 'maja:sync1', ev: 'ev_note_revised', body: revised, deduction: 'ded_note_versions',
     versions: [
       { label: 'Wcześniejszy zapis', t: '2026-10-14T23:41', body: original, ev: 'ev_note_original' },
@@ -15,11 +15,11 @@
   Object.assign(DATA.evidence, {
     ev_note_original: {
       title: '„Do Oli” · wcześniejsza wersja', cat: 'digital', source: 'Nimbus · historia wersji · zapis 14.10, 23:41',
-      desc: original + '\n\nZapis z urządzenia Mai. Historia została przesłana z zaległą kopią 24.10 o 03:07. To wcześniejsza treść tej samej notatki, a nie wiadomość dostarczona Oli.'
+      desc: original + '\n\nZapis z urządzenia Mai. Historia została przesłana z zaległą kopią 24.10 po zakończeniu kopii rozpoczętej o 03:05. To wcześniejsza treść tej samej notatki, a nie wiadomość dostarczona Oli.'
     },
     ev_note_revised: {
       title: '„Do Oli” · zmieniona wersja', cat: 'digital', source: 'Nimbus · notatka · zapis 24.10, 03:04',
-      desc: revised + '\n\nOdebrano w kopii o 03:07. Metadane wskazują urządzenie i czas zapisu, bez informacji o osobie wpisującej tekst. Notatka nie została wysłana do Oli.'
+      desc: revised + '\n\nOdebrano po zakończeniu kopii rozpoczętej o 03:05. Metadane wskazują urządzenie i czas zapisu, bez informacji o osobie wpisującej tekst. Notatka nie została wysłana do Oli.'
     },
     ev_note_changed: {
       title: 'Ktoś zmienił treść „Do Oli”', cat: 'digital', source: 'Porównanie dwóch wersji tej samej notatki',
@@ -37,7 +37,7 @@
       { id: 'left', label: 'Maja dobrowolnie odeszła. Późniejszy zapis unieważnia wcześniejszy.' },
       { id: 'gajda', label: 'Gajda osobiście wpisał ten tekst. Godzina pliku potwierdza jego tożsamość.' },
       { id: 'changed', label: 'Tekst zmieniono. Nie wiadomo, kto go zapisał ani czy zrobił to dobrowolnie; poszukiwania muszą trwać.' },
-      { id: 'sync', label: 'Oba teksty powstały o 03:07, bo wtedy pojawiły się w chmurze.' }
+      { id: 'sync', label: 'Oba teksty powstały w chwili odbioru kopii, bo wtedy pojawiły się w chmurze.' }
     ],
     answer: 'changed',
     support: { need: 2, from: ['ev_note_original', 'ev_note_revised'], prompt: 'Wskaż obie wersje tej samej notatki.', fail: 'Potrzebna jest treść sprzed zmiany i po zmianie. SMS, zdjęcie i wspomnienie Oli ich nie zastąpią.' },

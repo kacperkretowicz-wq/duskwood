@@ -1,15 +1,16 @@
 'use strict';
-/* Szukajka: wyszukiwarka po słowach kluczowych i strony miasteczkowego internetu. */
+/* Internet: wyszukiwarka po słowach kluczowych i strony miasteczkowego internetu. */
 
 (() => {
   const { h, $ } = U;
 
+  const val = v => (typeof v === 'function' ? v() : v);
   function score(page, q) {
     const nq = U.norm(q);
     if (!nq) return 0;
     const toks = nq.split(' ').filter(t => t.length > 1);
     let sc = 0;
-    for (const kw of page.kw || []) {
+    for (const kw of val(page.kw) || []) {
       const nk = U.norm(kw);
       if (!nk) continue;
       if ((' ' + nq + ' ').includes(' ' + nk + ' ') || nq === nk) { sc += 3 + nk.length / 12; continue; }
@@ -31,7 +32,7 @@
   }
 
   UI.def('browser', {
-    name: 'Szukajka',
+    name: 'Internet',
     mount(host, params) {
       const stack = new UI.Stack(host);
       stack.push(homePage(stack));
@@ -62,12 +63,12 @@
       if (hist.length) {
         recent.appendChild(h('div', { class: 'sec-t' }, 'Ostatnio odwiedzane'));
         const list = h('div', { class: 'list' });
-        hist.forEach(id => { const p = DATA.web[id]; list.appendChild(h('button', { class: 'row', onclick: () => stack.push(webPage(stack, id)) }, h('span', { class: 'ri', html: U.icon('globe', 17) }), h('div', { class: 'rm' }, h('b', {}, p.title), h('span', {}, p.url)))); });
+        hist.forEach(id => { const p = DATA.web[id]; list.appendChild(h('button', { class: 'row', onclick: () => stack.push(webPage(stack, id)) }, h('span', { class: 'ri', html: U.icon('globe', 17) }), h('div', { class: 'rm' }, h('b', {}, val(p.title)), h('span', {}, p.url)))); });
         recent.appendChild(list);
       }
     };
     pg.body.append(
-      h('div', { class: 'br-logo' }, h('span', {}, 'Szukaj'), h('b', {}, 'ka')),
+      h('div', { class: 'br-logo' }, h('span', {}, 'Internet')),
       h('div', { class: 'pad' }, searchBar(stack)),
       h('div', { class: 'br-short' }, DATA.webShortcuts.filter(s => G.test(s.avail)).map(s => h('button', { class: 'br-sc', onclick: () => stack.push(webPage(stack, s.page)) }, h('span', { class: 'br-sci', style: `background:${s.color}` }, s.letter), h('small', {}, s.name)))),
       recent,
@@ -88,10 +89,13 @@
     if (!res.length) pg.body.appendChild(h('div', { class: 'empty' }, h('b', { style: 'display:block;color:var(--tx);margin-bottom:6px' }, `Brak wyników dla „${q}”.`), 'Spróbuj innych słów: nazwiska, miejsca, wydarzenia.'));
     else {
       pg.body.appendChild(h('div', { class: 'res-n' }, `${res.length} ${res.length === 1 ? 'wynik' : res.length < 5 ? 'wyniki' : 'wyników'}`));
-      res.forEach(p => pg.body.appendChild(h('button', { class: 'res', onclick: () => stack.push(webPage(stack, p.id)) },
-        h('div', { class: 'res-u' }, h('span', { class: 'fav', style: `background:${p.favColor || '#456'}` }, (p.fav || p.title[0]).slice(0, 1)), p.url),
-        h('div', { class: 'res-t' }, p.title),
-        h('div', { class: 'res-s', html: U.rich(p.snippet || '') }))));
+      res.forEach(p => {
+        const title = val(p.title) || '';
+        pg.body.appendChild(h('button', { class: 'res', onclick: () => stack.push(webPage(stack, p.id)) },
+        h('div', { class: 'res-u' }, h('span', { class: 'fav', style: `background:${p.favColor || '#456'}` }, (p.fav || title[0] || '?').slice(0, 1)), p.url),
+        h('div', { class: 'res-t' }, title),
+        h('div', { class: 'res-s', html: U.rich(val(p.snippet) || '') })));
+      });
     }
     return { el: pg.el };
   }

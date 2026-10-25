@@ -83,7 +83,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     g('bartek', 'skad to masz'),
     choose('group', [
       opt('Od kogoś, kto podpisuje się „Szklarz”. Pisze do mnie od pierwszej nocy.', [g('kuba', 'szklarz?? jak w tej bajce o hucie?')]),
-      opt('Ktoś mi to przysłał z zastrzeżonego numeru.', [g('kuba', 'kto??')])
+      opt('Ktoś mi to przysłał z zastrzeżonego numeru.', [g('kuba', 'kto??')], { wording: 'Ktoś mi to przysłał z nieznanego numeru.' })
     ]),
     g('ola', 'Czekajcie. Kto miał skany? Igor mówił, że kadr 23 był „prześwietlony”.'),
     deduce('ded_szklarz'),
@@ -158,7 +158,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     /* --- Marek Sowa --- */
     B('stary gadal ze mna cala noc'),
     B('pisze, bo nie umiem tego powiedziec na glos'),
-    B('7 lipca 97. byli w hucie we czterech. robert, leszek, darek i on. pili. darek robil zdjecia'),
+    B('7 lipca 97. byli w hucie we czterech. robert, leszek, darek i on. pili. darek robil zdjecia', { wording: '7 lipca 97. robert, leszek, darek i stary. darek robil zdjecia jednorazowka. dwa grupowe pstryknela im halina mroz. przyszla od drogi zawolac ich do pomocy przy workach. oddala aparat i poszla, zanim tomek wpadl do kanalu' }),
     B('tomek lazil za darkiem jak zawsze. przegonili go. wrocil'),
     B('kolo polnocy wszedl na deski nad kanalem pieca. zarwaly sie. kanal byl zalany po deszczu'),
     B('wyciagneli go. nie oddychal. stary mowi ze probowali. darek probowal najdluzej'),

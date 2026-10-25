@@ -715,7 +715,7 @@ Decyzje podjęte samodzielnie (Kacper polecił pracę bez pytań):
 
 ### 17.8. Etap klipów — anonimowy materiał P4 (24.10.2026)
 
-- Karta z `MAPA-S1.md` zrealizowana jako scena `xAnonim` w ch3 (po `xDataPliku`): Igor ściąga z Klipo plik MATERIAŁ_ROBOCZY_01 z pustego konta i wrzuca do grupy, więc trop nie zależy od wygasającego linku. Wideo z CAM-01 (ta sama brama) ma w pasku 15.10.2026 01:47, a zdjęcie z kurtką 22.10 02:13 — gracz może wskazać, że to inna noc (flaga `x_anonimData`). Na nagraniu nie widać twarzy ani napisu na kurtce.
+- Karta z `MAPA-S1.md` zrealizowana jako scena `xAnonim` w ch3 (po `xDataPliku`): Igor ściąga z Klipo plik CAM-01_2026-10-15_0147.mp4 z pustego konta i wrzuca do grupy, więc trop nie zależy od wygasającego linku. Wideo z CAM-01 (ta sama brama) ma w pasku 15.10.2026 01:47, a zdjęcie z kurtką 22.10 02:13 — gracz może wskazać, że to inna noc (flaga `x_anonimData`). Na nagraniu nie widać twarzy ani napisu na kurtce.
 - Proces z punktu 12: pierwsza klatka (pusta brama) i ostatnia (osoba przy bramie) wygenerowane z referencji `c1_0057.jpg`, potem klip 6 s z obu klatek. **Decyzja:** Omni Flash nie jest dostępny w tym środowisku, użyto narzędzia GenerateVideo w trybie pierwsza+ostatnia klatka (ta sama metoda, inne narzędzie). Pasek OSD fotopułapki nałożono ffmpeg. Pliki: `assets/video/v_anonim.mp4`, `assets/video/v_anonim.jpg`.
 - Migracja zapisów v7 (`STORY_MIGRATIONS_V7`, fixture `story-v6-steps.json`, `tools/gen-migration-v7.cjs`); zapis tuż za nową sceną wraca na jej początek, wybór — do wyboru. SW v73.
 
@@ -1235,3 +1235,21 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 ### v154 — Sylwia zawsze pisze „Pan/Pani” wielką literą
 - S5: cztery wiadomości Sylwii w glos.js miały „{pan|pani}” małą literą, a w S2–S4 Sylwia konsekwentnie pisze „{Pan|Pani}”. Ujednolicone przez `wording` (rozmowy telefoniczne zostają małą literą — to mowa, nie SMS).
 - Losowe przebiegi tr152/tr153 (S1–S5) bez kolejnych niespójności.
+
+### v155 — stabilne dymki czatu i gest blokady
+- Zdjęcie w dymku rezerwuje proporcje (`width`/`height`/`aspect-ratio` z metadanych obrazu, inaczej 4:3), zanim plik się dociągnie. Po załadowaniu, jeśli prawdziwe proporcje się różnią, dymek poprawia się raz i zostaje przy dole.
+- Pole odpowiedzi dalej rośnie, gdy wchodzą opcje, ale przewinięcie jest dopinane do dołu jedną klatką — bez cofania.
+- „pisze…” to jeden węzeł na rozmowę: chowa się i wraca, bez budowania dymka od nowa przy każdym zdarzeniu.
+- Przewijanie czatu: najwyżej jedno ustawienie `scrollTop` na klatkę, bez `behavior: smooth`, więc nie goni animacji wejścia dymka. `overflow-anchor` wyłączone na liście wiadomości.
+- „Wysłano” / „Wyświetlono” to jeden element o stałej wysokości 14 px, przenoszony na najnowszą wiadomość albo aktualizowany w miejscu.
+- Ekran blokady podąża za palcem i myszą (przesunięcie w górę). Puszczenie poniżej 60 px wraca płynnie; powyżej odblokowuje jak dotąd. Ekran po odblokowaniu bez zmian.
+- Test: `tests/bubbles-ux.browser.cjs` (390×844). SW v155. Zapis gry bez zmian (nadal v16).
+- Numer v155 pokrywa się z nieprzetestowaną gałęzią `wip/v155-nieprzetestowane`. Ta gałąź, jeśli wejdzie później, potrzebuje kolejnego numeru.
+
+### v155 — playtest Hani (karta sprawy, cele, odmiana, wideo, telefon w prologu)
+- Lista SMS: karta „ZAGINIONA / Maja Wrona” i awatar dopiero po `knowMaja` albo `rename` (wcześniej numer i „Nie ma w kontaktach.”). Szczegół nieodebranego, zanim gracz zna Maję, pokazuje nieznany awatar i zestawienie godzin z SMS-em, bez nazwiska.
+- Silnik: spełniony `wait` czyści cel w „Co teraz?” także wtedy, gdy krok nie niesie tego samego tekstu (nekrolog Rybickiego, login do Nimbusa). Test: `tests/goals.test.cjs`.
+- Grupa: „to %name%. dodałem {go|ją}…” (prolog) oraz „brzmi jak %name%” / „%name%. za normalną sobotę” (S5) — imię zostaje w mianowniku, przypadek niesie zaimek. `wording`, bez ruszania podpisów starych kroków.
+- `serve.js` i service worker: `.mp4` jako `video/mp4`, `Accept-Ranges` i 206. Stary cache `application/octet-stream` przy Range i tak wraca jako `video/mp4`. SW `quiet-is-safer-v155`.
+- Prolog: telefon sam wstawia urwaną kopię Nimbusa (14.10.2026, 23:58, bez huty i bez logowania) oraz rozpoznaje numer karty SIM ze stopki. Zapis v17, tabele `STORY_MIGRATIONS_V17`.
+- Nietknięte: ekran po odblokowaniu, wygląd aplikacji, dymki w `messages.js`, gest odblokowania.

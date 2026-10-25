@@ -26,7 +26,7 @@ const shots=process.env.TEST_SCREENSHOT_DIR;if(shots)fs.mkdirSync(shots,{recursi
   await page.locator('.side-dialogue').waitFor();
   assert.match(await page.locator('.side-person').innerText(),/35 lat/);
   await page.getByRole('button',{name:'Dzień dobry. Co się dzieje w grupie?'}).click();
-  const play=page.getByRole('button',{name:'Pokaż transkrypcję wiadomości głosowej'}).first();
+  const play=page.getByRole('button',{name:'zapis',exact:true}).first();
   await play.waitFor();await play.click();
   assert.match(await page.locator('.voice-tr').first().innerText(),/Pan Henryk/);
   if(shots)await page.screenshot({path:path.join(shots,'glosowka-sylwia.png')});

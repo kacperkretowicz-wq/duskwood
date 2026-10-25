@@ -104,7 +104,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     /* P5 / G2: głosówka z drugiej karty Igora, nagrana w zamkniętym serwisie. Źródło wyjaśnia wyznanie w ch4. */
     scene('scOdsluch', [
       pause(2500),
-      say('szklarz', 'szklarz', 'voice:0:09||[cichy szum pomieszczenia, tyka zegar, ktoś stuka paznokciem w szybę… nagły trzask szkła tuż przy mikrofonie]'),
+      say('szklarz', 'szklarz', 'voice:0:09||[cichy szum pomieszczenia, tyka zegar, ktoś stuka paznokciem w szybę… nagły trzask szkła tuż przy mikrofonie]', { wording: 'voice:0:09||Szum pomieszczenia. Tyka zegar. Stuknięcie w szybę. Trzask szkła.' }),
       pause(4200),
       scare('s1_odsluch', 'glitch'),
       say('szklarz', 'szklarz', 'tak brzmi szklo jak peka'),
@@ -259,7 +259,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     pause(3500),
     g('kuba', 'jest dziura w siatce. jesteśmy w środku'),
     sync('maja:cam58', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0058.JPG' }),
-    scene('scCam58', [scare('s1_cam58', 'face', { img: 'c1_0058', caption: 'CAM-01 · 22.10.2026 · 23:41' })]),
+    scene('scCam58', [scare('s1_cam58', 'photo', { img: 'c1_0058', ms: 2200, caption: 'CAM-01 · 22.10.2026 · 23:41' })]),
     g('igor', 'no i właśnie mamy zdjęcie z jej fotopułapki. przynajmniej działa 🙃', { wording: 'to my na tym nowym zdjęciu. kamera złapała nas przy wejściu' }),
     /* Plan sprawdzony w s13: nie pytamy drugi raz o szatnię. */
     scene('s13go', [iff('flag:planChecked', [

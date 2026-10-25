@@ -68,26 +68,69 @@ Adamie, odbierz tam, gdzie jesteś.`)}
       <p class="gz-small">Redakcja Gazety Sudeckiej</p></main>`
   });
 
-  page('gazeta2026', {
-    url: 'gazetasudecka.pl/region/2026/11/tomek-nie-utonal', title: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', site: 'gazeta', fav: 'G', favColor: '#7b2b21', avail: 'flag:epilog',
-    kw: ['tomek nie utonął', 'przełom w sprawie', 'gajda zatrzymany', 'maja wrona odnaleziona', 'huta szczątki'],
-    snippet: 'Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa.',
-    html: () => `${gzHead()}<main class="gz-m gz-art">
-      <div class="gz-kick">Region · Reportaż</div>
-      <h1>Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”</h1>
-      <p class="gz-lead">Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa. Sprawa wyszła na jaw dzięki studentce fotografii — i dzięki numerowi telefonu, który kiedyś należał do naszego redakcyjnego kolegi.</p>
-      ${P(G.s && G.s.vars.endingId === 'swit'
-        ? `Robert G., komendant posterunku w Mglisku, usłyszał zarzuty pozbawienia wolności 22-letniej Mai W. oraz ukrycia zwłok i utrudniania postępowania w sprawie z 1997 roku. Prokuratura nie wyklucza kolejnych zarzutów. Dwaj mężczyźni, którzy w 1997 roku mieli po 16 i 17 lat, złożyli obszerne wyjaśnienia.
+  const gazetaEpilog = () => {
+    const id = G.s && G.s.vars && G.s.vars.endingId;
+    if (id === 'cisza' && G.flag('m_lateRescue')) return {
+      title: 'Odnaleziono Maję W. Szczątków Tomasza Lisa nadal brak',
+      kw: ['maja wrona odnaleziona', 'rzeczka', 'gajda zatrzymany', 'pożar huta', 'tomek lis'],
+      snippet: '22-letnią Maję W. odnaleziono w Rzeczce. Roberta G. zatrzymano na miejscu. Szczątków Tomasza Lisa po pożarze odprężarki nie odnaleziono.',
+      lead: '22-letnią Maję W. odnaleziono żywą w Rzeczce. Roberta G. zatrzymano na miejscu. Pożar wcześniej zniszczył tunel odprężarki w hucie „Jutrzenka”: szczątków Tomasza Lisa nie odnaleziono.',
+      body: `Maja W. przez kilka tygodni była poszukiwana. Odnaleziono ją w zamkniętym pokoju na zapleczu domu w Rzeczce. Robert G. siedział wtedy w kuchni. Nie stawiał oporu.
+
+Strażacy nie uratowali tunelu w hucie. Mur i odprężarka spłonęły, zanim ktokolwiek zdążył je rozebrać. Sprawa śmierci Tomasza Lisa pozostaje bez ciała.
+
+Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Tę sprawę wciąż ktoś prowadzi.`,
+      foot: 'Redakcja Gazety Sudeckiej'
+    };
+    if (id === 'cisza') return {
+      title: 'Pożar w hucie „Jutrzenka”. Poszukiwania trwają',
+      kw: ['pożar huta', 'poszukiwania mai', 'tomek lis', 'gajda poszukiwany', 'huta jutrzenka'],
+      snippet: 'Pożar zniszczył tunel odprężarki w hucie „Jutrzenka”. Szczątków Tomasza Lisa nie odnaleziono. 22-letnia Maja W. i Robert G. są poszukiwani.',
+      lead: 'Pożar zniszczył tunel odprężarki i mur, który ktoś postawił w hucie „Jutrzenka”. Szczątków dziewięcioletniego Tomasza Lisa nie odnaleziono. 22-letnia Maja W. i komendant posterunku Robert G. są poszukiwani.',
+      body: `Strażacy przyjechali za późno. Tunel, w którym według materiałów przekazanych policji spoza Mgliska mógł być Tomasz Lis, spłonął razem z murem.
+
+Krata sztolni na Sowiej Kopie była otwarta. W środku znaleziono ślady czyjegoś pobytu. Mai W. tam nie było.
+
+Robert G. nie wrócił na posterunek. Trwają poszukiwania jego i 22-letniej Mai W.
+
+Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Tę sprawę wciąż ktoś prowadzi. Poza Mgliskiem.`,
+      foot: 'Redakcja Gazety Sudeckiej, na podstawie materiałów przekazanych spoza Mgliska'
+    };
+    const found = {
+      title: 'Przełom w sprawie sprzed 29 lat: Tomka odnaleziono w hucie',
+      kw: ['tomek nie utonął', 'przełom w sprawie', 'gajda zatrzymany', 'maja wrona odnaleziona', 'huta szczątki'],
+      snippet: 'Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa.',
+      lead: 'Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa. Sprawa wyszła na jaw dzięki studentce fotografii — i dzięki numerowi telefonu, który kiedyś należał do naszego redakcyjnego kolegi.',
+      foot: 'Redakcja Gazety Sudeckiej, na podstawie materiałów Adama Rybickiego (1961–2021) i Mai Wrony'
+    };
+    if (id === 'swit') return Object.assign(found, { body: `Robert G., komendant posterunku w Mglisku, usłyszał zarzuty pozbawienia wolności 22-letniej Mai W. oraz ukrycia zwłok i utrudniania postępowania w sprawie z 1997 roku. Prokuratura nie wyklucza kolejnych zarzutów. Dwaj mężczyźni, którzy w 1997 roku mieli po 16 i 17 lat, złożyli obszerne wyjaśnienia.
 
 Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Odnalazła ją grupa przyjaciół i rodzina — w porozumieniu z kimś, kogo w Mglisku nikt nie znał.
 
-Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.`
-        : `${G.flag('gajdaCaught') ? 'Robert G. został zatrzymany przy leśnym szlabanie. Nie wszystkie materiały z dawnej sprawy udało się zabezpieczyć; część okoliczności pozostaje do wyjaśnienia.' : 'Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym wcześniej stało auto Mai W. Mężczyzny nie odnaleziono. Poszukiwania trwają.'}
+Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.` });
+    return Object.assign(found, { body: `${G.flag('gajdaCaught') && !G.flag('m_lateRescue')
+      ? 'Robert G. został zatrzymany przy leśnym szlabanie. Milczy. Nie wszystkie materiały z dawnej sprawy udało się zabezpieczyć; część okoliczności pozostaje do wyjaśnienia.'
+      : G.flag('m_lateRescue')
+        ? 'Robert G. został zatrzymany w Rzeczce, w domu, w którym przetrzymywano Maję W. Nie stawiał oporu.'
+        : 'Samochód Roberta G., komendanta posterunku w Mglisku, znaleziono na koronie tamy Zalewu Mgliskiego — w tym samym miejscu, w którym wcześniej stało auto Mai W. Mężczyzny nie odnaleziono. Samochód nie jest dowodem jego śmierci. Poszukiwania trwają.'}
 
-Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Dwaj mężczyźni, którzy w 1997 roku mieli po 16 i 17 lat, złożyli wyjaśnienia w sprawie śmierci Tomasza Lisa.
+Maja W. przez dziesięć dni była przetrzymywana w zamkniętej kratą sztolni na Sowiej Kopie. Odnaleziono ją żywą. Za murem odprężarki są szczątki Tomasza Lisa. Sprawa jego śmierci jest w toku.
 
-Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.`)}
-      <div class="gz-foot">Redakcja Gazety Sudeckiej, na podstawie materiałów Adama Rybickiego (1961–2021) i Mai Wrony</div></main>`
+Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Miał rację.` });
+  };
+  page('gazeta2026', {
+    url: 'gazetasudecka.pl/region/2026/11/tomek-nie-utonal', title: () => gazetaEpilog().title, site: 'gazeta', fav: 'G', favColor: '#7b2b21', avail: 'flag:epilog',
+    kw: () => gazetaEpilog().kw,
+    snippet: () => gazetaEpilog().snippet,
+    html: () => {
+      const a = gazetaEpilog();
+      return `${gzHead()}<main class="gz-m gz-art">
+      <div class="gz-kick">Region · Reportaż</div>
+      <h1>${esc(a.title)}</h1>
+      <p class="gz-lead">${esc(a.lead)}</p>
+      ${P(a.body)}
+      <div class="gz-foot">${esc(a.foot)}</div></main>`;
+    }
   });
 
   /* ================= Mglisko24 ================= */
