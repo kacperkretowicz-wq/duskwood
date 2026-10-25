@@ -1038,3 +1038,6 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 
 ### v126 — forma grzecznościowa gracza (S1/S2)
 - Sylwia i Marta konsekwentnie mówią do gracza „{Pan|Pani}”, a gracz w kilkunastu opcjach mówił do nich na „ty”. Teraz wszystkie te opcje są formalne („Proszę dać…”, „Niech pani zostanie…”, „Pani mama ma tablet…”). Zmiana tylko przez `wording`, więc zapisy działają bez migracji.
+
+### v127 — Marta mieszka z mamą (S2)
+- Marta mieszka z mamą (wspólny tablet, kolacja, „od soboty śpię u koleżanki”), a jednocześnie pisała „jadę do mamy”. Teraz jadą razem na urodziny ciotki, a w m4 „przed wyjazdem na urodziny ciotki”. Zmiana tylko przez `wording`.

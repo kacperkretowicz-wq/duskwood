@@ -328,7 +328,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
       ], { set: { m_zal3Noticed: true } })
     ]),
     pause(2000),
-    Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.', { wording: 'Jutro mam wolne, jadę do mamy na urodziny ciotki. Już dzwoniła, żebym wyjechała o siódmej. Przy ósmej na pewno się spóźnię, ona wie lepiej.' }),
+    Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.', { wording: 'Jutro mam wolne, jedziemy z mamą na urodziny ciotki. Mama już zapowiedziała, że wyjeżdżamy o siódmej. Przy ósmej na pewno byśmy się spóźniły, ona wie lepiej.' }),
     Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.'),
     give('ev_m_terminy', { silent: true }),
     scene('xIda', [
