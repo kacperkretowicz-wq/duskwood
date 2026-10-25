@@ -1,4 +1,4 @@
-// Playtest jak gracz: S1 → sprawa 2 → sprawa 3 w jednym zapisie, na skórkach iOS i Android, w widoku telefonu.
+// Playtest: S1 → S5 w jednym zapisie, na skórkach iOS i Android, w widoku telefonu.
 // Klika prawdziwe przyciski odpowiedzi, odbiera połączenia, przechodzi kurtyny i napisy. Straszaki odpalają się naprawdę.
 // Mierzy tempo (czas i liczba wiadomości na rozdział), odstępy straszaków, błędy, przepełnienie układu, start i cache offline.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
@@ -17,7 +17,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
  const out={};
  try{
   for(const os of (process.env.E2E_OS||'ios,android').split(',')){
-   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[],numbered={},badNames=[];
+   const ctx=await browser.newContext({viewport:{width:+(process.env.E2E_WIDTH||390),height:+(process.env.E2E_HEIGHT||844)},deviceScaleFactor:2,isMobile:true,hasTouch:true}),page=await ctx.newPage(),errors=[],numbered={},badNames=[];
    page.on('crash',()=>console.error(os,'RENDERER CRASH',JSON.stringify(process.memoryUsage())));
    page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    let bytes=0;page.on('response',async r=>{if(r.url().startsWith(base)){if(r.status()>=400)errors.push(r.status()+' '+r.url());const l=+r.headers()['content-length']||0;bytes+=l;}});
@@ -32,7 +32,12 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
      G.s.finished=true;G.s.chapter='c4';G.s.vars.s4Ending='przewiniecie';Seasons.startNext();}
     UI.packageSheet=async()=>6;UI.renderHome();Engine.restart();},FROM);
    // Glitch trwa w trybie instant ~120 ms, więc liczymy go przy wywołaniu, a nie tylko po klasie ekranu.
-   const hookGlitch=()=>page.evaluate(()=>{if(UI.__hooked)return;const o=UI.scare;UI.scare=(k,x)=>{if(k==='glitch')window.__glitch=1;return o(k,x);};UI.__hooked=1;});await hookGlitch();
+   const hookGlitch=()=>page.evaluate(()=>{if(UI.__hooked)return;const o=UI.scare;UI.scare=(k,x)=>{if(k==='glitch')window.__glitch=1;return o(k,x);};UI.__hooked=1;
+    // Zliczamy faktycznie opublikowane teksty jednej ścieżki, także przed zmianą sezonu.
+    window.__reading=JSON.parse(sessionStorage.getItem('playtest-reading')||'{}');const post=G.post;
+    G.post=function(chat,msg){const result=post.call(this,chat,msg),text=U.tpl(msg.text||'').replace(/^voice:[^|]*\|[^|]*\|/,'');
+     if(text){const r=window.__reading[G.s.chapter]||={messages:0,words:0,characters:0};r.messages++;r.words+=(text.match(/\p{L}+(?:['’-]\p{L}+)*/gu)||[]).length;r.characters+=text.length;sessionStorage.setItem('playtest-reading',JSON.stringify(window.__reading));}return result;};
+   });await hookGlitch();
    const chapters={},scares=[],layout=[];let season=FROM,lastCh='',tick=0,lastKey='',same=0,credits=0;const tStart=Date.now();
    while(true){
     if(Date.now()-tStart>2700000)throw new Error('e2e: przekroczony czas w rozdziale '+lastCh+' (maszyna przeciążona?)');
@@ -45,7 +50,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
      const acc=document.querySelector('.scare-call:not(.out) .c-btn.acc,.call:not(.out) .c-btn.acc');if(acc){acc.click();r.click='call';return r;}
      const cu=document.querySelector('.curtain');if(cu){r.curtain=cu.className;const b=cu.querySelector('button');if(/credits/.test(cu.className)||G.s.finished){r.credits=true;return r;}if(b)b.click();else cu.click();r.click='curtain';return r;}
      const p=Engine.pending();if(!p)return r;r.p=p.type;r.chat=p.chat;
-     const ch=Engine.chapters[G.s.chapter],step=ch.steps[G.s.pc];
+     const ch=Engine.chapters[G.s.chapter],step=ch.steps[p.early?p.pc:G.s.pc];
      if(p.type==='choose'){
       const score=o=>{const s=Object.keys(step.options[o.i].set||{}),inc=step.options[o.i].inc||{},set=step.options[o.i].set||{};let v=10*s.filter(k=>W.includes(k)).length-10*s.filter(k=>X.includes(k)).length;
        v+=(set.toldGajda||set.gajdaAlert||inc.leaks?-20:0)+(set.reportBoth?6:0)+(set.named112?6:0)+(step.options[o.i].exit?3:0)+(set.dispatchLocal?-6:0);return v-o.i*0.01;};
@@ -62,6 +67,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
     if(st.ch!==lastCh){
      if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t,chapters[lastCh].msgs=st.msgs-chapters[lastCh].m0;
      chapters[st.ch]={t:Date.now(),m0:st.msgs,season:st.season};lastCh=st.ch;console.log(os,'→',st.ch,Math.round((Date.now()-tStart)/1000)+'s');
+     if(shots)await page.screenshot({path:path.join(shots,`${os}-ch-${st.ch}.png`)});
      const lay=await page.evaluate(()=>{const W=innerWidth,bad=[...document.querySelectorAll('.screen *')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.right>W+2&&getComputedStyle(e).position!=='fixed';}).slice(0,3).map(e=>e.className||e.tagName);return {sw:document.documentElement.scrollWidth,W,bad};});
      if(lay.sw>lay.W||lay.bad.length)layout.push({ch:st.ch,...lay});
      // Nazwy kontaktów przechodzą między sprawami: Kuba nie może wrócić jako sam numer.
@@ -86,18 +92,19 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
        if(t==='ev')G.addEv(id,true);else if(t==='solved')G.solve(id);else if(t==='flag')G.setFlag(id);else if(t==='seen')G.markSeen(id);else if(t==='unlocked')G.unlock(id);}};
       if(typeof step.cond==='function'){G.setFlag('sawCalls');if(G.s.chapter==='ch1'&&!G.has('ev_ola_sorry'))G.addEv('ev_ola_fight',true);
        for(const w of ['gs_most','tt_most','tyg_most','tt_archiwum','tt_kronika'])if(DATA.web[w]&&G.test(DATA.web[w].avail||[])){UI.openApp('browser',{page:w});}
-       for(const c of Object.keys(G.s.chats||{})){G.viewing=c;G.change();if(G.test(step.cond))break;}}else sat(step.cond);G.change();});
+       for(const c of new Set([...Object.keys(G.s.chats||{}),...Object.keys(G.s.unlocked||{}).filter(k=>k.startsWith('chat:')).map(k=>k.slice(5))])){G.viewing=c;G.change();if(G.test(step.cond))break;}}else sat(step.cond);G.change();});
     }
     if(same>2500)throw new Error('utknięcie '+key+' '+JSON.stringify(st));
     await page.waitForTimeout(25);
    }
    if(chapters[lastCh])chapters[lastCh].ms=Date.now()-chapters[lastCh].t;
+   const reading=await page.evaluate(()=>window.__reading);
    const fin=await page.evaluate(()=>({s1:G.s.vars.s1Ending||G.s.vars.endingId,s2:G.s.vars.s2Ending,s3:G.s.vars.s3Ending,s4:G.s.vars.s4Ending,s5:G.s.vars.s5Ending,scaresSaved:Object.keys(G.s.scares)}));
    // offline: po pierwszym wczytaniu service worker musi wystarczyć do startu bez sieci
-   await page.reload();await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
+   await page.reload({waitUntil:"domcontentloaded",timeout:60000});await page.waitForFunction(()=>navigator.serviceWorker?.controller).catch(()=>{});
    await ctx.setOffline(true);let offline=true;try{await page.reload();await page.waitForFunction(()=>typeof G!=='undefined'&&typeof Engine!=='undefined',{timeout:8000});}catch{offline=false;}
    await ctx.setOffline(false);
-   out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),
+   out[os]={boot,offline,fin,credits,scares:scares.map(s=>({ch:s.ch,kind:s.kind,msgsIn:s.msgsIn})),layout,errors:errors.filter(e=>!/favicon|ERR_INTERNET_DISCONNECTED/.test(e)),reading,
     chapters:Object.fromEntries(Object.entries(chapters).map(([k,v])=>[k,{season:v.season,sec:Math.round(v.ms/1000),msgs:v.msgs}]))};
    console.log(os,JSON.stringify(out[os]));
    if(FROM==='s1'){assert.equal(fin.s1,'swit');assert.equal(fin.s2,'pelny_kadr');assert.equal(fin.s3,'wlasnym_glosem');}assert.equal(fin.s4,'przewiniecie');assert.equal(fin.s5,S5);

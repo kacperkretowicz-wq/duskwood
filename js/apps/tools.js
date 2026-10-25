@@ -248,7 +248,7 @@
       const hrs = [];
       for (let i = 0; i < 8; i++) { const t = now + i * 3600e3; hrs.push(h('div', { class: 'wx-h' }, h('small', {}, i ? U.time(t).slice(0, 2) : 'Teraz'), U.ico(w.hourly[i % w.hourly.length].i, 22), h('b', {}, w.hourly[i % w.hourly.length].t + '°'))); }
       U.put(pg.body,
-        h('div', { class: 'wx-top' }, h('small', {}, 'Mglisko'), h('div', { class: 'wx-t' }, w.temp + '°'), h('b', {}, w.nowLong || w.now), h('span', {}, `Odczuwalna ${w.feel}° · wilgotność ${w.hum}%`)),
+        h('div', { class: 'wx-top' }, h('small', {}, DATA.weatherPlace()), h('div', { class: 'wx-t' }, w.temp + '°'), h('b', {}, w.nowLong || w.now), h('span', {}, `Odczuwalna ${w.feel}° · wilgotność ${w.hum}%`)),
         w.alert ? h('div', { class: 'wx-alert' }, U.ico('info', 18), h('div', {}, h('b', {}, 'Ostrzeżenie IMGW'), h('span', {}, w.alert))) : null,
         h('div', { class: 'wx-hours' }, hrs),
         h('div', { class: 'list', style: 'margin-top:14px' }, w.days.map(d => h('div', { class: 'row' }, h('div', { class: 'rm' }, h('b', {}, d.d)), U.ico(d.i, 20), h('span', { class: 'rx', style: 'min-width:70px' }, `${d.lo}° / ${d.hi}°`)))),
@@ -486,7 +486,7 @@
         chList.appendChild(h('button', { class: 'row' + (ok ? '' : ' dis'), onclick: async () => {
           if (!ok) return;
           const r = await UI.modal({ title: `Zagrać od: ${ch.title}?`, text: 'Obecny postęp zostanie zastąpiony stanem z początku tego rozdziału. Odblokowane zakończenia zostaną zachowane.', buttons: [{ label: 'Anuluj', value: 0 }, { label: 'Wczytaj', value: 1, pri: true }] });
-          if (r === 1) { G.loadCheckpoint(id); location.reload(); }
+          if (r === 1) { if (G.loadCheckpoint(id)) location.reload(); else UI.toast('Nie udało się wczytać tego rozdziału — zapis był uszkodzony.', { kind: 'error' }); }
         } }, h('span', { class: 'ri', html: U.icon(ok ? 'refresh' : 'lock', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)), h('span', {}, ch.title))));
       });
       const endings = h('div', { class: 'list plain' }, Object.entries(DATA.endings).map(([id, e]) => h('div', { class: 'row' + (G.s.endings.includes(id) ? '' : ' dis') }, h('div', { class: 'rm' }, h('b', {}, G.s.endings.includes(id) ? e.title : '???'), h('span', {}, G.s.endings.includes(id) ? e.tag : 'Zakończenie nieodkryte')))));
@@ -497,6 +497,12 @@
           if (r === 1) { S.os = k; G.saveSettings(); G.save(true); location.reload(); }
         }
       }, l)));
+      const textSize = h('div', { class: 'seg', style: 'margin:0' }, [['m', 'Zwykły'], ['l', 'Duży'], ['xl', 'Bardzo duży']].map(([key, text]) => h('button', {
+        class: (S.textSize || 'm') === key ? 'on' : '', 'aria-pressed': String((S.textSize || 'm') === key), onclick: e => {
+          S.textSize = key; G.saveSettings();
+          [...textSize.children].forEach(b => { b.classList.toggle('on', b === e.currentTarget); b.setAttribute('aria-pressed', String(b === e.currentTarget)); });
+        }
+      }, text)));
       const appearance = h('div', { class: 'seg', style: 'margin:0' }, [['light', 'Jasny'], ['dark', 'Ciemny'], ['auto', 'Systemowy']].map(([key, text]) => h('button', {
         class: (S.appearance || 'light') === key ? 'on' : '', 'aria-pressed': String((S.appearance || 'light') === key), onclick: e => {
           S.appearance = key; G.saveSettings();
@@ -508,9 +514,12 @@
         h('div', { class: 'pad' }, osSeg),
         h('div', { class: 'sec-t' }, 'Wygląd'),
         h('div', { class: 'pad' }, appearance),
+        h('div', { class: 'sec-t' }, 'Rozmiar tekstu'),
+        h('div', { class: 'pad' }, textSize),
+        h('div', { class: 'sec-t' }, 'Personalizacja'),
         h('div', { class: 'list plain' },
-          h('button', { class: 'row', onclick: () => UI.openWallpapers() }, h('div', { class: 'rm' }, h('b', {}, 'Tapeta'), h('span', {}, Wallpapers.selected().name)), U.ico('back', 16)),
-          h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, Seasons.current().title + ' · twój postęp')), U.ico('back', 16))),
+          h('button', { class: 'row', onclick: () => UI.openWallpapers() }, h('div', { class: 'rm' }, h('b', {}, 'Tapeta'), h('span', {}, Wallpapers.selected().name)), U.ico('back', 16, 'cal-next')),
+          h('button', { class: 'row', onclick: () => UI.openSeason() }, h('div', { class: 'rm' }, h('b', {}, 'Sezony i sesje'), h('span', {}, Seasons.current().title + ' · twój postęp')), U.ico('back', 16, 'cal-next'))),
         h('div', { class: 'sec-t' }, 'Profil'),
         h('div', { class: 'pad' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Imię'), nameIn, h('label', { class: 'lbl' }, 'Forma zwracania się'), gen),
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),

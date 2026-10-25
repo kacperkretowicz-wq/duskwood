@@ -68,7 +68,7 @@ Object.assign(DATA.persons, {
       { text: 'Rybicki zdigitalizował kasetę „H.W. 2/2” w 2019 r. Plik jest w archiwum redakcji. Części 1/2 nie ma ani tam, ani w pudle.' },
       { text: 'Zna rozkład biura Kurek-Bud: „robiłam tam kiedyś praktyki”.', cond: 'ev:ev_m_praktyki' },
       { text: '„U nas mówiło się, że most to przekleństwo… W Mglisku, znaczy.”', cond: 'ev:ev_m_przeklenstwo' },
-      { text: '„Mama ma zawsze rację co do terminów.”', cond: 'ev:ev_m_terminy' },
+      { text: '„Mama już zapowiedziała, że wyjeżdżamy o siódmej… ona wie lepiej.”', cond: 'ev:ev_m_terminy' },
       { text: 'Jest córką Janiny Kurek. Opowiadała matce o kasecie i załączniku nr 3. Nie wiedziała, co matka z tym zrobi.', cond: 'flag:m_twist' }
     ]
   },
@@ -181,7 +181,7 @@ Object.assign(DATA.evidence, {
     desc: 'Wpis w zeszycie zgadza się z fakturą. Bartek miał wtedy 9 lat. Warsztat naprawił hamulce i wydał auto. Własność pojazdu ani obecność w firmie nie oznacza działania przy moście.' },
   ev_m_janina_mail: { title: 'Mail Kurek-Bud z 26.11', cat: 'msg', source: 'Natan · mail do GS Wideo', img: 'most_mail_kb',
     desc: 'Janina Kurek: „sugestie dotyczące rzekomo brakującego *załącznika nr 3* do dziennika robót są bezpodstawne”. W publikacji redakcji był tylko „brakujący dokument”. Skąd numer?' },
-  ev_m_terminy: { title: '„Mama ma zawsze rację co do terminów”', cat: 'testimony', source: 'Marta · wiadomość', desc: 'Zwykła rozmowa o wyjeździe na urodziny ciotki.' },
+  ev_m_terminy: { title: '„Ona wie lepiej”', cat: 'testimony', source: 'Marta · wiadomość', desc: 'Zwykła rozmowa o wyjeździe na urodziny ciotki.' },
   ev_m_kuchnia: { title: 'Głosówka Marty z kuchni', cat: 'testimony', source: 'Marta · głosówka 0:38',
     desc: 'Na pierwszych 20 s kasety nie ma nazwiska. W tle kobiecy głos: „Martuś, z kim tak późno?”. Barwę można porównać z nagraniem z rady gminy. Nieformalnie, to nie dowód.' },
   ev_m_ida: { title: 'Rozmowa stażystki Idy z Pawłem D.', cat: 'digital', source: 'Natan · za zgodą Idy', img: 'most_ida',
@@ -247,6 +247,12 @@ Object.assign(DATA.evidence, {
   Art.def('v_kotka', { src: 'assets/video/v_kotka.jpg', title: 'Pani Ziuta', w: 360, h: 480, draw: () => '' });
   Art.def('v_szyba', { src: 'assets/video/v_szyba.jpg', title: 'Pod inspekcją', w: 360, h: 480, draw: () => '' });
   Art.def('s1_mem_kot', { src: 'assets/s1x/s1_mem_kot.jpg', title: 'Kot w praniu', w: 768, h: 1024, draw: () => '' });
+  Art.def('mp_osrodek', { src: 'assets/s1x/mp_osrodek.jpg', title: 'Ośrodek kolonijny huty · stare zdjęcie Weroniki', w: 1024, h: 768, draw: () => '' });
+  Art.def('k_rozwidlenie', { src: 'assets/s1x/k_rozwidlenie.jpg', title: 'Rozwidlenie za szlabanem · Kuba', w: 768, h: 1024, draw: () => '' });
+  Art.def('g_slady', { src: 'assets/s1x/g_slady.jpg', title: 'Ślady pod hutą · Kuba, 15.03', w: 768, h: 1024, draw: () => '' });
+  Art.def('s1_bagaznik', { src: 'assets/s1x/s1_bagaznik.jpg', title: 'Bagażnik · warsztat Sowów', w: 1024, h: 768, draw: () => '' });
+  Art.def('e_pudlo', { src: 'assets/s1x/e_pudlo.jpg', title: 'Pudło pana Adama · pod biurkiem', w: 1024, h: 768, draw: () => '' });
+  Art.def('e_czytelnia', { src: 'assets/s1x/e_czytelnia.jpg', title: 'Czytelnia · dyżur', w: 1024, h: 768, draw: () => '' });
   Art.def('s1_lumpeks', { src: 'assets/s1x/s1_lumpeks.jpg', title: 'Lumpeks na Kolejowej', w: 768, h: 1024, draw: () => '' });
   Art.def('life_zuza_most', { src: 'assets/people/zuza_most.jpg', title: 'Pod mostem', w: 1200, h: 900, draw: () => '' });
   P('most_hw', 'hw_kadr.jpg', 'H.W. 2/2 · kadr', 1280, 720, { date: '10.2011', time: '17:22:08', device: 'mini-DV · zgrane w 2019', file: 'HW_2z2.mov' });
@@ -283,7 +289,7 @@ Object.assign(DATA.evidence, {
     avail: 'flag:m_clipOut', ev: 'ev_m_gs',
     html: () => `${gsHead()}<main class="gz-m gz-art"><div class="gz-kick">GS Wideo · Region</div>
       <h1>Most 2011. Brygadzista: „moja wina”</h1>
-      <figure>${img('most_hw')}<figcaption>▶ 0:40 · kadr z kasety mini-DV, X 2011</figcaption></figure>
+      <figure><video class="web-vid" src="assets/video/v_most40.mp4" poster="assets/video/v_most40.jpg" controls playsinline muted preload="none"></video><figcaption>▶ 0:40 · kaseta mini-DV, X 2011 · w odtwarzaczu końcówka fragmentu</figcaption></figure>
       <p>Fragment nieznanej dotąd rozmowy, którą śp. Adam Rybicki nagrał w październiku 2011 r. z brygadzistą remontu mostu kolejowego nad Mglicą. Miesiąc wcześniej przy remoncie zginął 30-letni Dariusz K.</p>
       <p><i>${G.flag('m_quoteRemoved') ? '[Opis zaktualizowany 23.11.2026, 21:14]' : 'Z notesu Rybickiego: „K. przyniosła ksero, dziękuje za mleko”.'}</i></p>
       <p class="gz-small">Oprac. N. Brzeziński · 22.11.2026, 20:05 · 18 komentarzy</p></main>`
@@ -305,7 +311,7 @@ Object.assign(DATA.evidence, {
     avail: 'flag:m_clipOut', ev: 'ev_m_tyg',
     html: () => `<header class="gz-h"><div class="gz-top"><span>Tygodnik regionalny</span><span>od 2004</span></div><div class="gz-mast" style="color:#2c5b3f">Tydzień w Sudetach</div></header><main class="gz-m gz-art">
       <h1>Kto zdjął siatkę? Pytania po 15 latach</h1>
-      <figure>${img('most_hw')}<figcaption>▶ 0:42 · nagranie z 2011 r., materiał nadesłany</figcaption></figure>
+      <figure><video class="web-vid" src="assets/video/v_most42.mp4" poster="assets/video/v_most42.jpg" controls playsinline muted preload="none"></video><figcaption>▶ 0:42 · nagranie z 2011 r., materiał nadesłany · końcówka</figcaption></figure>
       <p>Brygadzista Henryk W. na nagraniu z 2011 roku mówi, że nie założył z powrotem siatki zabezpieczającej. Wykonawca remontu przypomina, że prokuratura umorzyła postępowanie w 2012 roku.</p>
       <figure>${img('life_janina_1')}<figcaption>Janina Kurek, współwłaścicielka Kurek-Bud, podczas sesji rady gminy. Fot. TwS</figcaption></figure>
       <p class="gz-small">23.11.2026 · red.</p></main>`

@@ -8,7 +8,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  try{
   for(const target of ['swit','odlamki','cisza','legacy']){
-   const ctx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
+   const ctx=await browser.newContext({viewport:{width:+(process.env.E2E_WIDTH||390),height:+(process.env.E2E_HEIGHT||844)},reducedMotion:'reduce'}),page=await ctx.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
    await page.goto(base+'/?debug');
@@ -44,7 +44,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
     while(Date.now()-t0<240000){
      await new Promise(r=>setTimeout(r,15));Engine.skip();
      if(G.s.finished)break;
-     const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+     const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
      if(st&&st.scene)scenes.add(st.scene);
      const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);
      same=key===lastKey?same+1:0;lastKey=key;
@@ -73,11 +73,17 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
    assert.equal(result.ending,want);assert.deepEqual(result.endings,[want]);
    const sceneBase=['f3reset','igorMid','s12','s13','s13go','s14','s15','s16','s17','s18','s19','s28','s29'];
    const scenesWant=(want==='cisza'?sceneBase:['epBartek','epIgor','epOla','f3lib',...sceneBase]).filter(x=>target!=='legacy'||x!=='f3reset').sort();
-   if(target==='legacy')assert.equal(result.startV,4);
+   if(target==='legacy')assert.equal(result.startV,16);
    assert.deepEqual(result.scenes.filter(x=>!/^(sc|x)[A-Z]/.test(x)),scenesWant);
    if(want==='cisza')assert.equal(result.majaFound,false);else assert.equal(result.majaFound,true);
    if(want==='swit')assert.equal(result.caught,true);
    assert.deepEqual(errors.filter(e=>!/favicon/.test(e)),[]);
+   // Każdy czat tej ścieżki (także gorsze zakończenia) mieści się w szerokości telefonu.
+   const over=await page.evaluate(async()=>{const W=innerWidth,out=[];document.querySelectorAll('.curtain').forEach(e=>e.remove());
+    for(const id of Object.keys(G.s.chats||{})){if(!G.s.chats[id].msgs?.length)continue;UI.openApp('messages',{chat:id});await new Promise(r=>setTimeout(r,30));
+     const bad=[...document.querySelectorAll('.screen *')].filter(e=>{const b=e.getBoundingClientRect();return b.width&&b.right>W+2&&getComputedStyle(e).position!=='fixed';});
+     if(bad.length||document.documentElement.scrollWidth>W)out.push(id+':'+(bad[0]?.className||'doc'));}return out;});
+   assert.deepEqual(over,[],'przepełnienie układu w czatach '+target);
    await ctx.close();
    console.log('PASS full playthrough →',target);
   }

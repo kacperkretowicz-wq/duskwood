@@ -12,6 +12,10 @@ const UI = (() => {
 
   /* ---------- ikony aplikacji ---------- */
   const GLYPH = {
+    gadka: '<path d="M16 5.5c-6.1 0-11 4.1-11 9.6 0 3 1.5 5.6 3.9 7.4l-.9 4 4.3-2.3c1.2.4 2.4.5 3.7.5 6.1 0 11-4.1 11-9.6S22.1 5.5 16 5.5z" fill="#fff"/><circle cx="11.2" cy="15.2" r="1.7" fill="#2f7d6d"/><circle cx="16" cy="15.2" r="1.7" fill="#2f7d6d"/><circle cx="20.8" cy="15.2" r="1.7" fill="#2f7d6d"/>',
+    blysk: '<path d="M17.5 4 8 17.5h7L13 28l11-15h-7.2z" fill="#ffd84d"/>',
+    klipo: '<rect x="7" y="7" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M14 12.5v7l6-3.5z" fill="#fff"/>',
+    kadr: '<path d="M7 12V8.5A1.5 1.5 0 018.5 7H12M20 7h3.5A1.5 1.5 0 0125 8.5V12M25 20v3.5a1.5 1.5 0 01-1.5 1.5H20M12 25H8.5A1.5 1.5 0 017 23.5V20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="16" r="3.2" fill="#fff"/>',
     messages: '<path d="M27 15c0 6-5 10-11 10-2 0-4-.4-5-1L5 27l2-6c-2-2-3-4-3-6C4 9 9 5 16 5s11 4 11 10z" fill="#fff"/>',
     phone: '<path d="M10.5 6h4l2 5.5-2.6 2a14 14 0 006.6 6.6l2-2.6 5.5 2v4a2.5 2.5 0 01-2.5 2.5A20.5 20.5 0 018 8.5 2.5 2.5 0 0110.5 6z" fill="#fff"/>',
     browser: '<circle cx="16" cy="16" r="10.5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M20.5 11.5l-3 6-6 3 3-6z" fill="#fff"/><circle cx="16" cy="16" r="1.4" fill="#2a6fb0"/>',
@@ -28,6 +32,10 @@ const UI = (() => {
     clock: '<circle cx="16" cy="16" r="10.5" fill="#fff"/><path d="M16 9v7l4.5 3" stroke="#111" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="16" cy="16" r="1.4" fill="#e5484d"/>'
   };
   const GRAD = {
+    gadka: 'linear-gradient(160deg,#4fc39a,#1f6f8b)',
+    blysk: 'linear-gradient(160deg,#2a2a33,#121217)',
+    klipo: 'linear-gradient(160deg,#22d3c5,#0b5d7a)',
+    kadr: 'linear-gradient(160deg,#ff8a65,#c2185b)',
     messages: 'linear-gradient(#64e175,#20c543)',
     phone: 'linear-gradient(160deg,#5be38f,#1f9d55)',
     browser: 'linear-gradient(160deg,#5aa8f0,#1e5a9e)',
@@ -61,7 +69,8 @@ const UI = (() => {
   const appName = a => (LABELS[OS] && LABELS[OS][a.id]) || a.name;
 
   function def(id, meta) { apps[id] = Object.assign({ id }, meta); }
-  const appUnlocked = id => { const a = apps[id]; return a && (!a.unlock || G.isUnlocked(a.unlock)); };
+  const appUnlocked = id => { const a = apps[id]; return !!a && (!a.unlock || G.isUnlocked(a.unlock)) && (!a.visible || a.visible()); };
+  const routeApp = (id, params) => (DATA.MSG_APPS.includes(id) && params && params.chat && DATA.chatApp) ? DATA.chatApp(params.chat) : id;
 
   /* ---------- budowa ---------- */
   function build() {
@@ -92,6 +101,29 @@ const UI = (() => {
         h('button', { 'aria-label': 'Ostatnie aplikacje', onclick: () => { SFX.play.tap(); recents(); }, html: '<svg viewBox="0 0 24 24" width="20" height="20"><rect x="5.5" y="5.5" width="13" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>' }))
       : h('div', { id: 'homebar', title: 'Ekran główny', onclick: () => goHome() });
     screen.append(home, appsLayer, statusEl, island, bannersEl, toastsEl, homebar);
+    /* Gest wstecz: przeciągnięcie od lewej krawędzi (iOS i Android 10+). Strona podąża za palcem. */
+    let eg = null;
+    appsLayer.addEventListener('pointerdown', e => {
+      if (!current || overlays.length) return;
+      const r = screen.getBoundingClientRect();
+      if (e.clientX - r.left > 22) return;
+      const pgs = current.el.querySelectorAll('.pg'); const tgt = pgs.length > 1 ? pgs[pgs.length - 1] : current.el;
+      eg = { x: e.clientX, y: e.clientY, tgt, w: r.width };
+    });
+    appsLayer.addEventListener('pointermove', e => {
+      if (!eg) return;
+      const dx = Math.max(0, e.clientX - eg.x);
+      if (Math.abs(e.clientY - eg.y) > 50 && dx < 30) { eg.tgt.style.transform = ''; eg = null; return; }
+      eg.tgt.classList.add('edge-drag'); eg.tgt.style.transform = `translateX(${dx}px)`;
+    });
+    const egEnd = e => {
+      if (!eg) return;
+      const g = eg; eg = null; const dx = e.clientX - g.x;
+      g.tgt.classList.remove('edge-drag'); g.tgt.style.transition = 'transform .2s'; 
+      if (dx > g.w * 0.3) { g.tgt.style.transform = `translateX(${g.w}px)`; setTimeout(() => { g.tgt.style.transform = ''; g.tgt.style.transition = ''; SFX.play.tap(); back(); }, 180); }
+      else { g.tgt.style.transform = ''; setTimeout(() => { g.tgt.style.transition = ''; }, 220); }
+    };
+    appsLayer.addEventListener('pointerup', egEnd); appsLayer.addEventListener('pointercancel', egEnd);
     renderStatus();
     fit();
     window.addEventListener('resize', fit);
@@ -159,17 +191,21 @@ const UI = (() => {
     const t = U.time(G.now());
     const st = $('.st-t', statusEl); if (st && st.textContent !== t) renderStatus();
     const wt = $('.w-time', home); if (wt && wt.textContent !== t) { wt.textContent = t; $('.w-date', home).textContent = cap(U.dayLong(G.now())); }
-    if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; }
+    const hd = $('.home-day', home), hdd = cap(U.dayShort(G.now())); if (hd && hd.textContent !== hdd) hd.textContent = hdd;
+    if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; const ld = $('.lk-d', lockEl), d = cap(U.dayLong(G.now())); if (ld && ld.textContent !== d) ld.textContent = d; }
     if (G.s && !document.hidden && !G.s.clock.paused) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
   function applyAppearance() {
     const pref = G.settings.appearance || 'light';
     document.body.classList.toggle('dark-ui', pref === 'dark' || pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const ts = G.settings.textSize || 'm';
+    document.body.classList.toggle('ts-l', ts === 'l');
+    document.body.classList.toggle('ts-xl', ts === 'xl');
   }
 
   /* ---------- ekran główny ---------- */
-  let homeQueued = false;
+  let homeQueued = false, homePage = 0;
   function scheduleHome() { if (homeQueued) return; homeQueued = true; requestAnimationFrame(() => { homeQueued = false; renderHome(); }); }
   function renderHome() {
     if (!G.s) return;
@@ -182,16 +218,32 @@ const UI = (() => {
         h('span', { class: 'ic', style: `--g:${GRAD[id]}` }, h('span', { html: glyph(id) }), n ? h('span', { class: 'badge' + (n === 'dot' ? ' dot' : '') }, n === 'dot' ? '' : n) : null), h('span', { class: 'lb' }, appName(a)));
     }
     const weather = DATA.weather();
-    home.append(
+    const p1 = h('div', { class: 'home-page', 'aria-label': 'Ekran 1' },
       h('div', { class: 'home-widgets' },
-        h('button', { class: 'home-weather', onclick: () => openApp('weather'), 'aria-label': 'Pogoda w Mglisku' },
-          h('b', {}, 'Mglisko'), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', {}, cap(U.dayShort(G.now())))),
+        h('button', { class: 'home-weather', onclick: () => openApp('weather'), 'aria-label': 'Pogoda: ' + DATA.weatherPlace() },
+          h('b', {}, DATA.weatherPlace()), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', { class: 'home-day' }, cap(U.dayShort(G.now())))),
         h('button', { class: 'home-note', onclick: () => openApp('notes', { note: 'todo' }), 'aria-label': 'Co teraz? Otwórz notatkę' },
           h('small', {}, 'NOTATKI'), h('b', {}, 'Co teraz?'), h('p', {}, G.s.objective ? U.tpl(G.s.objective.text).replace(/[*_]/g, '') : 'Sprawdź wiadomości.'))),
-      h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['calendar', 'maps', 'weather', 'clock', 'notes', 'nimbus', 'ciemnia', 'bushview', 'settings'].filter(appUnlocked).map(appIcon)),
+      h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['gadka', 'blysk', 'kadr', 'klipo', 'calendar', 'maps', 'weather', 'clock'].filter(appUnlocked).map(appIcon)));
+    const p2 = h('div', { class: 'home-page', 'aria-label': 'Ekran 2' },
+      h('div', { class: 'home-folder-t' }, 'Narzędzia'),
+      h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['notes', 'nimbus', 'ciemnia', 'bushview', 'settings'].filter(appUnlocked).map(appIcon)));
+    const pages = h('div', { class: 'home-pages' }, p1, p2);
+    const dots = h('div', { class: 'home-dots', role: 'tablist' }, [0, 1].map(i => h('button', { 'aria-label': 'Ekran ' + (i + 1), class: i === homePage ? 'on' : '', onclick: () => goPage(i) })));
+    function goPage(i, smooth = true) { homePage = i; pages.scrollTo({ left: i * pages.clientWidth, behavior: smooth ? 'smooth' : 'auto' }); [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i)); }
+    pages.addEventListener('scroll', () => { const i = Math.round(pages.scrollLeft / Math.max(1, pages.clientWidth)); if (i !== homePage) { homePage = i; [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i)); } }, { passive: true });
+    /* Mysz na komputerze: przeciąganie jak palcem. Na dotyku działa natywny scroll-snap. */
+    let dx = null, sl = 0;
+    pages.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; dx = e.clientX; sl = pages.scrollLeft; });
+    pages.addEventListener('pointermove', e => { if (dx == null) return; pages.scrollLeft = sl - (e.clientX - dx); });
+    const endDrag = e => { if (dx == null) return; const d = e.clientX - dx; dx = null; if (Math.abs(d) < 8) return; goPage(Math.max(0, Math.min(1, homePage + (d < -40 ? 1 : d > 40 ? -1 : 0)))); };
+    pages.addEventListener('pointerup', endDrag); pages.addEventListener('pointerleave', endDrag);
+    pages.addEventListener('click', e => { const w = Math.max(1, pages.clientWidth), off = pages.scrollLeft % w; if (Math.min(off, w - off) > 10) e.stopPropagation(); }, true);
+    home.append(pages, dots,
       h('button', { class: 'home-search', onclick: searchPhone }, U.ico('search', 13), 'Szukaj'),
       h('div', { class: 'dock', 'aria-label': 'Dock' }, dock.filter(appUnlocked).map(appIcon))
     );
+    requestAnimationFrame(() => goPage(homePage, false));
   }
 
   function searchPhone() {
@@ -218,12 +270,13 @@ const UI = (() => {
 
   /* ---------- aplikacje ---------- */
   function openApp(id, params, origin) {
-    if (!appUnlocked(id)) return;
+    id = routeApp(id, params);
+    if (!apps[id] || (!appUnlocked(id) && !(params && params.chat))) return;
     SFX.unlockAudio();
     if (current && current.id === id) { if (current.ctrl && current.ctrl.onParams) current.ctrl.onParams(params || {}); return; }
     closeOverlays();
     if (current) closeApp(true);
-    const el = h('div', { class: 'app app-' + id });
+    const el = h('div', { class: 'app app-' + id + (DATA.MSG_APPS.includes(id) && id !== 'messages' ? ' app-messages' : '') });
     if (origin && origin.getBoundingClientRect) {
       const r = origin.getBoundingClientRect(), sr = screen.getBoundingClientRect();
       el.style.setProperty('--ox', `${((r.left + r.width / 2 - sr.left) / sr.width) * 100}%`);
@@ -361,7 +414,12 @@ const UI = (() => {
 
   /* ---------- powiadomienia ---------- */
   const bq = [];
-  let bShowing = false;
+  let bShowing = false, shownBanner = null;
+  /* Jak w systemie: baner rozmowy chowa się, gdy gracz sam wejdzie do tej rozmowy. */
+  function dismissBannerFor(chat) {
+    if (shownBanner && chat && shownBanner.chat === chat) shownBanner.close();
+    for (let i = bq.length - 1; i >= 0; i--) if (bq[i].open && bq[i].open.chat === chat) bq.splice(i, 1);
+  }
   function banner(o) {
     if (locked && lockEl) { addLockNotif(o); playBannerSound(o); return; }
     /* Kolejka nie może zostawać w tyle za rozmową: z jednego czatu zostaje tylko najnowszy baner, a w kolejce najwyżej dwa. */
@@ -397,7 +455,8 @@ const UI = (() => {
     bShowing = true;
     const el = bannerEl(o);
     let done = false;
-    const close = () => { if (done) return; done = true; el.classList.add('out'); setTimeout(() => { el.remove(); nextBanner(); }, 280); };
+    const close = () => { if (done) return; done = true; if (shownBanner && shownBanner.el === el) shownBanner = null; el.classList.add('out'); setTimeout(() => { el.remove(); nextBanner(); }, 280); };
+    shownBanner = { el, chat: o.open && o.open.chat, close };
     el.addEventListener('click', () => { close(); if (o.onclick) o.onclick(); else if (o.app) openApp(o.app, o.open || {}); });
     let sy = null;
     el.addEventListener('pointerdown', e => { sy = e.clientY; });
@@ -415,14 +474,16 @@ const UI = (() => {
     const name = U.tpl((G.s.chats[chat] && G.s.chats[chat].name) || cd.name || who.name || '');
     const title = cd.group ? `${who.short || who.name} · ${name}` : name;
     banner({
-      app: 'messages', open: { chat }, who: cd.group ? msg.from : (G.chat(chat).avatar || cd.avatar || msg.from), title,
+      app: DATA.chatApp(chat), icon: DATA.chatApp(chat), open: { chat }, who: cd.group ? msg.from : (G.chat(chat).avatar || cd.avatar || msg.from), title,
       text: preview(msg), sound: cd.group ? 'group' : 'msg', glitch: !!cd.glitch && Math.random() < 0.6
     });
   }
   function preview(msg) {
+    if (msg.deleted) return 'Wiadomość została usunięta';
     if (msg.vanish) return '👁 Wiadomość znikająca';
     if (/^voice:/.test(msg.text || '')) return '🎤 Wiadomość głosowa ' + msg.text.split('|')[0].slice(6);
     if (msg.text) return U.tpl(msg.text).replace(/[*_]/g, '').replace(/\n/g, ' ');
+    if (msg.snap) return '▶ Film jednorazowy';
     if (msg.vid) return '🎬 Wideo';
     if (msg.img) return '📷 Zdjęcie';
     if (msg.ev) return '📎 Załącznik';
@@ -475,6 +536,9 @@ const UI = (() => {
   /* ---------- awatary ---------- */
   function avatar(who, cls = '') {
     if (who === 'szklarz') who = 'unknown';
+    /* Grupa bez własnego zdjęcia: dwa nachodzące na siebie awatary członków, jak w komunikatorach. */
+    const gc = DATA.chats && DATA.chats[who];
+    if (gc && gc.group && gc.duo) return h('span', { class: 'av av-duo ' + cls, role: 'img', 'aria-label': U.tpl(gc.name) }, avatar(gc.duo[0]), avatar(gc.duo[1]));
     const photo = DATA.chars[who]?.photo;
     if (photo && !/^assets\/people\//.test(photo)) return h('span', { class: 'av ' + cls }, h('img', { src: photo, alt: DATA.chars[who].name, style: 'object-fit:cover' }));
     if (photo) {
@@ -501,7 +565,7 @@ const UI = (() => {
       h('div', { class: 'lk-d' }, cap(U.dayLong(G.now()))),
       h('div', { class: 'lk-t' }, U.time(G.now())),
       h('div', { class: 'lk-n' }),
-      h('div', { class: 'lk-u', onclick: unlockScreen }, 'Dotknij, aby odblokować'));
+      h('div', { class: 'lk-u', onclick: unlockScreen }, OS === 'android' ? 'Przesuń w górę, aby odblokować' : 'Przesuń w górę, aby otworzyć'));
     lockWallpaperCleanup = Wallpapers.bind(lockEl, () => UI.openWallpapers());
     let sy = null;
     lockEl.addEventListener('pointerdown', e => { sy = e.clientY; });
@@ -512,8 +576,19 @@ const UI = (() => {
   function addLockNotif(o) {
     if (!lockEl) return;
     const el = bannerEl(Object.assign({}, o, { when: U.time(G.now()) }));
-    el.addEventListener('click', unlockScreen);
-    $('.lk-n', lockEl).prepend(el);
+    el.addEventListener('click', e => { e.stopPropagation(); unlockScreen(); if (o.open && o.open.chat) UI.openApp(o.app || 'messages', { chat: o.open.chat }); });
+    const box = $('.lk-n', lockEl);
+    box.prepend(el);
+    // Jak w prawdziwym telefonie: kilka najnowszych na wierzchu, starsze zwinięte w stos zamiast uciętej listy.
+    const all = [...box.querySelectorAll(':scope > .banner')], keep = 4;
+    all.forEach((b, i) => b.classList.toggle('lk-hidden', i >= keep));
+    let more = $('.lk-more', box);
+    if (all.length > keep) {
+      if (!more) { more = h('button', { class: 'lk-more', onclick: e => { e.stopPropagation(); unlockScreen(); } }); box.appendChild(more); }
+      const n = all.length - keep;
+      more.textContent = `jeszcze ${n} ${n === 1 ? 'powiadomienie' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'powiadomienia' : 'powiadomień'}`;
+      box.appendChild(more);
+    } else if (more) more.remove();
   }
   function unlockScreen() {
     if (!lockEl) return;
@@ -525,6 +600,29 @@ const UI = (() => {
     homebar.classList.remove('hide');
     G.setFlag('unlockedPhone');
   }
+
+  /* Powrót do gry po dłuższej przerwie: nieprzeczytane czekają na ekranie blokady jak w prawdziwym telefonie (najwyżej trzy rozmowy, najnowsze na górze). */
+  let hiddenAt = 0;
+  const RETURN_LOCK_MS = 3 * 60 * 1000;
+  function returnLock() {
+    if (lockEl || !G.s || G.s.finished || overlays.length || callEl || document.querySelector('.curtain,.scare-ov,.scare-call,.title-scr')) return false;
+    const ids = Object.keys(G.s.chats || {}).filter(id => id !== 'call' && G.isUnlocked('chat:' + id) && G.s.chats[id].unread > 0);
+    if (!ids.length) return false;
+    lock();
+    for (const id of ids.slice(-3)) {
+      const c = G.s.chats[id], msg = [...c.msgs].reverse().find(m => m.from !== 'me' && m.from !== 'sys');
+      if (!msg) continue;
+      const cd = DATA.chats[id] || {}, who = DATA.chars[msg.from] || {}, name = U.tpl(c.name || cd.name || who.name || '');
+      addLockNotif({ app: 'messages', open: { chat: id }, who: cd.group ? msg.from : (c.avatar || cd.avatar || msg.from),
+        title: (cd.group ? `${who.short || who.name} · ${name}` : name) + (c.unread > 1 ? ` (${c.unread})` : ''), text: preview(msg) });
+    }
+    return true;
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { hiddenAt = Date.now(); return; }
+    if (hiddenAt && Date.now() - hiddenAt >= RETURN_LOCK_MS) returnLock();
+    hiddenAt = 0;
+  });
 
   /* ---------- połączenia ---------- */
   let callEl = null;
@@ -826,7 +924,7 @@ const UI = (() => {
   return {
     get os() { return OS; }, appName,
     build, def, apps, openApp, closeApp, goHome, back, currentApp, Stack, page, iconBtn, sheet, modal,
-    banner, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, unlockScreen, get locked() { return locked; },
+    banner, dismissBannerFor, toast, evidenceToast, avatar, textOrVoice, glyph, GRAD, lock, returnLock, unlockScreen, get locked() { return locked; },
     incomingCall, outgoingCall, callScreen, endCall, chapterTitle, chapterEnd, interlude, endingScreen, credits,
     fx, scare, nearby, camera, renderHome, scheduleHome, preview, pushOverlay, popOverlay, closeOverlays, get screen() { return screen; }, appUnlocked
   };

@@ -14,11 +14,11 @@ DATA.evidence = {
   /* ---------- prolog ---------- */
   ev_missed: {
     title: 'Nieodebrane połączenia od Mai', cat: 'digital', source: 'Twój telefon',
-    desc: 'Numer +48 731 402 118 dzwonił do ciebie dwa razy: *13.10 o 22:31* i *14.10 o 23:47*. Drugie połączenie było ostatnim, jakie Maja wykonała w życiu… albo przynajmniej przed zniknięciem.'
+    desc: 'Numer +48 731 402 118 dzwonił do ciebie dwa razy: *13.10 o 22:31* i *14.10 o 23:47*. Według bilingu drugie połączenie jest ostatnim przed zniknięciem Mai. Nie zostało odebrane.'
   },
   ev_sms_maja: {
     title: 'SMS od Mai (13.10, 21:12)', cat: 'msg', source: 'Twój telefon',
-    desc: '„Dzień dobry, Panie Adamie. Nazywam się Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Chyba znalazłam coś, co wtedy przeoczono. Nie wiem, komu tu mogę zaufać. Proszę o kontakt. M.W.”'
+    desc: '„' + DATA.storyTexts.firstMajaSMS + '”'
   },
   ev_article2007: {
     title: 'Artykuł „Dziesięć lat ciszy” (2007)', cat: 'msg', source: 'Gazeta Sudecka, archiwum', img: 'web_flood97',
@@ -72,7 +72,7 @@ DATA.evidence = {
   ev_mount: { title: 'Urwany uchwyt fotopułapki 2', cat: 'object', source: 'Zdjęcie Igora', img: 'k_mount', desc: 'Na filarze w hali A zostały tylko opaski zaciskowe i kawałek plastiku. Fotopułapkę ktoś zerwał.' },
   ev_frame08: { title: 'Kadr 8: chłopcy w hucie (1997)', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_08d', desc: 'Kilku nastolatków przy piwie, w świetle flesza. Lato, burza za oknami. Twarze prześwietlone.' },
   ev_frame21: { title: 'Kadr 21: postać w żółtej pelerynie', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_21d', desc: 'Czterech chłopaków przy piecu. W drzwiach za nimi stoi *małe dziecko w żółtej pelerynie z kapturem*. Na szyi ma coś na sznurku.' },
-  ev_frame22: { title: 'Kadr 22: dziura w podłodze', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_22d', desc: 'Rozmazany, niemal czarny kadr. Snop latarki, połamane deski, czarna woda w dole. Ktoś krzyczy — widać otwarte usta.' },
+  ev_frame22: { title: 'Kadr 22: dziura w podłodze', cat: 'photo', source: 'Klisza z szafki 17', img: 'p_22d', desc: 'Rozmazany, niemal czarny kadr. Snop latarki, połamane deski, czarna woda w dole, a w niej coś żółtego. Przy dolnej krawędzi rozmazana ręka — ktoś sięga w dół.' },
   ev_questions: { title: 'Notatka Mai: „Pytania”', cat: 'msg', source: 'Nimbus · notatki (PIN)', desc: 'Lista pytań Mai: kim są chłopcy z kadru 21, kto i po co zamurował odprężarkę, dlaczego szukano tylko w rzece, kto prowadził poszukiwania (*komendant Gajda — ojciec Roberta*). Na końcu: „Nie mówić nikomu. *Zwłaszcza R.G.*”' },
   ev_car_igor: { title: 'Zdjęcie auta przy bramie (Igor)', cat: 'photo', source: 'Zdjęcie Igora', img: 'i_car', desc: 'Rozmazane zdjęcie z daleka: ciemne auto przy bramie huty, światła zgaszone. Z tablicy da się odczytać tylko końcówkę: *…19*.' },
   ev_bartek_conf: { title: 'Bartek: „Pytała o mojego ojca”', cat: 'testimony', source: 'Rozmowa z Bartkiem', desc: '14.10 Maja pytała Bartka, czy jego ojciec Marek był latem 1997 w hucie. Bartek się wściekł. W nocy z 21 na 22.10 sam poszedł do huty sprawdzić, czego szukała.' },

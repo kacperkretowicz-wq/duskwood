@@ -10,21 +10,21 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
   const members = list => run(() => { G.chat('group').members = list; BUS.emit('chats'); });
 
   const olaRevealsGajda = [
-    O('Jest coś jeszcze. I to jest ważniejsze niż moja kłótnia.'),
+    O('Jest coś jeszcze. I to jest ważniejsze niż moja kłótnia.', { wording: 'Czekaj. Przypomniało mi się coś z tamtej rozmowy.' }),
     O('Tamtego wieczoru najpierw rozmawiałyśmy przez telefon. Powiedziałam jej: idź z tym na policję.'),
     O('A ona: „Nie do Gajdy. Nie pytaj dlaczego. Jeszcze nie.”'),
     give('ev_not_gajda'),
     O('Myślałam, że się nakręciła. Gajda kiedyś dał jej mandat pod biblioteką, więc uznałam, że znowu o to chodzi.'),
     O('No i teraz siedzę w kuchni, czytam to jeszcze raz i mi niedobrze.'),
-    O('Kuba go uwielbia. Jak mu powiesz, nie uwierzy.')
+    O('Kuba go uwielbia. Jak mu powiesz, nie uwierzy.', { wording: 'Kuba mu ufa. Nie wiem, jak mu to powiedzieć.' })
   ];
 
   return [
     title(),
     K('to jej mail: maja.wrona@nimbus.pl'),
     K('pytania są dwa. o pierwszego psa i o pierwszy aparat'),
-    K('wpisałem bandzior i lustrzanka. oba źle 💀'),
-    K('bandzior to ten pies którego mamy TERAZ. nie pytaj jak ja studia zdaję'),
+    K('wpisałem bandzior i lustrzanka. oba źle 💀', { wording: 'wpisałem bandzior i lustrzanka. nic' }),
+    K('bandzior to ten pies którego mamy TERAZ. nie pytaj jak ja studia zdaję', { wording: 'a potem do mnie dotarło, że wpisałem psa, którego mamy teraz. dobra, już nie strzelam' }),
     unlock('app:nimbus'),
     goal('Odzyskaj dostęp do konta Nimbus Mai.', [
       'Otwórz aplikację *Nimbus* → „Nie pamiętasz hasła?” i wpisz *maja.wrona@nimbus.pl*.',
@@ -39,9 +39,10 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     }),
     K('udało się??'),
     choose('kuba', [
-      opt('Jestem w środku.', []),
+      opt('Jestem w środku.', [], { set: { r_wsrodku: true } }),
       opt('Kluska i Kometa. Mam dostęp.', [K('KLUSKA. no jasne'), K('jamniczka. umarła, jak miałem 12 lat. maja płakała tydzień')], { trust: { kuba: 1 } })
     ]),
+    scene('xReWSrodku', [iff('flag:r_wsrodku', [K('serio?? nie pytam jak')])]),
     /* Zapowiedź sprawy 3: Kuba widzi, jak działa reset konta. */
     scene('f3reset', [
       K('ej. czyli jak ktoś zna odpowiedzi, to po prostu wchodzi na czyjeś konto i tyle?'),
@@ -71,10 +72,10 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     }),
     pause(1200),
     g('ola', 'Huta?'),
-    g('bartek', 'nie bylo jej na tamie'),
+    g('bartek', 'nie bylo jej na tamie', { wording: 'czyli o tej godzinie jej telefon byl w hucie' }),
     g('igor', 'czekajcie. 22:58 huta, 23:58 dalej huta. do zalewu to nawet nie jest po drodze'),
     g('kuba', 'to jak jej auto znalazło się na tamie???'),
-    g('igor', 'mógł paść albo stracić zasięg w środku. ale to nie tłumaczy auta. mamy pozycję telefonu, nie mai'),
+    g('igor', 'mógł paść albo stracić zasięg w środku. ale to nie tłumaczy auta. mamy pozycję telefonu, nie mai', { wording: 'przy 23:58 kończy się zapis. potem mógł paść albo stracić zasięg. nie wiemy jeszcze, kiedy ona stamtąd wyszła' }),
     g('ola', 'Albo ktoś go wyłączył.'),
     typing('group', 'kuba', 3000),
     g('kuba', 'albo ktoś zawiózł jej auto na tamę'),
@@ -88,20 +89,20 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     ]),
     g('kuba', 'jutro rano idę z tym z mamą do gajdy'),
     g('igor', 'ej, jeszcze chwila. zobaczmy resztę kopii'),
-    g('igor', 'smsy też. pisałem z nią w poniedziałek o filmie. fotograficznym, nie kinie'),
+    g('igor', 'smsy też. pisałem z nią w poniedziałek o filmie. fotograficznym, nie kinie', { wording: 'zerknij też w smsy. pisała do mnie w poniedziałek o tych negatywach' }),
     g('ola', 'Ja ostatni raz pisałam z nią w poniedziałek. Wszystko było normalnie.'),
     g('bartek', 'ja z nia nie gadalem od miesiecy'),
     pause(1500),
     g('igor', 'czekaj. fotopułapki. ustawiałem je mai w hucie. powinny wysyłać zdjęcia na maila'),
     g('kuba', 'serio?? czemu nic nie mówiłeś'),
-    g('igor', 'bo dopiero teraz sobie przypomniałem. sory. od trzech dni naprawiam telefony na autopilocie'),
+    g('igor', 'bo dopiero teraz sobie przypomniałem. sory. od trzech dni naprawiam telefony na autopilocie', { wording: 'sory. myślę tylko o tym, jak się dostać do jej panelu. a one wysyłały też na maila. możemy już mieć zdjęcia w kopii' }),
     goal('Sprawdź zdjęcia z fotopułapek z nocy 14 października.', [
       'Nimbus → Galeria → album *Fotopułapki*.',
       'Na dole każdego zdjęcia jest pasek z datą i godziną. Szukaj 14.10 wieczorem.'
     ]),
     waitFor('ev:ev_cam1_maja', { hints: [{ after: 90, chat: 'group', who: 'igor', text: 'W albumie Fotopułapki są daty w pasku na dole. Szukaj 14.10, około 23.' }] }),
     g('kuba', 'i co?'),
-    show('group', { prompt: 'Pokaż zdjęcie z fotopułapki', accept: [{ ev: ['ev_cam1_maja'] }], wrongFor: { ev_cam2_0019: ['igor', 'To z 13-ego, dzień wcześniej. Ważne, ale najpierw — czy kamera złapała ją 14-ego?'], ev_cam1_car: ['igor', 'To już 15-ego. A 14-ego wieczorem?'] }, wrong: [['kuba', 'pokaż z fotopułapki']] }),
+    show('group', { prompt: 'Pokaż zdjęcie z fotopułapki', accept: [{ ev: ['ev_cam1_maja'] }], wrongFor: { ev_cam2_0019: ['igor', 'to z trzynastego, dzień wcześniej. ważne, ale najpierw: czy kamera złapała ją czternastego?'], ev_cam1_car: ['igor', 'to już piętnasty, po północy. a czternastego wieczorem?'] }, wrong: [['kuba', 'pokaż z fotopułapki']] }),
     typing('group', 'kuba', 4200),
     g('kuba', 'to ona'),
     g('kuba', 'to jej kurtka. a na głowie czołówka, jak u górnika'),
@@ -115,34 +116,34 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
       accept: [
         {
           ev: ['ev_cam1_car'], then: [
-            g('bartek', '1:20. noc po tym, jak zniknęła'),
-            g('igor', 'Światła prosto w obiektyw. Tablicy nie widać.'),
+            g('bartek', '1:20. noc po tym, jak zniknęła', { wording: '1:20. ta sama noc. niecałe półtorej godziny po tym, jak jej telefon padł' }),
+            g('igor', 'Światła prosto w obiektyw. Tablicy nie widać.', { wording: 'światła prosto w obiektyw. tablicy nie widać' }),
             g('ola', 'Gajda mówił mamie Kuby, że sprawdzili hutę w piątek. W dzień.'),
             g('kuba', 'jest zdjęcie z piątku. 11:12. dwóch policjantów'),
-            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?'),
-            g('igor', 'A druga kamera? Ta w hali?'),
-            show('group', { prompt: 'Pokaż zdjęcie z kamery w hali', accept: [{ ev: ['ev_cam2_0019'] }], wrong: [['igor', 'Szukaj CAM-02. Hala A.']] }),
+            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?', { wording: 'To kto tam przyjechał w nocy ze środy na czwartek?' }),
+            g('igor', 'A druga kamera? Ta w hali?', { wording: 'a druga kamera? ta w hali?' }),
+            show('group', { prompt: 'Pokaż zdjęcie z kamery w hali', accept: [{ ev: ['ev_cam2_0019'] }], wrong: [['igor', 'szukaj CAM-02. hala A']] }),
             g('ola', 'A to kto?'),
-            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę.'),
-            g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.')
+            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę.', { wording: '13.10, 02:40. dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę' }),
+    g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.', { wording: 'latarka zasłania twarz. może trafił w kamerę przypadkiem, może nie. z tego kadru go nie poznam' })
           ]
         },
         {
           ev: ['ev_cam2_0019'], then: [
             g('ola', 'Kto to jest?'),
-            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała Maja.'),
-            g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.'),
+            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała Maja.', { wording: '13.10, 02:40. dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała maja' }),
+    g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.', { wording: 'twarzy nie widać przez latarkę. nie wiem, czy celował w kamerę, czy po prostu szedł z tej strony' }),
             g('kuba', 'czyli ktoś wiedział, czego ona szuka'),
             g('bartek', 'a brama? tam tez byla kamera'),
             show('group', { prompt: 'Pokaż zdjęcie spod bramy', accept: [{ ev: ['ev_cam1_car'] }], wrong: [['bartek', 'cos z bramy. cam-01']] }),
-            g('bartek', '1:20. noc po tym, jak zniknęła'),
+            g('bartek', '1:20. noc po tym, jak zniknęła', { wording: '1:20. ta sama noc. niecałe półtorej godziny po tym, jak jej telefon padł' }),
             g('ola', 'Gajda mówił, że sprawdzili hutę w piątek. W dzień.'),
-            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?')
+            g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?', { wording: 'To kto tam przyjechał w nocy ze środy na czwartek?' })
           ]
         }
       ],
       wrongFor: { ev_cam1_maja: ['kuba', 'to już widzieliśmy'] },
-      wrong: [['igor', 'Coś z fotopułapek. Inne godziny, inne dni.']]
+      wrong: [['igor', 'coś z fotopułapek. inne godziny, inne dni']]
     }),
     g('kuba', 'nikt nam nic nie mówił o żadnym aucie'),
     pause(2000),
@@ -168,9 +169,9 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
         O('Tak, pokłóciłyśmy się. We wtorek. Dzień przed.'),
         O('Ostatnie, co jej napisałam, to że mam dość jej obsesji.'),
         O('A w środę, o 23:31, ona napisała mi „przepraszam”. Ja już spałam. Rano zobaczyłam i pomyślałam: odpiszę po pracy.'),
-        O('Nie odpisałam.'),
+        O('Nie odpisałam.', { wording: 'Nawet otworzyłam ten czat w autobusie. I znowu odłożyłam.' }),
         choose('ola', [
-          opt('To nie twoja wina, Ola.', [O('Wiem, że chcesz dobrze. Tylko ja ciągle widzę tę nieodpisaną wiadomość.'), O('Ale dziękuję.')], { trust: { ola: 2 } }),
+          opt('To nie twoja wina, Ola.', [O('Wiem, że chcesz dobrze. Tylko ja ciągle widzę tę nieodpisaną wiadomość.'), O('Ale dziękuję.')], { wording: 'Też czasem otwieram wiadomość i zapominam odpisać.', trust: { ola: 2 } }),
           opt('Dlaczego skłamałaś w grupie?', [O('Bo mi wstyd. I bałam się, że Kuba zobaczy „mam dość” i już nic więcej nie przeczyta.')]),
           opt('Kuba musi o tym wiedzieć.', [O('Wiem. Sama mu powiem. Nie ty.')], { trust: { ola: -1 } })
         ]),
@@ -193,9 +194,9 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
         pause(5000),
         unlock('chat:ola'),
         O('{Mogłeś|Mogłaś} napisać do mnie. Nie przy wszystkich.'),
-        O('Ale skoro już grzebiesz, to dokop się do końca.'),
+        O('Ale skoro już grzebiesz, to dokop się do końca.', { wording: 'Jest jeszcze coś, czego nie napisałam na grupie.' }),
         olaRevealsGajda,
-        O('Wracam do grupy. Dla Mai, nie dla ciebie.'),
+        O('Wracam do grupy. Dla Mai, nie dla ciebie.', { wording: 'Wrócę na grupę. Nie chcę się teraz z tobą kłócić, ale więcej tak nie rób.' }),
         sys('group', 'Ola dołączyła do grupy.'),
         members(['kuba', 'ola', 'bartek', 'igor'])
       ])
@@ -215,21 +216,34 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     g('kuba', 'czemu?'),
     g('bartek', 'bo to ruina. bo sie pozabijacie. bo nie'),
     g('bartek', 'ja nie ide. mam robote'),
-    g('ola', 'Mam nockę. Piszcie, telefon zostawiam obok. I powerbank, bo Kuba ma zawsze 8%.'),
+    scene('xOlaGrafik', [g('ola', 'Zamieniłam się z Moniką. Jutro zamiast szóstej rano biorę nockę na dyżurze w aptece, żeby w dzień móc z wami jeździć.')]),
+    g('ola', 'Mam nockę. Piszcie, telefon zostawiam obok. I powerbank, bo Kuba ma zawsze 8%.', { wording: 'Jak jutro w nocy nie odpiszę, dzwońcie. Kuba, weź powerbank, zanim znowu będziesz prosił o ładowarkę w aucie.' }),
     g('kuba', 'dobranoc %name%. jak coś przyjdzie, mam dźwięk na maksa'),
     pause(2000),
-    interlude('Kilka godzin później', 'Mglisko śpi. Prawie wszyscy.', 3600),
+    interlude('Kilka godzin później', 'Mglisko śpi. Prawie wszyscy.', 3600, { rest: 's1_night' }),
+    /* P3: spokojny powrót. Przerwa nie zawsze kończy się alarmem. */
+    scene('xNieSpisz', [
+      clock('2026-10-22T01:48'),
+      say('kuba', 'kuba', 'nie śpisz?'),
+      choose('kuba', [
+        opt('Nie śpię. Co jest?', [say('kuba', 'kuba', 'nic. leżę i odświeżam tego nimbusa jak debil'), say('kuba', 'kuba', 'mama chodzi po korytarzu. słyszę ją przez ścianę')], { trust: { kuba: 1 } }),
+        opt('Prawie. Ty też powinieneś.', [say('kuba', 'kuba', 'wiem. jeszcze chwila')])
+      ]),
+      pause(2500),
+      say('kuba', 'kuba', 'dobra. jakby co, mam dźwięk na maksa. serio', { wording: 'dobra. spróbuję zamknąć oczy. telefon mam pod poduszką' })
+    ]),
     clock('2026-10-22T02:13'),
     ambient('tense'),
     fx('vibrate'),
     sync('maja:cam57', { count: 1, text: 'Nowy plik w folderze Fotopułapki: CAM01_IMG_0057.JPG' }),
+    scene('xRanoNoc', [iff('flag:rano_s1_night', [sys('kuba', 'Wiadomości z nocy. Nimbus zsynchronizował plik o 02:13.')])]),
     goal('Nimbus właśnie coś zsynchronizował. Sprawdź nowe zdjęcie.', ['Nimbus → Galeria → Fotopułapki → najnowsze zdjęcie (22.10, 02:13).']),
     waitFor('seen:img:c1_0057'),
     give('ev_cam1_0057'),
     pause(2500),
     fx('glitch'),
-    sz('nie tylko ty nie spisz'),
-    sz('on tez nie'),
+    sz('nie tylko ty nie spisz', { wording: 'sprawdź godzinę na nowym zdjęciu' }),
+    sz('on tez nie', { wording: 'to nie jest zapis sprzed tygodnia' }),
     pause(2500),
     end('ch2')
   ];

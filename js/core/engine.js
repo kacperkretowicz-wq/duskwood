@@ -16,17 +16,31 @@ const Engine = (() => {
   let waiter = null;
   const typingMap = {};
   let lastTalk = null;
+  // Odpowiedź w trakcie pisania: gdy rozmówca pisze ostatnią wiadomość przed wyborem gracza,
+  // opcje są już widoczne. Klik kończy pisanie (jego dymek ląduje od razu), a wybór jest gotowy.
+  let early = null, earlyPick = null, hurry = null;
 
+  // Natan, Bartek, Zuza i Szklarz piszą bez polskich znaków — styl postaci, pilnowany w jednym miejscu.
+  const PLAIN_TYPERS = new Set(['natan', 'bartek', 'zuza', 'szklarz']);
+  function plainTyper(who, text) {
+    if (!PLAIN_TYPERS.has(who) || typeof text !== 'string' || text.startsWith('voice:')) return text;
+    const m = { ą: 'a', ć: 'c', ę: 'e', ł: 'l', ń: 'n', ó: 'o', ś: 's', ź: 'z', ż: 'z', Ą: 'A', Ć: 'C', Ę: 'E', Ł: 'L', Ń: 'N', Ó: 'O', Ś: 'S', Ź: 'Z', Ż: 'Z' };
+    return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, c => m[c]);
+  }
   // Tempo konkretnej osoby: najpierw czyta, potem pisze; kolejne dymki idą seriami.
   function cadence(chat, who, text, extra) {
     const profile = (DATA.chars[who] && DATA.chars[who].cadence) || {};
     const previous = G.chat(chat).msgs.at(-1);
     const sameBurst = previous && previous.from === who && lastTalk && lastTalk.chat === chat && lastTalk.who === who && Date.now() - lastTalk.at < 18000;
-    const reading = previous && previous.from !== who ? Math.min((previous.text || '').length * 24, 3200) : 0;
+    const reading = previous && previous.from !== who ? Math.min((previous.text || '').length * 20, 1800) : 0;
     const jitter = .85 + Math.random() * .3;
     const gap = extra.gap ?? ((sameBurst ? 450 : (profile.think || 1500) + reading) * jitter);
-    const duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 14000));
-    return { gap, duration, hesitate: !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
+    let duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 9000));
+    let g2 = gap;
+    // Ostatnia wiadomość przed wyborem gracza: krótsze czekanie, żeby odpowiedzi pojawiały się zaraz po niej.
+    // Gdy opcje są widoczne już w trakcie pisania (extra.early), pisanie trwa naturalnie — gracz i tak może odpowiedzieć od razu.
+    if (extra.beforeChoice && extra.gap == null) { g2 = Math.min(gap, 700); if (extra.typing == null && !extra.early) duration = Math.min(duration, 2400); }
+    return { gap: g2, duration, hesitate: !extra.beforeChoice && !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
   }
 
   /* ---------- DSL ---------- */
@@ -35,7 +49,7 @@ const Engine = (() => {
     pic: (chat, who, img, text = '', o = {}) => ({ t: 'say', chat, who, text, img, ...o }),
     me: (chat, text, o = {}) => ({ t: 'say', chat, who: 'me', text, ...o }),
     sys: (chat, text) => ({ t: 'sys', chat, text }),
-    pause: ms => ({ t: 'pause', ms }),
+    pause: (ms, o = {}) => ({ t: 'pause', ms, ...o }),
     choose: (chat, options, o = {}) => ({ t: 'choose', chat, options, ...o }),
     menu: (chat, options, o = {}) => ({ t: 'choose', chat, options, menu: true, ...o }),
     opt: (text, then = [], o = {}) => ({ text, then, ...o }),
@@ -57,8 +71,8 @@ const Engine = (() => {
     go: to => ({ t: 'go', to }),
     notify: o => ({ t: 'notify', ...o }),
     sync: (key, o = {}) => ({ t: 'sync', key, ...o }),
-    clock: iso => ({ t: 'clock', iso }),
-    interlude: (text, sub = '', ms = 3400) => ({ t: 'interlude', text, sub, ms }),
+    clock: (iso, o = {}) => ({ t: 'clock', iso, ...o }),
+    interlude: (text, sub = '', ms = 3400, o = {}) => ({ t: 'interlude', text, sub, ms, ...o }),
     title: () => ({ t: 'title' }),
     callIn: (who, o = {}) => ({ t: 'callIn', who, ...o }),
     callEnd: (o = {}) => ({ t: 'callEnd', ...o }),
@@ -69,6 +83,10 @@ const Engine = (() => {
     fx: (name, o = {}) => ({ t: 'fx', name, ...o }),
     typing: (chat, who, ms = 2500) => ({ t: 'typing', chat, who, ms }),
     run: fn => ({ t: 'run', fn }),
+    // Wycofanie wiadomości: nadawca usuwa swoją wiadomość (uid) u wszystkich. flag = czy gracz miał wtedy otwarty ten czat.
+    unsend: (chat, uid, o = {}) => ({ t: 'unsend', chat, uid, ...o }),
+    // Edycja wiadomości: nowa treść z dopiskiem „edytowano”. flag = czy gracz widział wersję przed edycją (miał otwarty czat).
+    edit: (chat, uid, text, o = {}) => ({ t: 'edit', chat, uid, text, ...o }),
     task: fn => ({ t: 'task', fn }),
     toast: (text, o = {}) => ({ t: 'toast', text, ...o }),
     rename: (chat, name, avatar) => ({ t: 'rename', chat, name, avatar }),
@@ -79,7 +97,7 @@ const Engine = (() => {
     // Straszak: odpala się raz na zapis (s.scares), nigdy przy przewijaniu ani po wczytaniu.
     scare: (id, kind, o = {}) => ({ t: 'scare', id, kind, ...o }),
     nearby: (id, o = {}) => ({ t: 'nearby', id, ...o }),
-    vanish: (chat, text) => ({ t: 'vanish', chat, text }),
+    vanish: (chat, text, o = {}) => ({ t: 'vanish', chat, text, wording: o.wording }),
     camera: (chat, options, o = {}) => ({ t: 'choose', chat, options, camera: true, ...o })
   };
 
@@ -220,6 +238,12 @@ const Engine = (() => {
     return new Promise((res, rej) => { resolver = v => (my === gen ? res(v) : rej(ABORT)); });
   }
   function answer(v) {
+    if (!resolver && early) {
+      earlyPick = v; early = null;
+      BUS.emit('pending', null);
+      if (hurry) hurry();
+      return true;
+    }
     if (!resolver) return false;
     const r = resolver; resolver = null;
     G.s.pending = null;
@@ -227,7 +251,7 @@ const Engine = (() => {
     r(v);
     return true;
   }
-  const pending = () => G.s && G.s.pending;
+  const pending = () => (G.s && G.s.pending) || early;
 
   function setTyping(chat, who, on) {
     if (on) typingMap[chat] = who; else delete typingMap[chat];
@@ -246,6 +270,8 @@ const Engine = (() => {
     const timing = cadence(chat, who, text, extra);
     await sleep(timing.gap); guard(my);
     setTyping(chat, who, true);
+    const pre = extra.early && !ff && earlyPick == null ? extra.early : null;
+    if (pre) { early = pre; BUS.emit('pending', early); }
     try {
       if (timing.hesitate) {
         await sleep(timing.duration * .35); guard(my);
@@ -253,8 +279,17 @@ const Engine = (() => {
         await sleep(1100); guard(my);
         setTyping(chat, who, true);
         await sleep(timing.duration * .65);
-      } else await sleep(timing.duration);
-    } finally { if (my === gen) setTyping(chat, who, false); }
+      } else {
+        const done = sleep(timing.duration);
+        const sl = [...sleepers].at(-1);
+        if (pre) hurry = () => { if (sleepers.has(sl)) { clearTimeout(sl.timer); sl.res(); } };
+        await done;
+      }
+    } finally {
+      // Po naturalnym końcu pisania opcje zostają na ekranie do kroku wyboru (bez mrugnięcia).
+      if (pre) { hurry = null; if (my !== gen && early === pre) early = null; }
+      if (my === gen) setTyping(chat, who, false);
+    }
     guard(my);
     if (extra.cancelIf && extra.cancelIf()) return;
     const msg = G.post(chat, Object.assign({ from: who, text }, extra.msg || {}));
@@ -280,6 +315,36 @@ const Engine = (() => {
   }
 
   /* ---------- Wykonanie kroków ---------- */
+  // Czy zaraz po bieżącym kroku (pomijając krótkie pauzy) gracz dostaje wybór?
+  function leadsToChoice(ch) {
+    if (!ch || !ch.steps) return false;
+    // Etykiety nie są krokami dla gracza — każdy wybór ma przed sobą własną etykietę.
+    for (let i = G.s.pc + 1, seen = 0; i < ch.steps.length && seen < 2; i++) {
+      const n = ch.steps[i];
+      if (!n) return false;
+      if (n.t === 'label') continue;
+      if (n.t === 'choose' || n.t === 'ask') return true;
+      if (n.t !== 'pause') return false;
+      seen++;
+    }
+    return false;
+  }
+  // Najbliższy wybór w tej samej rozmowie (za krótkimi pauzami) — do odpowiedzi w trakcie pisania.
+  function earlyChoice(ch, st) {
+    if (!ch || !ch.steps || st.who === 'me' || st.chat === 'call') return null;
+    for (let i = G.s.pc + 1, seen = 0; i < ch.steps.length && seen < 2; i++) {
+      const n = ch.steps[i];
+      if (!n) return null;
+      if (n.t === 'label') continue;
+      if (n.t === 'pause') { seen++; continue; }
+      if (n.t !== 'choose' || n.chat !== st.chat || n.camera || n.rest) return null;
+      const key = `${G.s.chapter}:${n.self}`, used = G.s.used[key] || [];
+      const vis = n.options.map((o, j) => Object.assign({ i: j }, o)).filter(o => !(n.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
+      if (!vis.length) return null;
+      return { type: 'choose', chat: n.chat, early: true, pc: i, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) };
+    }
+    return null;
+  }
   async function exec(st, ch) {
     const my = gen;
     const s = G.s;
@@ -287,13 +352,15 @@ const Engine = (() => {
       case 'label': return;
       case 'go': return st.to;
       case 'ifnot': return G.test(st.cond) ? undefined : st.to;
-      case 'pause': await sleep(st.ms); guard(my); return;
+      case 'pause': if (earlyPick != null) return; await sleep(leadsToChoice(ch) ? Math.min(st.ms, 800) : st.ms); guard(my); return;
       case 'title': await UI.chapterTitle(ch); guard(my); return;
 
       case 'say': {
         const msg = {};
-        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'vanish'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
-        await talk(st.chat, st.who, st.text, { msg, gap: st.gap, typing: st.typing });
+        ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
+        // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
+        const before = leadsToChoice(ch);
+        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;
@@ -309,12 +376,18 @@ const Engine = (() => {
         const vis = st.options.map((o, i) => Object.assign({ i }, o))
           .filter(o => !(st.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
         if (!vis.length) return st.end;
-        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
+        let pick;
+        const shown = !!(early && early.chat === st.chat);
+        if (earlyPick != null && vis.some(o => o.i === earlyPick)) { pick = earlyPick; earlyPick = null; early = null; }
+        else {
+          earlyPick = null; early = null;
+          pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, shown, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
+        }
         guard(my);
         const o = st.options[pick];
         if (st.menu && !o.exit) s.used[key] = [...used, pick];
         if (o.shot) G.post(st.chat, { from: 'sys', text: U.tpl(o.sys || '{Zrobiłeś|Zrobiłaś} zrzut ekranu. Druga strona dostała powiadomienie.') });
-        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : o.text }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
+        else if (!o.silent) { const m = { from: 'me', text: o.say != null ? o.say : (o.wording ?? o.text) }; if (o.img) { m.img = o.img; if (st.camera && o.say == null) m.text = ''; } G.post(st.chat, m); SFX.play.sent(); }
         apply(o);
         return o.lab || st.end;
       }
@@ -390,6 +463,8 @@ const Engine = (() => {
           check();
         });
         guard(my);
+        // Spełniony cel nie wisi dalej w „Co teraz?” — do następnego celu widżet mówi „Sprawdź wiadomości.”
+        if (st.goal && s.objective && s.objective.text === st.goal) { s.objective = null; G.change(); }
         return;
       }
 
@@ -411,7 +486,7 @@ const Engine = (() => {
       case 'set': G.setFlag(st.k, st.v); return;
       case 'inc': G.inc(st.k, st.n); return;
       case 'trust': doTrust(st.who, st.n); return;
-      case 'notify': UI.banner(st); return;
+      case 'notify': UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...st, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...st, app: DATA.chatApp(st.who) } : st); return;
       case 'sync': {
         G.unlock(st.key);
         s.vars.nimbusNew = (s.vars.nimbusNew || 0) + (st.count || 1);
@@ -449,8 +524,28 @@ const Engine = (() => {
       case 'vanish': {
         // Znikające wiadomości: po przeczytaniu zostaje tylko informacja, że były.
         const c = s.chats[st.chat];
-        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
+        if (c && c.msgs) { const n = c.msgs.filter(m => m.vanish).length; c.msgs = c.msgs.filter(m => !m.vanish); if (n) G.post(st.chat, { from: 'sys', text: st.wording || st.text || 'Wiadomości zniknęły po przeczytaniu.' }); }
         G.change(); return;
+      }
+      case 'unsend': {
+        const c = G.chat(st.chat);
+        const m = c && c.msgs ? [...c.msgs].reverse().find(x => x.uid === st.uid) : null;
+        if (m && !m.deleted) {
+          if (st.flag) G.setFlag(st.flag, G.viewing === st.chat);
+          m.deleted = true; m.text = ''; delete m.img; delete m.ev;
+          G.save(); BUS.emit('msg-edit', { chat: st.chat });
+        }
+        return;
+      }
+      case 'edit': {
+        const c = G.chat(st.chat);
+        const m = c && c.msgs ? [...c.msgs].reverse().find(x => x.uid === st.uid) : null;
+        if (m && !m.deleted && !m.edited) {
+          if (st.flag) G.setFlag(st.flag, G.viewing === st.chat);
+          m.text = st.text; m.edited = true;
+          G.save(); BUS.emit('msg-edit', { chat: st.chat });
+        }
+        return;
       }
       case 'run': { const r = st.fn(s, G); return typeof r === 'string' ? r : undefined; }
       case 'task': { stopFF(); const r = await st.fn(s, G); guard(my); return typeof r === 'string' ? r : undefined; }
@@ -534,6 +629,7 @@ const Engine = (() => {
         if (G.s.pc === 0 && SeasonPacing.hold(ch.id)) break;
         const st = ch.steps[G.s.pc];
         if (!st) break;
+        if (SeasonPacing.holdRest(st)) break;
         let next;
         try { next = await exec(st, ch); }
         catch (e) { if (e === ABORT) return; throw e; }
@@ -564,6 +660,7 @@ const Engine = (() => {
     sleepers.clear();
     Object.keys(typingMap).forEach(k => delete typingMap[k]);
     ff = false;
+    early = null; earlyPick = null; hurry = null;
     if (G.s) G.s.pending = null;
     BUS.emit('pending', null);
     setTimeout(run, 0);

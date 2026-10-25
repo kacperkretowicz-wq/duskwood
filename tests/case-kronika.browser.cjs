@@ -28,7 +28,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
    while(Date.now()-t0<150000){
     await new Promise(r=>setTimeout(r,15));Engine.skip();
     if(G.s.finished)return{end:true,chapters,ending:G.s.vars.s4Ending,archived:G.s.ending,scares:Object.keys(G.s.scares||{}),v:JSON.parse(localStorage.getItem('mglisko.save.v1')).v,missing:Object.keys(DATA.evidence).filter(e=>/^ev_c_/.test(e)&&!G.has(e))};
-    const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();if(chapters.at(-1)!==G.s.chapter)chapters.push(G.s.chapter);
+    const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];if(chapters.at(-1)!==G.s.chapter)chapters.push(G.s.chapter);
     const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===last?same+1:0;last=key;
     if(p){if(p.type==='choose'){const sc=o=>{const set=Object.keys(st.options[o.i].set||{});return 10*set.filter(k=>want.includes(k)).length-10*set.filter(k=>avoid.includes(k)).length-o.i*0.1;};Engine.answer([...p.options].sort((a,b)=>sc(b)-sc(a))[0].i);}
      else if(p.type==='dial')Engine.answer(p.numbers[0]);else if(p.type==='show'){const ev=st.accept[0].ev[0];G.addEv(ev,true);Engine.answer(ev);}else if(p.type==='ask')Engine.answer(st.answers[0].match?st.answers[0].match[0]:'tak');continue;}
@@ -42,7 +42,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173',shots=process.env.
   const sc=['s4_cisza','s4_drzwi','s4_festyn','s4_noc','s4_okno',...(target==='transmisja'?['s4_transmisja']:[])].sort();
   assert.deepEqual(res.scares.filter(s=>/^s4_/.test(s)).sort(),sc);
   assert.deepEqual(res.missing,[]);
-  assert.equal(res.v,4);
+  assert.equal(res.v, 16);
   const again=await page.evaluate(()=>{const n=JSON.stringify(G.s.scares);G.save(true);G.load();return [n,JSON.stringify(G.s.scares)];});
   assert.equal(again[0],again[1]);
   if(shots&&target==='przewiniecie'){

@@ -57,7 +57,7 @@ Object.assign(DATA.evidence, {
     ['g_ola_umowa', 'assets/glos/g_ola_umowa.jpg', 'Świetlica', 768, 1024],
     ['g_kostka', 'assets/glos/g_kostka.jpg', 'Podwórko Sowów', 768, 1024],
     ['g_huta_czapka', 'assets/glos/g_huta_czapka.jpg', 'Brama huty · 2:51', 768, 1024],
-    ['g_maja_korytarz', 'assets/glos/g_maja_korytarz.jpg', 'Po kolokwium', 768, 1024],
+    ['g_maja_korytarz', 'assets/glos/g_maja_korytarz.jpg', 'Po przeglądzie zdjęć', 768, 1024],
     ['g_przystanek', 'assets/glos/g_przystanek.jpg', 'Przystanek · 18:47', 768, 1024],
     ['g_tomek_album', 'assets/glos/g_tomek_album.jpg', 'Festyn · 1996', 1024, 768],
     ['g_pracownia', 'assets/glos/g_pracownia.jpg', 'Archiwum gminy · pracownia', 1024, 768],
@@ -65,7 +65,9 @@ Object.assign(DATA.evidence, {
     ['g_kuba_kostka', 'assets/glos/g_kuba_kostka.jpg', 'Kostka u sąsiada', 768, 1024],
     ['g_serwis_noc', 'assets/glos/g_serwis_noc.jpg', 'Serwis · 22:17', 768, 1024],
     ['g_magnetowid', 'assets/glos/g_magnetowid.jpg', 'Pracownia · kaseta 12', 1024, 768],
-    ['g_pizza', 'assets/glos/g_pizza.jpg', 'Sobota u Oli', 1024, 768]
+    ['g_pizza', 'assets/glos/g_pizza.jpg', 'Sobota u Oli', 1024, 768],
+    ['g_zatrzymanie', 'assets/glos/g_zatrzymanie.jpg', 'Nad pizzerią · 19.03, rano', 1024, 768],
+    ['g_platki', 'assets/glos/g_platki.jpg', 'Kuchnia Wronów · 19.03', 768, 1024]
   ]) Art.def(id, { src, title, w, h, draw: () => '' });
 })();
 

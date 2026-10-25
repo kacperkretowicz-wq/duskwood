@@ -37,7 +37,7 @@ test('v3 migration: every v2 step maps to the identical step; resume lands on a 
   const {chapters,v3}=stories();
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v2-steps.json'),'utf8'));
   const sig=s=>JSON.stringify([s.t,s.name,s.to,s.self,s.text,s.chat,s.who,s.ev,s.k,s.iso]);
-  assert.deepEqual([...Object.keys(v3)].sort(),['ch1','ch2','ch3','ch4','ch5','epilog']);
+  assert.deepEqual([...Object.keys(v3)].sort(),['ch1','ch2','ch3','ch4','ch5','epilog','prolog']);
   for(const [ch,steps] of Object.entries(old)){
     const m=v3[ch]||{exact:steps.map((_,i)=>i).concat(steps.length),resume:steps.map((_,i)=>i).concat(steps.length)};
     assert.equal(m.exact.length,steps.length+1);
@@ -66,14 +66,14 @@ test('every new scene compiles inside its chapter with namespaced labels',()=>{
 test('generated v3 migration table is up to date with the story sources',()=>{
   const {execFileSync}=require('node:child_process');
   const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v3.cjs'),path.join(__dirname,'fixtures/story-v2-steps.json')],{encoding:'utf8'});
-  assert.ok(fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8').endsWith(gen),'run tools/gen-migration-v3.cjs');
+  assert.ok(fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8').replace(/\r\n/g,'\n').endsWith(gen.replace(/\r\n/g,'\n')),'run tools/gen-migration-v3.cjs');
 });
 
 test('v4 migration table is up to date and maps every v3 step monotonically',()=>{
   const {execFileSync}=require('node:child_process');
   const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v4.cjs'),path.join(__dirname,'fixtures/story-v3-steps.json')],{encoding:'utf8'});
   const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');
-  assert.ok(src.includes(gen),'run tools/gen-migration-v4.cjs');
+  assert.ok(src.replace(/\r\n/g,'\n').includes(gen.replace(/\r\n/g,'\n')),'run tools/gen-migration-v4.cjs');
   const v4=JSON.parse(gen.split('V4 = ')[1].replace(/;\s*$/,''));
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v3-steps.json'),'utf8'));
   const {chapters,sig}=require(path.join(root,'tools/dump-steps.cjs'));
@@ -97,4 +97,45 @@ test('every scare has a unique id, sits in its own scene and is rare (≤3 per c
     for(const st of sc){assert.ok(!seen.has(st.id),st.id);seen.add(st.id);assert.ok(st.scene&&/^sc[A-Z]/.test(st.scene),st.id+' w scenie sc*');assert.ok(['call','photo','face','glitch','breath'].includes(st.kind));}
   }
   assert.ok(seen.size>=4);
+});
+
+test('v5 migration table is up to date; v4 saves map monotonically and keep choice ids',()=>{
+  const {execFileSync}=require('node:child_process');
+  const gen=execFileSync(process.execPath,[path.join(root,'tools/gen-migration-v5.cjs'),path.join(__dirname,'fixtures/story-v4-steps.json')],{encoding:'utf8'});
+  const src=fs.readFileSync(path.join(root,'js/data/migrations.js'),'utf8');
+  assert.ok(src.replace(/\r\n/g,'\n').includes(gen.replace(/\r\n/g,'\n')),'run tools/regen-migrations.cjs');
+  const v5=JSON.parse(gen.split('V5 = ')[1].replace(/;\s*$/,''));
+  const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/story-v4-steps.json'),'utf8'));
+  const {chapters,sig}=require(path.join(root,'tools/dump-steps.cjs'));
+  for(const [ch,m] of Object.entries(v5)){
+    assert.equal(m.exact.length,old[ch].length+1,ch);
+    m.exact.forEach((x,i)=>{assert.ok(x>=0&&x<=chapters[ch].steps.length);if(i)assert.ok(x>=m.exact[i-1],ch+':'+i);assert.ok(m.resume[i]<=x);});
+    // każdy krok v4 nadal istnieje i trafia dokładnie na siebie (pakiet tylko dopisuje sceny)
+    // nazwy etykiet (ie15 itd.) są numerowane automatycznie i mogą się przesunąć po dopisaniu iff — porównujemy bez numerów
+    const nl=x=>x.replace(/"((?:[A-Za-z0-9]+\.)?[a-z]{1,2})\d+"/g,'"$1#"');
+    old[ch].forEach((o,i)=>assert.equal(nl(sig(chapters[ch].steps[m.exact[i]])),nl(o),ch+':'+i));
+    for(let i=0;i<old[ch].length;i++)for(let j=m.resume[i];j<m.exact[i];j++)assert.ok(chapters[ch].steps[j].scene,ch+':'+i+' resume skips only new scenes');
+  }
+});
+test('every wording written in story sources reaches a compiled step or option', ()=>{
+  // Pomocnicze funkcje (c, H, V…) muszą przekazywać opcje dalej — inaczej wording po cichu przepada.
+  const {chapters}=stories();
+  const got=[];
+  for(const ch of Object.values(chapters))for(const st of ch.steps){if(st.wording)got.push(st.wording);for(const o of [...(st.options||[]),...(st.accept||[]),...(st.answers||[])])if(o.wording)got.push(o.wording);}
+  const all=got.join('\n');
+  const src=fs.readdirSync(path.join(root,'js/story')).map(f=>fs.readFileSync(path.join(root,'js/story',f),'utf8')).join('\n');
+  const re=/wording:\s*'((?:[^'\\]|\\.)*)'/g;let m;const miss=[];
+  while((m=re.exec(src))){const w=m[1].replace(/\\'/g,"'");if(!all.includes(w.slice(0,40)))miss.push(w.slice(0,80));}
+  assert.deepEqual(miss,[]);
+});
+
+test('godzina na karcie rozdziału zgadza się z pierwszym zegarem rozdziału', ()=>{
+  const {chapters} = stories(); const bad = [];
+  for (const [id, c] of Object.entries(chapters)) {
+    const w = String(c.when || '').match(/(\d{1,2}):(\d\d)\s*$/); const st = c.steps.find(s => s.t === 'clock');
+    if (!w || !st || !st.iso) continue;
+    const t = w[1].padStart(2, '0') + ':' + w[2];
+    if (st.iso.slice(11, 16) !== t) bad.push(`${id}: ${c.when} ≠ ${st.iso}`);
+  }
+  assert.deepEqual(bad, []);
 });

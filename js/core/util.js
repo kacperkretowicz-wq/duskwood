@@ -107,6 +107,7 @@ const U = (() => {
   // Ikony interfejsu (linie, 24x24).
   const ICONS = {
     back: '<path d="M15 5l-7 7 7 7"/>',
+    heart: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/>',
     arrowL: '<path d="M19.5 12H5M11 5.5L4.5 12l6.5 6.5"/>',
     close: '<path d="M6 6l12 12M18 6L6 18"/>',
     send: '<path d="M4 12l16-8-6 16-2.5-6.5z"/>',
@@ -165,12 +166,36 @@ const U = (() => {
   }
   const ico = (name, size, extra) => { const s = document.createElement('span'); s.className = 'icw'; s.innerHTML = icon(name, size, extra); return s; };
 
-  function vibrate(p) { try { if (typeof G !== 'undefined' && G.settings.vibrate && typeof navigator !== 'undefined') navigator.vibrate?.(p); } catch (e) { /* brak wsparcia */ } }
+  // Wzorzec wibracji -> wywołanie Capacitor Haptics (iOS nie ma navigator.vibrate).
+  function hapticPlan(p) {
+    const arr = Array.isArray(p) ? p : [p];
+    const on = arr.filter((_, i) => i % 2 === 0).map(n => Math.max(0, +n || 0));
+    const total = on.reduce((a, b) => a + b, 0);
+    if (!total) return null;
+    if (on.length === 1 && total <= 60) return { kind: 'impact', style: total <= 30 ? 'LIGHT' : 'MEDIUM' };
+    if (on.length > 1 && total <= 200) return { kind: 'notify', type: on.length >= 3 ? 'WARNING' : 'SUCCESS' };
+    return { kind: 'vibrate', duration: Math.min(total, 1000) };
+  }
+  function vibrate(p) {
+    try {
+      if (typeof G === 'undefined' || !G.settings.vibrate) return;
+      const cap = typeof window !== 'undefined' && window.Capacitor;
+      const H = cap && cap.isNativePlatform?.() && cap.Plugins?.Haptics;
+      if (H) {
+        const plan = hapticPlan(p); if (!plan) return;
+        if (plan.kind === 'impact') H.impact({ style: plan.style });
+        else if (plan.kind === 'notify') H.notification({ type: plan.type });
+        else H.vibrate({ duration: plan.duration });
+        return;
+      }
+      if (typeof navigator !== 'undefined') navigator.vibrate?.(p);
+    } catch (e) { /* brak wsparcia */ }
+  }
   const clone = o => JSON.parse(JSON.stringify(o));
   const uid = () => Math.random().toString(36).slice(2, 10);
 
   const put = (el, ...kids) => { append(el, kids); return el; };
-  return { h, put, $, $$, clamp, lerp, sleep, rng, hash, esc, norm, squash, tpl, rich, time, dayLong, dayShort, dateNum, sameDay, parseLocal, dur, pad, Bus, icon, ico, vibrate, clone, uid, MONTHS_GEN, DAYS };
+  return { h, put, $, $$, clamp, lerp, sleep, rng, hash, esc, norm, squash, tpl, rich, time, dayLong, dayShort, dateNum, sameDay, parseLocal, dur, pad, Bus, icon, ico, vibrate, hapticPlan, clone, uid, MONTHS_GEN, DAYS };
 })();
 
 const BUS = U.Bus();

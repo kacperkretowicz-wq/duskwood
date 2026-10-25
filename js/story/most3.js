@@ -5,40 +5,41 @@
 Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona 41', when: 'Poniedziałek, 30 listopada · 8:20', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, callIn, callEnd, scene, notify, vanish } = D;
   const IK = t => say('blyskm', 'blyskm', t, { vanish: true });
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
-  const H = t => say('call', 'henryk', t);
-  const c = (who, t) => say('call', who, t);
+  const H = (t, o) => say('call', 'henryk', t, o);
+  const c = (who, t, o) => say('call', who, t, o);
 
   return [
     clock('2026-11-30T08:20'),
     title(),
     Ma('Dzień dobry. Byłam u naczelnego o 7:45. Powiedziałam wszystko: że to moja mama, że opowiadałam o kasecie przy kolacji, że tablet jest wspólny.'),
-    Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.'),
+    Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.', { wording: 'Do decyzji nie mam dostępu do materiału. Natan ma go dalej. Nie protestowałam.' }),
     Ma('Mama nie odbiera ode mnie od soboty. Wczoraj zostawiła mi obiad pod drzwiami. Nie wiem, co to znaczy.'),
     choose('marta', [
-      opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
+      opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { wording: 'Dobrze, że pani powiedziała. To nie mogło być łatwe.', trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
     ]),
     scene('xObiad', [
       pause(1500),
       pic('marta', 'marta', 'm_obiad_drzwi', 'Od soboty śpię u koleżanki z redakcji. Mama wczoraj przywiozła to pod jej drzwi. Gołąbki i ogórki.'),
       choose('marta', [
-        opt('To chyba znaczy, że dalej jesteś jej córką.', [Ma('Może. Zjadłam dwa. Smakowały jak w podstawówce.')], { trust: { marta: 1 } }),
-        opt('Zadzwoń do niej, kiedy będziesz gotowa.', [Ma('Nie dziś. Ale słoik oddam osobiście. Zawsze to jakiś pretekst.')])
+        opt('To chyba znaczy, że dalej jesteś jej córką.', [Ma('Może. Zjadłam dwa. Smakowały jak w podstawówce.', { wording: 'Nic. Może chciała sprawdzić, czy tu jestem. Może po prostu zrobiła za dużo. Zjadłam dwa, reszta jest w lodówce.' })], { wording: 'Napisała coś potem?', trust: { marta: 1 } }),
+        opt('Zadzwoń do niej, kiedy będziesz gotowa.', [Ma('Nie dziś. Ale słoik oddam osobiście. Zawsze to jakiś pretekst.')], { wording: 'Niech pani do niej zadzwoni, kiedy będzie gotowa.' })
       ])
     ]),
     scene('xLicznik', [
       pause(2500),
-      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.'),
+      Ma('Jeszcze jedno. Nagrałam to w piątek w nocy w archiwum, zanim oddałam klucze. Nikomu tego nie pokazywałam.', { wording: 'Jeszcze jedno. Nagrałam to w czwartek późnym wieczorem w archiwum, jak przewijałam taśmę do zaników przed wyjazdem na urodziny ciotki. Nikomu tego nie pokazywałam.' }),
+      Ma('Wiem, pisałam, że jestem u mamy. Wróciłam wieczorem tylko oddać klucze, a pani Weronika pożyczyła mi kasetę na tę jedną noc. Rano już ją miała z powrotem.', { wording: 'Pani Weronika pożyczyła mi kasetę na dwie noce, żebym mogła przesłuchać zaniki w spokoju. W sobotę rano już ją miała z powrotem.' }),
       say('marta', 'marta', '', { vid: 'assets/video/v_licznik.mp4', img: 'v_licznik' }),
       Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
       choose('marta', [
         opt('Stare kamery same się wyłączają na końcu taśmy.', [Ma('Wiem. Tylko że to nie był koniec taśmy. Licznik stanął na 03:51, dokładnie tam, gdzie urywa się fragment z publikacji.')]),
-        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { trust: { marta: 1 } })
+        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { wording: 'Niech pani tam nie siedzi sama po nocach.', trust: { marta: 1 } })
       ]),
       pause(4000),
       callIn('natan'),
@@ -53,22 +54,22 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     scene('xInspekcja', [
       pause(2000),
-      pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu'),
+      pic('natan', 'natan', 'm_inspekcja', 'moje biuro na dziś. kawa ze stacji smakuje jak gorąca woda z kartonu', { wording: 'zdjęcia wysyłam za chwilę, muszę odzyskać czucie w palcach' }),
       choose('natan', [
-        opt('Ogrzej się. Akta nie uciekną.', [Nt('akta nie. ale czytelnię zamykają o 15, a pani w okienku patrzy na mnie jak na ucznia bez legitymacji')]),
+        opt('Ogrzej się. Akta nie uciekną.', [Nt('akta nie. ale czytelnię zamykają o 15, a pani w okienku patrzy na mnie jak na ucznia bez legitymacji', { wording: 'grzeję ręce o kubek. czytelnia była od 7:30, wszystko obfociłem' })]),
         opt('Ile zdjęć zrobiłeś?', [Nt('63. połowa krzywo. ale wszystko da się przeczytać')])
       ])
     ]),
     pause(2500),
-    Nt('hej. naczelny wystąpił do inspekcji pracy we wrocławiu o akta wypadku z 2011. jako redakcja, oficjalnie, z powołaniem na dostęp do informacji'),
-    Nt('i sorry że tak szybko ale już mamy. pojechałem rano, dali mi czytelnię na godzinę'),
+    Nt('hej. naczelny wystąpił do inspekcji pracy we wrocławiu o akta wypadku z 2011. jako redakcja, oficjalnie, z powołaniem na dostęp do informacji', { wording: 'dobra. to są akta wypadku z 2011 z inspekcji pracy we wrocławiu. naczelny wystąpił o wgląd w imieniu gazety' }),
+    Nt('i sorry że tak szybko ale już mamy. pojechałem rano, dali mi czytelnię na godzinę', { wording: 'dostałem dziś godzinę w czytelni. zrobiłem zdjęcia, teraz je porównuję z kserem' }),
     pic('natan', 'natan', 'most_oip_s41', 'kopia str 41 która firma dała inspekcji 19.09.2011'),
     give('ev_m_oip_s41'),
     Nt('i patrz. tu jest „bez uwag”. zero o siatce. a pismo inne niż na ksero'),
     choose('natan', [
       opt('Zanim cokolwiek napiszemy: kto przystawił „za zgodność”?', [
         Nt('j. kurek. kierowniczka kontraktu. 19.09.2011'),
-        Ma('Pięć dni po wypadku. Czyli nie podrobione ksero, tylko przepisany oryginał.')
+        Ma('Pięć dni po wypadku. Czyli nie podrobione ksero, tylko przepisany oryginał.', { wording: 'Pięć dni po wypadku. Oba ksera zgadzają się ze sobą, a strona przekazana inspekcji jest inna. Ktoś ją przepisał.' })
       ], { set: { m_askedStamp: true } }),
       opt('Ta strona jest przepisana. Pismo inne niż na ksero, a „za zgodność” potwierdziła sama kierowniczka kontraktu.', [
         Nt('tak. j. kurek, 19.09.2011. pięć dni po wypadku'),
@@ -116,39 +117,39 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
         opt('Zrób zrzut ekranu', [
           IK('serio? teraz?'),
           IK('ok. to już nic nie piszę'),
-          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).')
+          vanish('blyskm', 'Wiadomości zniknęły. i.k_00 cię zablokował(a).', { wording: 'Wiadomości zniknęły. Konto i.k_00 cię zablokowało.' })
         ], { shot: true, set: { m_shotIda2: true } }),
         opt('Dobrze, że sama do niego idziesz.', [
           IK('nie czuję się dobrze. ale jest mi trochę lżej'),
           IK('dzięki, że wtedy nie zrobił{eś|aś} zrzutu'),
           vanish('blyskm')
-        ], { set: { m_idaKind: true } })
+        ], { wording: 'Jak pójdziesz, opowiedz mu po kolei, co zrobiłaś. Tak jak Natanowi.', set: { m_idaKind: true } })
       ])
     ])]),
     pause(2500),
     clock('2026-12-01T19:10'),
     scene('xZuzaGlos', [
-      V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza'),
+      V('zuza', 'zuza', '0:18', 'sorry, że głosówka, idę ze szkoły i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza', 'Zuza', { wording: 'sorry, że głosówka, wracam z korków i marzną mi palce. babcia od rana ogląda tylko teleturnieje. jak ktoś w telewizji powie „most”, od razu przełącza' }),
       choose('zuza', [
         opt('Niech ogląda teleturnieje. Też trzeba odpocząć.', [Z('ona mówi, że przynajmniej tam wiadomo, kto wygrał')]),
         opt('Załóż rękawiczki, zanim odpiszesz.', [Z('nie mam. zgubiłam w autobusie. trzecie w tym roku')])
       ]),
       pause(2000)
     ]),
-    Z('hej'),
+    Z('hej', { wording: 'a jeszcze' }),
     Z('widziałam artykuł że jest jakaś przepisana strona'),
     Z('powiedz mi jedno. czy ktoś wujka zabił'),
     choose('zuza', [
       opt('Nie mamy dowodu, że ktoś go zabił. Wiemy, że spadł z przęsła, brak siatki zgłoszono wcześniej, a potem przepisano stronę dziennika.', [
         Z('ok'),
-        Z('dziwne że mi ulżyło i jednocześnie nie'),
+        Z('dziwne że mi ulżyło i jednocześnie nie', { wording: 'czyli wiedzieli o tej siatce. wcześniej' }),
         Z('babcia całe życie bała się że to było coś gorszego. albo że to jego wina')
-      ], { set: { m_toldZuzaTruth: true } }),
+      ], { wording: 'Nie wiemy, żeby ktoś go zabił. Wiemy, że nie było siatki. Zgłosili to przed wypadkiem, potem ktoś przepisał stronę dziennika.', set: { m_toldZuzaTruth: true } }),
       opt('Nie ma dowodu, że ktoś go zabił. Ale chcesz to usłyszeć ode mnie, zanim przeczytasz w gazecie, czy razem z babcią?', [
         Z('razem z babcią'),
         Z('ona sama nie przeczyta. ja jej przeczytam na głos'),
         D.choose('zuza', [opt('Dobrze. Ja poczekam na znak od ciebie.', [Z('dzięki że {zapytałeś|zapytałaś}')])])
-      ], { set: { m_toldZuzaTruth: true, m_zuzaWithGran: true } })
+      ], { wording: 'Nie mamy dowodu na zabójstwo. Mam ci wyjaśnić, co znaleźliśmy, czy wolisz przeczytać to z babcią?', set: { m_toldZuzaTruth: true, m_zuzaWithGran: true } })
     ]),
     scene('xGrupaArt', [
       pause(2000),
@@ -164,26 +165,26 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     ]),
     pause(2500),
     clock('2026-12-02T21:40'),
-    Ma('Naczelny zdecydował. Mogę dalej sprawdzać materiały z archiwum do tego tekstu albo się z niego wycofać. Decyzja ma być moja.'),
+    Ma('Naczelny zdecydował. Mogę dalej sprawdzać materiały z archiwum do tego tekstu albo się z niego wycofać. Decyzja ma być moja.', { wording: 'Naczelny pozwolił mi wrócić do materiału, jeśli chcę. Albo mogę przekazać wszystko Natanowi i się wycofać. Mam mu dziś odpowiedzieć.' }),
     Ma('Jeśli zostanę, ktoś drugi sprawdzi wszystko, co przygotuję. W tekście napiszemy też, że moja mama jest w zarządzie Kurek-Bud.'),
     Ma('Jeśli odejdę od tematu, Natan będzie pracował sam. Zajmie mu to więcej czasu. Dotąd przeglądaliśmy kasetę razem.'),
     Ma('Co by {Pan|Pani} zrobił{|a}?'),
     choose('marta', [
       opt('Zostań. Napiszcie w tekście, kim jest twoja mama, i niech ktoś sprawdza twoje ustalenia. Znasz taśmę najlepiej.', [
-        Ma('Dobrze. Wtedy już nie ma odwrotu. W domu też'),
-        Ma('Mama dowie się z gazety, że wiem. Wolę, żeby z gazety niż z tabletu')
-      ], { set: { m_martaStays: true } }),
+        Ma('Dobrze. Wtedy już nie ma odwrotu. W domu też', { wording: 'Chcę zostać. Boję się tylko tego zdania o mamie' }),
+        Ma('Mama dowie się z gazety, że wiem. Wolę, żeby z gazety niż z tabletu', { wording: 'Ona przeczyta je od razu. Nie wiem, czy potem jeszcze będzie chciała ze mną rozmawiać' })
+      ], { wording: 'Niech pani zostanie. Napiszcie w tekście, kim jest pani mama, i niech ktoś sprawdza pani ustalenia. Pani zna taśmę najlepiej.', set: { m_martaStays: true } }),
       opt('Wycofaj się z tego tekstu. Przez twoje pokrewieństwo z Kurek mogą podważać ustalenia.', [
         Ma('Rozumiem. Boli, ale rozumiem.'),
         Ma('Przekażę Natanowi wszystkie znaczniki czasu. 03:12, 03:21, 03:47. Resztę zrobi sam.')
-      ], { set: { m_martaOut: true } })
+      ], { wording: 'Niech się pani wycofa z tego tekstu. Przez pani pokrewieństwo z Kurek mogą podważać ustalenia.', set: { m_martaOut: true } })
     ]),
     scene('xSloik', [
       pause(2000),
       V('marta', 'marta', '0:16', 'Oddałam mamie słoik. Otworzyła drzwi, wzięła go i zapytała: „Umyty?”. I tyle. Ale chyba się uśmiechnęła. Chyba.', 'Marta'),
       choose('marta', [
         opt('Jak na pierwszy krok to sporo.', [Ma('Też tak myślę. W niedzielę idę na obiad. Bez tabletu na stole.')]),
-        opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.')], { trust: { marta: 1 } })
+        opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.', { wording: 'Stałam na klatce chyba dziesięć minut. A potem wróciłam do domu i pierwszy raz od soboty zasnęłam przed drugą.' })], { wording: 'A jak pani się czuje?', trust: { marta: 1 } })
       ])
     ]),
     W('Dobry wieczór. Pani Marta była u mnie po kamerę. Długo stała w przedpokoju.'),
@@ -203,13 +204,13 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
 
 Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny kadr', when: 'Piątek, 4 grudnia · 16:05', mood: 'calm' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, dial, callIn, callEnd, notify, ending, credits, run, scene, camera, nearby } = D;
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const S = (t, o) => say('sylwia', 'sylwia', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
-  const c = (who, t) => say('call', who, t);
+  const c = (who, t, o) => say('call', who, t, o);
 
   return [
     clock('2026-12-04T16:05'),
@@ -229,9 +230,9 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     Nt('naczelny pyta czy nie wyprzedzić ich dziś. z notesem. „k. przyniosła ksero, dziękuje za mleko”. mówi że to najmocniejszy dowód że ksero jest z 2011'),
     choose('natan', [
       opt('Nie. Ten cytat wskazuje panią Krystynę każdemu, kto ją zna. Ksero mamy potwierdzone kopią Henryka i aktami z inspekcji.', [
-        Nt('wiem. sorry. chciałem tylko żeby ktoś to powiedział na głos zanim on mnie przekona'),
+        Nt('wiem. sorry. chciałem tylko żeby ktoś to powiedział na głos zanim on mnie przekona', { wording: 'masz rację. kopia henryka i akta wystarczą. nie dam jej znowu do rozpoznania po jednym zdaniu' }),
         Nt('ok. bez notesu')
-      ], { set: { m_protectK: true } }),
+      ], { wording: 'Bez tego cytatu. Sąsiedzi poznają panią Krystynę. Kopię potwierdzili Henryk i inspekcja, tego się trzymajmy.', set: { m_protectK: true } }),
       opt('Wyprzedźcie ich. Jak tygodnik i tak to da, lepiej, żeby było rzetelnie u was.', [
         Nt('…'),
         Nt('ok. dam znać naczelnemu')
@@ -293,7 +294,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       clock('2026-12-05T16:20'),
       nearby('m_znicz', { device: 'Telefon', img: 'm_znicz_most', note: 'Nieznane urządzenie w pobliżu', flag: 'm_zniczOk', declineFlag: 'm_zniczNo' }),
       iff('flag:m_zniczOk', [
-        Z('to ja. widzę cię z drugiej strony mostu')
+        Z('to ja. widzę cię z drugiej strony mostu', { wording: 'to ja. zdjecie z drugiej strony mostu, puscilam ci przez przesylanie' })
       ], [
         Z('to byłam ja, z drugiej strony mostu. sorry, że wysłałam przez przesyłanie'),
         pic('zuza', 'zuza', 'm_znicz_most', '')
@@ -335,7 +336,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       opt('Poczekaj na tekst. Lepiej z linkiem do całości.', [
         S('Rozumiem. Tylko że do poniedziałku jeszcze dwa dni komentarzy.'),
         S('No nic. Poczekam.')
-      ], { set: { m_correctionLater: true } })
+      ], { wording: 'Proszę poczekać na tekst. Lepiej z linkiem do całości.', set: { m_correctionLater: true } })
     ]),
     pause(3000),
     clock('2026-12-07T07:00'),
@@ -350,16 +351,16 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
         opt('A korekta pod starym nagraniem?', [Nt('jest. zaraz ci wkleję. pisałem ją dłużej niż cały tekst')])
       ])
     ]),
-    Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”'),
+    Nt('i pod starym nagraniem jest korekta, moje nazwisko. „opublikowaliśmy fragment ucięty z dłuższej wypowiedzi, bez weryfikacji. odpowiedzialność ponosi autor”', { wording: 'pod starym nagraniem jest korekta z moim nazwiskiem. wprost, że puściłem ucięty fragment bez sprawdzenia. teraz każdy, kto otworzy nagranie u nas, ją zobaczy' }),
     scene('xNatanKorekta', [
       Nt('mama pyta, czy to wstyd, że pod moim nazwiskiem jest korekta'),
       choose('natan', [
         opt('Wstydem byłoby jej nie dać.', [Nt('naczelny powiedział to samo. tylko dłużej')]),
-        opt('To uczciwe. Ludzie to zapamiętają.', [Nt('oby. a jak nie, to chociaż ja zapamiętam')])
+        opt('To uczciwe. Ludzie to zapamiętają.', [Nt('oby. a jak nie, to chociaż ja zapamiętam', { wording: 'oby ją w ogóle otworzyli. oryginał dalej krąży bez korekty' })], { wording: 'Oby dotarła też do tych, którzy widzieli sam klip.' })
       ])
     ]),
-    iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu')], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
-    iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.')], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
+    iff('flag:m_henrykOnRecord', [Nt('henryk w całości, 14 minut. nic nie ciąłem. nawet kaszlu', { wording: 'rozmowa z henrykiem też jest. całe 14 minut, od pierwszego pytania do pożegnania' })], [Nt('bez henryka. same dokumenty. naczelny mówi że to i tak dużo, ale część pytań zostaje otwarta')]),
+    iff('flag:m_martaStays', [Ma('Na dole jest zdanie o mnie. Że jestem córką. Przeczytałam je pięć razy. Jest prawdziwe.', { wording: 'Jest to zdanie, że jestem córką Janiny Kurek. Doszłam do niego i przez chwilę nie mogłam czytać dalej.' })], [Ma('Przeczytałam w autobusie. Natan dobrze to zrobił. Beze mnie.')]),
     scene('xGrupaWyszlo', [
       pause(1500),
       say('group', 'bartek', 'henryk dostal brawa w sklepie. w kolejce po chleb. serio'),
@@ -374,7 +375,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     W('Kasetę i obie kopie strony 41 przechowuje teraz redakcja. Razem z panią Martą i rodziną pana Adama podpisaliśmy protokół przekazania. Teczka wróciła do pudła, już bez kasety.'),
     scene('xMajaRano', [
       say('maja2', 'maja', 'czytam w autobusie. trzeci raz'),
-      say('maja2', 'maja', 'pan Adam by się ucieszył. pani Weronika mówi, że powtarzał: najlepszy tekst to taki, po którym nikt nie musi się wstydzić. ani bohater, ani autor'),
+      say('maja2', 'maja', 'pan Adam by się ucieszył. pani Weronika mówi, że powtarzał: najlepszy tekst to taki, po którym nikt nie musi się wstydzić. ani bohater, ani autor', { wording: 'pani Weronika mówi, że pan Adam czekał z tym tyle lat, żeby nie wydać K. ciekawe, czy wyobrażał sobie ten tekst tak jak wyszedł' }),
       choose('maja2', [
         opt('A ty? Jak się czujesz po tym wszystkim?', [say('maja2', 'maja', 'lepiej niż w listopadzie. dużo lepiej'), say('maja2', 'maja', 'i pierwszy raz od dawna nie boję się otworzyć komentarzy')], { trust: { maja: 1 } }),
         opt('To też twoja zasługa. Ty znalazłaś teczkę.', [say('maja2', 'maja', 'kotka znalazła. ja ją tylko przesunęłam'), say('maja2', 'maja', 'ale dzięki 🫶')])
@@ -384,7 +385,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       W('Pani Ziuta wróciła na swój karton. Pusty, ale jej to nie przeszkadza.'),
       pause(2500),
       callIn('henryk'),
-      c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.'),
+      c('henryk', 'Wiśniewski. Przeczytałem. To znaczy wnuczka sąsiadów mi przeczytała. Dwa razy.', { wording: 'Wiśniewski. Przeczytałem. To znaczy wnuczka mi przeczytała. Dwa razy.' }),
       c('henryk', 'Ja tam nikogo nie oskarżam. Ale teraz ludzie wiedzą, że to nie ja kazałem zostawić tę siatkę zdjętą.'),
       choose('call', [
         opt('Dziękuję, że mi pan zaufał.', [c('henryk', 'To ja dziękuję. Że ktoś w końcu sprawdził.')], { trust: { henryk: 1 } }),

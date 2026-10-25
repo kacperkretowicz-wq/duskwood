@@ -74,7 +74,7 @@
   });
 
   /* ================= PLAN EWAKUACJI ================= */
-  D('m_plan', {
+  D('m_plan', { src: 'assets/web/m_plan.jpg',
     title: 'Plan ewakuacji — hala A', exif: phone('03.10.2026', '15:31', { place: 'Huta „Jutrzenka”, hala A', note: 'Tablica przy wejściu do hali A' }),
     onView: 'ev_plan',
     draw: k => {
@@ -279,7 +279,7 @@
     return s;
   }
   D('m_library', { src: 'assets/maja/m_library.jpg', title: 'Biblioteka Gminna', exif: phone('11.10.2026', '16:00', { place: 'Mglisko, Rynek 9' }), grade: 'warm', draw: k => library(k) });
-  D('w_books', { title: 'Tydzień Bibliotek', grade: 'warm', w: 900, h: 900, draw: k => library(k, { table: false }) });
+  D('w_books', { src: 'assets/web/w_books.jpg', title: 'Tydzień Bibliotek', grade: 'warm', w: 900, h: 900, draw: k => library(k, { table: false }) });
 
   /* ================= LUSTRO / ZAPOWIEDŹ ================= */
   D('m_mirror', { src: 'assets/maja/m_mirror.jpg',
@@ -323,7 +323,7 @@
   });
 
   /* ================= NAD ZALEWEM / PIES ================= */
-  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg',
+  D('m_ola_lake', { src: 'assets/maja/m_ola_lake.jpg', w: 760, h: 953,
     title: 'Z Olą nad zalewem', exif: phone('21.09.2026', '18:42', { place: 'Zalew Mgliski, tama' }), grade: 'warm',
     draw: k => {
       const { W, H } = k;
@@ -419,6 +419,8 @@
     title: 'CAM-01 · 19.10, 03:30', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 44, '19.10.2026', '03:30'), stamp: tstamp('CAM-01', 44, '19.10.2026', '03:30:02', 0, 'half'),
     draw: k => yard(k) + k.g(k.ell(0, 0, 26, 36, '#8a8a8a') + k.circle(0, -38, 20, '#8a8a8a') + k.circle(-8, -40, 5, '#fff') + k.circle(8, -40, 5, '#fff') + k.path('M-16,-52 L-12,-66 L-4,-56 Z M16,-52 L12,-66 L4,-56 Z', '#8a8a8a'), 'transform="translate(574,140)"')
   });
+  D('v_snap', { src: 'assets/video/v_snap.jpg', title: 'Błysk · film jednorazowy', w: 480, h: 848, draw: () => '' });
+  D('v_anonim', { src: 'assets/video/v_anonim.jpg', title: 'MATERIAŁ_ROBOCZY_01 · CAM-01 · 15.10, 01:47', w: 848, h: 480, draw: () => '' });
   D('c1_0057', { src: 'assets/trap/c1_0057.jpg',
     title: 'CAM-01 · 22.10, 02:13', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 57, '22.10.2026', '02:13'), stamp: tstamp('CAM-01', 57, '22.10.2026', '02:13:26', 3, 'wax'),
     hotspots: [{ x: 470, y: 360, r: 90, ev: 'ev_jacket', zoom: 1.8 }],
@@ -580,7 +582,7 @@
       return s;
     }
   });
-  D('i_car', {
+  D('i_car', { src: 'assets/web/i_car.jpg',
     title: 'Auto przy bramie', exif: phone('23.10.2026', '00:14', { device: 'Telefon Igora', place: 'Huta „Jutrzenka”, przy trafostacji', note: 'Zoom cyfrowy 8×' }), style: 'night', fx: { soft: 1.8, grain: 0.55 },
     onView: 'ev_car_igor',
     draw: k => {
@@ -597,7 +599,7 @@
   });
 
   /* ================= SZKLARZ ================= */
-  D('sz_window', {
+  D('sz_window', { src: 'assets/web/sz_window.jpg',
     title: '▒▒▒', w: 900, h: 1200, style: 'night', fx: { grain: 0.5 },
     draw: k => {
       const { W, H } = k;

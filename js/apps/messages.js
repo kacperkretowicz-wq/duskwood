@@ -39,16 +39,25 @@
     return U.dateNum(t).slice(0, 5);
   }
 
-  UI.def('messages', {
-    name: 'Wiadomości',
+  const META = {
+    messages: { name: 'Wiadomości', title: 'Wiadomości', empty: 'Jeszcze cisza. Ktoś zaraz się odezwie.' },
+    gadka: { name: 'Gadka', title: 'Czaty', empty: 'Nikt jeszcze nie pisał na Gadce.' },
+    blysk: { name: 'Błysk', title: 'Błysk', empty: 'Brak błysków. Znikają po przeczytaniu.' },
+    klipo: { name: 'Klipo', title: 'Wiadomości Klipo', empty: 'Brak wiadomości prywatnych.' }
+  };
+  const inApp = (app, id) => DATA.chatApp(id) === app;
+  DATA.MSG_APPS.forEach(app => UI.def(app, {
+    name: META[app].name,
+    visible: app === 'messages' ? null : () => Object.keys(DATA.chats).some(id => inApp(app, id) && G.isUnlocked('chat:' + id)),
     badge: () => {
-      const n = G.unreadTotal();
+      const n = Object.keys(DATA.chats).filter(id => inApp(app, id)).reduce((a, id) => a + ((G.s.chats[id] && G.s.chats[id].unread) || 0), 0);
       const p = Engine.pending();
-      return n || (p && p.chat && p.chat !== 'call' ? 'dot' : 0);
+      return n || (p && p.chat && p.chat !== 'call' && inApp(app, p.chat) ? 'dot' : 0);
     },
     mount(host, params) {
+      host.classList.add('msgapp', 'msgapp-' + app);
       const stack = new UI.Stack(host);
-      stack.push(listPage(stack));
+      stack.push(listPage(stack, app));
       if (params.chat) stack.push(chatPage(stack, params.chat));
       return {
         back: () => stack.pop(),
@@ -62,11 +71,11 @@
         destroy: () => { stack.destroy(); G.viewing = null; }
       };
     }
-  });
+  }));
 
   /* ---------- lista rozmów ---------- */
-  function listPage(stack) {
-    const pg = UI.page({ title: 'Wiadomości', big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
+  function listPage(stack, app = 'messages') {
+    const pg = UI.page({ title: META[app].title, big: true, right: [UI.iconBtn('note', () => UI.openApp('notes'), 'Otwórz Notatki')] });
     pg.el.classList.add('conversation-list');
     let filter = 'all';
     const search = h('input', { type: 'search', placeholder: 'Szukaj rozmowy', 'aria-label': 'Szukaj rozmowy', class: 'chat-search' });
@@ -84,17 +93,34 @@
     const list = h('div', { class: 'chatlist' });
     const sideEntry = h('button', { class: 'side-entry', onclick: () => UI.openConversations() });
     search.addEventListener('input', render);
-    pg.body.append(caseCard, sideEntry, search, tabs, list);
+    // Gadka jak natywny komunikator: pasek osób z rozmów; zielona kropka, gdy ktoś właśnie pisze albo pisał przed chwilą.
+    const people = h('div', { class: 'gd-people', role: 'list', 'aria-label': 'Osoby' });
+    pg.body.append(caseCard, sideEntry, search, people, tabs, list);
+    function renderPeople() {
+      people.hidden = app !== 'gadka';
+      if (people.hidden) return;
+      const ids = Object.keys(DATA.chats).filter(id => inApp('gadka', id) && !DATA.chats[id].group && G.isUnlocked('chat:' + id) && DATA.chars[id] && G.chat(id).msgs.length)
+        .sort((a, b) => (G.chat(b).last || 0) - (G.chat(a).last || 0)).slice(0, 8);
+      people.hidden = ids.length < 2;
+      people.innerHTML = '';
+      ids.forEach(id => {
+        const last = [...G.chat(id).msgs].reverse().find(m => m.from === id);
+        const on = Engine.typing(id) || (last && G.now() - last.t < 10 * 6e4);
+        people.appendChild(h('button', { class: 'gd-p' + (on ? ' on' : ''), role: 'listitem', onclick: () => stack.push(chatPage(stack, id)) },
+          UI.avatar(chatAv(id)), h('small', {}, charName(id).split(' ')[0])));
+      });
+    }
     function render() {
-      caseCard.hidden = !G.isUnlocked('chat:maja');
+      renderPeople();
+      caseCard.hidden = app !== 'messages' || !G.isUnlocked('chat:maja');
       const sideCount = Conversations.available().length;
-      sideEntry.hidden = !G.isUnlocked('chat:group');
+      sideEntry.hidden = app !== 'gadka' || !G.isUnlocked('chat:group');
       sideEntry.textContent = sideCount ? `Na osobności · ${sideCount} ${sideCount === 1 ? 'temat' : sideCount < 5 ? 'tematy' : 'tematów'} do rozmowy` : 'Na osobności · zapisane rozmowy';
-      const ids = Object.keys(DATA.chats).filter(id => G.isUnlocked('chat:' + id))
+      const ids = Object.keys(DATA.chats).filter(id => inApp(app, id) && G.isUnlocked('chat:' + id))
         .filter(id => (filter !== 'unread' || G.chat(id).unread) && chatName(id).toLocaleLowerCase('pl').includes(search.value.toLocaleLowerCase('pl')))
         .sort((a, b) => Number(PhoneTools.pinned(b)) - Number(PhoneTools.pinned(a)) || ((G.s.chats[b] && G.s.chats[b].last) || 0) - ((G.s.chats[a] && G.s.chats[a].last) || 0));
       list.innerHTML = '';
-      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : 'Jeszcze cisza. Ktoś zaraz się odezwie.') })); return; }
+      if (!ids.length) { list.appendChild(h('div', { class: 'empty', html: U.icon('chat', 40) + (search.value || filter === 'unread' ? 'Nie ma takich rozmów.' : META[app].empty) })); return; }
       ids.forEach(id => {
         const c = G.chat(id);
         const last = c.msgs[c.msgs.length - 1];
@@ -102,7 +128,11 @@
         const p = pendingFor(id);
         let prev = '';
         if (typing) prev = h('span', { class: 'typ' }, DATA.chats[id].group ? `${charName(typing)} pisze…` : 'pisze…');
-        else if (last) {
+        else if (app === 'blysk' && last) {
+          // Błysk jak natywna aplikacja: zamiast treści status (nowa / otwarta / wysłana) z kolorowym kwadratem.
+          const st = c.unread ? ['new', 'Nowa wiadomość'] : last.from === 'me' ? ['sent', 'Wysłano'] : ['open', 'Otwarto'];
+          prev = h('span', { class: 'bl-st bl-' + st[0] }, h('i', { 'aria-hidden': 'true' }), st[1] + ' · ' + stamp(last.t));
+        } else if (last) {
           const who = last.from === 'me' ? 'Ty: ' : (DATA.chats[id].group && last.from !== 'sys' ? charName(last.from) + ': ' : '');
           prev = who + UI.preview(last);
         }
@@ -121,7 +151,7 @@
   /* ---------- czat ---------- */
   function chatPage(stack, id) {
     const cd = DATA.chats[id] || {};
-    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') });
+    const el = h('div', { class: 'chat' + (cd.glitch ? ' glitchy' : '') + (' skin-' + (cd.skin || { gadka: 'gadka', blysk: 'blysk', klipo: 'klipo', messages: 'sms' }[DATA.chatApp(id)])) });
     const sub = h('small', {});
     const ffBtn = h('button', { class: 'ff', title: 'Przewiń', 'aria-label': 'Przewiń', onclick: () => { Engine.skip(); }, html: U.icon('ff', 18) });
     const hdr = h('div', { class: 'hdr chat-hdr' },
@@ -149,6 +179,31 @@
       }
     }
 
+    /* Potwierdzenia jak w danej aplikacji: SMS „Dostarczono”; Gadka i Klipo „Wysłano”, potem główki/„Wyświetlono”; Błysk „Wysłano” → „Otwarto”. */
+    const appId = DATA.chatApp(id);
+    function receipt() {
+      const t = appId === 'messages' ? 'Dostarczono' : 'Wysłano';
+      return h('span', { class: 'delivery', title: t, 'aria-label': t }, t);
+    }
+    let seenTimer = null;
+    function updateSeen() {
+      clearTimeout(seenTimer);
+      if (appId === 'messages' || cd.readonly) return;
+      const last = G.chat(id).msgs.at(-1), d = msgs.querySelector('.delivery');
+      if (!last || last.from !== 'me' || !d || d.classList.contains('seen')) return;
+      const wait = 2200 - (G.now() - last.t);
+      if (!Engine.typing(id) && wait > 0) { seenTimer = setTimeout(updateSeen, Math.min(wait, 2200)); return; }
+      d.classList.add('seen'); d.innerHTML = '';
+      if (appId === 'gadka') {
+        const who = cd.group ? ((G.s.chats[id] && G.s.chats[id].members) || cd.members || []).slice(0, 4) : [chatAv(id)];
+        d.setAttribute('aria-label', 'Wyświetlono'); d.title = 'Wyświetlono';
+        who.forEach(w => d.appendChild(UI.avatar(w, 'seen-av')));
+      } else {
+        const t = appId === 'blysk' ? 'Otwarto' : 'Wyświetlono';
+        d.textContent = t; d.setAttribute('aria-label', t); d.title = t;
+      }
+    }
+
     function sepNeeded(prev, m) {
       if (!prev) return true;
       return !U.sameDay(prev.t, m.t) || m.t - prev.t > 40 * 60000;
@@ -164,19 +219,21 @@
       const mine = m.from === 'me';
       const newRun = !prev || prev.from !== m.from || m.t - prev.t > 5 * 60000 || sepNeeded(prev, m) || prev.from === 'sys';
       const ch = DATA.chars[m.from] || {};
-      const b = h('div', { class: 'bub' + (m.img && !m.text ? ' media' : '') });
+      const b = h('div', { class: 'bub' + (m.img && !m.text && !m.snap ? ' media' : '') });
       UI.bindMessageActions(b, id, m);
       if (m.img && !m.vid) {
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
         b.appendChild(im);
       }
-      if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
+      if (m.snap) { b.classList.add('snap-bub'); b.appendChild(snapTile(m)); }
+      else if (m.vid) b.appendChild(h('video', { class: 'mvid', src: m.vid, poster: m.img ? Art.url(m.img) : null, playsinline: '', muted: '', loop: '', autoplay: '', preload: 'metadata' }));
       if (m.vanish) { b.classList.add('vanish'); b.appendChild(h('span', { class: 'vanish-tag' }, '👁 zniknie po przeczytaniu')); }
       if (m.ev) b.appendChild(evCard(m.ev));
       if (m.place) b.appendChild(placeCard(m.place));
-      if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
+      if (m.deleted) b.appendChild(h('div', { class: 'tx' }, h('i', {}, 'Wiadomość została usunięta')));
+      else if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
       else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, U.time(m.t), mine ? h('span', { class: 'delivery', title: 'Dostarczono', 'aria-label': 'Dostarczono' }, 'Dostarczono') : null));
+      b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t), mine ? receipt() : null));
       if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
       const reaction = PhoneTools.reaction(id, m.id);
       if (reaction) b.append(h('button', { class: 'message-reaction', 'aria-label': 'Twoja reakcja ' + reaction, onclick: e => { e.stopPropagation(); UI.messageActions(id, m); } }, reaction));
@@ -194,6 +251,29 @@
       } else row.appendChild(b);
       return row;
     }
+    /* Film jednorazowy (Błysk): kafel → pełny ekran → jedno odtworzenie → „Otwarto”. */
+    function snapTile(m) {
+      if (m.opened) return h('div', { class: 'snap-tile opened' }, h('span', { class: 'snap-ic' }, '○'), h('div', {}, h('b', {}, 'Otwarto'), h('small', {}, 'Błysk · film jednorazowy')));
+      return h('button', { class: 'snap-tile', 'aria-label': 'Otwórz film jednorazowy', onclick: e => { e.stopPropagation(); openSnap(m); } },
+        h('span', { class: 'snap-ic' }, '▶'), h('div', {}, h('b', {}, 'Film'), h('small', {}, 'Błysk · dotknij, żeby obejrzeć raz')));
+    }
+    function openSnap(m) {
+      if (m.opened) return;
+      const done = () => { if (m.opened) return; m.opened = true; G.setFlag('sawSnap'); G.save(true); ov.remove(); renderAll(); };
+      const v = h('video', { class: 'snap-video', src: m.vid, playsinline: '', muted: '', autoplay: '', preload: 'auto' });
+      const bar = h('i', {});
+      const ov = h('div', { class: 'snap-ov', role: 'dialog', 'aria-label': 'Film jednorazowy', onclick: done },
+        h('div', { class: 'snap-bar' }, bar), v, h('div', { class: 'snap-meta' }, (DATA.chars[m.from] || {}).short || '', ' · Błysk'));
+      v.muted = true;
+      // Pasek postępu liczony z czasu filmu (animacja CSS bywa wyłączana przez ograniczenie ruchu).
+      const tick = () => { if (m.opened) return; const d = v.duration || 5; bar.style.transform = 'scaleX(' + Math.min(1, v.currentTime / d) + ')'; requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      v.addEventListener('ended', done);
+      v.addEventListener('error', () => setTimeout(done, 1500));
+      setTimeout(done, 12000);
+      document.body.appendChild(ov);
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    }
     function evCard(evId) {
       const e = G.ev(evId);
       if (!e) return h('div', {}, '');
@@ -208,18 +288,21 @@
 
     function renderAll() {
       msgs.innerHTML = '';
+      // Dymek „pisze…” wypadł razem z resztą; bez tego append() wstawiałby przed odłączony węzeł i przerywał render.
+      typingEl = null;
       lastRendered = null;
       const list = G.chat(id).msgs;
       list.forEach(m => append(m, false));
       showTyping();
       requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
+      updateSeen();
     }
     function append(m, animate = true) {
-      if (m.from === 'me') msgs.querySelectorAll('.delivery').forEach(el => el.remove());
+      if (m.from === 'me' || (appId === 'gadka' && m.from !== 'sys')) msgs.querySelectorAll('.delivery').forEach(el => el.remove());
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');
-      if (typingEl) msgs.insertBefore(n, typingEl); else msgs.appendChild(n);
+      if (typingEl && typingEl.parentNode === msgs) msgs.insertBefore(n, typingEl); else msgs.appendChild(n);
       lastRendered = m;
     }
     function nearBottom() { return body.scrollHeight - body.scrollTop - body.clientHeight < 160; }
@@ -255,7 +338,7 @@
           scrollEnd(true); return;
         }
         p.options.forEach((o, n) => comp.appendChild(h('button', {
-          class: 'opt' + (o.shot ? ' shot' : ''), style: `animation-delay:${n * 60}ms`,
+          class: 'opt' + (o.shot ? ' shot' : ''), style: p.shown ? 'animation:none' : `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
         }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
         scrollEnd(true);
@@ -279,23 +362,25 @@
       BUS.on('msg', ({ chat, msg }) => {
         if (chat !== id) return;
         append(msg);
+        updateSeen();
         G.markRead(id);
         scrollEnd(msg.from === 'me');
       }),
-      BUS.on('typing', ({ chat }) => { if (chat === id) showTyping(); }),
+      BUS.on('typing', ({ chat }) => { if (chat === id) { updateSeen(); showTyping(); } }),
       BUS.on('pending', () => renderComposer()),
+      BUS.on('msg-edit', ({ chat }) => { if (chat !== id) return; const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
       BUS.on('phone-tools', () => { const top = body.scrollTop; renderAll(); requestAnimationFrame(() => { body.scrollTop = top; }); }),
       BUS.on('chats', () => { $('h1', hdr).textContent = chatName(id); setSub(); })
     ];
     renderAll();
     renderComposer();
-    const activate = () => { G.viewing = id; G.markRead(id); G.change(); };
+    const activate = () => { G.viewing = id; G.markRead(id); if (UI.dismissBannerFor) UI.dismissBannerFor(id); G.change(); };
     activate();
     return {
       el, chat: id,
       onShow: activate,
       onHide: () => { if (G.viewing === id) G.viewing = null; },
-      destroy: () => { offs.forEach(f => f()); if (G.viewing === id) G.viewing = null; G.change(); }
+      destroy: () => { clearTimeout(seenTimer); offs.forEach(f => f()); if (G.viewing === id) G.viewing = null; G.change(); }
     };
   }
 

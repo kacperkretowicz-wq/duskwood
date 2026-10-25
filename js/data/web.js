@@ -196,7 +196,7 @@ Po zamknięciu zakładów tunele odprężarek bywają zalewane wodą lub zamurow
 
 Najtrudniejsza sytuacja panowała w dorzeczu Odry i jej sudeckich dopływów. Wiele miejscowości ewakuowano w ciągu jednej nocy.
 
-_W grze Mglisko rzeka Mglica i samo miasteczko są fikcyjne._`))
+_Ten artykuł jest zalążkiem. Możesz pomóc Wolnopedii, dopisując skutki powodzi w poszczególnych gminach._`))
   });
 
   /* ================= Kadr ================= */

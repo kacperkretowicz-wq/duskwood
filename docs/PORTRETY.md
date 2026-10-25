@@ -1,5 +1,7 @@
 # Portrety postaci
 
+Aktualizacja oceny, 23.10.2026: użytkownik wskazał `assets/people/kuba.jpg`, `assets/lena-v2.jpg` i `assets/gajda.jpg` jako wzorce realizmu. Pozostałe 21 zdjęć z przedstawionych plansz zostało odrzuconych. Poniższy opis dokumentuje wcześniejszą produkcję, a nie aktualną akceptację jakości. Obowiązują [REALIZM-2026.md](REALIZM-2026.md), rejestr `ASSETY-REALIZM-2026.json` i [ZDJECIA-SYTUACJE.md](ZDJECIA-SYTUACJE.md).
+
 Wszystkie zdjęcia osób w `assets/people` powstały według wzorca `assets/lena-v2.jpg` (prompt w [ASSETY-OSTATNI-KURS.md](ASSETY-OSTATNI-KURS.md)): zwykłe zdjęcie budżetowym telefonem, płaskie światło dzienne lub jarzeniówka, lekka kompresja JPEG, nieidealna ostrość, przypadkowe tło, bez filmowego gradingu, HDR, bokeh i napisów.
 
 Spójność twarzy: dla każdej postaci najpierw powstał jeden kanoniczny portret (`<postać>.jpg`). Każde zdjęcie z życia (`<postać>_lifeN.jpg`) wygenerowano z tym portretem jako obrazem referencyjnym („the same person as in the reference image”). Maja wychodzi z `assets/maja-river.png`, żeby zgadzała się z dotychczasowymi zdjęciami w fabule; wspólne zdjęcie z Olą (`ola_life2.jpg`) ma dwie referencje.

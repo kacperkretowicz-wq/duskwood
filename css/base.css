@@ -280,6 +280,8 @@ body.mobile .hdr { padding-top: calc(36px + var(--safe-t)); min-height: calc(82p
 #lock .lk-t { font-size: 92px; font-weight: 250; letter-spacing: -.04em; line-height: 1.02; }
 #lock .lk-n { width: 100%; margin-top: 26px; display: flex; flex-direction: column; gap: 8px; flex: 1; overflow: hidden; }
 #lock .lk-n .banner { animation: lkin .5s cubic-bezier(.2, 1.1, .3, 1) both; margin: 0; }
+#lock .lk-n .banner.lk-hidden { display: none; }
+#lock .lk-n .lk-more { align-self: center; margin-top: 2px; padding: 7px 14px; border: 0; border-radius: 16px; background: rgba(245, 245, 247, .55); color: #1c1c1e; font: 600 13px/1.2 inherit; font-family: inherit; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 6px 0 -3px rgba(245, 245, 247, .35), 0 11px 0 -6px rgba(245, 245, 247, .22); cursor: pointer; }
 @keyframes lkin { from { transform: translateY(18px) scale(.96); opacity: 0; } }
 #lock .lk-u { font-size: 14px; color: rgba(255, 255, 255, .7); display: flex; flex-direction: column; align-items: center; gap: 10px; animation: breathe 2.4s ease-in-out infinite; cursor: pointer; padding: 10px 30px; }
 #lock .lk-u::after { content: ""; width: 134px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .7); }

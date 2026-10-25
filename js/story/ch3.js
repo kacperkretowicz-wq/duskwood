@@ -2,7 +2,7 @@
 /* ROZDZIAŁ 3 — Peleryna */
 
 Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 października', mood: 'calm' }, D => {
-  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene } = D;
+  const { say, pic, me, sys, pause, choose, opt, show, ask, waitFor, openChat, goal, give, evolve, unlock, set, inc, iff, run, fx, typing, end, title, interlude, clock, ambient, sync, notify, callIn, callEnd, trust , scene, scare, unsend } = D;
   const SC = StoryScenes(D);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
@@ -24,27 +24,72 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
         opt('Kot ma rację. Ręczniki są ciepłe.', [K('xD babcia mówi dokładnie to samo')])
       ]),
       pause(2500),
-      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.'),
+      say('group', 'ola', 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Jadę po pracy do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.', { wording: 'voice:0:12|Ola|Sorry za głosówkę, jestem w autobusie. Odespałam nockę i jadę do lumpeksu na Kolejowej, szukam kurtki na zimę. Odezwę się, jak dojadę.' }),
       pause(5000),
-      pic('group', 'ola', 's1_lumpeks', 'Wisiało między kurtkami. Przypomina wam to coś?'),
+      pic('group', 'ola', 's1_lumpeks', 'Wisiało między kurtkami. Przypomina wam to coś?', { wording: 'Zobaczyłam ten żółty kaptur i aż się zatrzymałam.' }),
       choose('group', [
         opt('Peleryna jak z kliszy. Żółta, z kapturem.', [
           g('ola', 'Też od razu o tym pomyślałam. Zapytałam sprzedawczynię. Przyszło w tym tygodniu w worku z Niemiec.'),
-          g('ola', 'Czyli to nie ta. Ale przez chwilę serce mi stanęło.'),
+          g('ola', 'Czyli to nie ta. Ale przez chwilę serce mi stanęło.', { wording: 'Nie mamy powodu łączyć jej z Tomkiem. Po prostu od wczoraj wszędzie widzę ten kolor.' }),
           g('kuba', 'na kliszy dziecko ma taką samą. tylko bez paska')
         ], { set: { x_pelerynaLink: true } }),
         opt('Kurtka z fotopułapki?', [
           g('kuba', 'nie no, tamta była ciemna i z napisem'),
           g('ola', 'To zwykła dziecięca peleryna. Ale teraz jak patrzę, to przypomina mi kliszę.')
         ], { set: { x_pelerynaDetour: true } }),
-        opt('Zwykła peleryna. Szukaj tej kurtki.', [g('ola', 'Znalazłam. 25 zł i jeszcze ciepła.')], { set: { x_pelerynaLater: true } })
+        opt('Zwykła peleryna. Szukaj tej kurtki.', [g('ola', 'Znalazłam. 25 zł i jeszcze ciepła.', { wording: 'Znalazłam. 25 zł. Z kieszeni wyjęłam cudzy bilet autobusowy, więc bonus.' })], { set: { x_pelerynaLater: true } })
       ])
     ]),
     scene('s15', SC.s15),
     scene('xPeleryna', [iff('flag:x_pelerynaLater', [g('ola', 'Czekajcie. Ta peleryna z lumpeksu. Dopiero teraz mi się skojarzyła.')])]),
+    /* P2: Bartek dzień po przyznaniu się. Nie ma nowego tropu, jest tylko odkładana rozmowa. */
+    scene('xBartek', [
+      pause(2000),
+      g('bartek', 'bylem rano u starego w garazu'),
+      g('bartek', 'nie pytalem. pomoglem mu wymienic olej w passacie i tyle'),
+      g('bartek', 'dzis mam trzy auta na podnosniku. moze jutro'),
+      choose('group', [
+        opt('Nie musisz dziś. Tylko nie odkładaj tego za długo.', [g('bartek', 'wiem')], { trust: { bartek: 1 } }),
+        opt('Bartek, to może być ważne dla Mai.', [g('bartek', 'myslisz ze nie wiem'), g('ola', 'Dajcie mu ten dzień. Sama bym nie umiała zapytać ojca o coś takiego.')])
+      ])
+    ]),
+    /* P4: wycofana wiadomość. Treść zna tylko ten, kto miał wtedy otwartą grupę. */
+    scene('xWycofana', [
+      pause(3000),
+      g('bartek', 'stary dzis rano pytal czy ktos z was byl w hucie. skad on to wie', { uid: 'x_bw1' }),
+      pause(3500),
+      unsend('group', 'x_bw1', { flag: 'x_wycofanaSeen' }),
+      pause(1200),
+      g('kuba', 'bartek co usunąłeś'),
+      g('bartek', 'nic. nie do was bylo'),
+      iff('flag:x_wycofanaSeen', [
+        choose('group', [
+          opt('{Zdążyłem|Zdążyłam} przeczytać. Twój ojciec pytał, czy ktoś z nas był w hucie.', [
+            g('bartek', 'no. pytal. nie wiem skad wie'),
+            g('ola', 'Może ktoś widział twoje auto pod bramą. To jeszcze nic nie znaczy.'),
+            g('bartek', 'pogadam z nim. nie dzis')
+          ], { set: { x_wycofanaTold: true } }),
+          opt('Nie naciskajmy go.', [g('bartek', 'dzieki')], { trust: { bartek: 1 } })
+        ])
+      ], [
+        choose('group', [
+          opt('Bartek, jak to było ważne, napisz jeszcze raz.', [g('bartek', 'nie bylo wazne'), g('ola', 'Jasne. Na pewno.')]),
+          opt('Nie naciskajmy go.', [g('bartek', 'dzieki')], { trust: { bartek: 1 } })
+        ])
+      ])
+    ]),
+    /* P4: „wyświetlono” to zachowanie, nie dowód. */
+    scene('xWyswietlono', [
+      g('ola', 'Bartek, wyświetliłeś i cisza. Super.'),
+      g('bartek', 'leze pod autem. telefon jest na masce. jak go podnosze to sie samo otwiera'),
+      choose('group', [
+        opt('„Wyświetlono” znaczy tylko, że otworzył czat. Nie że olewa.', [g('ola', 'Wiem. Po prostu mam za mało snu na cierpliwość.')]),
+        opt('Daj mu skończyć to auto, Ola.', [g('ola', 'Dobra. Przepraszam, Bartek.'), g('bartek', 'spoko')])
+      ])
+    ]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
-    g('ola', 'Kuba, zjedz coś. Serio.'),
+    g('ola', 'Kuba, zjedz coś. Serio.', { wording: 'Kuba, zjedz coś. Choćby te bułki z kuchni, zanim mama je wyrzuci.' }),
     g('kuba', 'musimy pogadać z kimś, kto pamięta tamtą noc w 97'),
     g('ola', 'Pani Weronika. Siostra Tomka. Maja nagrała z nią rozmowę 11.10 — jest w dyktafonie.'),
     g('bartek', 'ona prowadzi biblioteke. zawsze byla mila'),
@@ -65,9 +110,9 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Kuba Wrona poprosił, żebym {napisał|napisała}.', [])
     ]),
     W('Maja była u mnie dwa tygodnie temu. Pytała o Tomka. Od dawna nikt się tym nie interesował.'),
-    W('A potem zniknęła. Od tygodnia nie śpię i myślę: czy to przeze mnie? Czy coś jej powiedziałam…'),
+    W('A potem zniknęła. Od tygodnia nie śpię i myślę: czy to przeze mnie? Czy coś jej powiedziałam…', { wording: 'Od tygodnia odtwarzam sobie tę rozmowę. Na końcu pytała, czy może jeszcze przyjść. Powiedziałam, że zawsze.' }),
     choose('weronika', [
-      opt('To nie przez panią.', [W('Dziękuję. Chciałabym w to wierzyć.')], { trust: { weronika: 1 } }),
+      opt('To nie przez panią.', [W('Dziękuję. Chciałabym w to wierzyć.', { wording: 'Dziękuję. Tylko bardzo bym chciała, żeby już mogła przyjść.' })], { wording: 'Jeśli uda nam się coś ustalić, dam pani znać.', trust: { weronika: 1 } }),
       opt('Co jej pani powiedziała?', [W('Opowiedziałam to, co pamiętam. Miałam wtedy dwanaście lat. Dziś nie zawsze wiem, co sama widziałam, a co mi opowiedziano.')])
     ]),
     W('Czego {Pan|Pani} ode mnie potrzebuje?'),
@@ -79,7 +124,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     typing('weronika', 'weronika', 6000),
     W('To jest Tomek.'),
     W('Ta peleryna. Mama kupiła ją w Dzierżoniowie na kolonie, na które nie pojechał.'),
-    W('Widzi {Pan|Pani} ten różowy punkcik na jego szyi? To tamagotchi. Nie rozstawał się z nim.'),
+    W('Widzi {Pan|Pani} ten różowy punkcik na jego szyi? To tamagotchi. Nie rozstawał się z nim.', { wording: 'I to różowe przy szyi. Nosił tamagotchi na sznurku. Zaraz znajdę swoje zdjęcie, tam widać je lepiej.' }),
     pic('weronika', 'weronika', 'w_tomek', 'To ostatnie zdjęcie, jakie mam. Czternasty czerwca 1997.'),
     give('ev_tomek'),
     W('Gdzie zrobiono to zdjęcie z kliszy?'),
@@ -89,7 +134,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     ]),
     W('W hucie.'),
     W('Pani Halina miała rację.'),
-    W('Dwadzieścia dziewięć lat palę znicze nad rzeką.'),
+    W('Dwadzieścia dziewięć lat palę znicze nad rzeką.', { wording: 'A ja co roku chodziłam nad rzekę. Nikt mi nigdy nie powiedział, że sprawdzali ten budynek.' }),
     scene('s16', SC.s16),
     goal('Weronika mówi o tamagotchi Tomka. Czy {widziałeś|widziałaś} coś takiego w hucie?', [
       'Przejrzyj jeszcze raz zdjęcia Mai z odprężarki (8.10).',
@@ -107,9 +152,9 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       opt('Tak. Bardzo mi przykro, pani Weroniko.', [W('Dziękuję, że {Pan|Pani} mi to mówi. Lepiej wiedzieć.')], { trust: { weronika: 1 } }),
       opt('Myślę, że on wciąż tam jest. Za tym murem.', [W('…'), W('Tak. Ja też tak myślę.')])
     ]),
-    W('Maja nagrywała naszą rozmowę. Powiedziałam jej wtedy imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.'),
-    W('Teraz mi się wszystko plącze. Nie chcę nikogo oskarżać na podstawie pamięci dwunastolatki.'),
-    W('Jeśli to nagranie jest w jej telefonie…'),
+    W('Maja nagrywała naszą rozmowę. Powiedziałam jej wtedy imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.', { wording: 'Na tamtym nagraniu są imiona. Imiona chłopców, za którymi Tomek chodził tamtego lata.' }),
+    W('Teraz mi się wszystko plącze. Nie chcę nikogo oskarżać na podstawie pamięci dwunastolatki.', { wording: 'Maja zapisywała nazwiska. Proszę sprawdzić, co jej wtedy powiedziałam. Teraz boję się coś pomylić.' }),
+    W('Jeśli to nagranie jest w jej telefonie…', { wording: 'Proszę go posłuchać. Ja nie dam rady drugi raz.' }),
     g('kuba', 'i co? pani weronika odpisała?'),
     g('kuba', '%name%??'),
     pause(2000),
@@ -126,7 +171,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('kuba', 'gajda'),
     g('kuba', 'GAJDA był z tymi chłopakami?'),
     g('ola', 'Robert Gajda. Leszek Malicki. Marek Sowa. Darek Kruk.'),
-    g('ola', 'Czterech chłopaków z kadru 21.'),
+    g('ola', 'Czterech chłopaków z kadru 21.', { wording: 'Mogą być na tym zdjęciu. Nie umiem ich rozpoznać po twarzach.' }),
     typing('group', 'bartek', 6000),
     g('bartek', 'moj stary mial wtedy 17 lat. co z tego'),
     typing('group', 'igor', 7000),
@@ -141,13 +186,13 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('bartek', 'jeszcze nie'),
     sys('group', 'Bartek opuścił grupę.'),
     members(['kuba', 'ola']),
-    g('kuba', 'super. zostaliśmy we trójkę'),
+    g('kuba', 'super. zostaliśmy we trójkę', { wording: 'wyszli. obaj. co ja mam teraz zrobić z tą grupą' }),
     choose('group', [
       opt('Dajmy im chwilę. To ich ojcowie.', [g('ola', 'Masz rację.')], { trust: { ola: 1 } }),
       opt('Uciekają, bo coś wiedzą.', [g('kuba', 'albo bo się boją. jak ja')]),
       opt('Kuba, jak się trzymasz?', [g('kuba', 'gajda był na pogrzebie dziadka. przynosił mi lego. trzymał mamę za rękę, jak tata się wyprowadził')], { trust: { kuba: 1 } })
     ]),
-    g('kuba', 'a teraz on mówi, że maja skoczyła z tamy'),
+    g('kuba', 'a teraz on mówi, że maja skoczyła z tamy', { wording: 'a gajda dalej mówi mamie, że maja skoczyła z tamy' }),
     pause(4000),
 
     scene('s17', SC.s17),
@@ -157,15 +202,15 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     C('Dobry wieczór. Robert Gajda. Nie przeszkadzam?'),
     choose('call', [opt('Słucham.', []), opt('Trochę przeszkadza.', [C('Będę krótko.')])]),
     C('Rozmawiałem z panią Wroną. Mówi, że ma {Pan|Pani} dostęp do konta Mai w chmurze.'),
-    C('Potrzebuję tych plików. To materiał dowodowy. Proszę mi przesłać hasło do konta.'),
+    C('Potrzebuję tych plików. To materiał dowodowy. Proszę mi przesłać hasło do konta.', { wording: 'Potrzebuję dostępu do tej kopii. Będzie szybciej, jeśli poda mi {Pan|Pani} hasło. Rodzinie oszczędzimy kolejnych pytań.' }),
     choose('call', [
-      opt('Dobrze, prześlę.', [C('Dziękuję. Mądra decyzja.')], { set: { leakFiles: true }, inc: { leaks: 2 } }),
+      opt('Dobrze, prześlę.', [C('Dziękuję. Mądra decyzja.', { wording: 'Dziękuję. Proszę niczego nie zmieniać, zajmę się tym.' })], { set: { leakFiles: true }, inc: { leaks: 2 } }),
       opt('Nie mogę. Rodzina mnie o to nie prosiła.', [C('Rozumiem.'), C('Ale proszę pamiętać, że utrudnianie postępowania to przestępstwo.')]),
       opt('Dlaczego nie poprosi pan o to prokuratury?', [C('…'), C('Prokuratura ma ważniejsze sprawy niż dziewczyna, która…'), C('Przepraszam. Proszę się zastanowić.')], { set: { gajdaSlip: true } }),
       opt('Co pan robił pod hutą wczoraj o północy?', [C('…'), C('Nie wiem, o czym {Pan|Pani} mówi.')], { cond: 'ev:ev_car_igor', set: { gajdaAlert: true }, inc: { leaks: 1 } })
     ]),
     C('Jeszcze jedno.'),
-    C('Nie jest {Pan|Pani} stąd. Proszę nie namawiać tych dzieciaków do kolejnej wyprawy. Ich matki będą dzwoniły do mnie, nie do {Pana|Pani}.'),
+    C('Nie jest {Pan|Pani} stąd. Proszę nie namawiać tych dzieciaków do kolejnej wyprawy. Ich matki będą dzwoniły do mnie, nie do {Pana|Pani}.', { wording: 'Pani Wrona nie śpi, Kuba chce znowu jechać do huty. Gdyby rozmawiali o wyjeździe, proszę mi dać znać. Wolałbym nie tłumaczyć kolejnej matce, że nie dopilnowaliśmy jej dziecka.' }),
     callEnd(),
     give('ev_gajda_call'),
     iff('flag:leakFiles', [
@@ -209,11 +254,13 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
       give('ev_plate'),
       g('kuba', 'DDZ 6K19. czyje to?')
     ]),
+    /* Podział rozdziału 3 (v6): przerwa po złożeniu tablicy DDZ 6K19, przed ustalaniem właściciela. */
+    scene('xPrzerwaTablica', [interlude('Wieczór', 'Numer auta jest w notatkach. Właściciela jeszcze nikt nie zna.', 3000, { rest: 's1_plate' })]),
     scene('s18', SC.s18),
-    g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.'),
+    g('ola', 'Bartek może sprawdzić w warsztacie. Mają zeszyt napraw, pół gminy do nich jeździ.', { wording: 'Pół gminy jeździ do Sowów. Mają zeszyt napraw z numerami.' }),
     g('kuba', 'bartek wyszedł z grupy i nie odbiera'),
     unlock('chat:bartek'),
-    goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka w *Wiadomościach*.']),
+    goal('Poproś Bartka o pomoc w ustaleniu właściciela auta.', ['Napisz do Bartka na *Gadce*.']),
     openChat('bartek'),
     choose('bartek', [
       opt('Bartek, potrzebuję twojej pomocy. Chodzi o samochód spod huty.', [], { trust: { bartek: 1 } }),
@@ -240,7 +287,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     give('ev_owner'),
     B('byl u nas 16.10. mycie podwozia i dywanikow. cale w blocie'),
     B('stary go obslugiwal. mowil potem ze gajda byl dziwny. dal 200 zl napiwku za mycie'),
-    B('on nigdy nie daje napiwkow'),
+    B('on nigdy nie daje napiwkow', { wording: 'mi kazal kiedys doliczyc do faktury plyn za 8 zl, bo brakowalo w bagazniku. a tu zostawil dwie stowy' }),
     typing('bartek', 'bartek', 4000),
     B('sorry ze wyszedlem. musialem pogadac ze starym'),
     B('nie chce gadac. zamknal sie w garazu i siedzi'),
@@ -250,15 +297,68 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('bartek', 'auto pod huta to magna gajdy. DDZ 6K19. mam to w zeszycie'),
     typing('group', 'kuba', 5000),
     g('kuba', 'może sprawdzał hutę. jest policjantem'),
-    g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?'),
+    g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?', { wording: 'O pierwszej w nocy, niecałe półtorej godziny po tym, jak jej telefon zamilkł? Zanim ktokolwiek wiedział, że zaginęła?' }),
     typing('group', 'kuba', 6000),
     g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),
 
+    /* P4: relacja → screen → reupload → komentarze → reakcja bliskich. Usunięcie oryginału nie usuwa kopii. */
+    scene('xReupload', [
+      g('ola', 'Ktoś zrobił screena ostatniej relacji Mai z Kadru i wrzucił na „Mglisko bez cenzury”. Z podpisem „pewnie uciekła z chłopakiem”.'),
+      g('ola', 'Pod spodem sześćdziesiąt komentarzy.'),
+      g('kuba', 'mama to widziała. siedzi w kuchni i czyta wszystkie po kolei'),
+      choose('group', [
+        opt('Zgłośmy post. Ale screen już krąży, samo usunięcie go nie zatrzyma.', [
+          g('ola', 'Zgłosiłam. Admin odpisał, że „to było publiczne”.'),
+          g('kuba', 'mama sama do niego napisała. usunął po godzinie'),
+          g('kuba', 'ktoś zdążył wrzucić na grupę osiedla')
+        ], { set: { x_reuploadReported: true } }),
+        opt('Kuba, nie szukaj teraz autora. Posiedź z mamą.', [
+          g('kuba', 'dobra. siedzę'),
+          g('kuba', 'zrobiła screeny komentarzy. mówi że „żeby pamiętać kto”')
+        ], { trust: { kuba: 1 } })
+      ])
+    ]),
+    /* Wyjaśnienie otwarcia: jednorazowy film z prologu to prawdziwa relacja Mai. */
+    scene('xSnapEcho', [
+      iff('flag:sawSnap', [
+        g('kuba', 'ten film z czołówką, co krążył po błysku jako „ostatnia relacja”. to naprawdę jej relacja z kadru. 14.10, 22:56, tylko dla bliskich. ktoś nagrał ją ekranem i puścił dalej'),
+        g('ola', 'Igor pisze mi na priv: to ścieżka wzdłuż ściany walcowni, 30 metrów od bramy. Odwróciła się, bo trzasnęła blacha na bramie, wiatr. Minutę później CAM-01 zrobiła jej zdjęcie, 22:57.'),
+        g('ola', 'A ta „postać” na końcu ścieżki to stara kufajka z kapturem na słupku od siatki. Wisi tam od lat, widział ją, jak wieszał kamery. W dzień wygląda śmiesznie.')
+      ])
+    ]),
+    /* P4: prośby o wiadomość i prywatny profil. Zachowanie ludzi, nie automatyczny dowód. */
+    scene('xProsby', [
+      pause(3000),
+      g('ola', 'Weszłam przy okazji w prośby o wiadomość na Kadrze. Nigdy tam nie zaglądam.'),
+      g('ola', 'Leży wiadomość z 15.10 od konta bez zdjęcia: „wiesz gdzie jest maja?”. Profil prywatny, zero postów.'),
+      choose('group', [
+        opt('Nie odpisuj jeszcze. Zrób screena z datą i nazwą konta.', [
+          g('ola', 'Zrobione. „m.k.2009”. Nic mi to nie mówi.'),
+          g('kuba', 'prywatne konto bez postów to pół mojej klasy. ktoś też mógł jej szukać')
+        ], { set: { x_prosbaSaved: true } }),
+        opt('Odpisz i zapytaj, kim jest.', [
+          g('ola', 'Napisałam. Jedna szara kreska.'),
+          g('kuba', 'może nie zagląda. ja do próśb też nie zaglądam od roku')
+        ])
+      ])
+    ]),
     scene('s19', SC.s19),
+    /* P2: ostatni autobus. Zwykły powrót Oli, bez tropu. */
+    scene('xAutobus', [
+      pause(3000),
+      g('ola', 'Uciekł mi ostatni autobus. Kierowca widział, że biegnę, i i tak ruszył.'),
+      g('ola', 'Idę pieszo. Mapa mówi 28 minut. Mapa kłamie.'),
+      choose('group', [
+        opt('Mam do ciebie zadzwonić, żebyś nie szła sama?', [g('ola', 'Nie trzeba. Mam słuchawki i podcast o grzybach. Napiszę, jak dojdę.')], { trust: { ola: 1 } }),
+        opt('Kuba, nie podjedziesz po nią?', [g('kuba', 'mama ma auto, a ja nie mam prawka jeszcze. sorry'), g('ola', 'Spokojnie. Do tego czasu będę w połowie drogi. Idę.')])
+      ]),
+      pause(6000),
+      g('ola', 'Jestem w domu. Nogi mi odpadają.')
+    ]),
 
     /* --- noc: telefon Mai ożywa --- */
-    interlude('Noc', 'Nikt w Mglisku nie śpi spokojnie.', 3400),
+    interlude('Noc', 'Nikt w Mglisku nie śpi spokojnie.', 3400, { rest: 's1_sync' }),
     clock('2026-10-24T03:05'),
     ambient('dark'),
     set('majaOnline'),
@@ -273,18 +373,37 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     K('ej'),
     K('ona żyje???'),
     pause(1500),
+    /* P5 / G1: krótki powrót telefonu do sieci. Gajda ma telefon Mai i sprawdza ostatni numer, pod który dzwoniła. */
+    scene('scMajaNumer', [
+      scare('s1_maja_numer', 'call', { who: 'maja', name: 'Maja Wrona', number: '+48 731 402 118', ms: 5000, listen: 2600, onAccept: 's1_pickedMaja' }),
+      iff('flag:s1_pickedMaja', [
+        K('czekaj. dzwoniła do ciebie?? teraz?'),
+        K('co było słychać'),
+        choose('kuba', [
+          opt('Nic. Jakby ktoś przesuwał telefon po stole.', [K('to nie ona. ona by coś powiedziała. cokolwiek')]),
+          opt('Ktoś oddychał i się rozłączył.', [K('nie mów tego mamie. błagam')])
+        ])
+      ], [
+        K('masz coś od jej numeru? mama widzi że był online'),
+        choose('kuba', [
+          opt('Nieodebrane połączenie. Kilka sekund.', [K('kurwa'), K('ktoś ma jej telefon. ona by napisała, nie dzwoniła o trzeciej')]),
+          opt('Nie {zdążyłem|zdążyłam} odebrać. Dzwonił kilka sekund.', [K('ona nigdy nie dzwoni o tej porze. nigdy')])
+        ])
+      ])
+    ]),
     unlock('maja:find'),
     set('majaOnline', false),
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest offline.', sound: 'notif' }),
     choose('kuba', [
       opt('Kuba, poczekaj. Kluska nie żyje od 2019.', [K('wiem'), K('wiem. właśnie dlatego mi ręce latają')], { trust: { kuba: 1 } }),
-      opt('Żyje! To najważniejsze.', [K('tak tylko'), K('czekaj')]),
+      opt('Żyje! To najważniejsze.', [K('tak tylko', { wording: 'tak. tylko…' }), K('czekaj')]),
       opt('To nie brzmi jak ona.', [K('nie brzmi')])
     ]),
+    scene('xRanoSync', [iff('flag:rano_s1_sync', [K('i nie przepraszaj, że czytasz dopiero rano. ja bym też spał, gdyby nie mama')])]),
     K('kluska nie żyje od 7 lat'),
     K('i maja nigdy nie pisze „mamo”. zawsze „mamuś”. zawsze'),
     K('to nie ona to pisała. albo ktoś jej kazał'),
-    K('może dała nam znać specjalnie. ja muszę tak myśleć, rozumiesz?'),
+    K('może dała nam znać specjalnie. ja muszę tak myśleć, rozumiesz?', { wording: 'może napisała o klusce specjalnie. tak żebyśmy wiedzieli. nie wiem. czytam to w kółko' }),
     goal('Telefon Mai był przez chwilę online. Sprawdź, co się zsynchronizowało.', [
       'Nimbus → Galeria → Aparat. Są nowe zdjęcia z 14.10, z nocy zniknięcia.',
       'Nimbus → Wiadomości → „Mamuś 💛”. Dotknij nowego SMS-a, żeby zapisać go w Notatkach.'
@@ -297,6 +416,27 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('ola', 'Peleryna.'),
     g('kuba', 'tomek'),
     pause(2000),
+    /* P4: data pliku a czas powiadomienia. Synchronizacja nie dowodzi, kiedy zrobiono zdjęcie. */
+    scene('xDataPliku', [
+      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.'),
+      g('kuba', 'czyli to nie jest z dzisiaj'),
+      choose('group', [
+        opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('ola', 'Igor: „dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust”.')]),
+        opt('Ale SMS do mamy jest z dzisiaj.', [g('ola', 'Igor mówi: SMS tak, zdjęcia nie. Dwie różne rzeczy.'), g('ola', 'Czyli ktoś miał dziś jej telefon w ręku. To akurat jest pewne.')])
+      ])
+    ]),
+    /* P4: anonimowy materiał z kopii karty CAM-01. Prawdziwy, ale z innej nocy (data w pliku). Igor wrzuca go od razu do grupy, więc trop nie zależy od otwarcia wygasającego linku. */
+    scene('xAnonim', [
+      g('ola', 'Igor przysłał mi to na priv. Ktoś wrzucił na Klipo z pustego konta, plik MATERIAŁ_ROBOCZY_01. Link wygasa za 24 h, więc ściągnął.'),
+      g('ola', '', { vid: 'assets/video/v_anonim.mp4', img: 'v_anonim' }),
+      g('bartek', 'to brama huty. ta sama kamera co u mai'),
+      choose('group', [
+        opt('Na dole: 15.10, 01:47. Zdjęcie z kurtką jest z 22.10, 02:13. To inna noc.', [set('x_anonimData'), g('kuba', 'no właśnie. ktoś chce, żebyśmy to wzięli za tamtą noc'), g('ola', 'Albo chce pokazać, że ktoś tam chodził już tydzień wcześniej. Jedno i drugie coś znaczy.')]),
+        opt('To ten sam człowiek co na zdjęciu z kurtką.', [g('ola', 'Nie wiem. Spójrz na datę na dole: 15.10. Kurtka była 22.10.'), g('kuba', 'czyli tydzień wcześniej ktoś już tam łaził')])
+      ]),
+      g('kuba', 'skąd ktoś to ma? kartę z fotopułapki zabrała policja'),
+      g('ola', 'Igor uważa, że ktoś ją skopiował, zanim zabrali. I chce, żebyśmy wiedzieli, że ma kopię.')
+    ]),
     g('kuba', 'jest coś jeszcze?'),
     show('group', { prompt: 'Pokaż zdjęcie z 23:53', accept: [{ ev: ['ev_sync_door', 'ev_sms_kluska'] }], wrong: [['kuba', 'jeszcze coś z tej nocy?']] }),
     iff('ev:ev_sync_door', [
@@ -310,8 +450,8 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('ola', 'Igor mówił, że Nimbus zapisuje lokalizację. Mamy ją?'),
     pause(2500),
     fx('glitch'),
-    sz('teraz wiesz, ze zyje'),
-    sz('on tez juz wie, ze wy wiecie'),
+    sz('teraz wiesz, ze zyje', { wording: 'ten sms niczego nie kończy' }),
+    sz('on tez juz wie, ze wy wiecie', { wording: 'nie dajcie sobie wmówić, że sama zniknęła' }),
     pause(2500),
     end('ch4')
   ];

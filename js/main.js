@@ -42,7 +42,7 @@
       const cps = G.checkpoints();
       const list = h('div', { class: 'list' }, Engine.order.filter(id => cps[id]).map(id => {
         const ch = Engine.chapters[id];
-        return h('button', { class: 'row', onclick: () => { G.loadCheckpoint(id); sh.close(); close(); start(); } },
+        return h('button', { class: 'row', onclick: () => { if (!G.loadCheckpoint(id)) { sh.close(); UI.toast('Nie udało się wczytać tego rozdziału — zapis był uszkodzony.', { kind: 'error' }); return; } sh.close(); close(); start(); } },
           h('span', { class: 'ri', html: U.icon('refresh', 17) }), h('div', { class: 'rm' }, h('b', {}, ch.kicker || (ch.num === 0 ? 'Prolog' : ch.num === 99 ? 'Epilog' : `Rozdział ${ch.num}`)), h('span', {}, ch.title)));
       }));
       const sh = UI.sheet({ title: 'Wybierz rozdział', body: list });

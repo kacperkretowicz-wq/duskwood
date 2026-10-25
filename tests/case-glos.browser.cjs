@@ -30,7 +30,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
     await new Promise(r=>setTimeout(r,15));
     if(G.s.finished||!Engine.chapters[G.s.chapter]){msgs[chapters.at(-1)]=total()-m0;return{end:true,next:G.s.chapter,chapters,msgs,ending:G.s.vars.s5Ending,archived:G.s.ending,finished:!!G.s.finished,scares:Object.keys(G.s.scares||{}),v:JSON.parse(localStorage.getItem('mglisko.save.v1')).v,missing:Object.keys(DATA.evidence).filter(e=>/^ev_g_/.test(e)&&!G.has(e))};}
     Engine.skip();
-    const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+    const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
     if(chapters.at(-1)!==G.s.chapter){if(chapters.length)msgs[chapters.at(-1)]=total()-m0;m0=total();chapters.push(G.s.chapter);}
     const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===last?same+1:0;last=key;
     if(p){if(p.type==='choose'){const sc=o=>{const set=Object.keys(st.options[o.i].set||{});return 10*set.filter(k=>want.includes(k)).length-10*set.filter(k=>avoid.includes(k)).length-o.i*0.1;};Engine.answer([...p.options].sort((a,b)=>sc(b)-sc(a))[0].i);}
@@ -45,7 +45,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
   assert.ok(res.finished,'sezon zakończony');assert.equal(res.ending,target);assert.equal(res.archived,target);
   assert.deepEqual(res.scares.filter(x=>/^s5_/.test(x)).sort(),['s5_przewijanie','s5_serwis','s5_smiech','s5_ty','s5_wera',...(target==='echo'?['s5_echo']:[])].sort());
   assert.deepEqual(res.missing,[]);
-  assert.equal(res.v,4);
+  assert.equal(res.v, 16);
   const again=await page.evaluate(()=>{const n=JSON.stringify(G.s.scares);G.save(true);G.load();return [n,JSON.stringify(G.s.scares)];});
   assert.equal(again[0],again[1]);
   assert.deepEqual(errors,[]);await ctx.close();console.log('PASS case-glos',s4,target);

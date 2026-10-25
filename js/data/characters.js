@@ -2,6 +2,10 @@
 /* Postacie, rozmowy, kontakty, pogoda, zakończenia. */
 
 const DATA = window.DATA = {};
+DATA.storyTexts = {
+  firstMajaSMS: 'Dzień dobry, panie Adamie. Tu Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Mam zdjęcia, które mogą mieć z tym związek. Mogę zadzwonić? Chciałabym z Panem porozmawiać, zanim komuś je pokażę.',
+  legacyFirstMajaSMS: 'Dzień dobry, Panie Adamie. Nazywam się Maja Wrona. Czytałam Pana artykuł o Tomku Lisie z 2007 roku. Chyba znalazłam coś, co wtedy przeoczono. Nie wiem, komu tu mogę zaufać. Proszę o kontakt. M.W.'
+};
 
 DATA.chars = {
   kuba: { name: 'Kuba Wrona', short: 'Kuba', color: '#f2994a', number: '604 228 961', trust: true, voicemail: '„Siema, tu Kuba. Nie odbieram, bo… no, nie odbieram. Pisz.”' },
@@ -14,15 +18,18 @@ DATA.chars = {
   maja: { name: 'Maja Wrona', short: 'Maja', color: '#e88aa2', number: '731 402 118', offline: true },
   mama: { name: 'Ewa Wrona', short: 'Mama Mai', number: '607 993 140', voicemail: 'Abonent nie odbiera.' },
   marek: { name: 'Marek Sowa', short: 'Marek' },
-  leszek: { name: 'Leszek Malicki', short: 'Wójt' },
+  leszek: { name: 'Leszek Malicki', short: 'Wójt', photo: 'assets/people/leszek.jpg' },
   dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
   duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
   prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
+  ada: { name: 'Ada Kurek', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
+  szymon: { name: 'Szymon Bielak', short: 'Szymon', color: '#5aa0e8', photo: 'assets/people/szymon.jpg' },
   unknown: { name: 'Nieznany numer', short: '?' },
   me: { name: 'Ty', short: 'Ty' }
 };
 
 DATA.chats = {
+  ekipa: { name: 'Ekipa 🍕', avatar: 'ekipa', duo: ['ada', 'szymon'], group: true, members: ['ada', 'szymon'], skin: 'gadka' },
   maja: { name: '+48 731 402 118', avatar: 'unknown', sub: 'SMS', readonly: true },
   kuba: { name: '+48 604 228 961', avatar: 'unknown' },
   group: { name: 'Szukamy Mai 🕯️', avatar: 'group', group: true, members: ['kuba', 'ola', 'bartek', 'igor'] },
@@ -57,6 +64,9 @@ DATA.contacts = [
   { name: 'Biblioteka Gminna w Mglisku', number: '74 873 40 55', cond: 'seen:web:biblioteka', auto: '„Biblioteka Gminna w Mglisku jest teraz nieczynna. Zapraszamy od wtorku do soboty w godzinach 10–18.”' },
   { name: 'Serwis GSM-PC (Igor)', who: 'igor', number: '733 905 014', cond: 'seen:web:kadr:igor.malicki' }
 ];
+
+// Nazwa miejsca w pogodzie: przed wiadomością od Kuby gracz jeszcze nie zna Mgliska.
+DATA.weatherPlace = () => (G.s && G.s.chapter === 'prolog' && !G.flag('knowMaja')) ? 'Moja lokalizacja' : 'Mglisko';
 
 // Pogoda zależna od dnia fabuły.
 DATA.weather = () => {
@@ -140,3 +150,21 @@ DATA.endings = {
     });
   });
 })();
+
+/* Komunikatory: każda rozmowa żyje w jednej aplikacji przez całą grę.
+   SMS — numery spoza kontaktów, starsi rozmówcy, urzędowe; Gadka — znajomi i grupy;
+   Błysk — znikające wiadomości; Klipo — prywatne wiadomości z kont wideo. */
+DATA.chatApps = {
+  sms: ['maja', 'maja2', 'kuba', 'weronika', 'gajda', 'szklarz', 'ewa', 'marta', 'henryk_sms', 'dudek', 'zenon'],
+  gadka: ['ekipa', 'group', 'ola', 'bartek', 'igor', 'natan', 'nina', 'sylwia', 'zuza', 'oskar', 'ida', 'lena'],
+  klipo: ['archiwum', 'cicho']
+};
+DATA.chatApp = id => {
+  const cd = DATA.chats[id] || {};
+  if (cd.app) return cd.app === 'sms' ? 'messages' : cd.app;
+  if (cd.ephemeral || /^blysk/.test(id)) return 'blysk';
+  for (const [app, ids] of Object.entries(DATA.chatApps)) if (ids.includes(id)) return app === 'sms' ? 'messages' : app;
+  if (/^\+|^\d/.test(cd.name || '') || cd.sub === 'SMS') return 'messages';
+  return 'gadka';
+};
+DATA.MSG_APPS = ['messages', 'gadka', 'blysk', 'klipo'];

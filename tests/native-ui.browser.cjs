@@ -19,7 +19,8 @@ if(shots)fs.mkdirSync(shots,{recursive:true});
    G.setFlag('knowKuba');G.setFlag('knowMaja');G.chat('kuba').name='Kuba Wrona';G.chat('kuba').avatar='kuba';
    G.s.objective={text:'Sprawdź ostatnie połączenia od Mai.',hints:[],level:0};UI.renderHome();
   });
-  await page.locator('.toast').last().waitFor({state:'detached'});
+  // Toasty „Zainstalowano” znikają po ~3 s; pod obciążeniem timery bywają dławione, więc po 60 s sprzątamy je sami.
+  await page.waitForFunction(()=>!document.querySelector('#toasts .toast'),null,{timeout:60000}).catch(()=>page.evaluate(()=>document.querySelectorAll('#toasts .toast').forEach(t=>t.remove())));
   assert.equal(await page.locator('.dock .app-ic').count(),4);
   assert.equal(await page.locator('.hub-case').count(),0,'home is a phone launcher');
   await page.evaluate(()=>{G.s.objective.text='Poszukaj artykułu o Tomku Lisie.';BUS.emit('goal');});
