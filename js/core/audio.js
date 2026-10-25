@@ -1,5 +1,5 @@
 'use strict';
-/* Dźwięk syntezowany na żywo (Web Audio) — bez plików audio. */
+/* Dźwięk syntezowany na żywo (Web Audio): dzwonki, stuki, ambient. Nagrania głosu są w voices.js. */
 
 const SFX = (() => {
   let ctx = null, master = null, sfxBus = null, ambBus = null, nbuf = null;

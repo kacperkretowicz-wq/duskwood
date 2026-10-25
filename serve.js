@@ -8,7 +8,8 @@ const port = +(process.argv[2] || process.env.PORT || 5173);
 const types = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.svg': 'image/svg+xml', '.json': 'application/json', '.webmanifest': 'application/manifest+json',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.md': 'text/markdown; charset=utf-8'
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.md': 'text/markdown; charset=utf-8',
+  '.mp3': 'audio/mpeg', '.mp4': 'video/mp4', '.wav': 'audio/wav'
 };
 
 http.createServer((req, res) => {

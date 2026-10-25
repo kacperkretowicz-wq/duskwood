@@ -43,3 +43,7 @@
 .voice-wave i { display:block; width:3px; border-radius:2px; background:currentColor; opacity:.55; }
 .voice-from { display:block; margin-top:4px; opacity:.7; }
 .voice-tr { margin:8px 0 0; font-size:15px; opacity:.9; font-style:italic; }
+.voice-wave i.lit { opacity:1; }
+.voice-time { font-variant-numeric:tabular-nums; }
+.voice-cc { font-size:11px; opacity:.7; margin-top:2px; }
+html.no-captions .voice-cc, html.no-captions .voice-tr { display:none; }
