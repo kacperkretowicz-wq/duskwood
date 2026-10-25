@@ -20,7 +20,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
     Ma('Zabrał mi dostęp do tego materiału do czasu decyzji. Słusznie.', { wording: 'Do decyzji nie mam dostępu do materiału. Natan ma go dalej. Nie protestowałam.' }),
     Ma('Mama nie odbiera ode mnie od soboty. Wczoraj zostawiła mi obiad pod drzwiami. Nie wiem, co to znaczy.'),
     choose('marta', [
-      opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { trust: { marta: 1 } }),
+      opt('Dobrze, że powiedziałaś. Pewnie było ci trudno.', [Ma('Bałam się wejść do jego gabinetu. Ale nie mogłam dalej tego ukrywać.')], { wording: 'Dobrze, że pani powiedziała. To nie mogło być łatwe.', trust: { marta: 1 } }),
       opt('Dobrze, że naczelny wie. Co dalej z tekstem?', [Ma('Dalej Natan. Ja mogę tylko odpowiadać na pytania o archiwum.')])
     ]),
     scene('xObiad', [
@@ -28,7 +28,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       pic('marta', 'marta', 'm_obiad_drzwi', 'Od soboty śpię u koleżanki z redakcji. Mama wczoraj przywiozła to pod jej drzwi. Gołąbki i ogórki.'),
       choose('marta', [
         opt('To chyba znaczy, że dalej jesteś jej córką.', [Ma('Może. Zjadłam dwa. Smakowały jak w podstawówce.', { wording: 'Nic. Może chciała sprawdzić, czy tu jestem. Może po prostu zrobiła za dużo. Zjadłam dwa, reszta jest w lodówce.' })], { wording: 'Napisała coś potem?', trust: { marta: 1 } }),
-        opt('Zadzwoń do niej, kiedy będziesz gotowa.', [Ma('Nie dziś. Ale słoik oddam osobiście. Zawsze to jakiś pretekst.')])
+        opt('Zadzwoń do niej, kiedy będziesz gotowa.', [Ma('Nie dziś. Ale słoik oddam osobiście. Zawsze to jakiś pretekst.')], { wording: 'Niech pani do niej zadzwoni, kiedy będzie gotowa.' })
       ])
     ]),
     scene('xLicznik', [
@@ -173,18 +173,18 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       opt('Zostań. Napiszcie w tekście, kim jest twoja mama, i niech ktoś sprawdza twoje ustalenia. Znasz taśmę najlepiej.', [
         Ma('Dobrze. Wtedy już nie ma odwrotu. W domu też', { wording: 'Chcę zostać. Boję się tylko tego zdania o mamie' }),
         Ma('Mama dowie się z gazety, że wiem. Wolę, żeby z gazety niż z tabletu', { wording: 'Ona przeczyta je od razu. Nie wiem, czy potem jeszcze będzie chciała ze mną rozmawiać' })
-      ], { set: { m_martaStays: true } }),
+      ], { wording: 'Niech pani zostanie. Napiszcie w tekście, kim jest pani mama, i niech ktoś sprawdza pani ustalenia. Pani zna taśmę najlepiej.', set: { m_martaStays: true } }),
       opt('Wycofaj się z tego tekstu. Przez twoje pokrewieństwo z Kurek mogą podważać ustalenia.', [
         Ma('Rozumiem. Boli, ale rozumiem.'),
         Ma('Przekażę Natanowi wszystkie znaczniki czasu. 03:12, 03:21, 03:47. Resztę zrobi sam.')
-      ], { set: { m_martaOut: true } })
+      ], { wording: 'Niech się pani wycofa z tego tekstu. Przez pani pokrewieństwo z Kurek mogą podważać ustalenia.', set: { m_martaOut: true } })
     ]),
     scene('xSloik', [
       pause(2000),
       V('marta', 'marta', '0:16', 'Oddałam mamie słoik. Otworzyła drzwi, wzięła go i zapytała: „Umyty?”. I tyle. Ale chyba się uśmiechnęła. Chyba.', 'Marta'),
       choose('marta', [
         opt('Jak na pierwszy krok to sporo.', [Ma('Też tak myślę. W niedzielę idę na obiad. Bez tabletu na stole.')]),
-        opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.', { wording: 'Stałam na klatce chyba dziesięć minut. A potem wróciłam do domu i pierwszy raz od soboty zasnęłam przed drugą.' })], { trust: { marta: 1 } })
+        opt('A ty jak się czujesz?', [Ma('Jakbym zdała egzamin, z którego nikt nie wystawia ocen.', { wording: 'Stałam na klatce chyba dziesięć minut. A potem wróciłam do domu i pierwszy raz od soboty zasnęłam przed drugą.' })], { wording: 'A jak pani się czuje?', trust: { marta: 1 } })
       ])
     ]),
     W('Dobry wieczór. Pani Marta była u mnie po kamerę. Długo stała w przedpokoju.'),
@@ -336,7 +336,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
       opt('Poczekaj na tekst. Lepiej z linkiem do całości.', [
         S('Rozumiem. Tylko że do poniedziałku jeszcze dwa dni komentarzy.'),
         S('No nic. Poczekam.')
-      ], { set: { m_correctionLater: true } })
+      ], { wording: 'Proszę poczekać na tekst. Lepiej z linkiem do całości.', set: { m_correctionLater: true } })
     ]),
     pause(3000),
     clock('2026-12-07T07:00'),

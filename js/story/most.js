@@ -259,11 +259,11 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
     S('Pod spodem już piszą, że on zabił Darka Kruka. Komentarze kasuję, ale nie nadążam.'),
     S('Gazeta Sudecka to wrzuciła. Gazeta! Myślałam, że jak oni, to sprawdzone.', { wording: 'Sama to udostępniłam. Zobaczyłam logo Gazety Sudeckiej i nawet nie sprawdziłam.' }),
     choose('sylwia', [
-      opt('Na razie nie przypinaj niczego. Sprawdzę, skąd jest nagranie.', [S('Dobrze. Zostawiam tylko swój komentarz: „Prosimy nie oskarżać nikogo z imienia i nazwiska”.')], { set: { m_sylwiaWaits: true } }),
+      opt('Na razie nie przypinaj niczego. Sprawdzę, skąd jest nagranie.', [S('Dobrze. Zostawiam tylko swój komentarz: „Prosimy nie oskarżać nikogo z imienia i nazwiska”.')], { wording: 'Na razie proszę niczego nie przypinać. Sprawdzę, skąd jest nagranie.', set: { m_sylwiaWaits: true } }),
       opt('Skasuj wszystkie wpisy z tym nagraniem.', [
         S('Wszystkich nie dam rady, to pół grupy. A jak usunę wpis gazety, to powiedzą, że coś ukrywam.'),
         S('Zostawię link, ale wyłączę komentarze pod nim.')
-      ])
+      ], { wording: 'Proszę skasować wszystkie wpisy z tym nagraniem.' })
     ]),
     scene('xSylwiaFotel', [
       S('Klientka na fotelu mówi, że jej szwagier „zawsze wiedział”. Nic nie wiedział. Siedzi z farbą na odrostach i ogląda to piąty raz.', { wording: 'A klientka właśnie mówi mi, że jej szwagier „zawsze wiedział”. Piąty raz puszcza nagranie na głośniku. Mam cały salon.' }),

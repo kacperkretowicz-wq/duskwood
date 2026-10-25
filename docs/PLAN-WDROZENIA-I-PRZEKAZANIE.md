@@ -1035,3 +1035,6 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 - g1: Weronika mówiła, że pani Marta dzwoniła „z podziękowaniem za kasety z kiermaszu” i że jedna z nich to festyn 1996 — a potem to kaseta nr 12 pana Zenona, który „kopii nie robił”. Teraz: Marta dziękuje za kasety z kiermaszu i przy okazji mówi, że zgrywa kasety pana Zenona; wśród nich jest festyn 1996.
 - g6 (8:20): „Nie poszłam” przed spotkaniem o 9:00 → „Jeszcze nie wyszłam… jakbym miała zaraz iść”.
 - Wszystko przez `wording`. SW v125.
+
+### v126 — forma grzecznościowa gracza (S1/S2)
+- Sylwia i Marta konsekwentnie mówią do gracza „{Pan|Pani}”, a gracz w kilkunastu opcjach mówił do nich na „ty”. Teraz wszystkie te opcje są formalne („Proszę dać…”, „Niech pani zostanie…”, „Pani mama ma tablet…”). Zmiana tylko przez `wording`, więc zapisy działają bez migracji.

@@ -30,20 +30,20 @@ const StoryScenes = D => {
         opt('Przypnij oficjalny kontakt: 112 i Komenda Powiatowa w Dzierżoniowie. Bez prywatnych wiadomości.', [
           S('Tak zrobię. Dopiszę, że materiały przyjmuje komenda, z numerem sprawy.'),
           S('Pan komendant pewnie się obrazi. Trudno, strzygę jego żonę od dziesięciu lat, przeżyję 🙃')
-        ], { wording: 'Przypnij kontakt do komendy w Dzierżoniowie. Niech zdjęcia trafiają tam.', set: { sylwiaOfficial: true } }),
+        ], { wording: 'Proszę przypiąć kontakt do komendy w Dzierżoniowie. Niech zdjęcia trafiają tam.', set: { sylwiaOfficial: true } }),
         opt('Nie przypinaj niczego, dopóki ktoś nie poda numeru sprawy.', [
           S('Dobrze. Napiszę mu, że czekam na numer sprawy.'),
           S('Ciekawe, co odpisze.')
-        ], { set: { sylwiaOfficial: true } }),
+        ], { wording: 'Proszę nic nie przypinać, dopóki ktoś nie poda numeru sprawy.', set: { sylwiaOfficial: true } }),
         opt('Dlaczego pytasz mnie, a nie Kubę?', [
           S('Bo Kuba ma dziewiętnaście lat i siostrę na plakatach. Nie będę mu dokładać.'),
           S('Przypnę numer komendy w Dzierżoniowie. Prywatnych wysyłek nie polecam nikomu.')
-        ], { set: { sylwiaOfficial: true } })
+        ], { wording: 'Dlaczego pyta pani mnie, a nie Kubę?', set: { sylwiaOfficial: true } })
       ]),
       S('Jeszcze jedno. Dziewczyna z Klipo, Zuza, pyta o Twój numer. Dać jej?'),
       choose('sylwia', [
-        opt('Daj. Ale niech pisze, nie publikuje.', [S('Przekażę słowo w słowo 🙏')]),
-        opt('Daj, porozmawiam z nią.', [S('Dobrze. Ona jest w porządku. Tylko szybka.')])
+        opt('Daj. Ale niech pisze, nie publikuje.', [S('Przekażę słowo w słowo 🙏')], { wording: 'Proszę dać. Ale niech pisze, nie publikuje.' }),
+        opt('Daj, porozmawiam z nią.', [S('Dobrze. Ona jest w porządku. Tylko szybka.')], { wording: 'Proszę dać, porozmawiam z nią.' })
       ]),
       unlock('chat:zuza')
     ],
@@ -114,7 +114,7 @@ const StoryScenes = D => {
       give('ev_album97'),
       choose('sylwia', [
         opt('To potwierdza, że znali się w 1997. Nie mówi, co robili w hucie.', [S('No właśnie. Dlatego nie przypinam. Ludzie i tak już robią z tego wyrok.')], { wording: 'Czyli znali się wtedy. Ale pod tym zdjęciem nie ma nic o hucie.', set: { namesChecked: true } }),
-        opt('Możesz zablokować komentarze pod albumem?', [S('Zablokowałam. Dostałam już trzy wiadomości, że „ukrywam prawdę” 🙄'), S('Zdjęcia nie usuwam, ale nie pozwolę tam ludzi wyzywać.')], { set: { namesChecked: true } })
+        opt('Możesz zablokować komentarze pod albumem?', [S('Zablokowałam. Dostałam już trzy wiadomości, że „ukrywam prawdę” 🙄'), S('Zdjęcia nie usuwam, ale nie pozwolę tam ludzi wyzywać.')], { wording: 'Może pani zablokować komentarze pod albumem?', set: { namesChecked: true } })
       ]),
       S('I jeszcze… Darek K. to Darek Kruk. Wujek tej Zuzy.'),
       S('Zuza mówiła mi kiedyś, że babcia nie chce z nią rozmawiać o Darku. Chyba jeszcze nie widziała tego zdjęcia.'), S('Proszę na razie nic jej nie mówić, dobrze?'),

@@ -534,8 +534,8 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       pause(2000),
       pic('marta', 'marta', 'm_tablet_kuchnia', 'Mój gabinet na dziś. Mama ogląda serial w drugim pokoju. Mandarynki są jej, okulary też.'),
       choose('marta', [
-        opt('Nie siedź za długo. Jutro też jest dzień.', [Ma('Wiem. Jeszcze tylko sprawdzę zamówienia z listopada.')]),
-        opt('Twoja mama ma tablet starszy niż mój telefon.', [Ma('Ma osiem lat. Mama mówi, że „jeszcze działa”. Robi na nim wszystko: przepisy, krzyżówki, maile.')])
+        opt('Nie siedź za długo. Jutro też jest dzień.', [Ma('Wiem. Jeszcze tylko sprawdzę zamówienia z listopada.')], { wording: 'Niech pani nie siedzi za długo. Jutro też jest dzień.' }),
+        opt('Twoja mama ma tablet starszy niż mój telefon.', [Ma('Ma osiem lat. Mama mówi, że „jeszcze działa”. Robi na nim wszystko: przepisy, krzyżówki, maile.')], { wording: 'Pani mama ma tablet starszy niż mój telefon.' })
       ]),
       Ma('Idę do siebie. Mama zaraz przyjdzie zmywać.')
     ]),
@@ -571,12 +571,12 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
         opt('Nie musisz dziś nic mówić. Możesz po prostu wejść i pomóc wycierać.', [
           Ma('weszłam. wycieram. ona nuci coś z radia'),
           Ma('a ja nie umiem spojrzeć jej w oczy')
-        ], { trust: { marta: 1 } }),
+        ], { wording: 'Nie musi pani dziś nic mówić. Może pani po prostu wejść i pomóc wycierać.', trust: { marta: 1 } }),
         opt('Zapytaj ją wprost, komu dała to ksero.', [
           Ma('zapytałam'),
           Ma('powiedziała „to nie twoja sprawa, córcia” i dalej zmywała'),
           Ma('pierwszy raz w życiu tak do mnie powiedziała')
-        ], { set: { m_martaAsked: true } })
+        ], { wording: 'Niech pani zapyta ją wprost, komu dała to ksero.', set: { m_martaAsked: true } })
       ])
     ]),
     set('m_act3'),
