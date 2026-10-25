@@ -1245,3 +1245,11 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Ekran blokady podąża za palcem i myszą (przesunięcie w górę). Puszczenie poniżej 60 px wraca płynnie; powyżej odblokowuje jak dotąd. Ekran po odblokowaniu bez zmian.
 - Test: `tests/bubbles-ux.browser.cjs` (390×844). SW v155. Zapis gry bez zmian (nadal v16).
 - Numer v155 pokrywa się z nieprzetestowaną gałęzią `wip/v155-nieprzetestowane`. Ta gałąź, jeśli wejdzie później, potrzebuje kolejnego numeru.
+
+### v155 — playtest Hani (karta sprawy, cele, odmiana, wideo, telefon w prologu)
+- Lista SMS: karta „ZAGINIONA / Maja Wrona” i awatar dopiero po `knowMaja` albo `rename` (wcześniej numer i „Nie ma w kontaktach.”). Szczegół nieodebranego, zanim gracz zna Maję, pokazuje nieznany awatar i zestawienie godzin z SMS-em, bez nazwiska.
+- Silnik: spełniony `wait` czyści cel w „Co teraz?” także wtedy, gdy krok nie niesie tego samego tekstu (nekrolog Rybickiego, login do Nimbusa). Test: `tests/goals.test.cjs`.
+- Grupa: „to %name%. dodałem {go|ją}…” (prolog) oraz „brzmi jak %name%” / „%name%. za normalną sobotę” (S5) — imię zostaje w mianowniku, przypadek niesie zaimek. `wording`, bez ruszania podpisów starych kroków.
+- `serve.js` i service worker: `.mp4` jako `video/mp4`, `Accept-Ranges` i 206. Stary cache `application/octet-stream` przy Range i tak wraca jako `video/mp4`. SW `quiet-is-safer-v155`.
+- Prolog: telefon sam wstawia urwaną kopię Nimbusa (14.10.2026, 23:58, bez huty i bez logowania) oraz rozpoznaje numer karty SIM ze stopki. Zapis v17, tabele `STORY_MIGRATIONS_V17`.
+- Nietknięte: ekran po odblokowaniu, wygląd aplikacji, dymki w `messages.js`, gest odblokowania.

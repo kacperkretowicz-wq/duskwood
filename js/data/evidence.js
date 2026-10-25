@@ -28,6 +28,14 @@ DATA.evidence = {
     title: 'Nekrolog Adama Rybickiego', cat: 'msg', source: 'Gazeta Sudecka',
     desc: 'Adam Rybicki, dziennikarz Gazety Sudeckiej, zmarł w lutym 2021 roku. Jego numer komórkowy został po latach przydzielony nowemu abonentowi — tobie. Maja nie mogła o tym wiedzieć.'
   },
+  ev_backup_cut: {
+    title: 'Urwana kopia Nimbusa (14.10, 23:58)', cat: 'digital', source: 'Twój telefon · podgląd',
+    desc: 'Przy SMS-ie z 13.10 telefon próbował wczytać podgląd zdjęć. Z Nimbusa wróciła tylko data: *ostatnia kopia urządzenia 14.10.2026, 23:58*. Potem zapis się urywa. Bez hasła nie widać treści kopii ani miejsca.'
+  },
+  ev_sim_footer: {
+    title: 'Numer karty SIM', cat: 'digital', source: 'Twój telefon',
+    desc: 'Stopka artykułu z 2007 roku podaje *692 117 305*. Telefon rozpoznał w niej numer karty SIM, która jest w środku.'
+  },
 
   /* ---------- rozdział 1 ---------- */
   ev_kluska: { title: 'Kluska — pierwszy pies Mai', cat: 'photo', source: 'Kadr: @maja.wrona', img: 'k_kluska', desc: 'Jamniczka Kluska (2006–2019). Pierwsza psia miłość Mai — „zanim pojawił się Bandzior”.' },

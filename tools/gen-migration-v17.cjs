@@ -21,4 +21,4 @@ for(const [ch,c] of Object.entries(chapters)){
   const resume=exact.map((ni,i)=>{let j=ni;while(j>0&&c.steps[j-1].scene&&!kept.has(j-1))j--;return j;});
   out[ch]={exact,resume};
 }
-process.stdout.write('// v16 → v17: przyznanie Marty w g6 i zatrzymanie Gajdy po późnym ratunku. exact = ten sam krok, resume = początek nowej sceny tuż przed nim.\nconst STORY_MIGRATIONS_V17 = '+JSON.stringify(out)+';\n');
+process.stdout.write('// v16 → v17: przyznanie Marty w g6, zatrzymanie Gajdy po późnym ratunku oraz prolog (telefon sam pokazuje urwaną kopię i numer karty). exact = ten sam krok, resume = początek nowej sceny tuż przed nim.\nconst STORY_MIGRATIONS_V17 = '+JSON.stringify(out)+';\n');

@@ -224,7 +224,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       pause(3000),
       Gr('bartek', 'ktos mi wyslal na kwartale ze „%name% robi jakies dziwne glosowki”. co jest'),
       Gr('ola', 'Do mnie też ktoś napisał. Konto bez zdjęcia. Zablokowałam.'),
-      Gr('kuba', 'w nocy ktoś wysłał mai głosówkę głosem %name%. to nie był{|a} on{|a}'),
+      Gr('kuba', 'w nocy ktoś wysłał mai głosówkę głosem %name%. to nie był{|a} on{|a}', { wording: 'w nocy ktoś wysłał mai głosówkę. brzmi jak %name%. to nie był{|a} on{|a}' }),
       Gr('igor', 'klonowanie głosu. dziś to apka za 20 zł. wystarczy 30 sekund nagrania'),
       choose('group', [
         opt('To nie ja. Jak dostaniecie coś „ode mnie”, oddzwońcie na mój zwykły numer.', [Gr('ola', 'Jasne. I nie odbieramy nieznanych numerów w nocy.'), Gr('bartek', 'ok. ale jak mi zaspiewasz to wiem ze to nie ty xd')], { set: { g_groupTold: true } }),
@@ -1021,7 +1021,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Nagran
       clock('2027-03-20T18:40'),
       pic('ola', 'ola', 'g_pizza', 'Pizza! Ananas zniknął pierwszy. Nikt się nie przyznaje.'),
       Gr('bartek', 'ja zjadlem ananasa. oficjalnie. dla mai'),
-      Gr('kuba', 'za %name%. za normalną sobotę'),
+      Gr('kuba', 'za %name%. za normalną sobotę', { wording: '%name%. za normalną sobotę' }),
       V('maja2', 'maja', '0:05', 'To ja. Wiesz, po czym poznasz. Dzięki. Za wszystko.', 'Maja'),
       ...GlosHaslo(D, w => [M(`p.s. „${w}”. zawsze`)]),
       ending('haslo')

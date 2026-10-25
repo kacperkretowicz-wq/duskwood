@@ -1,4 +1,4 @@
-// Przelicza tabele V3, V4, V5, V6 i V7 w js/data/migrations.js po zmianie kroków historii (V3 musi zostać na końcu pliku — tak sprawdza test).
+// Przelicza tabele V3–V17 w js/data/migrations.js po zmianie kroków historii (V3 musi zostać na końcu pliku — tak sprawdza test).
 // Tabele mapują stare zapisy wprost na bieżące kroki. Użycie: node tools/regen-migrations.cjs
 const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process');
 const root=path.join(__dirname,'..'),file=path.join(root,'js/data/migrations.js');

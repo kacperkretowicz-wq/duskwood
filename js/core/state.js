@@ -149,7 +149,7 @@ const G = (() => {
       saved.v = 17;
     }
     if (saved.v < 17) {
-      // v17: kwestie Natana po przyznaniu Marty (g6) i flaga gajdaCaught przy późnym ratunku (mp).
+      // v17: kwestie Natana po przyznaniu Marty (g6), flaga gajdaCaught przy późnym ratunku (mp) oraz prolog — telefon sam pokazuje urwaną kopię Nimbusa (xPodglad) i rozpoznaje numer karty (xKartaSim).
       const map = typeof STORY_MIGRATIONS_V17 !== 'undefined' && STORY_MIGRATIONS_V17[saved.chapter];
       if (map && Number.isInteger(saved.pc) && map.exact[saved.pc] != null) {
         saved.pc = (saved.pending ? map.exact : map.resume)[saved.pc];

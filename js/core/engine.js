@@ -443,7 +443,10 @@ const Engine = (() => {
       }
 
       case 'wait': {
-        if (G.test(st.cond)) return;
+        // goal() i waitFor często są osobnymi krokami. Cel gaśnie, gdy warunek czekania
+        // jest spełniony — także gdy sam krok wait nie niesie tego samego tekstu.
+        const clearGoal = () => { if (s.objective) { s.objective = null; G.change(); } };
+        if (G.test(st.cond)) { clearGoal(); return; }
         stopFF();
         if (st.goal) setGoal(st.goal, st.goalHints || []);
         await new Promise((res, rej) => {
@@ -464,7 +467,7 @@ const Engine = (() => {
         });
         guard(my);
         // Spełniony cel nie wisi dalej w „Co teraz?” — do następnego celu widżet mówi „Sprawdź wiadomości.”
-        if (st.goal && s.objective && s.objective.text === st.goal) { s.objective = null; G.change(); }
+        clearGoal();
         return;
       }
 
