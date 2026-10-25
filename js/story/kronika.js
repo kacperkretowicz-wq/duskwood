@@ -37,7 +37,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       B('2006–2021 to dopiero połowa. dziś o 21'),
       vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ])]),
-    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc? kuba mówił, że pani z parteru wynajęła ci kawalerkę naprzeciwko. z naszej kuchni widać twoje okno 👀 ferie, a lodowisko zamknięte. „awaria agregatu”' }),
+    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc w kawalerce? kuba mówił, że bierzesz ją na dłużej, nie tylko na ferie. z naszej kuchni widać twoje okno 👀 a lodowisko zamknięte. „awaria agregatu”' }),
     pic('maja2', 'maja', 'c_lodowisko', 'za to bałwan pilnuje. ktoś mu dał pachołek zamiast czapki'),
     choose('maja2', [
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu', { wording: 'kuba mówi że to jego dzieło. nie wierzę mu' })]),
@@ -54,7 +54,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     ])]),
     scene('xFerie', [
       pause(2500),
-      say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj', { wording: 'pierwszy zjazd. pani z parteru wynajęła ci kawalerkę na ferie. mai powiedziałem. z ich kuchni widać twoje okno. nie pytaj czemu tak tanio' }),
+      say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj', { wording: 'pierwszy zjazd. pani z parteru mówiła, że klucze do kawalerki już masz. fajnie, że po świętach znowu jesteś w mglisku' }),
       pic('kuba', 'kuba', 'c_gorka', 'maja nagrała jak się wywalam. jak to wrzuci na klipo to się wyprowadzam'),
       choose('kuba', [
         opt('10/10 za styl lądowania.', [say('kuba', 'kuba', 'dzięki. sędziowie razem z bałwanem dali mi 6')]),
@@ -610,7 +610,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
     pause(3000),
     typing('blysk2', 'blysk2', 4000),
     pause(2500),
-    scene('scFestyn', [scare('s4_festyn', 'face', { img: 'c_festyn', caption: 'TV Dolina · 11.08.2018 · 21:12' })]),
+    scene('scFestyn', [scare('s4_festyn', 'photo', { img: 'c_festyn', ms: 2400, caption: 'TV Dolina · 11.08.2018 · 21:12' })]),
     pause(2000),
     M('dobra. zamknij drzwi na dwa zamki. ja nie śpię', { wording: "sprawdź, czy drzwi są zamknięte. nie schodź sam{|a} na klatkę. ja też jeszcze nie zasnę" }),
     scene('xNocDalej', [
@@ -776,7 +776,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       ]),
       pause(2500),
       K('maja mi mówi, że to ida'),
-      K('czyli to ona w wigilię pisała do ciebie, że ma więcej plików niż ja'),
+      K('czyli to ona w wigilię pisała do ciebie, że ma więcej plików niż ja', { wording: 'czyli to ona w wigilię pisała do ciebie o tych kasetach' }),
       K('robiła to samo co ja. tylko dłużej', { wording: "ja też sobie mówiłem, że tylko wrzucam pliki. a potem ludzie bali się odebrać telefon" }),
       choose('kuba', [
         opt('Ty przestałeś. Ona też jeszcze może.', [K('mogę jej to napisać. jak ktoś, kto wie, jak to jest')], { set: { c_kubaHelps: true } }),
@@ -935,8 +935,8 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
       scene('scTransmisja', [scare('s4_transmisja', 'glitch')]),
       O('Wyszło.'),
       O('Mama trzyma mnie za rękę. Telefon leży ekranem w dół.'),
-      iff('flag:c_olaPosted', [O('Pod moim wpisem z rana ludzie piszą „wiemy, dzięki, że napisałaś pierwsza”. Pod klipem jest ciszej, niż myślałam.')]),
-      iff('flag:c_warnedOla', [O('Dzięki, że napisałeś{|aś} wcześniej. Zdążyłam powiedzieć mamie sama, zanim zobaczyła to u sąsiadki.')]),
+      iff('flag:c_olaPosted', [O('Pod moim wpisem z rana ludzie piszą „wiemy, dzięki, że napisałaś pierwsza”. Pod klipem jest ciszej, niż myślałam.', { wording: 'Pod moim dzisiejszym wpisem ludzie piszą „wiemy, dzięki, że napisałaś pierwsza”. Pod klipem jest ciszej, niż myślałam.' })]),
+      iff('flag:c_warnedOla', [O('Dzięki, że napisałeś{|aś} wcześniej. Zdążyłam powiedzieć mamie sama, zanim zobaczyła to u sąsiadki.', { wording: 'Dzięki, że {napisałeś|napisałaś} przed publikacją. Mama już wiedziała, ale ja potrzebowałam wtedy wiadomości od ciebie.' })]),
       iff('flag:c_warnedWera', [W('Zapisałam, z której taśmy jest ten fragment. Jak ktoś zapyta, będzie wiadomo, że to stare nagranie, nie nowe.')]),
       iff('flag:c_warnedZenon', [Z('Ida siedzi w kuchni. Nie wyszła. Pies od niej nie odchodzi.')]),
       ending('transmisja')

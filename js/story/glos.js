@@ -182,8 +182,8 @@ Engine.chapter('g0', { num: 0, kicker: 'Sprawa 5 · Prolog', title: '2:14', when
     pause(4000),
     clock('2027-03-15T03:03'),
     scene('scTwojGlos', [scare('s5_ty', 'call', { name: 'Maja', ms: 6000, listen: 3500 })]),
-    M('{dzwoniłeś|dzwoniłaś} do mnie?? teraz??'),
-    M('telefon zadzwonił z nieznanego. odebrałam, bo myślałam, że to kuba z dołu'),
+    M('{dzwoniłeś|dzwoniłaś} do mnie?? teraz??', { wording: 'przed chwilą znowu ktoś do mnie dzwonił. to nie {byłeś|byłaś} ty, prawda?' }),
+    M('telefon zadzwonił z nieznanego. odebrałam, bo myślałam, że to kuba z dołu', { wording: 'oddzwoniłam do ciebie, żeby sprawdzić. tamto połączenie było z nieznanego numeru. nie umiałam się odezwać' }),
     M('ktoś się zaśmiał. twoim śmiechem'),
     choose('maja2', [
       opt('Nie {dzwoniłem|dzwoniłam}. Śpij przy Kubie. Rano wszystko sprawdzimy.', [M('wyciszam telefon. jutro tylko tekstem, ok?'), M('i wymyśl coś, po czym poznam, że to ty')], { set: { g_haslNeeded: true } }),
@@ -317,9 +317,9 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       pause(3500),
       nearby('g_przystanek', { device: 'Telefon', img: 'g_przystanek', note: 'Nieznane urządzenie w pobliżu', flag: 'g_przystOk', declineFlag: 'g_przystNo', ev: 'ev_g_przystanek' }),
       iff('flag:g_przystOk', [
-        me('maja2', 'Ktoś mi właśnie przesłał przez przesyłanie w pobliżu zdjęcie. Mnie. Na przystanku.', { wording: 'Jakiś telefon obok wysłał mi przed chwilą zdjęcie. Przez przesyłanie w pobliżu. Mnie. Na przystanku.' }),
+        me('maja2', 'Ktoś mi właśnie przesłał przez przesyłanie w pobliżu zdjęcie. Mnie. Na przystanku.', { wording: 'Jestem na przystanku przy szkole, wracam z miasta. Telefon obok właśnie wysłał mi zdjęcie. Mnie. Zza pleców.' }),
         M('czekaj. to ty? na przystanku przy szkole?'),
-        M('ktoś stał po drugiej stronie ulicy i robił ci zdjęcie. kiedy?', { wording: "to jest z drugiej strony ulicy. kiedy tak stał{eś|aś}? bo nie chcę cię straszyć, jeśli to stare zdjęcie" }),
+        M('ktoś stał po drugiej stronie ulicy i robił ci zdjęcie. kiedy?', { wording: "ktoś był tuż za tobą. kiedy tak stał{eś|aś}? bo nie chcę cię straszyć, jeśli to stare zdjęcie" }),
         choose('maja2', [
           opt('Teraz. Wracam z miasta. Nikogo nie widzę.', [M('idź do sklepu. tam, gdzie są ludzie. i pisz do mnie')], { set: { g_przystNow: true } }),
           opt('Nie wiem. Odrzuć wszystko, co przyjdzie z „Telefonu”.', [M('już. odrzucam wszystko. nawet przesyłanie od kuby')])
@@ -493,7 +493,7 @@ Engine.chapter('g2', { num: 2, kicker: 'Sprawa 5 · Rozdział 2', title: 'Wera',
     W('Znowu dzwonił.'),
     W('Nie odebrałam. Zostawił wiadomość głosową.'),
     V('weronika', 'weronika', '0:06', 'Wera, czemu nie odbierasz? Jest mi zimno. [szum; w tle coś cicho piszczy i trzaska, jakby ktoś przewijał]', 'Poczta głosowa · 23:46'),
-    scene('scWera', [scare('s5_wera', 'face', { img: 'g_tomek_album', caption: 'Festyn · sierpień 1996' })]),
+    scene('scWera', [scare('s5_wera', 'photo', { img: 'g_tomek_album', ms: 2400, caption: 'Festyn · sierpień 1996' })]),
     choose('weronika', [
       opt('Proszę wyłączyć telefon do rana. Jutro idziemy razem do archiwum.', [W('Wyłączam. Do jutra.')], { set: { g_weraOff: true } }),
       opt('Proszę mi przesłać tę wiadomość. Każdą. Zbieram je.', [W('Przesłałam. I wyłączam telefon.')], { set: { g_weraVoices: true } })
@@ -793,7 +793,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
       pause(3000),
       Gr('bartek', 'pizza jutro aktualna? bo ja juz kupilem 4 litry coli'),
       Gr('ola', 'Aktualna! Teraz to już nawet musi być.'),
-      Gr('igor', 'oskar napisał, że przeprasza wszystkich. i że odda kasę z tych telefonów. 850 zł. zbiera z kieszonkowego'),
+      Gr('igor', 'oskar napisał, że przeprasza wszystkich. i że odda kasę z tych telefonów. 850 zł. zbiera z kieszonkowego', { wording: 'oskar mówi, że odda te 800 zł. dziesięć paczek po 50 i 300 za telefon idy. mama rozliczy z nim każdą wpłatę' }),
       Gr('kuba', 'niech odda pani krysi na ciasto. ona najwięcej się wystraszyła'),
       choose('group', [
         opt('Oskar dostał nauczkę. Dajmy mu szansę.', [Gr('igor', 'dostanie. ale od teraz kasuję sam. przy nim')], { set: { g_oskarChance: true } }),
@@ -892,7 +892,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     pause(4000),
     clock('2027-03-19T23:47'),
     scene('scPrzewijanie', [scare('s5_przewijanie', 'call', { name: 'Marta Jasińska', number: '694 117 302', ms: 6000, listen: 3500 })]),
-    Mr('Przepraszam, że dzwoniłam tak późno. Nie odebrał{|a} {Pan|Pani}.'),
+    Mr('Przepraszam, że dzwoniłam tak późno. Nie odebrał{|a} {Pan|Pani}.', { wording: 'Przepraszam za ten nocny telefon. Powinnam była najpierw napisać.' }),
     Mr('Chciałabym jutro porozmawiać. Tylko my. Bez pani Weroniki i bez pana Natana.'),
     Mr('Myślę, że wie {Pan|Pani} już dużo. Może za dużo jak na jeden tydzień.', { wording: "Chciałabym, żeby najpierw usłyszał{|a} {Pan|Pani} moje wyjaśnienie. Zanim porozmawia z nimi." }),
     set('g_day5'),
@@ -1001,10 +1001,10 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Nagran
     ]),
     callEnd(),
     run(s => {
-      // Przyznanie na taśmie zostaje dowodem także wtedy, gdy w piątek poszły pliki.
-      // Samo wysłanie nagrań, bez jej własnych słów, nadal zostawia echo.
+      // Własne przyznanie lub groźba Marty są nowym materiałem także po wysłaniu plików.
+      // Samo wysłanie nagrań, bez zarejestrowania rozmowy, nadal zostawia echo.
       const taped = G.flag('g_recordMarta') && G.flag('g_recOn');
-      const haslo = taped && (G.flag('g_confess') || !G.flag('g_martaAsk'));
+      const haslo = taped && (G.flag('g_confess') || G.flag('g_threat'));
       s.vars.s5Ending = G.flag('g_wipeAll') ? 'cisza2' : haslo ? 'haslo' : 'echo';
     }),
     pause(2500),
@@ -1028,7 +1028,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Nagran
     ], [
       iff(s => s.vars.s5Ending === 'echo', [
         scene('scEcho', [scare('s5_echo', 'glitch')]),
-        iff('flag:g_confess', [Nt('przyznala sie. „wszystko jest na kasetach”. ale nie mamy tego na tasmie. prokuratorka slyszy tylko moje streszczenie')], [Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”')]),
+        iff('flag:g_confess', [Nt('przyznala sie. „wszystko jest na kasetach”. ale nie mamy tego na tasmie. prokuratorka slyszy tylko moje streszczenie', { wording: 'przyznala sie. „wszystko jest na kasetach”. ale nie przekazal{es|as} tej rozmowy. prokuratorka ma tylko moje streszczenie' })], [Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”', { wording: 'nie przekazal{es|as} rozmowy z marta. bez jej wlasnych slow na razie nie potrafimy powiazac jej z dudkiem' })]),
         Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „dzwonil maz i prosil, zeby dala spokoj”'),
         Nt('jej maz nie zyje od pieciu lat'),
         iff('flag:g_martaAsk', [Nt('i jeszcze jedno. w piatek wyslal{es|as} marcie nasze nagrania. wiedziala, co mamy, zanim zadzwonila')]),
@@ -1045,7 +1045,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Nagran
         Nt('rozumiem. naprawde rozumiem. ale prokuratorka bedzie miala tylko to, co mam ja'),
         Nt('skasowal{es|as} wszystko?'),
         choose('natan', [
-          opt('Tak. Głosówki, nagrania, zrzuty. Proszę Idę, Igora i Zenona o to samo.', [Nt('ok. wtedy ja tez. nie bede trzymal glosow ludzi w telefonie'), Nt('i tak nie mamy dowodu. tylko domysly')]),
+          opt('Tak. Głosówki, nagrania, zrzuty. Proszę Idę, Igora i Zenona o to samo.', [Nt('ok. wtedy ja tez. nie bede trzymal glosow ludzi w telefonie'), Nt('i tak nie mamy dowodu. tylko domysly', { wording: 'policja ma juz materialy od dudka. ale bez tej rozmowy marta moze dalej mowic, ze nic o nich nie wiedziala' })]),
           opt('Prawie. Została mi jedna zwykła głosówka od Mai.', [Nt('ta zostaw. to nie dowod. to pamiatka')])
         ]),
         pause(3000),

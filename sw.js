@@ -1,7 +1,7 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
 let AUDIO_FILES = [];
 try { importScripts('./js/data/audio-cache.js'); AUDIO_FILES = self.AUDIO_CACHE || []; } catch (e) { AUDIO_FILES = []; }
-const VERSION = 'quiet-is-safer-v155';
+const VERSION = 'quiet-is-safer-v158';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',

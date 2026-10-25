@@ -83,7 +83,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     g('bartek', 'skad to masz'),
     choose('group', [
       opt('Od kogoś, kto podpisuje się „Szklarz”. Pisze do mnie od pierwszej nocy.', [g('kuba', 'szklarz?? jak w tej bajce o hucie?')]),
-      opt('Ktoś mi to przysłał z zastrzeżonego numeru.', [g('kuba', 'kto??')])
+      opt('Ktoś mi to przysłał z zastrzeżonego numeru.', [g('kuba', 'kto??')], { wording: 'Ktoś mi to przysłał z nieznanego numeru.' })
     ]),
     g('ola', 'Czekajcie. Kto miał skany? Igor mówił, że kadr 23 był „prześwietlony”.'),
     deduce('ded_szklarz'),

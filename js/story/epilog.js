@@ -54,7 +54,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Pozdrów ją ode mnie.', [K('sama cię pozdrowi. zaraz zobaczysz')])
       ]),
       scene('f3lib', [K('pani weronika dała mi dyżury w bibliotece. ogarniam komputery w czytelni. ktoś musi 💀', { img: 'e_czytelnia' })]),
-      notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
+      notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', wording: 'Przełom w sprawie sprzed 29 lat: Tomka odnaleziono w hucie', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [
         W('Pochowaliśmy Tomka w sobotę. Obok mamy.', { wording: 'Pochowaliśmy Tomka w zeszłą sobotę. Obok mamy.' }),
@@ -100,8 +100,8 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ])]),
       pause(2500),
       iff('var:trust_ola>=1', [
-        O('Odpisałam jej. Po trzech tygodniach.'),
-        O('Napisałam: „Ja też przepraszam za tamten wieczór”.')
+        O('Odpisałam jej. Po trzech tygodniach.', { wording: 'Maja odpisała na tamtą wiadomość. Tę, którą wysłałam, kiedy jeszcze jej szukaliśmy.' }),
+        O('Napisałam: „Ja też przepraszam za tamten wieczór”.', { wording: 'Napisała: „Wiem, Olka”. I zaraz pyta, co kupić na kolację.' })
       ], [
         O('Dziękuję za wszystko. Nawet za to, że {grzebałeś|grzebałaś} w moich wiadomościach.')
       ]),

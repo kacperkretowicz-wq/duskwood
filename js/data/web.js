@@ -97,7 +97,7 @@ Adam Rybicki pisał w 2007 roku: „Każda informacja może być ważna”. Tę 
       foot: 'Redakcja Gazety Sudeckiej, na podstawie materiałów przekazanych spoza Mgliska'
     };
     const found = {
-      title: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”',
+      title: 'Przełom w sprawie sprzed 29 lat: Tomka odnaleziono w hucie',
       kw: ['tomek nie utonął', 'przełom w sprawie', 'gajda zatrzymany', 'maja wrona odnaleziona', 'huta szczątki'],
       snippet: 'Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa.',
       lead: 'Dwadzieścia dziewięć lat po powodzi tysiąclecia w zamurowanym tunelu huty „Jutrzenka” odnaleziono szczątki dziewięcioletniego Tomasza Lisa. Sprawa wyszła na jaw dzięki studentce fotografii — i dzięki numerowi telefonu, który kiedyś należał do naszego redakcyjnego kolegi.',

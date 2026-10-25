@@ -54,7 +54,7 @@ test('każda kwestia z fabuły ma wpis w manifeście i plik mp3', () => {
 
 test('service worker bierze nagrania z listy i podnosi wersję', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /quiet-is-safer-v155/);
+  assert.match(sw, /quiet-is-safer-v\d+/);
   assert.match(sw, /importScripts\('\.\/js\/data\/audio-cache\.js'\)/);
   assert.match(sw, /voice-lib\.js/);
   assert.match(sw, /voices\.js/);

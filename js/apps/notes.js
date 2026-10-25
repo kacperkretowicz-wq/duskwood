@@ -263,7 +263,8 @@
     };
     const check = (sup = []) => {
       const okA = picked === d.answer;
-      const okS = !d.support || sup.filter(x => d.support.from.includes(x)).length >= d.support.need;
+      const okS = !d.support || (sup.filter(x => d.support.from.includes(x)).length >= d.support.need &&
+        (!d.support.groups || d.support.groups.every(group => sup.some(x => group.includes(x)))));
       if (okA && okS) {
         G.solve(id); SFX.play.discover(); sh.close();
         UI.modal({ title: d.q, text: d.done, buttons: [{ label: 'OK', pri: true }] });

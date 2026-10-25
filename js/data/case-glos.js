@@ -30,7 +30,7 @@ Object.assign(DATA.evidence, {
   ev_g_czapka: { title: 'Czerwona czapka na bramie huty', cat: 'photo', source: 'Kuba · 15.03, 2:51', img: 'g_huta_czapka',
     desc: 'Dziecięca czapka z daszkiem, mokra, zawieszona na bramie huty. Świeże ślady butów w błocie. Nikogo w środku.' },
   ev_g_przystanek: { title: 'Moje zdjęcie z przystanku', cat: 'photo', source: 'Przesyłanie w pobliżu · 15.03, 18:47', img: 'g_przystanek',
-    desc: 'Ktoś zrobił mi zdjęcie z drugiej strony ulicy, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' },
+    desc: 'Ktoś zrobił mi zdjęcie z bliska, zza pleców, kiedy słuchał{em|am} głosówek na przystanku, i przesłał je z telefonu bez nazwy.' },
   ev_g_album: { title: 'Tomek na festynie, 1996', cat: 'photo', source: 'Weronika · album', img: 'g_tomek_album',
     desc: 'Tomek Lis, 8 lat, w czerwonej czapce z daszkiem. Obok Weronika. Z boku kadru kamera kablówki z kablem. Festyn, sierpień 1996.' },
   ev_g_festyn96: { title: 'Kaseta nr 12 · festyn 1996', cat: 'digital', source: 'Marta Jasińska · archiwum gminy', img: 'v_festyn96',
@@ -94,7 +94,7 @@ Object.assign(DATA.endings, {
   cisza2: {
     season: 's5', title: 'CISZA', tag: 'Sprawa 5 · zakończenie 3 z 3', mood: 'dark',
     text: [
-      'Telefony ustają. Głosy znikają z laptopów, folderów i telefonów. Razem z nimi znikają dowody.',
+      'Telefony ustają. Usuwacie własne kopie nagrań. Nie da się sprawdzić, kto jeszcze je pobrał. Dokumenty i pliki zabezpieczone u Dudka pozostają w sprawie.',
       'Dudek dostaje wyrok w zawieszeniu za oszustwa. O scenariuszach nikt nie mówi.',
       'Kasety stoją w szafie archiwum. Kaseta numer dwanaście też. Pani Weronika ogląda ją raz w miesiącu, przy pani Marcie.',
       'W Mglisku jest cicho. Tylko ty wiesz, ile ta cisza kosztowała.'

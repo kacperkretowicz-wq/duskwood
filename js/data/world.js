@@ -14,7 +14,7 @@ DATA.persons = {
       { text: '14.10 jej telefon był w *hucie*, nie na tamie. Ostatni sygnał: 23:58.', cond: 'ev:ev_loc_1410' },
       { text: 'Nie ufała komendantowi Gajdzie: „Właśnie nie na policję”, „Zwłaszcza R.G.”', cond: any('ev:ev_not_gajda', 'ev:ev_questions') },
       { text: 'Wybiła otwór w zamurowanej odprężarce i zobaczyła żółty materiał.', cond: 'ev:ev_sync_wall' },
-      { text: '24.10 jej telefon na chwilę ożył w lesie. „Pozdrów Kluskę” — Maja daje znak, że jest w niebezpieczeństwie.', cond: 'ev:ev_sms_kluska' }
+      { text: '24.10 z jej numeru przyszedł SMS „Pozdrów Kluskę”, choć pies nie żyje od 2019. Nie wiadomo, kto pisał i czy dobrowolnie.', cond: 'ev:ev_sms_kluska' }
     ]
   },
   kuba: {
@@ -68,8 +68,8 @@ DATA.persons = {
       { text: '13.10 odwiedził dom Wronów i pytał o projekt Mai w hucie.', cond: 'ev:ev_mom_gajda' },
       { text: 'Syn komendanta Zbigniewa Gajdy, który w 1997 szukał Tomka „w rzece”.', cond: 'ev:ev_questions' },
       { text: 'W 1997 miał 17 lat i był w hucie z Tomkiem i trzema kolegami.', cond: 'ev:ev_interview' },
-      { text: 'Jego sevra DDZ 6K19 była pod hutą noc po zniknięciu Mai i ponownie 23.10.', cond: 'ev:ev_owner' },
-      { text: 'Łowczy koła „Sokół”. Ma jedyny klucz do kraty sztolni Ewa.', cond: 'ev:ev_kolo' },
+      { text: 'Jego sevra DDZ 6K19 była pod hutą w nocy 14/15.10 i ponownie 23.10 o 00:12. Tablica nie wskazuje kierowcy.', cond: 'ev:ev_owner' },
+      { text: 'Łowczy koła „Sokół”. Koło i nadleśnictwo mają dostęp do kraty sztolni Ewa.', cond: 'ev:ev_kolo' },
       { text: 'Na kadrze 23 z 1997: siedemnastolatek z ręką wyciągniętą w stronę aparatu.', cond: 'ev:ev_frame23' }
     ]
   },
@@ -121,8 +121,8 @@ DATA.persons = {
 DATA.timeline = [
   { t: '1997-07-07T21:30', title: 'Noc powodzi. *Tomek Lis* (9 l.) wychodzi z domu w żółtej pelerynie.', cond: 'ev:ev_article2007', key: true },
   { t: '1997-07-07T22:00', title: 'Halina Mróz widzi „żółtą postać” na drodze do huty.', cond: 'ev:ev_article2007' },
-  { t: '1997-07-07T23:30', title: 'Kadr 21: huta. W drzwiach — Tomek.', text: 'Przy piecu trzech, czwarty bliżej obiektywu. Dziecko w żółtej pelerynie stoi w drzwiach.', cond: 'ev:ev_frame21', key: true },
-  { t: '1997-07-08T00:10', title: 'Tomek wpada przez podłogę do zalanego kanału pieca.', text: 'Ciało ukryto w odprężarce, wejście zamurowano.', cond: 'solved:ded_1997', key: true },
+  { t: '1997-07-07T23:30', time: false, title: 'Kadr 21: huta. W drzwiach — Tomek.', text: 'Przy piecu trzech, czwarty bliżej obiektywu. Dziecko w żółtej pelerynie stoi w drzwiach. Dokładna godzina zdjęcia nie jest znana.', cond: 'ev:ev_frame21', key: true },
+  { t: '1997-07-08T00:10', time: false, title: 'Tomek wpada przez podłogę do zalanego kanału pieca.', text: 'Rekonstrukcja nocy z 7 na 8 lipca, bez dokładnej godziny. Ciało ukryto w odprężarce, wejście zamurowano.', cond: 'solved:ded_1997', key: true },
   { t: '2007-07-07T08:00', title: 'Reportaż Rybickiego „Dziesięć lat ciszy”.', cond: 'ev:ev_article2007', time: false },
   { t: '2011-09-14T06:50', title: 'Dariusz Kruk ginie przy remoncie mostu kolejowego.', cond: 'seen:web:m24_kruk', time: false },
   { t: '2021-02-11T12:00', title: 'Umiera Adam Rybicki. Jego numer trafia później do ciebie.', cond: 'ev:ev_obit', time: false },
@@ -139,6 +139,8 @@ DATA.timeline = [
   { t: '2026-10-13T21:40', title: 'Kłótnia Mai i Oli.', cond: 'ev:ev_ola_fight' },
   { t: '2026-10-13T23:10', title: 'Ciemne auto pod domem Wronów.', cond: 'ev:ev_car_window' },
   { t: '2026-10-14T17:05', title: 'Maja spotyka się z Bartkiem na stacji.', cond: 'ev:ev_bartek_conf' },
+  { t: '2026-10-14T22:52', title: 'Maja nagrywa głosówkę spod huty.', cond: 'ev:ev_last_note' },
+  { t: '2026-10-14T22:56', title: 'Relacja Mai z Kadru sprzed wejścia do huty.', cond: s => G.flag('sawSnap') && G.has('ev_owner'), text: 'Godzinę i miejsce grupa potwierdza przy porównaniu relacji z CAM-01.' },
   { t: '2026-10-14T22:57', title: 'Fotopułapka 1: Maja wchodzi na teren huty.', cond: 'ev:ev_cam1_maja', key: true },
   { t: '2026-10-14T23:31', title: 'SMS do Oli: „Przepraszam za wczoraj”.', cond: 'ev:ev_ola_sorry' },
   { t: '2026-10-14T23:44', title: 'Maja wybija otwór w murze odprężarki.', cond: 'ev:ev_sync_wall', key: true },
@@ -180,16 +182,21 @@ DATA.deductions = {
     done: 'Szklarz pisze „technicznie rzecz biorac” — jak Igor. Przysłał ci kadr 23, który „był prześwietlony”, a pełne skany miał tylko Igor. On też konfigurował fotopułapki. *Igor jest Szklarzem.*'
   },
   ded_who: {
-    q: 'Kto porwał Maję?', kind: 'person',
-    intro: 'Ktoś był w hucie 14.10 o 23:53. Ktoś wrócił tam o 1:20. Ktoś ma klucz do kraty w lesie.',
+    q: 'Kogo najmocniej obciążają ślady porwania Mai?', kind: 'person',
+    intro: 'Połącz właściciela auta, dostęp do sztolni i ślad z huty. Sama obawa Mai ani sama tablica nie potwierdzają sprawcy.',
     options: [
       { id: 'gajda', label: 'Robert Gajda', av: 'gajda' }, { id: 'bartek', label: 'Bartek Sowa', av: 'bartek' }, { id: 'igor', label: 'Igor Malicki', av: 'igor' },
       { id: 'leszek', label: 'Leszek Malicki', av: 'leszek' }, { id: 'marek', label: 'Marek Sowa', av: 'marek' }, { id: 'ola', label: 'Ola Nowicka', av: 'ola' }
     ],
     answer: 'gajda',
-    support: { need: 2, from: ['ev_plate', 'ev_owner', 'ev_kolo', 'ev_gajda_hunt', 'ev_sync_door', 'ev_frame23', 'ev_not_gajda', 'ev_questions', 'ev_cam1_car'], prompt: 'Wybierz *dwa* dowody, które wskazują sprawcę.', fail: 'Połącz samochód spod huty z właścicielem albo klucz do kraty z konkretną osobą.' },
+    support: {
+      need: 3, from: ['ev_owner', 'ev_kolo', 'ev_car_igor', 'ev_gajda_hunt', 'ev_sync_door', 'ev_cam1_car', 'ev_marek'],
+      groups: [['ev_owner'], ['ev_kolo', 'ev_gajda_hunt'], ['ev_car_igor', 'ev_sync_door', 'ev_cam1_car', 'ev_marek']],
+      prompt: 'Wybierz *trzy* materiały: właściciel auta, dostęp do sztolni oraz ślad z huty lub relacja Marka.',
+      fail: 'Potrzebne są trzy różne ogniwa: właściciel auta, dostęp do Ewy oraz zapis z huty lub relacja Marka. Dwie fotografie tego samego paśnika nie są dwoma ogniwami.'
+    },
     fail: 'Kto miał samochód pod hutą tamtej nocy? Kto ma klucz do kraty?',
-    done: 'Sevra DDZ 6K19 komendanta Gajdy była pod hutą noc po zniknięciu Mai. Gajda jest łowczym koła, które trzyma klucz do kraty sztolni Ewa — i wymienił kłódkę 16.10. *Maję porwał Robert Gajda.*'
+    done: 'Sevra DDZ 6K19 należy do Gajdy i była pod hutą w nocy 14/15.10 oraz 23.10. Jako łowczy ma dostęp do Ewy; Marek mówi też o wymianie kłódki. *Najmocniej podejrzewamy Roberta Gajdę.* To podstawa pilnego zgłoszenia, a nie pewne rozpoznanie osoby na niewyraźnym zdjęciu.'
   }
 };
 

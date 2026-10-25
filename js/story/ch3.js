@@ -418,7 +418,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     pause(2000),
     /* P4: data pliku a czas powiadomienia. Synchronizacja nie dowodzi, kiedy zrobiono zdjęcie. */
     scene('xDataPliku', [
-      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.'),
+      g('ola', 'Igor mi pisze, zanim ktoś się nakręci: to przyszło o 3:05, ale zdjęcie jest z 14.10. Nimbus dosyła zaległe pliki, jak telefon złapie zasięg.', { wording: 'Igor mi pisze: telefon połączył się o 3:05, kopia doszła do 3:07. Zdjęcie jest z 14.10. To zaległy plik, nie zdjęcie z dzisiaj.' }),
       g('kuba', 'czyli to nie jest z dzisiaj'),
       choose('group', [
         opt('Data w pliku: 14.10, 23:44. Dziś telefon tylko złapał sieć.', [g('ola', 'Igor: „dokładnie. powiadomienie mówi, kiedy doszło, a nie kiedy ktoś nacisnął spust”.')]),

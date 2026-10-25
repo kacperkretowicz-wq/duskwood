@@ -257,7 +257,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     Z('babcia mówi że chce pogadać. z tobą. nie z gazetą'),
     Z('tylko przez stacjonarny. chce ustalić, co może być w tekście, a co nie'),
     Z('ona się po prostu boi'),
-    Z('numer 74 873 52 06. dzwoń po piątej, po dzienniku'),
+    Z('numer 74 873 52 06. dzwoń po piątej, po dzienniku', { wording: 'numer 74 873 52 06. dzwoń po piątej, po dzienniku. jutro idę pod most ze zniczem. wpadnij o 16:20, jak możesz' }),
     give('ev_m_krystyna_tel', { silent: true }),
     dial({
       goal: 'Zadzwoń do pani Krystyny Kruk na stacjonarny (numer od Zuzy, 74 873 52 06).',
@@ -292,7 +292,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
     scene('xZnicz', [
       pause(3000),
       clock('2026-12-05T16:20'),
-      nearby('m_znicz', { device: 'Telefon', img: 'm_znicz_most', note: 'Nieznane urządzenie w pobliżu', flag: 'm_zniczOk', declineFlag: 'm_zniczNo' }),
+      nearby('m_znicz', { device: 'Telefon Zuzy', img: 'm_znicz_most', note: 'Most nad Mglicą · spotkanie z Zuzą', flag: 'm_zniczOk', declineFlag: 'm_zniczNo' }),
       iff('flag:m_zniczOk', [
         Z('to ja. widzę cię z drugiej strony mostu', { wording: 'to ja. zdjecie z drugiej strony mostu, puscilam ci przez przesylanie' })
       ], [

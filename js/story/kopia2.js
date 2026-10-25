@@ -115,7 +115,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     pause(3500),
     clock('2026-12-21T21:40'),
     ambient('dark'),
-    /* Nagranie z pustej czytelni. Lampa na czujnik zapala się sama. Wyjaśnienia nie ma (zaczep na sprawę 4). */
+    /* Lampa z wadliwym czujnikiem. Usterkę potwierdza konserwator następnego dnia. */
     scene('kLampa', [
       W('Wróciłam do czytelni po szalik. Kuba już poszedł, wszystko pozamykane.'),
       W('Lampa na końcu korytarza zapaliła się sama. Nagrałam, bo nie wierzyłam.'),
@@ -278,7 +278,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     waitFor('ev:ev_k_logi', { hints: [{ after: 80, chat: 'weronika', who: 'weronika', text: 'Proszę spojrzeć na pierwszy wiersz. Drugi grudnia.' }] }),
     W('Drugi grudnia. To była środa.'),
     W('„Sieć: Biblioteka Publiczna Mglisko”. To jest nasze wi-fi. Hasło wisi na tablicy przy ladzie.'),
-    W('Tego dnia byłam w czytelni do osiemnastej. Mam zeszyt zapisów do komputerów. Jutro rano go przejrzę, dziś nie mam siły.'),
+    W('Tego dnia byłam w czytelni do osiemnastej. Mam zeszyt zapisów do komputerów. Jutro rano go przejrzę, dziś nie mam siły.', { wording: 'Mam zeszyt zapisów do komputerów z drugiego grudnia. Jutro go przejrzę. A lampę sprawdził dziś konserwator: uszkodzony czujnik, zapalała się też przy nim w pustym korytarzu. Wymienił go.' }),
     set('k_ch2Done'),
     end('k3')
   ];
@@ -315,7 +315,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     ]),
     scene('kKlatka', [
       pause(5000),
-      M('ktoś chodzi po klatce. o tej porze'),
+      M('ktoś chodzi po klatce. o tej porze', { wording: 'ktoś chodzi pod naszym oknem. o tej porze' }),
       M('a nie. pies pana Zenona. ma zapalenie pęcherza i wychodzi co dwie godziny'),
       M('teraz chodzi z nim wnuczka, przyjechała na święta. pan Zenon by nie dał rady po nocach'),
       pause(4000),
@@ -681,7 +681,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       notify({ app: 'messages', title: 'Błysk', text: 'nowy kontakt wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blysk2' } }),
       say('blysk2', 'blysk2', 'wesołych świąt', { vanish: true }),
       say('blysk2', 'blysk2', 'na peronie {stałeś|stałaś} przy starej wiacie. ładna kurtka', { vanish: true }),
-      say('blysk2', 'blysk2', 'kuba skopiował 1412 plików. ja mam więcej', { vanish: true, wording: 'przy wiacie miał{eś|aś} otwarty pdf od nimbusa. zdążyłam przeczytać: 1412 plików. ja mam więcej' }),
+      say('blysk2', 'blysk2', 'kuba skopiował 1412 plików. ja mam więcej', { vanish: true, wording: 'szukasz w nagraniach pana adama. ja mam kasety, których on nigdy nie widział' }),
       vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ]),
     pause(3000),

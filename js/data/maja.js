@@ -108,10 +108,10 @@ DATA.maja = {
     },
     {
       id: 'kuba', name: 'Młody', who: 'kuba', number: '604 228 961', msgs: [
-        { t: '2026-10-04T13:20', text: 'pożyczysz auto w sobotę' },
+        { t: '2026-10-04T13:20', text: 'podrzucisz mnie w sobotę z igorem' },
         { t: '2026-10-04T13:21', me: true, text: 'nie' },
         { t: '2026-10-04T13:21', text: '😭😭😭' },
-        { t: '2026-10-04T13:23', me: true, text: 'ostatnio było 6 km zasięgu i frytka pod siedzeniem' },
+        { t: '2026-10-04T13:23', me: true, text: 'ostatnio zrobiliście objazd pół miasta i została frytka pod siedzeniem' },
         { t: '2026-10-04T13:23', text: 'to była dobra frytka' },
         { t: '2026-10-12T00:14', me: true, text: 'ej. dzięki że odebrałeś mamie te zakupy. kocham cię czasem' },
         { t: '2026-10-12T00:16', text: 'co ty umierasz xd' },
@@ -236,7 +236,7 @@ DATA.maja = {
         { from: '17:00', move: true, text: 'Przejazd samochodem', sub: '1,4 km' },
         { from: '17:05', to: '17:40', place: 'stacja' },
         { from: '17:55', to: '22:41', place: 'dom' },
-        { from: '22:41', move: true, text: 'Przejazd samochodem', sub: '2,2 km · ul. Szklarska → droga do huty' },
+        { from: '22:41', move: true, text: 'Przejazd i dojście pieszo', sub: '2,2 km · ul. Szklarska → dojazd do huty → brama. Zapis nie wyznacza chwili zaparkowania.' },
         { from: '22:58', to: '23:58', place: 'huta', text: 'Ostatni sygnał: *23:58* · dokładność 12 m', last: true }
       ]
     },

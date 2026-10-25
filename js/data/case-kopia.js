@@ -37,7 +37,7 @@ Object.assign(DATA.persons, {
     facts: [
       { text: 'Nie chciała wiedzieć, co jest w pudle. „On już wszystko nagrał, wystarczy.”' },
       { text: 'W nocy z 18 na 19.12 dzwoniła z domowego numeru. Nie umiała nic powiedzieć.', cond: 'flag:k_ewaCalled' },
-      { text: 'Nie zna hasła do jego konta Nimbus. Telefon męża leży w szufladzie, rozładowany od pogrzebu.', cond: 'flag:k_ewaCloud' }
+      { text: 'Nie zna hasła do jego konta Nimbus. Telefon męża leży rozładowany w szufladzie. Kopia nagrań mogła powstać dużo wcześniej.', cond: 'flag:k_ewaCloud' }
     ]
   },
   archiwum: {

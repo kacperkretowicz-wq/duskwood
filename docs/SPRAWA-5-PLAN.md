@@ -67,7 +67,7 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 - `kopia2`: jeden z głosów pochodzi z twojego folderu (link od Idy był publiczny). Sylwia pisze w grupie „ktoś ma całą kronikę” i wszyscy patrzą na ciebie. Najmroczniejszy start.
 - Flagi: `c_igorClosed` (bez kopii u Igora), `c_gsTemplate` (Natan zna serwer gazety), `c_kubaHelps`, `c_zenonDefended`, `c_olaFirst`.
 
-## 8. Przebieg (7 dni, 15–21.03.2027)
+## 8. Przebieg (7 dni, 14–20.03.2027)
 1. **2:14** — głosówka do Mai twoim głosem. Kuba dzwoni o 2:20. Codzienność: kostka Bartka, wniosek o stypendium Kuby.
 2. **Hasło** — grupa Sylwii panikuje. Gracz ustala z Mają rodzinne hasło. Zagadka audio: trzy głosówki „Kuby”, jedna prawdziwa (oddech, tło, sposób mówienia). Wybór zmienia tempo ujawnienia, nie jest quizem.
 3. **Wera** — telefon od „Tomka”. Wieczór z panią Weroniką i albumem. Zenon rozpoznaje festyn 1996.
@@ -79,7 +79,7 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 ## 9. Zakończenia (season 's5')
 - `haslo`: gracz nagrywa Martę i oddaje nagranie Natanowi i prokuraturze. Proces rusza. Maja wysyła głosówkę: „to ja. hasło: [hasło gracza]”.
 - `echo`: gracz nie zdąży. Świadek wycofuje zeznania po telefonie „od zmarłej żony”. Proces się sypie. Twój głos jeszcze miesiąc krąży po Mglisku.
-- `cisza2`: gracz kasuje wszystko, co ma (folder, nagrania), i prosi Idę, Igora i Zenona o to samo. Głosy znikają, dowody też. Spokój bez sprawiedliwości.
+- `cisza2`: gracz kasuje wszystko, co ma (folder, nagrania), i prosi Idę, Igora i Zenona o to samo. Usuwają własne kopie; nie oznacza to usunięcia materiałów zabezpieczonych przez policję u Dudka. Przestają dalej dokumentować udział Marty.
 
 ## 10. Mechaniki uzależniające
 - **Rodzinne hasło**: gracz wybiera słowo w rozdziale 2. Wraca w finale i w kolejnych sezonach. Postaci pytają o nie, kiedy coś jest nie tak.
