@@ -1142,3 +1142,9 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - ch1/ch2: odpowiedzi na zły dowód: „13-ego/15-ego” → „trzynastego/piętnasty, po północy”, małe litery Igora.
 - S3/S4: Maja (od S2 pisze małymi literami) w ~30 wiadomościach zaczynała zdania wielką literą, czasem w połowie tej samej wiadomości („Kuba nie odpisuje od dziesiątej. na nocce…”) i pisała „Ciebie” → jednolicie małe litery na początku zdań, „ciebie”.
 - Wszystko przez `wording` (sygnatury kroków bez zmian). SW v138.
+
+### v139 — zeszyt napraw Bartka jako zdjęcie
+- Przegląd rejestru obrazów (`Art.reg`): poza mapami i zrzutami ekranu (celowo grafika) jedynym rysunkiem w fabule był `b_ledger` (ch3, dowód `ev_owner`). Teraz to zdjęcie telefonem: otwarty zeszyt w kratkę na zatłuszczonym biurku Auto-Sowy, kubek z sową, popielniczka, brudny kciuk Bartka; wpisy niebieskim długopisem zgodne z poprzednim rysunkiem i z fabułą (16.10, DDZ 6K19, Magna gr., R. Gajda, „mycie podw. + dywaniki (błoto!)” w czerwonej obwódce; 25.09 Corsa „Lis W.”). Codex image_gen + `realism-post.py` 0.45, `assets/s1x/b_ledger.jpg`, w cache offline.
+- Losowe gałęzie na v138 (`logs/night/br138`, 5 przebiegów na segment S1a/S1b/S1c/S2–S5): bez zawieszeń, wszystkie dochodzą do końca.
+- Krea: saldo dalej 0 (plan Free) — nowy klip snapa zablokowany.
+- SW v139.

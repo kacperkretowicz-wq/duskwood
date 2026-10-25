@@ -124,7 +124,7 @@
   });
 
   /* ================= ZDJĘCIA W ROZMOWACH ================= */
-  D('b_ledger', {
+  D('b_ledger', { src: 'assets/s1x/b_ledger.jpg',
     title: 'Zeszyt napraw', w: 900, h: 1200, exif: ph('23.10.2026', '19:12', { device: 'Telefon Bartka', place: 'Auto-Sowa, biuro' }), grade: 'warm', onView: 'ev_owner',
     draw: k => {
       const { W, H } = k;
