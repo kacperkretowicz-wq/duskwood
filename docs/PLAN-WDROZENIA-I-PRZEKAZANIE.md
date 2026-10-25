@@ -1014,8 +1014,12 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 Przejrzane wszystkie pozostałe zdjęcia używane w grze (119 plików: S1 klisza i fotopułapki, galeria Mai, S2 Głos, S3 Kopia, S4 Kronika, epilog, kadry filmów) obok tekstu, który je zapowiada lub opisuje. Fotopułapki: daty, godziny i °C/°F zgodne z osią czasu (14.10 22:57 Maja, 15.10 1:20 i 2:05 auto). Poprawione rozbieżności:
 - `k_rampa` (Kuba po nocce, 20.12 o 6:12): różowy wschód słońca o 6:12 w grudniu był niemożliwy (wschód ≈ 7:40) — teraz noc, lampy nad rampą, mokry śnieg. Opcja „Ładny wschód. Idź spać.” → „Jeszcze ciemno, a ty już po nocce. Idź spać.” (`wording`).
 - `c_kasety_babci`: zamiast drewnianych klocków trzy prawdziwe kasety VHS w pudełkach z odręcznymi opisami i tą samą naklejką z anteną „TV Dolina” — opcja gracza mówi o „naklejce z anteną”, a na zdjęciu był znaczek słońca.
-- `m_lehr`: „mały, owalny, plastikowy przedmiot” pod murem, który Weronika rozpoznaje jako różowe tamagotchi Tomka, wyglądał jak guzik — teraz pękniete różowe tamagotchi w pyle (to samo miejsce i ten sam hotspot).
+- `m_lehr`: „mały, owalny, plastikowy przedmiot” pod murem, który Weronika rozpoznaje jako różowe tamagotchi Tomka, wyglądał jak guzik — teraz pęknięte różowe tamagotchi w pyle (to samo miejsce i ten sam hotspot).
 - `e_pudlo` (epilog, Maja z pudłem notatek Rybickiego): ręka w gipsie, o której nikt nigdzie nie mówi → zwykły rękaw swetra.
 - `g_slady` (S5, Kuba: „jestem na moście. mgła jak mleko… świeże ślady”): dodana gęsta mgła i poręcz mostu ginąca we mgle.
 - Tekst zamiast zdjęcia: kadr 22 opisywał „otwarte usta”, których na kadrze nie ma → „w wodzie coś żółtego, przy krawędzi rozmazana ręka”; pierniki Oli — foremki na zdjęciu to ludziki i gwiazdki, więc „połowa dzieci twierdzi, że ich ludzik to dinozaur”; kolejka na poczcie „do samych drzwi” zamiast „dwanaście osób” (na zdjęciu widać kilka).
 - Nowe zdjęcia: Codex image_gen + `tools/realism-post.py`, wymiary bez zmian.
+
+### 2026-10-25 — v123: dzień na widżecie pogody
+- Widżet pogody na ekranie głównym pokazywał dzień z chwili narysowania ekranu; po północy czasu gry (np. nocne rozmowy S1/S5) zostawała wczorajsza data, choć zegar i blokada miały już nową. Teraz `tick()` odświeża `.home-day` razem z godziną widżetu.
+- `tests/native-ui.browser.cjs`: czekanie na zniknięcie toastów „Zainstalowano” odporne na dławione timery (fałszywy timeout w pełnym zestawie na v122). SW v123.

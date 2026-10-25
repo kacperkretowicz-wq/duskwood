@@ -191,6 +191,7 @@ const UI = (() => {
     const t = U.time(G.now());
     const st = $('.st-t', statusEl); if (st && st.textContent !== t) renderStatus();
     const wt = $('.w-time', home); if (wt && wt.textContent !== t) { wt.textContent = t; $('.w-date', home).textContent = cap(U.dayLong(G.now())); }
+    const hd = $('.home-day', home), hdd = cap(U.dayShort(G.now())); if (hd && hd.textContent !== hdd) hd.textContent = hdd;
     if (lockEl) { const lt = $('.lk-t', lockEl); if (lt) lt.textContent = t; const ld = $('.lk-d', lockEl), d = cap(U.dayLong(G.now())); if (ld && ld.textContent !== d) ld.textContent = d; }
     if (G.s && !document.hidden && !G.s.clock.paused) G.s.playMs = (G.s.playMs || 0) + 1000;
   }
@@ -220,7 +221,7 @@ const UI = (() => {
     const p1 = h('div', { class: 'home-page', 'aria-label': 'Ekran 1' },
       h('div', { class: 'home-widgets' },
         h('button', { class: 'home-weather', onclick: () => openApp('weather'), 'aria-label': 'Pogoda w Mglisku' },
-          h('b', {}, 'Mglisko'), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', {}, cap(U.dayShort(G.now())))),
+          h('b', {}, 'Mglisko'), h('span', { class: 'home-degrees' }, `${weather.temp}°`), h('span', {}, weather.nowLong), h('small', { class: 'home-day' }, cap(U.dayShort(G.now())))),
         h('button', { class: 'home-note', onclick: () => openApp('notes', { note: 'todo' }), 'aria-label': 'Co teraz? Otwórz notatkę' },
           h('small', {}, 'NOTATKI'), h('b', {}, 'Co teraz?'), h('p', {}, G.s.objective ? U.tpl(G.s.objective.text).replace(/[*_]/g, '') : 'Sprawdź wiadomości.'))),
       h('div', { class: 'home-apps', 'aria-label': 'Aplikacje' }, ['gadka', 'blysk', 'kadr', 'klipo', 'calendar', 'maps', 'weather', 'clock'].filter(appUnlocked).map(appIcon)));
