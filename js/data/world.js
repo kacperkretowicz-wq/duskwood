@@ -79,7 +79,7 @@ DATA.persons = {
       { text: 'Zniknął w noc powodzi. Miał na sobie żółtą pelerynę z kapturem.' },
       { text: 'Świadek widział go na drodze *do huty*, nie nad rzeką.' },
       { text: 'Nosił na szyi tamagotchi na sznurku.', cond: any('ev:ev_tomek', 'flag:heard:wywiad') },
-      { text: 'Na kadrze 21 stoi w drzwiach huty, za czterema starszymi chłopakami.', cond: 'ev:ev_frame21' },
+      { text: 'Na kadrze 21 stoi w drzwiach huty. Przy piecu jest trzech starszych, czwarty wszedł bliżej aparatu.', cond: 'ev:ev_frame21' },
       { text: 'Jego tamagotchi leży pod zamurowanym fragmentem odprężarki.', cond: 'flag:weronikaToy' }
     ]
   },
@@ -121,7 +121,7 @@ DATA.persons = {
 DATA.timeline = [
   { t: '1997-07-07T21:30', title: 'Noc powodzi. *Tomek Lis* (9 l.) wychodzi z domu w żółtej pelerynie.', cond: 'ev:ev_article2007', key: true },
   { t: '1997-07-07T22:00', title: 'Halina Mróz widzi „żółtą postać” na drodze do huty.', cond: 'ev:ev_article2007' },
-  { t: '1997-07-07T23:30', title: 'Czterech chłopaków w hucie. W drzwiach — Tomek.', text: 'Kadr 21 z kliszy z szafki 17.', cond: 'ev:ev_frame21', key: true },
+  { t: '1997-07-07T23:30', title: 'Kadr 21: huta. W drzwiach — Tomek.', text: 'Przy piecu trzech, czwarty bliżej obiektywu. Dziecko w żółtej pelerynie stoi w drzwiach.', cond: 'ev:ev_frame21', key: true },
   { t: '1997-07-08T00:10', title: 'Tomek wpada przez podłogę do zalanego kanału pieca.', text: 'Ciało ukryto w odprężarce, wejście zamurowano.', cond: 'solved:ded_1997', key: true },
   { t: '2007-07-07T08:00', title: 'Reportaż Rybickiego „Dziesięć lat ciszy”.', cond: 'ev:ev_article2007', time: false },
   { t: '2011-09-14T06:50', title: 'Dariusz Kruk ginie przy remoncie mostu kolejowego.', cond: 'seen:web:m24_kruk', time: false },

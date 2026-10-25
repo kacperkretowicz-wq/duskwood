@@ -37,7 +37,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       B('2006–2021 to dopiero połowa. dziś o 21'),
       vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ])]),
-    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc w kawalerce naprzeciwko? z naszej kuchni widać twoje okno 👀 ferie, a lodowisko zamknięte. „awaria agregatu”' }),
+    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc? kuba mówił, że pani z parteru wynajęła ci kawalerkę naprzeciwko. z naszej kuchni widać twoje okno 👀 ferie, a lodowisko zamknięte. „awaria agregatu”' }),
     pic('maja2', 'maja', 'c_lodowisko', 'za to bałwan pilnuje. ktoś mu dał pachołek zamiast czapki'),
     choose('maja2', [
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu', { wording: 'kuba mówi że to jego dzieło. nie wierzę mu' })]),
@@ -54,7 +54,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     ])]),
     scene('xFerie', [
       pause(2500),
-      say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj'),
+      say('kuba', 'kuba', 'pierwszy zjazd sezonu. nie pytaj', { wording: 'pierwszy zjazd. pani z parteru wynajęła ci kawalerkę na ferie. mai powiedziałem. z ich kuchni widać twoje okno. nie pytaj czemu tak tanio' }),
       pic('kuba', 'kuba', 'c_gorka', 'maja nagrała jak się wywalam. jak to wrzuci na klipo to się wyprowadzam'),
       choose('kuba', [
         opt('10/10 za styl lądowania.', [say('kuba', 'kuba', 'dzięki. sędziowie razem z bałwanem dali mi 6')]),

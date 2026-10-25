@@ -16,7 +16,7 @@ DATA.seasons = [{
     ['s1.09', 'O czym nie mówi Ola', 'ch1', 'ev:ev_not_gajda'],
     ['s1.10', 'Po godzinach', 'ch2', 'ev:ev_bartek_conf'],
     ['s1.11', 'Szafka siedemnaście', 'ch2', 'ev:ev_dk97'],
-    ['s1.12', 'Czapka na zdjęciu', 'ch2', 'ev:ev_patch'],
+    ['s1.12', 'Mur za paletami', 'ch2', 'ev:ev_patch'],
     ['s1.13', 'Świeża zaprawa', 'ch2', 'ev:ev_mount'],
     ['s1.14', 'Samochód pod bramą', 'ch2', 'ev:ev_car_igor'],
     ['s1.15', 'Brat Weroniki', 'ch3', 'ev:ev_tomek'],

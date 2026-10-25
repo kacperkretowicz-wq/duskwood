@@ -130,6 +130,6 @@ DATA.seasons.push({
     ['s5.10', 'pd_audio', 'g4', 'ev:ev_g_dudek'],
     ['s5.11', 'Scenariusz', 'g5', 'ev:ev_g_scenariusz'],
     ['s5.12', 'Przewijanie', 'g5', 'flag:g_twist'],
-    ['s5.13', 'Rozprawa', 'g6', s => !!G.s.vars.s5Ending]
+    ['s5.13', 'Nagranie', 'g6', s => !!G.s.vars.s5Ending]
   ].map(([id, title, chapter, done]) => ({ id, title, chapter, done }))
 });

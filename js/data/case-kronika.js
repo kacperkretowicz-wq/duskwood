@@ -102,7 +102,7 @@ DATA.web.tt_kronika = {
 /* Sezon 4: ten sam zapis. Identyfikatory odcinków są kontraktem zapisu. */
 DATA.seasons.push({
   id: 's4', revision: 1, title: 'Kronika', kicker: 'SPRAWA 4', released: true,
-  description: 'Ferie w Mglisku: wynajmujesz kawalerkę w bloku naprzeciwko Wronów. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
+  description: 'Ferie w Mglisku. Kuba załatwił ci kawalerkę u pani z parteru, w bloku naprzeciwko kuchni Wronów. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
   chapters: ['c0', 'c1', 'c2', 'cf', 'c3', 'c4'],
   credits: {
     kicker: 'Koniec sprawy 4', title: 'KRONIKA',
@@ -136,7 +136,7 @@ Object.assign(DATA.endings, {
       'Ida mówi dziadkowi o wszystkim w kuchni, przy herbacie. Pan Zenon długo milczy, potem pyta tylko, czy pies był wyprowadzony.',
       'W lutym kasety jadą do archiwum gminy. Na każdej jest nowa naklejka: „do pamięci, nie do Klipo”.',
       'W archiwum odbiera je pani Marta Jasińska. Podpisuje protokół i mówi panu Zenonowi, że wszystko będzie zapisane.',
-      () => G.flag('c_olaFirst') ? 'Ola sama opowiada o festynie w grupie. Pod jej wpisem są trzy serduszka i jeden komentarz: „też byłam głupia w liceum”.' : 'Ola nigdy się nie dowiaduje, jak blisko było.'
+      () => G.flag('c_olaFirst') ? 'Ola sama opowiada o festynie w grupie. Miała wtedy czternaście lat i złamała dziewczynie nos. Pod wpisem jest jeden komentarz: „też miałam czternaście lat”.' : 'Ola widziała zapowiedź „jutro: O.N.” i wie, że klip miał wyjść o 21:00. Nie wychodzi. W poniedziałek jest w świetlicy. Nikt jej o festyn nie pyta.'
     ]
   },
   transmisja: {

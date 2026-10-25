@@ -74,7 +74,7 @@ Drugi krok: scenariusze rozmów mają przecinki przed „że” i pełne zdania.
 4. **Twój głos** — Dudek dzwoni do ciebie twoim głosem. Straszak: na końcu rozmowy słyszysz własny śmiech.
 5. **Serwis** — Igor, Oskar i paczka na Błysku. Zatrzymanie Oskara, laptop Dudka. Fałszywe rozwiązanie.
 6. **Przewijanie** — szum magnetowidu w nagraniu Tomka, archiwum gminy, przecinki w scenariuszach. Zwrot.
-7. **Rozprawa** — dzień przed pierwszą rozprawą o most. Marta dzwoni o 23:47. Ostatni wybór.
+7. **Nagranie** — sobota 20 marca. Rozmowa z Martą jest nagrywana. Rozprawa o most jest dopiero w kwietniu.
 
 ## 9. Zakończenia (season 's5')
 - `haslo`: gracz nagrywa Martę i oddaje nagranie Natanowi i prokuraturze. Proces rusza. Maja wysyła głosówkę: „to ja. hasło: [hasło gracza]”.
@@ -102,5 +102,5 @@ Siedem dni z punktu 8 = siedem rozdziałów, każdy ok. 55–75 wiadomości:
 - **g3 „Twój głos”** (17.03): pracownia, wideo z kasety nr 12, zagadka (nowe zdania / trzy kubki / kaseta niepokazywana), zeszyt Igora, telefon twoim głosem do ciebie, straszak `s5_smiech`.
 - **g4 „Serwis”** (18.03): Oskar, trzy próbki twojego głosu (źródło: rozmowa z Idą o 20:58), pd_audio = Dudek, przesyłanie w pobliżu: serwis nocą, SMS od Dudka, straszak `s5_serwis`.
 - **g5 „Przewijanie”** (19.03): zatrzymanie Dudka (fałszywe rozwiązanie), scenariusz z laptopa (Pracownia_UG), pisk magnetowidu, kaseta z mostu 2011, Marta z domu Kurek, telefon o 23:47 (`s5_przewijanie`).
-- **g6 „Rozprawa”** (20.03): plan z prokuraturą, nagrywanie rozmów, zdjęcie-dowód z galerii, rozmowa z Martą, zakończenia `haslo` / `echo` / `cisza2`.
-Warunek `haslo`: gracz nagrywa rozmowę (`g_recOn`), mówi Marcie o nagraniu (`g_recordMarta`) i nie obiecał jej nagrań (`g_martaAsk`). `cisza2`: „skasuję wszystko”. Pozostałe przypadki: `echo`.
+- **g6 „Nagranie”** (20.03): plan z prokuraturą, nagrywanie rozmów, zdjęcie-dowód z galerii, rozmowa z Martą, zakończenia `haslo` / `echo` / `cisza2`. Rozprawa o most jest w kwietniu, w tekście zakończenia `haslo`, nie w tytule tego dnia.
+Warunek `haslo`: gracz nagrywa rozmowę (`g_recOn`), mówi Marcie o nagraniu (`g_recordMarta`) i albo słyszy wyraźne przyznanie (`g_confess`), albo nie wysłał jej wcześniej nagrań (`g_martaAsk`). Samo wysłanie plików bez przyznania zostawia `echo`. `cisza2`: „skasuję wszystko”.
