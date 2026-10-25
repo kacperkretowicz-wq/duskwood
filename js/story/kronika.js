@@ -863,7 +863,7 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
           opt('Przeczytała. To już dużo.', [K('może. ja też kiedyś tylko czytałem')]),
           opt('Dzięki, że spróbowałeś.', [K('nie dziękuj. jakoś jestem jej to winny', { wording: "nie wiem, czy to coś dało. ale nie chciałem tylko patrzeć na „wyświetlono”" })])
         ])
-      ], [K('nie wiem, czy do niej napisać. chyba nie mam prawa nikogo pouczać')]),
+      ], [K('nie wiem, czy do niej napisać. chyba nie mam prawa nikogo pouczać', { wording: 'nie napisałem do idy. ale ciągle mam otwarty jej profil. chyba nie mam prawa nikogo pouczać' })]),
       pause(2500),
       Nt('naczelny obiecal: jak klip wyjdzie, gs nie robi z tego newsa. zadnego linku'),
       Nt('pierwszy raz od listopada mam wrazenie, ze cos robimy dobrze, zanim jest za pozno', { wording: "mam to od niego na mailu. przynajmniej nasza gazeta nie bedzie jej tego podrzucac w wynikach wyszukiwania" }),

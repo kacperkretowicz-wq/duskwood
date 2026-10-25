@@ -1226,3 +1226,8 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - S3 k4: konfrontacja Mai po pokazaniu logów — małe litery bez kropek na końcu, jak w reszcie jej wiadomości.
 - S1 ch3: Kuba po „Żyje!” urywa „tak. tylko…” zamiast „tak tylko”.
 - Epilog (gorsze zakończenie): Weronika nie powtarza dwa razy, że ma pytania — „Mogę do niego pójść.”
+
+### v153 — drugi losowy przebieg S2–S5 (tr152)
+- S2 m0 (gałąź „Ktoś tu kłamie”): Weronika najpierw przyznaje „Ja też tak na początku pomyślałam”, potem wycinek; na końcu „Babcia mówi „w pracy”, notatka mówi „most”. Obie mają rację.” (wcześniej przyznanie wisiało na końcu, bez związku).
+- S2 m3: pan Henryk nie powtarza dwa razy „przez telefon nie powiem”.
+- S4 c4 (gałąź „Nie mieszaj się w to”): Kuba nie zaprzecza sam sobie — „nie napisałem do idy. ale ciągle mam otwarty jej profil…”.

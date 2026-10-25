@@ -106,9 +106,9 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
         W('Przepraszam. Po tym wszystkim w każdej różnicy szukam kłamstwa.', { wording: 'Rzeczywiście. Przeczytałam ten wycinek i ominęłam najważniejsze zdanie.' })
       ], { set: { m_sameEvent: true } }),
       opt('Ktoś tu kłamie. Albo babcia, albo notatka.', [
-        W('Proszę spojrzeć na wycinek. „Spadł z przęsła remontowanego mostu… Wykonawca prac, firma Kurek-Bud.”'),
+        W('Proszę spojrzeć na wycinek. „Spadł z przęsła remontowanego mostu… Wykonawca prac, firma Kurek-Bud.”', { wording: 'Ja też tak na początku pomyślałam. Ale proszę spojrzeć na wycinek: „Spadł z przęsła remontowanego mostu… Wykonawca prac, firma Kurek-Bud.”' }),
         W('Pracował przy remoncie. Czyli chodzi o ten sam wypadek. Tylko każdy mówi o nim trochę inaczej.'),
-        W('Ja też tak na początku pomyślałam.')
+        W('Ja też tak na początku pomyślałam.', { wording: 'Babcia mówi „w pracy”, notatka mówi „most”. Obie mają rację.' })
       ], { set: { m_sameEvent: true } })
     ]),
     scene('xGaleriaBrat', [

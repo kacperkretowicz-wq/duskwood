@@ -508,7 +508,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       ], { set: { m_henrykCopyKept: true } }),
       opt('Czy to pani Kurek zabroniła panu założyć siatkę?', [
         H('Pani kierownik. Ja nazwiska przez telefon nie będę mówił.'),
-        H('Na kartce jest nazwisko. Niech tam będzie. Przez telefon nie powiem.'),
+        H('Na kartce jest nazwisko. Niech tam będzie. Przez telefon nie powiem.', { wording: 'Na kartce jest nazwisko. Niech tam będzie.' }),
         H('Wnuczka zrobi zdjęcie tej kartki.')
       ], { set: { m_henrykCopyKept: true } })
     ]),
