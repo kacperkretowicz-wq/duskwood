@@ -41,12 +41,12 @@ Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Ha
     ]),
     pause(4000),
     unlock('chat:maja2'),
-    M('Kuba do Ciebie pisał? Od rana chodzi jakiś nieswój.'),
-    M('Ja mam się dobrze, naprawdę. Tylko nie chodzę do sklepu. Mama chodzi za mnie i wraca zła.'),
+    M('Kuba do Ciebie pisał? Od rana chodzi jakiś nieswój.', { wording: 'kuba do ciebie pisał? od rana chodzi jakiś nieswój.' }),
+    M('Ja mam się dobrze, naprawdę. Tylko nie chodzę do sklepu. Mama chodzi za mnie i wraca zła.', { wording: 'ja mam się dobrze, naprawdę. tylko nie chodzę do sklepu. mama chodzi za mnie i wraca zła.' }),
     M('Jak coś, to on nie lubi, jak się go pyta „co ci jest”. Lepiej pytać, co robi.', { wording: 'jak go pytam co jest, mówi „nic”. a potem siedzi w kuchni, dopóki nie pójdę spać' }),
     choose('maja2', [
-      opt('Robi hasła w czytelni. I liczy dni od Rzeczki.', [M('Liczy. Ja przestałam po tygodniu. On nie umie przestać.')], { set: { kp_toldMaja: true } }),
-      opt('Pisał o sklepie. Popilnuję go trochę.', [M('Dzięki. Mnie już nie słucha, jestem siostrą*'), M('*starszą siostrą. to gorzej')])
+      opt('Robi hasła w czytelni. I liczy dni od Rzeczki.', [M('Liczy. Ja przestałam po tygodniu. On nie umie przestać.', { wording: 'liczy. ja przestałam po tygodniu. on nie umie przestać.' })], { set: { kp_toldMaja: true } }),
+      opt('Pisał o sklepie. Popilnuję go trochę.', [M('Dzięki. Mnie już nie słucha, jestem siostrą*', { wording: 'dzięki. mnie już nie słucha, jestem siostrą*' }), M('*starszą siostrą. to gorzej')])
     ]),
     pause(3000),
     set('kp_done'),
@@ -215,17 +215,17 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     goal('Porównaj opisy klipów na koncie @archiwum.rybickiego: godziny wrzutek i sposób pisania.', ['Otwórz Klipo w przeglądarce. Zapisz, o której pojawiały się klipy i jak są podpisane.']),
     waitFor(s => G.flag('k_clip6') && G.has('ev_k_klip1'), {}),
     M('Siedzę nad tymi opisami od rana. Zrobiłam tabelkę.', { wording: 'pozapisywałam godziny i opisy, zanim znowu coś zniknie. chcesz zobaczyć?' }),
-    M('Od czego zaczynamy?'),
+    M('Od czego zaczynamy?', { wording: 'od czego zaczynamy?' }),
     choose('maja2', [
       opt('Od godzin.', [
         M('22:31, 23:40, 06:58, 22:15, 03:11, 23:48, 00:20.'),
-        M('Nigdy między ósmą a dwudziestą pierwszą. Albo ktoś w dzień pracuje, albo w dzień śpi.'),
-        M('A opisy: małe litery, bez kropek, „4% baterii”, „kabel pożyczony a i tak lepiej niż milczeć”. Ktoś młody. Albo ktoś, kto chce tak brzmieć.')
+        M('Nigdy między ósmą a dwudziestą pierwszą. Albo ktoś w dzień pracuje, albo w dzień śpi.', { wording: 'nigdy między ósmą a dwudziestą pierwszą. albo ktoś w dzień pracuje, albo w dzień śpi.' }),
+        M('A opisy: małe litery, bez kropek, „4% baterii”, „kabel pożyczony a i tak lepiej niż milczeć”. Ktoś młody. Albo ktoś, kto chce tak brzmieć.', { wording: 'a opisy: małe litery, bez kropek, „4% baterii”, „kabel pożyczony a i tak lepiej niż milczeć”. ktoś młody. albo ktoś, kto chce tak brzmieć.' })
       ], { set: { k_hoursFirst: true } }),
       opt('Od sposobu pisania.', [
-        M('Małe litery, bez kropek. „4% baterii a i tak wrzucam”, „kabel pożyczony a i tak lepiej niż milczeć”.'),
-        M('Ktoś młody. Albo ktoś, kto chce tak brzmieć.'),
-        M('A godziny: 22:31, 23:40, 06:58, 22:15, 03:11, 23:48, 00:20. Nigdy w dzień. Albo w dzień pracuje, albo w dzień śpi.')
+        M('Małe litery, bez kropek. „4% baterii a i tak wrzucam”, „kabel pożyczony a i tak lepiej niż milczeć”.', { wording: 'małe litery, bez kropek. „4% baterii a i tak wrzucam”, „kabel pożyczony a i tak lepiej niż milczeć”.' }),
+        M('Ktoś młody. Albo ktoś, kto chce tak brzmieć.', { wording: 'ktoś młody. albo ktoś, kto chce tak brzmieć.' }),
+        M('A godziny: 22:31, 23:40, 06:58, 22:15, 03:11, 23:48, 00:20. Nigdy w dzień. Albo w dzień pracuje, albo w dzień śpi.', { wording: 'a godziny: 22:31, 23:40, 06:58, 22:15, 03:11, 23:48, 00:20. nigdy w dzień. albo w dzień pracuje, albo w dzień śpi.' })
       ], { set: { k_styleFirst: true } })
     ]),
     give('ev_k_godziny'),
@@ -250,7 +250,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
         opt('Zwykły biały kabel. Każdy taki ma.', [M('no może. zapiszę i tyle')], { set: { k_cableLater: true } })
       ])
     ]),
-    M('Pół Mgliska pisze małymi literami. Mój brat też, nawet do mamy*'),
+    M('Pół Mgliska pisze małymi literami. Mój brat też, nawet do mamy*', { wording: 'pół Mgliska pisze małymi literami. mój brat też, nawet do mamy*' }),
     M('*zwłaszcza do mamy'),
     pause(3000),
     unlock('chat:zuza'),
@@ -319,7 +319,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
       M('a nie. pies pana Zenona. ma zapalenie pęcherza i wychodzi co dwie godziny'),
       M('teraz chodzi z nim wnuczka, przyjechała na święta. pan Zenon by nie dał rady po nocach'),
       pause(4000),
-      M('Kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”'),
+      M('Kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”', { wording: 'kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”' }),
       say('maja2', 'maja', 'voice:0:07|Maja|(szeptem) Mama już śpi. Na stole zostało dwieście uszek. Dobra, idę spać.')
     ]),
     pause(8000),
@@ -388,26 +388,26 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     ]),
     W('Proszę, żeby {Pan|Pani} to zrobił{|a} ostrożnie. To dobry chłopak.', { wording: 'Nie umiem do niego zadzwonić. Wczoraj pomagał mi zamknąć czytelnię. Naprawdę nie wiem, co mu powiedzieć.' }),
     pause(3000),
-    M('Pani Weronika do mnie dzwoniła. Nic nie powiedziała, tylko zapytała, czy Kuba śpi w domu.'),
+    M('Pani Weronika do mnie dzwoniła. Nic nie powiedziała, tylko zapytała, czy Kuba śpi w domu.', { wording: 'pani Weronika do mnie dzwoniła. nic nie powiedziała, tylko zapytała, czy Kuba śpi w domu.' }),
     scene('kSzybciej', [
       iff('flag:k_cableLink', [
-        M('Nie musisz mi nic pokazywać.'),
+        M('Nie musisz mi nic pokazywać.', { wording: 'nie musisz mi nic pokazywać.' }),
         M('Kabel z taśmą to mój. Zeszyt, dyżur do osiemnastej, logowanie o 17:40. Ja to już wiem od wczoraj, tylko nie chciałam wiedzieć.', { wording: 'kabel jest mój. a teraz ten zeszyt. był tam do osiemnastej, zalogował się o 17:40. wczoraj patrzyłam na ten kabel i szukałam kogokolwiek innego' })
       ], [
-        M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.'),
+        M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.', { wording: 'co się dzieje? pokaż mi, co masz. wolę od ciebie niż od niej.' }),
         show('maja2', {
           prompt: 'Pokaż Mai, co łączy konto z jedną osobą',
           accept: [{ ev: ['ev_k_logi', 'ev_k_zeszyt'] }],
           wrong: [['maja', 'To mi nic nie mówi. Pokaż mi, skąd i kiedy ktoś wchodził na jego konto.'], ['maja', 'A kto wtedy był w czytelni?']]
         }),
-        M('17:40. Biblioteka. Dyżur do osiemnastej.')
+        M('17:40. Biblioteka. Dyżur do osiemnastej.', { wording: '17:40. biblioteka. dyżur do osiemnastej.' })
       ])
     ]),
     pause(2500),
     M('nie'),
     pause(3000),
-    M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.', { wording: 'W sobotę przed nocką pożyczył ode mnie kabel. Mówił, że ma 4% i w nocy musi coś wrzucić. Myślałam, że zdjęcie z magazynu.' }),
-    scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.')])]),
+    M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.', { wording: 'w sobotę przed nocką pożyczył ode mnie kabel. mówił, że ma 4% i w nocy musi coś wrzucić. myślałam, że zdjęcie z magazynu.' }),
+    scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.', { wording: 'i ten kabel z klipu. z taśmą. to mój kabel. {mówiłeś|mówiłaś}, że zwykły, a ja ci uwierzyłam.' })])]),
     M('Zadzwoń do niego. Ja nie umiem. Ja na niego nakrzyczę i on się zamknie na tydzień.', { wording: 'możesz do niego zadzwonić? ja teraz nie dam rady. już mam otwarty czat i nie chcę wysłać tego, co napisałam' }),
     set('k_majaKnows'),
     pause(2500),
@@ -539,7 +539,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
     C('napisał mi, że ci powiedział'),
     C('nie wypytuj go o mnie. on nie wie, kim jestem'),
     pause(3000),
-    scene('xPetlaTrop', [iff('flag:k_lampkiBus', [M('Ola wysłała mi zdjęcie z okna. Bus na pętli, sześć minut postoju. Jak na tym zdjęciu przez przednią szybę.')])]),
+    scene('xPetlaTrop', [iff('flag:k_lampkiBus', [M('Ola wysłała mi zdjęcie z okna. Bus na pętli, sześć minut postoju. Jak na tym zdjęciu przez przednią szybę.', { wording: 'ola wysłała mi zdjęcie z okna. bus na pętli, sześć minut postoju. jak na tym zdjęciu przez przednią szybę.' })])]),
     W('Przepraszam, że się wtrącam. Ktoś mnie niedawno pytał o nagrania pana Adama z 2019. Pisałam {Panu|Pani} o tym, pamięta {Pan|Pani}?'),
     goal('Kto jest @cicho.bylo? Zestaw głosówkę, zdjęcie i nazwę konta.', ['Głosówka z 2:14: równe tykanie jak kierunkowskaz. Zdjęcie: przednia szyba, pętla, kanapka w folii.', 'Klip nr 1: dziewczyna miała 7 lat w 2009. Kto pytał Weronikę o nagrania z 2019?']),
     ask('maja2', {
@@ -550,8 +550,8 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
         ['maja', '„cicho było”. Ktoś, kto ma to w nazwisku? I kto pytał panią Weronikę o 2019?']
       ]
     }),
-    M('Lena. Ta od busa. To ona pytała panią Weronikę o 2019.'),
-    M('W 2009 miała siedem lat. Wiek też pasuje. Ale nadal tylko zgaduję.'),
+    M('Lena. Ta od busa. To ona pytała panią Weronikę o 2019.', { wording: 'lena. ta od busa. to ona pytała panią Weronikę o 2019.' }),
+    M('W 2009 miała siedem lat. Wiek też pasuje. Ale nadal tylko zgaduję.', { wording: 'w 2009 miała siedem lat. wiek też pasuje. ale nadal tylko zgaduję.' }),
     pause(3000),
     unlock('chat:lena'),
     goal('Napisz do Leny.'),
@@ -615,7 +615,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
         opt('Ile jest tych pierogów?', [M('policzyłam. 64. mama mówi, że za mało')]),
         opt('Zostaw mi jednego.', [M('z kapustą czy ruskiego? dobra, z kapustą. ruskie są moje')])
       ]),
-      M('Kuba od rana nie wychodzi z pokoju. mama myśli, że pakuje prezenty'),
+      M('Kuba od rana nie wychodzi z pokoju. mama myśli, że pakuje prezenty', { wording: 'kuba od rana nie wychodzi z pokoju. mama myśli, że pakuje prezenty' }),
       pause(3000)
     ]),
     E('dzien dobry. pani weronika powiedziala mi wszystko. o kubie tez'),

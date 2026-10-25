@@ -1134,3 +1134,11 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 ### v137 — prawdziwe zrzuty ekranu w galerii Mai
 - `z_article` i `z_kruk` (album „zrzuty” w telefonie Mai) to teraz faktyczne zrzuty stron z gry (Gazeta Sudecka 2007, Mglisko24 2011) w motywie Androida, 900×1600, z godzinami 22:46 / 21:42 zgodnymi z EXIF — zamiast rysowanych SVG, które nie zgadzały się już z prawdziwym zdjęciem w artykule.
 - SW v137.
+
+### v138 — styl pisania Igora i Mai (świeże transkrypty na v137)
+- Transkrypty S1–S5 odświeżone na ef7a7a7 (`logs/night/tr137`): wszystkie sezony dochodzą do końca, bez STUCK.
+- Igor według `GLOSY-POSTACI.md` pisze małymi literami, a kilkanaście jego kwestii w prologu, ch1 i ch2 (także w hucie: „Cicho.”, „Światła na dziedzińcu.”) zaczynało się wielką literą → małe litery; fraza „technicznie rzecz biorąc” (trop `ev_igor_phrase`) zostaje.
+- ch1: Igor mówił „ktoś mógł go wyłączyć”, a zaraz potem Ola „Albo ktoś go wyłączył.” → Igor: „potem mógł paść albo stracić zasięg”.
+- ch1/ch2: odpowiedzi na zły dowód: „13-ego/15-ego” → „trzynastego/piętnasty, po północy”, małe litery Igora.
+- S3/S4: Maja (od S2 pisze małymi literami) w ~30 wiadomościach zaczynała zdania wielką literą, czasem w połowie tej samej wiadomości („Kuba nie odpisuje od dziesiątej. na nocce…”) i pisała „Ciebie” → jednolicie małe litery na początku zdań, „ciebie”.
+- Wszystko przez `wording` (sygnatury kroków bez zmian). SW v138.

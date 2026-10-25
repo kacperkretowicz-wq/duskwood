@@ -75,7 +75,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     g('bartek', 'nie bylo jej na tamie', { wording: 'czyli o tej godzinie jej telefon byl w hucie' }),
     g('igor', 'czekajcie. 22:58 huta, 23:58 dalej huta. do zalewu to nawet nie jest po drodze'),
     g('kuba', 'to jak jej auto znalazło się na tamie???'),
-    g('igor', 'mógł paść albo stracić zasięg w środku. ale to nie tłumaczy auta. mamy pozycję telefonu, nie mai', { wording: 'przy 23:58 kończy się zapis. potem mógł paść, ktoś mógł go wyłączyć. nie wiemy jeszcze, kiedy ona stamtąd wyszła' }),
+    g('igor', 'mógł paść albo stracić zasięg w środku. ale to nie tłumaczy auta. mamy pozycję telefonu, nie mai', { wording: 'przy 23:58 kończy się zapis. potem mógł paść albo stracić zasięg. nie wiemy jeszcze, kiedy ona stamtąd wyszła' }),
     g('ola', 'Albo ktoś go wyłączył.'),
     typing('group', 'kuba', 3000),
     g('kuba', 'albo ktoś zawiózł jej auto na tamę'),
@@ -102,7 +102,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
     ]),
     waitFor('ev:ev_cam1_maja', { hints: [{ after: 90, chat: 'group', who: 'igor', text: 'W albumie Fotopułapki są daty w pasku na dole. Szukaj 14.10, około 23.' }] }),
     g('kuba', 'i co?'),
-    show('group', { prompt: 'Pokaż zdjęcie z fotopułapki', accept: [{ ev: ['ev_cam1_maja'] }], wrongFor: { ev_cam2_0019: ['igor', 'To z 13-ego, dzień wcześniej. Ważne, ale najpierw — czy kamera złapała ją 14-ego?'], ev_cam1_car: ['igor', 'To już 15-ego. A 14-ego wieczorem?'] }, wrong: [['kuba', 'pokaż z fotopułapki']] }),
+    show('group', { prompt: 'Pokaż zdjęcie z fotopułapki', accept: [{ ev: ['ev_cam1_maja'] }], wrongFor: { ev_cam2_0019: ['igor', 'to z trzynastego, dzień wcześniej. ważne, ale najpierw: czy kamera złapała ją czternastego?'], ev_cam1_car: ['igor', 'to już piętnasty, po północy. a czternastego wieczorem?'] }, wrong: [['kuba', 'pokaż z fotopułapki']] }),
     typing('group', 'kuba', 4200),
     g('kuba', 'to ona'),
     g('kuba', 'to jej kurtka. a na głowie czołówka, jak u górnika'),
@@ -117,21 +117,21 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
         {
           ev: ['ev_cam1_car'], then: [
             g('bartek', '1:20. noc po tym, jak zniknęła', { wording: '1:20. ta sama noc. niecałe półtorej godziny po tym, jak jej telefon padł' }),
-            g('igor', 'Światła prosto w obiektyw. Tablicy nie widać.'),
+            g('igor', 'Światła prosto w obiektyw. Tablicy nie widać.', { wording: 'światła prosto w obiektyw. tablicy nie widać' }),
             g('ola', 'Gajda mówił mamie Kuby, że sprawdzili hutę w piątek. W dzień.'),
             g('kuba', 'jest zdjęcie z piątku. 11:12. dwóch policjantów'),
             g('ola', 'To kto przyjechał w czwartek o pierwszej w nocy?', { wording: 'To kto tam przyjechał w nocy ze środy na czwartek?' }),
-            g('igor', 'A druga kamera? Ta w hali?'),
-            show('group', { prompt: 'Pokaż zdjęcie z kamery w hali', accept: [{ ev: ['ev_cam2_0019'] }], wrong: [['igor', 'Szukaj CAM-02. Hala A.']] }),
+            g('igor', 'A druga kamera? Ta w hali?', { wording: 'a druga kamera? ta w hali?' }),
+            show('group', { prompt: 'Pokaż zdjęcie z kamery w hali', accept: [{ ev: ['ev_cam2_0019'] }], wrong: [['igor', 'szukaj CAM-02. hala A']] }),
             g('ola', 'A to kto?'),
-            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę.'),
+            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę.', { wording: '13.10, 02:40. dzień przed jej zniknięciem ktoś w nocy oglądał tę ścianę' }),
     g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.', { wording: 'latarka zasłania twarz. może trafił w kamerę przypadkiem, może nie. z tego kadru go nie poznam' })
           ]
         },
         {
           ev: ['ev_cam2_0019'], then: [
             g('ola', 'Kto to jest?'),
-            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała Maja.'),
+            g('igor', '13.10, 02:40. Dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała Maja.', { wording: '13.10, 02:40. dzień przed jej zniknięciem ktoś w nocy oglądał ścianę, którą fotografowała maja' }),
     g('igor', 'I świeci latarką prosto w obiektyw. Albo przypadek, albo wiedział, gdzie jest kamera.', { wording: 'twarzy nie widać przez latarkę. nie wiem, czy celował w kamerę, czy po prostu szedł z tej strony' }),
             g('kuba', 'czyli ktoś wiedział, czego ona szuka'),
             g('bartek', 'a brama? tam tez byla kamera'),
@@ -143,7 +143,7 @@ Engine.chapter('ch1', { num: 1, title: 'Chmura', when: 'Środa, 21 października
         }
       ],
       wrongFor: { ev_cam1_maja: ['kuba', 'to już widzieliśmy'] },
-      wrong: [['igor', 'Coś z fotopułapek. Inne godziny, inne dni.']]
+      wrong: [['igor', 'coś z fotopułapek. inne godziny, inne dni']]
     }),
     g('kuba', 'nikt nam nic nie mówił o żadnym aucie'),
     pause(2000),

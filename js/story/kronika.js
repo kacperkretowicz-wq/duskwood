@@ -40,7 +40,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
     M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc w kawalerce naprzeciwko? z naszej kuchni widać twoje okno 👀 ferie, a lodowisko zamknięte. „awaria agregatu”' }),
     pic('maja2', 'maja', 'c_lodowisko', 'za to bałwan pilnuje. ktoś mu dał pachołek zamiast czapki'),
     choose('maja2', [
-      opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu')]),
+      opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu', { wording: 'kuba mówi że to jego dzieło. nie wierzę mu' })]),
       opt('Czyli całe ferie na sankach?', [M('sanki, herbata, seriale. jak w podstawówce'), M('mama już kupiła trzy paczki pierniczków „na wszelki wypadek”')])
     ]),
     // P7: wejście do S4 po „Zasięgach”.
@@ -396,7 +396,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
         opt('Ta kurtka. Ktoś w takiej kurtce stał na peronie przed świętami?', [
           M('nie wiem. nie widziałam, kto był na peronie'),
           pause(3000),
-          M('ale ten pies to pies pana Zenona. czyli to jego wnuczka. Ida')
+          M('ale ten pies to pies pana Zenona. czyli to jego wnuczka. Ida', { wording: 'ale ten pies to pies pana Zenona. czyli to jego wnuczka. ida' })
         ], { set: { c_idaSeen: true, c_peronLink: true } }),
         opt('Ktoś wyszedł z psem. Normalny wieczór.', [M('no normalny. tylko u nas nikt normalny nie chodzi o 22 z psem po tej stronie bloku', { wording: "no, może po prostu spacer. tylko ten pies mnie zastanawia. nie chcę teraz robić tropu z każdego, kto wychodzi wieczorem" })], { set: { c_idaLater: true } })
       ])
@@ -600,7 +600,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       pause(3000),
       pic('maja2', 'maja', 'c_slady', 'zeszliśmy z Kubą. to było na schodach. co o tym myślisz?'),
       choose('maja2', [
-        opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku'), M('pies pana Zenona')], { set: { c_pawLink: true } }),
+        opt('Łapy psa. Ten sam pies, co na zdjęciu ze śniegu.', [M('tak. Kuba mówi, że to kundel po owczarku', { wording: 'tak. kuba mówi, że to kundel po owczarku' }), M('pies pana Zenona')], { set: { c_pawLink: true } }),
         opt('Małe buty. To raczej dziewczyna niż dorosły facet.', [M('może 37. Kuba przyłożył swój but. dwa razy większy', { wording: "mały ślad. kuba przyłożył swój but, ale od samego rozmiaru nie poznamy, kto tu był" })], { wording: "Mały ślad buta. Możesz porównać go ze swoim, bez dotykania?", set: { c_smallShoe: true } }),
         opt('Ktoś wrócił z psem do domu. Zwykłe błoto.', [M('o pierwszej w nocy? no może')])
       ]),
@@ -642,7 +642,7 @@ Engine.chapter('cf', { num: 3, kicker: 'Sprawa 4 · Noc', title: 'Festyn', when:
       I('laptop złożony. idę spać. ty też idź'),
       O('Mama zasnęła na fotelu. Przykryłam ją kocem. Zwykle jest odwrotnie.'),
       pause(2000),
-      M('Kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty', { img: 'c_parking_noc' }),
+      M('Kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty', { wording: 'kuba poszedł spać. ja siedzę z herbatą przy oknie. parking pusty', img: 'c_parking_noc' }),
       choose('maja2', [
         opt('Idź spać. Rano pogadamy.', [M('dobra. jeszcze jeden odcinek. żartuję')]),
         opt('Napisz, jak coś zobaczysz.', [M('napiszę. ale chyba nic już nie zobaczę. śnieg zasypał ślady')])
@@ -756,7 +756,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       M('kto pisze „wogóle” razem? moja polonistka by zemdlała', { wording: "„wogóle”. razem. kojarzysz, kto tak pisze?" }),
       choose('maja2', [
         opt('i.k_00. W listopadzie, na Błysku, przyznała się do wycięcia 40 sekund nagrania z mostu. Napisała „wogóle”. To Ida.', [
-          M('Ida. wnuczka pana Zenona'),
+          M('Ida. wnuczka pana Zenona', { wording: 'ida. wnuczka pana Zenona' }),
           M('ona ma klucz do jego pokoju, wychodzi z psem po nocach i wie, gdzie mieszkasz', { wording: "jest u niego na ferie, wychodzi z tym psem. i była pod blokiem. to zaczyna pasować, nie tylko to jedno słowo" }),
           M('i miała kiedyś w telefonie numery wszystkich od mostu')
         ], { set: { c_twist: true } }),
@@ -764,7 +764,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
           M('pan Zenon pisze esemesy z przecinkami i „Szanowna Pani”. widziałam'),
           M('to nie on. to ktoś młody. ktoś kto zna Błysk', { wording: "sam błąd nikogo nie wskazuje. ale porównajmy go z tamtymi wiadomościami z Błysku" }),
           pause(3000),
-          M('Ida. jego wnuczka. pracowała w gazecie nad sprawą tego mostu, Natan mi mówił')
+          M('Ida. jego wnuczka. pracowała w gazecie nad sprawą tego mostu, Natan mi mówił', { wording: 'ida. jego wnuczka. pracowała w gazecie nad sprawą tego mostu, Natan mi mówił' })
         ], { set: { c_twist: true, c_wrongZenon: true } })
       ])
     ]),
@@ -821,8 +821,8 @@ Engine.chapter('c4', { num: 5, kicker: 'Sprawa 4 · Rozdział 5', title: '20:58'
     title(),
     scene('xPiatek', [
       M('mama robi pierogi z kapustą, bo „w stresie trzeba jeść”', { img: 'c_pierogi' }),
-      M('Kuba zjadł dwanaście i mówi że nie jest zestresowany'),
-      choose('maja2', [opt('Zostaw mi pięć.', [M('cztery. Kuba już patrzy')]), opt('Nie mam teraz głowy do pierogów.', [M('wiem. ja też nie. ale zjadłam')])])
+      M('Kuba zjadł dwanaście i mówi że nie jest zestresowany', { wording: 'kuba zjadł dwanaście i mówi że nie jest zestresowany' }),
+      choose('maja2', [opt('Zostaw mi pięć.', [M('cztery. Kuba już patrzy', { wording: 'cztery. kuba już patrzy' })]), opt('Nie mam teraz głowy do pierogów.', [M('wiem. ja też nie. ale zjadłam')])])
     ]),
     iff('flag:c_olaFirst', [
       O('Napisałam. Pokażę ci, zanim wrzucę.'),

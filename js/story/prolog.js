@@ -183,7 +183,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
       opt('Nie znała. Myślała, że pisze do dziennikarza, który miał kiedyś mój numer.', [
         g('ola', 'Dziennikarza?'),
         g('kuba', 'adam rybicki. pisał w 2007 o tym chłopcu, co zaginął w powódź. tomek lis'),
-        g('igor', 'Lis… jak pani Weronika z biblioteki?'),
+        g('igor', 'Lis… jak pani Weronika z biblioteki?', { wording: 'lis… jak pani weronika z biblioteki?' }),
         g('kuba', 'chyba tak. jej brat')
       ], { trust: { ola: 1 } }),
       opt('Nie {znałem|znałam} jej. Jestem tu przypadkiem, ale chcę pomóc.', [
@@ -209,7 +209,7 @@ Engine.chapter('prolog', { num: 0, title: 'Nieodebrane', when: 'Środa, 21 paźd
     g('ola', 'Miała wszystko w Nimbusie. Zdjęcia, smsy, notatki. Całe życie, nawet listy zakupów.'),
     g('kuba', 'próbowałem się zalogować na jej laptopie. hasła nie ma. jak klikam „nie pamiętasz hasła”, to pyta o pytania bezpieczeństwa'),
     g('kuba', 'dwa razy źle odpowiedziałem i się wystraszyłem, że zablokuje konto'),
-    g('igor', 'Spokojnie. Technicznie rzecz biorąc, Nimbus blokuje dopiero po dziesięciu próbach. Ale lepiej nie strzelać na ślepo.', { clue: 'ev_igor_phrase' }),
+    g('igor', 'Spokojnie. Technicznie rzecz biorąc, Nimbus blokuje dopiero po dziesięciu próbach. Ale lepiej nie strzelać na ślepo.', { clue: 'ev_igor_phrase', wording: 'spokojnie. technicznie rzecz biorąc, nimbus blokuje dopiero po dziesięciu próbach. ale lepiej nie strzelać na ślepo' }),
     g('ola', 'Jutro mam na szóstą 🙃 Jeszcze chwilę jestem. %name%, zerkniesz? My już te ekrany znamy na pamięć.'),
     g('kuba', 'zaraz podeślę ci jej maila'),
     /* P1: Kuba porządkuje to, co już wiadomo, i jedną rzecz, która się nie zgadza. */
