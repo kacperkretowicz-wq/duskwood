@@ -297,7 +297,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     g('bartek', 'auto pod huta to magna gajdy. DDZ 6K19. mam to w zeszycie'),
     typing('group', 'kuba', 5000),
     g('kuba', 'może sprawdzał hutę. jest policjantem'),
-    g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?', { wording: 'O pierwszej w nocy, godzinę po tym, jak jej telefon zamilkł? Zanim ktokolwiek wiedział, że zaginęła?' }),
+    g('ola', 'O pierwszej w nocy, dzień po jej zniknięciu? Zanim ktokolwiek wiedział, że zaginęła?', { wording: 'O pierwszej w nocy, niecałe półtorej godziny po tym, jak jej telefon zamilkł? Zanim ktokolwiek wiedział, że zaginęła?' }),
     typing('group', 'kuba', 6000),
     g('kuba', 'nie wiem. kurwa, naprawdę już nie wiem'),
     pause(3000),

@@ -1041,3 +1041,12 @@ Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez
 
 ### v127 — Marta mieszka z mamą (S2)
 - Marta mieszka z mamą (wspólny tablet, kolacja, „od soboty śpię u koleżanki”), a jednocześnie pisała „jadę do mamy”. Teraz jadą razem na urodziny ciotki, a w m4 „przed wyjazdem na urodziny ciotki”. Zmiana tylko przez `wording`.
+
+### v128 — świeży przegląd ciągłości S1 (transkrypty na v127)
+- Transkrypty wszystkich sezonów odświeżone na f35d983 (bez STUCK, S1–S5 dochodzą do końca).
+- ch2: Igor mówił, że dostał negatywy „w zeszłym tygodniu”, a w ch4 skanował je 10 października → „jakieś dwa tygodnie temu”.
+- ch3: Ola — auto pod hutą o 1:20 to „niecałe półtorej godziny” po zaniku telefonu (23:58), jak u Bartka, nie „godzinę”.
+- ch4: Ola zdradzała Igora („Igor miał ją w znacznie lepszym skanie”) zanim gracz sam dojdzie do Szklarza → „A ten skan jest dużo lepszy niż wszystko, co mamy.”
+- Epizod z panem Henrykiem: gracz mówił do Sylwii na „ty” → „Proszę mu przekazać…”, „Proszę mu niczego nie obiecywać…” (spójnie z v126).
+- Epilog: Weronika pisze w sobotę 14.11 „pochowaliśmy w sobotę” → „w zeszłą sobotę”; wiadomość Mai o pudle w jej stylu (małe litery).
+- Wszystko przez `wording`. SW v128.

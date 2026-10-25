@@ -57,7 +57,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       notify({ app: 'browser', title: 'Gazeta Sudecka', text: 'Przełom w sprawie sprzed 29 lat: „Tomek nie utonął”', sound: 'notif', open: { page: 'gazeta2026' } }),
       pause(2500),
       iff(E('swit'), [
-        W('Pochowaliśmy Tomka w sobotę. Obok mamy.'),
+        W('Pochowaliśmy Tomka w sobotę. Obok mamy.', { wording: 'Pochowaliśmy Tomka w zeszłą sobotę. Obok mamy.' }),
         W('Pierwszy raz od dwudziestu dziewięciu lat zapaliłam znicz na grobie, a nie nad rzeką.'),
         W('Dziękuję. Nie wiem, jak to inaczej powiedzieć.')
       ], [
@@ -125,7 +125,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
         opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.', { wording: 'teraz? marzną mi stopy, mama trzeci raz pyta czy herbaty, a ja chcę posiedzieć sama. ale jem już normalnie' })]),
         opt('Pan Adam byłby z ciebie dumny.', [M('Jego brat powiedział to samo. Prawie się rozpłakałam przy obcym facecie.', { wording: 'to prawda. nawet jak nic nie mówię, on siedzi obok. dzisiaj wysłałam go w końcu na spacer' })], { wording: 'Dobrze mieć Kubę obok. Bardzo na ciebie czekał.' })
       ]),
-      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.', { img: 'e_pudlo' }),
+      M('Właśnie. Brat pana Rybickiego przyniósł mi pudło. Jego notatki. Dwadzieścia lat notatek.', { img: 'e_pudlo', wording: 'właśnie. brat pana Rybickiego przyniósł mi pudło. jego notatki. dwadzieścia lat notatek' }),
       M('Tomek był tylko jedną z jego spraw. Tam są inne.', { wording: 'na razie zajrzałam tylko na wierzch. kasety, zeszyty, jakieś wycinki o moście' }),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.', { wording: 'pani Weronika mówi, że pomoże to poukładać. u mnie pudło stoi pod biurkiem i przeszkadza bandziorowi' }),
       M('Kiedyś ci pokażę, jak je znaleźć.', { wording: 'jak do tego usiądę, napiszę. dzisiaj tylko chciałam się odezwać' }),

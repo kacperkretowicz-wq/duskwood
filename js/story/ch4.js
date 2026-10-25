@@ -78,7 +78,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
     show('group', { prompt: 'Pokaż kadr 23', accept: [{ ev: ['ev_frame23'] }], wrong: [['kuba', 'co masz?']] }),
     typing('group', 'kuba', 4500),
     g('kuba', 'ten chłopak ma czapkę policyjną'),
-    g('ola', 'Czapka pasuje do Roberta. Jego ojciec był komendantem.', { wording: 'Robert mógł mieć taką po ojcu. Ale to nadal stara klisza. Igor miał ją w znacznie lepszym skanie.' }),
+    g('ola', 'Czapka pasuje do Roberta. Jego ojciec był komendantem.', { wording: 'Robert mógł mieć taką po ojcu. Ale to nadal stara klisza. A ten skan jest dużo lepszy niż wszystko, co mamy.' }),
     g('ola', 'A w kanale pieca, za nim… to żółte.'),
     g('bartek', 'skad to masz'),
     choose('group', [

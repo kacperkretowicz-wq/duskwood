@@ -207,8 +207,8 @@ const StoryScenes = D => {
       S('Przyszedł do salonu z pierniczkami. Nic nie powiedział, tylko je postawił i wyszedł 🥲'),
       S('A, i pyta, czy ktoś kiedyś zapyta go o most. Nie wiem, o jaki most. Mówi, że „wy wiecie”.'),
       choose('sylwia', [
-        opt('Przekaż mu, że ktoś zapyta. Nie od razu, ale zapyta.', [S('Przekażę. Ucieszy się, chociaż tego nie pokaże.')], { set: { henrykPromise: true } }),
-        opt('Nie obiecuj mu niczego w moim imieniu.', [S('Dobrze. Powiem, że przekazałam i tyle.')])
+        opt('Przekaż mu, że ktoś zapyta. Nie od razu, ale zapyta.', [S('Przekażę. Ucieszy się, chociaż tego nie pokaże.')], { wording: 'Proszę mu przekazać, że ktoś zapyta. Nie od razu, ale zapyta.', set: { henrykPromise: true } }),
+        opt('Nie obiecuj mu niczego w moim imieniu.', [S('Dobrze. Powiem, że przekazałam i tyle.')], { wording: 'Proszę mu niczego nie obiecywać w moim imieniu.' })
       ])
     ]
   };

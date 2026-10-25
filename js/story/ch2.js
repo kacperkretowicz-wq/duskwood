@@ -146,7 +146,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     scene('s12', SC.s12),
 
     /* --- negatywy --- */
-    g('igor', 'słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu'),
+    g('igor', 'słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu w zeszłym tygodniu', { wording: 'słuchajcie, jeszcze ta klisza. maja dała mi negatywy do skanu jakieś dwa tygodnie temu' }),
     g('igor', 'stary film, większość klatek ledwo czytelna'),
     g('ola', 'A te skany gdzie są?'),
     g('igor', 'oddałem na pendrivie. ale wcześniej robiła negatywom zdjęcia telefonem. szukaj w galerii'),
