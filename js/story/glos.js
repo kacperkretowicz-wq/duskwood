@@ -900,8 +900,8 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
   ];
 });
 
-/* ---------- g6 · Rozprawa ---------- */
-Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozprawa', when: 'Sobota, 20 marca · 8:20', mood: 'tense' }, D => {
+/* ---------- g6 · Nagranie ---------- */
+Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Nagranie', when: 'Sobota, 20 marca · 8:20', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, give, set, iff, end, title, clock, notify, ambient, scene, scare, callIn, callEnd, unlock, run, ending, credits, camera } = D;
   const { M, K, O, I, W, S, Nt, Z, Mr, Gr, c, V } = GlosCast(D);
   return [
@@ -1001,7 +1001,11 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     ]),
     callEnd(),
     run(s => {
-      s.vars.s5Ending = G.flag('g_wipeAll') ? 'cisza2' : (G.flag('g_recordMarta') && G.flag('g_recOn') && !G.flag('g_martaAsk')) ? 'haslo' : 'echo';
+      // Przyznanie na taśmie zostaje dowodem także wtedy, gdy w piątek poszły pliki.
+      // Samo wysłanie nagrań, bez jej własnych słów, nadal zostawia echo.
+      const taped = G.flag('g_recordMarta') && G.flag('g_recOn');
+      const haslo = taped && (G.flag('g_confess') || !G.flag('g_martaAsk'));
+      s.vars.s5Ending = G.flag('g_wipeAll') ? 'cisza2' : haslo ? 'haslo' : 'echo';
     }),
     pause(2500),
     W('Czekam w kuchni. Woda w czajniku gotowała się już trzy razy. Czy to już?'),
@@ -1010,6 +1014,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     iff(s => s.vars.s5Ending === 'haslo', [
       Nt('mam nagranie. prokuratorka slucha go w samochodzie drugi raz'),
       iff('flag:g_confess', [Nt('„wszystko jest na kasetach. wystarczylo sluchac”. powiedziala to sama. pani prokurator tylko kiwnela glowa')], [Nt('nie przyznala sie wprost. ale jest grozba i „mam glos mai”. to wystarczy na przeszukanie pracowni')]),
+      iff('flag:g_martaAsk', [Nt('w piatek wyslal{es|as} jej nasze nagrania. wiedziala, co mamy. ale na tej tasmie mowi swoimi slowami. to co innego')]),
       iff('flag:g_strong', [Nt('i zdjecie magnetowidu. policjant mowi, ze zabezpiecza sprzet od razu')]),
       Nt('ida, zenon, weronika, henryk. wszyscy zeznaja. dzieki tobie'),
       pause(3000),
@@ -1023,7 +1028,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     ], [
       iff(s => s.vars.s5Ending === 'echo', [
         scene('scEcho', [scare('s5_echo', 'glitch')]),
-        Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”'),
+        iff('flag:g_confess', [Nt('przyznala sie. „wszystko jest na kasetach”. ale nie mamy tego na tasmie. prokuratorka slyszy tylko moje streszczenie')], [Nt('nie mam nic, co by przekonalo prokuratorke. rozmowa z marta jest „zbyt ogolna”')]),
         Nt('a godzine temu pani jadwiga z kiosku wycofala zeznania. powiedziala, ze „dzwonil maz i prosil, zeby dala spokoj”'),
         Nt('jej maz nie zyje od pieciu lat'),
         iff('flag:g_martaAsk', [Nt('i jeszcze jedno. w piatek wyslal{es|as} marcie nasze nagrania. wiedziala, co mamy, zanim zadzwonila')]),

@@ -22,7 +22,7 @@ DATA.chars = {
   dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
   duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
   prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
-  ada: { name: 'Ada Kurek', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
+  ada: { name: 'Ada Wolska', short: 'Ada', color: '#c86dd7', photo: 'assets/people/ada.jpg' },
   szymon: { name: 'Szymon Bielak', short: 'Szymon', color: '#5aa0e8', photo: 'assets/people/szymon.jpg' },
   unknown: { name: 'Nieznany numer', short: '?' },
   me: { name: 'Ty', short: 'Ty' }

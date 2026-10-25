@@ -129,7 +129,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('Tomek był tylko jedną z jego spraw. Tam są inne.', { wording: 'na razie zajrzałam tylko na wierzch. kasety, zeszyty, jakieś wycinki o moście' }),
       M('I miejsca. Prawdziwe miejsca, opisane tak, że da się je znaleźć. Nie tylko w Mglisku.', { wording: 'pani Weronika mówi, że pomoże to poukładać. u mnie pudło stoi pod biurkiem i przeszkadza bandziorowi' }),
       M('Kiedyś ci pokażę, jak je znaleźć.', { wording: 'jak do tego usiądę, napiszę. dzisiaj tylko chciałam się odezwać' }),
-      M('tylko odbierz jak zadzwonię, ok? tym razem'),
+      M('tylko odbierz jak zadzwonię, ok? tym razem', { wording: 'tylko odbierz jak zadzwonię, ok? tym razem. tamtej nocy gajda włączył telefon, żeby wysłać mamie tamtego smsa. zobaczył ostatni numer i zadzwonił. nic nie powiedział. ja nawet nie wiedziałam' }),
       pause(3500),
       iff(E('swit'), [ending('swit')], [ending('odlamki')])
     ]),

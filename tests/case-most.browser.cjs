@@ -56,7 +56,7 @@ async function shot(page,name,fn,arg){
    assert.ok(res.stop,JSON.stringify(res));
    if(ending==='cisza'){
     assert.deepEqual(res.chapters,['mp','m0','m1','m2','m3','m4','m5']);assert.equal(res.ending,'margines');
-    assert.ok(await page.evaluate(()=>G.flag('majaFound')&&G.flag('m_lateRescue')&&G.flag('mp_placeOnly')&&G.flag('mp_reportClean')));
+    assert.ok(await page.evaluate(()=>G.flag('majaFound')&&G.flag('m_lateRescue')&&G.flag('gajdaCaught')&&G.flag('mp_placeOnly')&&G.flag('mp_reportClean')));
     await shot(page,'cisza-nina',()=>{UI.goHome();UI.openApp('messages',{chat:'nina'});});
     await shot(page,'cisza-kuba',()=>{UI.goHome();UI.openApp('messages',{chat:'kuba'});});
     await shot(page,'cisza-maja',()=>{UI.goHome();UI.openApp('messages',{chat:'maja2'});});

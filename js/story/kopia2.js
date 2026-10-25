@@ -1,10 +1,10 @@
 'use strict';
-/* SPRAWA 3 „KOPIA ZAPASOWA” — prolog po Ciszy „Hasło” (kp) oraz rozdziały 2 „Opisy” (akt III),
+/* SPRAWA 3 „KOPIA ZAPASOWA” — prolog po Ciszy „Karteczka” (kp) oraz rozdziały 2 „Opisy” (akt III),
    3 „Kto patrzył” (akt IV, zwrot: Kuba) i 4 „Cudzym głosem” (akt V, Lena, zakończenia).
    Plan: docs/SPRAWA-3-PLAN.md. Każdy wniosek ma źródło widoczne wcześniej (dowód, zdjęcie, log).
    Straszaki w scenach sc*: raz na zapis, najwyżej trzy na rozdział, tryb łagodny w Ustawieniach. */
 
-Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Hasło', when: 'Piątek, 18 grudnia · 16:20', mood: 'calm' }, D => {
+Engine.chapter('kp', { num: 0, kicker: 'Sprawa 3 · Prolog po Ciszy', title: 'Karteczka', when: 'Piątek, 18 grudnia · 16:20', mood: 'calm' }, D => {
   const { say, pause, choose, opt, set, end, title, clock, ambient, unlock, trust } = D;
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
@@ -681,7 +681,7 @@ Engine.chapter('k4', { num: 4, kicker: 'Sprawa 3 · Rozdział 4', title: 'Cudzym
       notify({ app: 'messages', title: 'Błysk', text: 'nowy kontakt wysyła ci wiadomość. Zniknie po przeczytaniu.', sound: 'notif', open: { chat: 'blysk2' } }),
       say('blysk2', 'blysk2', 'wesołych świąt', { vanish: true }),
       say('blysk2', 'blysk2', 'na peronie {stałeś|stałaś} przy starej wiacie. ładna kurtka', { vanish: true }),
-      say('blysk2', 'blysk2', 'kuba skopiował 1412 plików. ja mam więcej', { vanish: true }),
+      say('blysk2', 'blysk2', 'kuba skopiował 1412 plików. ja mam więcej', { vanish: true, wording: 'przy wiacie miał{eś|aś} otwarty pdf od nimbusa. zdążyłam przeczytać: 1412 plików. ja mam więcej' }),
       vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ]),
     pause(3000),
