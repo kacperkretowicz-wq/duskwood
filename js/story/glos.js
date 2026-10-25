@@ -264,7 +264,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       pause(3000),
       S('Grupa „Mglisko — co się dzieje” wariuje. Od rana siedem zgłoszeń.'),
       S('Pan Stach dostał telefon od „syna z Holandii”. Pani Gienia od „pani z gminy”, że ma zapłacić za wywóz śmieci kodem.'),
-      S('I jeszcze jedno. Ktoś wkleił głosówkę z %name% w nazwie. Usunęłam, ale ludzie pytają, czy to {pan|pani}.'),
+      S('I jeszcze jedno. Ktoś wkleił głosówkę z %name% w nazwie. Usunęłam, ale ludzie pytają, czy to {pan|pani}.', { wording: 'I jeszcze jedno. Ktoś wkleił głosówkę z %name% w nazwie. Usunęłam, ale ludzie pytają, czy to {Pan|Pani}.' }),
       choose('sylwia', [
         opt('To nie ja. Ktoś podszywa się pode mnie. Mogę napisać sprostowanie.', [S('Proszę. Wkleję je i przypnę. Krótko, bez nazwisk.')], { set: { g_sprostowanie: true } }),
         opt('Niech pani nikogo nie oskarża w grupie. Nawet mnie.', [S('Staram się. Ale ludzie są przestraszeni. Wolą mieć winnego niż nie mieć nikogo.')])
@@ -709,7 +709,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     scene('xSylwiaCzwartek', [
       pause(3000),
       S('W grupie ktoś napisał, że „ktoś z Dzierżoniowa” dzwoni do ludzi od mostu. Nie wiem, skąd to wie.'),
-      S('Ludzie przestali pisać o {panu|pani}. Teraz piszą o mafii z Wrocławia. Wolę już to.', { wording: "Przestali podawać {pana|pani} nazwisko. Teraz piszą o mafii z Wrocławia. Znowu muszę usuwać adresy, bo już „wiedzą”, gdzie szukać." }),
+      S('Ludzie przestali pisać o {panu|pani}. Teraz piszą o mafii z Wrocławia. Wolę już to.', { wording: "Przestali podawać {Pana|Pani} nazwisko. Teraz piszą o mafii z Wrocławia. Znowu muszę usuwać adresy, bo już „wiedzą”, gdzie szukać." }),
       choose('sylwia', [
         opt('Niech pani pilnuje, żeby nikt nie podawał nazwisk. Policja już działa.', [S('Pilnuję. Usunęłam już trzy adresy dzisiaj. Jak w styczniu.')]),
         opt('Dziękuję, że pani mnie broniła.', [S('Nie broniłam. Po prostu nie wierzyłam w bzdury. To co innego.')])
@@ -801,7 +801,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
       ])
     ]),
     pause(3000),
-    S('W grupie wszyscy dziękują policji. I trochę Natanowi. O {panu|pani} nikt już nie pisze źle.'),
+    S('W grupie wszyscy dziękują policji. I trochę Natanowi. O {panu|pani} nikt już nie pisze źle.', { wording: 'W grupie wszyscy dziękują policji. I trochę Natanowi. O {Panu|Pani} nikt już nie pisze źle.' }),
     S('Pani Krysia napisała: „wnuczek dzwonił naprawdę i powiedział hasło”. Dwieście serduszek.'),
     pause(3500),
     clock('2027-03-19T11:20'),
@@ -1033,7 +1033,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
         M('ktoś wrzucił twoją głosówkę do grupy sylwii. mówisz w niej, że „przepraszasz za wszystko”'),
         M('wiem, że to nie ty. hasło znam tylko ja. ale reszta miasta go nie zna'),
         S('Usunęłam tę głosówkę. Ktoś ją wkleił znowu. I znowu. W końcu zamknęłam komentarze.'),
-        S('Przepraszam. Wiem, że to nie {pan|pani}. Ale ja nie mam już siły tłumaczyć ludziom, co jest prawdziwe.'),
+        S('Przepraszam. Wiem, że to nie {pan|pani}. Ale ja nie mam już siły tłumaczyć ludziom, co jest prawdziwe.', { wording: 'Przepraszam. Wiem, że to nie {Pan|Pani}. Ale ja nie mam już siły tłumaczyć ludziom, co jest prawdziwe.' }),
         K('siedzę z mają na balkonie. pizza była, ale nikt nie miał ochoty się śmiać'),
         ending('echo')
       ], [

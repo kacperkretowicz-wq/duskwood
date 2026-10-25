@@ -1231,3 +1231,7 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - S2 m0 (gałąź „Ktoś tu kłamie”): Weronika najpierw przyznaje „Ja też tak na początku pomyślałam”, potem wycinek; na końcu „Babcia mówi „w pracy”, notatka mówi „most”. Obie mają rację.” (wcześniej przyznanie wisiało na końcu, bez związku).
 - S2 m3: pan Henryk nie powtarza dwa razy „przez telefon nie powiem”.
 - S4 c4 (gałąź „Nie mieszaj się w to”): Kuba nie zaprzecza sam sobie — „nie napisałem do idy. ale ciągle mam otwarty jej profil…”.
+
+### v154 — Sylwia zawsze pisze „Pan/Pani” wielką literą
+- S5: cztery wiadomości Sylwii w glos.js miały „{pan|pani}” małą literą, a w S2–S4 Sylwia konsekwentnie pisze „{Pan|Pani}”. Ujednolicone przez `wording` (rozmowy telefoniczne zostają małą literą — to mowa, nie SMS).
+- Losowe przebiegi tr152/tr153 (S1–S5) bez kolejnych niespójności.
