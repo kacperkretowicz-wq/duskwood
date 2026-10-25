@@ -166,6 +166,32 @@
 
     let lastRendered = null;
     let typingEl = null;
+    let receiptEl = null;
+    let followBottom = true;
+    let pinScheduled = false;
+    let ignoreScroll = false;
+
+    function atBottom() { return body.scrollHeight - body.scrollTop - body.clientHeight < 160; }
+    body.addEventListener('scroll', () => { if (!ignoreScroll) followBottom = atBottom(); }, { passive: true });
+    /* Jedno przewinięcie na klatkę, po tym jak dymek już zajmuje miejsce. Bez smooth — nie goni animacji .msg.in. */
+    function pinBottom() {
+      if (pinScheduled) return;
+      pinScheduled = true;
+      requestAnimationFrame(() => {
+        pinScheduled = false;
+        const top = Math.max(0, body.scrollHeight - body.clientHeight);
+        if (Math.abs(body.scrollTop - top) <= 1) { followBottom = true; return; }
+        ignoreScroll = true;
+        body.scrollTop = top;
+        ignoreScroll = false;
+        followBottom = true;
+      });
+    }
+    function artFrame(imgId) {
+      const meta = (Art.get && Art.get(imgId)) || {};
+      const w = meta.w || 1200, h = meta.h || 900;
+      return { w, h };
+    }
 
     function setSub() {
       const t = Engine.typing(id);
@@ -181,26 +207,45 @@
 
     /* Potwierdzenia jak w danej aplikacji: SMS „Dostarczono”; Gadka i Klipo „Wysłano”, potem główki/„Wyświetlono”; Błysk „Wysłano” → „Otwarto”. */
     const appId = DATA.chatApp(id);
-    function receipt() {
-      const t = appId === 'messages' ? 'Dostarczono' : 'Wysłano';
-      return h('span', { class: 'delivery', title: t, 'aria-label': t }, t);
+    const receiptLabel = () => appId === 'messages' ? 'Dostarczono' : 'Wysłano';
+    function placeReceipt(row) {
+      const tm = $('.tm', row);
+      if (!tm) return;
+      const label = receiptLabel();
+      if (!receiptEl) receiptEl = h('span', { class: 'delivery' }, label);
+      const moving = receiptEl.parentNode !== tm;
+      if (moving || receiptEl.classList.contains('seen')) {
+        receiptEl.classList.remove('seen');
+        delete receiptEl.dataset.seen;
+        receiptEl.textContent = label;
+      }
+      receiptEl.title = label;
+      receiptEl.setAttribute('aria-label', label);
+      if (moving) tm.appendChild(receiptEl);
     }
+    function clearReceipt() { if (receiptEl && receiptEl.parentNode) receiptEl.remove(); }
     let seenTimer = null;
     function updateSeen() {
       clearTimeout(seenTimer);
       if (appId === 'messages' || cd.readonly) return;
-      const last = G.chat(id).msgs.at(-1), d = msgs.querySelector('.delivery');
+      const last = G.chat(id).msgs.at(-1);
+      const d = receiptEl && receiptEl.isConnected ? receiptEl : null;
       if (!last || last.from !== 'me' || !d || d.classList.contains('seen')) return;
       const wait = 2200 - (G.now() - last.t);
       if (!Engine.typing(id) && wait > 0) { seenTimer = setTimeout(updateSeen, Math.min(wait, 2200)); return; }
-      d.classList.add('seen'); d.innerHTML = '';
+      d.classList.add('seen');
       if (appId === 'gadka') {
         const who = cd.group ? ((G.s.chats[id] && G.s.chats[id].members) || cd.members || []).slice(0, 4) : [chatAv(id)];
         d.setAttribute('aria-label', 'Wyświetlono'); d.title = 'Wyświetlono';
-        who.forEach(w => d.appendChild(UI.avatar(w, 'seen-av')));
+        const want = who.join(',');
+        if (d.dataset.seen !== want) {
+          d.dataset.seen = want;
+          d.replaceChildren(...who.map(w => UI.avatar(w, 'seen-av')));
+        }
       } else {
         const t = appId === 'blysk' ? 'Otwarto' : 'Wyświetlono';
-        d.textContent = t; d.setAttribute('aria-label', t); d.title = t;
+        if (d.textContent !== t) d.textContent = t;
+        d.setAttribute('aria-label', t); d.title = t;
       }
     }
 
@@ -222,7 +267,19 @@
       const b = h('div', { class: 'bub' + (m.img && !m.text && !m.snap ? ' media' : '') });
       UI.bindMessageActions(b, id, m);
       if (m.img && !m.vid) {
-        const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
+        const frame = artFrame(m.img);
+        const im = h('img', {
+          class: 'mimg', src: Art.url(m.img), alt: '', width: frame.w, height: frame.h,
+          decoding: 'async', onclick: () => UI.viewImage(m.img, { from: ch.name })
+        });
+        im.style.aspectRatio = frame.w + ' / ' + frame.h;
+        im.addEventListener('load', () => {
+          const nw = im.naturalWidth, nh = im.naturalHeight;
+          if (nw > 0 && nh > 0 && Math.abs(nw / nh - frame.w / frame.h) > 0.02) {
+            im.style.aspectRatio = nw + ' / ' + nh;
+            if (followBottom) pinBottom();
+          }
+        });
         b.appendChild(im);
       }
       if (m.snap) { b.classList.add('snap-bub'); b.appendChild(snapTile(m)); }
@@ -233,7 +290,7 @@
       if (m.deleted) b.appendChild(h('div', { class: 'tx' }, h('i', {}, 'Wiadomość została usunięta')));
       else if (m.text && /^voice:/.test(m.text)) b.appendChild(h('div', { class: 'tx' }, UI.textOrVoice(m.text)));
       else if (m.text) b.appendChild(h('div', { class: 'tx', html: U.rich(m.text) }));
-      b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t), mine ? receipt() : null));
+      b.appendChild(h('span', { class: 'tm' }, m.edited && !m.deleted ? 'edytowano · ' : null, U.time(m.t)));
       if (PhoneTools.isSaved(id, m.id)) b.append(h('span', { class: 'message-bookmark' }, 'Zachowany cytat'));
       const reaction = PhoneTools.reaction(id, m.id);
       if (reaction) b.append(h('button', { class: 'message-reaction', 'aria-label': 'Twoja reakcja ' + reaction, onclick: e => { e.stopPropagation(); UI.messageActions(id, m); } }, reaction));
@@ -288,45 +345,66 @@
 
     function renderAll() {
       msgs.innerHTML = '';
-      // Dymek „pisze…” wypadł razem z resztą; bez tego append() wstawiałby przed odłączony węzeł i przerywał render.
-      typingEl = null;
+      // Pełne przerysowanie odłącza węzły, ale „pisze…” i potwierdzenie zostają tymi samymi elementami.
       lastRendered = null;
       const list = G.chat(id).msgs;
       list.forEach(m => append(m, false));
       showTyping();
-      requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
+      followBottom = true;
+      pinBottom();
       updateSeen();
     }
     function append(m, animate = true) {
-      if (m.from === 'me' || (appId === 'gadka' && m.from !== 'sys')) msgs.querySelectorAll('.delivery').forEach(el => el.remove());
+      const stick = animate && (m.from === 'me' || atBottom());
+      const affectsReceipt = m.from === 'me' || (appId === 'gadka' && m.from !== 'sys');
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');
       if (typingEl && typingEl.parentNode === msgs) msgs.insertBefore(n, typingEl); else msgs.appendChild(n);
+      if (affectsReceipt) { if (m.from === 'me') placeReceipt(n); else clearReceipt(); }
       lastRendered = m;
+      if (stick) pinBottom();
     }
-    function nearBottom() { return body.scrollHeight - body.scrollTop - body.clientHeight < 160; }
-    function scrollEnd(force) { if (force || nearBottom()) requestAnimationFrame(() => body.scrollTo({ top: body.scrollHeight, behavior: 'smooth' })); }
     function showTyping() {
       const t = Engine.typing(id);
-      if (typingEl) { typingEl.remove(); typingEl = null; }
-      if (t) {
-        typingEl = h('div', { class: 'msg them typing' + (cd.group ? '' : ' solo') },
-          cd.group ? UI.avatar(t, 'sm') : null,
-          h('div', { class: 'bub' }, h('i'), h('i'), h('i')));
+      if (!t) {
+        if (typingEl && typingEl.parentNode === msgs) {
+          const stick = atBottom() || followBottom;
+          typingEl.remove();
+          if (stick) pinBottom();
+        }
+        setSub();
+        return;
+      }
+      if (!typingEl) {
+        typingEl = h('div', { class: 'msg them typing', dataset: { who: t } }, h('div', { class: 'bub' }, h('i'), h('i'), h('i')));
+      }
+      typingEl.className = 'msg them typing' + (cd.group ? '' : ' solo');
+      typingEl.dataset.who = t;
+      let av = typingEl.querySelector(':scope > .av');
+      if (cd.group) {
+        if (!av || av.dataset.who !== t) {
+          const n = UI.avatar(t, 'sm');
+          n.dataset.who = t;
+          if (av) av.replaceWith(n); else typingEl.insertBefore(n, typingEl.firstChild);
+        }
+      } else if (av) av.remove();
+      if (typingEl.parentNode !== msgs) {
         msgs.appendChild(typingEl);
-        scrollEnd();
+        if (atBottom() || followBottom) pinBottom();
       }
       setSub();
     }
 
     /* ----- pole odpowiedzi ----- */
     function renderComposer() {
+      const wasBottom = atBottom() || followBottom;
       comp.innerHTML = '';
       comp.className = 'composer';
       const p = pendingFor(id);
       if (!p) {
         comp.appendChild(h('div', { class: 'idle' }, h('span', {}, cd.readonly ? 'Nie możesz odpowiedzieć na tę wiadomość' : Engine.typing(id) ? 'Poczekaj na wiadomość…' : 'Czekasz na odpowiedź'), h('span', { class: 'send dis', html: U.icon('send', 18) })));
+        if (wasBottom) pinBottom();
         return;
       }
       if (p.type === 'choose') {
@@ -335,13 +413,10 @@
         if (p.camera) {
           comp.appendChild(h('button', { class: 'opt cam-open', onclick: async () => { SFX.play.tap(); const i = await UI.camera(p.options); if (i != null) { comp.innerHTML = ''; Engine.answer(i); } } },
             h('span', {}, '📷 Otwórz aparat'), U.ico('send', 15)));
-          scrollEnd(true); return;
-        }
-        p.options.forEach((o, n) => comp.appendChild(h('button', {
+        } else p.options.forEach((o, n) => comp.appendChild(h('button', {
           class: 'opt' + (o.shot ? ' shot' : ''), style: p.shown ? 'animation:none' : `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
         }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
-        scrollEnd(true);
       } else if (p.type === 'ask') {
         const inp = h('input', { class: 'field', placeholder: p.placeholder, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', type: p.mask ? 'password' : 'text', enterkeyhint: 'send' });
         const send = () => { const v = inp.value.trim(); if (!v) { inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); return; } SFX.play.tap(); comp.innerHTML = ''; Engine.answer(v); };
@@ -356,6 +431,7 @@
         comp.classList.add('action');
         comp.appendChild(h('button', { class: 'btn pri wide', onclick: () => UI.openApp('maps', { pick: { prompt: p.prompt, layer: p.layer, chat: id, pool: p.pool } }) }, U.ico('pin', 18), U.tpl(p.prompt)));
       }
+      if (wasBottom || p.type === 'choose' || p.type === 'ask' || p.type === 'show' || p.type === 'place') pinBottom();
     }
 
     const offs = [
@@ -364,7 +440,6 @@
         append(msg);
         updateSeen();
         G.markRead(id);
-        scrollEnd(msg.from === 'me');
       }),
       BUS.on('typing', ({ chat }) => { if (chat === id) { updateSeen(); showTyping(); } }),
       BUS.on('pending', () => renderComposer()),
