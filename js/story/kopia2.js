@@ -298,7 +298,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     scene('kNocka', [
       M('nie śpisz? ja też nie'),
       M('mama już lepi uszka. o drugiej w nocy. mówi, że jak nie teraz, to kiedy'),
-      M('a Kuba ma ostatnią nockę przed świętami. obiecał, że jutro odśpi i przyjdzie lepić'),
+      M('a Kuba ma ostatnią nockę przed świętami. obiecał, że jutro odśpi i przyjdzie lepić', { wording: 'a kuba ma ostatnią nockę przed świętami. obiecał, że jutro odśpi i przyjdzie lepić' }),
       choose('maja2', [
         opt('Ile tych uszek?', [M('dwieście. liczyłam. w tym roku ja robię te krzywe')]),
         opt('Śpij, Maja. Jutro ważny dzień.', [M('wiem. dobranoc')])
@@ -320,7 +320,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
       M('teraz chodzi z nim wnuczka, przyjechała na święta. pan Zenon by nie dał rady po nocach'),
       pause(4000),
       M('Kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”', { wording: 'kuba nie odpisuje od dziesiątej. na nocce zwykle odpisuje chociaż „ok”' }),
-      say('maja2', 'maja', 'voice:0:07|Maja|(szeptem) Mama już śpi. Na stole zostało dwieście uszek. Dobra, idę spać.')
+      say('maja2', 'maja', 'voice:0:07|Maja|(szeptem) Mama już śpi. Na stole zostało dwieście uszek. Dobra, idę spać.', { wording: 'voice:0:07|Maja|(szeptem) Mama właśnie poszła spać. Na stole zostało dwieście uszek. Dobra, ja też idę.' })
     ]),
     pause(8000),
     typing('kuba', 'kuba', 4000),

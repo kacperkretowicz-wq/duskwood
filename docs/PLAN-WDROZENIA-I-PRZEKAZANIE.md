@@ -1179,3 +1179,9 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - S3: Maja kończyła 11 z 63 wiadomości kropką, w S2/S4/S5 nigdy. Kropki zdjęte w `wording` (bez listy godzin, która jest wyliczanką).
 - S5 g3: „kuba mówi, że coś się stało” — Kuba nie mógł wiedzieć o telefonie. Teraz Maja widzi z kuchni okno gracza (kawalerka naprzeciwko z S4): „widzę z kuchni twoje okno. chodzisz w kółko z telefonem. co się dzieje”.
 - SW v144.
+
+### v145 — S3 k3: uszka o drugiej
+- Maja pisze „mama już lepi uszka”, a parę wiadomości później w głosówce „Mama już śpi”. Teraz: „Mama właśnie poszła spać… Dobra, ja też idę”.
+- Maja pisze „kuba” małą literą także w k3 (jak wszędzie indziej).
+- Sprawdzone przy okazji: „29 lat” milczenia o Tomku (VII 1997 → XII 2026) i „trzydzieści lat” od festynu 1996 w S5 są zgodne z biblią sezonów.
+- SW v145.
