@@ -1092,3 +1092,12 @@ Transkrypty `tr132` (wszystkie sezony) i losowe gałęzie (`br133`, 7 przebiegó
 - S2: Maja z polskimi znakami (nie jest w `plainTyper`); Marta odtwarza mini-DV na kamerze z archiwum, nie na magnetowidzie (także opcja gracza i gałąź `m_askFamily`); chronologia odsłuchu zaników; Natan nie przedstawia Idy drugi raz; Marta wieczorem „Dobry wieczór”; dowód `ev_m_terminy` cytuje aktualne brzmienie („ona wie lepiej”).
 - S3: Weronika pisze o 08:05 o pociągu 7:12 → „za kwadrans dziewiąta”.
 - SW v133.
+
+### v134 — Ustawienia: kierunek strzałek i nagłówek sekcji
+
+Przegląd zrzutów wszystkich aplikacji i obu ekranów domowych (iOS jasny, Android ciemny, stan na początku ch4; `logs/night/tour133`).
+
+- Ustawienia: wiersze „Tapeta” i „Sezony i sesje” miały strzałkę w lewo (ikona „wstecz” bez obrotu) → strzałka w prawo, jak w Kalendarzu i wyszukiwarce.
+- Ustawienia: te dwa wiersze dostały nagłówek „Personalizacja” (wcześniej karta przyklejała się do przełącznika rozmiaru tekstu bez odstępu).
+- Krea: saldo 0 jednostek (plan Free), więc nowy klip snapa dalej zablokowany.
+- SW v134.
