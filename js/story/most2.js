@@ -557,11 +557,11 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       opt('Marta, nie wiedziałaś, co ona z tym zrobi. Ale teraz musisz to powiedzieć w redakcji.', [
         Ma('wiem'),
         Ma('w poniedziałek rano. do naczelnego. zanim zdążę to sobie wytłumaczyć')
-      ], { wording: 'Nie wiedziałaś, że wyśle to Dudkowi. Ale w redakcji musisz im powiedzieć.', set: { m_martaTells: true }, trust: { marta: 1 } }),
+      ], { wording: 'Nie wiedziała pani, że wyśle to Dudkowi. Ale w redakcji musi pani to powiedzieć.', set: { m_martaTells: true }, trust: { marta: 1 } }),
       opt('Dlaczego nie powiedziałaś wcześniej?', [
         Ma('bo myślałam, że to moja prywatna sprawa i nie ma związku ze śledztwem'),
         Ma('pomyliłam się. jutro mówię naczelnemu', { wording: 'nie będę już czekać. powiem naczelnemu' })
-      ], { set: { m_martaTells: true } })
+      ], { wording: 'Dlaczego pani nie powiedziała wcześniej?', set: { m_martaTells: true } })
     ]),
     Ma('ona jest w kuchni. słyszę jak zmywa'),
     Ma('nie wiem, jak mam teraz tam wejść'),

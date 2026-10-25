@@ -370,7 +370,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
     M('i jak?'),
     choose('maja2', [
       opt('Mówi, że nikomu nie dawał kaset. Brzmiał szczerze.', [M('to kto je ma?')]),
-      opt('Wspomniał o wnuczce. Ktoś jeszcze ma dostęp do tych kaset.', [M('wnuczka? nie wiedziałam, że ma wnuczkę')], { set: { c_granddaughter: true } })
+      opt('Wspomniał o wnuczce. Ktoś jeszcze ma dostęp do tych kaset.', [M('wnuczka? nie wiedziałam, że ma wnuczkę', { wording: 'wnuczka. ta, co w święta chodziła z jego psem. w ogóle o niej nie pomyślałam' })], { set: { c_granddaughter: true } })
     ]),
     scene('xRamowka', [
       pause(2500),

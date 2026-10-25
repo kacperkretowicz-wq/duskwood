@@ -405,7 +405,7 @@ Engine.chapter('m1', { num: 1, kicker: 'Sprawa 2 · Rozdział 1', title: 'Trzy p
       opt('Pokaż to ludziom, nie mnie. Trzy pierwsze klatki obok siebie, do grupy Sylwii.', [
         Ma('17:22:08 wszędzie, tak. Zrobię zrzut trzech klatek obok siebie.'),
         Ma('Sylwia to przypnie szybciej niż my napiszemy sprostowanie.')
-      ], { set: { m_oneSource: true, m_showSylwia: true } })
+      ], { wording: 'Niech pani pokaże to ludziom, nie mnie. Trzy pierwsze klatki obok siebie, do grupy Sylwii.', set: { m_oneSource: true, m_showSylwia: true } })
     ]),
     give('ev_m_one'),
     pause(1800),

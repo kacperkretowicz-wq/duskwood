@@ -1211,3 +1211,7 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Trzy karty rozdziałów pokazywały godzinę późniejszą niż pierwsza wiadomość w rozdziale: mp 10:40 → 10:38, m0 19:30 → 19:24, k3 2:40 → 2:31.
 - Nowy test jednostkowy: godzina w `when` każdego rozdziału musi się zgadzać z jego pierwszym `clock()`. Dni tygodnia i daty wszystkich 33 kart sprawdzone skryptem.
 - SW v149.
+
+### v150 — gałęzie losowe S2/S4 (tr149 r-s2, r-s4)
+- Marta: wszystkie odpowiedzi gracza w jej czacie na „pani” (m1 „Niech pani pokaże to ludziom…”, m3 „Nie wiedziała pani…”, „Dlaczego pani nie powiedziała wcześniej?”, m4 „Niech pani tam nie siedzi sama po nocach.”) — wcześniej część gałęzi przechodziła na „ty”.
+- Maja (S4 c2, gałąź „Wspomniał o wnuczce”): zamiast „nie wiedziałam, że ma wnuczkę” — Maja w S3 sama opisywała wnuczkę z psem, więc teraz „w ogóle o niej nie pomyślałam”.

@@ -39,7 +39,7 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
       Ma('Taśma stanęła sama. Bez pilota, bez nikogo. I czerwona dioda mrugnęła raz.'),
       choose('marta', [
         opt('Stare kamery same się wyłączają na końcu taśmy.', [Ma('Wiem. Tylko że to nie był koniec taśmy. Licznik stanął na 03:51, dokładnie tam, gdzie urywa się fragment z publikacji.')]),
-        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { trust: { marta: 1 } })
+        opt('Nie siedź tam sama po nocach.', [Ma('Już nie siedzę. Nie mam nawet klucza.')], { wording: 'Niech pani tam nie siedzi sama po nocach.', trust: { marta: 1 } })
       ]),
       pause(4000),
       callIn('natan'),
