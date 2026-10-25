@@ -63,7 +63,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       ], [
         W('Oddali mi szczątki Tomka. Pochowaliśmy go obok mamy.'),
         W('Nadal nie wiem wszystkiego. O niektórych rzeczach wciąż nie chcą mówić.'),
-        W('Ale przynajmniej wiem, gdzie jest. Tyle że nadal mam pytania.')
+        W('Ale przynajmniej wiem, gdzie jest. Tyle że nadal mam pytania.', { wording: 'Ale przynajmniej wiem, gdzie jest. Mogę do niego pójść.' })
       ]),
       pause(2500),
       iff('var:trust_bartek>=1', [

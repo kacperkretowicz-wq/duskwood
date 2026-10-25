@@ -220,7 +220,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
     W('Czternaście dni. A on wrzuca co kilka godzin.', { wording: 'Nie wiem, ile jeszcze nagrań zdąży przez ten czas wrzucić.' }),
     choose('weronika', [
       opt('Proszę wysłać od razu. I poprosić o historię logowań, nie o treść.', [W('Dobrze. „Historia aktywności konta”. Tak to się nazywa w formularzu.')], { set: { k_requestLog: true } }),
-      opt('Proszę też poprosić o zablokowanie konta. Nawet jeśli stracimy ślad.', [W('Wpiszę oba. Niech zdecydują, co szybciej.')], { set: { k_requestLog: true, k_requestLock: true } })
+      opt('Proszę też poprosić o zablokowanie konta. Nawet jeśli stracimy ślad.', [W('Wpiszę oba. Niech zdecydują, co szybciej.')], { wording: 'Proszę też wpisać prośbę o blokadę konta. Nawet jeśli stracimy ślad.', set: { k_requestLog: true, k_requestLock: true } })
     ]),
     scene('xEwaTel', [
       pause(3000),

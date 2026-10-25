@@ -394,20 +394,20 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
         M('Nie musisz mi nic pokazywać.', { wording: 'nie musisz mi nic pokazywać' }),
         M('Kabel z taśmą to mój. Zeszyt, dyżur do osiemnastej, logowanie o 17:40. Ja to już wiem od wczoraj, tylko nie chciałam wiedzieć.', { wording: 'kabel jest mój. a teraz ten zeszyt. był tam do osiemnastej, zalogował się o 17:40. wczoraj patrzyłam na ten kabel i szukałam kogokolwiek innego' })
       ], [
-        M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.', { wording: 'co się dzieje? pokaż mi, co masz. wolę od ciebie niż od niej.' }),
+        M('Co się dzieje? Pokaż mi, co masz. Wolę od Ciebie niż od niej.', { wording: 'co się dzieje? pokaż mi, co masz. wolę od ciebie niż od niej' }),
         show('maja2', {
           prompt: 'Pokaż Mai, co łączy konto z jedną osobą',
           accept: [{ ev: ['ev_k_logi', 'ev_k_zeszyt'] }],
           wrong: [['maja', 'To mi nic nie mówi. Pokaż mi, skąd i kiedy ktoś wchodził na jego konto.'], ['maja', 'A kto wtedy był w czytelni?']]
         }),
-        M('17:40. Biblioteka. Dyżur do osiemnastej.', { wording: '17:40. biblioteka. dyżur do osiemnastej.' })
+        M('17:40. Biblioteka. Dyżur do osiemnastej.', { wording: '17:40. biblioteka. dyżur do osiemnastej' })
       ])
     ]),
     pause(2500),
     M('nie'),
     pause(3000),
     M('W niedzielę w nocy pożyczał ode mnie kabel. Mówił, że ma 4% i musi coś wrzucić. Myślałam, że zdjęcie z magazynu.', { wording: 'w sobotę przed nocką pożyczył ode mnie kabel. mówił, że ma 4% i w nocy musi coś wrzucić. myślałam, że zdjęcie z magazynu' }),
-    scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.', { wording: 'i ten kabel z klipu. z taśmą. to mój kabel. {mówiłeś|mówiłaś}, że zwykły, a ja ci uwierzyłam.' })])]),
+    scene('kPozniej', [iff('flag:k_cableLater', [M('I ten kabel z klipu. Z taśmą. To mój kabel. {Mówiłeś|Mówiłaś}, że zwykły, a ja Ci uwierzyłam.', { wording: 'i ten kabel z klipu. z taśmą. to mój kabel. {mówiłeś|mówiłaś}, że zwykły, a ja ci uwierzyłam' })])]),
     M('Zadzwoń do niego. Ja nie umiem. Ja na niego nakrzyczę i on się zamknie na tydzień.', { wording: 'możesz do niego zadzwonić? ja teraz nie dam rady. już mam otwarty czat i nie chcę wysłać tego, co napisałam' }),
     set('k_majaKnows'),
     pause(2500),

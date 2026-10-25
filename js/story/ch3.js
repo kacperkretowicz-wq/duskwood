@@ -396,7 +396,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     notify({ app: 'nimbus', title: 'Nimbus', text: 'Urządzenie „Telefon Mai” jest offline.', sound: 'notif' }),
     choose('kuba', [
       opt('Kuba, poczekaj. Kluska nie żyje od 2019.', [K('wiem'), K('wiem. właśnie dlatego mi ręce latają')], { trust: { kuba: 1 } }),
-      opt('Żyje! To najważniejsze.', [K('tak tylko'), K('czekaj')]),
+      opt('Żyje! To najważniejsze.', [K('tak tylko', { wording: 'tak. tylko…' }), K('czekaj')]),
       opt('To nie brzmi jak ona.', [K('nie brzmi')])
     ]),
     scene('xRanoSync', [iff('flag:rano_s1_sync', [K('i nie przepraszaj, że czytasz dopiero rano. ja bym też spał, gdyby nie mama')])]),

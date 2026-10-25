@@ -1220,3 +1220,9 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - S5 g4: opcja w czacie Dudka podpisana jako czynność „(nie odpisuj, zrób zrzut i wyślij Natanowi)”, tak jak inne ciche wybory.
 - S5 g5: przy fladze `g_dudekShot` Natan potwierdza rano, że zrzut trafił do policji („to „nie odbieraj” jest juz w aktach”). Wcześniej flaga nie była nigdzie używana.
 - Migracje przeliczone (`tools/regen-migrations.cjs`).
+
+### v152 — losowe gałęzie S1/S3/S5 (tr150)
+- S3 k1: opcja do pani Weroniki „Proszę też wpisać prośbę o blokadę konta…” (było „Proszę też poprosić”).
+- S3 k4: konfrontacja Mai po pokazaniu logów — małe litery bez kropek na końcu, jak w reszcie jej wiadomości.
+- S1 ch3: Kuba po „Żyje!” urywa „tak. tylko…” zamiast „tak tylko”.
+- Epilog (gorsze zakończenie): Weronika nie powtarza dwa razy, że ma pytania — „Mogę do niego pójść.”
