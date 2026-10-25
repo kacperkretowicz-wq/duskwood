@@ -1082,3 +1082,13 @@ Przegląd transkryptów S4/S5 z `tr130` (b2d9b50). Tylko `wording`, sygnatury kr
 - `kronika.js`: helper `V` przyjmuje teraz `wording` (tak samo jak w `most3.js`).
 - S5 g1: Natan, mama nie odebrała „wczoraj od przychodni” (wczoraj była niedziela) → „dziś rano nie odebrała nawet z przychodni”.
 - Sprawdzone bez zmian: dni tygodnia dat S4/S5, wątek Zenona (o 20:58 śpi, później w kuchni z Idą, co jest spójne z gałęzią `c_warnedZenon`), wątek Marty, Dudka i magnetowidu, rachunek Oskara (300 + 11×50 = 850 zł).
+
+### v133 — ciągłość S2/S3, helpery gubiące `wording`, test regresji
+
+Transkrypty `tr132` (wszystkie sezony) i losowe gałęzie (`br133`, 7 przebiegów na segment): żadnego ślepego zaułka ani zawieszenia w S1–S5. Tylko `wording`, sygnatury kroków bez zmian.
+
+- Błąd: helpery rozmów (`c` w `most3.js`, `c`/`H`/`V` w `most2.js`, `c` w `kopia2.js`) nie przekazywały opcji, więc część `wording` nigdy nie działała (m.in. Henryk: „wnuczka sąsiadów” vs jego wnuczka). Naprawione.
+- Nowy test `story.test.cjs`: każdy `wording` ze źródeł musi trafić do skompilowanego kroku/opcji (sprawdzone, że wyłapuje cofnięcie poprawki helpera).
+- S2: Maja z polskimi znakami (nie jest w `plainTyper`); Marta odtwarza mini-DV na kamerze z archiwum, nie na magnetowidzie (także opcja gracza i gałąź `m_askFamily`); chronologia odsłuchu zaników; Natan nie przedstawia Idy drugi raz; Marta wieczorem „Dobry wieczór”; dowód `ev_m_terminy` cytuje aktualne brzmienie („ona wie lepiej”).
+- S3: Weronika pisze o 08:05 o pociągu 7:12 → „za kwadrans dziewiąta”.
+- SW v133.

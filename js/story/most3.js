@@ -10,8 +10,8 @@ Engine.chapter('m4', { num: 4, kicker: 'Sprawa 2 · Rozdział 4', title: 'Strona
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
-  const H = t => say('call', 'henryk', t);
-  const c = (who, t) => say('call', who, t);
+  const H = (t, o) => say('call', 'henryk', t, o);
+  const c = (who, t, o) => say('call', who, t, o);
 
   return [
     clock('2026-11-30T08:20'),
@@ -210,7 +210,7 @@ Engine.chapter('m5', { num: 5, kicker: 'Sprawa 2 · Rozdział 5', title: 'Pełny
   const Z = (t, o) => say('zuza', 'zuza', t, o);
   const S = (t, o) => say('sylwia', 'sylwia', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
-  const c = (who, t) => say('call', who, t);
+  const c = (who, t, o) => say('call', who, t, o);
 
   return [
     clock('2026-12-04T16:05'),

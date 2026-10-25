@@ -17,7 +17,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     iff('flag:m_lateRescue', [
       M('hej. to ja'),
     M('nie odpisałam ci wcześniej. nie umiałam. lekarka mówi, że to normalne, że nie umiem', { wording: 'widziałam twoje wiadomości. kilka razy otwierałam czat i nic. nie umiałam odpisać' }),
-      M('dziękuję. za rzeczkę. kuba mi pokazał, co {pisales|pisalas} z niną. więcej nie dam rady o tym teraz')
+      M('dziękuję. za rzeczkę. kuba mi pokazał, co {pisales|pisalas} z niną. więcej nie dam rady o tym teraz', { wording: 'dziękuję. za rzeczkę. kuba mi pokazał, co {pisałeś|pisałaś} z niną. więcej nie dam rady o tym teraz' })
     ], [M('hej. nie śpisz?')]),
     M('siedzę u pani Weroniki. ona spisuje, co jest w pudle pana Adama, ja robię zdjęcia, bo to akurat umiem', { wording: 'jestem u pani Weroniki. spisuje rzeczy z pudła pana Adama, a ja je fotografuję. wolę to niż siedzenie w domu' }),
     M('i trochę dlatego, że w domu mama co pięć minut pyta, czy chcę herbaty'),
@@ -197,15 +197,15 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
     pause(2000),
     Ma('Widzę, że {Pan|Pani} dzwonił{|a}. Dyżur wydania od razu do mnie napisał. Dziękuję.'),
     Ma('Nasz plik zaczyna się w środku zdania, choć licznik pokazuje 00:00:00. Pan Adam opisał go „2/2”. Pierwsza kaseta musi być gdzie indziej albo zaginęła.'),
-    Ma('Jeśli w pudle jest oryginał, mogę go przegrać na naszym magnetowidzie i sprawdzić, czy plik jest pełny. Nic nie publikujemy. To tylko archiwum.'),
+    Ma('Jeśli w pudle jest oryginał, mogę go przegrać na naszym magnetowidzie i sprawdzić, czy plik jest pełny. Nic nie publikujemy. To tylko archiwum.', { wording: 'Jeśli w pudle jest oryginał, mogę go odtworzyć na kamerze z archiwum i sprawdzić, czy plik jest pełny. Nic nie publikujemy. To tylko archiwum.' }),
     choose('marta', [
       opt('Dobrze. Ale kaseta zostaje u pani Weroniki. Może pani przyjechać do niej z magnetowidem?', [
         Ma('Zgoda. To nawet lepiej, oryginał nie wychodzi z domu.'),
         Ma('Napiszę do pani Lis w poniedziałek.')
-      ], { set: { m_tapeStays: true } }),
+      ], { set: { m_tapeStays: true }, wording: 'Dobrze. Ale kaseta zostaje u pani Weroniki. Może pani przyjechać do niej z kamerą?' }),
       opt('Najpierw zapytam rodzinę pana Adama.', [
         Ma('Tak powinno być. Poczekam.'),
-        Ma('Jeśli się zgodzą, przyjadę do Mgliska z magnetowidem. Kaseta nie musi nigdzie jechać.')
+        Ma('Jeśli się zgodzą, przyjadę do Mgliska z magnetowidem. Kaseta nie musi nigdzie jechać.', { wording: 'Jeśli się zgodzą, przyjadę do Mgliska z kamerą. Kaseta nie musi nigdzie jechać.' })
       ], { set: { m_askFamily: true } })
     ]),
     scene('xNatanZapowiedz', [

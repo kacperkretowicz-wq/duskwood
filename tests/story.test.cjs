@@ -117,3 +117,14 @@ test('v5 migration table is up to date; v4 saves map monotonically and keep choi
     for(let i=0;i<old[ch].length;i++)for(let j=m.resume[i];j<m.exact[i];j++)assert.ok(chapters[ch].steps[j].scene,ch+':'+i+' resume skips only new scenes');
   }
 });
+test('every wording written in story sources reaches a compiled step or option', ()=>{
+  // Pomocnicze funkcje (c, H, V…) muszą przekazywać opcje dalej — inaczej wording po cichu przepada.
+  const {chapters}=stories();
+  const got=[];
+  for(const ch of Object.values(chapters))for(const st of ch.steps){if(st.wording)got.push(st.wording);for(const o of [...(st.options||[]),...(st.accept||[]),...(st.answers||[])])if(o.wording)got.push(o.wording);}
+  const all=got.join('\n');
+  const src=fs.readdirSync(path.join(root,'js/story')).map(f=>fs.readFileSync(path.join(root,'js/story',f),'utf8')).join('\n');
+  const re=/wording:\s*'((?:[^'\\]|\\.)*)'/g;let m;const miss=[];
+  while((m=re.exec(src))){const w=m[1].replace(/\\'/g,"'");if(!all.includes(w.slice(0,40)))miss.push(w.slice(0,80));}
+  assert.deepEqual(miss,[]);
+});

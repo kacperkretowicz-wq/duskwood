@@ -68,7 +68,7 @@ Object.assign(DATA.persons, {
       { text: 'Rybicki zdigitalizował kasetę „H.W. 2/2” w 2019 r. Plik jest w archiwum redakcji. Części 1/2 nie ma ani tam, ani w pudle.' },
       { text: 'Zna rozkład biura Kurek-Bud: „robiłam tam kiedyś praktyki”.', cond: 'ev:ev_m_praktyki' },
       { text: '„U nas mówiło się, że most to przekleństwo… W Mglisku, znaczy.”', cond: 'ev:ev_m_przeklenstwo' },
-      { text: '„Mama ma zawsze rację co do terminów.”', cond: 'ev:ev_m_terminy' },
+      { text: '„Mama już zapowiedziała, że wyjeżdżamy o siódmej… ona wie lepiej.”', cond: 'ev:ev_m_terminy' },
       { text: 'Jest córką Janiny Kurek. Opowiadała matce o kasecie i załączniku nr 3. Nie wiedziała, co matka z tym zrobi.', cond: 'flag:m_twist' }
     ]
   },
@@ -181,7 +181,7 @@ Object.assign(DATA.evidence, {
     desc: 'Wpis w zeszycie zgadza się z fakturą. Bartek miał wtedy 9 lat. Warsztat naprawił hamulce i wydał auto. Własność pojazdu ani obecność w firmie nie oznacza działania przy moście.' },
   ev_m_janina_mail: { title: 'Mail Kurek-Bud z 26.11', cat: 'msg', source: 'Natan · mail do GS Wideo', img: 'most_mail_kb',
     desc: 'Janina Kurek: „sugestie dotyczące rzekomo brakującego *załącznika nr 3* do dziennika robót są bezpodstawne”. W publikacji redakcji był tylko „brakujący dokument”. Skąd numer?' },
-  ev_m_terminy: { title: '„Mama ma zawsze rację co do terminów”', cat: 'testimony', source: 'Marta · wiadomość', desc: 'Zwykła rozmowa o wyjeździe na urodziny ciotki.' },
+  ev_m_terminy: { title: '„Ona wie lepiej”', cat: 'testimony', source: 'Marta · wiadomość', desc: 'Zwykła rozmowa o wyjeździe na urodziny ciotki.' },
   ev_m_kuchnia: { title: 'Głosówka Marty z kuchni', cat: 'testimony', source: 'Marta · głosówka 0:38',
     desc: 'Na pierwszych 20 s kasety nie ma nazwiska. W tle kobiecy głos: „Martuś, z kim tak późno?”. Barwę można porównać z nagraniem z rady gminy. Nieformalnie, to nie dowód.' },
   ev_m_ida: { title: 'Rozmowa stażystki Idy z Pawłem D.', cat: 'digital', source: 'Natan · za zgodą Idy', img: 'most_ida',

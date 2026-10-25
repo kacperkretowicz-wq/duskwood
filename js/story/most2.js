@@ -8,7 +8,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const N = (t, o) => say('nina', 'nina', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
-  const c = (who, t) => say('call', who, t);
+  const c = (who, t, o) => say('call', who, t, o);
 
   return [
     clock('2026-11-15T10:38'),
@@ -169,7 +169,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const B = (t, o) => say('bartek', 'bartek', t, o);
   const S = (t, o) => say('sylwia', 'sylwia', t, o);
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
   const IK = t => say('blyskm', 'blyskm', t, { vanish: true });
 
   return [
@@ -329,7 +329,7 @@ Engine.chapter('m2', { num: 2, kicker: 'Sprawa 2 · Rozdział 2', title: 'Siatka
     ]),
     pause(2000),
     Ma('Jutro mam wolne, do mamy jadę na urodziny ciotki. Mama ma zawsze rację co do terminów, więc wyjeżdżam o siódmej, nie o ósmej.', { wording: 'Jutro mam wolne, jedziemy z mamą na urodziny ciotki. Mama już zapowiedziała, że wyjeżdżamy o siódmej. Przy ósmej na pewno byśmy się spóźniły, ona wie lepiej.' }),
-    Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.'),
+    Ma('Wieczorem mogę posłuchać pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.', { wording: 'Dziś późnym wieczorem posłucham jeszcze pierwszych 20 sekund, tych z zanikami. Może tam jest coś przed „mi zabroniła”.' }),
     give('ev_m_terminy', { silent: true }),
     scene('xIda', [
       pause(6000),
@@ -373,13 +373,13 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
   const Ma = (t, o) => say('marta', 'marta', t, o);
   const Nt = (t, o) => say('natan', 'natan', t, o);
   const Z = (t, o) => say('zuza', 'zuza', t, o);
-  const H = t => say('call', 'henryk', t);
-  const V = (chat, who, dur, text, from = '') => say(chat, who, `voice:${dur}|${from}|${text}`);
+  const H = (t, o) => say('call', 'henryk', t, o);
+  const V = (chat, who, dur, text, from = '', o) => say(chat, who, `voice:${dur}|${from}|${text}`, o && o.wording ? { ...o, wording: `voice:${dur}|${from}|${o.wording}` } : o);
 
   return [
     clock('2026-11-27T23:18'),
     title(),
-    V('marta', 'marta', '0:38', 'Przepraszam, że głosówka, nie chce mi się pisać. Przesłuchałam te zaniki. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.', 'Marta'),
+    V('marta', 'marta', '0:38', 'Przepraszam, że głosówka, nie chce mi się pisać. Przesłuchałam te zaniki. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.', 'Marta', { wording: 'Przepraszam, że głosówka, nie chce mi się pisać. Wczoraj w nocy przesłuchałam te zaniki, dopiero teraz mam chwilę. Tam jest tylko pan Adam: „Panie Henryku, nagrywam, dobrze?” i szum. Nic przed „zabroniła”. Czyli nazwiska na tej części nie ma i nie będzie. (w tle kobiecy głos: „Martuś, z kim tak późno?”) Z nikim, mamo, z pracy. (ciszej) Dobra, to tyle, dobranoc.' }),
     give('ev_m_kuchnia', { silent: true }),
     scene('xPiatekNoc', [
       pause(3000),
@@ -427,7 +427,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       Nt('ida mówi że dudek przeglądał jej telefon na siłowni. miała tam numery do wszystkich od mostu. twój też, bo ci go przekazywałem')
     ]),
     Nt('ok, mam. przepraszam że tak długo, ale nie chciałem tego robić za plecami'),
-    Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund', { wording: 'rozmawiałem z nią w cztery oczy. ida to ta stażystka, co robiła eksport 40 sekund' }),
+    Nt('rozmawiałem z idą. to nasza stażystka. ta co robiła eksport 40 sekund', { wording: 'rozmawiałem z nią w cztery oczy. to ona zrobiła tamten eksport 40 sekund' }),
     scene('xIdaPo', [
       iff('flag:m_toldNatan', [Nt('i sorry za tamto. miał{eś|aś} rację z tym błyskiem, a ja cię zbyłem')]),
       iff('flag:m_shotIda', [Nt('powiedziała że ktoś jej zrobił zrzut i się przestraszyła. dlatego tak długo nie chciała gadać')]),
@@ -523,7 +523,7 @@ Engine.chapter('m3', { num: 3, kicker: 'Sprawa 2 · Rozdział 3', title: 'K.', w
       say('henryk_sms', 'henryk', 'DOBRANOC.')
     ]),
     pause(2000),
-    Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.'),
+    Ma('Dzień dobry. Natan przesłał mi zdjęcie od pana Henryka.', { wording: 'Dobry wieczór. Natan przesłał mi zdjęcie od pana Henryka.' }),
     Ma('To ta sama strona 41, ten sam wpis z 13.09, ta sama „zał. nr 3”. Druga kopia, od innej osoby. Zgadza się z kserem z teczki.'),
     Ma('Czyli możemy sprawdzić ksero bez ujawniania, że dostaliśmy je od pani Krystyny. Tak będzie lepiej dla wszystkich.', { wording: 'Możemy powołać się na kopię pana Henryka. Nie trzeba wciągać pani Krystyny do tekstu, żeby sprawdzić tę stronę.' }),
     give('ev_m_second_source'),

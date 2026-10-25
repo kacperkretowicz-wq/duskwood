@@ -58,7 +58,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
   const { say, pic, pause, choose, opt, waitFor, goal, give, unlock, set, iff, end, title, clock, notify, ambient, typing, scene, scare, vanish, callIn, callEnd } = D;
   const I = (t, o) => say('igor', 'igor', t, o);
   const Bl = (t) => say('blysk', 'blysk', t, { vanish: true });
-  const c = (who, t) => say('call', who, t);
+  const c = (who, t, o) => say('call', who, t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -286,7 +286,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
 
 Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto patrzył', when: 'Środa, 23 grudnia · 2:40', mood: 'tense' }, D => {
   const { say, pic, pause, choose, opt, waitFor, goal, give, set, iff, end, title, clock, ambient, typing, scene, scare, show, interlude, nearby, camera, label, go, dial, callEnd, unlock } = D;
-  const c = (who, t) => say('call', who, t);
+  const c = (who, t, o) => say('call', who, t, o);
   const K = (t, o) => say('kuba', 'kuba', t, o);
   const M = (t, o) => say('maja2', 'maja', t, o);
   const W = (t, o) => say('weronika', 'weronika', t, o);
@@ -336,7 +336,7 @@ Engine.chapter('k3', { num: 3, kicker: 'Sprawa 3 · Rozdział 3', title: 'Kto pa
     clock('2026-12-23T08:05'),
     ambient('calm'),
     W('Dzień dobry. Wolałabym pokazać {Panu|Pani} ten zeszyt na miejscu. Przez telefon nie umiem.'),
-    W('Pociąg o 7:12 jest w Mglisku za kwadrans dziewiąta. Odbiorę ze stacji.'),
+    W('Pociąg o 7:12 jest w Mglisku za kwadrans dziewiąta. Odbiorę ze stacji.', { wording: 'Najbliższy pociąg jest w Mglisku za kwadrans dziewiąta. Odbiorę {Pana|Panią} ze stacji.' }),
     scene('xPociag', [
       pause(2000),
       M('jedziesz do Mgliska? weź mi z dworca drożdżówkę z budki. z serem. pani Halinka wie, którą'),
