@@ -1001,3 +1001,6 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 - `m_kamera_kotka` i `m_kot_wycinki`: ta sama kotka Ziuta i ta sama cerata w kuchni pani Weroniki (wcześniej dwa różne koty, wygładzone), zdjęcia z fleszem/dziennym światłem z taniego telefonu.
 - `g_ola_umowa` (selfie Oli z umową w świetlicy) i `g_kuba_kostka` (Kuba przy kostce u sąsiada): zamiast pozowanych, „AI-owych” kadrów — selfie z przedniej kamery i szybkie zdjęcie od Bartka, krzywy kadr, błoto, zwykłe światło.
 - Klip snap: nadal wstrzymany (Krea 402, brak środków).
+
+### 2026-10-25 — v120: kotka Ziuta zgodna z filmem
+- `m_kamera_kotka` i `m_kot_wycinki` zrobione na nowo z klatki filmu `v_kotka.mp4` jako wzoru: ta sama kuchnia (białe kafle, drewniane szafki), ta sama ciemna cerata w kwiaty, karton z teczkami i herbata z cytryną — wcześniej (v119) kuchnia i cerata różniły się od filmu, który gracz ogląda chwilę wcześniej.
