@@ -1101,3 +1101,22 @@ Przegląd zrzutów wszystkich aplikacji i obu ekranów domowych (iOS jasny, Andr
 - Ustawienia: te dwa wiersze dostały nagłówek „Personalizacja” (wcześniej karta przyklejała się do przełącznika rozmiaru tekstu bez odstępu).
 - Krea: saldo 0 jednostek (plan Free), więc nowy klip snapa dalej zablokowany.
 - SW v134.
+
+### v135 — prawdziwe zdjęcia zamiast rysunków na stronach i w Kadrze
+
+Przegląd zrzutów wszystkich 40 stron przeglądarki (`logs/night/web133`): część zdjęć w artykułach, na stronach urzędów i w profilach Kadru była nadal rysunkiem SVG, co od razu wyglądało sztucznie. Nowe zdjęcia: Codex image_gen + `tools/realism-post.py` (0.45; archiwalne 0.25; nocne `--night`), pliki w `assets/web/`, w cache offline. Rysunki SVG zostają jako zapas (`draw`).
+
+- Mglisko24: auto Mai na tamie (`web_dam`, także dowód „Samochód Mai na tamie”): mała czerwona stara hatchback na koronie tamy, taśma, policjant, mgła.
+- Gazeta Sudecka 2007 i Mglisko24 „20 lat po powodzi”: archiwalne cz.-b. zdjęcie zalanej ulicy z blokami i łodzią (`web_flood97`, także dowód z artykułu 2007).
+- Wspomnienie o Adamie Rybickim: archiwalny portret reportera (`web_rybicki`).
+- Gmina: portret wójta (`web_wojt`); z niego awatar `leszek` (zdjęcie zamiast rysowanego popiersia).
+- Posterunek i Kadr Gajdy: `g_award` = kadr z istniejącego portretu Gajdy (`assets/gajda.jpg`), więc twarz się zgadza.
+- Kadr Gajdy: „Paśnik pod Ewą” (`kadr_hunt`, dowód `ev_gajda_hunt`): paśnik z sianem, w tle krata sztolni z żółtą kłódką, zgodnie z opisem dowodu. Zawody wędkarskie (`g_fish`).
+- Kadr wójta: otwarcie placu zabaw (`l_ribbon`).
+- Kadr Bartka: rozrząd w passacie B5 (`b_car`), warsztat z szyldem AUTO-SOWA (`b_shop`).
+- Kadr Igora: stanowisko serwisowe ze skanerem w tle (`i_desk`, zgodnie z komentarzem Mai „ten skaner w tle to legenda”).
+- Kadr Oli: znicz w oknie (`o_candle`, także u Igora), czarna kotka Pani Fasolka na parapecie (`o_cat`).
+- Kadr Weroniki i strona biblioteki: lampiony na rzece 8 lipca (`w_candle`), kiermasz książek (`w_books`).
+- sowiakopa.pl: Sztolnia Anna z kasą i zielonym szyldem (`web_anna`), zawalona i zalana Waltraud (`web_waltraud`), Ewa nr 3 z kratą i paśnikiem (`web_ewa`, także dowód `ev_sztolnie`).
+- Wolnopedia „Powódź tysiąclecia”: usunięte zdanie „W grze Mglisko… są fikcyjne” (łamało immersję; zastrzeżenie jest na ekranie startowym i w napisach) → zwykła wolnopedyczna stopka o zalążku.
+- SW v135.

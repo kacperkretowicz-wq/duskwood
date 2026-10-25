@@ -279,7 +279,7 @@
     return s;
   }
   D('m_library', { src: 'assets/maja/m_library.jpg', title: 'Biblioteka Gminna', exif: phone('11.10.2026', '16:00', { place: 'Mglisko, Rynek 9' }), grade: 'warm', draw: k => library(k) });
-  D('w_books', { title: 'Tydzień Bibliotek', grade: 'warm', w: 900, h: 900, draw: k => library(k, { table: false }) });
+  D('w_books', { src: 'assets/web/w_books.jpg', title: 'Tydzień Bibliotek', grade: 'warm', w: 900, h: 900, draw: k => library(k, { table: false }) });
 
   /* ================= LUSTRO / ZAPOWIEDŹ ================= */
   D('m_mirror', { src: 'assets/maja/m_mirror.jpg',

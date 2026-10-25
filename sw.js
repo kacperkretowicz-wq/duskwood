@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v134';
+const VERSION = 'quiet-is-safer-v135';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',
@@ -17,6 +17,7 @@ const FILES = [
   './assets/kuba/k_headlamp.jpg', './assets/kuba/k_kluska.jpg', './assets/kuba/k_locker.jpg', './assets/kuba/k_mount.jpg',
   './assets/kuba/k_poster.jpg', './assets/kuba/k_skate.jpg', './assets/kuba/k_wall.jpg', './assets/kuba/k_kometa.jpg',
   './assets/maja/m_bandzior.jpg', './assets/maja/m_bricks.jpg', './assets/maja/m_cam_install.jpg', './assets/maja/m_darkroom.jpg',
+  './assets/web/b_car.jpg', './assets/web/g_award.jpg', './assets/web/kadr_hunt.jpg', './assets/people/leszek.jpg', './assets/web/b_shop.jpg', './assets/web/g_fish.jpg', './assets/web/l_ribbon.jpg', './assets/web/web_dam.jpg', './assets/web/web_flood97.jpg', './assets/web/web_rybicki.jpg', './assets/web/web_wojt.jpg', './assets/web/i_desk.jpg', './assets/web/o_candle.jpg', './assets/web/o_cat.jpg', './assets/web/w_candle.jpg', './assets/web/web_anna.jpg', './assets/web/web_ewa.jpg', './assets/web/web_waltraud.jpg', './assets/web/w_books.jpg',
   './assets/maja/m_fence.jpg', './assets/maja/m_hall.jpg', './assets/maja/m_kodak.jpg', './assets/maja/m_lehr.jpg',
   './assets/maja/m_library.jpg', './assets/maja/m_lockers.jpg', './assets/maja/m_mirror.jpg', './assets/maja/m_ola_lake.jpg',
   './assets/maja/m_window.jpg', './assets/maja/s_blur.jpg', './assets/maja/s_door.jpg', './assets/maja/s_wall.jpg',

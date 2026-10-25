@@ -18,7 +18,7 @@ DATA.chars = {
   maja: { name: 'Maja Wrona', short: 'Maja', color: '#e88aa2', number: '731 402 118', offline: true },
   mama: { name: 'Ewa Wrona', short: 'Mama Mai', number: '607 993 140', voicemail: 'Abonent nie odbiera.' },
   marek: { name: 'Marek Sowa', short: 'Marek' },
-  leszek: { name: 'Leszek Malicki', short: 'Wójt' },
+  leszek: { name: 'Leszek Malicki', short: 'Wójt', photo: 'assets/people/leszek.jpg' },
   dispatcher: { name: 'Centrum Powiadamiania Ratunkowego', short: 'Operator 112' },
   duty: { name: 'Posterunek Policji Mglisko', short: 'Dyżurny' },
   prosecutor: { name: 'Prokuratura Rejonowa', short: 'Prokuratura' },
