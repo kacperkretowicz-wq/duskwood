@@ -117,7 +117,7 @@ Engine.chapter('k0', { num: 0, kicker: 'Sprawa 3 · Prolog', title: 'Pierwszy kl
     choose('ewa', [
       opt('Jeszcze nie wiem. Ale to nie są kasety z pudła. To nagrania z jego telefonu.', [
         E('on wszystko nagrywal. mowil ze to dla pamieci nie do druku'),
-        E('telefon lezy w szufladzie. rozladowany od pogrzebu. hasla nie znam')
+        E('telefon lezy w szufladzie. rozladowany od pogrzebu. hasla nie znam', { wording: 'telefon lezy w szufladzie. rozladowany. hasla nie znam' })
       ], { set: { k_ewaCloud: true } }),
       opt('Bardzo mi przykro. Czy ktoś jeszcze ma dostęp do jego rzeczy?', [
         E('brat byl przy pudle. i pani weronika. nikt wiecej'),
@@ -227,7 +227,7 @@ Engine.chapter('k1', { num: 1, kicker: 'Sprawa 3 · Rozdział 1', title: 'Chmura
       callIn('ewa'),
       c('ewa', 'Przepraszam. Nie umiem tak szybko pisać, to dzwonię.'),
       c('ewa', 'Pani Weronika mówiła o tej chmurze. Ja nic o tym nie wiem. Ale ten jego telefon w szufladzie…'),
-      c('ewa', 'Po Wszystkich Świętych raz go podłączyłam. Chciałam zobaczyć jego zdjęcia. Hasła nie znałam, więc odłożyłam.'),
+      c('ewa', 'Po Wszystkich Świętych raz go podłączyłam. Chciałam zobaczyć jego zdjęcia. Hasła nie znałam, więc odłożyłam.', { wording: 'Po Wszystkich Świętych raz go podłączyłam, zapomniałam o tym powiedzieć. Chciałam zobaczyć jego zdjęcia. Hasła nie znałam, więc odłożyłam. Potem znowu się rozładował.' }),
       c('ewa', 'A w nocy ekran się zaświecił. Sam. Myślałam, że mi się przywidziało.'),
       choose('call', [
         opt('Czy ktoś jeszcze wtedy był u pani w domu?', [c('ewa', 'Brat Adama na chwilę. I chłopak od Wronów przyniósł zakupy, bo Maja prosiła. Nikt więcej.', { wording: 'Brat Adama na chwilę. I chłopak od Wronów przyniósł zakupy. Nikt więcej.' })], { set: { k_ewaVisitors: true } }),

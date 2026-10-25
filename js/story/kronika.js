@@ -37,7 +37,7 @@ Engine.chapter('c0', { num: 0, kicker: 'Sprawa 4 · Prolog', title: 'Studniówka
       B('2006–2021 to dopiero połowa. dziś o 21'),
       vanish('blysk2', 'Wiadomości zniknęły po przeczytaniu.')
     ])]),
-    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”'),
+    M('hej. ferie, a lodowisko zamknięte. „awaria agregatu”', { wording: 'hej. jak pierwsza noc w kawalerce naprzeciwko? z naszej kuchni widać twoje okno 👀 ferie, a lodowisko zamknięte. „awaria agregatu”' }),
     pic('maja2', 'maja', 'c_lodowisko', 'za to bałwan pilnuje. ktoś mu dał pachołek zamiast czapki'),
     choose('maja2', [
       opt('Bałwan wygląda, jakby był tu dłużej niż agregat.', [M('xD bo jest. stoi od sylwestra'), M('Kuba mówi że to jego dzieło. nie wierzę mu')]),
@@ -252,10 +252,10 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     clock('2027-01-19T21:00', { rest: 's4_evening' }),
     /* P3: Weronika wraca po pracy; zwykła rozmowa przed nowym klipem. */
     scene('xPoPracy', [
-      W('Wróciłam. Dwanaście godzin na nogach, a w autobusie ktoś jadł śledzie.'),
+      W('Wróciłam. Dwanaście godzin na nogach, a w autobusie ktoś jadł śledzie.', { wording: 'Wróciłam do domu. Cały dzień w czytelni nad katalogiem, a w autobusie ktoś jadł śledzie.' }),
       choose('weronika', [
-        opt('Odpocznij. Kronika poczeka do jutra.', [W('Nie poczeka. Ale dzięki.')]),
-        opt('Jak w pracy?', [W('Jak zawsze we wtorek. Ktoś zgubił klucze, ktoś krzyczał na kasie. Normalnie.')])
+        opt('Odpocznij. Kronika poczeka do jutra.', [W('Nie poczeka. Ale dzięki.', { wording: 'Nie poczeka. Ale dziękuję.' })], { wording: 'Niech pani odpocznie. Kronika poczeka do jutra.' }),
+        opt('Jak w pracy?', [W('Jak zawsze we wtorek. Ktoś zgubił klucze, ktoś krzyczał na kasie. Normalnie.', { wording: 'Jak zawsze we wtorek. Ktoś zgubił kartę, ktoś się kłócił o termin zwrotu. Normalnie.' })], { wording: 'Jak było w czytelni?' })
       ])
     ]),
     set('c_day2'),

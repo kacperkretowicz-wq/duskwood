@@ -102,7 +102,7 @@ DATA.web.tt_kronika = {
 /* Sezon 4: ten sam zapis. Identyfikatory odcinków są kontraktem zapisu. */
 DATA.seasons.push({
   id: 's4', revision: 1, title: 'Kronika', kicker: 'SPRAWA 4', released: true,
-  description: 'Ferie w Mglisku. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
+  description: 'Ferie w Mglisku: wynajmujesz kawalerkę w bloku naprzeciwko Wronów. Codziennie o 21:00 ktoś wrzuca trzydzieści sekund starej kroniki kablówki. Jutro kolejna osoba.',
   chapters: ['c0', 'c1', 'c2', 'cf', 'c3', 'c4'],
   credits: {
     kicker: 'Koniec sprawy 4', title: 'KRONIKA',

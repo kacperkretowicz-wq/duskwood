@@ -1023,3 +1023,10 @@ Przejrzane wszystkie pozostałe zdjęcia używane w grze (119 plików: S1 klisza
 ### 2026-10-25 — v123: dzień na widżecie pogody
 - Widżet pogody na ekranie głównym pokazywał dzień z chwili narysowania ekranu; po północy czasu gry (np. nocne rozmowy S1/S5) zostawała wczorajsza data, choć zegar i blokada miały już nową. Teraz `tick()` odświeża `.home-day` razem z godziną widżetu.
 - `tests/native-ui.browser.cjs`: czekanie na zniknięcie toastów „Zainstalowano” odporne na dławione timery (fałszywy timeout w pełnym zestawie na v122). SW v123.
+
+### 2026-10-25 — v124: ciągłość faktów S3/S4 (przegląd transkryptów)
+Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez migracji).
+- S3 (k0/k1), telefon pana Adama: Ewa pisała „rozładowany od pogrzebu”, a w telefonie mówi, że po Wszystkich Świętych raz go podłączyła. Teraz „rozładowany”, a w rozmowie: „Po Wszystkich Świętych raz go podłączyłam, zapomniałam o tym powiedzieć… Potem znowu się rozładował” — ujawnienie zostaje, sprzeczność znika.
+- S4 (c1, `xPoPracy`): Weronika (bibliotekarka) mówiła o „dwunastu godzinach na nogach” i „krzyku na kasie”, a gracz zwracał się do niej na „ty”. Teraz: cały dzień w czytelni nad katalogiem; „Niech pani odpocznie…”, „Jak było w czytelni?” → zgubiona karta, kłótnia o termin zwrotu.
+- S4: gracz w prologu „nigdy nie był w Mglisku”, w S3 przyjeżdża pociągiem, a w S4 ktoś stoi „pod twoim blokiem”, Kuba schodzi „na twoją klatkę”, a telefon widzi „nieznane urządzenie w pobliżu”. Teraz pierwsza wiadomość Mai w c0 ustala, że na ferie gracz wynajmuje kawalerkę w bloku naprzeciwko Wronów („z naszej kuchni widać twoje okno”); opis sprawy 4 mówi to samo.
+- Sprawdzone bez zmian: dni tygodnia przy datach (2026/2027), oś czasu 14.10 (22:57 → 23:44 → 23:47 → 23:53 → 23:58), godziny klipów S3, logowanie stażystki 18.01 20:47, „przy stole” u Zenona (poprawione wcześniej). SW v124.
