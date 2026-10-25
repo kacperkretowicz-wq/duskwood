@@ -1009,3 +1009,13 @@ Przejrzane pełne transkrypty wszystkich pięciu spraw (tools/transcript.browser
 - Tropy w rozmowach mówią o rzeczach, których nie było na obrazach: odbicie lampki u góry ekranu (studniówka, boisko — dowód, że ktoś filmuje telewizor telefonem), zielone cyferki 23:47 w rogu przy samochodzie (boisko — zegar magnetowidu z pokoju pana Zenona) i pasek „TV Dolina” (festyn, studniówka).
 - `c_studniowka`, `c_boisko`, `c_festyn` i filmy `v_studniowka`, `v_festyn` (+ plakaty): żółty pasek „TV DOLINA” w lewym dolnym rogu; na studniówce i boisku ciepłe odbicie lampki w prawym górnym rogu (lampka stoi w pokoju po prawej od telewizora), lekkie linie i winieta jak przy filmowaniu ekranu; na boisku zegar 23:47 w prawym dolnym rogu. W filmie studniówki odbicie pojawia się pod koniec (≈ 0:27 klipu).
 - Maja przy porównaniu z kadrem Natana (pasek GS Wideo w rogu): „ta sama jakość z kasety. tylko pasek u dołu inny, żółty” (przez `wording`).
+
+### 2026-10-25 — v122: audyt obraz↔tekst we wszystkich sprawach (reszta zdjęć)
+Przejrzane wszystkie pozostałe zdjęcia używane w grze (119 plików: S1 klisza i fotopułapki, galeria Mai, S2 Głos, S3 Kopia, S4 Kronika, epilog, kadry filmów) obok tekstu, który je zapowiada lub opisuje. Fotopułapki: daty, godziny i °C/°F zgodne z osią czasu (14.10 22:57 Maja, 15.10 1:20 i 2:05 auto). Poprawione rozbieżności:
+- `k_rampa` (Kuba po nocce, 20.12 o 6:12): różowy wschód słońca o 6:12 w grudniu był niemożliwy (wschód ≈ 7:40) — teraz noc, lampy nad rampą, mokry śnieg. Opcja „Ładny wschód. Idź spać.” → „Jeszcze ciemno, a ty już po nocce. Idź spać.” (`wording`).
+- `c_kasety_babci`: zamiast drewnianych klocków trzy prawdziwe kasety VHS w pudełkach z odręcznymi opisami i tą samą naklejką z anteną „TV Dolina” — opcja gracza mówi o „naklejce z anteną”, a na zdjęciu był znaczek słońca.
+- `m_lehr`: „mały, owalny, plastikowy przedmiot” pod murem, który Weronika rozpoznaje jako różowe tamagotchi Tomka, wyglądał jak guzik — teraz pękniete różowe tamagotchi w pyle (to samo miejsce i ten sam hotspot).
+- `e_pudlo` (epilog, Maja z pudłem notatek Rybickiego): ręka w gipsie, o której nikt nigdzie nie mówi → zwykły rękaw swetra.
+- `g_slady` (S5, Kuba: „jestem na moście. mgła jak mleko… świeże ślady”): dodana gęsta mgła i poręcz mostu ginąca we mgle.
+- Tekst zamiast zdjęcia: kadr 22 opisywał „otwarte usta”, których na kadrze nie ma → „w wodzie coś żółtego, przy krawędzi rozmazana ręka”; pierniki Oli — foremki na zdjęciu to ludziki i gwiazdki, więc „połowa dzieci twierdzi, że ich ludzik to dinozaur”; kolejka na poczcie „do samych drzwi” zamiast „dwanaście osób” (na zdjęciu widać kilka).
+- Nowe zdjęcia: Codex image_gen + `tools/realism-post.py`, wymiary bez zmian.

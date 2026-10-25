@@ -421,7 +421,7 @@ Engine.chapter('c2', { num: 2, kicker: 'Sprawa 4 · Rozdział 2', title: 'O.N.',
       I('a w ogóle mam praktykanta z technikum. oskar. czyści stare telefony do sprzedaży szybciej niż ja. trochę za szybko, ale nie narzekam')
     ]),
     scene('xSwietlica', [
-      O('Upiekliśmy pierniki. Połowa ma kształt dinozaura, choć foremki były w gwiazdki.'),
+      O('Upiekliśmy pierniki. Połowa ma kształt dinozaura, choć foremki były w gwiazdki.', { wording: 'Upiekliśmy pierniki. Foremki były w ludziki i gwiazdki, ale połowa dzieci twierdzi, że ich ludzik to dinozaur.' }),
       pic('ola', 'ola', 'c_pierniki', 'Dowód rzeczowy 🦖'),
       O('Jedna dziewczynka zapytała mnie, czy ja też kiedyś byłam niegrzeczna. Prawie się rozpłakałam przy blasze.'),
       choose('ola', [

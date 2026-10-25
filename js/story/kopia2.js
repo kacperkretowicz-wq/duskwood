@@ -205,7 +205,7 @@ Engine.chapter('k2', { num: 2, kicker: 'Sprawa 3 · Rozdział 2', title: 'Opisy'
     ]),
     scene('xPoczta', [
       pause(2000),
-      pic('ola', 'ola', 'k_poczta', 'Stoję na poczcie w przerwie. Wysyłam bratu paczkę do Holandii. Przede mną dwanaście osób i każda ma pięć paczek.'),
+      pic('ola', 'ola', 'k_poczta', 'Stoję na poczcie w przerwie. Wysyłam bratu paczkę do Holandii. Przede mną dwanaście osób i każda ma pięć paczek.', { wording: 'Stoję na poczcie w przerwie. Wysyłam bratu paczkę do Holandii. Kolejka do samych drzwi i każdy ma po pięć paczek.' }),
       choose('ola', [
         opt('Wytrzymaj. To już ostatnie dni przed świętami.', [O('Półtora dnia. Liczę w godzinach.')]),
         opt('Co jest w paczce?', [O('Kiełbasa, pierniki i opłatek. Brat mówi, że w Holandii nie ma prawdziwego chleba.')])
