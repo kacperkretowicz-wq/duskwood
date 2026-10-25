@@ -16,6 +16,9 @@ const Engine = (() => {
   let waiter = null;
   const typingMap = {};
   let lastTalk = null;
+  // Odpowiedź w trakcie pisania: gdy rozmówca pisze ostatnią wiadomość przed wyborem gracza,
+  // opcje są już widoczne. Klik kończy pisanie (jego dymek ląduje od razu), a wybór jest gotowy.
+  let early = null, earlyPick = null, hurry = null;
 
   // Natan, Bartek, Zuza i Szklarz piszą bez polskich znaków — styl postaci, pilnowany w jednym miejscu.
   const PLAIN_TYPERS = new Set(['natan', 'bartek', 'zuza', 'szklarz']);
@@ -35,7 +38,8 @@ const Engine = (() => {
     let duration = extra.typing ?? (extra.msg && extra.msg.img ? 1900 : U.clamp(650 + (text || '').length * (profile.key || 65) * jitter, 1200, 9000));
     let g2 = gap;
     // Ostatnia wiadomość przed wyborem gracza: krótsze czekanie, żeby odpowiedzi pojawiały się zaraz po niej.
-    if (extra.beforeChoice && extra.gap == null) { g2 = Math.min(gap, 700); if (extra.typing == null) duration = Math.min(duration, 2400); }
+    // Gdy opcje są widoczne już w trakcie pisania (extra.early), pisanie trwa naturalnie — gracz i tak może odpowiedzieć od razu.
+    if (extra.beforeChoice && extra.gap == null) { g2 = Math.min(gap, 700); if (extra.typing == null && !extra.early) duration = Math.min(duration, 2400); }
     return { gap: g2, duration, hesitate: !extra.beforeChoice && !sameBurst && duration > 5000 && /[?…]|\.\./.test(text || '') };
   }
 
@@ -234,6 +238,12 @@ const Engine = (() => {
     return new Promise((res, rej) => { resolver = v => (my === gen ? res(v) : rej(ABORT)); });
   }
   function answer(v) {
+    if (!resolver && early) {
+      earlyPick = v; early = null;
+      BUS.emit('pending', null);
+      if (hurry) hurry();
+      return true;
+    }
     if (!resolver) return false;
     const r = resolver; resolver = null;
     G.s.pending = null;
@@ -241,7 +251,7 @@ const Engine = (() => {
     r(v);
     return true;
   }
-  const pending = () => G.s && G.s.pending;
+  const pending = () => (G.s && G.s.pending) || early;
 
   function setTyping(chat, who, on) {
     if (on) typingMap[chat] = who; else delete typingMap[chat];
@@ -260,6 +270,8 @@ const Engine = (() => {
     const timing = cadence(chat, who, text, extra);
     await sleep(timing.gap); guard(my);
     setTyping(chat, who, true);
+    const pre = extra.early && !ff && earlyPick == null ? extra.early : null;
+    if (pre) { early = pre; BUS.emit('pending', early); }
     try {
       if (timing.hesitate) {
         await sleep(timing.duration * .35); guard(my);
@@ -267,8 +279,17 @@ const Engine = (() => {
         await sleep(1100); guard(my);
         setTyping(chat, who, true);
         await sleep(timing.duration * .65);
-      } else await sleep(timing.duration);
-    } finally { if (my === gen) setTyping(chat, who, false); }
+      } else {
+        const done = sleep(timing.duration);
+        const sl = [...sleepers].at(-1);
+        if (pre) hurry = () => { if (sleepers.has(sl)) { clearTimeout(sl.timer); sl.res(); } };
+        await done;
+      }
+    } finally {
+      // Po naturalnym końcu pisania opcje zostają na ekranie do kroku wyboru (bez mrugnięcia).
+      if (pre) { hurry = null; if (my !== gen && early === pre) early = null; }
+      if (my === gen) setTyping(chat, who, false);
+    }
     guard(my);
     if (extra.cancelIf && extra.cancelIf()) return;
     const msg = G.post(chat, Object.assign({ from: who, text }, extra.msg || {}));
@@ -297,13 +318,32 @@ const Engine = (() => {
   // Czy zaraz po bieżącym kroku (pomijając krótkie pauzy) gracz dostaje wybór?
   function leadsToChoice(ch) {
     if (!ch || !ch.steps) return false;
-    for (let i = G.s.pc + 1; i < Math.min(ch.steps.length, G.s.pc + 3); i++) {
+    // Etykiety nie są krokami dla gracza — każdy wybór ma przed sobą własną etykietę.
+    for (let i = G.s.pc + 1, seen = 0; i < ch.steps.length && seen < 2; i++) {
       const n = ch.steps[i];
       if (!n) return false;
+      if (n.t === 'label') continue;
       if (n.t === 'choose' || n.t === 'ask') return true;
       if (n.t !== 'pause') return false;
+      seen++;
     }
     return false;
+  }
+  // Najbliższy wybór w tej samej rozmowie (za krótkimi pauzami) — do odpowiedzi w trakcie pisania.
+  function earlyChoice(ch, st) {
+    if (!ch || !ch.steps || st.who === 'me' || st.chat === 'call') return null;
+    for (let i = G.s.pc + 1, seen = 0; i < ch.steps.length && seen < 2; i++) {
+      const n = ch.steps[i];
+      if (!n) return null;
+      if (n.t === 'label') continue;
+      if (n.t === 'pause') { seen++; continue; }
+      if (n.t !== 'choose' || n.chat !== st.chat || n.camera || n.rest) return null;
+      const key = `${G.s.chapter}:${n.self}`, used = G.s.used[key] || [];
+      const vis = n.options.map((o, j) => Object.assign({ i: j }, o)).filter(o => !(n.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
+      if (!vis.length) return null;
+      return { type: 'choose', chat: n.chat, early: true, pc: i, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) };
+    }
+    return null;
   }
   async function exec(st, ch) {
     const my = gen;
@@ -312,14 +352,15 @@ const Engine = (() => {
       case 'label': return;
       case 'go': return st.to;
       case 'ifnot': return G.test(st.cond) ? undefined : st.to;
-      case 'pause': await sleep(leadsToChoice(ch) ? Math.min(st.ms, 800) : st.ms); guard(my); return;
+      case 'pause': if (earlyPick != null) return; await sleep(leadsToChoice(ch) ? Math.min(st.ms, 800) : st.ms); guard(my); return;
       case 'title': await UI.chapterTitle(ch); guard(my); return;
 
       case 'say': {
         const msg = {};
         ['img', 'ev', 'kind', 'place', 'audio', 'link', 'clue', 'vid', 'snap', 'vanish', 'uid'].forEach(k => { if (st[k] != null) msg[k] = st[k]; });
         // wording zmienia wypowiedź bez naruszenia podpisu kroku starych zapisów.
-        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: leadsToChoice(ch) });
+        const before = leadsToChoice(ch);
+        await talk(st.chat, st.who, plainTyper(st.who, st.wording ?? st.text), { msg, gap: st.gap, typing: st.typing, beforeChoice: before, early: before ? earlyChoice(ch, st) : null });
         return;
       }
       case 'sys': G.unlock('chat:' + st.chat); G.post(st.chat, { from: 'sys', text: st.text }); return;
@@ -335,7 +376,13 @@ const Engine = (() => {
         const vis = st.options.map((o, i) => Object.assign({ i }, o))
           .filter(o => !(st.menu && !o.exit && used.includes(o.i)) && G.test(o.cond));
         if (!vis.length) return st.end;
-        const pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
+        let pick;
+        const shown = !!(early && early.chat === st.chat);
+        if (earlyPick != null && vis.some(o => o.i === earlyPick)) { pick = earlyPick; earlyPick = null; early = null; }
+        else {
+          earlyPick = null; early = null;
+          pick = await interact({ type: 'choose', chat: st.chat, camera: !!st.camera, shown, options: vis.map(o => ({ i: o.i, text: o.wording ?? o.text, img: o.img, gallery: !!o.gallery, shot: !!o.shot })) });
+        }
         guard(my);
         const o = st.options[pick];
         if (st.menu && !o.exit) s.used[key] = [...used, pick];
@@ -611,6 +658,7 @@ const Engine = (() => {
     sleepers.clear();
     Object.keys(typingMap).forEach(k => delete typingMap[k]);
     ff = false;
+    early = null; earlyPick = null; hurry = null;
     if (G.s) G.s.pending = null;
     BUS.emit('pending', null);
     setTimeout(run, 0);

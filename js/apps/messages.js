@@ -315,7 +315,7 @@
           scrollEnd(true); return;
         }
         p.options.forEach((o, n) => comp.appendChild(h('button', {
-          class: 'opt' + (o.shot ? ' shot' : ''), style: `animation-delay:${n * 60}ms`,
+          class: 'opt' + (o.shot ? ' shot' : ''), style: p.shown ? 'animation:none' : `animation-delay:${n * 60}ms`,
           onclick: () => { SFX.play.tap(); comp.innerHTML = ''; Engine.answer(o.i); }
         }, h('span', { html: U.rich(o.text) }), U.ico('send', 15))));
         scrollEnd(true);

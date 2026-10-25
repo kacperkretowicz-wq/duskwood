@@ -44,7 +44,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5173';
     while(Date.now()-t0<240000){
      await new Promise(r=>setTimeout(r,15));Engine.skip();
      if(G.s.finished)break;
-     const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+     const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
      if(st&&st.scene)scenes.add(st.scene);
      const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);
      same=key===lastKey?same+1:0;lastKey=key;

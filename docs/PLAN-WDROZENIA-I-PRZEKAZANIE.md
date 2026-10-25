@@ -961,3 +961,10 @@ Zamienione (17): marta, weronika (bez okularów), natan (proste włosy), janina 
 - Kadr: post od krawędzi do krawędzi (4:5), nagłówek z lewej, pasek akcji (serce z licznikiem polubień, komentarze → profil, wyślij), podpis „login treść”, relacje z obwódką i separatorem.
 - tests/browser.cjs dostosowany do otwarcia z Ekipą (film jednorazowy przed Kubą), podziału SMS/Gadka i zapisu v16.
 - Pełne e2e iOS + Android (31 rozdziałów, S1–S5, pięć finałów, offline) PASS; wszystkie testy przeglądarkowe i npm 97/97 PASS.
+
+### 2026-10-25 — v115: odpowiedź w trakcie pisania
+- Gdy rozmówca pisze ostatnią wiadomość przed wyborem (w tej samej rozmowie, za co najwyżej dwiema pauzami), opcje są widoczne już przy kropkach. Klik kończy pisanie: dymek rozmówcy ląduje od razu, zaraz po nim odpowiedź gracza. Kolejność rozmowy i warunki opcji bez zmian; bez wpływu na zapis (stan „early” nie jest zapisywany; po reloadzie krok wraca normalnie).
+- Naprawa: `leadsToChoice` nie widział wyborów, bo każdy `choose` ma przed sobą etykietę — skrócone czekanie przed wyborem praktycznie nie działało. Etykiety są teraz pomijane.
+- Spokojniejsze tempo: gdy opcje są widoczne w trakcie pisania, pisanie trwa naturalnie (bez limitu 2,4 s), bo gracz i tak może odpowiedzieć od razu.
+- Opcje, które były już widoczne, nie animują się drugi raz przy przejściu do kroku wyboru.
+- Nowy test: tests/early-reply.browser.cjs.

@@ -20,7 +20,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
    await new Promise(r=>setTimeout(r,15));Engine.skip();
    if(G.s.chapter===stopAt||G.s.finished)break;
    const o=G.s.objective&&G.s.objective.text;if(o&&o!==lastObj){log.push(`   >> CEL: ${o}`);lastObj=o;}
-   const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+   const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
    const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===lastKey?same+1:0;lastKey=key;
    if(p){
     if(p.type==='choose'){const ak=G.s.chapter+':'+G.s.pc;const n=(window.__att||={})[ak]=(window.__att[ak]||0)+1;log.push(`   ?? WYBÓR (${p.chat}): `+p.options.map(x=>x.text).join(' | ')+(n>1?'  [próba '+n+']':''));Engine.answer(p.options[(n-1)%p.options.length].i);}

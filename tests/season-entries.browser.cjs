@@ -26,7 +26,7 @@ const CASES=[
    Engine.restart();const t0=Date.now();let last='',same=0;
    while(Date.now()-t0<60000&&G.s.chapter!==c.until&&!G.s.finished){
     await new Promise(r=>setTimeout(r,15));Engine.skip();
-    const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();
+    const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];
     const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===last?same+1:0;last=key;
     if(p){if(p.type==='choose')Engine.answer(p.options[0].i);else if(p.type==='dial')Engine.answer(p.numbers[0]);else if(p.type==='show'){const ev=st.accept[0].ev[0];G.addEv(ev,true);Engine.answer(ev);}else if(p.type==='ask')Engine.answer(st.answers[0].match?st.answers[0].match[0]:'tak');continue;}
     if(st&&st.t==='wait'&&same>2){if(typeof st.cond==='function'){UI.openApp('browser',{page:'tt_archiwum'});await new Promise(r=>setTimeout(r,150));UI.goHome();}else satisfy(st.cond);G.change();}

@@ -14,7 +14,7 @@ async function play(page,stopFlag,target){
   while(Date.now()-t0<150000){
    await new Promise(r=>setTimeout(r,15));Engine.skip();
    if((stopFlag&&G.flag(stopFlag))||G.s.finished)break;
-   const ch=Engine.chapters[G.s.chapter],st=ch&&ch.steps[G.s.pc],p=Engine.pending();if(chapters.at(-1)!==G.s.chapter)chapters.push(G.s.chapter);
+   const ch=Engine.chapters[G.s.chapter],p=Engine.pending(),st=ch&&ch.steps[p&&p.early?p.pc:G.s.pc];if(chapters.at(-1)!==G.s.chapter)chapters.push(G.s.chapter);
    const key=G.s.chapter+':'+G.s.pc+':'+(p&&p.type);same=key===last?same+1:0;last=key;
    if(p){if(p.type==='choose'){const full=st.options;const W={pelny:['m_protectK','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays'],margines:['m_protectK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_martaOut'],cudzy:['m_leakK']}[target]||[];
      const X=['m_leakK','m_krystynaNo','m_henrykQuiet','m_correctionLater','m_krystynaOk','m_henrykOnRecord','m_correctionFirst','m_martaStays','m_martaOut','m_protectK'].filter(k=>!W.includes(k));

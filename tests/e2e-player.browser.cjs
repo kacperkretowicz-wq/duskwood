@@ -50,7 +50,7 @@ if(S5==='cisza2'){swap(AVOID,WANT,'g_wipeAll');swap(WANT,AVOID,'g_recordMarta');
      const acc=document.querySelector('.scare-call:not(.out) .c-btn.acc,.call:not(.out) .c-btn.acc');if(acc){acc.click();r.click='call';return r;}
      const cu=document.querySelector('.curtain');if(cu){r.curtain=cu.className;const b=cu.querySelector('button');if(/credits/.test(cu.className)||G.s.finished){r.credits=true;return r;}if(b)b.click();else cu.click();r.click='curtain';return r;}
      const p=Engine.pending();if(!p)return r;r.p=p.type;r.chat=p.chat;
-     const ch=Engine.chapters[G.s.chapter],step=ch.steps[G.s.pc];
+     const ch=Engine.chapters[G.s.chapter],step=ch.steps[p.early?p.pc:G.s.pc];
      if(p.type==='choose'){
       const score=o=>{const s=Object.keys(step.options[o.i].set||{}),inc=step.options[o.i].inc||{},set=step.options[o.i].set||{};let v=10*s.filter(k=>W.includes(k)).length-10*s.filter(k=>X.includes(k)).length;
        v+=(set.toldGajda||set.gajdaAlert||inc.leaks?-20:0)+(set.reportBoth?6:0)+(set.named112?6:0)+(step.options[o.i].exit?3:0)+(set.dispatchLocal?-6:0);return v-o.i*0.01;};
