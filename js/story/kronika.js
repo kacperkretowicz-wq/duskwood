@@ -303,7 +303,7 @@ Engine.chapter('c1', { num: 1, kicker: 'Sprawa 4 · Rozdział 1', title: 'Boisko
     O('Wiem, co może być na tej kasecie. Festyn, 2018. Nie chcę o tym pisać.'),
     choose('ola', [
       opt('Nie musisz. Jestem tu.', [O('Dziękuję. Muszę to przemyśleć.')], { trust: { ola: 1 } }),
-      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2018 na festynie.', { wording: "Może. Znam jeszcze dwie osoby z takimi inicjałami. Ale ten festyn... ja naprawdę mam czego się bać." })])
+      opt('Może to ktoś inny na O.N.?', [O('W Mglisku jest nas trzy. Ale tylko ja byłam w 2018 na festynie.', { wording: "Może. Znam jeszcze dwie osoby z takimi inicjałami. Ale ten festyn… ja naprawdę mam czego się bać." })])
     ]),
     scene('xOlaMama', [
       pause(4000),
@@ -700,7 +700,7 @@ Engine.chapter('c3', { num: 4, kicker: 'Sprawa 4 · Rozdział 4', title: 'Wogól
       W('Przypomina to {Panu|Pani} coś?'),
       choose('weronika', [
         opt('Magnetowid pokazuje 23:47. Taki zegar był w rogu klipu z boiskiem.', [
-          W('Boże. Czyli te klipy są nagrywane w tym pokoju.', { wording: "Ten sam zegar... I to odbicie lampki. Wygląda, jakby ktoś nagrywał tutaj." }),
+          W('Boże. Czyli te klipy są nagrywane w tym pokoju.', { wording: "Ten sam zegar… I to odbicie lampki. Wygląda, jakby ktoś nagrywał tutaj." }),
           W('Ale pan Zenon kładzie się o dziewiątej. Mówił mi to sto razy, bo „telewizja po dziewiątej to samo zło”.')
         ], { set: { c_roomLink: true } }),
         opt('Lampka na biurku. Jej odbicie było na studniówce.', [

@@ -1167,3 +1167,10 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Test regresji: `tests/rerender-typing.browser.cjs`.
 - Android: godzina kafla Błysku nie nachodzi już biało na „Błysk · film jednorazowy” (kafel nie dostaje klasy `media`).
 - SW v142.
+
+### v143 — świeże transkrypty S2–S5 na v142, drobne poprawki
+- Transkrypty S2–S5 na v142 (logs/night/tr142): wszystkie sezony dochodzą do końca, bez STUCK, daty i dni tygodnia zgodne (2026/2027), znaczniki czasu nie cofają się w żadnym rozdziale, identyczne z v140.
+- S5 g1: Maja nie mówi już „nigdzie tego nie piszemy, nawet tutaj”, skoro potem sama pyta o hasło na czacie. Teraz: „będę nim sprawdzać też wiadomości, nie tylko telefony”.
+- S4: Weronika i Ola piszą wielokropek „…” jak w reszcie swoich wiadomości.
+- Narzędzie transkryptu wypisuje błędy strony (`# BŁĄD STRONY: …`), żeby wyjątki połknięte przez BUS nie umykały.
+- SW v143.

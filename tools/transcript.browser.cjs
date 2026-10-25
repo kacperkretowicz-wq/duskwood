@@ -5,6 +5,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
 (async()=>{
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  const page=await (await browser.newContext({viewport:{width:390,height:844}})).newPage();
+ const errs=[];page.on('pageerror',e=>errs.push(e.message));page.on('console',m=>{if(m.type()==='error')errs.push(m.text());});
  await page.goto(base+'/?debug');
  // Wersja z sw.js na początku wyjścia: od razu widać, czy serwer pod tym portem serwuje bieżący katalog.
  const ver=await page.evaluate(async()=>{try{return((await (await fetch('sw.js')).text()).match(/VERSION = '([^']+)'/)||[])[1]||'?';}catch{return '?';}});
@@ -40,5 +41,5 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
   }
   return log.join('\n');
  },[stopAt,process.argv[3]||"",process.argv[4]||"s1",!!process.env.RANDOM_CHOICES]);
- console.log(out);await browser.close();
+ console.log(out);for(const e of errs)console.log('# BŁĄD STRONY: '+e);await browser.close();
 })();

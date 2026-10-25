@@ -217,7 +217,7 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       opt('„Jodełka”. Jak kostka Bartka.', [M('ok. bartek by się wzruszył. ale mu nie mówimy')], { set: { g_hasloJ: true } }),
       opt('„Trzy kości”. Tyle zapamiętałaś na anatomię.', [M('bardzo śmieszne. ale dobre. nikt tego nie zgadnie, bo to wstyd')], { wording: '„Trzy kości”. Z tych starych fiszek od Oli.', set: { g_hasloK: true } })
     ]),
-    ...GlosHaslo(D, w => [M(`zapisane w głowie. „${w}”. nigdzie już tego nie piszemy, nawet tutaj`)]),
+    ...GlosHaslo(D, w => [M(`zapisane w głowie. „${w}”. nigdzie już tego nie piszemy, nawet tutaj`, { wording: `zapisane w głowie. „${w}”. będę nim sprawdzać też wiadomości, nie tylko telefony` })]),
     set('g_haslo'),
     M('idę. trzymaj kciuki'),
     scene('xRanoGrupa', [
