@@ -1215,3 +1215,8 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 ### v150 — gałęzie losowe S2/S4 (tr149 r-s2, r-s4)
 - Marta: wszystkie odpowiedzi gracza w jej czacie na „pani” (m1 „Niech pani pokaże to ludziom…”, m3 „Nie wiedziała pani…”, „Dlaczego pani nie powiedziała wcześniej?”, m4 „Niech pani tam nie siedzi sama po nocach.”) — wcześniej część gałęzi przechodziła na „ty”.
 - Maja (S4 c2, gałąź „Wspomniał o wnuczce”): zamiast „nie wiedziałam, że ma wnuczkę” — Maja w S3 sama opisywała wnuczkę z psem, więc teraz „w ogóle o niej nie pomyślałam”.
+
+### v151 — zrzut od Dudka nie znika w próżni
+- S5 g4: opcja w czacie Dudka podpisana jako czynność „(nie odpisuj, zrób zrzut i wyślij Natanowi)”, tak jak inne ciche wybory.
+- S5 g5: przy fladze `g_dudekShot` Natan potwierdza rano, że zrzut trafił do policji („to „nie odbieraj” jest juz w aktach”). Wcześniej flaga nie była nigdzie używana.
+- Migracje przeliczone (`tools/regen-migrations.cjs`).

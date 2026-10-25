@@ -761,7 +761,7 @@ Engine.chapter('g4', { num: 4, kicker: 'Sprawa 5 · Rozdział 4', title: 'Serwis
     say('dudek', 'dudek', 'nie wiem kim jestes ale wiem jak brzmisz'),
     say('dudek', 'dudek', 'jutro twoja mama zadzwoni do ciebie. nie odbieraj'),
     choose('dudek', [
-      opt('Nie odpisuj. Zrób zrzut i wyślij Natanowi.', [say('dudek', 'dudek', 'grzecznie', { wording: 'pomysl do jutra' })], { silent: true, set: { g_dudekShot: true } }),
+      opt('Nie odpisuj. Zrób zrzut i wyślij Natanowi.', [say('dudek', 'dudek', 'grzecznie', { wording: 'pomysl do jutra' })], { wording: '(nie odpisuj, zrób zrzut i wyślij Natanowi)', silent: true, set: { g_dudekShot: true } }),
       opt('Wiem, kim jesteś, Paweł.', [say('dudek', 'dudek', 'nic nie wiesz'), say('dudek', 'dudek', 'ja tylko dzwonie. ktos inny mowi co')], { set: { g_dudekSlip: true } })
     ]),
     set('g_day4'),
@@ -780,6 +780,7 @@ Engine.chapter('g5', { num: 5, kicker: 'Sprawa 5 · Rozdział 5', title: 'Przewi
     Nt('zatrzymali go. o 6:10, w kawalerce nad pizzeria', { img: 'g_zatrzymanie' }),
     Nt('laptop, dwa telefony, mikrofon. i folder „glosy”. 60 osob z mgliska i okolic. ty tez'),
     Nt('policjant mowi, ze w zyciu czegos takiego nie widzial. a widzial duzo'),
+    iff('flag:g_dudekShot', [Nt('twoj wczorajszy zrzut od dudka tez im dalem. to „nie odbieraj” jest juz w aktach')]),
     choose('natan', [
       opt('Dzięki, Natan. Bez ciebie by tego nie było.', [Nt('bez oskara i ciebie. ja tylko jezdzilem samochodem'), Nt('i pije trzecia kawe. o 7:30')]),
       opt('Co mówi Dudek?', [Nt('nic. ma adwokata od razu. jakby czekal na to', { wording: "na razie odmawia odpowiedzi. jest juz z nim adwokat" }), Nt('adwokat jest z wroclawia. drogi. skad kierownik budowy ma na takiego', { wording: "kancelaria z wroclawia, znam ja z innych spraw. nie wiem, kto mu placi. samo to jeszcze niczego nie dowodzi" })], { set: { g_lawyer: true } })
