@@ -219,7 +219,7 @@
       const mine = m.from === 'me';
       const newRun = !prev || prev.from !== m.from || m.t - prev.t > 5 * 60000 || sepNeeded(prev, m) || prev.from === 'sys';
       const ch = DATA.chars[m.from] || {};
-      const b = h('div', { class: 'bub' + (m.img && !m.text ? ' media' : '') });
+      const b = h('div', { class: 'bub' + (m.img && !m.text && !m.snap ? ' media' : '') });
       UI.bindMessageActions(b, id, m);
       if (m.img && !m.vid) {
         const im = h('img', { class: 'mimg', src: Art.url(m.img), alt: '', loading: 'lazy', onclick: () => UI.viewImage(m.img, { from: ch.name }) });
@@ -288,6 +288,8 @@
 
     function renderAll() {
       msgs.innerHTML = '';
+      // Dymek „pisze…” wypadł razem z resztą; bez tego append() wstawiałby przed odłączony węzeł i przerywał render.
+      typingEl = null;
       lastRendered = null;
       const list = G.chat(id).msgs;
       list.forEach(m => append(m, false));
@@ -300,7 +302,7 @@
       if (sepNeeded(lastRendered, m)) msgs.appendChild(h('div', { class: 'sep' }, sepText(m.t)));
       const n = bubble(m, lastRendered);
       if (animate) n.classList.add('in');
-      if (typingEl) msgs.insertBefore(n, typingEl); else msgs.appendChild(n);
+      if (typingEl && typingEl.parentNode === msgs) msgs.insertBefore(n, typingEl); else msgs.appendChild(n);
       lastRendered = m;
     }
     function nearBottom() { return body.scrollHeight - body.scrollTop - body.clientHeight < 160; }

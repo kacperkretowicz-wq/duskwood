@@ -1161,3 +1161,9 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Epilog: Maja pisze nazwiska wielką literą (jak w S2–S5: „pana Rybickiego”, „pani Weronika”), a w tej samej rozmowie było „dzwonię do rybickiego” → „Rybickiego”.
 - `w_tomek` (zdjęcie Tomka z 14.06.1997): tamagotchi na szyi było białe, a Weronika mówi „to różowe przy szyi” i „na moim zdjęciu widać je lepiej” → obudowa podbarwiona na różowo (ekran bez zmian).
 - Wszystko tekstowe przez `wording`. SW v141.
+
+### v142 — czat nie znika po filmie jednorazowym
+- Błąd: gdy ktoś pisał w chwili przerysowania czatu (po obejrzeniu snapa, edycji wiadomości, `phone-tools`), `renderAll()` czyścił listę, ale trzymał odłączony wskaźnik pisania → `insertBefore` rzucał wyjątek, czat Ekipy tracił wiadomości Ady i kafel Błysku, a separator „Dziś 21:03” się dublował. Naprawa: `typingEl = null` po wyczyszczeniu i bezpieczne `append()`.
+- Test regresji: `tests/rerender-typing.browser.cjs`.
+- Android: godzina kafla Błysku nie nachodzi już biało na „Błysk · film jednorazowy” (kafel nie dostaje klasy `media`).
+- SW v142.

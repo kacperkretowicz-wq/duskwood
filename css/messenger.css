@@ -74,3 +74,4 @@
 .snap-bar { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 12px; right: 12px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); overflow: hidden; z-index: 1; }
 .snap-bar i { display: block; height: 100%; width: 100%; background: #fff; transform-origin: left; transform: scaleX(0); }
 .snap-meta { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 22px); left: 14px; color: #fff; font-size: 13px; text-shadow: 0 1px 3px #000; z-index: 1; }
+.snap-bub .tm { margin-right: 8px !important; margin-bottom: 2px !important; }
