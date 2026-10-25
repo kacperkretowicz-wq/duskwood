@@ -506,6 +506,7 @@ const Engine = (() => {
       case 'scare': {
         s.scares = s.scares || {};
         if (s.scares[st.id]) return;
+        if (typeof VoiceLib !== 'undefined' && !VoiceLib.allowScare(st.id, s.flags)) return;
         s.scares[st.id] = G.now ? G.now() : Date.now();
         G.save();
         if (ff) return;

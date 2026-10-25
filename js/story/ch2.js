@@ -104,7 +104,7 @@ Engine.chapter('ch2', { num: 2, title: 'Huta', when: 'Czwartek, 22 października
     /* P5 / G2: głosówka z drugiej karty Igora, nagrana w zamkniętym serwisie. Źródło wyjaśnia wyznanie w ch4. */
     scene('scOdsluch', [
       pause(2500),
-      say('szklarz', 'szklarz', 'voice:0:09||[cichy szum pomieszczenia, tyka zegar, ktoś stuka paznokciem w szybę… nagły trzask szkła tuż przy mikrofonie]'),
+      say('szklarz', 'szklarz', 'voice:0:09||[cichy szum pomieszczenia, tyka zegar, ktoś stuka paznokciem w szybę… nagły trzask szkła tuż przy mikrofonie]', { wording: 'voice:0:09||Szum pomieszczenia. Tyka zegar. Stuknięcie w szybę. Trzask szkła.' }),
       pause(4200),
       scare('s1_odsluch', 'glitch'),
       say('szklarz', 'szklarz', 'tak brzmi szklo jak peka'),

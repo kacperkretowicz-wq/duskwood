@@ -302,6 +302,7 @@ body.mobile .hdr { padding-top: calc(36px + var(--safe-t)); min-height: calc(82p
 .call h2 { margin: 26px 0 4px; font-size: 30px; font-weight: 500; letter-spacing: -.01em; text-align: center; }
 .call .c-s { color: var(--tx2); font-size: 15px; }
 .call .c-cap { flex: 1; width: 100%; margin: 24px 0 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; mask-image: linear-gradient(to bottom, transparent, #000 18%); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%); }
+.call.no-cc .c-cap { visibility: hidden; }
 .call .c-cap .cl { font-size: 16px; line-height: 1.45; color: var(--tx2); animation: toin .35s both; }
 .call .c-cap .cl b { color: var(--acc2); font-weight: 600; margin-right: 6px; }
 .call .c-cap .cl.me { color: var(--fog); text-align: right; }

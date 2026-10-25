@@ -526,16 +526,53 @@ const UI = (() => {
     evToast = { el, ids, close, t: setTimeout(close, 3400) };
   }
 
-  /* Wiadomość głosowa: `voice:0:38|Kto|transkrypcja`. Bez pliku audio pokazujemy przebieg i zapis. */
-  function textOrVoice(text) {
+  /* Wiadomość głosowa: `voice:0:38|Kto|transkrypcja`. Odtwarzacz siedzi w tym samym dymku. */
+  function textOrVoice(text, who) {
     const m = /^voice:(\d+:\d\d)\|([^|]*)\|([\s\S]*)$/.exec(String(text || ''));
     if (!m) return h('p', { html: U.rich(text) });
     const bars = Array.from({ length: 28 }, (_, i) => h('i', { style: `height:${4 + ((i * 7 + m[3].length) % 13)}px` }));
     const tr = h('p', { class: 'voice-tr', hidden: true, html: U.rich(m[3]) });
-    const btn = h('button', { class: 'voice-play', 'aria-label': 'Pokaż transkrypcję wiadomości głosowej', 'aria-expanded': 'false', onclick: () => { tr.hidden = !tr.hidden; btn.setAttribute('aria-expanded', String(!tr.hidden)); wrap.classList.toggle('open', !tr.hidden); } }, '▶');
+    const time = h('small', { class: 'voice-time' }, '0:00 / ' + m[1]);
+    const btn = h('button', { class: 'voice-play', type: 'button', 'aria-label': 'Odtwórz wiadomość głosową', 'aria-pressed': 'false' }, '▶');
+    const zapis = h('button', { class: 'voice-cc', type: 'button', 'aria-expanded': 'false' }, 'zapis');
+    const wave = h('span', { class: 'voice-wave', 'aria-hidden': 'true' }, bars);
+    let token = null;
+    const paint = (t, d) => {
+      const total = d || 0;
+      time.textContent = (typeof Voices !== 'undefined' ? Voices.fmt(t) : '0:00') + ' / ' + (total ? Voices.fmt(total) : m[1]);
+      const n = total ? Math.round(bars.length * Math.min(1, t / total)) : 0;
+      bars.forEach((b, i) => b.classList.toggle('lit', i < n));
+    };
+    const setPlay = on => { btn.textContent = on ? 'II' : '▶'; btn.setAttribute('aria-pressed', String(on)); };
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
+      if (typeof Voices === 'undefined') { tr.hidden = !tr.hidden; return; }
+      Voices.noteGesture();
+      if (token && Voices.held(token)) { Voices.toggle(token); setPlay(!Voices.paused(token)); return; }
+      await Voices.load();
+      const started = Voices.playManual(who || '', text, {
+        onTime: paint,
+        onEnd: () => { setPlay(false); token = null; },
+        onStop: () => { setPlay(false); token = null; }
+      });
+      if (!started) { tr.hidden = false; zapis.setAttribute('aria-expanded', 'true'); return; }
+      token = started.token;
+      setPlay(true);
+    });
+    wave.addEventListener('click', e => {
+      e.stopPropagation();
+      if (!token || typeof Voices === 'undefined' || !Voices.held(token)) return;
+      const r = wave.getBoundingClientRect();
+      Voices.seek(token, r.width ? (e.clientX - r.left) / r.width : 0);
+    });
+    zapis.addEventListener('click', e => {
+      e.stopPropagation();
+      tr.hidden = !tr.hidden;
+      zapis.setAttribute('aria-expanded', String(!tr.hidden));
+    });
     const wrap = h('div', { class: 'voice-msg' },
-      h('div', { class: 'voice-row' }, btn, h('span', { class: 'voice-wave', 'aria-hidden': 'true' }, bars), h('small', {}, m[1])),
-      m[2] ? h('small', { class: 'voice-from' }, 'Nagranie: ' + m[2]) : null, tr);
+      h('div', { class: 'voice-row' }, btn, wave, time),
+      m[2] ? h('small', { class: 'voice-from' }, 'Nagranie: ' + m[2]) : null, zapis, tr);
     return wrap;
   }
 
@@ -724,7 +761,7 @@ const UI = (() => {
     const cap = h('div', { class: 'c-cap' });
     const opts = h('div', { class: 'c-opts' });
     const timer = h('div', { class: 'c-s' }, '0:00');
-    const el = h('div', { class: 'call active' },
+    const el = h('div', { class: 'call active' + (G.settings.captions === false ? ' no-cc' : '') },
       h('div', { class: 'c-av' }, avatar(c.who, 'lg')),
       h('h2', { style: 'font-size:24px;margin-top:16px' }, who.name),
       timer, cap, opts,
@@ -759,6 +796,7 @@ const UI = (() => {
   }
   function endCall() {
     return new Promise(res => {
+      if (typeof Voices !== 'undefined') Voices.stop();
       SFX.play.hangup();
       const el = callEl; callEl = null;
       if (!el) return res();
@@ -877,7 +915,7 @@ const UI = (() => {
     closeOverlays();
     if (kind === 'glitch') {
       screen.classList.add('scare-glitch'); if (soft) screen.classList.add('soft');
-      SFX.play.staticHit(soft); if (!soft) U.vibrate([20, 40, 20, 40, 60]);
+      if (!o.silent) { SFX.play.staticHit(soft); if (!soft) U.vibrate([20, 40, 20, 40, 60]); }
       return wait(soft ? 700 : 560).then(() => { screen.classList.remove('scare-glitch', 'soft'); });
     }
     if (kind === 'breath') { SFX.play.breath(soft); if (!soft) U.vibrate(40); return wait(2600); }

@@ -8,7 +8,7 @@ const types = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.svg': 'image/svg+xml', '.json': 'application/json', '.webmanifest': 'application/manifest+json',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.md': 'text/markdown; charset=utf-8',
-  '.mp4': 'video/mp4', '.m4v': 'video/mp4', '.webm': 'video/webm'
+  '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.mp4': 'video/mp4', '.m4v': 'video/mp4', '.webm': 'video/webm'
 };
 
 function createServer() {

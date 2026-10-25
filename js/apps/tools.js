@@ -469,12 +469,16 @@
       const stack = new UI.Stack(host);
       const pg = UI.page({ title: 'Ustawienia', big: true });
       const S = G.settings;
-      const toggle = (label, key, desc) => h('button', { class: 'row', onclick: e => { S[key] = !S[key]; G.saveSettings(); e.currentTarget.querySelector('.tgl').classList.toggle('on', S[key]); if (key === 'ambient') SFX.ambient(S.ambient ? (G.s.mood || 'calm') : 'off'); } },
+      const toggle = (label, key, desc) => h('button', { class: 'row', onclick: e => {
+        S[key] = !S[key]; G.saveSettings(); e.currentTarget.querySelector('.tgl').classList.toggle('on', S[key]);
+        if (key === 'ambient') SFX.ambient(S.ambient ? (G.s.mood || 'calm') : 'off');
+        if (typeof Voices !== 'undefined' && (key === 'captions' || key === 'sfx')) { Voices.applyCaptions(); Voices.applyMix(); }
+      } },
         h('div', { class: 'rm' }, h('b', {}, label), desc ? h('span', {}, desc) : null), h('span', { class: 'tgl' + (S[key] ? ' on' : '') }));
       const speeds = [['slow', 'Wolno'], ['normal', 'Normalnie'], ['fast', 'Szybko'], ['instant', 'Natychmiast']];
       const sp = h('div', { class: 'seg', style: 'margin:0' }, speeds.map(([k, l]) => h('button', { class: S.speed === k ? 'on' : '', onclick: e => { S.speed = k; G.saveSettings(); [...sp.children].forEach(b => b.classList.remove('on')); e.currentTarget.classList.add('on'); } }, l)));
       const vol = h('input', { type: 'range', min: 0, max: 1, step: 0.05, value: S.volume, style: 'width:100%' });
-      vol.addEventListener('input', () => { S.volume = +vol.value; SFX.setVolume(S.volume); G.saveSettings(); });
+      vol.addEventListener('input', () => { S.volume = +vol.value; SFX.setVolume(S.volume); if (typeof Voices !== 'undefined') Voices.setVolume(S.volume); G.saveSettings(); });
       const nameIn = h('input', { class: 'field', value: G.s.player.name, maxlength: 20 });
       nameIn.addEventListener('change', () => { const v = nameIn.value.trim(); if (v) { G.s.player.name = v; G.save(); UI.toast('Zapisano imię.'); } });
       const gen = h('div', { class: 'seg', style: 'margin:0' }, [['m', 'Pisz do mnie: on'], ['f', 'Pisz do mnie: ona']].map(([k, l]) => h('button', { class: G.s.player.gender === k ? 'on' : '', onclick: e => { G.s.player.gender = k; G.save(); [...gen.children].forEach(b => b.classList.remove('on')); e.currentTarget.classList.add('on'); BUS.emit('chats'); } }, l)));
@@ -525,7 +529,7 @@
         h('div', { class: 'sec-t' }, 'Tempo wiadomości'),
         h('div', { class: 'pad' }, sp),
         h('div', { class: 'sec-t' }, 'Dźwięk i wibracje'),
-        h('div', { class: 'list plain' }, toggle('Efekty dźwiękowe', 'sfx'), toggle('Dźwięk otoczenia', 'ambient', 'Wiatr, szkło, niski szum'), toggle('Wibracje', 'vibrate'), toggle('Łagodniejsze straszenie', 'softScares', 'Bez głośnych dźwięków, błysków i nagłych zbliżeń'), toggle('Podpowiedzi od postaci', 'autoHints', 'Gdy utkniesz, ktoś może coś zasugerować')),
+        h('div', { class: 'list plain' }, toggle('Efekty dźwiękowe', 'sfx'), toggle('Dźwięk otoczenia', 'ambient', 'Wiatr, szkło, niski szum'), toggle('Napisy', 'captions', 'Zapis rozmowy i przycisk transkrypcji przy głosówce'), toggle('Wibracje', 'vibrate'), toggle('Łagodniejsze straszenie', 'softScares', 'Bez głośnych dźwięków, błysków i nagłych zbliżeń'), toggle('Podpowiedzi od postaci', 'autoHints', 'Gdy utkniesz, ktoś może coś zasugerować')),
         h('div', { class: 'pad', style: 'margin-top:12px' }, h('label', { class: 'lbl', style: 'margin-top:0' }, 'Głośność'), vol),
         h('div', { class: 'sec-t' }, 'Rozdziały'), chList,
         h('div', { class: 'sec-t' }, 'Zakończenia'), endings,
