@@ -248,7 +248,7 @@
       const hrs = [];
       for (let i = 0; i < 8; i++) { const t = now + i * 3600e3; hrs.push(h('div', { class: 'wx-h' }, h('small', {}, i ? U.time(t).slice(0, 2) : 'Teraz'), U.ico(w.hourly[i % w.hourly.length].i, 22), h('b', {}, w.hourly[i % w.hourly.length].t + '°'))); }
       U.put(pg.body,
-        h('div', { class: 'wx-top' }, h('small', {}, 'Mglisko'), h('div', { class: 'wx-t' }, w.temp + '°'), h('b', {}, w.nowLong || w.now), h('span', {}, `Odczuwalna ${w.feel}° · wilgotność ${w.hum}%`)),
+        h('div', { class: 'wx-top' }, h('small', {}, DATA.weatherPlace()), h('div', { class: 'wx-t' }, w.temp + '°'), h('b', {}, w.nowLong || w.now), h('span', {}, `Odczuwalna ${w.feel}° · wilgotność ${w.hum}%`)),
         w.alert ? h('div', { class: 'wx-alert' }, U.ico('info', 18), h('div', {}, h('b', {}, 'Ostrzeżenie IMGW'), h('span', {}, w.alert))) : null,
         h('div', { class: 'wx-hours' }, hrs),
         h('div', { class: 'list', style: 'margin-top:14px' }, w.days.map(d => h('div', { class: 'row' }, h('div', { class: 'rm' }, h('b', {}, d.d)), U.ico(d.i, 20), h('span', { class: 'rx', style: 'min-width:70px' }, `${d.lo}° / ${d.hi}°`)))),

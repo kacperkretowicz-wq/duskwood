@@ -65,6 +65,9 @@ DATA.contacts = [
   { name: 'Serwis GSM-PC (Igor)', who: 'igor', number: '733 905 014', cond: 'seen:web:kadr:igor.malicki' }
 ];
 
+// Nazwa miejsca w pogodzie: przed wiadomością od Kuby gracz jeszcze nie zna Mgliska.
+DATA.weatherPlace = () => (G.s && G.s.chapter === 'prolog' && !G.flag('knowMaja')) ? 'Moja lokalizacja' : 'Mglisko';
+
 // Pogoda zależna od dnia fabuły.
 DATA.weather = () => {
   const ch = G.s ? G.s.chapter : 'prolog';

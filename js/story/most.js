@@ -31,7 +31,7 @@ Engine.chapter('m0', { num: 0, kicker: 'Sprawa 2 · Prolog', title: 'Teczka', wh
       ])
     ])]),
     scene('xKot', [
-      pic('maja2', 'maja', 'm_kot_wycinki', 'poznaj Panią Ziutę. kotka pani Weroniki. uznała, że wycinki o powodzi to jej łóżko'),
+      pic('maja2', 'maja', 'm_kot_wycinki', 'poznaj Panią Ziutę. kotka pani Weroniki. uznała, że wycinki o powodzi to jej łóżko', { wording: 'poznaj panią Ziutę. kotka pani Weroniki. uznała, że wycinki o powodzi to jej łóżko' }),
       choose('maja2', [
         opt('Pani Ziuta ma większy porządek w papierach niż gmina.', [M('xD przekażę. kotka i tak ma to gdzieś')]),
         opt('Nie budźcie jej. Pilnuje dowodów.', [M('pilnuje. jak sięgnęłam po wycinek, dostałam łapą. bez pazurów, ale jednak')])

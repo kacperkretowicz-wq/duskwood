@@ -1185,3 +1185,8 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Maja pisze „kuba” małą literą także w k3 (jak wszędzie indziej).
 - Sprawdzone przy okazji: „29 lat” milczenia o Tomku (VII 1997 → XII 2026) i „trzydzieści lat” od festynu 1996 w S5 są zgodne z biblią sezonów.
 - SW v145.
+
+### v146 — 2026-10-25 (S2 do końca, pogoda w prologu)
+- Przeczytany S2 do końca (m3–m5): zaniki, tablet Janiny, obiad pod drzwiami, gozdziki, 7.12 — spójne.
+- Most: „poznaj panią Ziutę” (małe „pani” w ustach Mai, wording).
+- Widżet i aplikacja Pogoda: w prologu, zanim Kuba napisze, pokazują „Moja lokalizacja” zamiast „Mglisko” — gracz jeszcze nie zna miasteczka (Ada pisze „w jakimś mglisku”).
