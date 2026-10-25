@@ -63,7 +63,7 @@ const Engine = (() => {
     evolve: (ev, patch) => ({ t: 'evolve', ev, patch }),
     unlock: (...keys) => ({ t: 'unlock', keys }),
     lock: (...keys) => ({ t: 'lock', keys }),
-    set: (k, v = true) => ({ t: 'set', k, v }),
+    set: (k, v = true, also) => ({ t: 'set', k, v, ...(also ? { also } : {}) }),
     inc: (k, n = 1) => ({ t: 'inc', k, n }),
     trust: (who, n) => ({ t: 'trust', who, n }),
     iff: (cond, then, els = []) => ({ t: 'if', cond, then, els }),
@@ -483,7 +483,7 @@ const Engine = (() => {
       case 'tl': s.tl[st.id] = true; G.change(); return;
       case 'unlock': st.keys.forEach(k => G.unlock(k)); return;
       case 'lock': st.keys.forEach(k => G.lock(k)); return;
-      case 'set': G.setFlag(st.k, st.v); return;
+      case 'set': G.setFlag(st.k, st.v); if (st.also) G.setFlag(st.also, true); return;
       case 'inc': G.inc(st.k, st.n); return;
       case 'trust': doTrust(st.who, st.n); return;
       case 'notify': UI.banner(st.open && st.open.chat && (!st.app || st.app === 'messages') ? { ...st, app: DATA.chatApp(st.open.chat) } : st.who && G.s.chats[st.who] && st.app === 'messages' ? { ...st, app: DATA.chatApp(st.who) } : st); return;

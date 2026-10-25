@@ -212,7 +212,7 @@ DATA.seasons.push({
     note: 'Inne zakończenia: Ustawienia → Rozdziały → Sprawa 3 · Rozdział 4.'
   },
   episodes: [
-    ['s3.00a', 'Hasło', 'kp', 'flag:kp_passwords'],
+    ['s3.00a', 'Karteczka', 'kp', 'flag:kp_passwords'],
     ['s3.00b', 'Miesiąc od Rzeczki', 'kp', 'flag:kp_done'],
     ['s3.01', 'Pierwszy klip', 'k0', 'ev:ev_k_klip1'],
     ['s3.02', 'Nie z kasety', 'k0', 'ev:ev_k_zrodlo'],

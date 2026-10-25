@@ -420,7 +420,7 @@
     draw: k => yard(k) + k.g(k.ell(0, 0, 26, 36, '#8a8a8a') + k.circle(0, -38, 20, '#8a8a8a') + k.circle(-8, -40, 5, '#fff') + k.circle(8, -40, 5, '#fff') + k.path('M-16,-52 L-12,-66 L-4,-56 Z M16,-52 L12,-66 L4,-56 Z', '#8a8a8a'), 'transform="translate(574,140)"')
   });
   D('v_snap', { src: 'assets/video/v_snap.jpg', title: 'Błysk · film jednorazowy', w: 480, h: 848, draw: () => '' });
-  D('v_anonim', { src: 'assets/video/v_anonim.jpg', title: 'MATERIAŁ_ROBOCZY_01 · CAM-01 · 15.10, 01:47', w: 848, h: 480, draw: () => '' });
+  D('v_anonim', { src: 'assets/video/v_anonim.jpg', title: 'CAM-01_2026-10-15_0147.mp4', w: 848, h: 480, draw: () => '' });
   D('c1_0057', { src: 'assets/trap/c1_0057.jpg',
     title: 'CAM-01 · 22.10, 02:13', w: 1280, h: 720, style: 'ir', exif: trap('CAM-01', 57, '22.10.2026', '02:13'), stamp: tstamp('CAM-01', 57, '22.10.2026', '02:13:26', 3, 'wax'),
     hotspots: [{ x: 470, y: 360, r: 90, ev: 'ev_jacket', zoom: 1.8 }],
@@ -600,7 +600,7 @@
 
   /* ================= SZKLARZ ================= */
   D('sz_window', { src: 'assets/web/sz_window.jpg',
-    title: '▒▒▒', w: 900, h: 1200, style: 'night', fx: { grain: 0.5 },
+    title: 'okno_od_ulicy.jpg', w: 900, h: 1200, style: 'night', fx: { grain: 0.5 },
     draw: k => {
       const { W, H } = k;
       let s = k.full('#030405') + k.archWindow(150, 120, 600, 960, { light: '#16222c', broken: 0.55, cols: 4, rows: 6, frame: '#000', pane: '#0a1016' });

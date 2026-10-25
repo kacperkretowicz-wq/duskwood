@@ -150,7 +150,7 @@ Engine.chapter('mp', { num: 0, kicker: 'Sprawa 2 · Prolog po Ciszy', title: 'Ad
       opt('Powiedz jej, że czekam. Bez pośpiechu.', [K('powiem. ona może nie odpisać szybko. lekarka mówi żeby jej nie zasypywać wiadomościami'), K('ok?')])
     ]),
     set('majaFound'),
-    set('m_lateRescue'),
+    set('m_lateRescue', true, 'gajdaCaught'),
     notify({ app: 'browser', title: 'Mglisko24', text: 'Zaginiona 22-latka odnaleziona w Rzeczce. Zatrzymano byłego komendanta posterunku.', sound: 'notif' }),
     pause(3000),
     W('Dziękuję. Nie umiem tego lepiej napisać.'),
