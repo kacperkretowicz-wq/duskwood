@@ -1028,5 +1028,10 @@ Przejrzane wszystkie pozostałe zdjęcia używane w grze (119 plików: S1 klisza
 Wszystko przez `wording` (podpisy kroków bez zmian, stare zapisy działają bez migracji).
 - S3 (k0/k1), telefon pana Adama: Ewa pisała „rozładowany od pogrzebu”, a w telefonie mówi, że po Wszystkich Świętych raz go podłączyła. Teraz „rozładowany”, a w rozmowie: „Po Wszystkich Świętych raz go podłączyłam, zapomniałam o tym powiedzieć… Potem znowu się rozładował” — ujawnienie zostaje, sprzeczność znika.
 - S4 (c1, `xPoPracy`): Weronika (bibliotekarka) mówiła o „dwunastu godzinach na nogach” i „krzyku na kasie”, a gracz zwracał się do niej na „ty”. Teraz: cały dzień w czytelni nad katalogiem; „Niech pani odpocznie…”, „Jak było w czytelni?” → zgubiona karta, kłótnia o termin zwrotu.
-- S4: gracz w prologu „nigdy nie był w Mglisku”, w S3 przyjeżdża pociągiem, a w S4 ktoś stoi „pod twoim blokiem”, Kuba schodzi „na twoją klatkę”, a telefon widzi „nieznane urządzenie w pobliżu”. Teraz pierwsza wiadomość Mai w c0 ustala, że na ferie gracz wynajmuje kawalerkę w bloku naprzeciwko Wronów („z naszej kuchni widać twoje okno”); opis sprawy 4 mówi to samo.
+- S4: gracz w prologu „nigdy nie był w Mglisku”, w S3 przyjeżdża pociągiem, a w S4 ktoś stoi „pod twoim blokiem”, Kuba schodzi „na twoją klatkę”, a telefon widzi „nieznane urządzenie w pobliżu”. Teraz pierwsza wiadomość Mai w c0 ustala, że od ferii gracz wynajmuje kawalerkę w bloku naprzeciwko Wronów (S5 też zakłada, że gracz jest w Mglisku: przystanek przy szkole) („z naszej kuchni widać twoje okno”); opis sprawy 4 mówi to samo.
 - Sprawdzone bez zmian: dni tygodnia przy datach (2026/2027), oś czasu 14.10 (22:57 → 23:44 → 23:47 → 23:53 → 23:58), godziny klipów S3, logowanie stażystki 18.01 20:47, „przy stole” u Zenona (poprawione wcześniej). SW v124.
+
+### 2026-10-25 — v125: ciągłość faktów S5
+- g1: Weronika mówiła, że pani Marta dzwoniła „z podziękowaniem za kasety z kiermaszu” i że jedna z nich to festyn 1996 — a potem to kaseta nr 12 pana Zenona, który „kopii nie robił”. Teraz: Marta dziękuje za kasety z kiermaszu i przy okazji mówi, że zgrywa kasety pana Zenona; wśród nich jest festyn 1996.
+- g6 (8:20): „Nie poszłam” przed spotkaniem o 9:00 → „Jeszcze nie wyszłam… jakbym miała zaraz iść”.
+- Wszystko przez `wording`. SW v125.

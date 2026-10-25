@@ -1,5 +1,5 @@
 // Service worker: gra działa offline po pierwszym uruchomieniu.
-const VERSION = 'quiet-is-safer-v124';
+const VERSION = 'quiet-is-safer-v125';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
   './css/base.css', './css/apps.css', './css/web.css', './css/os.css', './css/messenger.css',

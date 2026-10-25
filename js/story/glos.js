@@ -330,8 +330,8 @@ Engine.chapter('g1', { num: 1, kicker: 'Sprawa 5 · Rozdział 1', title: 'Hasło
       ])
     ]),
     pause(3000),
-    W('Dobry wieczór. Pani Marta z archiwum zadzwoniła z podziękowaniem za kasety z kiermaszu.'),
-    W('Powiedziała, że jedna jest z festynu w 1996 roku i że mogę przyjść i obejrzeć, jeśli chcę.'),
+    W('Dobry wieczór. Pani Marta z archiwum zadzwoniła z podziękowaniem za kasety z kiermaszu.', { wording: 'Dobry wieczór. Dzwoniła pani Marta z archiwum gminy. Podziękowała za kasety z kiermaszu, a przy okazji powiedziała, że zgrywa teraz kasety pana Zenona.' }),
+    W('Powiedziała, że jedna jest z festynu w 1996 roku i że mogę przyjść i obejrzeć, jeśli chcę.', { wording: 'Wśród nich jest festyn z 1996 roku. Mogę przyjść i obejrzeć, jeśli chcę.' }),
     choose('weronika', [
       opt('Pójdzie pani?', [W('Nie wiem. Tomek tam może być. Nie wiem, czy chcę go zobaczyć na ekranie.')], { set: { g_weraFestyn: true } }),
       opt('To miłe, że dzwoni osobiście.', [W('Bardzo. Dziś mało kto dzwoni. Wszyscy piszą.')])
@@ -908,7 +908,7 @@ Engine.chapter('g6', { num: 6, kicker: 'Sprawa 5 · Rozdział 6', title: 'Rozpra
     ambient('calm'),
     title(),
     iff('flag:g_weraWait', [
-      W('Dzień dobry. Nie poszłam. Siedzę w kuchni w płaszczu, jakbym miała zaraz wyjść.'),
+      W('Dzień dobry. Nie poszłam. Siedzę w kuchni w płaszczu, jakbym miała zaraz wyjść.', { wording: 'Dzień dobry. Jeszcze nie wyszłam. Siedzę w kuchni w płaszczu, jakbym miała zaraz iść.' }),
       W('Proszę mi powiedzieć, o co chodzi. Wytrzymam.')
     ], [
       W('Dzień dobry. Pani Grażyna idzie ze mną do urzędu na dziewiątą. Ja do archiwum, ona po zaświadczenie.'),
