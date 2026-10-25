@@ -1153,3 +1153,11 @@ Te same narzędzia co w v135 (Codex image_gen + `realism-post.py`, `assets/web/`
 - Ekran blokady: podpowiedź zgodna z systemem („Przesuń w górę, aby otworzyć” na iOS, „Przesuń w górę, aby odblokować” na Androidzie); przesunięcie w górę i dotknięcie nadal odblokowują.
 - tools/transcript.browser.cjs: opcja `RANDOM_CHOICES=1` (losowa odpowiedź przy pierwszej próbie każdego wyboru) do przejść losowymi gałęziami; usunięty roboczy tools/.tr-rand.cjs.
 - Przegląd świeżego transkryptu S5 (g0–g4): bez niespójności dat, wieku Tomka (38 lat w 2027) ani ról (Marta w archiwum gminy po odejściu z redakcji).
+
+### v141 — świeże transkrypty S1 na v140, drobne poprawki
+- Uwaga dla kolejnych przebiegów: domyślny port `tools/transcript.browser.cjs` (5184) bywa zajęty przez stary serwer z innego katalogu (np. `/workspace/duskwood`, v115). Narzędzie wypisuje teraz w pierwszej linii adres i `VERSION` z `sw.js`, więc od razu widać, czy transkrypt jest z bieżącego kodu. Transkrypty na v140: `logs/night/tr140` (serwer z `dw-night`), wszystkie sezony do końca, bez STUCK.
+- ch4: Kuba po powrocie Igora do grupy pytał „co nam powie?” (w trzeciej osobie, do samego Igora) → „co niby opowiesz?”.
+- ch3: Ola do Kuby po nieprzespanej nocy: „masz jeszcze te bułki w kuchni? Zrób coś z nimi…” (niejasne) → „zjedz coś. Choćby te bułki z kuchni, zanim mama je wyrzuci.”
+- Epilog: Maja pisze nazwiska wielką literą (jak w S2–S5: „pana Rybickiego”, „pani Weronika”), a w tej samej rozmowie było „dzwonię do rybickiego” → „Rybickiego”.
+- `w_tomek` (zdjęcie Tomka z 14.06.1997): tamagotchi na szyi było białe, a Weronika mówi „to różowe przy szyi” i „na moim zdjęciu widać je lepiej” → obudowa podbarwiona na różowo (ekran bez zmian).
+- Wszystko tekstowe przez `wording`. SW v141.

@@ -89,7 +89,7 @@ Engine.chapter('ch3', { num: 3, title: 'Peleryna', when: 'Piątek, 23 październ
     ]),
     g('kuba', 'nie spałem całą noc'),
     g('kuba', 'ciągle widzę tę czołówkę'),
-    g('ola', 'Kuba, zjedz coś. Serio.', { wording: 'Kuba, masz jeszcze te bułki w kuchni? Zrób coś z nimi, zanim mama je wyrzuci.' }),
+    g('ola', 'Kuba, zjedz coś. Serio.', { wording: 'Kuba, zjedz coś. Choćby te bułki z kuchni, zanim mama je wyrzuci.' }),
     g('kuba', 'musimy pogadać z kimś, kto pamięta tamtą noc w 97'),
     g('ola', 'Pani Weronika. Siostra Tomka. Maja nagrała z nią rozmowę 11.10 — jest w dyktafonie.'),
     g('bartek', 'ona prowadzi biblioteke. zawsze byla mila'),

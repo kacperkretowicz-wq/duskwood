@@ -6,6 +6,9 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5184';const stopAt=proce
  const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true});
  const page=await (await browser.newContext({viewport:{width:390,height:844}})).newPage();
  await page.goto(base+'/?debug');
+ // Wersja z sw.js na początku wyjścia: od razu widać, czy serwer pod tym portem serwuje bieżący katalog.
+ const ver=await page.evaluate(async()=>{try{return((await (await fetch('sw.js')).text()).match(/VERSION = '([^']+)'/)||[])[1]||'?';}catch{return '?';}});
+ console.log('# '+base+' · '+ver);
  const out=await page.evaluate(async ([stopAt,START,START_SEASON,RND])=>{
   const log=[];const done=async()=>{};
   Object.assign(UI,{chapterTitle:async ch=>{log.push(`\n===== ${ch.id} · ${ch.title} · ${ch.when||''}`);},chapterEnd:done,interlude:done,fx:done,endingScreen:done,credits:done,endCall:done,incomingCall:async()=>'accept',outgoingCall:done,callScreen(){},packageSheet:async()=>6});

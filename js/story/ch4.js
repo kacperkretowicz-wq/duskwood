@@ -148,7 +148,7 @@ Engine.chapter('ch4', { num: 4, title: 'Sztolnia', when: 'Sobota, 24 październi
         sys('group', 'Igor dołączył do grupy.'),
         members(['kuba', 'ola', 'bartek', 'igor']),
         g('igor', 'jestem. sory za wszystko. %name% wie już o mnie. jak będzie po wszystkim, wam też opowiem'),
-        g('kuba', 'co nam powie?'),
+        g('kuba', 'co nam powie?', { wording: 'co niby opowiesz?' }),
         g('igor', 'że zawaliłem. bardzo. kuba, najpierw ją stamtąd wyciągnijmy')
       ], { set: { igorBack: true } }),
       opt('Na razie zostań poza grupą.', [I('okej. zostaję tutaj, telefon mam przy sobie')])

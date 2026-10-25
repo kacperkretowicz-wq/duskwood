@@ -119,7 +119,7 @@ Engine.chapter('epilog', { num: 99, title: 'Listopad', when: 'Sobota, 14 listopa
       M('hej, maja. kuba mówi że mam zacząć od imienia a nie od „to ja” 🙂'),
       M('nowy numer. stary telefon jest dowodem, a ja myślę czy muszą czytać moją listę „ser, ser, płyn do naczyń”'),
       M('kuba próbuje mi opowiedzieć co robiliście. co chwilę zaczyna od innego miejsca. dzięki że z nim {byłeś|byłaś}'),
-      M('myślałam że dzwonię do rybickiego. nawet nie sprawdziłam czy dalej ma ten numer'),
+      M('myślałam że dzwonię do rybickiego. nawet nie sprawdziłam czy dalej ma ten numer', { wording: 'myślałam że dzwonię do Rybickiego. nawet nie sprawdziłam, czy dalej ma ten numer' }),
       choose('maja2', [
         opt('Cieszę się, że zadzwoniłaś pod zły numer.', [M('ja też. pierwszy raz w życiu cieszę się że pomyliłam numer 🫶')]),
         opt('Jak się czujesz?', [M('Jak ktoś, kto przez dziesięć dni liczył krople wody na ścianie. Ale z każdym dniem lepiej.', { wording: 'teraz? marzną mi stopy, mama trzeci raz pyta czy herbaty, a ja chcę posiedzieć sama. ale jem już normalnie' })]),
