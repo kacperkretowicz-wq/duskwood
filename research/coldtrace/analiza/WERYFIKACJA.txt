@@ -1,0 +1,13 @@
+Weryfikacja pakietu ColdTrace, 26.10.2026
+
+PASS: 147 rekordow etapow = 140 tekstowych + 7 finalow; tylko 4 potwierdzone runtime
+PASS: 48 opisow aplikacji i 57 galezi routera zgodne z indeksem
+PASS: 67 plikow danych zgodnych z hashami
+PASS: 1678 pobranych plikow zgodnych z hashami; 11 blednych adresow zachowanych w inwentarzu
+PASS: 147 fragmentow SVG przechodzi parsowanie XML; bez tagow script
+PASS: Katalog: poprawna skladnia JavaScript, 1677 lokalnych plikow; nie oznacza ponownego testu UI
+PASS: ColdTrace-multimedia.zip: unikalne sciezki i poprawne sumy CRC
+PASS: ColdTrace-analiza.zip: unikalne sciezki i poprawne sumy CRC
+PASS: Raporty bez niedopelnionych znacznikow
+
+Granice: brak IPA, brak pelnego backendu, brak przejscia wszystkich spraw.

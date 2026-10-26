@@ -1,0 +1,16 @@
+ColdTrace — pakiet analizy, 26.10.2026
+
+1. ColdTrace-analiza.md — fabuła, mechaniki, oprawa, monetyzacja i wyniki badania.
+2. ColdTrace-analiza-techniczna.md — stany, aplikacje, zależności, media i ograniczenia kodu.
+3. 48-aplikacji-szczegolowo.csv — każda dostępna rodzina aplikacji.
+4. mapa-147-etapow.csv — 140 etapów tekstowych i 7 finałów; pierwsze cztery Noor potwierdzono w UI.
+5. Pozostałe CSV — schematy, liczniki, czas, blokady, audio i tożsamość materiału.
+6. dziennik-runtime.md i screenshoty — obserwacje na żywo, bez utożsamiania z pełnym przejściem iOS.
+
+W ColdTrace-analiza.zip są raporty, inwentarze, screenshoty, przeglądy oraz 147 odzyskanych fragmentów SVG. Po rozpakowaniu wektory.html pokazuje ich katalog. Kolory zależne od CSS mogą różnić się od oryginału.
+
+ColdTrace-multimedia.zip zawiera 1677 plików: 1603 WebP, 68 MP3, 4 WAV i 2 MP4. Po rozpakowaniu otwórz katalog.html. Wszystkie pliki katalogu są lokalne. 16 obrazów to piksele zastępcze 1x1; nie są pełnymi zdjęciami. PDF oraz fonty zachowano w materiale roboczym.
+
+Nie pozyskano IPA, backendu ani pełnych chronionych treści. Rozgrywkę potwierdzono do paywalla po czterech pytaniach Noor. Nie aktywowano subskrypcji. Udostępniane tu raporty nie są działającą kopią całej gry.
+
+Źródła, oryginalne dane i cztery rekordy Evidence REA (około 89 MB) są zachowane w work/coldtrace. Nie zmieniono plików źródłowych repozytorium REA.

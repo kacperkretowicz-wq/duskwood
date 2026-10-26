@@ -1,0 +1,21 @@
+﻿case,target,digits,public_secret_field,validation,source
+ava,photos,6,,POST /api/unlock observed in client; no protected response replay,ava-public.en.json#/locks/photos
+felix,photos,4,,POST /api/unlock observed in client; no protected response replay,felix-public.en.json#/locks/photos
+felix,notes,4,,POST /api/unlock observed in client; no protected response replay,felix-public.en.json#/locks/notes
+felix,snapchat,4,,POST /api/unlock observed in client; no protected response replay,felix-public.en.json#/locks/snapchat
+felix,reddit,4,,POST /api/unlock observed in client; no protected response replay,felix-public.en.json#/locks/reddit
+ghost,photos,4,,POST /api/unlock observed in client; no protected response replay,ghost-public.en.json#/locks/photos
+ghost,notes,4,,POST /api/unlock observed in client; no protected response replay,ghost-public.en.json#/locks/notes
+liv,photos,4,,POST /api/unlock observed in client; no protected response replay,liv-public.en.json#/locks/photos
+liv,notes,4,,POST /api/unlock observed in client; no protected response replay,liv-public.en.json#/locks/notes
+noor,photos,6,,POST /api/unlock observed in client; no protected response replay,noor-public.en.json#/locks/photos
+noor,notes,4,,POST /api/unlock observed in client; no protected response replay,noor-public.en.json#/locks/notes
+noor,calendarAttachment,4,,POST /api/unlock observed in client; no protected response replay,noor-public.en.json#/locks/calendarAttachment
+rei,photos,6,,POST /api/unlock observed in client; no protected response replay,rei-public.en.json#/locks/photos
+rei,notes,4,,POST /api/unlock observed in client; no protected response replay,rei-public.en.json#/locks/notes
+rei,kakaotalk,0,,POST /api/unlock observed in client; no protected response replay,rei-public.en.json#/locks/kakaotalk
+wren,photos,4,,POST /api/unlock observed in client; no protected response replay,wren-public.en.json#/locks/photos
+wren,notes,4,,POST /api/unlock observed in client; no protected response replay,wren-public.en.json#/locks/notes
+rei,kakaotalk,,/password,field exists in public JSON; runtime use not assumed from presence,rei-kakaotalk.json#/password
+wren,photos,,/deletedAlbumPin,field exists in public JSON; runtime use not assumed from presence,wren-photos.json#/deletedAlbumPin
+wren,polarsteps,,/sharedAccessCode,field exists in public JSON; runtime use not assumed from presence,wren-polarsteps.json#/sharedAccessCode

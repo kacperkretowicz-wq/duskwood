@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-26",
+  "media_files": 1677,
+  "svg_files": 147,
+  "archives_crc": "PASS",
+  "duplicate_archive_paths": "none",
+  "git_file_size_limit": "all files below 100 MB",
+  "scope": "research files only; no game runtime changes",
+  "runtime_validation": "first four Noor questions; paywall thereafter; not physical iPhone"
+}

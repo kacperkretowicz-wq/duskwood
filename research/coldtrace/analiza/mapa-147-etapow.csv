@@ -1,0 +1,148 @@
+﻿sprawa,etap,id,typ_etapu,funkcja_zagadki,plik_zrodlowy,wskaznik_json,status
+noor,1,q1,odpowiedz tekstowa,Ostatni odbiorca wiadomości ofiary,noor-public.en.json,/questions/0,potwierdzone zaliczenie w UI
+noor,2,q2,odpowiedz tekstowa,Niezapowiedziana placówka medyczna,noor-public.en.json,/questions/1,potwierdzone zaliczenie w UI
+noor,3,q3,odpowiedz tekstowa,Inicjały w potwierdzeniu rezerwacji,noor-public.en.json,/questions/2,potwierdzone zaliczenie w UI
+noor,4,q4,odpowiedz tekstowa,Data przelewu jako kod notatki,noor-public.en.json,/questions/3,potwierdzone zaliczenie w UI
+noor,5,q5,odpowiedz tekstowa,Kanał przekazania dowodów,noor-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,6,q6,odpowiedz tekstowa,Data eksportu jako kod załącznika,noor-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,7,q7,odpowiedz tekstowa,Przedmiot prowadzonego dochodzenia,noor-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,8,q8,odpowiedz tekstowa,Rola anonimowego kontaktu,noor-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,9,q9,odpowiedz tekstowa,Nagranie z ostatniej nocy,noor-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,10,q10,odpowiedz tekstowa,Powiązanie przyjaciółki z byłym partnerem,noor-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,11,q11,odpowiedz tekstowa,Prywatna wersja rozstania,noor-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,12,q12,odpowiedz tekstowa,Kontakt wysłany po śmierci,noor-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,13,q13,odpowiedz tekstowa,Miejsce ukrycia zdjęć,noor-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,14,q14,odpowiedz tekstowa,Znaczenie usuniętych fotografii,noor-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,15,q15,odpowiedz tekstowa,Historia wyszukiwania dotycząca śledzenia,noor-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,16,q16,odpowiedz tekstowa,Wyniki badań podważające wersję urzędową,noor-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,17,q17,odpowiedz tekstowa,Osobisty finał raportu ofiary,noor-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,18,q18,odpowiedz tekstowa,Próba przejęcia konta komunikatora,noor-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,19,q19,odpowiedz tekstowa,Niedokończona czynność w ostatniej minucie,noor-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,20,q20,odpowiedz tekstowa,Plan na następny dzień jako motyw czasowy,noor-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+noor,21,q21,oskarzenie,Końcowe wskazanie odpowiedzialności,noor-public.en.json,/questions/20,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,1,q1,odpowiedz tekstowa,Potwierdzenie tożsamości kartą kontaktu,felix-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,2,q2,odpowiedz tekstowa,Prywatna aktywność sportowa,felix-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,3,q3,odpowiedz tekstowa,Deklaracja dotycząca alkoholu,felix-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,4,q4,odpowiedz tekstowa,Odzyskanie dostępu do forum,felix-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,5,q5,odpowiedz tekstowa,Prawdziwy cel pozornych sprawunków,felix-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,6,q6,odpowiedz tekstowa,Fotografia z praktyki medycznej,felix-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,7,q7,odpowiedz tekstowa,Reakcja znajomego na zgłoszenie,felix-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,8,q8,odpowiedz tekstowa,Zawartość chronionego albumu komunikatora,felix-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,9,q9,odpowiedz tekstowa,Awaryjne miejsce przekazania materiałów,felix-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,10,q10,odpowiedz tekstowa,Powtarzalne powiązania w dokumentacji,felix-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,11,q11,odpowiedz tekstowa,Rola zewnętrznego doradcy,felix-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,12,q12,odpowiedz tekstowa,Kanał przekazania ostrzeżenia,felix-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,13,q13,odpowiedz tekstowa,Osoba podająca napój w nagraniu,felix-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,14,q14,odpowiedz tekstowa,Fotografia wykonana automatycznie jako kontrdowód,felix-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,15,q15,odpowiedz tekstowa,Wyszukiwanie podobnego zdarzenia,felix-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,16,q16,odpowiedz tekstowa,Połączenia lekarza na osi czasu,felix-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,17,q17,odpowiedz tekstowa,Uzgodnienia dotyczące toksykologii,felix-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,18,q18,odpowiedz tekstowa,Końcowa prośba autora dokumentacji,felix-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,19,q19,odpowiedz tekstowa,Konfiguracja blokująca wysyłkę dowodów,felix-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+felix,20,q20,oskarzenie,Rozdzielenie wykonawcy i zleceniodawcy,felix-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,1,q1,odpowiedz tekstowa,Tożsamość potwierdzona datą rodzinną,rei-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,2,q2,odpowiedz tekstowa,Dostęp do koreańskiego komunikatora,rei-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,3,q3,odpowiedz tekstowa,Zadanie powierzone przyjaciółce,rei-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,4,q4,odpowiedz tekstowa,Dokumentacja zdrowotna a oficjalna wersja,rei-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,5,q5,odpowiedz tekstowa,Rozszyfrowanie eufemizmu w notatkach,rei-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,6,q6,odpowiedz tekstowa,Nagranie osoby nadzorującej trening,rei-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,7,q7,odpowiedz tekstowa,Badanie losów wcześniejszych idolek,rei-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,8,q8,odpowiedz tekstowa,Tożsamość wcześniejszej stażystki,rei-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,9,q9,odpowiedz tekstowa,Niewinna nazwa kopii bezpieczeństwa,rei-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,10,q10,odpowiedz tekstowa,Rodzaj zachowanych nagrań,rei-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,11,q11,odpowiedz tekstowa,Powtarzalne wyjścia z akademika,rei-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,12,q12,odpowiedz tekstowa,Tożsamość dziennikarza,rei-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,13,q13,odpowiedz tekstowa,Dokument przygotowany na poranne spotkanie,rei-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,14,q14,odpowiedz tekstowa,Decyzja dotycząca umowy,rei-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,15,q15,odpowiedz tekstowa,Przekazanie ostrzeżenia przełożonym,rei-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,16,q16,odpowiedz tekstowa,Osoba przy pokoju poza zwykłym nadzorem,rei-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,17,q17,odpowiedz tekstowa,Nagranie wizyty przełożonej,rei-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,18,q18,odpowiedz tekstowa,Przyczyna urwania kontaktu z informatorem,rei-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,19,q19,odpowiedz tekstowa,Dokument integrujący pakiet dowodowy,rei-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+rei,20,q20,oskarzenie,Wskazanie osób w oskarżeniu,rei-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,1,q1,odpowiedz tekstowa,Rzeczywista tożsamość właściciela telefonu,liv-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,2,q2,odpowiedz tekstowa,Alias używany wobec ofiary,liv-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,3,q3,odpowiedz tekstowa,Ostatnie określenie sprawcy przez ofiarę,liv-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,4,q4,odpowiedz tekstowa,Liczba równolegle oszukiwanych osób,liv-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,5,q5,odpowiedz tekstowa,Ślady rzeczywistego miejsca pobytu,liv-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,6,q6,odpowiedz tekstowa,Powtarzalny schemat nawiązywania znajomości,liv-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,7,q7,odpowiedz tekstowa,Wspólna fotografia między profilami,liv-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,8,q8,odpowiedz tekstowa,Pretekst wymuszenia pierwszej wpłaty,liv-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,9,q9,odpowiedz tekstowa,Alias osoby kierującej płatnościami,liv-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,10,q10,odpowiedz tekstowa,Miejsce zbiorczego przekazywania pieniędzy,liv-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,11,q11,odpowiedz tekstowa,Suma wpłat konkretnej ofiary,liv-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,12,q12,odpowiedz tekstowa,Powtarzane czułe zwroty,liv-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,13,q13,odpowiedz tekstowa,Charakterystyczny błąd językowy,liv-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,14,q14,odpowiedz tekstowa,Tożsamość osoby za aliasem płatniczym,liv-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,15,q15,odpowiedz tekstowa,Powiązany zweryfikowany portfel,liv-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,16,q16,odpowiedz tekstowa,Połączenie ujawnione w materiale ofiary,liv-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,17,q17,odpowiedz tekstowa,Żądanie zwrotu i termin ultimatum,liv-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,18,q18,odpowiedz tekstowa,Wiadomość inicjująca działanie,liv-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,19,q19,odpowiedz tekstowa,Lokalizacja potwierdzająca przemieszczenie,liv-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+liv,20,q20,oskarzenie,Dwie osoby w końcowym rozliczeniu,liv-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,1,q1,odpowiedz tekstowa,Tożsamość z fotografii dokumentu,ghost-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,2,q2,odpowiedz tekstowa,Oficjalna przyczyna śmierci,ghost-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,3,q3,odpowiedz tekstowa,Moment ustania aktywności serca,ghost-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,4,q4,odpowiedz tekstowa,Charakter przebiegu wykresu,ghost-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,5,q5,odpowiedz tekstowa,Aplikacja aktywna w tle,ghost-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,6,q6,odpowiedz tekstowa,Rzeczywista funkcja pozornego narzędzia,ghost-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,7,q7,odpowiedz tekstowa,Czas trwania inwigilacji,ghost-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,8,q8,odpowiedz tekstowa,Objawy a zakres uprawnień aplikacji,ghost-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,9,q9,odpowiedz tekstowa,Zasięg rzeczywistego przemieszczania,ghost-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,10,q10,odpowiedz tekstowa,Aktywacja kamery po śmierci,ghost-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,11,q11,odpowiedz tekstowa,Tożsamość zakodowana w koncie sesji,ghost-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,12,q12,odpowiedz tekstowa,Zdalnie usunięty plik,ghost-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,13,q13,odpowiedz tekstowa,Znaczenie fragmentu skasowanego nagrania,ghost-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,14,q14,odpowiedz tekstowa,Osoba umożliwiająca wejście do mieszkania,ghost-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,15,q15,odpowiedz tekstowa,Przelew przed zdarzeniem,ghost-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,16,q16,odpowiedz tekstowa,Groźba skierowana do aktualnego posiadacza telefonu,ghost-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,17,q17,odpowiedz tekstowa,Usunięte wyszukiwanie wskazujące przygotowanie,ghost-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,18,q18,odpowiedz tekstowa,Rekonstrukcja treści nagrania,ghost-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,19,q19,odpowiedz tekstowa,Urządzenie przy wejściu i godzina,ghost-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,20,q20,odpowiedz tekstowa,Odpowiedź wysłana z telefonu po śmierci,ghost-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,21,q21,odpowiedz tekstowa,Metadane zdjęcia wobec jego podpisu,ghost-public.en.json,/questions/20,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ghost,22,q22,oskarzenie,Łączna odpowiedzialność dwóch osób,ghost-public.en.json,/questions/21,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,1,q1,odpowiedz tekstowa,Ostatni otwarty ekran pozostawionego telefonu,ava-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,2,q2,odpowiedz tekstowa,Zakup biletu i kierunek podróży,ava-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,3,q3,odpowiedz tekstowa,Potwierdzenie faktycznego wejścia do autokaru,ava-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,4,q4,odpowiedz tekstowa,Pierwsza osoba kontaktowa po odejściu,ava-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,5,q5,odpowiedz tekstowa,Ostatnia wiadomość do przyjaciółki,ava-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,6,q6,odpowiedz tekstowa,Przedmiot kłótni na imprezie,ava-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,7,q7,odpowiedz tekstowa,Potwierdzone alibi pierwszego podejrzanego,ava-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,8,q8,odpowiedz tekstowa,Telefony wykonane przed zgłoszeniem zaginięcia,ava-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,9,q9,odpowiedz tekstowa,Potwierdzone alibi pracodawcy,ava-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,10,q10,odpowiedz tekstowa,Wyszukiwania dotyczące dostępu do wiadomości,ava-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,11,q11,odpowiedz tekstowa,Obce urządzenie w historii konta,ava-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,12,q12,odpowiedz tekstowa,Ostrzeżenie od nieznanego numeru,ava-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,13,q13,odpowiedz tekstowa,Tożsamość nadawcy potwierdzona wspólnym sekretem,ava-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,14,q14,odpowiedz tekstowa,Bilet jako świadomie pozostawiony fałszywy trop,ava-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,15,q15,odpowiedz tekstowa,Osoba z pierwotnym dostępem do konta,ava-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,16,q16,odpowiedz tekstowa,Kierunek narzucany grupie poszukiwawczej,ava-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,17,q17,odpowiedz tekstowa,Rodzinne zdjęcie objaśniające hasło miejsca,ava-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,18,q18,odpowiedz tekstowa,Ustalenie dokładnej kryjówki,ava-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+ava,19,q19,oskarzenie,Wskazanie osoby będącej zagrożeniem,ava-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,1,q1,odpowiedz tekstowa,Oficjalne rozstrzygnięcie sprawy,wren-public.en.json,/questions/0,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,2,q2,odpowiedz tekstowa,Osoba oskarżona przez internet,wren-public.en.json,/questions/1,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,3,q3,odpowiedz tekstowa,Publiczna marka podróżnicza,wren-public.en.json,/questions/2,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,4,q4,odpowiedz tekstowa,Aplikacja ujawniająca lokalizację,wren-public.en.json,/questions/3,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,5,q5,odpowiedz tekstowa,Data rozpoczęcia ostatniej podróży,wren-public.en.json,/questions/4,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,6,q6,odpowiedz tekstowa,Data śmierci zamiast znalezienia ciała,wren-public.en.json,/questions/5,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,7,q7,odpowiedz tekstowa,Aktywność profilu po śmierci,wren-public.en.json,/questions/6,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,8,q8,odpowiedz tekstowa,Deklarowany cel podróży w wiadomości,wren-public.en.json,/questions/7,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,9,q9,odpowiedz tekstowa,Dawne określenie krewnego jako sygnał fałszerstwa,wren-public.en.json,/questions/8,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,10,q10,odpowiedz tekstowa,Rzeczywista lokalizacja opublikowanego zdjęcia,wren-public.en.json,/questions/9,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,11,q11,odpowiedz tekstowa,Rzeczywista data wykonania zdjęcia,wren-public.en.json,/questions/10,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,12,q12,odpowiedz tekstowa,Powtarzalny brak osoby na zdjęciach,wren-public.en.json,/questions/11,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,13,q13,odpowiedz tekstowa,Przemieszczanie telefonu po śmierci,wren-public.en.json,/questions/12,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,14,q14,odpowiedz tekstowa,Pojazd uchwycony przez automatyczną fotografię,wren-public.en.json,/questions/13,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,15,q15,odpowiedz tekstowa,Alibi z danych telefonu,wren-public.en.json,/questions/14,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,16,q16,odpowiedz tekstowa,Kod chronionego albumu,wren-public.en.json,/questions/15,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,17,q17,odpowiedz tekstowa,Zawartość usuniętej fotografii,wren-public.en.json,/questions/16,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,18,q18,odpowiedz tekstowa,Tożsamość kobiety na zdjęciu,wren-public.en.json,/questions/17,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,19,q19,odpowiedz tekstowa,Świadek potwierdzony wiadomościami,wren-public.en.json,/questions/18,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,20,q20,odpowiedz tekstowa,Osoba powtarzająca się między profilami,wren-public.en.json,/questions/19,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,21,q21,odpowiedz tekstowa,Przekroczenie granic w korespondencji,wren-public.en.json,/questions/20,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,22,q22,odpowiedz tekstowa,Powiązanie pseudonimu z prawdziwą osobą,wren-public.en.json,/questions/21,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,23,q23,odpowiedz tekstowa,Rozpoznawalny element ubioru na filmie,wren-public.en.json,/questions/22,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,24,q24,odpowiedz tekstowa,Weryfikacja elementu ubioru w archiwum profilu,wren-public.en.json,/questions/23,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
+wren,25,q25,oskarzenie,Końcowe oskarżenie,wren-public.en.json,/questions/24,analiza publicznego scenariusza; niepotwierdzone przejscie runtime
