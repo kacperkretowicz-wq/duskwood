@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "new_media": 347,
+  "new_media_bytes": 66322754,
+  "additional_pdf_count_local_only": 2,
+  "catalog_paths_exist": true,
+  "catalog_browser_test": false,
+  "scripts_parsed": 15,
+  "target_code_executed": false,
+  "new_runtime_playthrough": false,
+  "source_snapshot": "2026-10-26",
+  "extension_date": "2026-10-27"
+}

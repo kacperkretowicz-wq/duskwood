@@ -1,0 +1,14 @@
+{
+  "files": 4,
+  "nodes": 4844,
+  "styles": 749,
+  "timers": 38,
+  "calls": 77,
+  "strings": 1,
+  "button_sites": 400,
+  "image_sites": 86,
+  "aria_label_sites": 142,
+  "color_literals": 185,
+  "evidence_type": "static AST / file bytes",
+  "target_execution": false
+}

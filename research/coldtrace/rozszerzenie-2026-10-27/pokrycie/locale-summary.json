@@ -1,0 +1,166 @@
+{
+  "rows": [
+    {
+      "surface": "ui",
+      "locale": "en",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 593
+    },
+    {
+      "surface": "ui",
+      "locale": "fr",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 60
+    },
+    {
+      "surface": "ui",
+      "locale": "es",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 52
+    },
+    {
+      "surface": "ui",
+      "locale": "it",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 57
+    },
+    {
+      "surface": "ui",
+      "locale": "id",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 64
+    },
+    {
+      "surface": "ui",
+      "locale": "de",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 74
+    },
+    {
+      "surface": "ui",
+      "locale": "pt",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 57
+    },
+    {
+      "surface": "ui",
+      "locale": "pt_BR",
+      "leaf_fields": 593,
+      "string_fields": 593,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 58
+    },
+    {
+      "surface": "flow",
+      "locale": "en",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 133
+    },
+    {
+      "surface": "flow",
+      "locale": "fr",
+      "leaf_fields": 134,
+      "string_fields": 134,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 1,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "es",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "it",
+      "leaf_fields": 134,
+      "string_fields": 134,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 1,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "id",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "de",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "pt",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    },
+    {
+      "surface": "flow",
+      "locale": "pt_BR",
+      "leaf_fields": 133,
+      "string_fields": 133,
+      "missing_keys_vs_en": 0,
+      "extra_keys_vs_en": 0,
+      "placeholder_mismatches": 0,
+      "identical_string_values_vs_en": 2
+    }
+  ],
+  "issue_count": 2,
+  "scope": "shape and interpolation placeholders only; equality does not prove mistranslation"
+}

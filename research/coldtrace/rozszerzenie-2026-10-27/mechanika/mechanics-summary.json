@@ -1,0 +1,11 @@
+{
+  "scope": "Web client static snapshot 2026-10-26; no target execution; no API calls",
+  "js_files": 15,
+  "fetch_calls_all": 64,
+  "api_call_sites": 15,
+  "api_unique_paths": 9,
+  "storage_semantic_records": 15,
+  "transition_records": 32,
+  "telemetry_call_sites": 18,
+  "correction": "Initial offer X reaches chat for free; in-game final offer dismissal returns home and sets progress back to gateIndex; presence of offer alone does not prove hard gate."
+}

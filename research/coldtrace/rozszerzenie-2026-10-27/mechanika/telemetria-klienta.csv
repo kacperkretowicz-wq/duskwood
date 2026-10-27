@@ -1,0 +1,19 @@
+﻿event;properties;source_file;utf16_start;utf16_end;evidence
+web_pageview;;1gu28mcudgiv4.js;7509;7536;static
+checkout_cancelled;"{plan:e.get(""plan"")??void 0,surface:e.get(""surface"")??void 0}";1gu28mcudgiv4.js;7624;7719;static
+landing_cta_clicked;"{position:i,destination:""test""===c?""case"":""picker"",experiment_variant:c??""pending""}";1kwuxuaueq9dv.js;11052;11170;static
+checkout_click;s;1pfbqbd-z0uj8.js;15344;15375;static
+checkout_already_pending;s;1pfbqbd-z0uj8.js;15659;15700;static
+checkout_already_active;s;1pfbqbd-z0uj8.js;15826;15866;static
+checkout_redirect;s;1pfbqbd-z0uj8.js;16005;16039;static
+checkout_soft;"{...s,reason:""stripe_disabled""}";1pfbqbd-z0uj8.js;16308;16368;static
+paywall_viewed;{surface:e,case_slug:t,...s};1pfbqbd-z0uj8.js;18145;18203;static
+paywall_dismissed;{surface:e,case_slug:t,...s};1pfbqbd-z0uj8.js;18225;18286;static
+plan_selected;{surface:e,plan:t,case_slug:s};1pfbqbd-z0uj8.js;18305;18364;static
+case_solved;{case_slug:c,correct:!!t?.correct};1pfbqbd-z0uj8.js;303596;303657;static
+question_solved;{case_slug:k,question_index:e,gate_index:_,premium:ea};1pfbqbd-z0uj8.js;628753;628838;static
+gate_reached;"{case_slug:k,gate_index:_,experiment_variant:D??""pending""}";1pfbqbd-z0uj8.js;628900;628986;static
+onboarding_step_viewed;{case_slug:a,step:r,total:r6};1pfbqbd-z0uj8.js;635578;635645;static
+onboarding_completed;{case_slug:a};1pfbqbd-z0uj8.js;635680;635729;static
+intro_chat_completed;{case_slug:e.slug};1pfbqbd-z0uj8.js;656183;656237;static
+case_opened;{case_slug:e.slug,lang:x};1pfbqbd-z0uj8.js;662463;662515;static

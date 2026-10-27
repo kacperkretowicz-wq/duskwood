@@ -6,5 +6,16 @@
   "duplicate_archive_paths": "none",
   "git_file_size_limit": "all files below 100 MB",
   "scope": "research files only; no game runtime changes",
-  "runtime_validation": "first four Noor questions; paywall thereafter; not physical iPhone"
+  "runtime_validation": "first four Noor questions; paywall thereafter; not physical iPhone",
+  "extension_2026_10_27": {
+    "media_files": 2024,
+    "new_media": 347,
+    "configuration_count": 10,
+    "released_configurations": 7,
+    "unreleased_configurations": 3,
+    "question_records": 211,
+    "scripts_syntax_parsed": 15,
+    "new_runtime_playthrough": false,
+    "offer_interpretation_corrected": true
+  }
 }

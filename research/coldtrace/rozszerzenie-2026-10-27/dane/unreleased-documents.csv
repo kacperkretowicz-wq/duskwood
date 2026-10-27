@@ -1,0 +1,7 @@
+﻿case,file,pointer,id,filename,declared_kind,url,inline_pages,role_inferred_from_metadata
+pia,pia-files.json,/documents/0,pia_file_lowmoor_rota,lowmoor_rota_sat.png,text,,1,SECURITY & STEWARDING ROTA
+pia,pia-files.json,/documents/1,pia_file_wristband_policy,wristband_policy.pdf,text,,3,STAFF WRISTBAND & ACCESS GUIDE
+pia,pia-files.json,/documents/2,pia_file_ashdown_rota,ashdown_rota_apr.png,text,,1,AGENCY STAFF ALLOCATION
+sami,sami-files.json,/documents/0,sami_file_certificate,CERT-2026-0522-X_Inspection.pdf,pdf,/documents/sami_certificate_inspection.pdf,0,Formal Compliance Certificate & Site Safety Clearance
+sami,sami-files.json,/documents/1,sami_file_refuse,QCR-2026-0525_Tilleuls_Compliance.webp,image,/documents/sami_refuse_to_sign.webp,0,Certificate of Compliance and Repair — Résidence des Tilleuls
+sami,sami-files.json,/documents/2,sami_file_cost,CAR-LYON-2026-V1_Cost_Report.pdf,pdf,/documents/sami_cost_report.pdf,0,Cost Audit & Variance Report — Greater Lyon

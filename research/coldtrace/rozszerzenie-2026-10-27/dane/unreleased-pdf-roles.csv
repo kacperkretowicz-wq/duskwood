@@ -1,0 +1,3 @@
+﻿file,pointer,url,status,bytes,sha256,declared_kind,filename,role_from_metadata,basis
+sami-files.json,/documents/0/url,https://coldtrace.co/documents/sami_certificate_inspection.pdf,200,29436,8342f4f01a3ed0d7ba412c3a21520c4382503f1f8c1ea518adec9e16aca1804d,pdf,CERT-2026-0522-X_Inspection.pdf,Formal Compliance Certificate & Site Safety Clearance,metadata/source-reference only; PDF body not examined here
+sami-files.json,/documents/2/url,https://coldtrace.co/documents/sami_cost_report.pdf,200,27960,94e12287b1d407706664614541777300fd87d835cc0753d9e551c267f504ed9e,pdf,CAR-LYON-2026-V1_Cost_Report.pdf,Cost Audit & Variance Report — Greater Lyon,metadata/source-reference only; PDF body not examined here

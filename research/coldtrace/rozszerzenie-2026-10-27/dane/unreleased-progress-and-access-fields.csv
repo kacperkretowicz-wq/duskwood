@@ -1,0 +1,21 @@
+﻿case,file,pointer,field,value,semantics
+isla,isla-carelog.json,/feed/0/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/1/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/2/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/3/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/4/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/5/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/6/detailKind,detailKind,staffStatusIsla,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/7/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/8/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/9/detailKind,detailKind,medicationDiscrepancy,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/10/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-carelog.json,/feed/11/detailKind,detailKind,blank,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-public.en.json,/locks/photos/digits,digits,4,explicit authored selector/configuration; not proof of runtime execution
+isla,isla-suspects.json,/requiredCount,requiredCount,1,explicit authored selector/configuration; not proof of runtime execution
+pia,pia-public.en.json,/locks/photos/digits,digits,4,explicit authored selector/configuration; not proof of runtime execution
+pia,pia-suspects.json,/requiredCount,requiredCount,1,explicit authored selector/configuration; not proof of runtime execution
+pia,pia-whatsapp.json,/threads/0/diesInWave1,diesInWave1,False,explicit authored selector/configuration; not proof of runtime execution
+pia,pia-whatsapp.json,/threads/1/diesInWave1,diesInWave1,True,explicit authored selector/configuration; not proof of runtime execution
+sami,sami-public.en.json,/locks/photos/digits,digits,6,explicit authored selector/configuration; not proof of runtime execution
+sami,sami-suspects.json,/requiredCount,requiredCount,1,explicit authored selector/configuration; not proof of runtime execution

@@ -1,12 +1,14 @@
 # ColdTrace — analiza konstrukcji gry i inwentarz
 
+> Aktualizacja 27.10.2026: istnieje osobne rozszerzenie badania obejmujące dokładne działanie X przy ofertach, trzy niewydane konfiguracje oraz szczegółową specyfikację klienta. Liczniki poniżej opisują pierwszy etap z 26.10.2026.
+
 Stan badania: 26 października 2026. Producent: Saclic Studio. Materiał zawiera spoilery dotyczące konstrukcji zagadek.
 
 ## 1. Co rzeczywiście zostało zbadane
 
 Zidentyfikowano oficjalne wydanie iOS oraz oficjalną grę przeglądarkową. Przeanalizowano pobrane skrypty klienta WWW, publiczne pliki scenariuszy i danych aplikacji telefonu, referencje do multimediów oraz dostępne pliki binarne mediów. Narzędzie REA wykonało analizę statyczną czterech wybranych skryptów oraz śledzenie ścieżki odpowiedzi. W przeglądarce sprawdzono wybór sprawy, samouczek, oferty subskrypcji i początek pierwszego śledztwa. Dokładny zasięg obserwacji runtime opisuje dołączony dziennik.
 
-**R:** Przeprowadzono normalną ścieżkę czterech pierwszych pytań Noor, bez zmiany zapisu gry lub konsoli. Otwierano wiadomości, mapy, pocztę i bank; serwer potwierdził cztery rozwiązania. Następnie pojawiła się oferta wymagająca płatnego dostępu. Dalszych etapów nie przedstawiam jako rozegranych. Przejściowe problemy obsługi myszy rozwiązano sterowaniem klawiaturą oraz rzeczywistym przeciągnięciem suwaka telefonu.
+**R:** Przeprowadzono normalną ścieżkę czterech pierwszych pytań Noor, bez zmiany zapisu gry lub konsoli. Otwierano wiadomości, mapy, pocztę i bank; serwer potwierdził cztery rozwiązania. Następnie pojawiła się kolejna oferta. Nie wykonano wtedy całej sekwencji jej zamknięcia; sam jej widok nie dowodzi obowiązkowej płatności. Dalszych etapów nie przedstawiam jako rozegranych. Przejściowe problemy obsługi myszy rozwiązano sterowaniem klawiaturą oraz rzeczywistym przeciągnięciem suwaka telefonu.
 
 **S:** Odczyt Apple dla polskiego sklepu zwrócił wersję 1.3.0, identyfikator `com.saclicstudio.coldcase`, minimum iOS 15.0, rozmiar 192449536 bajtów i 13 deklarowanych języków, w tym polski. Metadane nie są pakietem instalacyjnym.
 
@@ -196,7 +198,7 @@ Analiza REA dotyczyła wcześniejszego snapshotu katalogu źródeł, zanim dodan
 
 **R:** Po wstępie widoczna była oferta tygodniowa 6,99 EUR oraz roczna wyświetlana jako 2,92 EUR miesięcznie, z trzydniowym okresem próbnym i późniejszą opłatą 34,99 EUR rocznie. Po zamknięciu pojawiła się dodatkowa oferta 19,99 EUR rocznie z odliczaniem od godziny. Po jej zamknięciu gra dopuściła rozmowę wprowadzającą. Screenshoty dokumentują tę konkretną sesję; ceny nie są potwierdzoną ofertą polskiego App Store.
 
-**R:** Po czterech poprawnych odpowiedziach pojawiło się podsumowanie postępu i kolejna oferta. W tym miejscu cena roczna była normalizowana do 0,67 EUR tygodniowo. W tej sesji ograniczenie postępu wystąpiło więc po czwartym pytaniu. Nie aktywowano okresu próbnego ani zakupu.
+**R:** Po czterech poprawnych odpowiedziach pojawiło się podsumowanie postępu i kolejna oferta. W tym miejscu cena roczna była normalizowana do 0,67 EUR tygodniowo. W tej sesji ofertę wyświetlono po czwartym pytaniu. Nie potwierdzono wówczas, czy zamknięcie wszystkich jej etapów pozwala przejść dalej; wcześniejsze utożsamienie widocznej oferty z potwierdzoną blokadą było zbyt kategoryczne. Nie aktywowano okresu próbnego ani zakupu.
 
 **W:** Mechanizm sprzedażowy działa przed doświadczeniem właściwego telefonu i ponownie może działać w toku postępu. Oferta po zamknięciu zwiększa presję decyzji, a normalizacja ceny rocznej do miesięcy zmienia sposób porównania. Nie ustalono, czy licznik oferty jest trwały między urządzeniami lub sesjami; nie należy przedstawiać go jako rzeczywistej jednorazowej dostępności bez takiego testu.
 

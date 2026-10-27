@@ -1,0 +1,44 @@
+[
+  {
+    "file": "96950b67a54dbf00-sami_certificate_inspection.pdf",
+    "url": "https://coldtrace.co/documents/sami_certificate_inspection.pdf",
+    "pages": 2,
+    "encrypted": false,
+    "producer": "WeasyPrint 62.3",
+    "page_sizes": [
+      [
+        595.275591,
+        841.889764
+      ],
+      [
+        595.275591,
+        841.889764
+      ]
+    ],
+    "text_chars_by_page": [
+      3283,
+      1809
+    ]
+  },
+  {
+    "file": "c0114c3fadb5b07e-sami_cost_report.pdf",
+    "url": "https://coldtrace.co/documents/sami_cost_report.pdf",
+    "pages": 2,
+    "encrypted": false,
+    "producer": "WeasyPrint 62.3",
+    "page_sizes": [
+      [
+        595.275591,
+        841.889764
+      ],
+      [
+        595.275591,
+        841.889764
+      ]
+    ],
+    "text_chars_by_page": [
+      1685,
+      716
+    ]
+  }
+]

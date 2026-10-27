@@ -1,0 +1,14 @@
+{
+  "scripts": 15,
+  "parsed": 15,
+  "bytes": 1908500,
+  "ast_nodes": 510814,
+  "function_nodes": 7183,
+  "jsx_calls": 4941,
+  "factory_occurrences": 231,
+  "module_occurrences": 233,
+  "unique_module_ids": 221,
+  "import_occurrences": 631,
+  "missing_target_occurrences": 0,
+  "scope": "syntax inventory of all acquired scripts; no execution; not semantic equivalence or backend coverage"
+}

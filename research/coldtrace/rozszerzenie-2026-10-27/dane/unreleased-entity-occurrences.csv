@@ -1,0 +1,122 @@
+﻿case,entity_id,role,name,file,pointer
+isla,guide,contact,Rory,isla-public.en.json,/contacts/0/npcId
+isla,dawn,contact,Dawn P,isla-public.en.json,/contacts/1/npcId
+isla,neil,contact,Neil Garrity,isla-public.en.json,/contacts/2/npcId
+isla,tash,contact,Tash Ellery,isla-public.en.json,/contacts/3/npcId
+isla,guide,preview,,isla-public.en.json,/phoneData/contactPreviews/0/npcId
+isla,dawn,preview,,isla-public.en.json,/phoneData/contactPreviews/1/npcId
+isla,neil,preview,,isla-public.en.json,/phoneData/contactPreviews/2/npcId
+isla,tash,preview,,isla-public.en.json,/phoneData/contactPreviews/3/npcId
+isla,dawn,main_thread,,isla-public.en.json,/phoneData/npcMessages/dawn
+isla,neil,main_thread,,isla-public.en.json,/phoneData/npcMessages/neil
+isla,tash,main_thread,,isla-public.en.json,/phoneData/npcMessages/tash
+isla,tash,board_piece,,isla-apps.json,/board/pieces/0/id
+isla,tash,board_character,Tash Ellery,isla-apps.json,/board/pieces/0/character/id
+isla,dawn,board_piece,,isla-apps.json,/board/pieces/1/id
+isla,dawn,board_character,Dawn Prescott,isla-apps.json,/board/pieces/1/character/id
+isla,neil,board_piece,,isla-apps.json,/board/pieces/2/id
+isla,neil,board_character,Neil Garrity,isla-apps.json,/board/pieces/2/character/id
+isla,dawn_tape,board_piece,,isla-apps.json,/board/pieces/3/id
+isla,hartsmere_label,board_piece,,isla-apps.json,/board/pieces/4/id
+isla,security_alert,board_piece,,isla-apps.json,/board/pieces/5/id
+isla,dawn_thread,board_piece,,isla-apps.json,/board/pieces/6/id
+isla,isla,board_piece,,isla-apps.json,/board/pieces/7/id
+isla,isla,board_character,Isla Bray,isla-apps.json,/board/pieces/7/character/id
+isla,coastal,board_piece,,isla-apps.json,/board/pieces/8/id
+isla,sticky_planning,board_piece,,isla-apps.json,/board/pieces/9/id
+isla,sticky_shortage,board_piece,,isla-apps.json,/board/pieces/10/id
+isla,coach_ticket,board_piece,,isla-apps.json,/board/pieces/11/id
+isla,lomax,board_piece,,isla-apps.json,/board/pieces/12/id
+isla,lomax,board_character,Gordon Lomax,isla-apps.json,/board/pieces/12/character/id
+isla,lomax_tape,board_piece,,isla-apps.json,/board/pieces/13/id
+isla,peggy,board_piece,,isla-apps.json,/board/pieces/14/id
+isla,peggy,board_character,Peggy Garrity,isla-apps.json,/board/pieces/14/character/id
+isla,peggy_tape,board_piece,,isla-apps.json,/board/pieces/15/id
+isla,rory,board_piece,,isla-apps.json,/board/pieces/16/id
+isla,rory,board_character,Rory Bray,isla-apps.json,/board/pieces/16/character/id
+isla,rory_tape,board_piece,,isla-apps.json,/board/pieces/17/id
+isla,dawn_prescott,accusation_candidate,Dawn Prescott,isla-suspects.json,/suspects/0/id
+isla,neil_garrity,accusation_candidate,Neil Garrity,isla-suspects.json,/suspects/1/id
+isla,gordon_lomax,accusation_candidate,Gordon Lomax,isla-suspects.json,/suspects/2/id
+isla,suicide,accusation_candidate,"No one, Isla took her own life",isla-suspects.json,/suspects/3/id
+isla,cl_06_apr_discrepancy,carelog_entryId,,isla-carelog.json,/medicationDetail/entryId
+isla,dawn,carelog_authorNpcId,,isla-carelog.json,/medicationDetail/authorNpcId
+isla,cl_09_apr_isla_suspended,carelog_entryId,,isla-carelog.json,/staffDetail/entryId
+isla,isla,carelog_staffNpcId,,isla-carelog.json,/staffDetail/staffNpcId
+pia,immy,contact,Immy,pia-public.en.json,/contacts/0/npcId
+pia,vulture,contact,Vulture,pia-public.en.json,/contacts/1/npcId
+pia,spence,contact,Spence,pia-public.en.json,/contacts/2/npcId
+pia,gate4,contact,GATE 4,pia-public.en.json,/contacts/3/npcId
+pia,josie,contact,Josie Mercer,pia-public.en.json,/contacts/4/npcId
+pia,immy,preview,,pia-public.en.json,/phoneData/contactPreviews/0/npcId
+pia,vulture,preview,,pia-public.en.json,/phoneData/contactPreviews/1/npcId
+pia,spence,preview,,pia-public.en.json,/phoneData/contactPreviews/2/npcId
+pia,gate4,preview,,pia-public.en.json,/phoneData/contactPreviews/3/npcId
+pia,immy,main_thread,,pia-public.en.json,/phoneData/npcMessages/immy
+pia,vulture,main_thread,,pia-public.en.json,/phoneData/npcMessages/vulture
+pia,spence,main_thread,,pia-public.en.json,/phoneData/npcMessages/spence
+pia,gate4,main_thread,,pia-public.en.json,/phoneData/npcMessages/gate4
+pia,josie,main_thread,,pia-public.en.json,/phoneData/npcMessages/josie
+pia,immy,board_piece,,pia-apps.json,/board/pieces/0/id
+pia,immy,board_character,Immy Barratt,pia-apps.json,/board/pieces/0/character/id
+pia,lee,board_piece,,pia-apps.json,/board/pieces/1/id
+pia,lee,board_character,Lee Garrow,pia-apps.json,/board/pieces/1/character/id
+pia,josie,board_piece,,pia-apps.json,/board/pieces/2/id
+pia,josie,board_character,Josie Mercer,pia-apps.json,/board/pieces/2/character/id
+pia,sticky_riverside,board_piece,,pia-apps.json,/board/pieces/3/id
+pia,security_alert,board_piece,,pia-apps.json,/board/pieces/4/id
+pia,chat_log,board_piece,,pia-apps.json,/board/pieces/5/id
+pia,pia,board_piece,,pia-apps.json,/board/pieces/6/id
+pia,pia,board_character,Pia Novak,pia-apps.json,/board/pieces/6/character/id
+pia,coastal,board_piece,,pia-apps.json,/board/pieces/7/id
+pia,sticky_planning,board_piece,,pia-apps.json,/board/pieces/8/id
+pia,sticky_witness,board_piece,,pia-apps.json,/board/pieces/9/id
+pia,coach_ticket,board_piece,,pia-apps.json,/board/pieces/10/id
+pia,spence,board_piece,,pia-apps.json,/board/pieces/11/id
+pia,spence,board_character,Spence,pia-apps.json,/board/pieces/11/character/id
+pia,vulture,board_piece,,pia-apps.json,/board/pieces/12/id
+pia,vulture,board_character,Vulture,pia-apps.json,/board/pieces/12/character/id
+pia,tobi,board_piece,,pia-apps.json,/board/pieces/13/id
+pia,tobi,board_character,Tobi,pia-apps.json,/board/pieces/13/character/id
+pia,lee_garrow,accusation_candidate,Lee Garrow,pia-suspects.json,/suspects/0/id
+pia,spence,accusation_candidate,Spence,pia-suspects.json,/suspects/1/id
+pia,tobi,accusation_candidate,Tobi,pia-suspects.json,/suspects/2/id
+pia,accident,accusation_candidate,No one — Pia drowned by accident,pia-suspects.json,/suspects/3/id
+sami,guide,contact,Clara,sami-public.en.json,/contacts/0/npcId
+sami,enzo,contact,Enzo,sami-public.en.json,/contacts/1/npcId
+sami,yanis,contact,Yanis,sami-public.en.json,/contacts/2/npcId
+sami,mom,contact,Maman,sami-public.en.json,/contacts/3/npcId
+sami,dad,contact,Dad,sami-public.en.json,/contacts/4/npcId
+sami,clara,contact,Clara,sami-public.en.json,/contacts/5/npcId
+sami,bruno,contact,Bruno Maes,sami-public.en.json,/contacts/6/npcId
+sami,crew_group,contact,Équipe Chantier,sami-public.en.json,/contacts/7/npcId
+sami,vincent,contact,Vincent Cardon,sami-public.en.json,/contacts/8/npcId
+sami,kessler,contact,Serge Kessler,sami-public.en.json,/contacts/9/npcId
+sami,lab_k,contact,K.,sami-public.en.json,/contacts/10/npcId
+sami,roussel,contact,Me Roussel,sami-public.en.json,/contacts/11/npcId
+sami,mme_perrin,contact,Mme Perrin,sami-public.en.json,/contacts/12/npcId
+sami,guide,preview,,sami-public.en.json,/phoneData/contactPreviews/0/npcId
+sami,enzo,preview,,sami-public.en.json,/phoneData/contactPreviews/1/npcId
+sami,yanis,preview,,sami-public.en.json,/phoneData/contactPreviews/2/npcId
+sami,mom,preview,,sami-public.en.json,/phoneData/contactPreviews/3/npcId
+sami,dad,preview,,sami-public.en.json,/phoneData/contactPreviews/4/npcId
+sami,clara,preview,,sami-public.en.json,/phoneData/contactPreviews/5/npcId
+sami,bruno,preview,,sami-public.en.json,/phoneData/contactPreviews/6/npcId
+sami,crew_group,preview,,sami-public.en.json,/phoneData/contactPreviews/7/npcId
+sami,vincent,preview,,sami-public.en.json,/phoneData/contactPreviews/8/npcId
+sami,kessler,preview,,sami-public.en.json,/phoneData/contactPreviews/9/npcId
+sami,lab_k,preview,,sami-public.en.json,/phoneData/contactPreviews/10/npcId
+sami,roussel,preview,,sami-public.en.json,/phoneData/contactPreviews/11/npcId
+sami,mme_perrin,preview,,sami-public.en.json,/phoneData/contactPreviews/12/npcId
+sami,clara,main_thread,,sami-public.en.json,/phoneData/npcMessages/clara
+sami,dad,main_thread,,sami-public.en.json,/phoneData/npcMessages/dad
+sami,mom,main_thread,,sami-public.en.json,/phoneData/npcMessages/mom
+sami,yanis,main_thread,,sami-public.en.json,/phoneData/npcMessages/yanis
+sami,enzo,main_thread,,sami-public.en.json,/phoneData/npcMessages/enzo
+sami,bruno,main_thread,,sami-public.en.json,/phoneData/npcMessages/bruno
+sami,crew_group,main_thread,,sami-public.en.json,/phoneData/npcMessages/crew_group
+sami,roussel,main_thread,,sami-public.en.json,/phoneData/npcMessages/roussel
+sami,vincent_cardon,accusation_candidate,Vincent Cardon,sami-suspects.json,/suspects/0/id
+sami,bruno_maes,accusation_candidate,Bruno Maes,sami-suspects.json,/suspects/1/id
+sami,serge_kessler,accusation_candidate,Serge Kessler,sami-suspects.json,/suspects/2/id
+sami,accident,accusation_candidate,No one - accident,sami-suspects.json,/suspects/3/id

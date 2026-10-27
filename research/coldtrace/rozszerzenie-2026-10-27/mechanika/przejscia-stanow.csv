@@ -1,0 +1,33 @@
+﻿from_state;to_state;trigger;effect;source_file;utf16_start;utf16_end;evidence
+start;onboarding;brak globalnej historii, fazy i postępu;wybór fazy;1pfbqbd-z0uj8.js;606926;607152;static
+start;phone;progress>0 albo zapisana faza phone;przywrócenie telefonu;1pfbqbd-z0uj8.js;606926;607152;static
+onboarding;paywall.main;ukończenie onboardingu;oferta początkowa, nie dowód obowiązku zakupu;1pfbqbd-z0uj8.js;655804;655827;static
+paywall.main;paywall.lto;"X; widoczny po2400ms";główna oferta zamknięta;1pfbqbd-z0uj8.js;655988;656008;static
+paywall.lto;chat;"X; albo wygasły deadline przy montowaniu";bez zakupu, zwykła ścieżka;1pfbqbd-z0uj8.js;656029;656038;static
+paywall;chat;onDone po wyniku checkout soft;sam serwer decyduje enabled=false;1pfbqbd-z0uj8.js;655940;655954;static
+chat;prep;CTA wstępu;zapis introDone=1;1pfbqbd-z0uj8.js;656136;656248;static
+prep;phone.lock;koniec filmu/błąd filmu lub watchdog8s;zapis flow=phone;1pfbqbd-z0uj8.js;656319;656381;static
+phone.lock;phone.home;gest odblokowania;brak kontroli PIN właściciela w tej ścieżce;1pfbqbd-z0uj8.js;39481;41959;static
+phone.home;question;ikona przewodnika;otwarcie overlay z bieżącym indeksem;1pfbqbd-z0uj8.js;608692;629905;static
+question;phone.currentScreen;X panelu;"odmontowuje pytanie; lokalne próby nie są utrwalone";1pfbqbd-z0uj8.js;628667;628684;static
+question.idle;question.pending;niepusty trim i brak busy;"POST /api/answer; próby+1";1pfbqbd-z0uj8.js;295481;295894;static
+question.pending;question.ok;response.correct;po700ms onSolved;1pfbqbd-z0uj8.js;295481;295894;static
+question.pending;hint.level1;response.openHint;POST /api/hint z aktualnymi próbami;1pfbqbd-z0uj8.js;295481;295894;static
+question.pending;question.error;incorrect bez openHint;"pole puste; pokaż nudge";1pfbqbd-z0uj8.js;295481;295894;static
+question;question.next;correct i brak granicy/finału;progress=index+1;1pfbqbd-z0uj8.js;628685;629012;static
+question;accusation;index+1>=questions.length-1;zakończenie etapów tekstowych;1pfbqbd-z0uj8.js;628685;629012;static
+question;gate.celebration;index=gateIndex oraz flow i brak premium;zapis progress=index+1;1pfbqbd-z0uj8.js;628685;629012;static
+gate.celebration;gate.paywall;Continue;przejście do oferty;1pfbqbd-z0uj8.js;629134;629393;static
+gate.paywall;gate.lto;X;sam X nie ustawia premium;1pfbqbd-z0uj8.js;629715;629736;static
+gate.lto;gate.trial;X albo wygasły deadline przy montowaniu;kolejna oferta;1pfbqbd-z0uj8.js;629768;629791;static
+gate.trial;phone.home;X albo Skip;"progress=gateIndex; panel zamknięty; brak premium";1pfbqbd-z0uj8.js;629813;629896;static
+gate.offer;question;onDone(true);ustawia lokalny dostęp i otwiera panel;1pfbqbd-z0uj8.js;629399;629556;static
+account.unknown;account.premium;signedIn&&premium&&!entitlementUnknown;flaga gateShown=1 i ponowne obliczenie ekranu;1pfbqbd-z0uj8.js;610573;610784;static
+accusation.select;accusation.pending;liczba wybranych=requiredCount;POST /api/accuse;1pfbqbd-z0uj8.js;303379;303674;static
+accusation.pending;accusation.result;odebrano JSON;correct/verdict/explanations z serwera;1pfbqbd-z0uj8.js;303190;306968;static
+accusation.incorrect;accusation.select;Try again;czyści wybór, nie resetuje sprawy;1pfbqbd-z0uj8.js;303190;306968;static
+accusation.correct;phone.lock;Close case;"usuwa progress i gateShown; index=0";1pfbqbd-z0uj8.js;627995;628141;static
+locked.notes;note;response.ok;przechowuje zwrócony body w rodzicu;1pfbqbd-z0uj8.js;167906;168149;static
+locked.photos;photos.hiddenOrDeleted;response.ok;przechowuje hidden/deleted w rodzicu;1pfbqbd-z0uj8.js;285626;285889;static
+ava.burner.noChoice;ava.burner.choiceVisible;index>=point.minQuestionIndex;pierwszy nieobsłużony choicePoint;1pfbqbd-z0uj8.js;156541;160650;static
+ava.burner.choiceVisible;ava.burner.reply;wybór opcji;zapis lokalny i deterministyczne dopięcie bąbli;1pfbqbd-z0uj8.js;160014;160104;static

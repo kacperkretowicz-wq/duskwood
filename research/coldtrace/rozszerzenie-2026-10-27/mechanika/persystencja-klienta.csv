@@ -1,0 +1,16 @@
+﻿storage;key;value_schema;consumer;behavior;scope;source_file;utf16_start;utf16_end;evidence
+localStorage;coldtrace.{case}.progress;tekstowa liczba;"rY; om";"onSolved zapisuje index+1; trial X wraca do gateIndex; finał usuwa";przypadek, bez języka;1pfbqbd-z0uj8.js;628719;628752;static
+localStorage;coldtrace.{case}.gateShown.v1;1;rY;"znany premium lub onDone(true); restart usuwa";przypadek;1pfbqbd-z0uj8.js;610611;610638;static
+localStorage;coldtrace.{case}.flow.v1;chat|prep|phone;om;"fazy chat/prep/phone; inne fazy mogą usuwać przy braku postępu";przypadek;1pfbqbd-z0uj8.js;654894;654926;static
+localStorage;coldtrace.{case}.introDone.v1;1;om;"CTA intro; nie jest usuwane przez standardowy restart sprawy";przypadek;1pfbqbd-z0uj8.js;656148;656182;static
+localStorage;coldtrace.{case}.gate.v1;JSON {v:string,i:number};rY;utrwala wariant i granicę A/B;przypadek;1pfbqbd-z0uj8.js;607350;607396;static
+localStorage;coldtrace.onboarding.v1;paywall|1;om;globalna historia początku;globalny;1pfbqbd-z0uj8.js;653787;653812;static
+localStorage;coldtrace.lto.deadline.v1;absolutny deadline epoch ms;"U; V; q";"domyślnie teraz+3600000; licznik1s";globalny;1pfbqbd-z0uj8.js;23460;23786;static
+localStorage;coldtrace.lang;kod języka;oy;query lang przed zapisanym językiem i językiem przeglądarki;globalny;1pfbqbd-z0uj8.js;661440;661456;static
+localStorage;ava_burner_choices_v1;JSON pointId→optionIndex;"k; sj";"wybór Avy; nie znaleziono resetu w standardowym restart";globalny klucz zawierający wybory Avy;1pfbqbd-z0uj8.js;12622;12645;static
+localStorage;coldtrace.ghost.custosGlitch.v1;1;lV;lokalna animacja Custos;Ghost;1pfbqbd-z0uj8.js;279628;279661;static
+localStorage;coldtrace.pia.wipe.v1;"JSON wipePhase;airplaneModeOn;deletedThreadIds;removedPhotoIds";"rO;rR;r$;rY";"niewydana sprawa; stan kasowania i trybu offline";Pia niewydana;1pfbqbd-z0uj8.js;606804;606827;static
+sessionStorage;coldtrace.flag_overrides.v1;JSON nazwa flagi→control|test;useVariant;"sesyjne narzędzie wariantów; analiza nie zmieniała";karta;1peok1ww0ltpj.js;6632;6661;static
+localStorage+cookie;coldtrace.ads_consent;granted|denied;"readAdsConsentClient;writeAdsConsentClient";"zgoda reklamowa; cookie na rok";witryna;1gu28mcudgiv4.js;4401;4424;static
+sessionStorage;coldtrace.meta.once.{event};1;a;deduplikacja zdarzeń Meta, fallback Set w pamięci;karta;1gu28mcudgiv4.js;5023;5137;static
+localStorage;coldtrace.telemetry.id;identyfikator;getPosthog;odczyt ID dla bootstrapa telemetrii, poza save;witryna;18fx52cq50ghm.js;303124;303148;static

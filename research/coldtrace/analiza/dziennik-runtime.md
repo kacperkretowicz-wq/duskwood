@@ -26,3 +26,10 @@ Data: 26.10.2026. Środowisko: oficjalny klient WWW `https://coldtrace.co`, prze
 Nie ukończono całej sprawy Noor ani pozostałych sześciu. Nie przetestowano wszystkich wariantów odpowiedzi, kodów blokad, zakończeń, reklam, przywracania zakupów, stanu offline lub powiadomień systemowych. Pierwsze cztery wyniki walidacji nie pozwalają odtworzyć kompletnej implementacji serwera.
 
 Osobno otwarto lokalny katalog multimediów po rozpakowaniu archiwum, wówczas z 1642 rekordami. Po rozszerzeniu materiału bieżąca wersja ma 1677 rekordów. Sprawdzono jej składnię, pliki i integralność archiwum. Nie wykonano ponownego testu filtrowania w przeglądarce, ponieważ lokalne sterowanie przeglądarką zostało wyłączone w ustawieniach w trakcie badania. Katalog jest narzędziem pakietu badawczego, nie oryginalną grą.
+
+
+## Korekta interpretacji oferty, 27.10.2026
+
+Użytkownik zgłosił kontynuację darmowej gry po użyciu X. To relacja użytkownika, nie nowy test wykonany przez agenta. Odczytane handlery klienta potwierdzają, że początkowe oferty można zamknąć i przejść do rozmowy. Późniejsze oferty również można zamknąć i wrócić na ekran główny telefonu; końcowy handler tej sekwencji jednocześnie zapisuje indeks pytania granicznego. Przeglądanie telefonu oraz zaliczanie następnego pytania należy sprawdzać osobno.
+
+R18 potwierdza wyświetlenie oferty, nie jej niezamykalność ani obowiązek zakupu. Nie wykonano wówczas pełnej sekwencji X/LTO/trial. Szczegółowe dowody statyczne zawiera rozszerzenie z 27.10.2026, `mechanika/ColdTrace-mechanika-klienta.md`. Nie wykonano nowego testu w przeglądarce, ponieważ sterowanie nią było wyłączone w ustawieniach Work.

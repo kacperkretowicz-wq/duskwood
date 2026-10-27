@@ -1,0 +1,17 @@
+﻿surface,locale,leaf_fields,string_fields,missing_keys_vs_en,extra_keys_vs_en,placeholder_mismatches,identical_string_values_vs_en
+ui,en,593,593,0,0,0,593
+ui,fr,593,593,0,0,0,60
+ui,es,593,593,0,0,0,52
+ui,it,593,593,0,0,0,57
+ui,id,593,593,0,0,0,64
+ui,de,593,593,0,0,0,74
+ui,pt,593,593,0,0,0,57
+ui,pt_BR,593,593,0,0,0,58
+flow,en,133,133,0,0,0,133
+flow,fr,134,134,0,1,0,2
+flow,es,133,133,0,0,0,2
+flow,it,134,134,0,1,0,2
+flow,id,133,133,0,0,0,2
+flow,de,133,133,0,0,0,2
+flow,pt,133,133,0,0,0,2
+flow,pt_BR,133,133,0,0,0,2

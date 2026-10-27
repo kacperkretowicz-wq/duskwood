@@ -1,5 +1,14 @@
 # ColdTrace — badanie referencyjne dla Duskwood / MGLISKO
 
+## Aktualne rozszerzenie — 27.10.2026
+
+[Pełny indeks pogłębionego rozbioru](rozszerzenie-2026-10-27/README.md) obejmuje 10 konfiguracji (7 wydanych i 3 niewydane), 211 rekordów pytań, 2024 pliki multimedialne w obu etapach oraz szczegółowe opracowania mechaniki, danych i UI. Wszystkie 15 pozyskanych skryptów JS zinwentaryzowano składniowo. Dane serwera i wykonanie iOS pozostają odrębnymi, niepozyskanymi warstwami.
+
+**Korekta X:** początkowe oferty można zamknąć i grać za darmo. Późniejsze oferty też oddają telefon do przeglądania; odczytany końcowy handler cofa indeks aktywnego pytania do progu oferty. Samo pojawienie się ceny nie jest dowodem obowiązkowej płatności. [Dokładne przejścia i źródła](rozszerzenie-2026-10-27/mechanika/ColdTrace-mechanika-klienta.md).
+
+Poniższy spis dokumentuje pierwszy etap badania; nowe wyniki są w rozszerzeniu.
+
+
 Snapshot badania: **26 października 2026**. Materiał dodano na gałęzi `rea`, opartej na `main` (`5ef89f620888487731454532b7f19ae8637d8d65`). Nie zmienia działania MGLISKA.
 
 ## Od czego zacząć
@@ -15,7 +24,7 @@ Snapshot badania: **26 października 2026**. Materiał dodano na gałęzi `rea`,
 
 ## Zakres i kompletność
 
-Zbadano klienta WWW ColdTrace i publiczne dane. Siedem wydanych konfiguracji spraw, 67 plików JSON w materiale roboczym, 140 etapów odpowiedzi tekstowej i siedem finałów. W UI potwierdzono pierwsze cztery pytania Noor, następnie napotkano paywall. Nie aktywowano subskrypcji.
+Zbadano klienta WWW ColdTrace i publiczne dane. Siedem wydanych konfiguracji spraw, 67 plików JSON w materiale roboczym, 140 etapów odpowiedzi tekstowej i siedem finałów. W UI potwierdzono pierwsze cztery pytania Noor, następnie wyświetlono ofertę; jej obecność sama nie dowodzi obowiązkowej płatności. Nie aktywowano subskrypcji.
 
 Katalog zawiera **1677 plików multimedialnych**: 1603 WebP, 68 MP3, 4 WAV i 2 MP4. Wśród obrazów jest 16 plików zastępczych 1×1. Manifest uwzględnia także 11 nieudanych pobrań. PDF był analizowany osobno i nie jest w katalogu multimediów.
 

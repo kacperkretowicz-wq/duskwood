@@ -1,0 +1,16 @@
+﻿endpoint;method;target;request_fields;response_fields_consumed;source_file;utf16_start;utf16_end;scope;evidence;note
+/api/ugc/unlock;POST;;pin;"error; message";1kwuxuaueq9dv.js;7728;7841;anonymous@7266 > anonymous@7474 > y;static;"Portal UGC, poza główną rozgrywką; sukces odświeża router; nie wywołano"
+/api/portal;POST;;brak body;"url; needsAuth; enabled";1peok1ww0ltpj.js;5884;5920;anonymous@5832 > a;static;Przekierowanie do portalu lub /login, status401
+/api/checkout;POST;;"plan; surface; caseSlug; phDistinctId";"already_pending; welcome_url; already_active; url; event_id; value; currency; product_id; enabled";1pfbqbd-z0uj8.js;15392;15581;anonymous@6435 > B;static;Wynik soft tylko gdy serwer zwróci enabled=false
+/api/unlock;POST;notes;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;167938;168079;anonymous@6435 > sS > b;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/unlock;POST;calendarAttachment;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;220748;220907;anonymous@6435 > lb > X;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/unlock;POST;calendarAttachment;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;243305;243459;anonymous@6435 > lA > R;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/unlock;POST;photos;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;285658;285800;anonymous@6435 > lX > E;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/hint;POST;;"caseId; questionId; level; attempts; lang; guideReply";"locked; text; lockedText; title; level; canGoDeeper; etykiety";1pfbqbd-z0uj8.js;295283;295462;anonymous@6435 > l5 > P;static;Nie odzyskano reguł poziomów backendu
+/api/answer;POST;;"caseId; questionId; answer; lang";"correct; openHint; nudge";1pfbqbd-z0uj8.js;295568;295712;anonymous@6435 > l5 > O;static;Klient wykonuje trim, nie porównuje do listy odpowiedzi
+/api/accuse;POST;;"caseId; suspectIds; lang";"correct; verdict; explanations[{name,text}]";1pfbqbd-z0uj8.js;303441;303573;anonymous@6435 > ae > g;static;Submit przy dokładnie requiredCount wybranych
+/api/unlock;POST;snapchat;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;481037;481181;anonymous@6435 > iz > w;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/unlock;POST;reddit;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;486716;486858;anonymous@6435 > iT > m;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/unlock;POST;kakaotalk;"caseId; target; code; lang";"ok; body?; attachment?; attachments?; hidden?; deleted?";1pfbqbd-z0uj8.js;561674;561819;anonymous@6435 > ry > b;static;"Walidacja po stronie serwera; shape zależy od target"
+/api/premium;GET;;brak body;"signedIn; premium; email; entitlementUnknown; userId";1pfbqbd-z0uj8.js;607718;607739;anonymous@6435 > rK > anonymous@607583 > i;static;"Retry3s; do5 uznanych odpowiedzi lub120s; tylko zalogowani bez premium"
+/api/auth/signout;POST;;brak body;odpowiedź niekonsumowana;1pfbqbd-z0uj8.js;659463;659505;anonymous@6435 > oj > o;static;POST i reload

@@ -1,0 +1,12 @@
+{
+  "references": 365,
+  "new_downloads": 349,
+  "baseline_references": 16,
+  "failed": 0,
+  "bytes_new": 66380150,
+  "new_formats": {
+    ".webp": 345,
+    ".mp3": 2,
+    ".pdf": 2
+  }
+}

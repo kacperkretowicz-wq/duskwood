@@ -1,0 +1,4 @@
+﻿case,released,pickerVisible,question_records,question_keys,contacts,main_threads,main_bubbles,notes,emails,calls,calendar,browser_history,board_pieces,suspects,required_suspects,source,sha256
+isla,False,False,20,guideReply|hints|id|q,4,3,104,34,11,14,79,3,18,4,1,deep-inventory/acquired/isla-public.en.json,6797b9c228ae75415c457832ee4fb167c7b7725631791c1f877266c8b323c764
+pia,False,False,21,guideReply|hints|id|q,5,5,69,8,0,2,0,9,14,4,1,deep-inventory/acquired/pia-public.en.json,57605ed673ca7a7143b439c97ffa1ab3bb15a639b73f4d2961ceee8560484621
+sami,False,False,23,guideReply|hints|id|q,13,8,210,9,13,2,1,8,0,4,1,deep-inventory/acquired/sami-public.en.json,e5c5880977fe6498d97ee1cd63a1ad4e4a3f4f4597ef3fbdeb1d326278d11f99

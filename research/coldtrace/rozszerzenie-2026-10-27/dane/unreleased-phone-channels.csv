@@ -1,0 +1,44 @@
+﻿case,file,pointer,type,records,meaning
+isla,isla-public.en.json,/phoneData/contactPreviews,list,4,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/npcMessages,dict,3,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/notes,list,34,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/emails,list,11,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/calls,list,14,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/calendar,list,79,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/safari,list,3,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/safariDeleted,list,0,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/safariPages,dict,3,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/phoneData/contactDetails,dict,9,main phone collection; nested messages not counted as threads
+isla,isla-public.en.json,/photos/visible,list,66,photo model
+isla,isla-carelog.json,/feed/0,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/1,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/2,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/3,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/4,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/5,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/6,dict,,detail selector: staffStatusIsla
+isla,isla-carelog.json,/feed/7,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/8,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/9,dict,,detail selector: medicationDiscrepancy
+isla,isla-carelog.json,/feed/10,dict,,detail selector: blank
+isla,isla-carelog.json,/feed/11,dict,,detail selector: blank
+pia,pia-public.en.json,/phoneData/contactPreviews,list,4,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/npcMessages,dict,5,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/notes,list,8,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/emails,list,0,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/calls,list,2,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/calendar,list,0,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/safari,list,9,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/safariDeleted,list,0,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/phoneData/safariPages,dict,9,main phone collection; nested messages not counted as threads
+pia,pia-public.en.json,/photos/visible,list,70,photo model
+sami,sami-public.en.json,/phoneData/contactPreviews,list,13,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/npcMessages,dict,8,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/notes,list,9,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/emails,list,13,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/calls,list,2,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/calendar,list,1,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/safari,list,8,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/safariDeleted,list,0,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/phoneData/safariPages,dict,8,main phone collection; nested messages not counted as threads
+sami,sami-public.en.json,/photos/visible,list,63,photo model

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "source_hashes_checked": 15,
+  "csv_rows": {
+    "endpointy-klienta.csv": 15,
+    "persystencja-klienta.csv": 15,
+    "pliki-zrodlowe-sha256.csv": 15,
+    "przejscia-stanow.csv": 32,
+    "telemetria-klienta.csv": 18
+  },
+  "utf16_ranges_in_bounds": 80,
+  "api_call_sites_matched_to_AST": 15,
+  "target_code_executed": false,
+  "API_calls_made": false,
+  "runtime_flow_verified": false,
+  "note": "CSV transitions are authored static dataflow reconstructions; no iOS or payment validation."
+}

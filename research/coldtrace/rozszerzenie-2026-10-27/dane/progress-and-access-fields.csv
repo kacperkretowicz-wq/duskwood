@@ -1,0 +1,48 @@
+﻿case,file,pointer,category,value,interpretation
+noor,noor-apps.json,/board/wide/stickies/0/revealWith,board_reference,unknown,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/stickies/1/revealWith,board_reference,map,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/stickies/2/revealWith,board_reference,transcript,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/0/revealWith,board_reference,adam,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/1/revealWith,board_reference,unknown,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/2/revealWith,board_reference,evidence,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/3/revealWith,board_reference,map,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/4/revealWith,board_reference,elena,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/5/revealWith,board_reference,maya,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-apps.json,/board/wide/chips/6/revealWith,board_reference,j,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-public.en.json,/locks/photos/digits,input_length,6,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-public.en.json,/locks/calendarAttachment/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+noor,noor-suspects.json,/requiredCount,accusation_cardinality,2,explicit JSON field; runtime enforcement not established by field alone
+felix,felix-public.en.json,/locks/photos/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+felix,felix-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+felix,felix-public.en.json,/locks/snapchat/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+felix,felix-public.en.json,/locks/reddit/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+felix,felix-suspects.json,/requiredCount,accusation_cardinality,2,explicit JSON field; runtime enforcement not established by field alone
+rei,rei-kakaotalk.json,/password,access_value_present,[redacted puzzle access value],explicit JSON field; runtime enforcement not established by field alone
+rei,rei-public.en.json,/locks/photos/digits,input_length,6,explicit JSON field; runtime enforcement not established by field alone
+rei,rei-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+rei,rei-public.en.json,/locks/kakaotalk/digits,input_length,0,explicit JSON field; runtime enforcement not established by field alone
+rei,rei-suspects.json,/requiredCount,accusation_cardinality,2,explicit JSON field; runtime enforcement not established by field alone
+liv,liv-public.en.json,/locks/photos/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+liv,liv-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+liv,liv-suspects.json,/requiredCount,accusation_cardinality,2,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-public.en.json,/locks/photos/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-settings.json,/suicideNoteRevealIndex,progress_index,6,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-settings.json,/voiceMemoStaticLevel1Index,progress_index,11,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-settings.json,/voiceMemoStaticLevel2Index,progress_index,17,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-settings.json,/custosGlitchStorageKey,persistence_key,coldtrace.ghost.custosGlitch.v1,explicit JSON field; runtime enforcement not established by field alone
+ghost,ghost-suspects.json,/requiredCount,accusation_cardinality,2,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/unlockQuestionIndex,progress_index,11,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/storageKey,persistence_key,ava_burner_choices_v1,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/choicePoints/0/minQuestionIndex,progress_index,12,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/choicePoints/1/minQuestionIndex,progress_index,13,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/choicePoints/2/minQuestionIndex,progress_index,15,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-burner.json,/choicePoints/3/minQuestionIndex,progress_index,17,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-public.en.json,/locks/photos/digits,input_length,6,explicit JSON field; runtime enforcement not established by field alone
+ava,ava-suspects.json,/requiredCount,accusation_cardinality,1,explicit JSON field; runtime enforcement not established by field alone
+wren,wren-photos.json,/deletedAlbumPin,access_value_present,[redacted puzzle access value],explicit JSON field; runtime enforcement not established by field alone
+wren,wren-polarsteps.json,/sharedAccessCode,access_value_present,[redacted puzzle access value],explicit JSON field; runtime enforcement not established by field alone
+wren,wren-public.en.json,/locks/photos/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+wren,wren-public.en.json,/locks/notes/digits,input_length,4,explicit JSON field; runtime enforcement not established by field alone
+wren,wren-suspects.json,/requiredCount,accusation_cardinality,1,explicit JSON field; runtime enforcement not established by field alone

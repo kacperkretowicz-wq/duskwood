@@ -1,0 +1,108 @@
+{
+  "checked": 41,
+  "json": 31,
+  "http_404": 10,
+  "errors": 0,
+  "locales_declared_web": [
+    "en",
+    "fr",
+    "es",
+    "it",
+    "id",
+    "de",
+    "pt",
+    "pt_BR"
+  ],
+  "unreleased_json": [
+    {
+      "url": "https://coldtrace.co/data/isla-apps.json",
+      "status": 200,
+      "file": "isla-apps.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/isla-carelog.json",
+      "status": 200,
+      "file": "isla-carelog.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/isla-files.json",
+      "status": 200,
+      "file": "isla-files.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/isla-public.en.json",
+      "status": 200,
+      "file": "isla-public.en.json",
+      "questions": 20
+    },
+    {
+      "url": "https://coldtrace.co/data/isla-spotify.json",
+      "status": 200,
+      "file": "isla-spotify.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/isla-suspects.json",
+      "status": 200,
+      "file": "isla-suspects.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/pia-apps.json",
+      "status": 200,
+      "file": "pia-apps.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/pia-files.json",
+      "status": 200,
+      "file": "pia-files.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/pia-public.en.json",
+      "status": 200,
+      "file": "pia-public.en.json",
+      "questions": 21
+    },
+    {
+      "url": "https://coldtrace.co/data/pia-suspects.json",
+      "status": 200,
+      "file": "pia-suspects.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/pia-whatsapp.json",
+      "status": 200,
+      "file": "pia-whatsapp.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/sami-apps.json",
+      "status": 200,
+      "file": "sami-apps.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/sami-files.json",
+      "status": 200,
+      "file": "sami-files.json",
+      "questions": 0
+    },
+    {
+      "url": "https://coldtrace.co/data/sami-public.en.json",
+      "status": 200,
+      "file": "sami-public.en.json",
+      "questions": 23
+    },
+    {
+      "url": "https://coldtrace.co/data/sami-suspects.json",
+      "status": 200,
+      "file": "sami-suspects.json",
+      "questions": 0
+    }
+  ]
+}

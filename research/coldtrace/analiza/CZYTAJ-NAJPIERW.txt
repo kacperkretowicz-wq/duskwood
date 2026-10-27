@@ -11,6 +11,8 @@ W ColdTrace-analiza.zip są raporty, inwentarze, screenshoty, przeglądy oraz 14
 
 ColdTrace-multimedia.zip zawiera 1677 plików: 1603 WebP, 68 MP3, 4 WAV i 2 MP4. Po rozpakowaniu otwórz katalog.html. Wszystkie pliki katalogu są lokalne. 16 obrazów to piksele zastępcze 1x1; nie są pełnymi zdjęciami. PDF oraz fonty zachowano w materiale roboczym.
 
-Nie pozyskano IPA, backendu ani pełnych chronionych treści. Rozgrywkę potwierdzono do paywalla po czterech pytaniach Noor. Nie aktywowano subskrypcji. Udostępniane tu raporty nie są działającą kopią całej gry.
+Nie pozyskano IPA, backendu ani pełnych chronionych treści. Potwierdzono cztery odpowiedzi Noor i wyświetlenie późniejszej oferty. Nie przetestowano całej sekwencji jej zamknięcia, więc sam ekran nie dowodzi obowiązkowej płatności. Nie aktywowano subskrypcji. Udostępniane tu raporty nie są działającą kopią całej gry.
 
 Źródła, oryginalne dane i cztery rekordy Evidence REA (około 89 MB) są zachowane w work/coldtrace. Nie zmieniono plików źródłowych repozytorium REA.
+
+Rozszerzenie 27.10.2026: katalog rozszerzenie-2026-10-27 zawiera dokładną korektę działania X, 64 dodatkowe rekordy pytań niewydanych konfiguracji, rozbiór danych, UI i mechaniki oraz 347 dodatkowych mediów. Pierwszy pakiet i jego liczniki pozostają osobnym snapshotem.

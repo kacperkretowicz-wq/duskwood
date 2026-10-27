@@ -1,0 +1,12 @@
+{
+  "case_files": 65,
+  "all_acquired_json": 67,
+  "cases": 7,
+  "question_records": 147,
+  "text_stages": 140,
+  "entity_occurrences": 552,
+  "exact_id_edges": 313,
+  "progress_access_fields": 47,
+  "evidence_flag_fields": 302,
+  "arrays": 1265
+}
