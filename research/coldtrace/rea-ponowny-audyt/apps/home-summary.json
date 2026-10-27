@@ -1,0 +1,104 @@
+{
+  "sha256": "f2b135e33cf64853f0b6e77516adeba23800bcda6eef8e24bf77f365505d57de",
+  "layout_start": 42022,
+  "layout_end": 54232,
+  "rows": 185,
+  "unresolved": [],
+  "summary": [
+    {
+      "app": "snake",
+      "router_present": true,
+      "registry_released": [
+        "noor",
+        "rei"
+      ],
+      "home_page_released": [
+        "noor",
+        "rei"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "tictactoe",
+      "router_present": true,
+      "registry_released": [
+        "noor",
+        "felix"
+      ],
+      "home_page_released": [
+        "noor",
+        "felix",
+        "wren"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "tetris",
+      "router_present": true,
+      "registry_released": [
+        "ava"
+      ],
+      "home_page_released": [
+        "ghost",
+        "ava",
+        "wren"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "pacman",
+      "router_present": true,
+      "registry_released": [],
+      "home_page_released": [
+        "ghost"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "flappybird",
+      "router_present": true,
+      "registry_released": [
+        "felix",
+        "ava"
+      ],
+      "home_page_released": [
+        "felix",
+        "ava"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "carracing",
+      "router_present": true,
+      "registry_released": [
+        "rei"
+      ],
+      "home_page_released": [
+        "rei"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "brickbreaker",
+      "router_present": true,
+      "registry_released": [
+        "liv"
+      ],
+      "home_page_released": [
+        "liv"
+      ],
+      "home_dock_released": []
+    },
+    {
+      "app": "spaceshooter",
+      "router_present": true,
+      "registry_released": [
+        "liv"
+      ],
+      "home_page_released": [
+        "liv"
+      ],
+      "home_dock_released": []
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "case_public_files": 80,
+  "cases": 10,
+  "ordered_ids_match_en": 80,
+  "question_keysets_match_en": 80,
+  "files_with_nonempty_hints": 0,
+  "locale_question_records": 1688,
+  "nonenglish_locale_question_records": 1477,
+  "note": "Counted records across language variants; not distinct stages. Earlier English files and later GETs are from different collection times. Field equality does not assess linguistic correctness."
+}

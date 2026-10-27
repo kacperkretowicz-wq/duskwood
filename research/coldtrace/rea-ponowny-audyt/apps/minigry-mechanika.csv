@@ -1,0 +1,9 @@
+﻿gra,funkcja,zrodlo,poczatek_utf16,koniec_utf16,plansza,tempo,punktacja,sterowanie,koniec_lub_bot,bezposrednie_localStorage,bezposrednie_fetch,argumenty
+snake,nB,1pfbqbd-z0uj8.js,417298,421203,15×22 pól,170 ms na krok,100 pkt za pokarm,D-pad i strzałki klawiatury,zderzenie ze ścianą lub ciałem,false,false,"{onBack:e,ui:l}"
+tictactoe,nR,1pfbqbd-z0uj8.js,421593,426282,plansza 3×3,520 ms start; 620 ms ruch bota,wygrana / przegrana / remis,klik pola; Play Again,"bot sprawdza zwycięstwo O, blokadę X, potem środek, narożniki, resztę",false,false,"{onBack:e,ui:l}"
+tetris,rg,1pfbqbd-z0uj8.js,551801,554920,plansza 10×18,spadanie co 450 ms,100 pkt za każdy usunięty rząd,lewo / obrót / szybki zrzut / prawo,brak miejsca dla nowej figury,false,false,"{onBack:e,ui:l}"
+pacman,rN,1pfbqbd-z0uj8.js,555289,558821,siatka kanwy; komórka 18 px,180 ms na krok,10 pkt za punkt,cztery przyciski kierunku,kolizja z duchem,false,false,"{onBack:e,ui:l}"
+flappybird,rv,1pfbqbd-z0uj8.js,558821,561408,kanwa 390×520,"grawitacja +0,45 i przesunięcie rur 2,4 px na klatkę",1 pkt za miniętą rurę,tap / pointer,kolizja z rurą lub granicą,false,false,"{onBack:e,ui:l}"
+carracing,r_,1pfbqbd-z0uj8.js,597449,599629,kanwa 390×520; 3 pasy,przeciwnicy +5 px na klatkę,1 pkt za samochód po opuszczeniu planszy,klik zmienia pas cyklicznie,kolizja na pasie,false,false,"{onBack:e,ui:l}"
+brickbreaker,rz,1pfbqbd-z0uj8.js,599629,603206,kanwa 390×640; do 7 kolumn,"12 piłek, wypuszczanie co 45 ms",10 pkt za zniszczony klocek,"pointer move ustawia kierunek, pointer up strzela",klocek przekracza dolny próg po zakończeniu salwy,false,false,"{onBack:e,ui:l}"
+spaceshooter,rT,1pfbqbd-z0uj8.js,603206,606554,kanwa 390×640; 18 przeciwników,"automatyczny strzał co 0,45 s; delta czasu ograniczona do 0,04 s",30 lub 10 pkt zależnie od typu przeciwnika,pointer steruje osią X,"trafienie, osiągnięcie dolnej granicy lub usunięcie wszystkich przeciwników",false,false,"{onBack:e,ui:l}"

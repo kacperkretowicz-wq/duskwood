@@ -1,0 +1,29 @@
+{
+  "original_source": "sources/_next/static/chunks/2ii6aol3fvuqv.js",
+  "original_snapshot_sha256": "b06cb74bc496c0d885da5294fae6d932958e9b384264b1a2e4ae34a4c0e74cf2",
+  "full_source_retry": {
+    "evidence_id": "ev_66fcd6dd0e1a1df89473c933dc32c078323050477efb315a714a4a550248baf1",
+    "heap_mb": 3072,
+    "result": "partial; worker exhausted heap"
+  },
+  "partition_retry": {
+    "evidence_id": "ev_6cdd3073d5ec774123508f28eb41a476e0468028c72ff6e8d7f49ed5a79a0209",
+    "fragments": 16,
+    "parsed": 15,
+    "skipped": 1,
+    "result": "partial; fragment 10 worker exhausted heap"
+  },
+  "fragment_retry": {
+    "evidence_id": "ev_c79166cdd9ca73f980bf872a8233f680c071dd9e86843849c3bab83ca307df38",
+    "statements": 8,
+    "parsed": 7,
+    "skipped": 1,
+    "remaining_original_utf16": [
+      140331,
+      146914
+    ],
+    "result": "partial; statement 07 worker exhausted heap"
+  },
+  "scope": "Synthetic fragments preserve source-range mappings, but break cross-fragment context. These are static projections, not the original application or evidence of execution. Independent Babel AST parsed the original entire 15-script snapshot in prior audit.",
+  "full_evidence": "Kept in local scratch work/coldtrace/rea-followup/rea-evidence-complete.json; 7 records."
+}

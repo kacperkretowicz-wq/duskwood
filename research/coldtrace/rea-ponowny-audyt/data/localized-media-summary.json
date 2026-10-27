@@ -1,0 +1,8 @@
+{
+  "unique_refs": 1115,
+  "reference_occurrences": 10728,
+  "prior_known": 1115,
+  "not_previously_in_manifests": 0,
+  "new_extensions": {},
+  "note": "Only exact asset URLs in 120 locale JSON; prior 404s count as previously attempted, not successful."
+}

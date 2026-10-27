@@ -1,0 +1,32 @@
+{
+  "candidates": 272,
+  "success": 120,
+  "new_live_get": 105,
+  "prior_local": 15,
+  "statuses": {
+    "prior-local": 15,
+    "404": 152,
+    "200": 105
+  },
+  "families": {
+    "public": 80,
+    "threads": 8,
+    "snapchat": 8,
+    "reddit": 8,
+    "bereal": 8,
+    "tinder": 8
+  },
+  "locales": {
+    "en": 15,
+    "fr": 15,
+    "es": 15,
+    "it": 15,
+    "id": 15,
+    "de": 15,
+    "pt": 15,
+    "pt_BR": 15
+  },
+  "errors": 0,
+  "stopped_429": false,
+  "note": "Candidates come from known registry, supported locales and loader path templates. Not proof that every unpublished case or route is reachable during normal gameplay."
+}

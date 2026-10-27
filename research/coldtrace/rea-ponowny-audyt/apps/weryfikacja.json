@@ -1,0 +1,13 @@
+{
+  "source_sha256": "f2b135e33cf64853f0b6e77516adeba23800bcda6eef8e24bf77f365505d57de",
+  "components_checked": 8,
+  "utf16_ranges": "PASS exact function names",
+  "home_tiles": 185,
+  "fully_literal_extraction": "PASS; 0 unresolved nodes",
+  "released_generic_tiles_missing_surface_count": 4,
+  "released_surface_ids": 48,
+  "surface_and_home_id_union": 49,
+  "router_branches": "PASS exact component mapping in 8 case branches",
+  "target_code_executed": false,
+  "new_browser_playtest_by_this_analysis": false
+}

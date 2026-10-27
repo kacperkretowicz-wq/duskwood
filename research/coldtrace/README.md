@@ -1,5 +1,9 @@
 # ColdTrace — badanie referencyjne dla Duskwood / MGLISKO
 
+## Ponowny audyt REA — 27.10.2026
+
+[Nowe wyniki i testy przeglądarkowe](rea-ponowny-audyt/README.md): 201 unikatowych JSON, 49 identyfikatorów w unii rejestru i ikon, potwierdzone Pac-Man/Tetris w Ghost oraz zachowanie oferty po czwartym pytaniu w jednej sesji Noor. Wcześniejsze liczby są stanem poprzednich etapów.
+
 ## Aktualne rozszerzenie — 27.10.2026
 
 [Pełny indeks pogłębionego rozbioru](rozszerzenie-2026-10-27/README.md) obejmuje 10 konfiguracji (7 wydanych i 3 niewydane), 211 rekordów pytań, 2024 pliki multimedialne w obu etapach oraz szczegółowe opracowania mechaniki, danych i UI. Wszystkie 15 pozyskanych skryptów JS zinwentaryzowano składniowo. Dane serwera i wykonanie iOS pozostają odrębnymi, niepozyskanymi warstwami.

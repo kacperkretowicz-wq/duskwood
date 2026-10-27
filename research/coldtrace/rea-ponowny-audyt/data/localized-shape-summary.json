@@ -1,0 +1,11 @@
+{
+  "files": 80,
+  "sections_rows": 560,
+  "shape_differences": 4765,
+  "files_with_shape_difference": 22,
+  "difference_types": {
+    "extra": 47,
+    "missing": 4718
+  },
+  "notes": "Scalar JSON paths include array indices; shape differences can reflect natural localization or different capture dates. String inequality is not a translation-quality assessment. Prior English and later localized downloads were not atomic."
+}
